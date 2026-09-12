@@ -850,6 +850,223 @@ a:focus-visible {
   border-radius: 50%;
   background: #bc8a5f;
 }
+.assessment-body {
+  padding-top: 30px;
+}
+.assessment-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin: 12px 0 20px;
+}
+.assessment-heading h1 {
+  font-size: 48px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  margin: 0 0 5px;
+}
+.assessment-heading p {
+  color: #74877e;
+  font-size: 19px;
+  margin: 0;
+}
+.assessment-heading > span {
+  color: #9b5c36;
+  font-size: 16px;
+  letter-spacing: 2px;
+}
+.assessment-layout {
+  display: grid;
+  grid-template-columns: 1.03fr 0.97fr;
+  gap: 30px;
+  align-items: start;
+}
+.assessment-table-card,
+.online-learning-card {
+  border: 1px solid #d9e2dc;
+  background: #fbfcfb;
+}
+.assessment-table-card {
+  overflow: hidden;
+}
+.assessment-table-card table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+.assessment-table-card th,
+.assessment-table-card td {
+  border-bottom: 1px solid #dfe6e1;
+  padding: 15px 17px;
+  text-align: left;
+  vertical-align: middle;
+  font-size: 18px;
+  line-height: 1.55;
+}
+.assessment-table-card thead th {
+  background: #edf3ef;
+  color: #4a6256;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+.assessment-table-card thead th:first-child,
+.assessment-table-card tbody th {
+  width: 132px;
+}
+.assessment-table-card thead th:last-child,
+.assessment-table-card .assessment-weight {
+  width: 94px;
+  text-align: center;
+}
+.assessment-table-card tbody th {
+  color: #536a5e;
+  font-weight: 550;
+}
+.assessment-table-card tbody td {
+  color: #65776d;
+}
+.assessment-table-card tbody tr:first-child {
+  background: #f8f2eb;
+}
+.assessment-table-card tbody tr:first-child th,
+.assessment-table-card tbody tr:first-child .assessment-weight {
+  color: #995c35;
+}
+.assessment-table-card .assessment-weight {
+  color: #9b5c36;
+  font:
+    22px Georgia,
+    serif;
+}
+.assessment-table-card .assessment-total th,
+.assessment-table-card .assessment-total td {
+  border-bottom: 0;
+  background: #314f46;
+  color: #fff;
+  font-weight: 600;
+}
+.online-learning-card {
+  padding: 22px 24px 18px;
+}
+.online-learning-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+.online-learning-heading span {
+  display: block;
+  color: #9b5c36;
+  font-size: 13px;
+  letter-spacing: 1px;
+  margin-bottom: 3px;
+}
+.online-learning-heading h2 {
+  font-size: 27px;
+  font-weight: 600;
+  margin: 0;
+}
+.online-learning-heading > strong {
+  border: 1px solid #b7774b;
+  border-radius: 999px;
+  color: #9b5c36;
+  font-size: 15px;
+  padding: 8px 14px;
+}
+.learning-paths {
+  display: grid;
+  grid-template-columns: 1.35fr 0.8fr;
+  gap: 10px;
+}
+.learning-paths > a,
+.learning-paths > div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 59px;
+  border: 1px solid #dce5df;
+  background: #fff;
+  padding: 8px 12px;
+  color: #40594e;
+  font-size: 16px;
+}
+.learning-paths > a > span,
+.learning-paths > div > span {
+  color: #b27850;
+  font:
+    18px Georgia,
+    serif;
+}
+.learning-paths small {
+  display: block;
+  color: #89978f;
+  font-size: 12px;
+  margin-bottom: 2px;
+}
+.learning-paths svg {
+  width: 17px;
+  margin-left: auto;
+}
+.learning-login {
+  margin-top: 12px;
+}
+.learning-login p {
+  display: grid;
+  grid-template-columns: 84px 1fr;
+  gap: 10px;
+  color: #5f7268;
+  font-size: 15px;
+  line-height: 1.5;
+  margin: 0;
+  padding: 7px 0;
+  border-bottom: 1px solid #e2e8e4;
+}
+.learning-login p > span {
+  color: #8d5c3e;
+  font-weight: 600;
+}
+.learning-login code {
+  color: #314f46;
+  font-size: 15px;
+  font-weight: 600;
+}
+.learning-alert {
+  margin-top: 12px;
+  border-left: 4px solid #b96143;
+  background: #f8ece7;
+  color: #6e4b3c;
+  font-size: 15px;
+  line-height: 1.45;
+  padding: 10px 12px;
+}
+.learning-alert strong {
+  display: block;
+  color: #a54d36;
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+.learning-alert b {
+  color: #a5412f;
+}
+.shared-course-note {
+  color: #566c61;
+  font-size: 14px;
+  margin: 10px 0 0;
+}
+.shared-course-note strong {
+  color: #9c5435;
+}
+.returning-note {
+  color: #77877f;
+  font-size: 13px;
+  line-height: 1.45;
+  margin: 7px 0 0;
+}
+.returning-note strong {
+  color: #53685d;
+  margin-right: 5px;
+}
 .video-body {
   padding-top: 42px;
 }

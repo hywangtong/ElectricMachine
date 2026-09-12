@@ -264,11 +264,13 @@ export default function CoursePlayer() {
                     : '章节导入'
                   : slide.kind === 'video'
                     ? '视频导入'
-                    : slide.kind === 'question'
-                      ? '课堂思考'
-                      : slide.kind === 'outline'
-                        ? '内容提纲'
-                        : '课堂讲义'}
+                    : slide.kind === 'assessment'
+                      ? '考核方案'
+                      : slide.kind === 'question'
+                        ? '课堂思考'
+                        : slide.kind === 'outline'
+                          ? '内容提纲'
+                          : '课堂讲义'}
             </span>
           </div>
           <div
@@ -391,7 +393,7 @@ export default function CoursePlayer() {
                             className="slide-primary"
                             onClick={() => navigate(index + 1)}
                           >
-                            {chapter.teacher ? '进入绪论' : '本章内容'}
+                            {chapter.teacher ? '查看考核方案' : '本章内容'}
                             <ArrowRight />
                           </Button>
                         </div>
@@ -441,6 +443,108 @@ export default function CoursePlayer() {
                             ))
                           )}
                         </section>
+                      </div>
+                    ) : slide.kind === 'assessment' ? (
+                      <div className="assessment-body">
+                        <div className="eyebrow">
+                          <span />
+                          COURSE ASSESSMENT <b>考核方案</b>
+                        </div>
+                        <div className="assessment-heading">
+                          <div>
+                            <h1>{slide.title}</h1>
+                            <p>过程性评价与期末考核相结合</p>
+                          </div>
+                          <span>总评构成 · 100%</span>
+                        </div>
+                        <div className="assessment-layout">
+                          <section className="assessment-table-card">
+                            <table>
+                              <thead>
+                                <tr>
+                                  <th>考核环节</th>
+                                  <th>考核要求</th>
+                                  <th>成绩占比</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {slide.rows.map((row) => (
+                                  <tr
+                                    key={row.stage}
+                                    className={
+                                      row.stage === '合计'
+                                        ? 'assessment-total'
+                                        : undefined
+                                    }
+                                  >
+                                    <th scope="row">{row.stage}</th>
+                                    <td>{row.requirement}</td>
+                                    <td className="assessment-weight">
+                                      {row.weight}
+                                    </td>
+                                  </tr>
+                                ))}
+                              </tbody>
+                            </table>
+                          </section>
+                          <section className="online-learning-card">
+                            <div className="online-learning-heading">
+                              <div>
+                                <span>平时作业 · 15%</span>
+                                <h2>智慧树在线学习</h2>
+                              </div>
+                              <strong>共享课</strong>
+                            </div>
+                            <div className="learning-paths">
+                              <a
+                                href={slide.platform.webUrl}
+                                target="_blank"
+                                rel="noreferrer"
+                              >
+                                <span>01</span>
+                                <div>
+                                  <small>网页端</small>
+                                  www.zhihuishu.com
+                                </div>
+                                <ArrowRight />
+                              </a>
+                              <div>
+                                <span>02</span>
+                                <div>
+                                  <small>APP 端</small>
+                                  {slide.platform.appName}
+                                </div>
+                              </div>
+                            </div>
+                            <div className="learning-login">
+                              <p>
+                                <span>登录</span>
+                                {slide.platform.loginGuide}
+                              </p>
+                              <p>
+                                <span>首次密码</span>
+                                <code>{slide.platform.firstPassword}</code>
+                              </p>
+                              <p>
+                                <span>加入学习</span>
+                                {slide.platform.courseGuide}
+                              </p>
+                            </div>
+                            <div className="learning-alert">
+                              <strong>特别提醒</strong>
+                              必须通过弹屏推送课程，点击确认课程，
+                              <b>不可以自己搜索！</b>
+                            </div>
+                            <p className="shared-course-note">
+                              正确的课程角标：
+                              <strong>共享课！共享课！共享课！</strong>
+                            </p>
+                            <p className="returning-note">
+                              <strong>已登录过？</strong>
+                              {slide.platform.returningGuide}
+                            </p>
+                          </section>
+                        </div>
                       </div>
                     ) : slide.kind === 'video' ? (
                       <div className="video-body">

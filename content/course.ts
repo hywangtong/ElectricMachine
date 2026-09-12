@@ -192,6 +192,25 @@ export type Slide =
       title: string;
       chapterId: string;
       prompt: string;
+    }
+  | {
+      id: string;
+      kind: 'assessment';
+      title: string;
+      chapterId: string;
+      rows: {
+        stage: string;
+        requirement: string;
+        weight: string;
+      }[];
+      platform: {
+        webUrl: string;
+        appName: string;
+        firstPassword: string;
+        loginGuide: string;
+        courseGuide: string;
+        returningGuide: string;
+      };
     };
 // IDs are stable URL fragments. Keep each chapter's pages together.
 export const slides: Slide[] = [
@@ -208,6 +227,47 @@ export const slides: Slide[] = [
 
     if (chapter.id === 'introduction') {
       chapterSlides.push(
+        {
+          id: 'introduction-assessment',
+          kind: 'assessment',
+          title: '课程考核方案',
+          chapterId: chapter.id,
+          rows: [
+            {
+              stage: '平时作业',
+              requirement: '智慧树平台在线学习',
+              weight: '15%',
+            },
+            {
+              stage: '课堂练习',
+              requirement: '随堂小练习',
+              weight: '15%',
+            },
+            {
+              stage: '实验成绩',
+              requirement:
+                '实验表现 + 实验报告，重点考察实践动手能力和解决实际问题能力',
+              weight: '30%',
+            },
+            {
+              stage: '期末考试',
+              requirement:
+                '闭卷；卷面 50 分为基准分。50 分及以上计算平时成绩；50 分以下只算卷面成绩，根据评分标准进行评分',
+              weight: '40%',
+            },
+            { stage: '合计', requirement: '—', weight: '100%' },
+          ],
+          platform: {
+            webUrl: 'https://www.zhihuishu.com',
+            appName: '知到',
+            firstPassword: 'Zhihuishu@学号后六位',
+            loginGuide: '使用学号 + 密码直接登录，无需注册',
+            courseGuide:
+              '登录成功后，学习频道会弹出课程；点击确认课程即可加入学习。考试在“作业考试”栏目查看。',
+            returningGuide:
+              '若之前已登录平台并修改过密码，请使用手机号或学号及修改后的密码登录，即可看到弹出的已导入课程；账号一直处于登录状态的，请退出后重新登录，待课程弹出后加入学习。',
+          },
+        },
         {
           id: 'introduction-electric-everywhere',
           kind: 'video',
