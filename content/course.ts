@@ -195,6 +195,12 @@ export type Slide =
     }
   | {
       id: string;
+      kind: 'trend';
+      title: string;
+      chapterId: string;
+    }
+  | {
+      id: string;
       kind: 'assessment';
       title: string;
       chapterId: string;
@@ -285,6 +291,12 @@ export const slides: Slide[] = [
           chapterId: chapter.id,
           prompt:
             '大家能不能举出当下现实存在的任何一个可以动但是不使用电机的东西？',
+        },
+        {
+          id: 'introduction-electrification-trend',
+          kind: 'trend',
+          title: '电动化浪潮',
+          chapterId: chapter.id,
         },
       );
     }

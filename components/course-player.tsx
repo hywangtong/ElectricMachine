@@ -24,6 +24,7 @@ import {
 } from '@/components/ui/dialog';
 import { chapters, slides } from '@/content/course';
 import { ChapterGalaxy } from '@/components/chapter-galaxy';
+import { ElectrificationTrend } from '@/components/electrification-trend';
 const number = (n: number) => String(n).padStart(2, '0');
 
 export default function CoursePlayer() {
@@ -268,9 +269,11 @@ export default function CoursePlayer() {
                       ? '考核方案'
                       : slide.kind === 'question'
                         ? '课堂思考'
-                        : slide.kind === 'outline'
-                          ? '内容提纲'
-                          : '课堂讲义'}
+                        : slide.kind === 'trend'
+                          ? '趋势示意'
+                          : slide.kind === 'outline'
+                            ? '内容提纲'
+                            : '课堂讲义'}
             </span>
           </div>
           <div
@@ -596,6 +599,8 @@ export default function CoursePlayer() {
                           <span />
                         </div>
                       </div>
+                    ) : slide.kind === 'trend' ? (
+                      <ElectrificationTrend />
                     ) : (
                       <div className="outline-body">
                         <div className="eyebrow">
