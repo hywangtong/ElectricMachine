@@ -786,6 +786,12 @@ a:focus-visible {
     16px ui-monospace,
     monospace;
 }
+.objectives p > .teacher-contact-details {
+  display: grid;
+  gap: 2px;
+  color: #5b7064;
+  font: inherit;
+}
 .outline-body {
   padding-top: 70px;
 }

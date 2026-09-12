@@ -421,6 +421,16 @@ export default function CoursePlayer() {
                                 <span>方向</span>
                                 {chapter.teacher.research}
                               </p>
+                              <p>
+                                <span>联系</span>
+                                <span className="teacher-contact-details">
+                                  <span>电话：{chapter.teacher.phone}</span>
+                                  <span>邮箱：{chapter.teacher.email}</span>
+                                  <span>
+                                    办公地点：{chapter.teacher.office}
+                                  </span>
+                                </span>
+                              </p>
                             </>
                           ) : (
                             chapter.objectives.map((goal, i) => (

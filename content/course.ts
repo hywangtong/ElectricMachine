@@ -5,6 +5,9 @@ export type TeacherProfile = {
   education: string;
   experience: string;
   research: string;
+  phone: string;
+  email: string;
+  office: string;
 };
 export type Chapter = {
   id: string;
@@ -30,6 +33,9 @@ export const chapters: Chapter[] = [
       experience:
         '2019—2023 年，在美的威灵（上海）电机技术有限公司从事电机控制软件方面的工作',
       research: '电机设计、电机驱动器、电机控制算法',
+      phone: '18758566499',
+      email: 'wangtong@hzcu.edu.cn',
+      office: '理工 5 楼 A 座 409-3',
     },
     objectives: [
       '认识电机与电力拖动系统',
