@@ -198,7 +198,11 @@ export default function CoursePlayer() {
                       className={s.id === slide.id ? 'selected' : ''}
                       aria-current={s.id === slide.id ? 'page' : undefined}
                     >
-                      {s.kind === 'chapter' ? '章节导入' : s.title}
+                      {s.kind === 'chapter'
+                        ? c.teacher
+                          ? '教师简介'
+                          : '章节导入'
+                        : s.title}
                     </button>
                   ))}
                 </div>
@@ -255,7 +259,9 @@ export default function CoursePlayer() {
               {slide.kind === 'home'
                 ? '课程封面'
                 : slide.kind === 'chapter'
-                  ? '章节导入'
+                  ? chapter?.teacher
+                    ? '教师简介'
+                    : '章节导入'
                   : slide.kind === 'outline'
                     ? '内容提纲'
                     : '课堂讲义'}
@@ -360,16 +366,28 @@ export default function CoursePlayer() {
                         <div className="chapter-copy">
                           <div className="eyebrow">
                             <span />
-                            CHAPTER {number(chapterIndex + 1)}{' '}
-                            <b>{chapter.category}</b>
+                            {chapter.teacher
+                              ? 'COURSE INSTRUCTOR'
+                              : `CHAPTER ${number(chapterIndex + 1)}`}{' '}
+                            <b>
+                              {chapter.teacher ? '授课教师' : chapter.category}
+                            </b>
                           </div>
-                          <h1>{chapter.title}</h1>
-                          <p className="chapter-question">{chapter.question}</p>
+                          <h1>
+                            {chapter.teacher
+                              ? chapter.teacher.name
+                              : chapter.title}
+                          </h1>
+                          <p className="chapter-question">
+                            {chapter.teacher
+                              ? chapter.teacher.role
+                              : chapter.question}
+                          </p>
                           <Button
                             className="slide-primary"
                             onClick={() => navigate(index + 1)}
                           >
-                            本章内容
+                            {chapter.teacher ? '进入绪论' : '本章内容'}
                             <ArrowRight />
                           </Button>
                         </div>
@@ -378,14 +396,36 @@ export default function CoursePlayer() {
                             {number(chapterIndex + 1)}
                           </span>
                           <h2>
-                            学习目标 <small>LEARNING OBJECTIVES</small>
+                            {chapter.teacher ? '教师简介' : '学习目标'}{' '}
+                            <small>
+                              {chapter.teacher
+                                ? 'EDUCATION · EXPERIENCE · RESEARCH'
+                                : 'LEARNING OBJECTIVES'}
+                            </small>
                           </h2>
-                          {chapter.objectives.map((goal, i) => (
-                            <p key={goal}>
-                              <span>{number(i + 1)}</span>
-                              {goal}
-                            </p>
-                          ))}
+                          {chapter.teacher ? (
+                            <>
+                              <p>
+                                <span>学历</span>
+                                {chapter.teacher.education}
+                              </p>
+                              <p>
+                                <span>经历</span>
+                                {chapter.teacher.experience}
+                              </p>
+                              <p>
+                                <span>方向</span>
+                                {chapter.teacher.research}
+                              </p>
+                            </>
+                          ) : (
+                            chapter.objectives.map((goal, i) => (
+                              <p key={goal}>
+                                <span>{number(i + 1)}</span>
+                                {goal}
+                              </p>
+                            ))
+                          )}
                         </section>
                       </div>
                     ) : (

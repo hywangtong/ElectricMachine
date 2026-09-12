@@ -1,4 +1,11 @@
 export type Topic = { title: string; description: string };
+export type TeacherProfile = {
+  name: string;
+  role: string;
+  education: string;
+  experience: string;
+  research: string;
+};
 export type Chapter = {
   id: string;
   title: string;
@@ -7,6 +14,7 @@ export type Chapter = {
   question: string;
   objectives: string[];
   topics: Topic[];
+  teacher?: TeacherProfile;
 };
 export const chapters: Chapter[] = [
   {
@@ -15,6 +23,14 @@ export const chapters: Chapter[] = [
     english: 'INTRODUCTION',
     category: '课程基础',
     question: '电能如何转化为我们需要的运动？',
+    teacher: {
+      name: '王彤',
+      role: '《电机与拖动》授课教师',
+      education: '2019 年，浙江大学电气工程博士毕业',
+      experience:
+        '2019—2023 年，在美的威灵（上海）电机技术有限公司从事电机控制软件方面的工作',
+      research: '电机设计、电机驱动器、电机控制算法',
+    },
     objectives: [
       '认识电机与电力拖动系统',
       '建立能量转换的整体视角',
@@ -162,7 +178,7 @@ export const slides: Slide[] = [
     {
       id: chapter.id,
       kind: 'chapter',
-      title: chapter.title,
+      title: chapter.teacher ? '教师简介' : chapter.title,
       chapterId: chapter.id,
     },
     {
