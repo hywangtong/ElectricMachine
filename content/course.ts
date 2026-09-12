@@ -170,22 +170,66 @@ export type Slide =
       chapterId: string;
       lead: string;
       points: Topic[];
+    }
+  | {
+      id: string;
+      kind: 'video';
+      title: string;
+      chapterId: string;
+      lead: string;
+      videoUrl: string;
+      externalUrl: string;
+    }
+  | {
+      id: string;
+      kind: 'question';
+      title: string;
+      chapterId: string;
+      prompt: string;
     };
-// IDs are stable URL fragments. Add lesson pages after each chapter's outline.
+// IDs are stable URL fragments. Keep each chapter's pages together.
 export const slides: Slide[] = [
   { id: 'home', kind: 'home', title: '课程封面' },
-  ...chapters.flatMap((chapter): Slide[] => [
-    {
-      id: chapter.id,
-      kind: 'chapter',
-      title: chapter.teacher ? '教师简介' : chapter.title,
-      chapterId: chapter.id,
-    },
-    {
+  ...chapters.flatMap((chapter): Slide[] => {
+    const chapterSlides: Slide[] = [
+      {
+        id: chapter.id,
+        kind: 'chapter',
+        title: chapter.teacher ? '教师简介' : chapter.title,
+        chapterId: chapter.id,
+      },
+    ];
+
+    if (chapter.id === 'introduction') {
+      chapterSlides.push(
+        {
+          id: 'introduction-electric-everywhere',
+          kind: 'video',
+          title: '电机无处不在',
+          chapterId: chapter.id,
+          lead: '电机在当今生产、生活等经济活动中极其重要、不可或缺，并仍在以非常快的速度取代其他原动机。',
+          videoUrl:
+            'https://player.bilibili.com/player.html?isOutside=true&bvid=BV1GN4y1Q75T&p=1&high_quality=1&danmaku=0',
+          externalUrl: 'https://www.bilibili.com/video/BV1GN4y1Q75T/',
+        },
+        {
+          id: 'introduction-opening-question',
+          kind: 'question',
+          title: '课堂思考',
+          chapterId: chapter.id,
+          prompt:
+            '大家能不能举出当下现实存在的任何一个可以动但是不使用电机的东西？',
+        },
+      );
+    }
+
+    chapterSlides.push({
       id: `${chapter.id}-outline`,
       kind: 'outline',
       title: '本章内容',
       chapterId: chapter.id,
-    },
-  ]),
+    });
+
+    return chapterSlides;
+  }),
 ];

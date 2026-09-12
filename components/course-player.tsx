@@ -262,9 +262,13 @@ export default function CoursePlayer() {
                   ? chapter?.teacher
                     ? '教师简介'
                     : '章节导入'
-                  : slide.kind === 'outline'
-                    ? '内容提纲'
-                    : '课堂讲义'}
+                  : slide.kind === 'video'
+                    ? '视频导入'
+                    : slide.kind === 'question'
+                      ? '课堂思考'
+                      : slide.kind === 'outline'
+                        ? '内容提纲'
+                        : '课堂讲义'}
             </span>
           </div>
           <div
@@ -427,6 +431,56 @@ export default function CoursePlayer() {
                             ))
                           )}
                         </section>
+                      </div>
+                    ) : slide.kind === 'video' ? (
+                      <div className="video-body">
+                        <div className="eyebrow">
+                          <span />
+                          INTRODUCTION <b>为什么要学习电机？</b>
+                        </div>
+                        <div className="video-heading">
+                          <div>
+                            <h1>{slide.title}</h1>
+                            <p>{slide.lead}</p>
+                          </div>
+                          <a
+                            href={slide.externalUrl}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            无法播放？在 Bilibili 打开
+                            <ArrowRight />
+                          </a>
+                        </div>
+                        <div className="video-frame">
+                          <iframe
+                            src={slide.videoUrl}
+                            title="如果这个世界上没有电，所有东西都烧油"
+
+                            allow="autoplay; fullscreen; picture-in-picture"
+                            allowFullScreen
+                            referrerPolicy="strict-origin-when-cross-origin"
+                          />
+                        </div>
+                      </div>
+                    ) : slide.kind === 'question' ? (
+                      <div className="question-body">
+                        <div className="eyebrow">
+                          <span />
+                          THINK ABOUT IT <b>课堂思考</b>
+                        </div>
+                        <div className="question-mark" aria-hidden="true">
+                          ?
+                        </div>
+                        <p className="question-kicker">
+                          看完视频，先别急着翻页
+                        </p>
+                        <h1>{slide.prompt}</h1>
+                        <div className="question-rule">
+                          <span />
+                          从你身边正在运动的事物开始找
+                          <span />
+                        </div>
                       </div>
                     ) : (
                       <div className="outline-body">
