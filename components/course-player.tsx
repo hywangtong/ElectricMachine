@@ -25,54 +25,67 @@ import {
 import { chapters, slides, type Slide } from '@/content/course';
 import { ChapterGalaxy } from '@/components/chapter-galaxy';
 import { ElectrificationTrend } from '@/components/electrification-trend';
-import { EvLesson } from '@/components/ev-roadmap';
+import {
+  EvLesson,
+  EvRouteNav,
+  type IntroPage,
+} from '@/components/ev-roadmap';
 import { ShipPodExplainer } from '@/components/ship-pod-explainer';
 import { DistributedPropulsion } from '@/components/distributed-propulsion';
 const number = (n: number) => String(n).padStart(2, '0');
-type EvTabSlide = Extract<Slide, { kind: 'ev' }>;
-type EvPage = EvTabSlide['page'];
+type IntroTabSlide = Extract<Slide, { kind: 'ev' | 'trend' }>;
 
-const evTabAnchorId = 'introduction-ev-principle';
-const isEvTabbedSlide = (candidate: Slide) =>
-  candidate.kind === 'ev' &&
-  candidate.page !== 'compare' &&
-  candidate.page !== 'memory';
+const introTabAnchorId = 'introduction-electrification-trend';
+const isIntroTabbedSlide = (candidate: Slide) =>
+  candidate.id === introTabAnchorId ||
+  (candidate.kind === 'ev' && candidate.page !== 'memory');
 const courseSlides = slides.filter(
-  (candidate) => !isEvTabbedSlide(candidate) || candidate.id === evTabAnchorId,
+  (candidate) =>
+    !isIntroTabbedSlide(candidate) || candidate.id === introTabAnchorId,
 );
 
-const findEvTab = (id: string): EvTabSlide | undefined => {
+const findIntroTab = (id: string): IntroPage | undefined => {
   const candidate = slides.find((item) => item.id === id);
-  return candidate && isEvTabbedSlide(candidate)
-    ? (candidate as EvTabSlide)
-    : undefined;
+  if (candidate?.id === introTabAnchorId) return 'trend';
+  if (
+    candidate?.kind === 'ev' &&
+    candidate.page !== 'memory'
+  )
+    return candidate.page;
+  return undefined;
 };
 
 const findCourseIndex = (id: string) => {
   const directIndex = courseSlides.findIndex((item) => item.id === id);
   if (directIndex >= 0) return directIndex;
-  return findEvTab(id)
-    ? courseSlides.findIndex((item) => item.id === evTabAnchorId)
+  return findIntroTab(id)
+    ? courseSlides.findIndex((item) => item.id === introTabAnchorId)
     : -1;
 };
 
 export default function CoursePlayer() {
   const [index, setIndex] = useState(0);
-  const [evPage, setEvPage] = useState<EvPage>('principle');
+  const [introPage, setIntroPage] = useState<IntroPage>('trend');
   const [presenting, setPresenting] = useState(false);
   const [catalog, setCatalog] = useState(false);
   const [notice, setNotice] = useState('');
   const viewport = useRef<HTMLDivElement>(null);
   const touchStart = useRef<{ x: number; y: number } | null>(null);
   const [scale, setScale] = useState(0);
-  const slide = courseSlides[index];
-  const activeEvTab =
-    slide.kind === 'ev' && isEvTabbedSlide(slide)
-      ? (slides.find(
-          (candidate) => candidate.kind === 'ev' && candidate.page === evPage,
-        ) as EvTabSlide | undefined)
+  const containerSlide = courseSlides[index];
+  const activeIntroTab =
+    containerSlide.id === introTabAnchorId
+      ? (introPage === 'trend'
+          ? slides.find(
+              (candidate) => candidate.id === introTabAnchorId,
+            )
+          : slides.find(
+              (candidate) =>
+                candidate.kind === 'ev' && candidate.page === introPage,
+            )) as IntroTabSlide | undefined
       : undefined;
-  const activeTitle = activeEvTab?.title ?? slide.title;
+  const slide = activeIntroTab ?? containerSlide;
+  const activeTitle = slide.title;
   const chapter =
     slide.kind === 'home'
       ? undefined
@@ -83,18 +96,20 @@ export default function CoursePlayer() {
         (s) => s.kind !== 'home' && s.chapterId === chapter.id,
       )
     : [courseSlides[0]];
-  const localIndex = chapterSlides.findIndex((s) => s.id === slide.id);
+  const localIndex = chapterSlides.findIndex(
+    (s) => s.id === containerSlide.id,
+  );
   const navigate = useCallback((next: number) => {
     const clamped = Math.max(0, Math.min(courseSlides.length - 1, next));
     setIndex(clamped);
     window.location.hash = courseSlides[clamped].id;
   }, []);
   const jump = (id: string) => {
-    const evTab = findEvTab(id);
+    const introTab = findIntroTab(id);
     const next = findCourseIndex(id);
     if (next < 0) return;
-    if (evTab) {
-      setEvPage(evTab.page);
+    if (introTab) {
+      setIntroPage(introTab);
       setIndex(next);
       window.location.hash = id;
     } else {
@@ -122,8 +137,8 @@ export default function CoursePlayer() {
   useEffect(() => {
     const sync = () => {
       const hash = window.location.hash.slice(1);
-      const evTab = findEvTab(hash);
-      if (evTab) setEvPage(evTab.page);
+      const introTab = findIntroTab(hash);
+      if (introTab) setIntroPage(introTab);
       const next = findCourseIndex(hash);
       setIndex(next < 0 ? 0 : next);
     };
@@ -501,7 +516,7 @@ export default function CoursePlayer() {
                     ) : slide.kind === 'ev' ? (
                       <EvLesson
                         key={slide.id}
-                        page={activeEvTab?.page ?? slide.page}
+                        page={slide.page}
                         onNavigate={jump}
                       />
                     ) : slide.kind === 'pod' ? (
@@ -667,7 +682,14 @@ export default function CoursePlayer() {
                         </div>
                       </div>
                     ) : slide.kind === 'trend' ? (
-                      <ElectrificationTrend />
+                      <div className="intro-trend-tabbed">
+                        <EvRouteNav
+                          page={introPage}
+                          onNavigate={jump}
+                          className="intro-trend-tabs"
+                        />
+                        <ElectrificationTrend />
+                      </div>
                     ) : (
                       <div
                         className={`outline-body${slide.kind === 'content' && slide.explainer ? ' propulsion-content' : ''}`}

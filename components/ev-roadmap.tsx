@@ -156,7 +156,8 @@ const routes: VehicleRoute[] = [
   },
 ];
 
-type EvPage = RouteId | 'principle' | 'compare' | 'memory';
+export type EvPage = RouteId | 'principle' | 'compare' | 'memory';
+export type IntroPage = 'trend' | EvPage;
 
 const stepIcon = (label: string): typeof Zap => {
   if (label.includes('充电')) return PlugZap;
@@ -169,6 +170,56 @@ const stepIcon = (label: string): typeof Zap => {
   if (label.includes('空气')) return Wind;
   return Bolt;
 };
+
+export function EvRouteNav({
+  page,
+  onNavigate,
+  className,
+}: {
+  page: IntroPage;
+  onNavigate: (id: string) => void;
+  className?: string;
+}) {
+  return (
+    <nav
+      className={'ev-route-nav' + (className ? ' ' + className : '')}
+      aria-label="绪论电动化内容"
+    >
+      <button
+        onClick={() => onNavigate('introduction-electrification-trend')}
+        aria-current={page === 'trend' ? 'page' : undefined}
+        style={{ '--tab-color': '#a7653b' } as React.CSSProperties}
+      >
+        电动化浪潮
+      </button>
+      {routes.map((route) => (
+        <button
+          key={route.id}
+          onClick={() => onNavigate('introduction-ev-' + route.id)}
+          aria-current={page === route.id ? 'page' : undefined}
+          style={{ '--tab-color': route.color } as React.CSSProperties}
+        >
+          {route.short}
+          <small>{route.id.toUpperCase()}</small>
+        </button>
+      ))}
+      <button
+        onClick={() => onNavigate('introduction-ev-principle')}
+        aria-current={page === 'principle' ? 'page' : undefined}
+        style={{ '--tab-color': '#76e7ff' } as React.CSSProperties}
+      >
+        共同原理
+      </button>
+      <button
+        onClick={() => onNavigate('introduction-ev-compare')}
+        aria-current={page === 'compare' ? 'page' : undefined}
+        style={{ '--tab-color': '#76e7ff' } as React.CSSProperties}
+      >
+        横向对比
+      </button>
+    </nav>
+  );
+}
 
 export function EvLesson({
   page,
@@ -227,31 +278,7 @@ export function EvLesson({
         </div>
         <span>{isRoute ? active.id.toUpperCase() : 'ENERGY → MOTION'}</span>
       </div>
-      <nav className="ev-route-nav" aria-label="新能源汽车技术路线">
-        {routes.map((route) => (
-          <button
-            key={route.id}
-            onClick={() => onNavigate('introduction-ev-' + route.id)}
-            aria-current={page === route.id ? 'page' : undefined}
-            style={{ '--tab-color': route.color } as React.CSSProperties}
-          >
-            {route.short}
-            <small>{route.id.toUpperCase()}</small>
-          </button>
-        ))}
-        <button
-          onClick={() => onNavigate('introduction-ev-principle')}
-          aria-current={page === 'principle' ? 'page' : undefined}
-        >
-          共同原理
-        </button>
-        <button
-          onClick={() => onNavigate('introduction-ev-compare')}
-          aria-current={page === 'compare' ? 'page' : undefined}
-        >
-          横向对比
-        </button>
-      </nav>
+      <EvRouteNav page={page} onNavigate={onNavigate} />
 
       {isRoute ? (
         <>

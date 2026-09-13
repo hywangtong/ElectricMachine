@@ -1349,6 +1349,30 @@ a:focus-visible {
 .trend-body {
   padding-top: 34px;
 }
+.intro-trend-tabs {
+  position: absolute;
+  top: 35px;
+  left: 300px;
+  right: 300px;
+  justify-content: center;
+  margin: 0;
+  z-index: 2;
+}
+.intro-trend-tabs button {
+  padding: 8px 13px;
+  border-color: #dce4df;
+  color: #71847a;
+  background: #ffffffd9;
+  font-size: 15px;
+}
+.intro-trend-tabs button[aria-current='page'] {
+  color: #fff;
+  background: #a7653b;
+  border-color: #a7653b;
+}
+.intro-trend-tabs button:hover {
+  border-color: #a7653b;
+}
 .trend-heading {
   display: flex;
   align-items: flex-end;
