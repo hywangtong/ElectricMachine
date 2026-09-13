@@ -165,6 +165,21 @@ export type Slide =
   | { id: string; kind: 'home'; title: string }
   | {
       id: string;
+      kind: 'ev';
+      title: string;
+      chapterId: string;
+      page:
+        | 'bev'
+        | 'hev'
+        | 'phev'
+        | 'erev'
+        | 'fcev'
+        | 'principle'
+        | 'compare'
+        | 'memory';
+    }
+  | {
+      id: string;
       kind: 'chapter' | 'outline';
       title: string;
       chapterId: string;
@@ -298,6 +313,26 @@ export const slides: Slide[] = [
           title: '电动化浪潮',
           chapterId: chapter.id,
         },
+        ...(
+          [
+            ['principle', '新能源汽车：共同原理'],
+            ['bev', '纯电动汽车'],
+            ['hev', '混合动力汽车'],
+            ['phev', '插电式混合动力汽车'],
+            ['erev', '增程式电动汽车'],
+            ['fcev', '氢燃料电池汽车'],
+            ['compare', '新能源汽车：路线对比'],
+            ['memory', '新能源汽车：五句话记忆'],
+          ] as const
+        ).map(
+          ([page, title]): Slide => ({
+            id: 'introduction-ev-' + page,
+            kind: 'ev',
+            title,
+            chapterId: chapter.id,
+            page,
+          }),
+        ),
       );
     }
 

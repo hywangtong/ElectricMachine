@@ -25,6 +25,7 @@ import {
 import { chapters, slides } from '@/content/course';
 import { ChapterGalaxy } from '@/components/chapter-galaxy';
 import { ElectrificationTrend } from '@/components/electrification-trend';
+import { EvLesson } from '@/components/ev-roadmap';
 const number = (n: number) => String(n).padStart(2, '0');
 
 export default function CoursePlayer() {
@@ -447,6 +448,12 @@ export default function CoursePlayer() {
                           )}
                         </section>
                       </div>
+                    ) : slide.kind === 'ev' ? (
+                      <EvLesson
+                        key={slide.id}
+                        page={slide.page}
+                        onNavigate={jump}
+                      />
                     ) : slide.kind === 'assessment' ? (
                       <div className="assessment-body">
                         <div className="eyebrow">
