@@ -255,13 +255,6 @@ export type Slide =
         courseGuide: string;
         returningGuide: string;
       };
-    }
-  | {
-      id: string;
-      kind: 'motor-advantage';
-      title: string;
-      chapterId: string;
-      advantage: 'environment' | 'convenience' | 'performance' | 'adaptability';
     };
 // IDs are stable URL fragments. Keep each chapter's pages together.
 export const slides: Slide[] = [
@@ -433,37 +426,37 @@ export const slides: Slide[] = [
       chapterId: chapter.id,
     });
 
-    if (chapter.id === 'introduction') {
-      chapterSlides.push(
-        {
-          id: 'introduction-motor-advantages-environment',
-          kind: 'motor-advantage',
-          title: '电机的优势：环保',
-          chapterId: chapter.id,
-          advantage: 'environment',
-        },
-        {
-          id: 'introduction-motor-advantages-convenience',
-          kind: 'motor-advantage',
-          title: '电机的优势：应用便捷',
-          chapterId: chapter.id,
-          advantage: 'convenience',
-        },
-        {
-          id: 'introduction-motor-advantages-performance',
-          kind: 'motor-advantage',
-          title: '电机的优势：高性能',
-          chapterId: chapter.id,
-          advantage: 'performance',
-        },
-        {
-          id: 'introduction-motor-advantages-adaptability',
-          kind: 'motor-advantage',
-          title: '电机的优势：适应性强',
-          chapterId: chapter.id,
-          advantage: 'adaptability',
-        },
-      );
+    if (chapter.id === 'magnetic-circuits') {
+      chapterSlides.push({
+        id: 'magnetic-circuits-maxwell-eli5',
+        kind: 'content',
+        title: '麦克斯韦方程组：电和磁的四条规则',
+        chapterId: chapter.id,
+        lead: '先看懂四幅图，再认识电机里的磁场。公式采用真空中的 SI 积分形式。',
+        points: [
+          {
+            title: '① 电荷周围有电场 · 电场的高斯定律',
+            description:
+              '∯ₛ E · dA = Q内 / ε₀。Q内是封闭面内部的净电荷，ε₀是真空介电常数。正电荷的场线向外，负电荷的场线向内。',
+          },
+          {
+            title: '② 磁场没有单独的端点 · 磁场的高斯定律',
+            description:
+              '∯ₛ B · dA = 0。B是磁感应强度；穿入封闭面的磁通与穿出部分相抵，磁力线没有单独的起点或终点。',
+          },
+          {
+            title: '③ 磁场变，电场绕起来 · 法拉第定律',
+            description:
+              '∮ᶜ E · dl = −dΦᴮ/dt。Φᴮ是穿过回路的磁通；负号表示感应作用反抗磁通变化，闭合回路才可能形成持续电流。',
+          },
+          {
+            title: '④ 电流和变化的电场，都与环绕的磁场有关 · 安培—麦克斯韦定律',
+            description:
+              '∮ᶜ B · dl = μ₀I + μ₀ε₀ dΦᴱ/dt。I是导电电流，μ₀是真空磁导率；第二项表示变化电场也贡献磁场。',
+          },
+        ],
+        note: '电流 → 建立磁场 → 用磁路描述与计算；磁通变化 → 感应电动势 → 发电机与变压器。想一想：磁铁在线圈旁一直不动，就一定会持续发电吗？',
+      });
     }
 
     return chapterSlides;
