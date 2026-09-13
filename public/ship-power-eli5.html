@@ -39,13 +39,18 @@ details li{font-size:15px;line-height:1.45;margin:8px 0}
 .reading-column:has(details[open]) .cards{display:none}
 .reading-column:has(details[open]) details[open]{flex:1}
 footer{padding:0;font-size:12px;line-height:1.5;border-top:1px solid #d7e5e9;padding-top:6px}
+[hidden]{display:none!important}
+.video-panel{display:flex;flex-direction:column;gap:10px;min-height:0;background:white;border:1px solid #d7e5e9;border-radius:18px;padding:14px}
+.video-panel iframe{width:100%;flex:1;min-height:0;border:0;border-radius:10px}
+.video-panel a{align-self:flex-end;font-size:17px}
 </style>
 <main>
 <header><div class="eyebrow">ELI5 · 舰船综合电力系统</div><h1>一艘船，一座共享电厂。</h1><p>先把能量变成电，再分给螺旋桨、雷达和灯。中压直流，是其中一种主干送电方式。</p></header>
 <div class="controls" role="group" aria-label="选择用电场景">
 <button data-mode="cruise" aria-pressed="true">🚢 平稳航行</button><button data-mode="sprint" aria-pressed="false">🌊 加速航行</button><button data-mode="pulse" aria-pressed="false">⚡ 短时大负载</button><button data-mode="fault" aria-pressed="false">🛟 一条供电支路故障</button>
+<button id="video-toggle" aria-pressed="false" aria-controls="video-panel">▶ 观看视频</button>
 </div>
-<div class="workspace">
+<div class="workspace" id="diagram-workspace">
 <div class="diagram-column">
 <section class="picture" aria-label="供电原理图">
 <svg viewBox="35 60 930 485" role="img" aria-labelledby="diagram-title diagram-desc">
@@ -87,6 +92,10 @@ footer{padding:0;font-size:12px;line-height:1.5;border-top:1px solid #d7e5e9;pad
 </ol></details>
 </aside>
 </div>
+<section class="video-panel" id="video-panel" aria-label="用户提供的舰船综合电力系统视频" hidden>
+<iframe id="ship-video" title="舰船综合电力系统 · Bilibili 视频 BV1nwQVY6EXM" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+<a href="https://www.bilibili.com/video/BV1nwQVY6EXM/" target="_blank" rel="noopener noreferrer">无法播放？在 Bilibili 打开 ↗</a>
+</section>
 <footer>依据公开资料制作的教学类比。B 站原视频页面未能读取，未核对其逐条说法；未读取视频所称参考书籍全文。</footer>
 </main>
 <script>
@@ -97,7 +106,9 @@ pulse:{icon:'⚡',title:'突然要一大口，储能先帮忙。',copy:'储能�
 fault:{icon:'🛟',title:'关掉坏支路，再找可用路线。',copy:'保护隔离故障；如果备用路径完好、容量足够，就能恢复供电。必要时减少次要负载，优先保住重要设备。',storage:'可提供过渡支撑',motor:6}
 };
 function setMode(mode){const scene=scenes[mode];document.querySelectorAll('[data-mode]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.mode===mode)));document.getElementById('scenario-icon').textContent=scene.icon;document.getElementById('scenario-title').textContent=scene.title;document.getElementById('scenario-copy').textContent=scene.copy;document.getElementById('storage-label').textContent=scene.storage;document.getElementById('motor-wire').style.strokeWidth=scene.motor;document.getElementById('storage-wire').classList.toggle('off',mode!=='pulse'&&mode!=='fault');document.getElementById('task-primary').classList.toggle('fault',mode==='fault');document.getElementById('task-primary').classList.toggle('off',mode==='fault');document.getElementById('task-backup').classList.toggle('off',mode!=='fault');}
-document.querySelectorAll('[data-mode]').forEach(button=>button.addEventListener('click',()=>setMode(button.dataset.mode)));
+function showVideo(open){document.getElementById('diagram-workspace').hidden=open;document.getElementById('video-panel').hidden=!open;const toggle=document.getElementById('video-toggle');toggle.setAttribute('aria-pressed',String(open));toggle.textContent=open?'↩ 返回供电图解':'▶ 观看视频';const video=document.getElementById('ship-video');if(open){video.src='https://player.bilibili.com/player.html?isOutside=true&bvid=BV1nwQVY6EXM&p=1&high_quality=1&danmaku=0&autoplay=0';}else{video.removeAttribute('src');}}
+document.getElementById('video-toggle').addEventListener('click',()=>showVideo(document.getElementById('video-panel').hidden));
+document.querySelectorAll('[data-mode]').forEach(button=>button.addEventListener('click',()=>{showVideo(false);setMode(button.dataset.mode);}));
 document.querySelectorAll('details').forEach(panel=>panel.addEventListener('toggle',()=>{if(panel.open)document.querySelectorAll('details').forEach(other=>{if(other!==panel)other.open=false;});}));
 function fitPage(){const scale=Math.min(window.innerWidth/1444,window.innerHeight/744);const page=document.querySelector('main');page.style.transform=`scale(${scale})`;page.style.marginLeft=`${(window.innerWidth-1444*scale)/2}px`;page.style.marginTop=`${(window.innerHeight-744*scale)/2}px`;}
 window.addEventListener('resize',fitPage);fitPage();
