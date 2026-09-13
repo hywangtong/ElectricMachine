@@ -204,132 +204,345 @@ const EnvironmentLesson = () => (
   </div>
 );
 
-const ConvenienceLesson = () => (
-  <div className="advantage-body advantage-convenience">
-    <div className="eyebrow">
-      <span />
-      电机的优势 <b>02 应用便捷</b>
+const humanoidJoints = [
+  { x: 320, y: 75 },
+  { x: 280, y: 110 },
+  { x: 360, y: 110 },
+  { x: 245, y: 165 },
+  { x: 395, y: 165 },
+  { x: 225, y: 220 },
+  { x: 415, y: 220 },
+  { x: 320, y: 190 },
+  { x: 295, y: 235 },
+  { x: 345, y: 235 },
+  { x: 285, y: 280 },
+  { x: 355, y: 280 },
+  { x: 280, y: 330 },
+  { x: 360, y: 330 },
+];
+
+const ConvenienceLesson = () => {
+  const [handsConnected, setHandsConnected] = useState(false);
+  const joints = handsConnected
+    ? [...humanoidJoints, { x: 205, y: 250 }, { x: 435, y: 250 }]
+    : humanoidJoints;
+  return (
+    <div className="advantage-body advantage-convenience">
+      <div className="eyebrow">
+        <span />
+        电机的优势 <b>02 应用便捷 · ELI5</b>
+      </div>
+      <h1>一块电池带动全身，电机直接住进关节</h1>
+      <p className="advantage-lead">
+        像给积木接电：沿两根供电线加分支；像搭积木：把电机做进手臂和腿里。
+      </p>
+      <div className="robot-advantages-grid">
+        <section className="robot-advantage-panel">
+          <h2>
+            <span>01</span> 两根供电线，分给许多关节
+          </h2>
+          <p>肩、肘、腕、髋、膝、踝……不用每个关节放一块电池。</p>
+          <svg
+            className="humanoid-power"
+            viewBox="0 0 700 360"
+            aria-label={`一块电池的正负两根直流母线并联分支到人形机器人${joints.length}个示意关节的驱动器，再驱动电机；四足机器人也采用同样的分支供电原理`}
+          >
+            <rect
+              className="robot-shell"
+              x="294"
+              y="9"
+              width="52"
+              height="45"
+              rx="16"
+            />
+            <path
+              className="robot-limb"
+              d="M320 54v21M280 110h80M280 110l-35 55-20 55-20 30M360 110l35 55 20 55 20 30M295 235l-10 45-5 50M345 235l10 45 5 50M280 330h-24m104 0h24"
+            />
+            <path
+              className="robot-shell"
+              d="M283 111h74l-9 73h-56zM320 184v20m-30 2h60l-5 29h-50z"
+            />
+            <path d="M306 31h5m18 0h5" />
+            <rect
+              className="battery-shell"
+              x="15"
+              y="23"
+              width="84"
+              height="57"
+              rx="10"
+            />
+            <text x="57" y="48" textAnchor="middle">
+              一块电池
+            </text>
+            <text x="57" y="69" textAnchor="middle">
+              ＋　−
+            </text>
+            <path className="power-positive" d="M39 80v15h86V45m0 50v248" />
+            <path
+              className="power-negative"
+              d="M75 80v24h45m10 0h7V45m0 59v234"
+            />
+            <text className="positive-label" x="110" y="22">
+              ＋
+            </text>
+            <text className="negative-label" x="138" y="22">
+              −
+            </text>
+            <text x="21" y="140">
+              两根线
+            </text>
+            <text x="21" y="165">
+              一直延伸
+            </text>
+            <text x="21" y="190">
+              就近分支
+            </text>
+            {joints.map(({ x, y }, index) => (
+              <g
+                key={`${x}-${y}`}
+                className={index >= 14 ? 'new-hand-motor' : undefined}
+              >
+                <path
+                  className="power-positive"
+                  d={`M125 ${y - 17}h7m10 0H${x - 27}`}
+                />
+                <path
+                  className="power-negative"
+                  d={`M137 ${y - 12}H${x - 27}`}
+                />
+                <circle
+                  className="positive-junction"
+                  cx="125"
+                  cy={y - 17}
+                  r="2"
+                />
+                <circle
+                  className="negative-junction"
+                  cx="137"
+                  cy={y - 12}
+                  r="2"
+                />
+                <rect
+                  className="joint-driver"
+                  x={x - 27}
+                  y={y - 21}
+                  width="20"
+                  height="14"
+                  rx="3"
+                />
+                <path
+                  className="driver-output"
+                  d={`M${x - 7} ${y - 14}H${x}v5`}
+                />
+                <circle className="joint-motor" cx={x} cy={y} r="10" />
+              </g>
+            ))}
+            <text x="446" y="84">
+              颈
+            </text>
+            <text x="446" y="117">
+              肩
+            </text>
+            <text x="446" y="172">
+              肘
+            </text>
+            <text x="446" y="197">
+              腰
+            </text>
+            <text x="446" y="224">
+              腕
+            </text>
+            <text x="446" y="244">
+              髋
+            </text>
+            <text x="446" y="287">
+              膝
+            </text>
+            <text x="446" y="337">
+              踝
+            </text>
+            {handsConnected && (
+              <text className="positive-label" x="465" y="257">
+                ＋双手
+              </text>
+            )}
+            <g transform="translate(510 40)">
+              <rect className="joint-driver" width="20" height="14" rx="3" />
+              <text x="28" y="13">
+                驱动器
+              </text>
+              <circle className="joint-motor" cx="10" cy="42" r="10" />
+              <text x="28" y="48">
+                关节电机
+              </text>
+              <text x="0" y="84">
+                每台各自控制
+              </text>
+            </g>
+            <g transform="translate(510 240)">
+              <path
+                className="robot-limb"
+                d="M12 22h126M22 22 9 52 24 80M58 22 45 52 60 80M101 22 87 52 101 80M134 22 121 52 135 80"
+              />
+              <rect
+                className="battery-shell"
+                x="56"
+                y="0"
+                width="46"
+                height="25"
+                rx="5"
+              />
+              <text x="79" y="18" textAnchor="middle">
+                电池
+              </text>
+              <path
+                className="power-positive"
+                d="M67 25v8H9v19m58-19H121v19M45 33v19m42-19v19"
+              />
+              <path
+                className="power-negative"
+                d="M80 25v14H15v13m65-13h47v13M51 39v13m42-13v13"
+              />
+              {[9, 45, 87, 121].map((x) => (
+                <circle key={x} className="joint-motor" cx={x} cy="52" r="7" />
+              ))}
+              <text x="77" y="107" textAnchor="middle">
+                四足也一样（驱动器略）
+              </text>
+            </g>
+          </svg>
+          <div className="robot-expand-row">
+            <button
+              type="button"
+              aria-pressed={handsConnected}
+              onClick={() => setHandsConnected((connected) => !connected)}
+            >
+              {handsConnected ? '撤下新增的双手电机' : '＋ 再接上双手电机'}
+            </button>
+            <span aria-live="polite">
+              {handsConnected ? '16 处共用电池' : '14 处共用电池'}
+              <small>仅为教学示意</small>
+            </span>
+          </div>
+        </section>
+        <section className="robot-advantage-panel joint-integration-panel">
+          <h2>
+            <span>02</span> 一部分固定，一部分带着手臂转
+          </h2>
+          <p>电磁主体：定子 + 转子（旋转的动子）。无框电机可融入关节。</p>
+          <svg
+            className="joint-integration"
+            viewBox="0 0 610 360"
+            aria-label="肘关节结构示意：定子固定在上臂结构内，转子与前臂连接；装在一起后，外圈不动，内圈旋转并带动前臂，无需另挂一个完整电机外壳"
+          >
+            <text x="110" y="30" textAnchor="middle">
+              定子：固定在上臂里
+            </text>
+            <path className="fixed-arm" d="M110 62v67" />
+            <circle className="stator-section" cx="110" cy="160" r="48" />
+            <circle className="stator-gap" cx="110" cy="160" r="31" />
+            <text x="110" y="242" textAnchor="middle">
+              外圈不动
+            </text>
+            <text x="302" y="30" textAnchor="middle">
+              转子：连着前臂
+            </text>
+            <path className="moving-arm" d="M302 160l36 94" />
+            <circle className="rotor-section" cx="302" cy="160" r="27" />
+            <path className="rotor-spoke" d="M285 160h34m-17-17v34" />
+            <text x="302" y="290" textAnchor="middle">
+              内圈带着前臂转
+            </text>
+            <path
+              className="assembly-arrow"
+              d="M174 160h79m-12-10 12 10-12 10M365 160h48m-12-10 12 10-12 10"
+            />
+            <text x="211" y="128" textAnchor="middle">
+              套进去
+            </text>
+            <text x="497" y="30" textAnchor="middle">
+              就是机器人的肘关节
+            </text>
+            <path className="fixed-arm" d="M497 62v67" />
+            <circle className="stator-section" cx="497" cy="160" r="48" />
+            <circle className="stator-gap" cx="497" cy="160" r="31" />
+            <g className="integrated-forearm">
+              <path className="moving-arm" d="M497 160l36 94" />
+              <circle className="rotor-section" cx="497" cy="160" r="27" />
+              <path className="rotor-spoke" d="M480 160h34m-17-17v34" />
+            </g>
+            <path
+              className="rotation-arrow"
+              d="M551 190q26 49-15 80m2-16-2 16 16-2"
+            />
+            <text x="497" y="316" textAnchor="middle">
+              电机与本体融为一体
+            </text>
+            <text x="497" y="345" textAnchor="middle">
+              肩、髋、膝也可这样集成
+            </text>
+          </svg>
+          <div className="joint-integration-legend">
+            <span>绿色：定子 + 上臂</span>
+            <span>橙色：转子 + 前臂</span>
+          </div>
+        </section>
+      </div>
+      <p className="robot-convenience-note">
+        两根线指直流母线的正、负供电导体；各支路经保护与驱动器供电，控制和反馈接线省略。可继续扩展，但受电源功率、线缆载流量等限制。结构图为集成原理示意，实际还需轴承、传感器，可能配减速器。
+      </p>
+      <nav className="robot-video-links" aria-label="机器人案例视频">
+        <a
+          href="https://www.bilibili.com/video/BV1gvt2eCE83/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <span className="robot-video-play">
+            <Play />
+          </span>
+          <span>
+            <small>视频 01 · 看供能装置</small>
+            <strong>内燃机动力四足机器人</strong>
+          </span>
+          <ExternalLink />
+        </a>
+        <a
+          href="https://www.bilibili.com/video/BV1CK4y1R7FF/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <span className="robot-video-play">
+            <Play />
+          </span>
+          <span>
+            <small>视频 02 · 看关节布置</small>
+            <strong>波士顿动力公司机器人进化史</strong>
+          </span>
+          <ExternalLink />
+        </a>
+      </nav>
+      <div className="robot-reference-links">
+        <a
+          className="robot-history-source"
+          href="https://bostondynamics.com/about/history/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          参考：Boston Dynamics 历史与产品 ↗
+        </a>
+        <a
+          className="robot-history-source"
+          href="https://www.kollmorgen.com/en-us/products/motors/technologies-explained/what-is-a-frameless-motor"
+          target="_blank"
+          rel="noreferrer"
+        >
+          结构依据：Kollmorgen 无框电机 ↗
+        </a>
+      </div>
     </div>
-    <h1>把电引过来，就能在需要的位置产生运动</h1>
-    <p className="advantage-lead">
-      供能靠电缆，多个关节可以各自安装电机，并从同一电源获得电能。
-    </p>
-    <div className="convenience-top">
-      <section className="flow-card">
-        <b>供能链</b>
-        <p>电源 → 电缆 → 驱动器 → 电机 → 运动</p>
-        <small>
-          直流可用 2 根供电导体；三相电机可用 3
-          根相线。实际还需要保护接地、反馈与控制接线。
-        </small>
-      </section>
-      <section className="branch-card">
-        <b>公共电源 / 母线</b>
-        <div>
-          <span>支路保护</span>
-          <span>驱动器</span>
-          <span>关节电机</span>
-        </div>
-        <div>
-          <span>支路保护</span>
-          <span>驱动器</span>
-          <span>关节电机</span>
-        </div>
-        <div>
-          <span>支路保护</span>
-          <span>驱动器</span>
-          <span>关节电机</span>
-        </div>
-        <small>每台电机由对应驱动器控制；容量、线缆与保护要匹配。</small>
-      </section>
-      <section className="motor-card">
-        <b>电机的电磁主体</b>
-        <div className="motor-ring">
-          <i>
-            定子
-            <br />
-            <small>固定部分</small>
-          </i>
-          <em>
-            动子
-            <br />
-            <small>运动部分</small>
-          </em>
-        </div>
-        <small>旋转电机的动子常称转子；完整电机还包括轴承、机壳等。</small>
-      </section>
-    </div>
-    <div className="convenience-bottom">
-      <section className="robot-case">
-        <span>电驱足式机器人</span>
-        <div className="robot-diagram">
-          <b>电池</b>
-          <i>
-            髋<br />
-            电机
-          </i>
-          <i>
-            膝<br />
-            电机
-          </i>
-          <i>
-            髋<br />
-            电机
-          </i>
-          <i>
-            膝<br />
-            电机
-          </i>
-        </div>
-        <p>
-          电源集中在机身，电缆分支给各腿关节供能；多台电机配合抬腿、迈步与支撑。
-        </p>
-      </section>
-      <section className="drive-compare">
-        <span>两条驱动链路</span>
-        <p>燃料 → 内燃机 → 液压泵 → 压力油路 → 液压执行器 → 关节</p>
-        <p className="electric">
-          电池 / 电源 → 电缆分支 → 驱动器 → 电机 → 关节
-        </p>
-        <small>
-          上游供能源与关节执行机构是不同层次；不能只看是否有电池判断驱动方式。
-        </small>
-      </section>
-      <section className="arm-case">
-        <span>电驱机械手</span>
-        <div className="arm-diagram">
-          <b>基座</b>
-          <i>肩</i>
-          <i>肘</i>
-          <i>腕</i>
-          <em>抓取</em>
-        </div>
-        <p>
-          在不同关节就地安装电机，电缆沿机械臂引入，各轴配合完成伸手、转腕与抓取。
-        </p>
-      </section>
-    </div>
-    <p className="advantage-chain">
-      电缆把能量送到各处，电机把能量变成各处的运动。
-    </p>
-    <ExternalLinks
-      links={[
-        {
-          label: '观看内燃机动力四足机器人',
-          href: 'https://www.bilibili.com/video/BV1gvt2eCE83/',
-        },
-        {
-          label: '观看波士顿动力公司机器人进化史',
-          href: 'https://www.bilibili.com/video/BV1CK4y1R7FF/',
-        },
-        {
-          label: 'Boston Dynamics：历史与产品',
-          href: 'https://bostondynamics.com/about/history/',
-        },
-      ]}
-    />
-  </div>
-);
+  );
+};
 
 const performanceCases = [
   {
