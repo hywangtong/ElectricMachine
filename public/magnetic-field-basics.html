@@ -1,74 +1,299 @@
 <!doctype html>
 <html lang="zh-CN">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>为什么电流能够建立电机磁场？</title>
-  <link rel="stylesheet" href="/magnetic-circuit-lesson.css" />
-</head>
-<body>
-<main class="lesson">
-  <header class="lesson-head">
-    <div class="eyebrow">磁路 / 04 基本量 · ELI5</div>
-    <h1>为什么电流能够建立电机磁场？</h1>
-    <p class="lead">先记一条因果链：电流给“推动力”，材料决定磁场响应，截面上累计成磁通。</p>
-  </header>
-  <section class="grid-2">
-    <article class="card hero-card">
-      <div class="chain" aria-label="电流到磁通的因果链">
-        <b>I</b><span class="arrow">→</span><b>H</b><span class="arrow">→</span><b>B</b><span class="arrow">→</span><b>Φ</b>
-      </div>
-      <svg viewBox="0 0 760 470" role="img" aria-label="N 匝通电线圈绕在闭合铁心上，建立沿铁心闭合的主磁通">
-        <defs>
-          <marker id="arr1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#2f7c70"/></marker>
-          <marker id="arr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#b26a38"/></marker>
-        </defs>
-        <path d="M170 105H590V365H170Z" fill="none" stroke="#b7c9c4" stroke-width="70" stroke-linejoin="round"/>
-        <path d="M170 105H590V365H170Z" fill="none" stroke="#5d7772" stroke-width="3" stroke-linejoin="round"/>
-        <g fill="none" stroke="#b26a38" stroke-width="7">
-          <path d="M112 155C155 130 185 130 228 155"/><path d="M112 183C155 158 185 158 228 183"/>
-          <path d="M112 211C155 186 185 186 228 211"/><path d="M112 239C155 214 185 214 228 239"/>
-          <path d="M112 267C155 242 185 242 228 267"/><path d="M112 295C155 270 185 270 228 295"/>
-        </g>
-        <text x="68" y="118" font-size="25" class="accent">N 匝线圈</text>
-        <path d="M110 315V385" stroke="#b26a38" stroke-width="5" marker-end="url(#arr2)"/>
-        <text x="55" y="420" font-size="22" class="accent">电流 I</text>
-        <path d="M210 92H540" stroke="#2f7c70" stroke-width="9" marker-end="url(#arr1)"/>
-        <path d="M610 125V330" stroke="#2f7c70" stroke-width="9" marker-end="url(#arr1)"/>
-        <path d="M555 382H220" stroke="#2f7c70" stroke-width="9" marker-end="url(#arr1)"/>
-        <path d="M150 340V135" stroke="#2f7c70" stroke-width="9" marker-end="url(#arr1)"/>
-        <text x="365" y="72" font-size="30" fill="#2f7c70">主磁通 Φ</text>
-        <text x="330" y="225" font-size="34">铁心</text>
-        <text x="295" y="265" font-size="18" class="muted">磁通是“穿过截面多少”的量，</text>
-        <text x="305" y="291" font-size="18" class="muted">不是铁心里流动的物质。</text>
-      </svg>
-    </article>
-    <div class="stack">
-      <article class="card">
-        <h2>三步把图读成公式</h2>
-        <div class="formula-row three" style="margin-top:9px">
-          <div class="formula">F = NI<small>磁通势：匝数 × 电流</small></div>
-          <div class="formula">B = μH<small>材料把 H“响应”为 B</small></div>
-          <div class="formula">Φ = BA<small>均匀截面近似</small></div>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>为什么电流能够建立电机磁场？</title>
+    <link rel="stylesheet" href="/magnetic-field-basics.css" />
+    <script type="module" src="/magnetic-field-basics.js"></script>
+  </head>
+  <body>
+    <main class="lesson" id="lesson">
+      <header class="lesson-head">
+        <div class="eyebrow">磁路 / 04 基本量 · 交互实验</div>
+        <h1>为什么电流能够建立电机磁场？</h1>
+        <p class="lead">
+          改变电流、匝数与截面积，看主磁通的大小和方向怎样变化。
+        </p>
+      </header>
+      <section class="workspace">
+        <article class="card hero-card">
+          <div class="card-heading">
+            <h2>通电线圈绕在闭合铁心上</h2>
+            <button type="button" id="reset">恢复初始值</button>
+          </div>
+          <svg
+            id="core-diagram"
+            viewBox="0 0 760 350"
+            role="img"
+            aria-label="连续绕组前方跨过铁心，绕至背面再返回；箭头长度表示电流与主磁通大小"
+          >
+            <defs>
+              <linearGradient id="iron">
+                <stop stop-color="#dce7e3" />
+                <stop offset="1" stop-color="#8da9a1" />
+              </linearGradient>
+              <linearGradient id="copper" x1="0" x2="0" y1="0" y2="1">
+                <stop stop-color="#e5a369" />
+                <stop offset="0.5" stop-color="#b9652e" />
+                <stop offset="1" stop-color="#e5a369" />
+              </linearGradient>
+              <marker
+                id="arr1"
+                viewBox="0 0 10 10"
+                refX="10"
+                refY="5"
+                markerWidth="16"
+                markerHeight="16"
+                markerUnits="userSpaceOnUse"
+                orient="auto"
+              >
+                <path d="M0 0L10 5L0 10Z" fill="#237d6c" />
+              </marker>
+              <marker
+                id="arr2"
+                viewBox="0 0 10 10"
+                refX="10"
+                refY="5"
+                markerWidth="14"
+                markerHeight="14"
+                markerUnits="userSpaceOnUse"
+                orient="auto"
+              >
+                <path d="M0 0L10 5L0 10Z" fill="#b9652e" />
+              </marker>
+            </defs>
+            <g
+              id="coil-back"
+              fill="none"
+              stroke="#935b38"
+              stroke-width="7"
+              stroke-linecap="round"
+            ></g>
+            <path
+              id="core-depth"
+              d="M210 63H560V287H210Z"
+              fill="none"
+              stroke="#6f8e85"
+              stroke-width="64"
+              stroke-linejoin="round"
+            />
+            <path
+              id="core-face"
+              d="M194 75H544V299H194Z"
+              fill="none"
+              stroke="url(#iron)"
+              stroke-width="64"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M194 75H544V299H194Z"
+              fill="none"
+              stroke="#537c70"
+              stroke-width="2"
+              stroke-dasharray="6 7"
+            />
+            <g
+              id="coil-front"
+              fill="none"
+              stroke="url(#copper)"
+              stroke-width="8"
+              stroke-linecap="round"
+            ></g>
+            <path
+              id="coil-leads"
+              fill="none"
+              stroke="#b9652e"
+              stroke-width="6"
+              stroke-linecap="round"
+            />
+            <g
+              id="flux-arrows"
+              fill="none"
+              stroke="#237d6c"
+              stroke-width="7"
+              marker-end="url(#arr1)"
+            >
+              <line id="flux-top" />
+              <line id="flux-right" />
+              <line id="flux-bottom" />
+              <line id="flux-left" />
+            </g>
+            <line
+              id="current-arrow"
+              stroke="#b9652e"
+              stroke-width="6"
+              marker-end="url(#arr2)"
+            />
+            <text x="20" y="284" class="copper-text">电流 I</text>
+            <text x="369" y="140" text-anchor="middle" class="core-label">
+              闭合铁心
+            </text>
+            <text x="369" y="184" text-anchor="middle" class="flux-label">
+              主磁通 Φ
+            </text>
+            <text id="direction-label" x="369" y="221" text-anchor="middle">
+              正电流 → 顺时针磁通
+            </text>
+            <text id="turns-label" x="20" y="30" class="copper-text">
+              N = 6 匝
+            </text>
+            <path
+              d="M125 34 158 102"
+              fill="none"
+              stroke="#b9652e"
+              stroke-width="2"
+            />
+            <g transform="translate(622 119)">
+              <text x="44" y="-24" text-anchor="middle">截面积 A</text>
+              <rect
+                id="section-area"
+                x="8"
+                y="8"
+                width="72"
+                height="72"
+                fill="url(#iron)"
+                stroke="#237d6c"
+                stroke-width="3"
+              />
+              <text id="area-label" x="44" y="115" text-anchor="middle">
+                3.0 cm²
+              </text>
+            </g>
+            <path
+              d="M580 185H620"
+              fill="none"
+              stroke="#537c70"
+              stroke-width="2"
+              stroke-dasharray="4 4"
+            />
+          </svg>
+          <div class="diagram-note">
+            导线跨过前面，绕回背面；箭头表示方向与强弱，不表示物质流动。
+          </div>
+          <div class="controls">
+            <div class="control current-control">
+              <label for="current"
+                >电流 I
+                <output id="current-value" for="current">+1.5 A</output></label
+              >
+              <input
+                id="current"
+                type="range"
+                min="-2"
+                max="2"
+                step="0.1"
+                value="1.5"
+              />
+              <div class="scale">
+                <span>−2 A · 反向</span><span>0</span><span>+2 A · 正向</span>
+              </div>
+            </div>
+            <div class="control">
+              <label for="turns">匝数 N <span>1—8 匝</span></label>
+              <div class="number-field">
+                <input
+                  id="turns"
+                  type="number"
+                  min="1"
+                  max="8"
+                  step="1"
+                  value="6"
+                /><span>匝</span>
+              </div>
+              <div class="control-hint" id="turns-hint">整数 · 同步增减</div>
+            </div>
+            <div class="control">
+              <label for="area"
+                >截面积 A
+                <output id="area-value" for="area">3.0 cm²</output></label
+              >
+              <input
+                id="area"
+                type="range"
+                min="1"
+                max="4"
+                step="0.1"
+                value="3"
+              />
+              <div class="scale"><span>1 cm²</span><span>4 cm²</span></div>
+            </div>
+          </div>
+          <div
+            class="experiment-result"
+            id="experiment-result"
+            role="status"
+            aria-live="polite"
+          >
+            主磁通 Φ = +0.054 mWb
+          </div>
+        </article>
+        <div class="explanation">
+          <article class="card">
+            <h2>从电流到磁通：三步读懂</h2>
+            <div class="equation-step">
+              <b>01</b>
+              <div>
+                <strong>F = NI → H ≈ NI/l</strong>
+                <p>电流 × 匝数，决定励磁强度</p>
+              </div>
+              <output id="h-value">H = +18.0 A/m</output>
+            </div>
+            <div class="equation-step">
+              <b>02</b>
+              <div>
+                <strong>B = μH</strong>
+                <p>同样 H，材料的 μ 决定 B</p>
+              </div>
+              <output id="b-value">B = +0.18 T</output>
+            </div>
+            <div class="equation-step">
+              <b>03</b>
+              <div>
+                <strong>Φ ≈ BA = μNIA/l</strong>
+                <p>同样 B，截面越大，主磁通越大</p>
+              </div>
+              <output id="phi-value">Φ = +0.054 mWb</output>
+            </div>
+            <div class="proportions">
+              固定 μ、l：<strong>Φ ∝ I · Φ ∝ N · Φ ∝ A</strong>
+            </div>
+          </article>
+          <article class="card quantities">
+            <h2>四个量别混在一起</h2>
+            <div class="note-list" style="margin-top: 7px">
+              <div class="note-item">
+                <strong>I</strong><span>电流，单位 A。在线圈里流动。</span>
+              </div>
+              <div class="note-item">
+                <strong>H</strong
+                ><span>磁场强度，单位 A/m。更像“励磁有多用力”。</span>
+              </div>
+              <div class="note-item">
+                <strong>B</strong
+                ><span>磁感应强度，单位 T。表示材料中磁场响应有多强。</span>
+              </div>
+              <div class="note-item">
+                <strong>Φ</strong
+                ><span>磁通，单位 Wb。把某个截面上的 B 累计起来。</span>
+              </div>
+            </div>
+          </article>
+          <article class="model-note">
+            <strong>模型边界：线性、未饱和、均匀截面</strong>
+            <p>
+              μ = 0.01 H/m，l = 0.50 m；忽略漏磁、气隙、磁滞。教学设定，非实测。
+            </p>
+            <p><strong>H ≠ B</strong>；μ = B/H（H ≠ 0），实际 μ 会变化。</p>
+          </article>
         </div>
-        <div class="formula-row" style="margin-top:8px">
-          <div class="formula">B = Φ/A<small>同一 Φ，面积越小，B 越大</small></div>
-          <div class="formula">μ = B/H<small>线性局部定义；铁磁材料并非全程常数</small></div>
-        </div>
-      </article>
-      <article class="card">
-        <h2>四个量别混在一起</h2>
-        <div class="note-list" style="margin-top:7px">
-          <div class="note-item"><strong>I</strong><span>电流，单位 A。在线圈里流动。</span></div>
-          <div class="note-item"><strong>H</strong><span>磁场强度，单位 A/m。更像“励磁有多用力”。</span></div>
-          <div class="note-item"><strong>B</strong><span>磁感应强度，单位 T。表示材料中磁场响应有多强。</span></div>
-          <div class="note-item"><strong>Φ</strong><span>磁通，单位 Wb。把某个截面上的 B 累计起来。</span></div>
-        </div>
-        <p><span class="tag">关键辨析</span> <strong>H ≠ B</strong>：H 主要由励磁决定，B 还要看材料的 μ。</p>
-      </article>
-    </div>
-  </section>
-  <footer class="engineering"><strong>工程结论</strong><span>绕组电流先建立 H；材料决定 B；B 穿过截面形成 Φ。下一页追问：为什么加铁心会让 Φ 明显变大？</span></footer>
-</main>
-</body>
+      </section>
+      <footer>
+        <strong>试一试</strong
+        ><span
+          >I 反向，Φ 也反向；N 或 A 加倍，Φ 加倍。只增大 A 时，B 不变。</span
+        ><span class="next">下一页：为什么要加铁心？ →</span>
+      </footer>
+    </main>
+  </body>
 </html>
