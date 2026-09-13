@@ -28,6 +28,7 @@ import { ElectrificationTrend } from '@/components/electrification-trend';
 import { EvLesson, type EvPage } from '@/components/ev-roadmap';
 import { ShipPodExplainer } from '@/components/ship-pod-explainer';
 import { DistributedPropulsion } from '@/components/distributed-propulsion';
+import { MotorAdvantagesLesson } from '@/components/motor-advantages-lesson';
 const number = (n: number) => String(n).padStart(2, '0');
 type IntroTabSlide = Extract<Slide, { kind: 'ev' }>;
 
@@ -88,9 +89,7 @@ export default function CoursePlayer() {
         (s) => s.kind !== 'home' && s.chapterId === chapter.id,
       )
     : [courseSlides[0]];
-  const localIndex = chapterSlides.findIndex(
-    (s) => s.id === containerSlide.id,
-  );
+  const localIndex = chapterSlides.findIndex((s) => s.id === containerSlide.id);
   const navigate = useCallback((next: number) => {
     const clamped = Math.max(0, Math.min(courseSlides.length - 1, next));
     if (courseSlides[clamped].id === introTabAnchorId)
@@ -325,17 +324,19 @@ export default function CoursePlayer() {
                     : '章节导入'
                   : slide.kind === 'video'
                     ? '视频导入'
-                   : slide.kind === 'embed'
-                     ? '互动图解'
-                    : slide.kind === 'assessment'
-                      ? '考核方案'
-                      : slide.kind === 'question'
-                        ? '课堂思考'
-                        : slide.kind === 'trend'
-                          ? '趋势示意'
-                          : slide.kind === 'outline'
-                            ? '内容提纲'
-                            : '课堂讲义'}
+                    : slide.kind === 'embed'
+                      ? '互动图解'
+                      : slide.kind === 'assessment'
+                        ? '考核方案'
+                        : slide.kind === 'question'
+                          ? '课堂思考'
+                          : slide.kind === 'trend'
+                            ? '趋势示意'
+                            : slide.kind === 'motor-advantage'
+                              ? '互动图解'
+                              : slide.kind === 'outline'
+                                ? '内容提纲'
+                                : '课堂讲义'}
             </span>
           </div>
           <div
@@ -679,6 +680,8 @@ export default function CoursePlayer() {
                       </div>
                     ) : slide.kind === 'trend' ? (
                       <ElectrificationTrend />
+                    ) : slide.kind === 'motor-advantage' ? (
+                      <MotorAdvantagesLesson advantage={slide.advantage} />
                     ) : (
                       <div
                         className={`outline-body${slide.kind === 'content' && slide.explainer ? ' propulsion-content' : ''}`}

@@ -255,6 +255,13 @@ export type Slide =
         courseGuide: string;
         returningGuide: string;
       };
+    }
+  | {
+      id: string;
+      kind: 'motor-advantage';
+      title: string;
+      chapterId: string;
+      advantage: 'environment' | 'convenience' | 'performance' | 'adaptability';
     };
 // IDs are stable URL fragments. Keep each chapter's pages together.
 export const slides: Slide[] = [
@@ -425,6 +432,39 @@ export const slides: Slide[] = [
       title: '本章内容',
       chapterId: chapter.id,
     });
+
+    if (chapter.id === 'introduction') {
+      chapterSlides.push(
+        {
+          id: 'introduction-motor-advantages-environment',
+          kind: 'motor-advantage',
+          title: '电机的优势：环保',
+          chapterId: chapter.id,
+          advantage: 'environment',
+        },
+        {
+          id: 'introduction-motor-advantages-convenience',
+          kind: 'motor-advantage',
+          title: '电机的优势：应用便捷',
+          chapterId: chapter.id,
+          advantage: 'convenience',
+        },
+        {
+          id: 'introduction-motor-advantages-performance',
+          kind: 'motor-advantage',
+          title: '电机的优势：高性能',
+          chapterId: chapter.id,
+          advantage: 'performance',
+        },
+        {
+          id: 'introduction-motor-advantages-adaptability',
+          kind: 'motor-advantage',
+          title: '电机的优势：适应性强',
+          chapterId: chapter.id,
+          advantage: 'adaptability',
+        },
+      );
+    }
 
     return chapterSlides;
   }),
