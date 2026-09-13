@@ -84,6 +84,8 @@ Use two-space indentation, semicolons, single quotes, and Oxfmt's 80-column targ
 
 Keep slide IDs unique, stable, and kebab-case; `chapterId` must reference an existing chapter. Preserve Chinese teaching copy and the 1600 × 900 canvas. Split overflowing content into slides instead of adding internal scrolling. Keep assets local. See `README.md` for slide examples.
 
+Read [全站内容记录与页面规划](docs/website-content.md) before reviewing or modifying website content or planning new pages. It records every page's content, relationships, and 已完成／未完成 status. Keep it synchronized with the corresponding source changes.
+
 ## Testing Guidelines
 
 No automated test framework, test naming convention, or coverage threshold is configured. Before submitting code, run typecheck, lint, and build. Manually verify chapter navigation, keyboard/touch controls, fullscreen, hash-link refresh/back/forward, and desktop/mobile scaling. Check projection and fullscreen on classroom equipment when relevant.
