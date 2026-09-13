@@ -157,7 +157,6 @@ const routes: VehicleRoute[] = [
 ];
 
 export type EvPage = RouteId | 'principle' | 'compare' | 'memory';
-export type IntroPage = 'trend' | EvPage;
 
 const stepIcon = (label: string): typeof Zap => {
   if (label.includes('充电')) return PlugZap;
@@ -174,15 +173,13 @@ const stepIcon = (label: string): typeof Zap => {
 export function EvRouteNav({
   page,
   onNavigate,
-  className,
 }: {
-  page: IntroPage;
+  page: EvPage;
   onNavigate: (id: string) => void;
-  className?: string;
 }) {
   return (
     <nav
-      className={'ev-route-nav' + (className ? ' ' + className : '')}
+      className="ev-route-nav"
       aria-label="绪论电动化内容"
     >
       {routes.map((route) => (

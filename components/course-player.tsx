@@ -25,32 +25,29 @@ import {
 import { chapters, slides, type Slide } from '@/content/course';
 import { ChapterGalaxy } from '@/components/chapter-galaxy';
 import { ElectrificationTrend } from '@/components/electrification-trend';
-import {
-  EvLesson,
-  EvRouteNav,
-  type IntroPage,
-} from '@/components/ev-roadmap';
+import { EvLesson, type EvPage } from '@/components/ev-roadmap';
 import { ShipPodExplainer } from '@/components/ship-pod-explainer';
 import { DistributedPropulsion } from '@/components/distributed-propulsion';
 const number = (n: number) => String(n).padStart(2, '0');
-type IntroTabSlide = Extract<Slide, { kind: 'ev' | 'trend' }>;
+type IntroTabSlide = Extract<Slide, { kind: 'ev' }>;
 
-const introTabAnchorId = 'introduction-electrification-trend';
-const isIntroTabbedSlide = (candidate: Slide) =>
-  candidate.id === introTabAnchorId ||
+const introTabAnchorId = 'introduction-ev-principle';
+const isIntroTabbedSlide = (candidate: Slide): candidate is IntroTabSlide =>
   candidate.kind === 'ev';
-const courseSlides = slides.filter(
-  (candidate) =>
-    !isIntroTabbedSlide(candidate) || candidate.id === introTabAnchorId,
-);
-
-const findIntroTab = (id: string): IntroPage | undefined => {
-  const candidate = slides.find((item) => item.id === id);
-  if (candidate?.id === introTabAnchorId) return 'trend';
-  if (
-    candidate?.kind === 'ev'
+const courseSlides = slides
+  .filter(
+    (candidate) =>
+      !isIntroTabbedSlide(candidate) || candidate.id === introTabAnchorId,
   )
-    return candidate.page;
+  .map((candidate) =>
+    candidate.id === introTabAnchorId
+      ? { ...candidate, title: '新能源汽车技术路线' }
+      : candidate,
+  );
+
+const findIntroTab = (id: string): EvPage | undefined => {
+  const candidate = slides.find((item) => item.id === id);
+  if (candidate && isIntroTabbedSlide(candidate)) return candidate.page;
   return undefined;
 };
 
@@ -64,7 +61,7 @@ const findCourseIndex = (id: string) => {
 
 export default function CoursePlayer() {
   const [index, setIndex] = useState(0);
-  const [introPage, setIntroPage] = useState<IntroPage>('trend');
+  const [introPage, setIntroPage] = useState<EvPage>('principle');
   const [presenting, setPresenting] = useState(false);
   const [catalog, setCatalog] = useState(false);
   const [notice, setNotice] = useState('');
@@ -74,14 +71,10 @@ export default function CoursePlayer() {
   const containerSlide = courseSlides[index];
   const activeIntroTab =
     containerSlide.id === introTabAnchorId
-      ? (introPage === 'trend'
-          ? slides.find(
-              (candidate) => candidate.id === introTabAnchorId,
-            )
-          : slides.find(
-              (candidate) =>
-                candidate.kind === 'ev' && candidate.page === introPage,
-            )) as IntroTabSlide | undefined
+      ? slides.find(
+          (candidate) =>
+            isIntroTabbedSlide(candidate) && candidate.page === introPage,
+        )
       : undefined;
   const slide = activeIntroTab ?? containerSlide;
   const activeTitle = slide.title;
@@ -100,6 +93,8 @@ export default function CoursePlayer() {
   );
   const navigate = useCallback((next: number) => {
     const clamped = Math.max(0, Math.min(courseSlides.length - 1, next));
+    if (courseSlides[clamped].id === introTabAnchorId)
+      setIntroPage('principle');
     setIndex(clamped);
     window.location.hash = courseSlides[clamped].id;
   }, []);
@@ -259,8 +254,10 @@ export default function CoursePlayer() {
                     <button
                       key={s.id}
                       onClick={() => jump(s.id)}
-                      className={s.id === slide.id ? 'selected' : ''}
-                      aria-current={s.id === slide.id ? 'page' : undefined}
+                      className={s.id === containerSlide.id ? 'selected' : ''}
+                      aria-current={
+                        s.id === containerSlide.id ? 'page' : undefined
+                      }
                     >
                       {s.kind === 'chapter'
                         ? c.teacher
@@ -681,14 +678,7 @@ export default function CoursePlayer() {
                         </div>
                       </div>
                     ) : slide.kind === 'trend' ? (
-                      <div className="intro-trend-tabbed">
-                        <EvRouteNav
-                          page={introPage}
-                          onNavigate={jump}
-                          className="intro-trend-tabs"
-                        />
-                        <ElectrificationTrend />
-                      </div>
+                      <ElectrificationTrend />
                     ) : (
                       <div
                         className={`outline-body${slide.kind === 'content' && slide.explainer ? ' propulsion-content' : ''}`}
