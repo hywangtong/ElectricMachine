@@ -1410,11 +1410,62 @@ a:focus-visible {
   font-size: 15px;
   line-height: 1.4;
 }
+.performance-player-slot {
+  height: 300px;
+}
 .performance-player {
+  position: relative;
   height: 300px;
   overflow: hidden;
   border-radius: 8px;
   background: #101820;
+}
+.performance-player.is-expanded {
+  position: absolute;
+  z-index: 21;
+  left: 50%;
+  top: 50%;
+  width: 1200px;
+  height: 675px;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 18px 60px #0006;
+  overflow: visible;
+}
+.performance-backdrop {
+  position: absolute;
+  z-index: 20;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: #101820b3;
+  cursor: default;
+}
+.performance-play-trigger {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: 0;
+  background: #10182066;
+  color: #fff;
+  font-size: 24px;
+}
+.performance-shrink {
+  position: absolute;
+  right: 0;
+  top: -43px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid #ffffff80;
+  border-radius: 6px;
+  padding: 6px 12px;
+  background: #101820;
+  color: #fff;
+  font-size: 18px;
 }
 .performance-player iframe,
 .performance-player video {

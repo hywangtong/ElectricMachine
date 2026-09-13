@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import { ArrowRight, ExternalLink, Play } from 'lucide-react';
+import { ArrowRight, ExternalLink, Play, X } from 'lucide-react';
 
 export type MotorAdvantage =
   | 'environment'
@@ -581,13 +581,29 @@ const performanceCases = [
 
 const PerformanceLesson = () => {
   const [selected, setSelected] = useState(0);
+  const [expanded, setExpanded] = useState(false);
   const video = useRef<HTMLVideoElement>(null);
   const active = performanceCases[selected];
-  useEffect(() => {
+  const shrink = () => {
     video.current?.pause();
-  }, [selected]);
-  const select = (next: number) =>
+    setExpanded(false);
+  };
+  const select = (next: number) => {
+    shrink();
     setSelected((next + performanceCases.length) % performanceCases.length);
+  };
+  useEffect(() => {
+    if (!expanded) return;
+    const keydown = (event: KeyboardEvent) => {
+      if (event.key !== 'Escape') return;
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      video.current?.pause();
+      setExpanded(false);
+    };
+    window.addEventListener('keydown', keydown, true);
+    return () => window.removeEventListener('keydown', keydown, true);
+  }, [expanded]);
   return (
     <div className="advantage-body advantage-performance">
       <div className="eyebrow">
@@ -653,12 +669,12 @@ const PerformanceLesson = () => {
               if (event.key === 'Home') {
                 event.preventDefault();
                 event.stopPropagation();
-                setSelected(0);
+                select(0);
               }
               if (event.key === 'End') {
                 event.preventDefault();
                 event.stopPropagation();
-                setSelected(performanceCases.length - 1);
+                select(performanceCases.length - 1);
               }
             }}
           >
@@ -669,7 +685,7 @@ const PerformanceLesson = () => {
                 role="tab"
                 aria-selected={selected === itemIndex}
                 tabIndex={selected === itemIndex ? 0 : -1}
-                onClick={() => setSelected(itemIndex)}
+                onClick={() => select(itemIndex)}
               >
                 {item.label}
               </button>
@@ -677,32 +693,70 @@ const PerformanceLesson = () => {
           </div>
           <h2>{active.title}</h2>
           <p>{active.text}</p>
-          <div className="performance-player">
-            {active.id === 'bonder' ? (
-              <iframe
-                key={active.id}
-                src={active.src}
-                title={active.title}
-                allow="autoplay; fullscreen; picture-in-picture"
-                allowFullScreen
-                referrerPolicy="strict-origin-when-cross-origin"
+          <div className="performance-player-slot">
+            {expanded && (
+              <button
+                type="button"
+                className="performance-backdrop"
+                aria-label="停止播放并缩回视频"
+                onClick={shrink}
               />
-            ) : (
-              <video
-                key={active.id}
-                ref={video}
-                src={active.src}
-                controls
-                title={active.title}
-              >
-                <track
-                  kind="captions"
-                  src="/videos/captions-unavailable.vtt"
-                  srcLang="zh"
-                  label="中文提示"
-                />
-              </video>
             )}
+            <div
+              className={`performance-player${expanded ? ' is-expanded' : ''}`}
+              onKeyDown={(event) => event.stopPropagation()}
+              onTouchStart={(event) => event.stopPropagation()}
+              onTouchEnd={(event) => event.stopPropagation()}
+            >
+              {active.id === 'bonder' ? (
+                <iframe
+                  key={active.id}
+                  src={`${active.src}&autoplay=${expanded ? 1 : 0}`}
+                  title={active.title}
+                  allow="autoplay; fullscreen; picture-in-picture"
+                  allowFullScreen
+                  referrerPolicy="strict-origin-when-cross-origin"
+                />
+              ) : (
+                <video
+                  key={active.id}
+                  ref={video}
+                  src={active.src}
+                  controls
+                  playsInline
+                  onPlay={() => setExpanded(true)}
+                  onEnded={() => setExpanded(false)}
+                  onError={() => setExpanded(false)}
+                  title={active.title}
+                >
+                  <track
+                    kind="captions"
+                    src="/videos/captions-unavailable.vtt"
+                    srcLang="zh"
+                    label="中文提示"
+                  />
+                </video>
+              )}
+              {active.id === 'bonder' && !expanded && (
+                <button
+                  type="button"
+                  className="performance-play-trigger"
+                  onClick={() => setExpanded(true)}
+                >
+                  <Play /> 居中放大播放
+                </button>
+              )}
+              {expanded && (
+                <button
+                  type="button"
+                  className="performance-shrink"
+                  onClick={shrink}
+                  aria-label="停止播放并缩回原位"
+                >
+                  <X /> 缩回原位
+                </button>
+              )}
+            </div>
           </div>
           <a
             className="media-link"
