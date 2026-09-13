@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>怎样把磁场问题变成磁路计算？</title>
+  <link rel="stylesheet" href="/magnetic-circuit-lesson.css" />
+</head>
+<body>
+<main class="lesson">
+  <header class="lesson-head">
+    <div class="eyebrow">磁路 / 07 计算方法 · ELI5</div>
+    <h1>怎样把磁场问题变成磁路计算？</h1>
+    <p class="lead">把“空间里的磁场”压缩成一条主磁通通道：谁推动？哪里难走？磁通怎么分、磁位降怎么加？</p>
+  </header>
+  <section class="grid-2">
+    <div class="stack">
+      <article class="card">
+        <h2>先借电路做一个“只用于建直觉”的类比</h2>
+        <div class="table" style="margin-top:8px">
+          <div class="table-row head"><span>电路</span><span>磁路</span><span>对应关系</span></div>
+          <div class="table-row"><span>电压 U</span><span>磁通势 F</span><span>推动</span></div>
+          <div class="table-row"><span>电流 I</span><span>磁通 Φ</span><span>通过</span></div>
+          <div class="table-row"><span>电阻 R</span><span>磁阻 R<sub>m</sub></span><span>限制</span></div>
+        </div>
+        <div class="formula-row" style="margin-top:8px">
+          <div class="formula">I = U/R</div>
+          <div class="formula emphasis">Φ = F/R<sub>m</sub></div>
+        </div>
+      </article>
+      <article class="card">
+        <h2>磁路的三个核心式</h2>
+        <div class="formula-row three" style="margin-top:8px">
+          <div class="formula">F = NI<small>磁通势，A·turn</small></div>
+          <div class="formula">R<sub>m</sub> = l/(μA)<small>磁阻，A·turn/Wb</small></div>
+          <div class="formula emphasis">Φ = NI/R<sub>m</sub><small>简单单支路磁路</small></div>
+        </div>
+        <p><strong>看趋势：</strong> l ↑ → R<sub>m</sub> ↑；A ↑ → R<sub>m</sub> ↓；μ ↑ → R<sub>m</sub> ↓。</p>
+      </article>
+    </div>
+    <div class="stack">
+      <article class="card hero-card">
+        <div class="compare-title"><h2>复杂磁路：磁通要连续，磁位降要闭合求和</h2><span class="tag">KCL / KVL 类比</span></div>
+        <svg viewBox="0 0 720 270" role="img" aria-label="三支路磁路满足磁通连续，闭合磁路中各段磁位降之和等于磁通势">
+          <defs><marker id="c4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#397f73"/></marker></defs>
+          <path d="M85 60v150M85 135h170M255 135v-75M255 135v75" fill="none" stroke="#7b918c" stroke-width="32" stroke-linecap="round"/>
+          <path d="M95 135h135" stroke="#397f73" stroke-width="7" marker-end="url(#c4)"/>
+          <path d="M255 125v-45" stroke="#397f73" stroke-width="7" marker-end="url(#c4)"/>
+          <path d="M255 145v45" stroke="#397f73" stroke-width="7" marker-end="url(#c4)"/>
+          <text x="126" y="112" font-size="20">Φ</text><text x="275" y="87" font-size="20">Φ₁</text><text x="275" y="202" font-size="20">Φ₂</text>
+          <text x="105" y="246" font-size="20">磁通连续：Φ = Φ₁ + Φ₂</text>
+          <path d="M420 60H650V210H420Z" fill="none" stroke="#829792" stroke-width="34" stroke-linejoin="round"/>
+          <path d="M445 70h160v125H445" fill="none" stroke="#397f73" stroke-width="6" marker-end="url(#c4)"/>
+          <text x="493" y="125" font-size="20">Uₘ = Hl</text>
+          <text x="415" y="246" font-size="20">闭合回路：ΣUₘ = ΣF</text>
+        </svg>
+      </article>
+      <article class="card">
+        <h2>标准解题链：别一上来硬套 μ</h2>
+        <div class="flow-steps" style="margin-top:8px">
+          <div class="flow-step">① 给定/求<br><strong>Φ</strong></div><div class="flow-arrow">→</div>
+          <div class="flow-step">② Bᵢ = Φᵢ/Aᵢ</div><div class="flow-arrow">→</div>
+          <div class="flow-step">③ 查 B-H<br>得到 Hᵢ</div>
+        </div>
+        <div class="flow-steps" style="grid-template-columns:1fr auto 1fr auto 1fr; margin-top:6px">
+          <div class="flow-step">④ Uₘᵢ = Hᵢlᵢ</div><div class="flow-arrow">→</div>
+          <div class="flow-step">⑤ ΣHᵢlᵢ = NI</div><div class="flow-arrow">→</div>
+          <div class="flow-step">得到所需安匝数</div>
+        </div>
+        <p class="mini">铁磁材料非线性时，H 应从 B-H 曲线查取；把 μ 当常数只适用于明确的线性近似。</p>
+      </article>
+    </div>
+  </section>
+  <footer class="engineering"><strong>工程结论</strong><span>磁通势推动磁通，磁阻限制磁通；复杂磁路靠“磁通连续 + 磁位降求和”组织计算。下一页用同一套框架看气隙。</span></footer>
+</main>
+</body>
+</html>

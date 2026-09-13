@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>为什么电机中的气隙最关键？</title>
+  <link rel="stylesheet" href="/magnetic-circuit-lesson.css" />
+</head>
+<body>
+<main class="lesson">
+  <header class="lesson-head">
+    <div class="eyebrow">磁路 / 08 气隙 · ELI5</div>
+    <h1>为什么电机中的气隙最关键？</h1>
+    <p class="lead">气隙明明很短，却像磁路里的“收费站”：空气磁导率太低，往往吃掉大部分磁通势。</p>
+  </header>
+  <section class="grid-2">
+    <article class="card hero-card">
+      <div class="compare-title"><h2>电机磁路：主磁通必须跨过气隙</h2><span class="tag">δ 很短，但 μ 很小</span></div>
+      <svg viewBox="0 0 760 455" role="img" aria-label="简化电机定子和转子之间有两个窄气隙，主磁通穿过气隙闭合">
+        <defs><marker id="g5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#397f73"/></marker></defs>
+        <circle cx="360" cy="225" r="185" fill="none" stroke="#aabcb7" stroke-width="70"/>
+        <circle cx="360" cy="225" r="88" fill="#d8e1de" stroke="#6d827d" stroke-width="3"/>
+        <circle cx="360" cy="225" r="120" fill="none" stroke="#f8fbf7" stroke-width="22"/>
+        <path d="M360 40A185 185 0 0 1 545 225" fill="none" stroke="#397f73" stroke-width="8" marker-end="url(#g5)"/>
+        <path d="M545 225A185 185 0 0 1 360 410" fill="none" stroke="#397f73" stroke-width="8" marker-end="url(#g5)"/>
+        <path d="M360 410A185 185 0 0 1 175 225" fill="none" stroke="#397f73" stroke-width="8" marker-end="url(#g5)"/>
+        <path d="M175 225A185 185 0 0 1 360 40" fill="none" stroke="#397f73" stroke-width="8" marker-end="url(#g5)"/>
+        <text x="355" y="26" text-anchor="middle" font-size="25" fill="#397f73">主磁通 Φ</text>
+        <text x="360" y="232" text-anchor="middle" font-size="26">转子</text>
+        <text x="360" y="70" text-anchor="middle" font-size="22">定子铁心</text>
+        <path d="M475 153h45" stroke="#b36b39" stroke-width="6"/><path d="M200 300h45" stroke="#b36b39" stroke-width="6"/>
+        <text x="500" y="136" font-size="22" class="accent">气隙 δ</text><text x="145" y="334" font-size="22" class="accent">气隙 δ</text>
+      </svg>
+      <div class="formula-row">
+        <div class="formula">R<sub>Fe</sub> = l<sub>Fe</sub>/(μ<sub>Fe</sub>A)</div>
+        <div class="formula warn">R<sub>δ</sub> = δ/(μ<sub>0</sub>A)</div>
+      </div>
+      <p style="text-align:center"><strong>μ<sub>Fe</sub> ≫ μ<sub>0</sub></strong>，所以即使 <strong>δ ≪ l<sub>Fe</sub></strong>，仍可能 <strong>R<sub>δ</sub> ≫ R<sub>Fe</sub></strong>。</p>
+    </article>
+    <div class="stack">
+      <article class="card">
+        <h2>教材例题：磁通势到底花在哪？</h2>
+        <p>只看最终结果，建立量级直觉：</p>
+        <div class="bar-row" style="margin-top:10px"><strong>铁心</strong><div class="bar-track"><div class="bar" style="width:5.3%"></div></div><span>444 A</span></div>
+        <div class="bar-row" style="margin-top:8px"><strong>气隙</strong><div class="bar-track"><div class="bar gap" style="width:94.7%"></div></div><span>7960 A</span></div>
+        <div class="formula-row" style="margin-top:10px">
+          <div class="formula">F<sub>Fe</sub> = 276 + 168 = 444 A</div>
+          <div class="formula emphasis">F<sub>δ</sub> = 7960 A</div>
+        </div>
+        <div class="formula warn" style="margin-top:8px">F<sub>总</sub> = 8404 A &nbsp;，&nbsp; 7960/8404 ≈ <strong>94.7%</strong><small>94.7% 只属于这个例题条件，不是所有电机的固定比例</small></div>
+      </article>
+      <article class="card">
+        <h2>气隙为什么直接影响励磁电流？</h2>
+        <div class="formula emphasis" style="margin-top:8px">F = NI</div>
+        <p>要跨过更“难走”的气隙，就需要更多安匝数 NI。N 不变时，通常意味着更大的励磁电流 I。</p>
+        <p><span class="tag">后续会反复出现</span> 直流电机、变压器漏磁、异步电机气隙磁场，都离不开这个直觉。</p>
+      </article>
+    </div>
+  </section>
+  <footer class="engineering"><strong>工程结论</strong><span>电机励磁的主要磁通势往往花在气隙上。短，不代表磁阻小；决定性因素是 l、A 与 μ 一起作用。</span></footer>
+</main>
+</body>
+</html>

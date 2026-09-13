@@ -625,7 +625,7 @@ export default function CoursePlayer() {
                       </div>
                     ) : slide.kind === 'embed' ? (
                       <div
-                        className={`embed-body${slide.embedUrl === '/magnetic-maxwell-eli5.html' ? ' embed-maxwell' : ''}`}
+                        className={`embed-body${slide.embedUrl.startsWith('/magnetic-') ? ' embed-maxwell' : ''}`}
                       >
                         <iframe
                           src={slide.embedUrl}

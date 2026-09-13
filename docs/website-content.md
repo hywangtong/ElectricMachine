@@ -6,7 +6,7 @@
 
 本文中的“页”包括课程翻页页面、具有独立地址的页内标签内容、独立 HTML 专题，以及目录等公共界面状态。网站主入口只有 `/`；课程页通过 `/#页面ID` 定位，不是多个独立路由。
 
-当前课程数据有 49 个内容记录，播放器有 42 个翻页位置。新能源汽车的 8 个记录共用第 7 个翻页位置，其余 7 个标签不增加总页码。绪论占 28 个翻页位置，磁路占 3 个，其余五章各占 2 个。优势四页为第 19—22 页；历史七页为第 23—29 页；现有独立麦克斯韦图解为磁路第 3 页（全站第 32 页），本次不改动其内容与位置。本文按实际导航位置同步页码。
+当前课程数据有 56 个内容记录，播放器有 49 个翻页位置。新能源汽车的 8 个记录共用第 7 个翻页位置，其余 7 个标签不增加总页码。绪论占 28 个翻页位置，磁路占 10 个，其余五章各占 2 个。优势四页为第 19—22 页；历史七页为第 23—29 页；麦克斯韦图解仍为磁路第 3 页（全站第 32 页），其后新增 7 页磁路详细教学，直流电机理论从全站第 40 页开始。本文按实际导航位置同步页码。
 
 每页使用下列状态约定：
 
@@ -37,8 +37,8 @@
 - 画布上方左侧“课堂讲义 / COURSE OVERVIEW”或“课堂讲义 / CHAPTER 章号”；右侧“16:9 · 页面类别”。类别包括课程封面、教师简介、章节导入、视频导入、互动图解、考核方案、课堂思考、趋势示意、内容提纲、课堂讲义。
 - 所有课程画布顶部左侧“电机与拖动”，右侧为章节英文名；封面为“ELECTRIC MACHINES & DRIVES”。英文名在各章页面记录中列出。
 - 画布底部左侧“章号 / 章节名”，右侧“章内页序 / 章内总页数”；封面例外，分别为“课程讲义 / COURSE NOTES”和“电磁 · 能量 · 运动”。新能源汽车各标签均显示同一个章内页序。
-- 底部提示“← → 翻页”“F 全屏”；上一页、下一页按钮；全站页码“当前页 / 42”；文字入口“下一页 · 下一个翻页位置的标题”，最后一页显示“已到最后一页”。首尾页禁用越界按钮。另有课程页数进度条。
-- 屏幕阅读器播报“第 N 页，共 42 页，当前内容标题”。页面图示、标签、按钮具有相应文字替代或名称。
+- 底部提示“← → 翻页”“F 全屏”；上一页、下一页按钮；全站页码“当前页 / 49”；文字入口“下一页 · 下一个翻页位置的标题”，最后一页显示“已到最后一页”。首尾页禁用越界按钮。另有课程页数进度条。
+- 屏幕阅读器播报“第 N 页，共 49 页，当前内容标题”。页面图示、标签、按钮具有相应文字替代或名称。
 - 翻页快捷键：→、↓、PageDown、空格进入下一页；←、↑、PageUp进入上一页；Home 到封面；End 到最后一页；F 开始或退出演示；M 打开目录；Esc 退出课堂模式。焦点位于按钮或链接时空格保留原生激活行为；输入区域和带 Alt/Ctrl/Meta 的快捷键不触发课程导航。目录打开时停止全站翻页快捷键。
 - 触屏：在画布非按钮、非链接区域左右滑动，横向位移超过 60 像素且大于纵向位移的 1.5 倍才翻页。
 - 页面 ID 写入 URL hash；刷新、直达、浏览器前进后退恢复目标页。未知 hash 返回封面。进入新能源汽车主位置时默认选择共同原理，指定其标签 hash 时恢复该标签。
@@ -621,13 +621,111 @@
 
 页内联系：四卡对应四条规律，底部桥梁连接磁路计算、发电机与变压器；课堂思考检查磁通变化条件。
 
-跨页联系：上一页 `#magnetic-circuits-outline`；下一页 `#dc-machines`。继承课程翻页、全屏与 hash 定位。
+跨页联系：上一页 `#magnetic-circuits-outline`；下一页 `#magnetic-circuits-field-basics`。继承课程翻页、全屏与 hash 定位。
 
 源码位置：`public/magnetic-maxwell-eli5.html`、`docs/previews/magnetic-maxwell-eli5.html`；`components/course-player.tsx` 与 `app/globals.css` 限定本页嵌入区域尺寸。
 
-### 33 直流电机理论：章节导入
+### 33 磁路：为什么有磁场？
 
-页面 ID：dc-machines。地址：`/#dc-machines`。类型：chapter。主位置：33 / 42。所属：03 直流电机理论 / DC MACHINES / 直流电机。标签：已完成。
+页面 ID：magnetic-circuits-field-basics。地址：`/#magnetic-circuits-field-basics`。类型：embed。主位置：33 / 49；磁路第 4 / 10 页。标签：已完成。
+
+已完成内容：ELI5 因果链 `I → H → B → Φ`；N 匝线圈、闭合铁心和主磁通主图；关键关系 `F = NI`、`B = μH`、`Φ = BA`、`B = Φ/A`、`μ = B/H`；I、H、B、Φ 的符号、单位和 `H ≠ B` 辨析；工程结论说明绕组电流先建立 H，材料决定 B，截面累计成 Φ。图中明确磁通不是实体流体。
+
+未完成内容：实际课堂投影可读性和部署环境加载需现场验证。
+
+页内联系：主图给对象，因果链给顺序，公式分别对应励磁、材料响应和截面磁通。
+
+跨页联系：上一页 `#magnetic-circuits-maxwell-eli5`；下一页 `#magnetic-circuits-iron-core`。
+
+源码位置：`public/magnetic-field-basics.html`、`public/magnetic-circuit-lesson.css`、`content/course.ts`。
+
+### 34 磁路：为什么要铁心？
+
+页面 ID：magnetic-circuits-iron-core。地址：`/#magnetic-circuits-iron-core`。类型：embed。主位置：34 / 49；磁路第 5 / 10 页。标签：已完成。
+
+已完成内容：相同线圈条件下空气磁路与铁心磁路的左右对照；`μ = B/H`、`μ_Fe ≫ μ_0`；教材量级示例“铸钢约 `10^3 μ_0`、某些硅钢片约 `6×10^3～7×10^3 μ_0`”，并注明并非固定常数；磁畴“方向杂乱 → 外加 H 后趋于同向”图；软磁材料与窄磁滞回线提示；工程结论说明铁心让有限励磁得到更大的 B、Φ 并集中主磁通。
+
+未完成内容：实际课堂投影可读性和部署环境加载需现场验证。
+
+页内联系：空气 / 铁心对照回答为什么，μ 解释量级，磁畴解释材料响应，软磁卡说明材料选择。
+
+跨页联系：上一页 `#magnetic-circuits-field-basics`；下一页 `#magnetic-circuits-saturation`。
+
+源码位置：`public/magnetic-iron-core.html`、`public/magnetic-circuit-lesson.css`、`content/course.ts`。
+
+### 35 磁路：铁心为什么会饱和？
+
+页面 ID：magnetic-circuits-saturation。地址：`/#magnetic-circuits-saturation`。类型：embed。主位置：35 / 49；磁路第 6 / 10 页。标签：已完成。
+
+已完成内容：B-H 起始磁化曲线主图，标出初始区、有效工作区、膝点和饱和区；淡色理想线性参考线；关键式 `B = f(H)`、`μ ≠ 常数`、`H ∝ NI`、`I ↑↑ ⇏ Φ ↑↑`；小型磁滞回线标 `B_r` 剩磁、`H_c` 矫顽力；工程结论强调铁心高导磁但不是无限导磁。
+
+未完成内容：实际课堂投影可读性和部署环境加载需现场验证。
+
+页内联系：大 B-H 曲线解释静态非线性，小磁滞回线提示循环磁化的路径依赖。
+
+跨页联系：上一页 `#magnetic-circuits-iron-core`；下一页 `#magnetic-circuits-calculation`。
+
+源码位置：`public/magnetic-saturation.html`、`public/magnetic-circuit-lesson.css`、`content/course.ts`。
+
+### 36 磁路：怎样算磁路？
+
+页面 ID：magnetic-circuits-calculation。地址：`/#magnetic-circuits-calculation`。类型：embed。主位置：36 / 49；磁路第 7 / 10 页。标签：已完成。
+
+已完成内容：电路—磁路类比 `U ↔ F`、`I ↔ Φ`、`R ↔ R_m`；并列 `I = U/R` 与 `Φ = F/R_m`；核心式 `F = NI`、`R_m = l/(μA)`、`Φ = NI/R_m`；长度、截面积、磁导率对磁阻的趋势；三支路图说明磁通连续，闭合磁路图说明 `U_m = Hl`、`ΣU_m = ΣF`；标准计算链 `Φ → B_i = Φ_i/A_i → 查 B-H 得 H_i → H_i l_i → ΣH_i l_i = NI`。
+
+未完成内容：实际课堂投影可读性和部署环境加载需现场验证。
+
+页内联系：类比建立直觉，F 与 R_m 给参数，KCL/KVL 类比和五步链负责复杂磁路。
+
+跨页联系：上一页 `#magnetic-circuits-saturation`；下一页 `#magnetic-circuits-air-gap`。
+
+源码位置：`public/magnetic-calculation.html`、`public/magnetic-circuit-lesson.css`、`content/course.ts`。
+
+### 37 磁路：为什么气隙最关键？
+
+页面 ID：magnetic-circuits-air-gap。地址：`/#magnetic-circuits-air-gap`。类型：embed。主位置：37 / 49；磁路第 8 / 10 页。标签：已完成。
+
+已完成内容：极简定转子磁路与两个气隙 `δ` 主图；`R_Fe = l_Fe/(μ_Fe A)`、`R_δ = δ/(μ_0 A)` 与 `μ_Fe ≫ μ_0`；教材特定例题最终结果：铁心磁位降 `276 + 168 = 444 A`，气隙磁位降 `7960 A`，总磁通势 `8404 A`，`7960/8404 ≈ 94.7%`；条形对比明确 94.7% 只属于本例；回接 `F = NI` 说明气隙影响所需安匝数。
+
+未完成内容：实际课堂投影可读性和部署环境加载需现场验证。
+
+页内联系：主图显示气隙很短，磁阻公式解释为什么仍可能很大，数值对比建立量级直觉。
+
+跨页联系：上一页 `#magnetic-circuits-calculation`；下一页 `#magnetic-circuits-ac-losses`。
+
+源码位置：`public/magnetic-air-gap.html`、`public/magnetic-circuit-lesson.css`、`content/course.ts`。
+
+### 38 磁路：交流为什么产生铁耗？
+
+页面 ID：magnetic-circuits-ac-losses。地址：`/#magnetic-circuits-ac-losses`。类型：embed。主位置：38 / 49；磁路第 9 / 10 页。标签：已完成。
+
+已完成内容：链式图 `u → i → Ni → Φ → e`；`e = -N dΦ/dt`、正弦稳态 `E = 4.44 fNΦ_m`；在忽略绕组压降等条件下由 `U ≈ E` 得 `Φ_m ≈ U/(4.44 fN)` 和 `Φ_m ∝ U/f`；`P_Fe = P_h + P_e`；磁滞回线面积与 `P_h = Vf∮H dB`、`P_h = K_h f B_m^α V`；实心铁心涡流图和 `P_e = K_e d^2 f^2 B_m^2 V`，突出 `d^2`、`f^2` 并把“能否把铁心做薄”留给下一页。
+
+未完成内容：实际课堂投影可读性和部署环境加载需现场验证。
+
+页内联系：左侧说明交流电压怎样约束主磁通，右侧区分磁滞和涡流两类铁耗。
+
+跨页联系：上一页 `#magnetic-circuits-air-gap`；下一页 `#magnetic-circuits-lamination`。
+
+源码位置：`public/magnetic-ac-losses.html`、`public/magnetic-circuit-lesson.css`、`content/course.ts`。
+
+### 39 磁路：为什么采用硅钢片叠片铁芯？
+
+页面 ID：magnetic-circuits-lamination。地址：`/#magnetic-circuits-lamination`。类型：embed。主位置：39 / 49；磁路第 10 / 10 页。标签：已完成。
+
+已完成内容：实心铁芯与绝缘薄硅钢片叠片铁芯左右强对比；实心铁芯中的大面积闭合涡流与叠片内被切小的涡流路径；保持公式 `P_e = K_e d^2 f^2 B_m^2 V` 并突出 `P_e ∝ d^2`；课堂小算例 `d → d/2`、其他条件不变时 `P_e → P_e/4`；材料与结构收束为“硅钢 / 薄片 / 片间绝缘”；列出教材典型片厚 `0.35、0.30、0.27、0.22 mm` 并注明不是所有电机的固定取值；页底闭环 `I → H → B → Φ → 磁路 → 气隙 → 交流铁耗 → 叠片降损`。
+
+未完成内容：实际课堂投影可读性和部署环境加载需现场验证。
+
+页内联系：结构对比给直觉，`P_e ∝ d^2` 给定量依据，半厚度算例建立平方关系。
+
+跨页联系：上一页 `#magnetic-circuits-ac-losses`；下一页 `#dc-machines`，后续电机章节复用磁路、气隙、饱和、铁耗与叠片基础。
+
+源码位置：`public/magnetic-lamination.html`、`public/magnetic-circuit-lesson.css`、`content/course.ts`。
+
+### 40 直流电机理论：章节导入
+
+页面 ID：dc-machines。地址：`/#dc-machines`。类型：chapter。主位置：40 / 49。所属：03 直流电机理论 / DC MACHINES / 直流电机。标签：已完成。
 
 已完成内容：眉题“CHAPTER 03 / 直流电机”；标题“直流电机理论”；问题“直流电机怎样实现发电与电动运行？”；按钮“本章内容”；右侧章号“03”和“学习目标 / LEARNING OBJECTIVES”：
 
@@ -639,11 +737,11 @@
 
 页内联系：结构解释装置如何工作，关系式解释能量转换，特性解释负载运行。
 
-跨页联系：上一页 `#magnetic-circuits-outline`；下一页及按钮目标 `#dc-machines-outline`。承接磁路并支撑直流拖动，新能源汽车回收场景可作为发电与电动可逆性的应用回顾。
+跨页联系：上一页 `#magnetic-circuits-lamination`；下一页及按钮目标 `#dc-machines-outline`。承接磁路并支撑直流拖动，新能源汽车回收场景可作为发电与电动可逆性的应用回顾。
 
-### 34 直流电机理论：本章内容
+### 41 直流电机理论：本章内容
 
-页面 ID：dc-machines-outline。地址：`/#dc-machines-outline`。类型：outline。主位置：34 / 42。标签：未完成。
+页面 ID：dc-machines-outline。地址：`/#dc-machines-outline`。类型：outline。主位置：41 / 49。标签：未完成。
 
 已完成内容：眉题“CHAPTER 03 / 直流电机理论”；标题“本章内容”；问题“直流电机怎样实现发电与电动运行？”；四个编号主题：
 
@@ -660,9 +758,9 @@
 
 跨页联系：上一页 `#dc-machines`；下一页 `#dc-drives`。基础方程与电动机特性将支持机械特性、起动、调速、制动。
 
-### 35 直流电机的电力拖动：章节导入
+### 42 直流电机的电力拖动：章节导入
 
-页面 ID：dc-drives。地址：`/#dc-drives`。类型：chapter。主位置：35 / 42。所属：04 直流电机的电力拖动 / DC ELECTRIC DRIVES / 直流电机。标签：已完成。
+页面 ID：dc-drives。地址：`/#dc-drives`。类型：chapter。主位置：42 / 49。所属：04 直流电机的电力拖动 / DC ELECTRIC DRIVES / 直流电机。标签：已完成。
 
 已完成内容：眉题“CHAPTER 04 / 直流电机”；标题“直流电机的电力拖动”；问题“如何让直流电动机按要求起动、调速和制动？”；按钮“本章内容”；右侧章号“04”和“学习目标 / LEARNING OBJECTIVES”：
 
@@ -676,9 +774,9 @@
 
 跨页联系：上一页 `#dc-machines-outline`；下一页及按钮目标 `#dc-drives-outline`。封面知识线由直流电机理论进入本章；与异步拖动构成两类电机控制方法的后续比较。
 
-### 36 直流电机的电力拖动：本章内容
+### 43 直流电机的电力拖动：本章内容
 
-页面 ID：dc-drives-outline。地址：`/#dc-drives-outline`。类型：outline。主位置：36 / 42。标签：未完成。
+页面 ID：dc-drives-outline。地址：`/#dc-drives-outline`。类型：outline。主位置：43 / 49。标签：未完成。
 
 已完成内容：眉题“CHAPTER 04 / 直流电机的电力拖动”；标题“本章内容”；问题“如何让直流电动机按要求起动、调速和制动？”；四个编号主题：
 
@@ -695,9 +793,9 @@
 
 跨页联系：上一页 `#dc-drives`；下一页 `#transformers`，顺序切换到交流方向。概念基础来自直流电机理论，方法可与 `#induction-drives-outline` 比较；回馈制动可回顾 EV 能量回收。
 
-### 37 变压器：章节导入
+### 44 变压器：章节导入
 
-页面 ID：transformers。地址：`/#transformers`。类型：chapter。主位置：37 / 42。所属：05 变压器 / TRANSFORMERS / 交流电机。标签：已完成。
+页面 ID：transformers。地址：`/#transformers`。类型：chapter。主位置：44 / 49。所属：05 变压器 / TRANSFORMERS / 交流电机。标签：已完成。
 
 已完成内容：眉题“CHAPTER 05 / 交流电机”；标题“变压器”；问题“静止的电磁装置如何改变电压并传递能量？”；按钮“本章内容”；右侧章号“05”和“学习目标 / LEARNING OBJECTIVES”：
 
@@ -711,9 +809,9 @@
 
 跨页联系：上一页 `#dc-drives-outline`；下一页及按钮目标 `#transformers-outline`。知识依赖来自磁路的交流磁路，与线性翻页前一章不同；等效电路方法支撑异步电机理论。
 
-### 38 变压器：本章内容
+### 45 变压器：本章内容
 
-页面 ID：transformers-outline。地址：`/#transformers-outline`。类型：outline。主位置：38 / 42。标签：未完成。
+页面 ID：transformers-outline。地址：`/#transformers-outline`。类型：outline。主位置：45 / 49。标签：未完成。
 
 已完成内容：眉题“CHAPTER 05 / 变压器”；标题“本章内容”；问题“静止的电磁装置如何改变电压并传递能量？”；四个编号主题：
 
@@ -730,9 +828,9 @@
 
 跨页联系：上一页 `#transformers`；下一页 `#induction-machines`。磁路提供电磁基础，参数折算和等效电路可迁移到异步电机。
 
-### 39 异步电机理论：章节导入
+### 46 异步电机理论：章节导入
 
-页面 ID：induction-machines。地址：`/#induction-machines`。类型：chapter。主位置：39 / 42。所属：06 异步电机理论 / INDUCTION MACHINES / 交流电机。标签：已完成。
+页面 ID：induction-machines。地址：`/#induction-machines`。类型：chapter。主位置：46 / 49。所属：06 异步电机理论 / INDUCTION MACHINES / 交流电机。标签：已完成。
 
 已完成内容：眉题“CHAPTER 06 / 交流电机”；标题“异步电机理论”；问题“旋转磁场怎样带动转子旋转？”；按钮“本章内容”；右侧章号“06”和“学习目标 / LEARNING OBJECTIVES”：
 
@@ -746,9 +844,9 @@
 
 跨页联系：上一页 `#transformers-outline`；下一页及按钮目标 `#induction-machines-outline`。星系同时由磁路、变压器连入本章，并向异步拖动连出。
 
-### 40 异步电机理论：本章内容
+### 47 异步电机理论：本章内容
 
-页面 ID：induction-machines-outline。地址：`/#induction-machines-outline`。类型：outline。主位置：40 / 42。标签：未完成。
+页面 ID：induction-machines-outline。地址：`/#induction-machines-outline`。类型：outline。主位置：47 / 49。标签：未完成。
 
 已完成内容：眉题“CHAPTER 06 / 异步电机理论”；标题“本章内容”；问题“旋转磁场怎样带动转子旋转？”；四个编号主题：
 
@@ -765,9 +863,9 @@
 
 跨页联系：上一页 `#induction-machines`；下一页 `#induction-drives`。等效分析承接变压器，转矩关系支持机械特性与调速。
 
-### 41 异步电机的电力拖动：章节导入
+### 48 异步电机的电力拖动：章节导入
 
-页面 ID：induction-drives。地址：`/#induction-drives`。类型：chapter。主位置：41 / 42。所属：07 异步电机的电力拖动 / INDUCTION MOTOR DRIVES / 交流电机。标签：已完成。
+页面 ID：induction-drives。地址：`/#induction-drives`。类型：chapter。主位置：48 / 49。所属：07 异步电机的电力拖动 / INDUCTION MOTOR DRIVES / 交流电机。标签：已完成。
 
 已完成内容：眉题“CHAPTER 07 / 交流电机”；标题“异步电机的电力拖动”；问题“如何实现异步电动机的可控运行？”；按钮“本章内容”；右侧章号“07”和“学习目标 / LEARNING OBJECTIVES”：
 
@@ -781,9 +879,9 @@
 
 跨页联系：上一页 `#induction-machines-outline`；下一页及按钮目标 `#induction-drives-outline`。承接异步电机理论，并与直流拖动共享系统层面的任务。
 
-### 42 异步电机的电力拖动：本章内容
+### 49 异步电机的电力拖动：本章内容
 
-页面 ID：induction-drives-outline。地址：`/#induction-drives-outline`。类型：outline。主位置：42 / 42。标签：未完成。
+页面 ID：induction-drives-outline。地址：`/#induction-drives-outline`。类型：outline。主位置：49 / 49。标签：未完成。
 
 已完成内容：眉题“CHAPTER 07 / 异步电机的电力拖动”；标题“本章内容”；问题“如何实现异步电动机的可控运行？”；四个编号主题：
 
@@ -1707,7 +1805,7 @@
 
 ### 磁路 7 页详细教学模块：实施与验收
 
-标签：未完成。以上 7 页均为新增规划页，当前网站未实现，不计入当前 42 个翻页位置，也不改变现有 `#magnetic-circuits`、`#magnetic-circuits-outline`、`#magnetic-circuits-maxwell-eli5` 的源码状态。真正接入时再同步全站总页数、磁路章内页数、侧栏导航、上一页 / 下一页关系以及本文前部的逐页记录。
+标签：已完成。以上 7 页已作为独立翻页位置接入课程，当前播放器共 49 个主翻页位置，磁路章共 10 页；稳定 ID、侧栏导航、上一页 / 下一页关系和本文前部逐页记录已同步。现有 `#magnetic-circuits`、`#magnetic-circuits-outline`、`#magnetic-circuits-maxwell-eli5` 内容本次不改动。
 
 实施原则：每页只回答一个核心问题，以主图和公式为主体，文字只承担符号解释、条件边界和一句工程结论；不把原 30 页内容按小字号压缩到 7 页。优先保证 B/H/Φ/μ、饱和、磁路欧姆定律、气隙、`E = 4.44fNΦ_m`、铁耗和硅钢片叠片这条因果链完整。
 
@@ -1734,7 +1832,7 @@
 ## 内容与源码对应
 
 - `content/course.ts`：七章问题、目标、提纲、教师资料、考核方案、课程页面 ID 与数据顺序、外部视频与分布式推进内容。
-- `components/course-player.tsx`：42 个主翻页位置的组织、八个 EV 标签映射、公共导航与专题接入。
+- `components/course-player.tsx`：49 个主翻页位置的组织、八个 EV 标签映射、公共导航与专题接入。
 - `content/motor-history.ts`、`components/motor-history-lesson.tsx`、`components/motor-history-lesson.css`：历史七页数据、来源、本地 HTML/SVG 图解与样式。
 - `components/chapter-galaxy.tsx`：封面七星球、颜色图例、符号、知识依赖线和悬停提示。
 - `components/electrification-trend.tsx`：传统动力 → 电机 → 车、飞机、船的趋势图与文案。

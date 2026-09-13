@@ -489,13 +489,64 @@ export const slides: Slide[] = [
     }
 
     if (chapter.id === 'magnetic-circuits') {
-      chapterSlides.push({
-        id: 'magnetic-circuits-maxwell-eli5',
-        kind: 'embed',
-        title: '麦克斯韦方程组：电和磁的四条规则',
-        chapterId: chapter.id,
-        embedUrl: '/magnetic-maxwell-eli5.html',
-      });
+      chapterSlides.push(
+        {
+          id: 'magnetic-circuits-maxwell-eli5',
+          kind: 'embed',
+          title: '麦克斯韦方程组：电和磁的四条规则',
+          chapterId: chapter.id,
+          embedUrl: '/magnetic-maxwell-eli5.html',
+        },
+        {
+          id: 'magnetic-circuits-field-basics',
+          kind: 'embed',
+          title: '为什么有磁场？',
+          chapterId: chapter.id,
+          embedUrl: '/magnetic-field-basics.html',
+        },
+        {
+          id: 'magnetic-circuits-iron-core',
+          kind: 'embed',
+          title: '为什么要铁心？',
+          chapterId: chapter.id,
+          embedUrl: '/magnetic-iron-core.html',
+        },
+        {
+          id: 'magnetic-circuits-saturation',
+          kind: 'embed',
+          title: '铁心为什么会饱和？',
+          chapterId: chapter.id,
+          embedUrl: '/magnetic-saturation.html',
+        },
+        {
+          id: 'magnetic-circuits-calculation',
+          kind: 'embed',
+          title: '怎样算磁路？',
+          chapterId: chapter.id,
+          embedUrl: '/magnetic-calculation.html',
+        },
+        {
+          id: 'magnetic-circuits-air-gap',
+          kind: 'embed',
+          title: '为什么气隙最关键？',
+          chapterId: chapter.id,
+          embedUrl: '/magnetic-air-gap.html',
+        },
+        {
+          id: 'magnetic-circuits-ac-losses',
+          kind: 'embed',
+          title: '交流为什么产生铁耗？',
+          chapterId: chapter.id,
+          embedUrl: '/magnetic-ac-losses.html',
+        },
+        {
+          id: 'magnetic-circuits-lamination',
+          kind: 'embed',
+          title: '为什么采用硅钢片叠片铁芯？',
+          chapterId: chapter.id,
+          embedUrl: '/magnetic-lamination.html',
+        },
+      );
     }
 
     return chapterSlides;

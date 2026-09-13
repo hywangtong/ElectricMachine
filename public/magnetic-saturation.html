@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>铁心为什么会饱和？</title>
+  <link rel="stylesheet" href="/magnetic-circuit-lesson.css" />
+</head>
+<body>
+<main class="lesson">
+  <header class="lesson-head">
+    <div class="eyebrow">磁路 / 06 非线性 · ELI5</div>
+    <h1>铁心为什么会饱和？</h1>
+    <p class="lead">刚开始“再用一点力，B 就涨很多”；过了膝点以后，再猛加励磁，B 只肯多一点点。</p>
+  </header>
+  <section class="grid-2">
+    <article class="card hero-card">
+      <div class="compare-title"><h2>B-H 起始磁化曲线：真实铁心不是直线</h2><span class="tag">核心图</span></div>
+      <svg viewBox="0 0 820 470" role="img" aria-label="B-H 曲线包含初始区、有效工作区、膝点和饱和区，并与理想线性参考线对比">
+        <defs><marker id="s3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#2f7c70"/></marker></defs>
+        <line x1="95" y1="400" x2="755" y2="400" stroke="#78908a" stroke-width="3" marker-end="url(#s3)"/>
+        <line x1="95" y1="400" x2="95" y2="55" stroke="#78908a" stroke-width="3" marker-end="url(#s3)"/>
+        <text x="770" y="412" font-size="22">H</text><text x="70" y="48" font-size="22">B</text>
+        <path d="M95 400C185 385 245 330 320 235C390 150 470 105 545 92C625 78 690 75 745 74" fill="none" stroke="#2f7c70" stroke-width="8"/>
+        <line x1="95" y1="400" x2="650" y2="65" stroke="#bfcac7" stroke-width="3" stroke-dasharray="10 8"/>
+        <text x="525" y="62" font-size="17" class="muted">理想线性 B = μH（仅作参考）</text>
+        <circle cx="455" cy="120" r="9" fill="#b36b39"/>
+        <text x="472" y="133" font-size="20" class="accent">膝点</text>
+        <text x="150" y="355" font-size="19">初始区</text>
+        <text x="290" y="238" font-size="19">有效工作区</text>
+        <text x="605" y="110" font-size="19">饱和区</text>
+        <path d="M575 180h125" stroke="#b36b39" stroke-width="5" marker-end="url(#s3)"/>
+        <text x="573" y="215" font-size="21" class="accent">H ↑↑</text>
+        <path d="M715 180v-42" stroke="#2f7c70" stroke-width="5" marker-end="url(#s3)"/>
+        <text x="676" y="255" font-size="21" fill="#2f7c70">B ↑ 很少</text>
+      </svg>
+    </article>
+    <div class="stack">
+      <article class="card">
+        <h2>两句公式就够了</h2>
+        <div class="formula-row" style="margin-top:8px">
+          <div class="formula emphasis">B = f(H)<small>真实铁磁材料：非线性</small></div>
+          <div class="formula warn">μ ≠ 常数<small>μ = B/H 只描述某个工作点附近</small></div>
+        </div>
+        <div class="formula warn" style="margin-top:8px">H ∝ NI &nbsp; ⇒ &nbsp; <strong>I ↑↑ ⇏ Φ ↑↑</strong><small>继续加电流会明显增加励磁负担和损耗，但磁通增长有限</small></div>
+      </article>
+      <article class="card hero-card">
+        <h2>磁滞：B 还会“记得一点过去”</h2>
+        <svg viewBox="0 0 650 245" role="img" aria-label="小型磁滞回线标出剩磁 Br 与矫顽力 Hc">
+          <defs><marker id="h3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#7a918b"/></marker></defs>
+          <line x1="70" y1="125" x2="590" y2="125" stroke="#829791" stroke-width="2" marker-end="url(#h3)"/>
+          <line x1="325" y1="220" x2="325" y2="25" stroke="#829791" stroke-width="2" marker-end="url(#h3)"/>
+          <path d="M100 170C160 50 260 45 325 75C390 105 500 95 555 45C500 195 390 198 325 168C260 138 150 145 100 170Z" fill="#dfeee9" stroke="#3f8276" stroke-width="5"/>
+          <circle cx="325" cy="75" r="6" fill="#b36b39"/><text x="342" y="72" font-size="18">Bᵣ 剩磁</text>
+          <circle cx="225" cy="125" r="6" fill="#b36b39"/><text x="176" y="113" font-size="18">−Hc</text>
+          <circle cx="425" cy="125" r="6" fill="#b36b39"/><text x="435" y="113" font-size="18">Hc</text>
+          <text x="570" y="145" font-size="18">H</text><text x="340" y="35" font-size="18">B</text>
+        </svg>
+        <p class="mini">这页只认识“有回线、会滞后”；回线面积为什么代表损耗，留到交流铁耗页。</p>
+      </article>
+    </div>
+  </section>
+  <footer class="engineering"><strong>工程结论</strong><span>铁心高导磁，但不是无限导磁。进入饱和后，再加电流换不来同比例磁通；后面的磁路计算必须尊重 B-H 非线性。</span></footer>
+</main>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>交流磁场为什么会产生铁耗？</title>
+  <link rel="stylesheet" href="/magnetic-circuit-lesson.css" />
+</head>
+<body>
+<main class="lesson">
+  <header class="lesson-head">
+    <div class="eyebrow">磁路 / 09 交流磁路 · ELI5</div>
+    <h1>交流磁场为什么会产生铁耗？</h1>
+    <p class="lead">交流电压不只“让磁通来回变”，还让铁心每个周期都为磁滞和涡流付出能量。</p>
+  </header>
+  <section class="grid-2 equal">
+    <div class="stack">
+      <article class="card">
+        <h2>先把交流电压和主磁通连起来</h2>
+        <div class="chain" style="margin-top:8px"><b>u</b><span class="arrow">→</span><b>i</b><span class="arrow">→</span><b>Ni</b><span class="arrow">→</span><b>Φ</b><span class="arrow">→</span><b>e</b></div>
+        <div class="formula-row" style="margin-top:9px">
+          <div class="formula">e = −N dΦ/dt<small>法拉第电磁感应</small></div>
+          <div class="formula emphasis">E = 4.44 fNΦ<sub>m</sub><small>正弦磁通、有效值形式</small></div>
+        </div>
+        <div class="formula warn" style="margin-top:8px">U ≈ E &nbsp; ⇒ &nbsp; Φ<sub>m</sub> ≈ U/(4.44 fN) &nbsp; ⇒ &nbsp; <strong>Φ<sub>m</sub> ∝ U/f</strong><small>近似条件：忽略绕组电阻和漏抗压降等影响</small></div>
+        <p class="mini">这就是后续“恒 U/f”控制的磁通直觉；详细控制方法留到电力拖动章节。</p>
+      </article>
+      <article class="card">
+        <h2>一句话先分清两类铁耗</h2>
+        <div class="formula emphasis" style="margin-top:8px">P<sub>Fe</sub> = P<sub>h</sub> + P<sub>e</sub></div>
+        <p><strong>P<sub>h</sub>：</strong>磁畴来回翻转有“内耗”；<strong>P<sub>e</sub>：</strong>变化磁通在导电铁心里感应出闭合电流并发热。</p>
+      </article>
+    </div>
+    <div class="stack">
+      <article class="card hero-card">
+        <div class="compare-title"><h2>磁滞损耗 P<sub>h</sub>：回线每绕一圈都要付能量</h2><span class="tag">回线面积</span></div>
+        <svg viewBox="0 0 700 210" role="img" aria-label="磁滞回线填充面积表示每周期单位体积的磁滞能量损耗">
+          <line x1="60" y1="110" x2="640" y2="110" stroke="#819690" stroke-width="2"/>
+          <line x1="350" y1="190" x2="350" y2="20" stroke="#819690" stroke-width="2"/>
+          <path d="M100 150C170 35 285 38 350 70C420 105 535 88 605 35C535 180 420 180 350 148C285 118 170 125 100 150Z" fill="#cfe6df" stroke="#3f8276" stroke-width="5"/>
+          <text x="610" y="128" font-size="17">H</text><text x="365" y="28" font-size="17">B</text>
+          <text x="100" y="28" font-size="17" class="muted">面积越大 → 每周期磁滞能量越大</text>
+        </svg>
+        <div class="formula-row">
+          <div class="formula">P<sub>h</sub> = Vf∮H dB<small>由回线面积得到</small></div>
+          <div class="formula">P<sub>h</sub> = K<sub>h</sub> f B<sub>m</sub><sup>α</sup> V<small>常用工程经验式</small></div>
+        </div>
+      </article>
+      <article class="card hero-card">
+        <div class="compare-title"><h2>涡流损耗 P<sub>e</sub>：铁心里自己绕起“短路线”</h2><span class="tag">下一页的悬念</span></div>
+        <svg viewBox="0 0 700 180" role="img" aria-label="实心铁心内部因变化磁通产生闭合涡流环">
+          <defs><marker id="e6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#b36b39"/></marker></defs>
+          <rect x="75" y="25" width="300" height="125" rx="12" fill="#d6dfdc" stroke="#728781" stroke-width="3"/>
+          <path d="M140 90C140 45 300 45 300 90S140 135 140 90Z" fill="none" stroke="#b36b39" stroke-width="7" marker-end="url(#e6)"/>
+          <path d="M430 145V40" stroke="#397f73" stroke-width="8"/>
+          <text x="445" y="70" font-size="18">变化的 Φ</text><text x="155" y="95" font-size="18" class="accent">闭合涡流</text>
+        </svg>
+        <div class="formula warn">P<sub>e</sub> = K<sub>e</sub> <strong>d²</strong> <strong>f²</strong> B<sub>m</sub>² V<small>K<sub>e</sub> 随材料、单位制和模型定义而定；这里看依赖关系</small></div>
+        <p><strong>问题：</strong>既然 P<sub>e</sub> 和厚度 d 的平方有关，能不能把铁心做薄？</p>
+      </article>
+    </div>
+  </section>
+  <footer class="engineering"><strong>工程结论</strong><span>交流磁化一边建立主磁通，一边产生磁滞与涡流损耗。U/f 控制磁通量级，而 d²、f² 直接提示了下一页的结构答案。</span></footer>
+</main>
+</body>
+</html>

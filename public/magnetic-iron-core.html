@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>为什么电机中要放铁心？</title>
+  <link rel="stylesheet" href="/magnetic-circuit-lesson.css" />
+</head>
+<body>
+<main class="lesson">
+  <header class="lesson-head">
+    <div class="eyebrow">磁路 / 05 铁磁材料 · ELI5</div>
+    <h1>为什么电机中要放铁心？</h1>
+    <p class="lead">同样的线圈、近似同样的励磁：空气像“难走的路”，软磁铁心像给磁通铺了一条更容易通过的主干道。</p>
+  </header>
+  <section class="grid-2 equal">
+    <article class="card hero-card">
+      <div class="compare-title"><h2>空气磁路 vs. 铁心磁路</h2><span class="tag">同样 H，看 B 的差别</span></div>
+      <svg viewBox="0 0 760 455" role="img" aria-label="相同线圈条件下，空气中磁通分散，铁心中磁通集中">
+        <defs><marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#397f73"/></marker></defs>
+        <text x="150" y="35" text-anchor="middle" font-size="25">空气磁路</text>
+        <text x="575" y="35" text-anchor="middle" font-size="25">铁心磁路</text>
+        <g transform="translate(15 60)">
+          <g fill="none" stroke="#b26839" stroke-width="5"><ellipse cx="140" cy="135" rx="25" ry="70"/><ellipse cx="160" cy="135" rx="25" ry="70"/><ellipse cx="180" cy="135" rx="25" ry="70"/></g>
+          <path d="M195 135C275 65 315 65 340 135C315 205 275 205 195 135" fill="none" stroke="#6ea99c" stroke-width="3" marker-end="url(#a2)"/>
+          <path d="M195 135C255 100 285 100 305 135C285 170 255 170 195 135" fill="none" stroke="#8bbcb2" stroke-width="3" marker-end="url(#a2)"/>
+          <path d="M195 135C270 20 345 35 370 135" fill="none" stroke="#b7d7d0" stroke-width="2"/>
+          <text x="140" y="260" text-anchor="middle" font-size="18" class="muted">磁通分散</text>
+        </g>
+        <g transform="translate(405 60)">
+          <path d="M80 55H300V215H80Z" fill="none" stroke="#bdcbc7" stroke-width="55" stroke-linejoin="round"/>
+          <g fill="none" stroke="#b26839" stroke-width="5"><ellipse cx="70" cy="135" rx="24" ry="70"/><ellipse cx="88" cy="135" rx="24" ry="70"/><ellipse cx="106" cy="135" rx="24" ry="70"/></g>
+          <path d="M115 58H270V205H115Z" fill="none" stroke="#397f73" stroke-width="8" stroke-linejoin="round" marker-end="url(#a2)"/>
+          <path d="M130 72H255V190H130Z" fill="none" stroke="#6aa093" stroke-width="5" stroke-linejoin="round"/>
+          <text x="190" y="260" text-anchor="middle" font-size="18" class="muted">主磁通集中在预定路径</text>
+        </g>
+        <line x1="380" y1="55" x2="380" y2="420" stroke="#d9e3df" stroke-width="2" stroke-dasharray="7 7"/>
+      </svg>
+    </article>
+    <div class="stack">
+      <article class="card">
+        <h2>高磁导率：同样 H，得到更大的 B</h2>
+        <div class="formula-row" style="margin-top:8px">
+          <div class="formula emphasis">μ = B/H</div>
+          <div class="formula warn">μ<sub>Fe</sub> ≫ μ<sub>0</sub><small>铁磁材料的 μ 还会随工作点变化</small></div>
+        </div>
+        <p>教材量级示例（不是固定常数）：铸钢约 <strong>10³μ₀</strong>；某些硅钢片可达约 <strong>6×10³～7×10³μ₀</strong>。</p>
+      </article>
+      <article class="card hero-card">
+        <h2>ELI5：磁畴像很多小指南针</h2>
+        <svg viewBox="0 0 680 190" role="img" aria-label="未磁化时磁畴方向杂乱，外加磁场后更多磁畴趋于同向">
+          <defs><marker id="d2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#397f73"/></marker></defs>
+          <rect x="25" y="35" width="240" height="115" rx="15" fill="#f3f7f5" stroke="#c8d9d4"/>
+          <rect x="415" y="35" width="240" height="115" rx="15" fill="#eef6f3" stroke="#c8d9d4"/>
+          <g stroke="#7fa69d" stroke-width="4" marker-end="url(#d2)"><path d="M65 70l35 20"/><path d="M145 115l-28 22"/><path d="M190 75l25-28"/><path d="M230 115l-35 8"/><path d="M95 120l10-38"/></g>
+          <g stroke="#397f73" stroke-width="5" marker-end="url(#d2)"><path d="M450 65h50"/><path d="M520 95h50"/><path d="M455 125h50"/><path d="M570 65h50"/><path d="M575 125h50"/></g>
+          <text x="145" y="178" text-anchor="middle" font-size="17">未磁化：方向较杂乱</text>
+          <text x="535" y="178" text-anchor="middle" font-size="17">加 H：更多趋于同向</text>
+          <text x="337" y="103" text-anchor="middle" font-size="32" fill="#b26839">H →</text>
+        </svg>
+      </article>
+      <article class="card">
+        <h2>为什么强调“软磁”材料？</h2>
+        <p><span class="tag">窄磁滞回线</span> 容易磁化，也容易退磁；电机磁场经常随电流和位置变化，不希望材料“死死记住”过去的磁化状态。</p>
+      </article>
+    </div>
+  </section>
+  <footer class="engineering"><strong>工程结论</strong><span>铁心让有限励磁获得更大的 B、Φ，并把主磁通集中到需要的位置；但“高导磁”不等于“无限导磁”——下一页就是饱和。</span></footer>
+</main>
+</body>
+</html>
