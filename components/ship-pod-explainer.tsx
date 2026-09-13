@@ -571,6 +571,14 @@ export function ShipPodExplainer({ view }: { view: PodView }) {
           >
             观看用户提供的视频 ↗
           </a>
+          {' · '}
+          <a
+            href="https://www.bilibili.com/video/BV1nwQVY6EXM/?share_source=copy_web&vd_source=a43aa07765401d6ab954076fcbe1f0ef"
+            target="_blank"
+            rel="noreferrer"
+          >
+            补充视频（Bilibili） ↗
+          </a>
         </p>
       ) : (
         <Citations ids={sourceIds[view]} />
