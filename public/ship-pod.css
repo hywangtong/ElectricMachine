@@ -1,0 +1,570 @@
+/* Shared by the React lesson and the self-contained HTML export. */
+.pod-lesson {
+  --pod-ink: #203947;
+  --pod-green: #286457;
+  --pod-orange: #bd7541;
+  width: 1444px;
+  height: 744px;
+  position: relative;
+  padding-top: 29px;
+  color: var(--pod-ink);
+  font-family: 'Segoe UI', 'Microsoft YaHei', 'PingFang SC', sans-serif;
+}
+.pod-lesson * {
+  box-sizing: border-box;
+}
+.pod-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  font-size: 14px;
+  letter-spacing: 2px;
+  color: #6e827c;
+}
+.pod-eyebrow > span {
+  width: 24px;
+  height: 3px;
+  background: var(--pod-orange);
+}
+.pod-eyebrow b {
+  margin-left: 14px;
+  font-size: 15px;
+  letter-spacing: 1px;
+}
+.pod-heading {
+  margin: 17px 0 24px;
+}
+.pod-heading h1 {
+  margin: 0;
+  font-size: 47px;
+  line-height: 1.3;
+  font-weight: 650;
+  letter-spacing: 1px;
+}
+.pod-heading > p {
+  margin: 11px 0 0;
+  font-size: 23px;
+  color: #72837f;
+  line-height: 1.4;
+}
+.pod-lesson h2 {
+  margin: 0;
+  font-weight: 650;
+}
+.pod-lesson p {
+  line-height: 1.6;
+}
+.pod-main {
+  height: 480px;
+}
+.pod-split {
+  display: grid;
+  grid-template-columns: 850px 1fr;
+  gap: 42px;
+  align-items: center;
+  height: 100%;
+}
+.pod-ocean {
+  margin: 0;
+  border-radius: 22px;
+  background: linear-gradient(#f4f7f5 0 35%, #eaf2f3 35%);
+  padding: 18px 0;
+}
+.pod-ocean svg {
+  display: block;
+  width: 850px;
+  height: 410px;
+}
+.pod-ocean figcaption {
+  font-size: 15px;
+  color: #798a87;
+  margin: 0 26px;
+}
+.pod-anatomy-stage {
+  position: relative;
+  width: 850px;
+  height: 410px;
+}
+.pod-anatomy-labels > span {
+  position: absolute;
+  font-size: 20px;
+  line-height: 1.4;
+}
+.pod-label-strut {
+  left: 612px;
+  top: 199px;
+}
+.pod-label-motor {
+  left: 557px;
+  top: 368px;
+}
+.pod-label-prop {
+  left: 80px;
+  top: 267px;
+}
+.pod-label-water {
+  left: 576px;
+  top: 259px;
+  color: #668d9a;
+}
+.pod-label-force {
+  left: 147px;
+  top: 201px;
+  color: #317d63;
+}
+.pod-direction {
+  position: absolute;
+  right: 26px;
+  top: 22px;
+  color: #758e8d;
+  font-size: 16px;
+}
+.pod-gear {
+  fill: none;
+  stroke: #bd7541;
+  stroke-width: 6px;
+  stroke-dasharray: 4 3;
+}
+.pod-layout-legend {
+  display: flex;
+  justify-content: space-around;
+  font-size: 21px;
+  line-height: 1.3;
+  margin-top: -15px;
+}
+.pod-lesson svg {
+  overflow: visible;
+}
+.pod-hull {
+  fill: #315668;
+  stroke: #203e4d;
+  stroke-width: 3;
+}
+.pod-deck {
+  fill: #d9e6e5;
+  stroke: #7a9698;
+  stroke-width: 3;
+  stroke-linejoin: round;
+}
+.pod-wave {
+  fill: none;
+  stroke: #b1ccce;
+  stroke-width: 3;
+}
+.pod-strut {
+  fill: none;
+  stroke: #80979c;
+  stroke-width: 31;
+  stroke-linejoin: round;
+}
+.pod-shell {
+  fill: #d7e5e5;
+  stroke: #6c8d94;
+  stroke-width: 3;
+}
+.pod-motor {
+  fill: #2c5c6a;
+  stroke: #224956;
+  stroke-width: 2;
+}
+.pod-shaft {
+  fill: none;
+  stroke: #526d78;
+  stroke-width: 7;
+}
+.pod-propeller {
+  fill: #c78650;
+  stroke: #a56539;
+  stroke-width: 2;
+}
+.pod-cable {
+  fill: none;
+  stroke: #d39b45;
+  stroke-width: 6;
+  stroke-linejoin: round;
+}
+.pod-guide {
+  fill: none;
+  stroke: #8aa1a5;
+  stroke-width: 2;
+}
+.pod-water-arrow {
+  fill: none;
+  stroke: #82a8b6;
+  stroke-width: 6;
+  stroke-linejoin: round;
+}
+.pod-force-arrow {
+  fill: none;
+  stroke: #317d63;
+  stroke-width: 7;
+  stroke-linejoin: round;
+}
+.pod-story h2 {
+  font-size: 38px;
+  line-height: 1.5;
+  margin: 20px 0;
+}
+.pod-story > p {
+  margin: 16px 0;
+  font-size: 26px;
+  color: #667d7c;
+}
+.pod-tag {
+  display: inline-block;
+  font-size: 17px;
+  letter-spacing: 1px;
+  color: #91704b;
+}
+.pod-takeaway {
+  border-top: 1px solid #c8d9d3;
+  margin-top: 28px;
+  padding-top: 22px;
+  font-size: 23px;
+  line-height: 1.8;
+  color: var(--pod-green);
+}
+.pod-citations {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 21px;
+  border-top: 1px solid #d9e3df;
+  padding-top: 13px;
+  font-size: 15px;
+  color: #798983;
+}
+.pod-citations a {
+  color: #5b766f;
+  text-decoration: none;
+}
+.pod-citations a:hover {
+  text-decoration: underline;
+}
+.pod-citations a:focus-visible,
+.pod-source-grid a:focus-visible {
+  outline: 3px solid #bd7541;
+  outline-offset: 4px;
+}
+.pod-supply {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  padding: 15px 0 30px;
+}
+.pod-supply section {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 7px;
+  padding: 17px 33px;
+  border: 1px solid #c6d7cb;
+  border-radius: 14px;
+  background: #f4f7f2;
+  min-width: 440px;
+}
+.pod-supply b {
+  color: var(--pod-green);
+  font-size: 28px;
+}
+.pod-supply section > span {
+  font-size: 20px;
+  color: #71827a;
+}
+.pod-or {
+  color: #83918a;
+  font-size: 19px;
+}
+.pod-flow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 37px;
+}
+.pod-flow section {
+  position: relative;
+  padding: 19px 24px 26px;
+  background: #edf3f3;
+  border-radius: 18px;
+}
+.pod-flow-icon {
+  display: block;
+  font-size: 70px;
+  height: 98px;
+  color: var(--pod-green);
+  line-height: 1.2;
+}
+.pod-step {
+  position: absolute;
+  right: 25px;
+  top: 27px;
+  font-size: 17px;
+  color: #87a39a;
+}
+.pod-flow h2 {
+  font-size: 30px;
+}
+.pod-flow p {
+  margin: 10px 0 0;
+  font-size: 21px;
+  color: #6a7f80;
+}
+.pod-flow-arrow {
+  position: absolute;
+  right: -33px;
+  top: 90px;
+  font-size: 30px;
+  color: #7f9991;
+}
+.pod-banner {
+  background: #edf3ed;
+  border-left: 4px solid #69937b;
+  padding: 14px 26px;
+  margin-top: 18px;
+  font-size: 23px;
+  color: #4d6b5e;
+  line-height: 1.5;
+}
+.pod-banner strong {
+  color: #2f5b45;
+  margin: 0 6px;
+}
+.pod-card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+.pod-card {
+  position: relative;
+  background: #f4f7f6;
+  border: 1px solid #dde7e2;
+  border-radius: 18px;
+  padding: 20px 26px;
+}
+.pod-card > svg {
+  width: 100%;
+  height: 220px;
+  display: block;
+}
+.pod-card h2 {
+  font-size: 30px;
+  margin-top: 14px;
+}
+.pod-card p {
+  font-size: 22px;
+  color: #6a7d7a;
+  margin: 11px 0 0;
+}
+.pod-plan-hull {
+  fill: #e1e9e8;
+  stroke: #a6bcb5;
+  stroke-width: 2;
+}
+.pod-turn-circle {
+  fill: none;
+  stroke: #95b4a4;
+  stroke-width: 2;
+  stroke-dasharray: 7 6;
+}
+.pod-prop-line {
+  fill: none;
+  stroke: #bd7541;
+  stroke-width: 9;
+  stroke-linecap: round;
+}
+.pod-mechanical {
+  fill: none;
+  stroke: #bd7541;
+  stroke-width: 7;
+}
+.pod-rim-shell {
+  fill: #e4ebea;
+  stroke: #9bb2ae;
+  stroke-width: 4;
+}
+.pod-rim-motor {
+  fill: #f4f7f6;
+  stroke: #2c5c6a;
+  stroke-width: 15;
+}
+.pod-rim-blade {
+  fill: #c78650;
+  stroke: #a56539;
+  stroke-width: 2;
+}
+.pod-lesson .pod-fineprint {
+  margin: 6px 0 0;
+  font-size: 16px;
+  color: #7a8b84;
+  line-height: 1.4;
+}
+.pod-view-layouts .pod-card > svg {
+  height: 180px;
+}
+.pod-view-layouts .pod-card {
+  min-height: 370px;
+}
+.pod-view-layouts .pod-banner {
+  margin-top: 20px;
+}
+.pod-china {
+  grid-template-columns: 780px 1fr;
+  gap: 43px;
+}
+.pod-china-graphic {
+  background: #eff4f2;
+  border: 1px solid #dce8e2;
+  padding: 15px 15px 18px;
+  border-radius: 20px;
+  text-align: center;
+}
+.pod-china-graphic > svg {
+  width: 750px;
+  height: 260px;
+}
+.pod-megawatt strong {
+  font-size: 94px;
+  font-weight: 700;
+  color: var(--pod-green);
+  line-height: 1.2;
+}
+.pod-megawatt strong > span {
+  font-size: 40px;
+  margin-left: 15px;
+  font-weight: 500;
+}
+.pod-megawatt p {
+  margin: 0;
+  font-size: 22px;
+  color: #6e8679;
+}
+.pod-china .pod-story h2 {
+  font-size: 34px;
+  margin: 12px 0 16px;
+}
+.pod-timeline {
+  border-left: 2px solid #b6cdbd;
+  padding-left: 23px;
+}
+.pod-timeline section {
+  margin-bottom: 15px;
+}
+.pod-timeline b {
+  font-size: 23px;
+  color: var(--pod-green);
+}
+.pod-timeline p {
+  margin: 6px 0;
+  font-size: 22px;
+  color: #657e75;
+}
+.pod-story > .pod-china-note {
+  font-size: 20px;
+  line-height: 1.7;
+}
+.pod-uses .pod-card > svg {
+  height: 130px;
+}
+.pod-uses .pod-card {
+  padding-top: 10px;
+}
+.pod-uses .pod-card h2 {
+  font-size: 29px;
+  margin-top: 11px;
+}
+.pod-uses .pod-card p {
+  font-size: 21px;
+  min-height: 60px;
+}
+.pod-example {
+  padding-top: 10px;
+  margin-top: 10px;
+  border-top: 1px solid #d4e0d8;
+  font-size: 20px;
+  color: #6f867b;
+  line-height: 1.7;
+}
+.pod-example b {
+  color: #37634c;
+}
+.pod-window {
+  fill: none;
+  stroke: #698c95;
+  stroke-width: 5;
+  stroke-dasharray: 10 8;
+}
+.pod-ice {
+  fill: none;
+  stroke: #96b6be;
+  stroke-width: 5;
+  stroke-linejoin: round;
+}
+.pod-crane {
+  fill: none;
+  stroke: #bd7541;
+  stroke-width: 6;
+  stroke-linejoin: round;
+}
+.pod-challenge-icon {
+  display: block;
+  height: 75px;
+  font-size: 87px;
+  line-height: 1.2;
+  color: #719a8b;
+}
+.pod-challenges .pod-card {
+  padding: 24px 29px;
+}
+.pod-challenges .pod-card p {
+  min-height: 100px;
+  font-size: 24px;
+}
+.pod-source-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  padding-top: 5px;
+}
+.pod-source-grid a {
+  display: block;
+  padding: 14px 20px;
+  height: 156px;
+  border: 1px solid #dbe6df;
+  background: #f4f7f4;
+  border-radius: 13px;
+  color: inherit;
+  text-decoration: none;
+}
+.pod-source-grid a:hover {
+  border-color: #93b3a1;
+  background: #edf4ef;
+}
+.pod-source-grid a > span {
+  font-size: 15px;
+  color: #7b9c8a;
+}
+.pod-source-grid h2 {
+  font-size: 21px;
+  margin-top: 6px;
+  line-height: 1.3;
+}
+.pod-source-grid p {
+  font-size: 17px;
+  margin: 6px 0;
+  line-height: 1.4;
+  color: #6b8175;
+}
+.pod-source-grid small {
+  font-size: 13px;
+  color: #8a998e;
+}
+.pod-research-note {
+  position: absolute;
+  bottom: 0;
+  font-size: 16px;
+  color: #829487;
+  margin: 0;
+}

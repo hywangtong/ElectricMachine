@@ -1,3 +1,5 @@
+import { podPages, type PodView } from '@/content/ship-pod';
+
 export type Topic = { title: string; description: string };
 export type TeacherProfile = {
   name: string;
@@ -180,6 +182,13 @@ export type Slide =
     }
   | {
       id: string;
+      kind: 'pod';
+      title: string;
+      chapterId: string;
+      view: PodView;
+    }
+  | {
+      id: string;
       kind: 'chapter' | 'outline';
       title: string;
       chapterId: string;
@@ -331,6 +340,13 @@ export const slides: Slide[] = [
             title,
             chapterId: chapter.id,
             page,
+          }),
+        ),
+        ...podPages.map(
+          (page): Slide => ({
+            ...page,
+            kind: 'pod',
+            chapterId: chapter.id,
           }),
         ),
       );

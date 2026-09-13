@@ -1,0 +1,608 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>轮船电动吊舱推进 · ELI5</title>
+<style>/* Shared by the React lesson and the self-contained HTML export. */
+.pod-lesson {
+  --pod-ink: #203947;
+  --pod-green: #286457;
+  --pod-orange: #bd7541;
+  width: 1444px;
+  height: 744px;
+  position: relative;
+  padding-top: 29px;
+  color: var(--pod-ink);
+  font-family: 'Segoe UI', 'Microsoft YaHei', 'PingFang SC', sans-serif;
+}
+.pod-lesson * {
+  box-sizing: border-box;
+}
+.pod-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  font-size: 14px;
+  letter-spacing: 2px;
+  color: #6e827c;
+}
+.pod-eyebrow > span {
+  width: 24px;
+  height: 3px;
+  background: var(--pod-orange);
+}
+.pod-eyebrow b {
+  margin-left: 14px;
+  font-size: 15px;
+  letter-spacing: 1px;
+}
+.pod-heading {
+  margin: 17px 0 24px;
+}
+.pod-heading h1 {
+  margin: 0;
+  font-size: 47px;
+  line-height: 1.3;
+  font-weight: 650;
+  letter-spacing: 1px;
+}
+.pod-heading > p {
+  margin: 11px 0 0;
+  font-size: 23px;
+  color: #72837f;
+  line-height: 1.4;
+}
+.pod-lesson h2 {
+  margin: 0;
+  font-weight: 650;
+}
+.pod-lesson p {
+  line-height: 1.6;
+}
+.pod-main {
+  height: 480px;
+}
+.pod-split {
+  display: grid;
+  grid-template-columns: 850px 1fr;
+  gap: 42px;
+  align-items: center;
+  height: 100%;
+}
+.pod-ocean {
+  margin: 0;
+  border-radius: 22px;
+  background: linear-gradient(#f4f7f5 0 35%, #eaf2f3 35%);
+  padding: 18px 0;
+}
+.pod-ocean svg {
+  display: block;
+  width: 850px;
+  height: 410px;
+}
+.pod-ocean figcaption {
+  font-size: 15px;
+  color: #798a87;
+  margin: 0 26px;
+}
+.pod-anatomy-stage {
+  position: relative;
+  width: 850px;
+  height: 410px;
+}
+.pod-anatomy-labels > span {
+  position: absolute;
+  font-size: 20px;
+  line-height: 1.4;
+}
+.pod-label-strut {
+  left: 612px;
+  top: 199px;
+}
+.pod-label-motor {
+  left: 557px;
+  top: 368px;
+}
+.pod-label-prop {
+  left: 80px;
+  top: 267px;
+}
+.pod-label-water {
+  left: 576px;
+  top: 259px;
+  color: #668d9a;
+}
+.pod-label-force {
+  left: 147px;
+  top: 201px;
+  color: #317d63;
+}
+.pod-direction {
+  position: absolute;
+  right: 26px;
+  top: 22px;
+  color: #758e8d;
+  font-size: 16px;
+}
+.pod-gear {
+  fill: none;
+  stroke: #bd7541;
+  stroke-width: 6px;
+  stroke-dasharray: 4 3;
+}
+.pod-layout-legend {
+  display: flex;
+  justify-content: space-around;
+  font-size: 21px;
+  line-height: 1.3;
+  margin-top: -15px;
+}
+.pod-lesson svg {
+  overflow: visible;
+}
+.pod-hull {
+  fill: #315668;
+  stroke: #203e4d;
+  stroke-width: 3;
+}
+.pod-deck {
+  fill: #d9e6e5;
+  stroke: #7a9698;
+  stroke-width: 3;
+  stroke-linejoin: round;
+}
+.pod-wave {
+  fill: none;
+  stroke: #b1ccce;
+  stroke-width: 3;
+}
+.pod-strut {
+  fill: none;
+  stroke: #80979c;
+  stroke-width: 31;
+  stroke-linejoin: round;
+}
+.pod-shell {
+  fill: #d7e5e5;
+  stroke: #6c8d94;
+  stroke-width: 3;
+}
+.pod-motor {
+  fill: #2c5c6a;
+  stroke: #224956;
+  stroke-width: 2;
+}
+.pod-shaft {
+  fill: none;
+  stroke: #526d78;
+  stroke-width: 7;
+}
+.pod-propeller {
+  fill: #c78650;
+  stroke: #a56539;
+  stroke-width: 2;
+}
+.pod-cable {
+  fill: none;
+  stroke: #d39b45;
+  stroke-width: 6;
+  stroke-linejoin: round;
+}
+.pod-guide {
+  fill: none;
+  stroke: #8aa1a5;
+  stroke-width: 2;
+}
+.pod-water-arrow {
+  fill: none;
+  stroke: #82a8b6;
+  stroke-width: 6;
+  stroke-linejoin: round;
+}
+.pod-force-arrow {
+  fill: none;
+  stroke: #317d63;
+  stroke-width: 7;
+  stroke-linejoin: round;
+}
+.pod-story h2 {
+  font-size: 38px;
+  line-height: 1.5;
+  margin: 20px 0;
+}
+.pod-story > p {
+  margin: 16px 0;
+  font-size: 26px;
+  color: #667d7c;
+}
+.pod-tag {
+  display: inline-block;
+  font-size: 17px;
+  letter-spacing: 1px;
+  color: #91704b;
+}
+.pod-takeaway {
+  border-top: 1px solid #c8d9d3;
+  margin-top: 28px;
+  padding-top: 22px;
+  font-size: 23px;
+  line-height: 1.8;
+  color: var(--pod-green);
+}
+.pod-citations {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 21px;
+  border-top: 1px solid #d9e3df;
+  padding-top: 13px;
+  font-size: 15px;
+  color: #798983;
+}
+.pod-citations a {
+  color: #5b766f;
+  text-decoration: none;
+}
+.pod-citations a:hover {
+  text-decoration: underline;
+}
+.pod-citations a:focus-visible,
+.pod-source-grid a:focus-visible {
+  outline: 3px solid #bd7541;
+  outline-offset: 4px;
+}
+.pod-supply {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  padding: 15px 0 30px;
+}
+.pod-supply section {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 7px;
+  padding: 17px 33px;
+  border: 1px solid #c6d7cb;
+  border-radius: 14px;
+  background: #f4f7f2;
+  min-width: 440px;
+}
+.pod-supply b {
+  color: var(--pod-green);
+  font-size: 28px;
+}
+.pod-supply section > span {
+  font-size: 20px;
+  color: #71827a;
+}
+.pod-or {
+  color: #83918a;
+  font-size: 19px;
+}
+.pod-flow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 37px;
+}
+.pod-flow section {
+  position: relative;
+  padding: 19px 24px 26px;
+  background: #edf3f3;
+  border-radius: 18px;
+}
+.pod-flow-icon {
+  display: block;
+  font-size: 70px;
+  height: 98px;
+  color: var(--pod-green);
+  line-height: 1.2;
+}
+.pod-step {
+  position: absolute;
+  right: 25px;
+  top: 27px;
+  font-size: 17px;
+  color: #87a39a;
+}
+.pod-flow h2 {
+  font-size: 30px;
+}
+.pod-flow p {
+  margin: 10px 0 0;
+  font-size: 21px;
+  color: #6a7f80;
+}
+.pod-flow-arrow {
+  position: absolute;
+  right: -33px;
+  top: 90px;
+  font-size: 30px;
+  color: #7f9991;
+}
+.pod-banner {
+  background: #edf3ed;
+  border-left: 4px solid #69937b;
+  padding: 14px 26px;
+  margin-top: 18px;
+  font-size: 23px;
+  color: #4d6b5e;
+  line-height: 1.5;
+}
+.pod-banner strong {
+  color: #2f5b45;
+  margin: 0 6px;
+}
+.pod-card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+.pod-card {
+  position: relative;
+  background: #f4f7f6;
+  border: 1px solid #dde7e2;
+  border-radius: 18px;
+  padding: 20px 26px;
+}
+.pod-card > svg {
+  width: 100%;
+  height: 220px;
+  display: block;
+}
+.pod-card h2 {
+  font-size: 30px;
+  margin-top: 14px;
+}
+.pod-card p {
+  font-size: 22px;
+  color: #6a7d7a;
+  margin: 11px 0 0;
+}
+.pod-plan-hull {
+  fill: #e1e9e8;
+  stroke: #a6bcb5;
+  stroke-width: 2;
+}
+.pod-turn-circle {
+  fill: none;
+  stroke: #95b4a4;
+  stroke-width: 2;
+  stroke-dasharray: 7 6;
+}
+.pod-prop-line {
+  fill: none;
+  stroke: #bd7541;
+  stroke-width: 9;
+  stroke-linecap: round;
+}
+.pod-mechanical {
+  fill: none;
+  stroke: #bd7541;
+  stroke-width: 7;
+}
+.pod-rim-shell {
+  fill: #e4ebea;
+  stroke: #9bb2ae;
+  stroke-width: 4;
+}
+.pod-rim-motor {
+  fill: #f4f7f6;
+  stroke: #2c5c6a;
+  stroke-width: 15;
+}
+.pod-rim-blade {
+  fill: #c78650;
+  stroke: #a56539;
+  stroke-width: 2;
+}
+.pod-lesson .pod-fineprint {
+  margin: 6px 0 0;
+  font-size: 16px;
+  color: #7a8b84;
+  line-height: 1.4;
+}
+.pod-view-layouts .pod-card > svg {
+  height: 180px;
+}
+.pod-view-layouts .pod-card {
+  min-height: 370px;
+}
+.pod-view-layouts .pod-banner {
+  margin-top: 20px;
+}
+.pod-china {
+  grid-template-columns: 780px 1fr;
+  gap: 43px;
+}
+.pod-china-graphic {
+  background: #eff4f2;
+  border: 1px solid #dce8e2;
+  padding: 15px 15px 18px;
+  border-radius: 20px;
+  text-align: center;
+}
+.pod-china-graphic > svg {
+  width: 750px;
+  height: 260px;
+}
+.pod-megawatt strong {
+  font-size: 94px;
+  font-weight: 700;
+  color: var(--pod-green);
+  line-height: 1.2;
+}
+.pod-megawatt strong > span {
+  font-size: 40px;
+  margin-left: 15px;
+  font-weight: 500;
+}
+.pod-megawatt p {
+  margin: 0;
+  font-size: 22px;
+  color: #6e8679;
+}
+.pod-china .pod-story h2 {
+  font-size: 34px;
+  margin: 12px 0 16px;
+}
+.pod-timeline {
+  border-left: 2px solid #b6cdbd;
+  padding-left: 23px;
+}
+.pod-timeline section {
+  margin-bottom: 15px;
+}
+.pod-timeline b {
+  font-size: 23px;
+  color: var(--pod-green);
+}
+.pod-timeline p {
+  margin: 6px 0;
+  font-size: 22px;
+  color: #657e75;
+}
+.pod-story > .pod-china-note {
+  font-size: 20px;
+  line-height: 1.7;
+}
+.pod-uses .pod-card > svg {
+  height: 130px;
+}
+.pod-uses .pod-card {
+  padding-top: 10px;
+}
+.pod-uses .pod-card h2 {
+  font-size: 29px;
+  margin-top: 11px;
+}
+.pod-uses .pod-card p {
+  font-size: 21px;
+  min-height: 60px;
+}
+.pod-example {
+  padding-top: 10px;
+  margin-top: 10px;
+  border-top: 1px solid #d4e0d8;
+  font-size: 20px;
+  color: #6f867b;
+  line-height: 1.7;
+}
+.pod-example b {
+  color: #37634c;
+}
+.pod-window {
+  fill: none;
+  stroke: #698c95;
+  stroke-width: 5;
+  stroke-dasharray: 10 8;
+}
+.pod-ice {
+  fill: none;
+  stroke: #96b6be;
+  stroke-width: 5;
+  stroke-linejoin: round;
+}
+.pod-crane {
+  fill: none;
+  stroke: #bd7541;
+  stroke-width: 6;
+  stroke-linejoin: round;
+}
+.pod-challenge-icon {
+  display: block;
+  height: 75px;
+  font-size: 87px;
+  line-height: 1.2;
+  color: #719a8b;
+}
+.pod-challenges .pod-card {
+  padding: 24px 29px;
+}
+.pod-challenges .pod-card p {
+  min-height: 100px;
+  font-size: 24px;
+}
+.pod-source-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  padding-top: 5px;
+}
+.pod-source-grid a {
+  display: block;
+  padding: 14px 20px;
+  height: 156px;
+  border: 1px solid #dbe6df;
+  background: #f4f7f4;
+  border-radius: 13px;
+  color: inherit;
+  text-decoration: none;
+}
+.pod-source-grid a:hover {
+  border-color: #93b3a1;
+  background: #edf4ef;
+}
+.pod-source-grid a > span {
+  font-size: 15px;
+  color: #7b9c8a;
+}
+.pod-source-grid h2 {
+  font-size: 21px;
+  margin-top: 6px;
+  line-height: 1.3;
+}
+.pod-source-grid p {
+  font-size: 17px;
+  margin: 6px 0;
+  line-height: 1.4;
+  color: #6b8175;
+}
+.pod-source-grid small {
+  font-size: 13px;
+  color: #8a998e;
+}
+.pod-research-note {
+  position: absolute;
+  bottom: 0;
+  font-size: 16px;
+  color: #829487;
+  margin: 0;
+}
+
+html,body{margin:0;height:100%;background:#eaf0ed;color:#203947;font-family:'Segoe UI','Microsoft YaHei',sans-serif}
+*{box-sizing:border-box} [hidden]{display:none!important}
+main{position:fixed;inset:0 0 66px;touch-action:pan-y}
+.pod-export-slide{width:1600px;height:900px;padding:49px 78px 0;background:white;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scale(var(--scale,1));transform-origin:center;overflow:hidden;box-shadow:0 6px 30px #20394716}
+.pod-export-top,footer{font-size:16px;color:#7e9488;display:flex;justify-content:space-between;letter-spacing:2px}
+footer{position:absolute;bottom:28px;left:78px;right:78px;font-size:14px}
+nav{position:fixed;bottom:0;left:0;right:0;height:66px;display:flex;align-items:center;justify-content:center;gap:18px;background:#f5f8f5}
+button,select{font:inherit;color:#315a48;background:white;border:1px solid #ccdbd0;border-radius:7px;padding:8px 13px;cursor:pointer}
+button:disabled{opacity:.4;cursor:default} button:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid #bd7541;outline-offset:4px}
+body.full main{bottom:0}body.full nav{opacity:0;transition:opacity .2s}body.full nav:hover,body.full nav:focus-within{opacity:1}
+@media(max-width:600px){nav{gap:6px}select{max-width:48vw}button{padding:8px}}
+@media print{main{position:static}nav{display:none}.pod-export-slide[hidden]{display:block!important}.pod-export-slide{position:relative;left:0;top:0;transform:none;page-break-after:always} @page{size:1600px 900px;margin:0}}
+</style></head><body><main><section class="pod-export-slide" id="ship-pod-anatomy" ><div class="pod-export-top">电机与拖动 · 绪论 <span>16:9 · ELI5</span></div><div class="pod-lesson pod-view-anatomy"><div class="pod-eyebrow"><span></span>MARINE ELECTRIC PROPULSION <b>轮船电动吊舱 · ELI5</b></div><header class="pod-heading"><h1>给大船装一只「水下电动脚」</h1><p>电动吊舱推进 · 从一张剖面图开始</p></header><div class="pod-main"><div class="pod-split"><figure class="pod-ocean"><div class="pod-anatomy-stage"><svg viewBox="0 0 850 470" role="img" aria-label="船底吊舱剖面：电缆穿过支架，水下密封壳体内的电机通过短轴驱动前方螺旋桨；水向后，船向前。"><path class="pod-hull" d="M95 90h625l-50 103H160Z"></path><path class="pod-deck" d="M243 90V40h250v50M309 40V13h108v27"></path><path class="pod-wave" d="M20 164q30-18 60 0t60 0t60 0t60 0t60 0t60 0t60 0t60 0t60 0t60 0t60 0t60 0t60 0"></path><g transform="translate(206 118)"><g><path class="pod-strut" d="M200 72v154"></path><path class="pod-shell" d="M96 192h151c62 0 84 30 84 40s-22 40-84 40H96Z"></path><rect class="pod-motor" x="135" y="210" width="106" height="44" rx="12"></rect><path class="pod-shaft" d="M61 232h207"></path><g transform="translate(78 232)" class="pod-propeller"><path d="M0 0C-52-82 29-85 0 0C52 82-29 85 0 0Z"></path><circle r="11"></circle></g></g></g><path class="pod-cable" d="M469 62h-63v260"></path><path class="pod-guide" d="M406 244h231M450 350l118 64h120M323 336H147"></path><path class="pod-water-arrow" d="M573 347h161m-22-15 22 15-22 15"></path><path class="pod-force-arrow" d="M242 218H85m22-15-22 15 22 15"></path></svg><div aria-hidden="true" class="pod-anatomy-labels"><span class="pod-label-strut">① 支架 + 电缆</span><span class="pod-label-motor">② 密封舱内的电机</span><span class="pod-label-prop">③ 螺旋桨</span><span class="pod-label-water">水向后</span><span class="pod-label-force">船向前</span></div></div><figcaption>示意剖面 · 拉式单桨方案 · 非产品工程图</figcaption></figure><div class="pod-story"><span class="pod-tag">像一只装在船底的电动脚</span><h2>电机藏在水下，<br/>螺旋桨就在旁边。</h2><p>电机带着桨转，桨把水往后送，水就把船往前推。</p><div class="pod-takeaway">它还能转方向：<br/><strong>一套装置，负责推进和转向。</strong></div></div></div></div><div class="pod-citations"><span>资料依据</span><a href="https://www.sastind.gov.cn/n10086200/n10086331/c10580560/content.html" target="_blank" rel="noreferrer">中国船舶 · 10 MW 全负荷试验 ↗</a><a href="https://www.abb.com/global/en/industries/marine/solutions/marine-electric-propulsion/azipod" target="_blank" rel="noreferrer">ABB · Azipod 工作原理 ↗</a></div></div><footer>轮船电动吊舱推进<span>1 / 8</span></footer></section>
+<section class="pod-export-slide" id="ship-pod-energy" hidden><div class="pod-export-top">电机与拖动 · 绪论 <span>16:9 · ELI5</span></div><div class="pod-lesson pod-view-energy"><div class="pod-eyebrow"><span></span>MARINE ELECTRIC PROPULSION <b>轮船电动吊舱 · ELI5</b></div><header class="pod-heading"><h1>电从哪里来？一路追到螺旋桨</h1><p>电源可以不同，最后都由电机把桨带起来</p></header><div class="pod-main"><div class="pod-supply"><section><b>燃料 → 发电机</b><span>柴油 / LNG 等：船上有“小电站”</span></section><span class="pod-or">或 / 混合</span><section><b>岸上充电 → 电池</b><span>适合具备充电条件的航线</span></section></div><div class="pod-flow"><section><span class="pod-flow-icon" aria-hidden="true">⚡</span><span class="pod-step">01</span><h2>船上电网</h2><p>把电送到推进系统</p><span class="pod-flow-arrow" aria-hidden="true">→</span></section><section><span class="pod-flow-icon" aria-hidden="true">∿</span><span class="pod-step">02</span><h2>变频驱动器</h2><p>像调光旋钮，调节电机</p><span class="pod-flow-arrow" aria-hidden="true">→</span></section><section><span class="pod-flow-icon" aria-hidden="true">↻</span><span class="pod-step">03</span><h2>水下电机</h2><p>电能变成转动</p><span class="pod-flow-arrow" aria-hidden="true">→</span></section><section><span class="pod-flow-icon" aria-hidden="true">≋</span><span class="pod-step">04</span><h2>螺旋桨</h2><p>转动变成推水</p></section></div><div class="pod-banner">“电推进”说的是<strong>桨由电机带动</strong>；发电端仍可能消耗燃料。</div></div><div class="pod-citations"><span>资料依据</span><a href="https://www.cssc.net.cn/n135/n171/n179/c21170/content.html" target="_blank" rel="noreferrer">中国船舶 · 国产大型邮轮配置 ↗</a><a href="https://www.yara.com/news-and-media/media-library/press-kits/yara-birkeland-press-kit/" target="_blank" rel="noreferrer">Yara · 电池动力货船资料 ↗</a><a href="https://www.abb.com/global/en/industries/marine/solutions/marine-electric-propulsion/azipod" target="_blank" rel="noreferrer">ABB · Azipod 工作原理 ↗</a></div></div><footer>轮船电动吊舱推进<span>2 / 8</span></footer></section>
+<section class="pod-export-slide" id="ship-pod-steering" hidden><div class="pod-export-top">电机与拖动 · 绪论 <span>16:9 · ELI5</span></div><div class="pod-lesson pod-view-steering"><div class="pod-eyebrow"><span></span>MARINE ELECTRIC PROPULSION <b>轮船电动吊舱 · ELI5</b></div><header class="pod-heading"><h1>脚一转，推力就转</h1><p>转速管推力大小，吊舱角度管推力方向</p></header><div class="pod-main"><div class="pod-card-grid"><section class="pod-card"><svg viewBox="0 0 360 300" role="img" aria-label="向前推的俯视推力示意图"><path class="pod-plan-hull" d="M180 19Q233 51 233 109v159H127V109q0-58 53-90Z"></path><circle class="pod-turn-circle" cx="180" cy="207" r="65"></circle><g transform="translate(180 207) rotate(0)"><rect class="pod-motor" x="-17" y="-30" width="34" height="62" rx="17"></rect><path class="pod-prop-line" d="M-30-35h60"></path><path class="pod-force-arrow" d="M0-49V-119m-13 20 13-20 13 20"></path></g></svg><span class="pod-direction" aria-hidden="true">俯视 · 船头 ↑</span><h2>向前推</h2><p>推力朝船头</p></section><section class="pod-card"><svg viewBox="0 0 360 300" role="img" aria-label="向后推的俯视推力示意图"><path class="pod-plan-hull" d="M180 19Q233 51 233 109v159H127V109q0-58 53-90Z"></path><circle class="pod-turn-circle" cx="180" cy="207" r="65"></circle><g transform="translate(180 207) rotate(180)"><rect class="pod-motor" x="-17" y="-30" width="34" height="62" rx="17"></rect><path class="pod-prop-line" d="M-30-35h60"></path><path class="pod-force-arrow" d="M0-49V-119m-13 20 13-20 13 20"></path></g></svg><span class="pod-direction" aria-hidden="true">俯视 · 船头 ↑</span><h2>向后推</h2><p>吊舱调转，可产生向后推力</p></section><section class="pod-card"><svg viewBox="0 0 360 300" role="img" aria-label="向旁边推的俯视推力示意图"><path class="pod-plan-hull" d="M180 19Q233 51 233 109v159H127V109q0-58 53-90Z"></path><circle class="pod-turn-circle" cx="180" cy="207" r="65"></circle><g transform="translate(180 207) rotate(90)"><rect class="pod-motor" x="-17" y="-30" width="34" height="62" rx="17"></rect><path class="pod-prop-line" d="M-30-35h60"></path><path class="pod-force-arrow" d="M0-49V-119m-13 20 13-20 13 20"></path></g></svg><span class="pod-direction" aria-hidden="true">俯视 · 船头 ↑</span><h2>向旁边推</h2><p>多台推进器配合，帮助靠泊</p></section></div><div class="pod-banner"><strong>360°</strong> 是吊舱绕竖直轴转向；桨叶同时绕自己的轴旋转。</div><p class="pod-fineprint">绿色箭头表示推力，示意图未模拟整船运动。实际操纵角度和功率需遵守运行限制。</p></div><div class="pod-citations"><span>资料依据</span><a href="https://www.sastind.gov.cn/n10086200/n10086331/c10580560/content.html" target="_blank" rel="noreferrer">中国船舶 · 10 MW 全负荷试验 ↗</a><a href="https://www.abb.com/global/en/industries/marine/solutions/marine-electric-propulsion/azipod" target="_blank" rel="noreferrer">ABB · Azipod 工作原理 ↗</a></div></div><footer>轮船电动吊舱推进<span>3 / 8</span></footer></section>
+<section class="pod-export-slide" id="ship-pod-layouts" hidden><div class="pod-export-top">电机与拖动 · 绪论 <span>16:9 · ELI5</span></div><div class="pod-lesson pod-view-layouts"><div class="pod-eyebrow"><span></span>MARINE ELECTRIC PROPULSION <b>轮船电动吊舱 · ELI5</b></div><header class="pod-heading"><h1>会转向，不一定是电动吊舱</h1><p>看电机位置，才知道它走哪条传动路线</p></header><div class="pod-main"><div class="pod-card-grid"><section class="pod-card"><svg viewBox="0 0 400 320" role="img" aria-label="电动吊舱：电机在水下，短轴直接带桨"><g><path class="pod-strut" d="M200 72v154"></path><path class="pod-shell" d="M96 192h151c62 0 84 30 84 40s-22 40-84 40H96Z"></path><rect class="pod-motor" x="135" y="210" width="106" height="44" rx="12"></rect><path class="pod-shaft" d="M61 232h207"></path><g transform="translate(78 232)" class="pod-propeller"><path d="M0 0C-52-82 29-85 0 0C52 82-29 85 0 0Z"></path><circle r="11"></circle></g></g></svg><span class="pod-tag">这次的主角</span><h2>电动吊舱</h2><p>电机在水下舱体内，短轴直接带桨。</p></section><section class="pod-card"><svg viewBox="0 0 400 320" role="img" aria-label="机械全回转推进器：电机在船内，竖轴及齿轮将动力送至水下"><g><path class="pod-strut" d="M292 72v154h-88"></path><path class="pod-shell" d="M96 192h151c62 0 84 30 84 40s-22 40-84 40H96Z"></path><rect class="pod-motor" x="135" y="210" width="106" height="44" rx="12"></rect><path class="pod-shaft" d="M61 232h207"></path><g transform="translate(78 232)" class="pod-propeller"><path d="M0 0C-52-82 29-85 0 0C52 82-29 85 0 0Z"></path><circle r="11"></circle></g></g><rect class="pod-motor" x="252" y="33" width="80" height="49" rx="9"></rect><path class="pod-mechanical" d="M292 80v151H99"></path><rect class="pod-shell" x="126" y="209" width="122" height="46" rx="5"></rect><circle class="pod-gear" cx="151" cy="232" r="16"></circle><circle class="pod-gear" cx="181" cy="232" r="16"></circle></svg><span class="pod-tag">另一种传动路径</span><h2>机械全回转</h2><p>电机或发动机在船内，通过轴和齿轮带桨。</p></section><section class="pod-card"><svg viewBox="0 0 400 320" role="img" aria-label="轮缘驱动推进器：电机沿桨外圈布置"><circle class="pod-rim-shell" cx="200" cy="180" r="100"></circle><circle class="pod-rim-motor" cx="200" cy="180" r="82"></circle><path class="pod-rim-blade" transform="rotate(0 200 180)" d="M200 180q-44-40-25-81l39 1q-26 35-14 80Z"></path><path class="pod-rim-blade" transform="rotate(90 200 180)" d="M200 180q-44-40-25-81l39 1q-26 35-14 80Z"></path><path class="pod-rim-blade" transform="rotate(180 200 180)" d="M200 180q-44-40-25-81l39 1q-26 35-14 80Z"></path><path class="pod-rim-blade" transform="rotate(270 200 180)" d="M200 180q-44-40-25-81l39 1q-26 35-14 80Z"></path></svg><span class="pod-tag">电机围着桨</span><h2>轮缘驱动</h2><p>把电机放在桨的外圈，也是直接电驱的一条路线。</p></section></div><div class="pod-banner">看到“全回转”，先问：<strong>电机在哪里？动力怎样送到桨？</strong></div><p class="pod-fineprint">三图仅说明传动路径。Azipod 是 ABB 商标；Siemens 的 POD-T 双桨命名与国产 T 型支架含义不同。</p></div><div class="pod-citations"><span>资料依据</span><a href="https://www.abb.com/global/en/industries/marine/solutions/marine-electric-propulsion/azipod" target="_blank" rel="noreferrer">ABB · Azipod 工作原理 ↗</a><a href="https://www.siemens-energy.com/global/en/home/products-services/product/podded-propulsion.html" target="_blank" rel="noreferrer">Siemens Energy · 电动吊舱 ↗</a><a href="https://www.kongsbergmaritime.com/products/propulsors-and-propulsion-systems/thrusters/direct-electric-drive/" target="_blank" rel="noreferrer">Kongsberg · 直接电驱与轮缘驱动 ↗</a></div></div><footer>轮船电动吊舱推进<span>4 / 8</span></footer></section>
+<section class="pod-export-slide" id="ship-pod-china" hidden><div class="pod-export-top">电机与拖动 · 绪论 <span>16:9 · ELI5</span></div><div class="pod-lesson pod-view-china"><div class="pod-eyebrow"><span></span>MARINE ELECTRIC PROPULSION <b>轮船电动吊舱 · ELI5</b></div><header class="pod-heading"><h1>国产 10 兆瓦，突破在哪里？</h1><p>从试验成功到系列发布，把两个时间点分清</p></header><div class="pod-main"><div class="pod-split pod-china"><div class="pod-china-graphic"><div class="pod-megawatt"><strong>10<span>MW</span></strong><p>= 10,000 kW · 功率等级</p></div><svg viewBox="0 0 780 330" role="img" aria-label="L 型与 T 型支架概念对比：L 型支架靠近一端，T 型支架位于舱体中部"><g transform="translate(0 0)"><g><path class="pod-strut" d="M292 72v154h-88"></path><path class="pod-shell" d="M96 192h151c62 0 84 30 84 40s-22 40-84 40H96Z"></path><rect class="pod-motor" x="135" y="210" width="106" height="44" rx="12"></rect><path class="pod-shaft" d="M61 232h207"></path><g transform="translate(78 232)" class="pod-propeller"><path d="M0 0C-52-82 29-85 0 0C52 82-29 85 0 0Z"></path><circle r="11"></circle></g></g></g><g transform="translate(390 0)"><g><path class="pod-strut" d="M200 72v154"></path><path class="pod-shell" d="M96 192h151c62 0 84 30 84 40s-22 40-84 40H96Z"></path><rect class="pod-motor" x="135" y="210" width="106" height="44" rx="12"></rect><path class="pod-shaft" d="M61 232h207"></path><g transform="translate(78 232)" class="pod-propeller"><path d="M0 0C-52-82 29-85 0 0C52 82-29 85 0 0Z"></path><circle r="11"></circle></g></g></g></svg><div class="pod-layout-legend" aria-hidden="true"><span>L 型</span><span>T 型</span></div><p class="pod-fineprint">支架布局概念图 · 不代表实物尺寸、内部结构或双桨配置</p></div><div class="pod-story"><span class="pod-tag">七〇四所 · S-POD</span><h2>把“大功率水下脚”<br/>掌握在自己手里。</h2><div class="pod-timeline"><section><b>2024 · 全负荷试验</b><p>国产首台套 10 MW T 型吊舱，完成全负荷动态试验。</p></section><section><b>2025 · 系列发布</b><p>S-POD 覆盖 400 kW—10 MW；发布报道明确实现 100% 国产化。</p></section></div><p class="pod-china-note">T 型把支架布局调整得更居中；从几何上，更有利于减小回转所需空间。这是布局原理解释。</p><p class="pod-fineprint">2 MW 产品已有实船应用；本页不把 10 MW 试验成功等同于长期实船运行。</p></div></div></div><div class="pod-citations"><span>资料依据</span><a href="https://www.sastind.gov.cn/n10086200/n10086331/c10580560/content.html" target="_blank" rel="noreferrer">中国船舶 · 10 MW 全负荷试验 ↗</a><a href="https://www.stdaily.com/web/gdxw/2025-12/02/content_441042.html" target="_blank" rel="noreferrer">S-POD 系列 · 国产化与实船应用 ↗</a></div></div><footer>轮船电动吊舱推进<span>5 / 8</span></footer></section>
+<section class="pod-export-slide" id="ship-pod-applications" hidden><div class="pod-export-top">电机与拖动 · 绪论 <span>16:9 · ELI5</span></div><div class="pod-lesson pod-view-applications"><div class="pod-eyebrow"><span></span>MARINE ELECTRIC PROPULSION <b>轮船电动吊舱 · ELI5</b></div><header class="pod-heading"><h1>哪些船最喜欢这只「脚」？</h1><p>看船要做什么，再看推进器能帮什么忙</p></header><div class="pod-main"><div class="pod-card-grid pod-uses"><section class="pod-card"><svg viewBox="0 0 400 260" role="img" aria-label="邮轮示意图"><path class="pod-hull" d="M28 135h344l-37 63H70Z"></path><path class="pod-deck" d="M83 135V91h248v44M119 91V58h169v33M145 58V37h115v21"></path><path class="pod-window" d="M109 113h185M142 73h122"></path><path class="pod-wave" d="M18 202q25-13 50 0t50 0t50 0t50 0t50 0t50 0t50 0"></path><path class="pod-strut" d="M240 196v20"></path><ellipse class="pod-motor" cx="242" cy="225" rx="29" ry="11"></ellipse><path class="pod-prop-line" d="M207 211v28"></path></svg><span class="pod-tag">邮轮 · 靠泊与舒适性</span><h2>让“大酒店”好转身</h2><p>低速操纵更灵活，减少振动是重要设计目标。</p><div class="pod-example">国产大型邮轮建造资料：<br/><b>两台 16.8 MW 吊舱</b></div></section><section class="pod-card"><svg viewBox="0 0 400 260" role="img" aria-label="破冰船示意图"><path class="pod-hull" d="M28 135h344l-37 63H70Z"></path><path class="pod-deck" d="M133 135V82h125v53M178 82V54h41v28"></path><path class="pod-ice" d="m19 224 48-14 29 24 38-14 31 22m119-8 37-24 42 13 21-22"></path><path class="pod-wave" d="M18 202q25-13 50 0t50 0t50 0t50 0t50 0t50 0t50 0"></path><path class="pod-strut" d="M240 196v20"></path><ellipse class="pod-motor" cx="242" cy="225" rx="29" ry="11"></ellipse><path class="pod-prop-line" d="M207 211v28"></path></svg><span class="pod-tag">破冰船 · 冰区操纵</span><h2>前进、后退都能干活</h2><p>冰级吊舱要承受冰桨相互作用，支持双向破冰设计。</p><div class="pod-example">雪龙 2：<br/><b>双 Azipod + 双向破冰</b></div></section><section class="pod-card"><svg viewBox="0 0 400 260" role="img" aria-label="科考船示意图"><path class="pod-hull" d="M28 135h344l-37 63H70Z"></path><path class="pod-deck" d="M133 135V82h125v53M178 82V54h41v28"></path><path class="pod-crane" d="M297 135V52h57v54m0 0-10 13h20Z"></path><path class="pod-wave" d="M18 202q25-13 50 0t50 0t50 0t50 0t50 0t50 0t50 0"></path><path class="pod-strut" d="M240 196v20"></path><ellipse class="pod-motor" cx="242" cy="225" rx="29" ry="11"></ellipse><path class="pod-prop-line" d="M207 211v28"></path></svg><span class="pod-tag">科考与作业船 · 精确操纵</span><h2>更容易在目标旁作业</h2><p>推力方向可调；配合定位、控制和其他推进器抵抗风浪。</p><div class="pod-example">国产 2 MW S-POD：<br/><b>“珠海云”“同济”号应用</b></div></section></div><div class="pod-banner">当船需要<strong>灵活操纵、紧凑布置或特殊作业</strong>，吊舱更容易发挥优势。</div></div><div class="pod-citations"><span>资料依据</span><a href="https://www.cssc.net.cn/n135/n171/n179/c21170/content.html" target="_blank" rel="noreferrer">中国船舶 · 国产大型邮轮配置 ↗</a><a href="https://new.abb.com/news/detail/67897/system-health-management-boosts-intelligence-of-chinese-polar-research-vessel" target="_blank" rel="noreferrer">ABB · 雪龙 2 的电力推进系统 ↗</a><a href="https://www.stdaily.com/web/gdxw/2025-12/02/content_441042.html" target="_blank" rel="noreferrer">S-POD 系列 · 国产化与实船应用 ↗</a></div></div><footer>轮船电动吊舱推进<span>6 / 8</span></footer></section>
+<section class="pod-export-slide" id="ship-pod-tradeoffs" hidden><div class="pod-export-top">电机与拖动 · 绪论 <span>16:9 · ELI5</span></div><div class="pod-lesson pod-view-tradeoffs"><div class="pod-eyebrow"><span></span>MARINE ELECTRIC PROPULSION <b>轮船电动吊舱 · ELI5</b></div><header class="pod-heading"><h1>好用，也要过三道关</h1><p>大船选推进系统，要把整条能量链一起看</p></header><div class="pod-main"><div class="pod-card-grid pod-challenges"><section class="pod-card"><span class="pod-challenge-icon" aria-hidden="true">≈</span><h2>水下关</h2><p>海水会腐蚀，轴在转，舱体必须密封；轴承、冷却都要可靠。</p><div class="pod-example">少了长轴系和齿轮环节，<br/><b>水下设备仍需维护。</b></div></section><section class="pod-card"><span class="pod-challenge-icon" aria-hidden="true">⚡</span><h2>供电关</h2><p>发电、配电、驱动、保护要配合；失电时，推进也会受影响。</p><div class="pod-example">要看整套系统的冗余，<br/><b>双吊舱不自动等于双保障。</b></div></section><section class="pod-card"><span class="pod-challenge-icon" aria-hidden="true">↗</span><h2>匹配关</h2><p>船型、速度、桨和航线要一起设计；水流、空化和阻力都影响效率。</p><div class="pod-example">节能看船型与运行工况，<br/><b>不能给所有船同一个百分比。</b></div></section></div><div class="pod-banner">带走一句话：<strong>把电机放到桨旁边，再让这只“脚”转方向。</strong></div><p class="pod-fineprint">以上是系统工程层面的原理归纳，不是这款国产产品存在故障的判断。低噪声、节能和定位效果均需整船验证。</p></div><div class="pod-citations"><span>资料依据</span><a href="https://www.abb.com/global/en/industries/marine/solutions/marine-electric-propulsion/azipod/azipod-services" target="_blank" rel="noreferrer">ABB · 维护与设备健康管理 ↗</a><a href="https://www.siemens-energy.com/global/en/home/products-services/product/podded-propulsion.html" target="_blank" rel="noreferrer">Siemens Energy · 电动吊舱 ↗</a><a href="https://new.abb.com/news/detail/67897/system-health-management-boosts-intelligence-of-chinese-polar-research-vessel" target="_blank" rel="noreferrer">ABB · 雪龙 2 的电力推进系统 ↗</a></div></div><footer>轮船电动吊舱推进<span>7 / 8</span></footer></section>
+<section class="pod-export-slide" id="ship-pod-sources" hidden><div class="pod-export-top">电机与拖动 · 绪论 <span>16:9 · ELI5</span></div><div class="pod-lesson pod-view-sources"><div class="pod-eyebrow"><span></span>MARINE ELECTRIC PROPULSION <b>轮船电动吊舱 · ELI5</b></div><header class="pod-heading"><h1>继续探索 · 资料入口</h1><p>原理、国产进展、实船案例，均可回到原文核对</p></header><div class="pod-main"><div class="pod-source-grid"><a href="https://www.sastind.gov.cn/n10086200/n10086331/c10580560/content.html" target="_blank" rel="noreferrer"><span>01 ↗</span><h2>中国船舶 · 10 MW 全负荷试验</h2><p>国产首台套、T 型、全负荷动态试验成功。</p><small>国防科工局转载中国船舶｜2024-07-20</small></a><a href="https://www.stdaily.com/web/gdxw/2025-12/02/content_441042.html" target="_blank" rel="noreferrer"><span>02 ↗</span><h2>S-POD 系列 · 国产化与实船应用</h2><p>系列发布、100% 国产化；2 MW 产品实船应用。</p><small>科技日报｜2025-12-02</small></a><a href="https://www.abb.com/global/en/industries/marine/solutions/marine-electric-propulsion/azipod" target="_blank" rel="noreferrer"><span>03 ↗</span><h2>ABB · Azipod 工作原理</h2><p>水下电机、直接驱动、360° 全回转。</p><small>制造商产品资料｜查阅于 2026-09-13</small></a><a href="https://www.siemens-energy.com/global/en/home/products-services/product/podded-propulsion.html" target="_blank" rel="noreferrer"><span>04 ↗</span><h2>Siemens Energy · 电动吊舱</h2><p>永磁同步电机、单桨与双桨产品方案。</p><small>制造商产品资料｜查阅于 2026-09-13</small></a><a href="https://www.kongsbergmaritime.com/products/propulsors-and-propulsion-systems/thrusters/direct-electric-drive/" target="_blank" rel="noreferrer"><span>05 ↗</span><h2>Kongsberg · 直接电驱与轮缘驱动</h2><p>吊舱与轮缘驱动是不同结构路线。</p><small>制造商产品资料｜查阅于 2026-09-13</small></a><a href="https://www.cssc.net.cn/n135/n171/n179/c21170/content.html" target="_blank" rel="noreferrer"><span>06 ↗</span><h2>中国船舶 · 国产大型邮轮配置</h2><p>柴油发电供电；两台 16.8 MW 吊舱推进器。</p><small>中国船舶集团｜建造阶段资料</small></a><a href="https://new.abb.com/news/detail/67897/system-health-management-boosts-intelligence-of-chinese-polar-research-vessel" target="_blank" rel="noreferrer"><span>07 ↗</span><h2>ABB · 雪龙 2 的电力推进系统</h2><p>双吊舱、双向破冰和设备健康监测。</p><small>系统供应商技术文章｜2020-09-24</small></a><a href="https://www.yara.com/news-and-media/media-library/press-kits/yara-birkeland-press-kit/" target="_blank" rel="noreferrer"><span>08 ↗</span><h2>Yara · 电池动力货船资料</h2><p>Yara Birkeland 是电池动力船；不据此认定吊舱结构。</p><small>船东新闻资料包｜查阅于 2026-09-13</small></a><a href="https://www.abb.com/global/en/industries/marine/solutions/marine-electric-propulsion/azipod/azipod-services" target="_blank" rel="noreferrer"><span>09 ↗</span><h2>ABB · 维护与设备健康管理</h2><p>定期维护、干坞服务和状态监测仍然必要。</p><small>制造商服务资料｜查阅于 2026-09-13</small></a></div></div><p class="pod-research-note">资料查阅：2026-09-13 · 原创教学简化图 · <a href="https://www.bilibili.com/video/BV1FkvQefEKX/" target="_blank" rel="noreferrer">观看用户提供的视频 ↗</a></p></div><footer>轮船电动吊舱推进<span>8 / 8</span></footer></section></main>
+<nav aria-label="讲解翻页"><button id="prev" aria-label="上一页">←</button><select id="page" aria-label="选择页面"><option value="0">1. 大船的水下电动脚</option><option value="1">2. 电从哪里来？</option><option value="2">3. 脚一转，推力就转</option><option value="3">4. 会转向，不一定是电动吊舱</option><option value="4">5. 国产 10 兆瓦，突破在哪里？</option><option value="5">6. 哪些船最喜欢它？</option><option value="6">7. 好用，也要过三道关</option><option value="7">8. 继续探索 · 资料入口</option></select><button id="next" aria-label="下一页">→</button><button id="full">全屏</button><span id="status" aria-live="polite"></span></nav>
+<script>
+const slides=[...document.querySelectorAll('.pod-export-slide')],main=document.querySelector('main'),picker=document.querySelector('#page');let index=0;
+function scale(){document.documentElement.style.setProperty('--scale',Math.min(main.clientWidth/1600,main.clientHeight/900))}
+function show(next){index=Math.max(0,Math.min(slides.length-1,next));slides.forEach((slide,i)=>{slide.hidden=i!==index});picker.value=index;document.querySelector('#prev').disabled=index===0;document.querySelector('#next').disabled=index===slides.length-1;document.querySelector('#status').textContent=(index+1)+' / '+slides.length;scale()}
+function go(next){show(next);if(location.hash!=='#'+slides[index].id)location.hash=slides[index].id}
+function fromHash(){const found=slides.findIndex(s=>s.id===location.hash.slice(1));show(found<0?0:found)}
+async function fullscreen(){if(document.fullscreenElement){await document.exitFullscreen();return}if(document.body.classList.contains('full')){document.body.classList.remove('full');scale();return}document.body.classList.add('full');try{await document.documentElement.requestFullscreen()}catch{}scale()}
+document.querySelector('#prev').onclick=()=>go(index-1);document.querySelector('#next').onclick=()=>go(index+1);picker.onchange=()=>go(Number(picker.value));document.querySelector('#full').onclick=fullscreen;
+addEventListener('keydown',e=>{if(e.target.closest('a,button,select,input,textarea'))return;if(['ArrowRight','ArrowDown','PageDown',' '].includes(e.key)){e.preventDefault();go(index+1)}else if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){e.preventDefault();go(index-1)}else if(e.key==='Home'){e.preventDefault();go(0)}else if(e.key==='End'){e.preventDefault();go(slides.length-1)}else if(e.key.toLowerCase()==='f'){e.preventDefault();fullscreen()}else if(e.key==='Escape'){document.body.classList.remove('full');scale()}});
+let touch;main.addEventListener('touchstart',e=>{if(e.target.closest('a'))return;touch=e.touches[0]&&{x:e.touches[0].clientX,y:e.touches[0].clientY}},{passive:true});main.addEventListener('touchend',e=>{const end=e.changedTouches[0];if(touch&&end){const dx=end.clientX-touch.x,dy=end.clientY-touch.y;if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)*1.5)go(index+(dx<0?1:-1))}touch=null},{passive:true});
+addEventListener('hashchange',fromHash);addEventListener('resize',scale);document.addEventListener('fullscreenchange',()=>{document.body.classList.toggle('full',!!document.fullscreenElement);scale()});fromHash();
+</script></body></html>

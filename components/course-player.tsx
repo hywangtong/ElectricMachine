@@ -26,6 +26,7 @@ import { chapters, slides } from '@/content/course';
 import { ChapterGalaxy } from '@/components/chapter-galaxy';
 import { ElectrificationTrend } from '@/components/electrification-trend';
 import { EvLesson } from '@/components/ev-roadmap';
+import { ShipPodExplainer } from '@/components/ship-pod-explainer';
 const number = (n: number) => String(n).padStart(2, '0');
 
 export default function CoursePlayer() {
@@ -454,6 +455,8 @@ export default function CoursePlayer() {
                         page={slide.page}
                         onNavigate={jump}
                       />
+                    ) : slide.kind === 'pod' ? (
+                      <ShipPodExplainer view={slide.view} />
                     ) : slide.kind === 'assessment' ? (
                       <div className="assessment-body">
                         <div className="eyebrow">
