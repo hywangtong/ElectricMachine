@@ -219,6 +219,13 @@ export type Slide =
     }
   | {
       id: string;
+      kind: 'embed';
+      title: string;
+      chapterId: string;
+      embedUrl: string;
+    }
+  | {
+      id: string;
       kind: 'trend';
       title: string;
       chapterId: string;
@@ -349,6 +356,13 @@ export const slides: Slide[] = [
             chapterId: chapter.id,
           }),
         ),
+        {
+          id: 'introduction-ship-integrated-power',
+          kind: 'embed',
+          title: '舰船综合电力系统 ELI5',
+          chapterId: chapter.id,
+          embedUrl: '/ship-power-eli5.html',
+        },
       );
     }
 

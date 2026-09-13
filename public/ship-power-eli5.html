@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>一艘船，一座共享电厂</title>
+<style>
+:root{color-scheme:light;--ink:#163747;--blue:#087daa;--green:#19835e;--gold:#b26a09}
+*{box-sizing:border-box}body{margin:0;background:#f3f7f8;color:var(--ink);font-family:system-ui,"Microsoft YaHei",sans-serif}main{max-width:1100px;margin:auto;padding:40px 24px}header p{color:#52717e}h1{font-size:clamp(32px,5vw,56px);margin:12px 0}h2{font-size:24px}p{line-height:1.7}.eyebrow{letter-spacing:3px;font-size:14px}button{font:inherit;padding:12px 18px;border:1px solid #b9ced6;border-radius:24px;background:white;color:var(--ink);cursor:pointer}button[aria-pressed=true]{background:var(--ink);color:white;border-color:var(--ink)}button:focus-visible,a:focus-visible{outline:3px solid var(--gold);outline-offset:4px}.controls{display:flex;flex-wrap:wrap;gap:10px;margin:24px 0}.picture{background:white;border:1px solid #d7e5e9;border-radius:24px;padding:14px;overflow:hidden}svg{display:block;width:100%;height:auto}svg text{font-family:inherit;fill:var(--ink);font-size:19px}svg .small{font-size:15px;fill:#52717e}.wire{fill:none;stroke:var(--blue);stroke-width:6;stroke-linecap:round}.energy{stroke-dasharray:12 13;animation:flow 3s linear infinite}.off{opacity:.18}.storage-wire{stroke:var(--green)}.fault{stroke:#b93c3c;stroke-dasharray:7 9}.node{fill:#eef6f9;stroke:#bbd5de;stroke-width:2}.caption{display:grid;grid-template-columns:70px 1fr;gap:16px;align-items:center;padding:20px 6px}.caption strong{font-size:22px}.caption p{margin:6px 0}.emoji{font-size:48px}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}.card{background:white;padding:24px;border-radius:18px;border:1px solid #d7e5e9}.card .emoji{display:block}.card h2{margin:12px 0}.card p{margin:0}.note{font-size:13px;color:#52717e}details{margin-top:28px;background:#e8f0f3;padding:20px;border-radius:16px}summary{cursor:pointer;font-weight:700}li{line-height:1.9;margin:8px 0}a{color:#09658c}footer{padding:24px 0;color:#52717e;font-size:13px}@keyframes flow{to{stroke-dashoffset:-100}}@media(max-width:700px){main{padding:24px 14px}.cards{grid-template-columns:1fr}.picture{padding:3px}.caption{padding:16px 10px;grid-template-columns:45px 1fr}.emoji{font-size:36px}}@media(prefers-reduced-motion:reduce){.energy{animation:none}}
+</style>
+<main>
+<header><div class="eyebrow">ELI5 · 舰船综合电力系统</div><h1>一艘船，一座共享电厂。</h1><p>先把能量变成电，再分给螺旋桨、雷达和灯。中压直流，是其中一种主干送电方式。</p></header>
+<div class="controls" role="group" aria-label="选择用电场景">
+<button data-mode="cruise" aria-pressed="true">🚢 平稳航行</button><button data-mode="sprint" aria-pressed="false">🌊 加速航行</button><button data-mode="pulse" aria-pressed="false">⚡ 短时大负载</button><button data-mode="fault" aria-pressed="false">🛟 一条供电支路故障</button>
+</div>
+<section class="picture" aria-label="供电原理图">
+<svg viewBox="0 0 1000 560" role="img" aria-labelledby="diagram-title diagram-desc">
+<title id="diagram-title">共享发电、双路配电与储能</title><desc id="diagram-desc">发动机带动发电机，经整流送入直流主干。电经变换器分给推进电机、任务设备和生活设备，储能可以补充短时功率。图为教学示意。</desc>
+<path d="M70 430 H930 L840 510 H170 Z" fill="#dcecf2"/><path d="M45 527 Q95 509 145 527 T345 527 T545 527 T745 527 T945 527" fill="none" stroke="#a4cbdc" stroke-width="5"/>
+<path d="M260 128 H345 V210 H865 M345 210 V370 H865" class="wire energy"/>
+<path d="M460 210 V245 M460 325 V370" class="wire energy" id="motor-wire"/>
+<path d="M680 210 V245" class="wire energy" id="task-primary"/>
+<path d="M680 370 V325" class="wire energy off" id="task-backup"/>
+<path d="M865 210 V245 M865 325 V370" class="wire energy"/>
+<path d="M570 128 H680 V210" class="wire storage-wire energy off" id="storage-wire"/>
+<rect x="85" y="78" width="180" height="105" rx="16" class="node"/><text x="175" y="109" text-anchor="middle">⚙ 发电机组</text><text x="175" y="137" text-anchor="middle" class="small">发动机 → 发电机</text><text x="175" y="163" text-anchor="middle" class="small">再经整流送出直流电</text>
+<rect x="415" y="78" width="155" height="100" rx="16" fill="#e8f5ec" stroke="#98c8ab" stroke-width="2"/><text x="492" y="112" text-anchor="middle">🔋 储能</text><text x="492" y="145" text-anchor="middle" class="small" id="storage-label">平时慢慢充</text>
+<text x="362" y="199" class="small">直流主干 A</text><text x="362" y="397" class="small">直流主干 B · 备用路径</text>
+<rect x="385" y="245" width="150" height="80" rx="12" class="node"/><text x="460" y="276" text-anchor="middle">推进变流器</text><text x="460" y="304" text-anchor="middle" class="small">调节电机转速</text>
+<rect x="605" y="245" width="150" height="80" rx="12" class="node"/><text x="680" y="276" text-anchor="middle">任务供电变换器</text><text x="680" y="304" text-anchor="middle" class="small">匹配设备需要</text>
+<rect x="790" y="245" width="150" height="80" rx="12" class="node"/><text x="865" y="276" text-anchor="middle">生活供电变换器</text><text x="865" y="304" text-anchor="middle" class="small">可送出交流电</text>
+<text x="460" y="443" text-anchor="middle" font-size="35">🌀</text><text x="460" y="477" text-anchor="middle">电机 → 螺旋桨</text><text x="680" y="443" text-anchor="middle" font-size="35">📡</text><text x="680" y="477" text-anchor="middle">雷达等任务设备</text><text x="865" y="443" text-anchor="middle" font-size="35">💡</text><text x="865" y="477" text-anchor="middle">照明、空调等</text>
+<rect x="90" y="265" width="205" height="105" rx="16" fill="#163747"/><text x="192" y="300" text-anchor="middle" style="fill:white">🧠 能量管理</text><text x="192" y="332" text-anchor="middle" style="fill:#d7e5e9;font-size:16px">决定谁发电、谁用电</text><text x="192" y="355" text-anchor="middle" style="fill:#d7e5e9;font-size:16px">保护系统负责快速隔离</text>
+</svg>
+<div class="caption" aria-live="polite"><div class="emoji" id="scenario-icon">🚢</div><div><strong id="scenario-title">大家从同一套电源取电。</strong><p id="scenario-copy">螺旋桨转，雷达工作，灯亮着；管理系统协调发电和用电，储能可以充电。</p></div></div>
+</section>
+<p class="note">概念演示：线条粗细不代表实测功率。双路连接、储能位置和切换结果取决于实际设计；不是某艘舰的接线图。</p>
+<section class="cards">
+<article class="card"><span class="emoji">🍲</span><h2>综合＝一起分饭</h2><p>从“推进一口锅、设备一口锅”，变成共享电源。谁需要多少，按任务协调。</p></article>
+<article class="card"><span class="emoji">🚚</span><h2>中压＝大车运货</h2><p>送同样的功率，提高电压就能减少电流。电缆负担更轻，绝缘要求更高。</p></article>
+<article class="card"><span class="emoji">➡️</span><h2>直流＝不用对拍子</h2><p>发电侧先整流，主干不要求各发电机交流频率同步。末端仍可变成交流。</p></article>
+</section>
+<details><summary>再往里看一层：为何难？</summary><p>共享也会相互影响。大负载突然启动，可能拉低电压；短路时，直流电流没有交流那样自然的过零机会。要让保护、变换器、储能和控制协同工作。</p><p>全电推进描述能量怎样到螺旋桨，不代表只用电池，也不代表一定用核动力。综合电力系统可以采用交流主干，也可以采用直流主干。</p></details>
+<details><summary>公开资料 · 点击原始来源</summary><ol>
+<li><a href="https://opaj.napstic.cn/periodicalArticle/0120241003019221">马伟明、肖飞、马凡（2024）：舰船综合电力系统研究进展与应用建议</a> — 系统全貌与共性技术；本次读取到摘要。</li>
+<li><a href="https://dgjsxb.ces-transaction.com/CN/abstract/abstract9867.shtml">杨亚宇等（2024）：系统结构和电力电子变换器</a> — 主干、整流器、推进变流器和 DC–DC 变换器。</li>
+<li><a href="https://dgjsxb.ces-transaction.com/CN/Y2024/V39/I23/7341">杨亚宇等（2024）：故障保护管理技术</a> — 保护、隔离与重构。</li>
+<li><a href="https://www.doerry.org/norbert/papers/090106usna-ngips-final.pdf">Norbert Doerry（2009）：Next Generation Integrated Power Systems for the Future Fleet</a> — 架构、分区与效率取舍。</li>
+<li><a href="https://www.nsrp.org/wp-content/uploads/2016/11/1-MVDC-Public.pdf">NAVSEA / NSRP（2015）：Medium Voltage DC Power for the Future Fleet</a> — 直流供电动机与概念架构；历史路线资料。</li>
+<li><a href="https://www.onr.navy.mil/organization/departments/code-33/power-and-energy-focus-area/electric-power-components-and-systems">美国海军研究办公室：Electric Power Components and Systems</a> — 储能、功率变换和控制的公开研究方向。</li>
+</ol></details>
+<footer>依据公开资料制作的教学类比。B 站原视频页面未能读取，未核对其逐条说法；未读取视频所称参考书籍全文。</footer>
+</main>
+<script>
+const scenes={
+cruise:{icon:'🚢',title:'大家从同一套电源取电。',copy:'螺旋桨转，雷达工作，灯亮着；管理系统协调发电和用电，储能可以充电。',storage:'平时慢慢充',motor:6},
+sprint:{icon:'🌊',title:'想跑快，推进就要多吃“电饭”。',copy:'管理系统增加可用发电功率，并协调其他负载。总功率有限，不能让所有设备无限加餐。',storage:'按需求协调',motor:10},
+pulse:{icon:'⚡',title:'突然要一大口，储能先帮忙。',copy:'储能经变换器补充短时功率，缓冲对发电机的冲击；之后再充电。能供多久取决于储能容量和功率。',storage:'短时补充功率',motor:6},
+fault:{icon:'🛟',title:'关掉坏支路，再找可用路线。',copy:'保护隔离故障；如果备用路径完好、容量足够，就能恢复供电。必要时减少次要负载，优先保住重要设备。',storage:'可提供过渡支撑',motor:6}
+};
+function setMode(mode){const scene=scenes[mode];document.querySelectorAll('[data-mode]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.mode===mode)));document.getElementById('scenario-icon').textContent=scene.icon;document.getElementById('scenario-title').textContent=scene.title;document.getElementById('scenario-copy').textContent=scene.copy;document.getElementById('storage-label').textContent=scene.storage;document.getElementById('motor-wire').style.strokeWidth=scene.motor;document.getElementById('storage-wire').classList.toggle('off',mode!=='pulse'&&mode!=='fault');document.getElementById('task-primary').classList.toggle('fault',mode==='fault');document.getElementById('task-primary').classList.toggle('off',mode==='fault');document.getElementById('task-backup').classList.toggle('off',mode!=='fault');}
+document.querySelectorAll('[data-mode]').forEach(button=>button.addEventListener('click',()=>setMode(button.dataset.mode)));
+</script>
+</html>

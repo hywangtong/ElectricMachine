@@ -267,6 +267,8 @@ export default function CoursePlayer() {
                     : '章节导入'
                   : slide.kind === 'video'
                     ? '视频导入'
+                    : slide.kind === 'embed'
+                      ? '互动图解'
                     : slide.kind === 'assessment'
                       ? '考核方案'
                       : slide.kind === 'question'
@@ -558,6 +560,14 @@ export default function CoursePlayer() {
                             </p>
                           </section>
                         </div>
+                      </div>
+                    ) : slide.kind === 'embed' ? (
+                      <div className="embed-body">
+                        <iframe
+                          src={slide.embedUrl}
+                          title={slide.title}
+                          className="embed-frame"
+                        />
                       </div>
                     ) : slide.kind === 'video' ? (
                       <div className="video-body">
