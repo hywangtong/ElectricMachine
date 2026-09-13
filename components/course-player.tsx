@@ -38,7 +38,7 @@ type IntroTabSlide = Extract<Slide, { kind: 'ev' | 'trend' }>;
 const introTabAnchorId = 'introduction-electrification-trend';
 const isIntroTabbedSlide = (candidate: Slide) =>
   candidate.id === introTabAnchorId ||
-  (candidate.kind === 'ev' && candidate.page !== 'memory');
+  candidate.kind === 'ev';
 const courseSlides = slides.filter(
   (candidate) =>
     !isIntroTabbedSlide(candidate) || candidate.id === introTabAnchorId,
@@ -48,8 +48,7 @@ const findIntroTab = (id: string): IntroPage | undefined => {
   const candidate = slides.find((item) => item.id === id);
   if (candidate?.id === introTabAnchorId) return 'trend';
   if (
-    candidate?.kind === 'ev' &&
-    candidate.page !== 'memory'
+    candidate?.kind === 'ev'
   )
     return candidate.page;
   return undefined;

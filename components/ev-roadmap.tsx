@@ -185,13 +185,6 @@ export function EvRouteNav({
       className={'ev-route-nav' + (className ? ' ' + className : '')}
       aria-label="绪论电动化内容"
     >
-      <button
-        onClick={() => onNavigate('introduction-electrification-trend')}
-        aria-current={page === 'trend' ? 'page' : undefined}
-        style={{ '--tab-color': '#a7653b' } as React.CSSProperties}
-      >
-        电动化浪潮
-      </button>
       {routes.map((route) => (
         <button
           key={route.id}
@@ -216,6 +209,13 @@ export function EvRouteNav({
         style={{ '--tab-color': '#76e7ff' } as React.CSSProperties}
       >
         横向对比
+      </button>
+      <button
+        onClick={() => onNavigate('introduction-ev-memory')}
+        aria-current={page === 'memory' ? 'page' : undefined}
+        style={{ '--tab-color': '#76e7ff' } as React.CSSProperties}
+      >
+        五句话简述
       </button>
     </nav>
   );
