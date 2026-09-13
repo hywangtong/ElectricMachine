@@ -1,71 +1,284 @@
 <!doctype html>
 <html lang="zh-CN">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>为什么电机中要放铁心？</title>
-  <link rel="stylesheet" href="/magnetic-circuit-lesson.css" />
-</head>
-<body>
-<main class="lesson">
-  <header class="lesson-head">
-    <div class="eyebrow">磁路 / 05 铁磁材料 · ELI5</div>
-    <h1>为什么电机中要放铁心？</h1>
-    <p class="lead">同样的线圈、近似同样的励磁：空气像“难走的路”，软磁铁心像给磁通铺了一条更容易通过的主干道。</p>
-  </header>
-  <section class="grid-2 equal">
-    <article class="card hero-card">
-      <div class="compare-title"><h2>空气磁路 vs. 铁心磁路</h2><span class="tag">同样 H，看 B 的差别</span></div>
-      <svg viewBox="0 0 760 455" role="img" aria-label="相同线圈条件下，空气中磁通分散，铁心中磁通集中">
-        <defs><marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#397f73"/></marker></defs>
-        <text x="150" y="35" text-anchor="middle" font-size="25">空气磁路</text>
-        <text x="575" y="35" text-anchor="middle" font-size="25">铁心磁路</text>
-        <g transform="translate(15 60)">
-          <g fill="none" stroke="#b26839" stroke-width="5"><ellipse cx="140" cy="135" rx="25" ry="70"/><ellipse cx="160" cy="135" rx="25" ry="70"/><ellipse cx="180" cy="135" rx="25" ry="70"/></g>
-          <path d="M195 135C275 65 315 65 340 135C315 205 275 205 195 135" fill="none" stroke="#6ea99c" stroke-width="3" marker-end="url(#a2)"/>
-          <path d="M195 135C255 100 285 100 305 135C285 170 255 170 195 135" fill="none" stroke="#8bbcb2" stroke-width="3" marker-end="url(#a2)"/>
-          <path d="M195 135C270 20 345 35 370 135" fill="none" stroke="#b7d7d0" stroke-width="2"/>
-          <text x="140" y="260" text-anchor="middle" font-size="18" class="muted">磁通分散</text>
-        </g>
-        <g transform="translate(405 60)">
-          <path d="M80 55H300V215H80Z" fill="none" stroke="#bdcbc7" stroke-width="55" stroke-linejoin="round"/>
-          <g fill="none" stroke="#b26839" stroke-width="5"><ellipse cx="70" cy="135" rx="24" ry="70"/><ellipse cx="88" cy="135" rx="24" ry="70"/><ellipse cx="106" cy="135" rx="24" ry="70"/></g>
-          <path d="M115 58H270V205H115Z" fill="none" stroke="#397f73" stroke-width="8" stroke-linejoin="round" marker-end="url(#a2)"/>
-          <path d="M130 72H255V190H130Z" fill="none" stroke="#6aa093" stroke-width="5" stroke-linejoin="round"/>
-          <text x="190" y="260" text-anchor="middle" font-size="18" class="muted">主磁通集中在预定路径</text>
-        </g>
-        <line x1="380" y1="55" x2="380" y2="420" stroke="#d9e3df" stroke-width="2" stroke-dasharray="7 7"/>
-      </svg>
-    </article>
-    <div class="stack">
-      <article class="card">
-        <h2>高磁导率：同样 H，得到更大的 B</h2>
-        <div class="formula-row" style="margin-top:8px">
-          <div class="formula emphasis">μ = B/H</div>
-          <div class="formula warn">μ<sub>Fe</sub> ≫ μ<sub>0</sub><small>铁磁材料的 μ 还会随工作点变化</small></div>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>为什么电机中要放铁心？</title>
+    <link rel="stylesheet" href="/magnetic-circuit-lesson.css" />
+    <link rel="stylesheet" href="/magnetic-iron-core.css" />
+    <script type="module" src="/magnetic-iron-core.js"></script>
+  </head>
+  <body>
+    <main class="lesson" id="lesson">
+      <header class="lesson-head">
+        <div class="eyebrow">磁路 / 05 铁磁材料 · ELI5</div>
+        <h1>为什么电机中要放铁心？</h1>
+        <p class="lead">
+          同样的线圈、近似同样的励磁：空气像“难走的路”，软磁铁心像给磁通铺了一条更容易通过的主干道。
+        </p>
+      </header>
+      <section class="grid-2 equal">
+        <article class="card hero-card">
+          <div class="compare-title">
+            <h2>空气磁路 vs. 铁心磁路</h2>
+            <span class="tag">同样 H，看 B 的差别</span>
+          </div>
+          <svg
+            viewBox="0 0 680 480"
+            role="img"
+            aria-label="上图：开放空间中的线圈，磁力线穿过线圈内部并在空气中散开后闭合。下图：同样六匝铜线绕在闭合铁心左柱，主磁通沿铁心顺时针闭合，背面绕组被铁心遮挡。"
+          >
+            <defs>
+              <linearGradient id="iron">
+                <stop stop-color="#dce7e3" />
+                <stop offset="1" stop-color="#8da9a1" />
+              </linearGradient>
+              <linearGradient id="copper" x1="0" x2="0" y1="0" y2="1">
+                <stop stop-color="#e5a369" />
+                <stop offset=".5" stop-color="#b9652e" />
+                <stop offset="1" stop-color="#e5a369" />
+              </linearGradient>
+              <marker
+                id="flux-head"
+                viewBox="0 0 10 10"
+                refX="10"
+                refY="5"
+                markerWidth="13"
+                markerHeight="13"
+                markerUnits="userSpaceOnUse"
+                orient="auto"
+              >
+                <path d="M0 0L10 5L0 10Z" fill="#237d6c" />
+              </marker>
+              <marker
+                id="air-head"
+                viewBox="0 0 10 10"
+                refX="10"
+                refY="5"
+                markerWidth="10"
+                markerHeight="10"
+                markerUnits="userSpaceOnUse"
+                orient="auto"
+              >
+                <path d="M0 0L10 5L0 10Z" fill="#6a9e91" />
+              </marker>
+              <g
+                id="winding-back"
+                fill="none"
+                stroke="#935b38"
+                stroke-width="5"
+                stroke-linecap="round"
+              >
+                <path
+                  d="M38 40C46 24-46 32-38 32 M38 24C46 8-46 16-38 16 M38 8C46-8-46 0-38 0 M38-8C46-24-46-16-38-16 M38-24C46-40-46-32-38-32 M38-40C46-56-46-48-38-48"
+                />
+              </g>
+              <g
+                id="winding-front"
+                fill="none"
+                stroke="url(#copper)"
+                stroke-width="6"
+                stroke-linecap="round"
+              >
+                <path
+                  d="M-38 48C-46 61 46 61 38 40 M-38 32C-46 45 46 45 38 24 M-38 16C-46 29 46 29 38 8 M-38 0C-46 13 46 13 38-8 M-38-16C-46-3 46-3 38-24 M-38-32C-46-19 46-19 38-40"
+                />
+              </g>
+            </defs>
+            <text x="20" y="28" class="diagram-title">开放空间中的磁场</text>
+            <text x="660" y="28" text-anchor="end" class="muted">空气磁路</text>
+            <!-- Every field line passes through the coil and closes in the air. -->
+            <g fill="none" stroke="#8bb6aa" stroke-width="2.5">
+              <path
+                d="M190 128H405C455 128 455 83 405 83H190C140 83 140 128 190 128Z"
+              />
+              <path
+                d="M175 140H420C510 140 510 58 420 58H175C85 58 85 140 175 140Z"
+              />
+              <path
+                d="M190 152H405C455 152 455 197 405 197H190C140 197 140 152 190 152Z"
+              />
+              <path
+                d="M175 140H420C510 140 510 222 420 222H175C85 222 85 140 175 140Z"
+              />
+            </g>
+            <use
+              href="#winding-back"
+              transform="translate(300 140) rotate(90)"
+              opacity=".65"
+            />
+            <use
+              href="#winding-front"
+              transform="translate(300 140) rotate(90)"
+            />
+            <path
+              d="M252 102V80H215 M348 102V80H385"
+              fill="none"
+              stroke="#b9652e"
+              stroke-width="4"
+              stroke-linecap="round"
+            />
+            <g stroke="#6a9e91" stroke-width="3" marker-end="url(#air-head)">
+              <path d="M360 128H400 M360 152H400 M343 58H303 M343 222H303" />
+            </g>
+            <text x="520" y="128" class="diagram-label">磁力线散开</text>
+            <text x="520" y="157" class="diagram-label muted">
+              在空气中闭合
+            </text>
+            <line
+              x1="20"
+              y1="249"
+              x2="660"
+              y2="249"
+              stroke="#d9e3df"
+              stroke-dasharray="6 7"
+            />
+            <text x="20" y="279" class="diagram-title">有闭合铁心的磁场</text>
+            <text x="660" y="279" text-anchor="end" class="muted">
+              铁心磁路
+            </text>
+            <!-- Rear wire first, then iron, then front wire: same layering as 04. -->
+            <use href="#winding-back" transform="translate(215 376)" />
+            <path
+              d="M226 313H516V436H226Z"
+              fill="none"
+              stroke="#6f8e85"
+              stroke-width="46"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M215 324H505V447H215Z"
+              fill="none"
+              stroke="url(#iron)"
+              stroke-width="46"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M215 324H505V447H215Z"
+              fill="none"
+              stroke="#537c70"
+              stroke-width="2"
+              stroke-dasharray="6 7"
+            />
+            <use href="#winding-front" transform="translate(215 376)" />
+            <path
+              d="M177 424H144V448H105 M177 328H144V311H105"
+              fill="none"
+              stroke="#b9652e"
+              stroke-width="4"
+              stroke-linecap="round"
+            />
+            <g
+              fill="none"
+              stroke="#237d6c"
+              stroke-width="5"
+              marker-end="url(#flux-head)"
+            >
+              <path d="M313 324H401 M505 357V408 M401 447H313 M215 405V350" />
+            </g>
+            <text x="360" y="377" text-anchor="middle" class="diagram-title">
+              闭合铁心
+            </text>
+            <text x="360" y="408" text-anchor="middle" class="flux-label">
+              主磁通 Φ
+            </text>
+            <text x="548" y="377" class="diagram-label">沿铁心</text>
+            <text x="548" y="406" class="diagram-label">集中、闭合</text>
+          </svg>
+          <p class="diagram-note">
+            铜色为绕组，青绿为磁力线；两图均为示意，未按 B 的比例绘制。
+          </p>
+        </article>
+        <div class="stack">
+          <article class="card">
+            <h2>高磁导率：同样 H，得到更大的 B</h2>
+            <div class="formula-row" style="margin-top: 8px">
+              <div class="formula emphasis">μ = B/H</div>
+              <div class="formula warn">
+                μ<sub>Fe</sub> ≫ μ<sub>0</sub
+                ><small>铁磁材料的 μ 还会随工作点变化</small>
+              </div>
+            </div>
+            <p>
+              教材量级示例（不是固定常数）：铸钢约
+              <strong>10³μ₀</strong>；某些硅钢片可达约
+              <strong>6×10³～7×10³μ₀</strong>。
+            </p>
+          </article>
+          <article class="card domain-card">
+            <h2>ELI5：磁畴像很多小指南针</h2>
+            <svg
+              id="domain-diagram"
+              viewBox="0 0 650 120"
+              role="img"
+              aria-label="H 为零，磁畴箭头方向散乱；增强 H 时逐渐向右对齐，减弱时回到散乱。"
+            >
+              <rect
+                x="12"
+                y="8"
+                width="626"
+                height="104"
+                rx="15"
+                fill="#f3f7f5"
+                stroke="#c8d9d4"
+              />
+              <g
+                id="domain-arrows"
+                fill="none"
+                stroke="#7fa69d"
+                stroke-width="3.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></g>
+            </svg>
+            <div class="domain-control">
+              <label for="field-strength"
+                >磁场强度 H
+                <output id="field-value" for="field-strength"
+                  >0% · 相对强度</output
+                ></label
+              >
+              <input
+                id="field-strength"
+                type="range"
+                min="0"
+                max="100"
+                step="1"
+                value="0"
+                aria-describedby="domain-model"
+              />
+              <div class="field-scale">
+                <span>0 · 无外加场</span
+                ><span id="field-direction">外加场方向 H →</span
+                ><span>100% · 强</span>
+              </div>
+            </div>
+            <p id="domain-state" role="status">
+              H = 0：磁畴方向散乱，整体磁化相互抵消。
+            </p>
+            <p id="domain-model" class="mini">
+              可逆简化演示：只示意取向变化，不模拟磁畴壁运动、磁滞与剩磁。
+            </p>
+            <noscript
+              ><p>请启用 JavaScript，以使用 H 滑块和磁畴动画。</p></noscript
+            >
+          </article>
+          <article class="card">
+            <h2>为什么强调“软磁”材料？</h2>
+            <p>
+              <span class="tag">窄磁滞回线</span>
+              容易磁化，也容易退磁；电机磁场经常随电流和位置变化，不希望材料“死死记住”过去的磁化状态。
+            </p>
+          </article>
         </div>
-        <p>教材量级示例（不是固定常数）：铸钢约 <strong>10³μ₀</strong>；某些硅钢片可达约 <strong>6×10³～7×10³μ₀</strong>。</p>
-      </article>
-      <article class="card hero-card">
-        <h2>ELI5：磁畴像很多小指南针</h2>
-        <svg viewBox="0 0 680 190" role="img" aria-label="未磁化时磁畴方向杂乱，外加磁场后更多磁畴趋于同向">
-          <defs><marker id="d2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#397f73"/></marker></defs>
-          <rect x="25" y="35" width="240" height="115" rx="15" fill="#f3f7f5" stroke="#c8d9d4"/>
-          <rect x="415" y="35" width="240" height="115" rx="15" fill="#eef6f3" stroke="#c8d9d4"/>
-          <g stroke="#7fa69d" stroke-width="4" marker-end="url(#d2)"><path d="M65 70l35 20"/><path d="M145 115l-28 22"/><path d="M190 75l25-28"/><path d="M230 115l-35 8"/><path d="M95 120l10-38"/></g>
-          <g stroke="#397f73" stroke-width="5" marker-end="url(#d2)"><path d="M450 65h50"/><path d="M520 95h50"/><path d="M455 125h50"/><path d="M570 65h50"/><path d="M575 125h50"/></g>
-          <text x="145" y="178" text-anchor="middle" font-size="17">未磁化：方向较杂乱</text>
-          <text x="535" y="178" text-anchor="middle" font-size="17">加 H：更多趋于同向</text>
-          <text x="337" y="103" text-anchor="middle" font-size="32" fill="#b26839">H →</text>
-        </svg>
-      </article>
-      <article class="card">
-        <h2>为什么强调“软磁”材料？</h2>
-        <p><span class="tag">窄磁滞回线</span> 容易磁化，也容易退磁；电机磁场经常随电流和位置变化，不希望材料“死死记住”过去的磁化状态。</p>
-      </article>
-    </div>
-  </section>
-  <footer class="engineering"><strong>工程结论</strong><span>铁心让有限励磁获得更大的 B、Φ，并把主磁通集中到需要的位置；但“高导磁”不等于“无限导磁”——下一页就是饱和。</span></footer>
-</main>
-</body>
+      </section>
+      <footer class="engineering">
+        <strong>工程结论</strong
+        ><span
+          >铁心让有限励磁获得更大的
+          B、Φ，并把主磁通集中到需要的位置；但“高导磁”不等于“无限导磁”——下一页就是饱和。</span
+        >
+      </footer>
+    </main>
+  </body>
 </html>

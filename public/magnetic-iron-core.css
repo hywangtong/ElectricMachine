@@ -1,0 +1,113 @@
+/* Page-local layout: preserve the classroom canvas at every viewport size. */
+.lesson {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 1444px;
+  height: 744px;
+  padding: 20px 24px;
+  grid-template-rows: 94px minmax(0, 1fr) 48px;
+  transform: translate(-50%, -50%) scale(var(--lesson-scale, 1));
+}
+body {
+  overflow: hidden;
+}
+.lesson-head .eyebrow {
+  font-size: 16px;
+}
+.lesson-head h1 {
+  font-size: 36px;
+}
+.lesson-head .lead {
+  font-size: 21px;
+}
+.grid-2.equal {
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.stack {
+  grid-template-rows: 160px minmax(0, 1fr) 100px;
+}
+.card h2 {
+  font-size: 21px;
+}
+.formula {
+  padding: 6px 10px;
+}
+.hero-card {
+  grid-template-rows: auto minmax(0, 1fr) auto;
+}
+.hero-card .diagram-note {
+  margin: 0;
+  font-size: 16px;
+}
+.diagram-title {
+  font-size: 23px;
+  font-weight: 700;
+}
+.diagram-label,
+svg .muted {
+  font-size: 18px;
+}
+.flux-label {
+  fill: #237d6c;
+  font-size: 25px;
+  font-weight: 700;
+}
+.domain-card {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto auto auto;
+  gap: 4px;
+}
+.domain-card h2 {
+  font-size: 24px;
+}
+.domain-card p {
+  margin: 0;
+  font-size: 17px;
+}
+.domain-card .mini {
+  font-size: 14px !important;
+}
+.domain-control {
+  padding: 2px 12px;
+  background: #edf6f2;
+  border-radius: 10px;
+}
+.domain-control label {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 20px;
+  font-weight: 700;
+}
+.domain-control output {
+  color: #237d6c;
+  font-size: 18px;
+  font-variant-numeric: tabular-nums;
+}
+.domain-control input {
+  display: block;
+  width: 100%;
+  height: 24px;
+  margin: 2px 0;
+  accent-color: #237d6c;
+  cursor: pointer;
+  touch-action: none;
+}
+.domain-control input:focus-visible {
+  outline: 3px solid #237d6c;
+  outline-offset: 3px;
+}
+.field-scale {
+  display: flex;
+  justify-content: space-between;
+  font-size: 15px;
+  color: #55736d;
+}
+#field-direction {
+  color: #b9652e;
+}
+.engineering {
+  font-size: 18px;
+}
