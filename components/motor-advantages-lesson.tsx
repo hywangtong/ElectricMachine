@@ -546,14 +546,6 @@ const ConvenienceLesson = () => {
 
 const performanceCases = [
   {
-    id: 'bonder',
-    label: '高速固晶机',
-    title: '快速运动，也要准确到位',
-    text: '观察机构如何反复移动、到位和返回。慢动作展示不代表设备实际运行速度。',
-    src: 'https://player.bilibili.com/player.html?isOutside=true&bvid=BV1Gu411C7qs&p=1&high_quality=1&danmaku=0',
-    href: 'https://www.bilibili.com/video/BV1Gu411C7qs/',
-  },
-  {
     id: 'semiconductor',
     label: '半导体应用集锦',
     title: '高性能伺服在半导体行业中的应用',
@@ -562,12 +554,12 @@ const performanceCases = [
     href: '/videos/servo-semiconductor-applications.mp4',
   },
   {
-    id: 'research',
-    label: '校企合作成果',
-    title: '高动态伺服电机响应',
-    text: '授课教师王彤 · 校企合作成果展示。观察电机响应运动指令时的变化。',
-    src: '/videos/servo-high-dynamic-response.mp4',
-    href: '/videos/servo-high-dynamic-response.mp4',
+    id: 'bonder',
+    label: '高速固晶机',
+    title: '快速运动，也要准确到位',
+    text: '观察机构如何反复移动、到位和返回。慢动作展示不代表设备实际运行速度。',
+    src: 'https://player.bilibili.com/player.html?isOutside=true&bvid=BV1Gu411C7qs&p=1&high_quality=1&danmaku=0',
+    href: 'https://www.bilibili.com/video/BV1Gu411C7qs/',
   },
   {
     id: 'vibration',
@@ -577,10 +569,20 @@ const performanceCases = [
     src: '/videos/servo-vibration-suppression.mp4',
     href: '/videos/servo-vibration-suppression.mp4',
   },
+  {
+    id: 'research',
+    label: '校企合作成果',
+    title: '高动态伺服电机响应',
+    text: '授课教师王彤 · 校企合作成果展示。观察电机响应运动指令时的变化。',
+    src: '/videos/servo-high-dynamic-response.mp4',
+    href: '/videos/servo-high-dynamic-response.mp4',
+  },
 ] as const;
 
 const PerformanceLesson = () => {
-  const [selected, setSelected] = useState(0);
+  const [selected, setSelected] = useState(() =>
+    performanceCases.findIndex((item) => item.id === 'bonder'),
+  );
   const [expanded, setExpanded] = useState(false);
   const [videoAspectRatio, setVideoAspectRatio] = useState(16 / 9);
   const video = useRef<HTMLVideoElement>(null);
