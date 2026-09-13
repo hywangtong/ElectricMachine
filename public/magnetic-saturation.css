@@ -1,0 +1,121 @@
+.saturation-grid {
+  grid-template-columns: 1.15fr 0.85fr;
+}
+.bh-card {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto auto auto;
+  gap: 6px;
+}
+.saturation-stack {
+  grid-template-rows: auto minmax(0, 1fr);
+}
+.domains-card {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto auto auto;
+  gap: 6px;
+}
+.curve-legend {
+  display: flex;
+  gap: 18px;
+  font-size: 12px;
+  color: #55736d;
+}
+.curve-legend span::before {
+  content: '';
+  display: inline-block;
+  width: 22px;
+  margin-right: 6px;
+  vertical-align: middle;
+  border-top: 3px solid #2f7c70;
+}
+.curve-legend .ascending::before {
+  border-color: #7986ad;
+}
+.curve-legend .virgin::before {
+  border-color: #b36b39;
+  border-top-style: dashed;
+}
+.field-control {
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: #edf6f2;
+}
+.control-heading,
+.control-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 12px;
+}
+.control-heading label {
+  font-weight: 700;
+  font-size: 14px;
+}
+.control-heading output {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  color: #a95d30;
+}
+#field {
+  width: 100%;
+  height: 25px;
+  margin: 3px 0;
+  accent-color: #2f7c70;
+  cursor: ew-resize;
+}
+button {
+  border: 1px solid #b9d0c8;
+  border-radius: 7px;
+  padding: 4px 10px;
+  background: white;
+  color: #214e4a;
+  font: inherit;
+  cursor: pointer;
+}
+button:hover {
+  background: #dfeee9;
+}
+button:focus-visible,
+#field:focus-visible {
+  outline: 3px solid #b36b39;
+  outline-offset: 2px;
+}
+.card .path-status {
+  min-height: 20px;
+  font-size: 12px;
+  color: #214e4a;
+}
+.card .domain-state {
+  min-height: 40px;
+  color: #214e4a;
+  font-weight: 650;
+}
+.remanence-note {
+  padding: 9px 11px;
+  border-radius: 9px;
+  background: #fff3df;
+  border: 1px solid #ead1a5;
+}
+.remanence-note strong {
+  color: #a95d30;
+}
+.saturation-lesson .formula.emphasis small {
+  color: #cce4dc;
+}
+@media (max-width: 900px) {
+  .saturation-lesson {
+    height: 100%;
+    min-height: 0;
+  }
+  .saturation-grid {
+    grid-template-columns: 1.15fr 0.85fr;
+  }
+  .saturation-lesson .card h2 {
+    font-size: 17px;
+  }
+  .curve-legend {
+    gap: 8px;
+    font-size: 10px;
+  }
+}

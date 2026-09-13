@@ -667,15 +667,15 @@
 
 页面 ID：magnetic-circuits-saturation。地址：`/#magnetic-circuits-saturation`。类型：embed。主位置：35 / 49；磁路第 6 / 10 页。标签：已完成。
 
-已完成内容：B-H 起始磁化曲线主图，标出初始区、有效工作区、膝点和饱和区；淡色理想线性参考线；关键式 `B = f(H)`、`μ ≠ 常数`、`H ∝ NI`、`I ↑↑ ⇏ Φ ↑↑`；小型磁滞回线标 `B_r` 剩磁、`H_c` 矫顽力；工程结论强调铁心高导磁但不是无限导磁。
+已完成内容：统一 B-H 交互图同时显示非线性饱和与磁滞，绿色减 H 分支、紫色增 H 分支、橙色虚线初始磁化曲线；标出初始区、有效工作区、膝点、正负饱和区、正负剩磁 Bᵣ、矫顽力 ±Hc 与分支方向。H 滑块范围 −3 至 +3（相对值），较大橙色圆点与虚线投影显示当前励磁点，细橙线保留最近的实际磁化轨迹；初始精确为 H=0、B=0。滑块采用有历史记忆的教学模型，未达饱和即反向时保留连续的局部回线；支持正负励磁，“回到 H=0”保留剩磁，“重置退磁态”清除历史并恢复原点。动画随 H 平滑推进，系统减少动画偏好下直接更新，原生滑块可键盘操作，不改 URL 或页码。右上保留 `B = f(H, 历史)`、`μ ≠ 常数`、割线与微分磁导率区别、`H ∝ NI`、`I ↑↑ ⇏ Φ ↑↑`；右下磁畴示意包含 24 个箭头，初始方向互相抵消，随净磁化转向，接近饱和时同向排列；撤去 H 后保留净取向的箭头变为橙色，并说明畴壁缺陷钉扎、磁晶各向异性等阻碍使净磁化不自动归零，反向 H 才能抵消，B=0 不代表磁畴消失。图形、膝点、H/B 数值和磁畴均注明教学示意，非特定材料实测。工程结论强调非线性和撤去励磁不等于消除剩磁。
 
 未完成内容：实际课堂投影可读性和部署环境加载需现场验证。
 
-页内联系：大 B-H 曲线解释静态非线性，小磁滞回线提示循环磁化的路径依赖。
+页内联系：统一 B-H 图同时解释非线性和励磁历史，右下联动磁畴从微观取向解释饱和与剩磁；“回到 H=0”与“重置退磁态”对照相同 H 下的不同 B。
 
 跨页联系：上一页 `#magnetic-circuits-iron-core`；下一页 `#magnetic-circuits-calculation`。
 
-源码位置：`public/magnetic-saturation.html`、`public/magnetic-circuit-lesson.css`、`content/course.ts`。
+源码位置：`public/magnetic-saturation.html`、`public/magnetic-saturation.css`、`public/magnetic-saturation.js`、`public/magnetic-saturation-model.js`、`public/magnetic-circuit-lesson.css`、`content/course.ts`；模型回归检查为 `scripts/magnetic-saturation.test.mjs`。
 
 ### 36 磁路：怎样算磁路？
 
