@@ -22,39 +22,84 @@ import {
   DialogDescription,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { chapters, slides } from '@/content/course';
+import { chapters, slides, type Slide } from '@/content/course';
 import { ChapterGalaxy } from '@/components/chapter-galaxy';
 import { ElectrificationTrend } from '@/components/electrification-trend';
 import { EvLesson } from '@/components/ev-roadmap';
 import { ShipPodExplainer } from '@/components/ship-pod-explainer';
 import { DistributedPropulsion } from '@/components/distributed-propulsion';
 const number = (n: number) => String(n).padStart(2, '0');
+type EvTabSlide = Extract<Slide, { kind: 'ev' }>;
+type EvPage = EvTabSlide['page'];
+
+const evTabAnchorId = 'introduction-ev-principle';
+const isEvTabbedSlide = (candidate: Slide) =>
+  candidate.kind === 'ev' &&
+  candidate.page !== 'compare' &&
+  candidate.page !== 'memory';
+const courseSlides = slides.filter(
+  (candidate) => !isEvTabbedSlide(candidate) || candidate.id === evTabAnchorId,
+);
+
+const findEvTab = (id: string): EvTabSlide | undefined => {
+  const candidate = slides.find((item) => item.id === id);
+  return candidate && isEvTabbedSlide(candidate)
+    ? (candidate as EvTabSlide)
+    : undefined;
+};
+
+const findCourseIndex = (id: string) => {
+  const directIndex = courseSlides.findIndex((item) => item.id === id);
+  if (directIndex >= 0) return directIndex;
+  return findEvTab(id)
+    ? courseSlides.findIndex((item) => item.id === evTabAnchorId)
+    : -1;
+};
 
 export default function CoursePlayer() {
   const [index, setIndex] = useState(0);
+  const [evPage, setEvPage] = useState<EvPage>('principle');
   const [presenting, setPresenting] = useState(false);
   const [catalog, setCatalog] = useState(false);
   const [notice, setNotice] = useState('');
   const viewport = useRef<HTMLDivElement>(null);
   const touchStart = useRef<{ x: number; y: number } | null>(null);
   const [scale, setScale] = useState(0);
-  const slide = slides[index];
+  const slide = courseSlides[index];
+  const activeEvTab =
+    slide.kind === 'ev' && isEvTabbedSlide(slide)
+      ? (slides.find(
+          (candidate) => candidate.kind === 'ev' && candidate.page === evPage,
+        ) as EvTabSlide | undefined)
+      : undefined;
+  const activeTitle = activeEvTab?.title ?? slide.title;
   const chapter =
     slide.kind === 'home'
       ? undefined
       : chapters.find((c) => c.id === slide.chapterId);
   const chapterIndex = chapter ? chapters.indexOf(chapter) : -1;
   const chapterSlides = chapter
-    ? slides.filter((s) => s.kind !== 'home' && s.chapterId === chapter.id)
-    : [slides[0]];
+    ? courseSlides.filter(
+        (s) => s.kind !== 'home' && s.chapterId === chapter.id,
+      )
+    : [courseSlides[0]];
   const localIndex = chapterSlides.findIndex((s) => s.id === slide.id);
   const navigate = useCallback((next: number) => {
-    const clamped = Math.max(0, Math.min(slides.length - 1, next));
+    const clamped = Math.max(0, Math.min(courseSlides.length - 1, next));
     setIndex(clamped);
-    window.location.hash = slides[clamped].id;
+    window.location.hash = courseSlides[clamped].id;
   }, []);
   const jump = (id: string) => {
-    navigate(slides.findIndex((s) => s.id === id));
+    const evTab = findEvTab(id);
+    const next = findCourseIndex(id);
+    if (next < 0) return;
+    if (evTab) {
+      setEvPage(evTab.page);
+      setIndex(next);
+      window.location.hash = id;
+    } else {
+      navigate(next);
+    }
     setCatalog(false);
   };
   const togglePresentation = useCallback(async () => {
@@ -76,9 +121,10 @@ export default function CoursePlayer() {
   }, [presenting]);
   useEffect(() => {
     const sync = () => {
-      const next = slides.findIndex(
-        (s) => s.id === window.location.hash.slice(1),
-      );
+      const hash = window.location.hash.slice(1);
+      const evTab = findEvTab(hash);
+      if (evTab) setEvPage(evTab.page);
+      const next = findCourseIndex(hash);
       setIndex(next < 0 ? 0 : next);
     };
     sync();
@@ -107,7 +153,7 @@ export default function CoursePlayer() {
     return () => observer.disconnect();
   }, []);
   useEffect(() => {
-    document.title = `${slide.title} · 电机与拖动`;
+    document.title = `${activeTitle} · 电机与拖动`;
     const keydown = (event: KeyboardEvent) => {
       const target = event.target as HTMLElement;
       if (
@@ -148,12 +194,12 @@ export default function CoursePlayer() {
       }
       if (event.key === 'End') {
         event.preventDefault();
-        navigate(slides.length - 1);
+        navigate(courseSlides.length - 1);
       }
     };
     window.addEventListener('keydown', keydown);
     return () => window.removeEventListener('keydown', keydown);
-  }, [catalog, index, navigate, presenting, slide.title, togglePresentation]);
+  }, [activeTitle, catalog, index, navigate, presenting, togglePresentation]);
 
   return (
     <div className={`course-app ${presenting ? 'presenting' : ''}`}>
@@ -268,8 +314,8 @@ export default function CoursePlayer() {
                     : '章节导入'
                   : slide.kind === 'video'
                     ? '视频导入'
-                    : slide.kind === 'embed'
-                      ? '互动图解'
+                   : slide.kind === 'embed'
+                     ? '互动图解'
                     : slide.kind === 'assessment'
                       ? '考核方案'
                       : slide.kind === 'question'
@@ -305,7 +351,7 @@ export default function CoursePlayer() {
           >
             <article
               className={`slide slide-${slide.kind}`}
-              aria-label={`第 ${index + 1} 页：${slide.title}`}
+              aria-label={`第 ${index + 1} 页：${activeTitle}`}
               style={{
                 transform: `translate(-50%, -50%) scale(${scale})`,
                 visibility: scale ? 'visible' : 'hidden',
@@ -455,7 +501,7 @@ export default function CoursePlayer() {
                     ) : slide.kind === 'ev' ? (
                       <EvLesson
                         key={slide.id}
-                        page={slide.page}
+                        page={activeEvTab?.page ?? slide.page}
                         onNavigate={jump}
                       />
                     ) : slide.kind === 'pod' ? (
@@ -728,13 +774,13 @@ export default function CoursePlayer() {
                 <ChevronLeft />
               </Button>
               <span>
-                <b>{number(index + 1)}</b> / {number(slides.length)}
+                <b>{number(index + 1)}</b> / {number(courseSlides.length)}
               </span>
               <Button
                 variant="ghost"
                 size="icon"
                 aria-label="下一页"
-                disabled={index === slides.length - 1}
+                disabled={index === courseSlides.length - 1}
                 onClick={() => navigate(index + 1)}
               >
                 <ChevronRight />
@@ -743,11 +789,11 @@ export default function CoursePlayer() {
             <button
               className="next-label"
               onClick={() => navigate(index + 1)}
-              disabled={index === slides.length - 1}
+              disabled={index === courseSlides.length - 1}
             >
-              {index === slides.length - 1
+              {index === courseSlides.length - 1
                 ? '已到最后一页'
-                : `下一页 · ${slides[index + 1].title}`}
+                : `下一页 · ${courseSlides[index + 1].title}`}
               <ArrowRight size={16} />
             </button>
           </footer>
@@ -755,7 +801,7 @@ export default function CoursePlayer() {
         <progress
           className="progress-track"
           aria-label="课程页数"
-          max={slides.length}
+          max={courseSlides.length}
           value={index + 1}
         />
       </main>
@@ -771,13 +817,13 @@ export default function CoursePlayer() {
             <ArrowLeft />
           </Button>
           <span>
-            {index + 1} / {slides.length}
+            {index + 1} / {courseSlides.length}
           </span>
           <Button
             variant="ghost"
             size="icon"
             onClick={() => navigate(index + 1)}
-            disabled={index === slides.length - 1}
+            disabled={index === courseSlides.length - 1}
             aria-label="下一页"
           >
             <ArrowRight />
@@ -809,7 +855,7 @@ export default function CoursePlayer() {
         </output>
       )}
       <span className="sr-only" aria-live="polite">
-        第 {index + 1} 页，共 {slides.length} 页，{slide.title}
+        第 {index + 1} 页，共 {courseSlides.length} 页，{activeTitle}
       </span>
       <Dialog open={catalog} onOpenChange={setCatalog}>
         <DialogContent className="catalog-dialog">
