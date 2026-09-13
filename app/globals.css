@@ -413,6 +413,10 @@ a:focus-visible {
   height: 744px;
   margin-top: 20px;
 }
+.embed-ship-power {
+  height: 744px;
+  margin-top: 20px;
+}
 .text-action {
   background: transparent;
   border: 0;

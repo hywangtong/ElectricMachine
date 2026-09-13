@@ -7,13 +7,48 @@
 :root{color-scheme:light;--ink:#163747;--blue:#087daa;--green:#19835e;--gold:#b26a09}
 *{box-sizing:border-box}body{margin:0;background:#f3f7f8;color:var(--ink);font-family:system-ui,"Microsoft YaHei",sans-serif}main{max-width:1100px;margin:auto;padding:40px 24px}header p{color:#52717e}h1{font-size:clamp(32px,5vw,56px);margin:12px 0}h2{font-size:24px}p{line-height:1.7}.eyebrow{letter-spacing:3px;font-size:14px}button{font:inherit;padding:12px 18px;border:1px solid #b9ced6;border-radius:24px;background:white;color:var(--ink);cursor:pointer}button[aria-pressed=true]{background:var(--ink);color:white;border-color:var(--ink)}button:focus-visible,a:focus-visible{outline:3px solid var(--gold);outline-offset:4px}.controls{display:flex;flex-wrap:wrap;gap:10px;margin:24px 0}.picture{background:white;border:1px solid #d7e5e9;border-radius:24px;padding:14px;overflow:hidden}svg{display:block;width:100%;height:auto}svg text{font-family:inherit;fill:var(--ink);font-size:19px}svg .small{font-size:15px;fill:#52717e}.wire{fill:none;stroke:var(--blue);stroke-width:6;stroke-linecap:round}.energy{stroke-dasharray:12 13;animation:flow 3s linear infinite}.off{opacity:.18}.storage-wire{stroke:var(--green)}.fault{stroke:#b93c3c;stroke-dasharray:7 9}.node{fill:#eef6f9;stroke:#bbd5de;stroke-width:2}.caption{display:grid;grid-template-columns:70px 1fr;gap:16px;align-items:center;padding:20px 6px}.caption strong{font-size:22px}.caption p{margin:6px 0}.emoji{font-size:48px}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}.card{background:white;padding:24px;border-radius:18px;border:1px solid #d7e5e9}.card .emoji{display:block}.card h2{margin:12px 0}.card p{margin:0}.note{font-size:13px;color:#52717e}details{margin-top:28px;background:#e8f0f3;padding:20px;border-radius:16px}summary{cursor:pointer;font-weight:700}li{line-height:1.9;margin:8px 0}a{color:#09658c}footer{padding:24px 0;color:#52717e;font-size:13px}@keyframes flow{to{stroke-dashoffset:-100}}@media(max-width:700px){main{padding:24px 14px}.cards{grid-template-columns:1fr}.picture{padding:3px}.caption{padding:16px 10px;grid-template-columns:45px 1fr}.emoji{font-size:36px}}@media(prefers-reduced-motion:reduce){.energy{animation:none}}
 </style>
+<style>
+html,body{width:100%;height:100%;overflow:hidden}
+main{width:1444px;height:744px;max-width:none;margin:0;padding:16px 20px;display:grid;grid-template-rows:auto auto minmax(0,1fr) auto;gap:10px;transform-origin:top left}
+header{display:grid;grid-template-columns:1fr auto;align-items:center;gap:4px 20px}
+header .eyebrow{grid-column:1/-1;font-size:13px;letter-spacing:2px}
+h1{font-size:36px;line-height:1.25;margin:0}
+header p{max-width:580px;font-size:17px;line-height:1.5;margin:0}
+.controls{margin:0;gap:10px}
+button{padding:8px 16px;font-size:17px}
+.workspace{display:grid;grid-template-columns:minmax(0,1fr) 390px;gap:16px;min-height:0}
+.diagram-column{display:grid;grid-template-rows:minmax(0,1fr) auto;gap:6px;min-height:0}
+.picture{display:grid;grid-template-rows:minmax(0,1fr) auto;min-height:0;padding:8px 14px;border-radius:18px}
+.picture svg{height:100%;width:100%;min-height:0}
+.caption{grid-template-columns:48px 1fr;gap:12px;padding:10px 4px;border-top:1px solid #d7e5e9;min-height:104px}
+.caption .emoji{font-size:36px}
+.caption strong{font-size:22px;line-height:1.3}
+.caption p{font-size:17px;line-height:1.5;margin:5px 0 0}
+.note{font-size:13px;line-height:1.5;margin:0 4px}
+.reading-column{display:flex;flex-direction:column;gap:10px;min-height:0}
+.cards{display:grid;grid-template-columns:1fr;gap:10px;margin:0;flex:1;min-height:0}
+.card{padding:14px 16px;display:grid;grid-template-columns:42px 1fr;column-gap:10px;align-content:center;border-radius:14px}
+.card .emoji{font-size:32px;grid-row:1/3;align-self:center}
+.card h2{font-size:22px;line-height:1.3;margin:0 0 6px}
+.card p{font-size:17px;line-height:1.5}
+details{margin:0;padding:12px 16px;border-radius:12px;font-size:17px;line-height:1.5}
+summary{font-size:17px;line-height:1.4}
+details p{line-height:1.65;margin:14px 0 0}
+details ol{padding-left:22px;margin:12px 0 0}
+details li{font-size:15px;line-height:1.45;margin:8px 0}
+.reading-column:has(details[open]) .cards{display:none}
+.reading-column:has(details[open]) details[open]{flex:1}
+footer{padding:0;font-size:12px;line-height:1.5;border-top:1px solid #d7e5e9;padding-top:6px}
+</style>
 <main>
 <header><div class="eyebrow">ELI5 · 舰船综合电力系统</div><h1>一艘船，一座共享电厂。</h1><p>先把能量变成电，再分给螺旋桨、雷达和灯。中压直流，是其中一种主干送电方式。</p></header>
 <div class="controls" role="group" aria-label="选择用电场景">
 <button data-mode="cruise" aria-pressed="true">🚢 平稳航行</button><button data-mode="sprint" aria-pressed="false">🌊 加速航行</button><button data-mode="pulse" aria-pressed="false">⚡ 短时大负载</button><button data-mode="fault" aria-pressed="false">🛟 一条供电支路故障</button>
 </div>
+<div class="workspace">
+<div class="diagram-column">
 <section class="picture" aria-label="供电原理图">
-<svg viewBox="0 0 1000 560" role="img" aria-labelledby="diagram-title diagram-desc">
+<svg viewBox="35 60 930 485" role="img" aria-labelledby="diagram-title diagram-desc">
 <title id="diagram-title">共享发电、双路配电与储能</title><desc id="diagram-desc">发动机带动发电机，经整流送入直流主干。电经变换器分给推进电机、任务设备和生活设备，储能可以补充短时功率。图为教学示意。</desc>
 <path d="M70 430 H930 L840 510 H170 Z" fill="#dcecf2"/><path d="M45 527 Q95 509 145 527 T345 527 T545 527 T745 527 T945 527" fill="none" stroke="#a4cbdc" stroke-width="5"/>
 <path d="M260 128 H345 V210 H865 M345 210 V370 H865" class="wire energy"/>
@@ -34,6 +69,8 @@
 <div class="caption" aria-live="polite"><div class="emoji" id="scenario-icon">🚢</div><div><strong id="scenario-title">大家从同一套电源取电。</strong><p id="scenario-copy">螺旋桨转，雷达工作，灯亮着；管理系统协调发电和用电，储能可以充电。</p></div></div>
 </section>
 <p class="note">概念演示：线条粗细不代表实测功率。双路连接、储能位置和切换结果取决于实际设计；不是某艘舰的接线图。</p>
+</div>
+<aside class="reading-column" aria-label="类比、深入说明与资料">
 <section class="cards">
 <article class="card"><span class="emoji">🍲</span><h2>综合＝一起分饭</h2><p>从“推进一口锅、设备一口锅”，变成共享电源。谁需要多少，按任务协调。</p></article>
 <article class="card"><span class="emoji">🚚</span><h2>中压＝大车运货</h2><p>送同样的功率，提高电压就能减少电流。电缆负担更轻，绝缘要求更高。</p></article>
@@ -48,6 +85,8 @@
 <li><a href="https://www.nsrp.org/wp-content/uploads/2016/11/1-MVDC-Public.pdf">NAVSEA / NSRP（2015）：Medium Voltage DC Power for the Future Fleet</a> — 直流供电动机与概念架构；历史路线资料。</li>
 <li><a href="https://www.onr.navy.mil/organization/departments/code-33/power-and-energy-focus-area/electric-power-components-and-systems">美国海军研究办公室：Electric Power Components and Systems</a> — 储能、功率变换和控制的公开研究方向。</li>
 </ol></details>
+</aside>
+</div>
 <footer>依据公开资料制作的教学类比。B 站原视频页面未能读取，未核对其逐条说法；未读取视频所称参考书籍全文。</footer>
 </main>
 <script>
@@ -59,5 +98,8 @@ fault:{icon:'🛟',title:'关掉坏支路，再找可用路线。',copy:'保护�
 };
 function setMode(mode){const scene=scenes[mode];document.querySelectorAll('[data-mode]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.mode===mode)));document.getElementById('scenario-icon').textContent=scene.icon;document.getElementById('scenario-title').textContent=scene.title;document.getElementById('scenario-copy').textContent=scene.copy;document.getElementById('storage-label').textContent=scene.storage;document.getElementById('motor-wire').style.strokeWidth=scene.motor;document.getElementById('storage-wire').classList.toggle('off',mode!=='pulse'&&mode!=='fault');document.getElementById('task-primary').classList.toggle('fault',mode==='fault');document.getElementById('task-primary').classList.toggle('off',mode==='fault');document.getElementById('task-backup').classList.toggle('off',mode!=='fault');}
 document.querySelectorAll('[data-mode]').forEach(button=>button.addEventListener('click',()=>setMode(button.dataset.mode)));
+document.querySelectorAll('details').forEach(panel=>panel.addEventListener('toggle',()=>{if(panel.open)document.querySelectorAll('details').forEach(other=>{if(other!==panel)other.open=false;});}));
+function fitPage(){const scale=Math.min(window.innerWidth/1444,window.innerHeight/744);const page=document.querySelector('main');page.style.transform=`scale(${scale})`;page.style.marginLeft=`${(window.innerWidth-1444*scale)/2}px`;page.style.marginTop=`${(window.innerHeight-744*scale)/2}px`;}
+window.addEventListener('resize',fitPage);fitPage();
 </script>
 </html>
