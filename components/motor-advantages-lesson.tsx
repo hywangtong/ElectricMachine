@@ -582,6 +582,7 @@ const performanceCases = [
 const PerformanceLesson = () => {
   const [selected, setSelected] = useState(0);
   const [expanded, setExpanded] = useState(false);
+  const [videoAspectRatio, setVideoAspectRatio] = useState(16 / 9);
   const video = useRef<HTMLVideoElement>(null);
   const active = performanceCases[selected];
   const shrink = () => {
@@ -590,6 +591,7 @@ const PerformanceLesson = () => {
   };
   const select = (next: number) => {
     shrink();
+    setVideoAspectRatio(16 / 9);
     setSelected((next + performanceCases.length) % performanceCases.length);
   };
   useEffect(() => {
@@ -704,6 +706,14 @@ const PerformanceLesson = () => {
             )}
             <div
               className={`performance-player${expanded ? ' is-expanded' : ''}`}
+              style={
+                expanded
+                  ? {
+                      width: Math.min(1200, 675 * videoAspectRatio),
+                      height: Math.min(675, 1200 / videoAspectRatio),
+                    }
+                  : undefined
+              }
               onKeyDown={(event) => event.stopPropagation()}
               onTouchStart={(event) => event.stopPropagation()}
               onTouchEnd={(event) => event.stopPropagation()}
@@ -724,6 +734,12 @@ const PerformanceLesson = () => {
                   src={active.src}
                   controls
                   playsInline
+                  onLoadedMetadata={(event) => {
+                    const { videoWidth, videoHeight } = event.currentTarget;
+                    if (videoWidth > 0 && videoHeight > 0) {
+                      setVideoAspectRatio(videoWidth / videoHeight);
+                    }
+                  }}
                   onPlay={() => setExpanded(true)}
                   onEnded={() => setExpanded(false)}
                   onError={() => setExpanded(false)}
