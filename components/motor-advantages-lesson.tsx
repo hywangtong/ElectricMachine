@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 import { ArrowRight, ExternalLink, Play } from 'lucide-react';
 
 export type MotorAdvantage =
@@ -145,6 +146,38 @@ const EnvironmentLesson = () => (
           电送到了。<b>电动机让风扇转、衣服洗、水流动、机器跑。</b>
         </p>
       </section>
+    </div>
+    <div className="environment-applications" aria-label="自然能源发电应用">
+      <figure>
+        <Image
+          unoptimized
+          src="/images/motor-advantages/offshore-wind.png"
+          alt="海面上的多台风力发电机组"
+          width={1448}
+          height={1086}
+        />
+        <figcaption>风能｜海上风电</figcaption>
+      </figure>
+      <figure>
+        <Image
+          unoptimized
+          src="/images/motor-advantages/tidal-power.png"
+          alt="潮汐电站堤坝及通过闸口的水流"
+          width={1448}
+          height={1086}
+        />
+        <figcaption>潮汐能｜潮汐电站</figcaption>
+      </figure>
+      <figure>
+        <Image
+          unoptimized
+          src="/images/motor-advantages/wave-power.png"
+          alt="在海浪中浮动的红黄色分节波浪能发电装置"
+          width={1448}
+          height={1086}
+        />
+        <figcaption>海浪能｜波浪能发电装置</figcaption>
+      </figure>
     </div>
     <p className="advantage-chain">
       自然的运动 → <b>发电机</b> → 电网 → <b>电动机</b> → 身边的运动

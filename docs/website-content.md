@@ -6,7 +6,7 @@
 
 本文中的“页”包括课程翻页页面、具有独立地址的页内标签内容、独立 HTML 专题，以及目录等公共界面状态。网站主入口只有 `/`；课程页通过 `/#页面ID` 定位，不是多个独立路由。
 
-当前课程数据有 37 个内容记录，播放器有 30 个翻页位置。新能源汽车的 8 个记录共用第 7 个翻页位置，其余 7 个标签不增加总页码。本文按实际翻页顺序记录，并将这 8 个标签逐一展开。绪论占 17 个翻页位置，其余六章各占 2 个。
+当前课程数据有 46 个内容记录，播放器有 39 个翻页位置。新能源汽车的 8 个记录共用第 7 个翻页位置，其余 7 个标签不增加总页码。绪论占 25 个翻页位置，磁路占 3 个，其余五章各占 2 个。历史七页为第 20—26 页；环保页为第 19 页；现有独立麦克斯韦图解为磁路第 3 页（全站第 29 页），本次不改动其内容与位置。本文按实际导航位置同步页码。
 
 每页使用下列状态约定：
 
@@ -37,8 +37,8 @@
 - 画布上方左侧“课堂讲义 / COURSE OVERVIEW”或“课堂讲义 / CHAPTER 章号”；右侧“16:9 · 页面类别”。类别包括课程封面、教师简介、章节导入、视频导入、互动图解、考核方案、课堂思考、趋势示意、内容提纲、课堂讲义。
 - 所有课程画布顶部左侧“电机与拖动”，右侧为章节英文名；封面为“ELECTRIC MACHINES & DRIVES”。英文名在各章页面记录中列出。
 - 画布底部左侧“章号 / 章节名”，右侧“章内页序 / 章内总页数”；封面例外，分别为“课程讲义 / COURSE NOTES”和“电磁 · 能量 · 运动”。新能源汽车各标签均显示同一个章内页序。
-- 底部提示“← → 翻页”“F 全屏”；上一页、下一页按钮；全站页码“当前页 / 30”；文字入口“下一页 · 下一个翻页位置的标题”，最后一页显示“已到最后一页”。首尾页禁用越界按钮。另有课程页数进度条。
-- 屏幕阅读器播报“第 N 页，共 30 页，当前内容标题”。页面图示、标签、按钮具有相应文字替代或名称。
+- 底部提示“← → 翻页”“F 全屏”；上一页、下一页按钮；全站页码“当前页 / 39”；文字入口“下一页 · 下一个翻页位置的标题”，最后一页显示“已到最后一页”。首尾页禁用越界按钮。另有课程页数进度条。
+- 屏幕阅读器播报“第 N 页，共 39 页，当前内容标题”。页面图示、标签、按钮具有相应文字替代或名称。
 - 翻页快捷键：→、↓、PageDown、空格进入下一页；←、↑、PageUp进入上一页；Home 到封面；End 到最后一页；F 开始或退出演示；M 打开目录；Esc 退出课堂模式。焦点位于按钮或链接时空格保留原生激活行为；输入区域和带 Alt/Ctrl/Meta 的快捷键不触发课程导航。目录打开时停止全站翻页快捷键。
 - 触屏：在画布非按钮、非链接区域左右滑动，横向位移超过 60 像素且大于纵向位移的 1.5 倍才翻页。
 - 页面 ID 写入 URL hash；刷新、直达、浏览器前进后退恢复目标页。未知 hash 返回封面。进入新能源汽车主位置时默认选择共同原理，指定其标签 hash 时恢复该标签。
@@ -67,7 +67,7 @@
 
 ### 01 课程封面
 
-页面 ID：home。地址：`/#home`。类型：home。主位置：1 / 30。标签：已完成。
+页面 ID：home。地址：`/#home`。类型：home。主位置：1 / 39。标签：已完成。
 
 已完成内容：
 
@@ -87,7 +87,7 @@
 
 ### 02 绪论：教师简介
 
-页面 ID：introduction。地址：`/#introduction`。类型：chapter。主位置：2 / 30。所属：01 绪论 / INTRODUCTION / 课程基础。标签：已完成。
+页面 ID：introduction。地址：`/#introduction`。类型：chapter。主位置：2 / 39。所属：01 绪论 / INTRODUCTION / 课程基础。标签：已完成。
 
 已完成内容：
 
@@ -107,7 +107,7 @@
 
 ### 03 绪论：课程考核方案
 
-页面 ID：introduction-assessment。地址：`/#introduction-assessment`。类型：assessment。主位置：3 / 30。标签：已完成。
+页面 ID：introduction-assessment。地址：`/#introduction-assessment`。类型：assessment。主位置：3 / 39。标签：已完成。
 
 已完成内容：
 
@@ -129,7 +129,7 @@
 
 ### 04 绪论：电机无处不在
 
-页面 ID：introduction-electric-everywhere。地址：`/#introduction-electric-everywhere`。类型：video。主位置：4 / 30。标签：已完成。
+页面 ID：introduction-electric-everywhere。地址：`/#introduction-electric-everywhere`。类型：video。主位置：4 / 39。标签：已完成。
 
 已完成内容：眉题“INTRODUCTION / 为什么要学习电机？”；标题“电机无处不在”；导语“电机在当今生产、生活等经济活动中极其重要、不可或缺，并仍在以非常快的速度取代其他原动机。”；视频框标题“如果这个世界上没有电，所有东西都烧油”；入口“无法播放？在 Bilibili 打开”。
 
@@ -143,7 +143,7 @@
 
 ### 05 绪论：课堂思考
 
-页面 ID：introduction-opening-question。地址：`/#introduction-opening-question`。类型：question。主位置：5 / 30。标签：已完成。
+页面 ID：introduction-opening-question。地址：`/#introduction-opening-question`。类型：question。主位置：5 / 39。标签：已完成。
 
 已完成内容：眉题“THINK ABOUT IT / 课堂思考”；大问号装饰；提示“看完视频，先别急着翻页”；主问题“大家能不能举出当下现实存在的任何一个可以动但是不使用电机的东西？”；底部引导“从你身边正在运动的事物开始找”。
 
@@ -155,7 +155,7 @@
 
 ### 06 绪论：电动化浪潮
 
-页面 ID：introduction-electrification-trend。地址：`/#introduction-electrification-trend`。类型：trend。主位置：6 / 30。标签：已完成。
+页面 ID：introduction-electrification-trend。地址：`/#introduction-electrification-trend`。类型：trend。主位置：6 / 39。标签：已完成。
 
 已完成内容：
 
@@ -173,7 +173,7 @@
 
 ### 07 新能源汽车标签组：公共内容与导航
 
-组 ID：ev-route-group。主位置：7 / 30。侧栏标题“新能源汽车技术路线”。标签：已完成。
+组 ID：ev-route-group。主位置：7 / 39。侧栏标题“新能源汽车技术路线”。标签：已完成。
 
 已完成内容：每个标签顶部有“新能源汽车 · ELI5 能量实验台”，路线详情右上显示路线缩写，共同原理、对比和记忆页显示“ENERGY → MOTION”。标签顺序：纯电 BEV、油混 HEV、插混 PHEV、增程 EREV、氢能 FCEV、共同原理、横向对比、五句话简述。点击改变 hash 和标签内容，不改变主位置、章内页码和总页数。详情页共用“比喻 / 一句话 / 发动机 / 补能 / 它擅长 / 要留意”的组织方式；每个能量路径节点有图标和箭头。
 
@@ -361,7 +361,7 @@
 
 ### 08 绪论：电机上天——分布式电推进
 
-页面 ID：introduction-distributed-electric-propulsion。地址：`/#introduction-distributed-electric-propulsion`。类型：content / distributed-propulsion。主位置：8 / 30。标签：已完成。
+页面 ID：introduction-distributed-electric-propulsion。地址：`/#introduction-distributed-electric-propulsion`。类型：content / distributed-propulsion。主位置：8 / 39。标签：已完成。
 
 已完成内容：
 
@@ -386,7 +386,7 @@
 
 ### 09 绪论：大船的水下电动脚
 
-页面 ID：ship-pod-anatomy。地址：`/#ship-pod-anatomy`。类型：pod / anatomy。主位置：9 / 30。标签：已完成。
+页面 ID：ship-pod-anatomy。地址：`/#ship-pod-anatomy`。类型：pod / anatomy。主位置：9 / 39。标签：已完成。
 
 吊舱八页公共眉题为“MARINE ELECTRIC PROPULSION / 轮船电动吊舱 · ELI5”。除资料页外，每页底部显示“资料依据”及对应链接；资料 ID 与完整入口在 `#ship-pod-sources` 统一记录。
 
@@ -407,7 +407,7 @@
 
 ### 10 绪论：电从哪里来？
 
-页面 ID：ship-pod-energy。地址：`/#ship-pod-energy`。类型：pod / energy。主位置：10 / 30。标签：已完成。
+页面 ID：ship-pod-energy。地址：`/#ship-pod-energy`。类型：pod / energy。主位置：10 / 39。标签：已完成。
 
 已完成内容：
 
@@ -428,7 +428,7 @@
 
 ### 11 绪论：脚一转，推力就转
 
-页面 ID：ship-pod-steering。地址：`/#ship-pod-steering`。类型：pod / steering。主位置：11 / 30。标签：已完成。
+页面 ID：ship-pod-steering。地址：`/#ship-pod-steering`。类型：pod / steering。主位置：11 / 39。标签：已完成。
 
 已完成内容：显示标题“脚一转，推力就转”；副题“转速管推力大小，吊舱角度管推力方向”。三幅俯视图均标“俯视 · 船头 ↑”，分别显示 0°、180°、90° 的吊舱与推力方向：
 
@@ -446,7 +446,7 @@
 
 ### 12 绪论：会转向，不一定是电动吊舱
 
-页面 ID：ship-pod-layouts。地址：`/#ship-pod-layouts`。类型：pod / layouts。主位置：12 / 30。标签：已完成。
+页面 ID：ship-pod-layouts。地址：`/#ship-pod-layouts`。类型：pod / layouts。主位置：12 / 39。标签：已完成。
 
 已完成内容：显示标题“会转向，不一定是电动吊舱”；副题“看电机位置，才知道它走哪条传动路线”。三种结构并列：
 
@@ -464,7 +464,7 @@
 
 ### 13 绪论：国产 10 兆瓦，突破在哪里？
 
-页面 ID：ship-pod-china。地址：`/#ship-pod-china`。类型：pod / china。主位置：13 / 30。标签：已完成。
+页面 ID：ship-pod-china。地址：`/#ship-pod-china`。类型：pod / china。主位置：13 / 39。标签：已完成。
 
 已完成内容：
 
@@ -485,7 +485,7 @@
 
 ### 14 绪论：哪些船最喜欢它？
 
-页面 ID：ship-pod-applications。地址：`/#ship-pod-applications`。类型：pod / applications。主位置：14 / 30。标签：已完成。
+页面 ID：ship-pod-applications。地址：`/#ship-pod-applications`。类型：pod / applications。主位置：14 / 39。标签：已完成。
 
 已完成内容：显示标题“哪些船最喜欢这只「脚」？”；副题“看船要做什么，再看推进器能帮什么忙”。三幅船示意及案例：
 
@@ -503,7 +503,7 @@
 
 ### 15 绪论：好用，也要过三道关
 
-页面 ID：ship-pod-tradeoffs。地址：`/#ship-pod-tradeoffs`。类型：pod / tradeoffs。主位置：15 / 30。标签：已完成。
+页面 ID：ship-pod-tradeoffs。地址：`/#ship-pod-tradeoffs`。类型：pod / tradeoffs。主位置：15 / 39。标签：已完成。
 
 已完成内容：标题“好用，也要过三道关”；副题“大船选推进系统，要把整条能量链一起看”。三张挑战卡：
 
@@ -521,7 +521,7 @@
 
 ### 16 绪论：继续探索——资料入口
 
-页面 ID：ship-pod-sources。地址：`/#ship-pod-sources`。类型：pod / sources。主位置：16 / 30。标签：已完成。
+页面 ID：ship-pod-sources。地址：`/#ship-pod-sources`。类型：pod / sources。主位置：16 / 39。标签：已完成。
 
 已完成内容：标题“继续探索 · 资料入口”；副题“原理、国产进展、实船案例，均可回到原文核对”。九张链接卡依次显示“01 ↗”至“09 ↗”、资料标题、支持内容、发布者与日期，完整内容如下：
 
@@ -545,7 +545,7 @@
 
 ### 17 绪论：舰船综合电力系统 ELI5
 
-页面 ID：introduction-ship-integrated-power。地址：`/#introduction-ship-integrated-power`。类型：embed。主位置：17 / 30。标签：已完成。
+页面 ID：introduction-ship-integrated-power。地址：`/#introduction-ship-integrated-power`。类型：embed。主位置：17 / 39。标签：已完成。
 
 已完成内容：画布主体为 iframe，标题“舰船综合电力系统 ELI5”，来源 `/ship-power-eli5.html`。iframe 内包含下述独立页面的全部内容、四个场景、折叠原理说明和六个来源；播放器本身不另绘专题正文。
 
@@ -557,7 +557,7 @@
 
 ### 18 绪论：本章内容
 
-页面 ID：introduction-outline。地址：`/#introduction-outline`。类型：outline。主位置：18 / 30。标签：未完成。
+页面 ID：introduction-outline。地址：`/#introduction-outline`。类型：outline。主位置：18 / 39。标签：未完成。
 
 已完成内容：眉题“CHAPTER 01 / 绪论”；标题“本章内容”；问题“电能如何转化为我们需要的运动？”；四个编号主题：
 
@@ -572,11 +572,11 @@
 
 页内联系：主题顺序从对象、转换原理、系统组成到学习路线，回应章节核心问题。
 
-跨页联系：上一页 `#introduction-ship-integrated-power`；下一页 `#magnetic-circuits`。前面的汽车、飞机、船是应用实例，后续磁路为磁场计算提供基础；封面学习路径对应最后一项。
+跨页联系：上一页 `#introduction-ship-integrated-power`；下一页 `#introduction-motor-advantages-environment`。前面的汽车、飞机、船是应用实例，后续磁路为磁场计算提供基础；封面学习路径对应最后一项。
 
-### 19 磁路：章节导入
+### 27 磁路：章节导入
 
-页面 ID：magnetic-circuits。地址：`/#magnetic-circuits`。类型：chapter。主位置：19 / 30。所属：02 磁路 / MAGNETIC CIRCUITS / 课程基础。标签：已完成。
+页面 ID：magnetic-circuits。地址：`/#magnetic-circuits`。类型：chapter。主位置：27 / 39。所属：02 磁路 / MAGNETIC CIRCUITS / 课程基础。标签：已完成。
 
 已完成内容：眉题“CHAPTER 02 / 课程基础”；标题“磁路”；问题“如何描述和计算电机中的磁场？”；按钮“本章内容”；右侧章号“02”和“学习目标 / LEARNING OBJECTIVES”：
 
@@ -588,11 +588,11 @@
 
 页内联系：问题规定分析任务，三个目标依次从物理量到方法、材料非理想性。
 
-跨页联系：上一页 `#introduction-outline`；下一页及按钮目标 `#magnetic-circuits-outline`。星系中承接绪论，向直流电机、变压器、异步电机提供磁场基础。
+跨页联系：上一页 `#introduction-motor-history-modern-drive`；下一页及按钮目标 `#magnetic-circuits-outline`。星系中承接绪论，向直流电机、变压器、异步电机提供磁场基础。
 
-### 20 磁路：本章内容
+### 28 磁路：本章内容
 
-页面 ID：magnetic-circuits-outline。地址：`/#magnetic-circuits-outline`。类型：outline。主位置：20 / 30。标签：未完成。
+页面 ID：magnetic-circuits-outline。地址：`/#magnetic-circuits-outline`。类型：outline。主位置：28 / 39。标签：未完成。
 
 已完成内容：眉题“CHAPTER 02 / 磁路”；标题“本章内容”；问题“如何描述和计算电机中的磁场？”；四个编号主题：
 
@@ -609,9 +609,9 @@
 
 跨页联系：上一页 `#magnetic-circuits`；下一页 `#dc-machines`。磁场概念供直流电机使用；交流磁路进一步支撑 `#transformers-outline` 和 `#induction-machines-outline`。
 
-### 21 直流电机理论：章节导入
+### 30 直流电机理论：章节导入
 
-页面 ID：dc-machines。地址：`/#dc-machines`。类型：chapter。主位置：21 / 30。所属：03 直流电机理论 / DC MACHINES / 直流电机。标签：已完成。
+页面 ID：dc-machines。地址：`/#dc-machines`。类型：chapter。主位置：30 / 39。所属：03 直流电机理论 / DC MACHINES / 直流电机。标签：已完成。
 
 已完成内容：眉题“CHAPTER 03 / 直流电机”；标题“直流电机理论”；问题“直流电机怎样实现发电与电动运行？”；按钮“本章内容”；右侧章号“03”和“学习目标 / LEARNING OBJECTIVES”：
 
@@ -625,9 +625,9 @@
 
 跨页联系：上一页 `#magnetic-circuits-outline`；下一页及按钮目标 `#dc-machines-outline`。承接磁路并支撑直流拖动，新能源汽车回收场景可作为发电与电动可逆性的应用回顾。
 
-### 22 直流电机理论：本章内容
+### 31 直流电机理论：本章内容
 
-页面 ID：dc-machines-outline。地址：`/#dc-machines-outline`。类型：outline。主位置：22 / 30。标签：未完成。
+页面 ID：dc-machines-outline。地址：`/#dc-machines-outline`。类型：outline。主位置：31 / 39。标签：未完成。
 
 已完成内容：眉题“CHAPTER 03 / 直流电机理论”；标题“本章内容”；问题“直流电机怎样实现发电与电动运行？”；四个编号主题：
 
@@ -644,9 +644,9 @@
 
 跨页联系：上一页 `#dc-machines`；下一页 `#dc-drives`。基础方程与电动机特性将支持机械特性、起动、调速、制动。
 
-### 23 直流电机的电力拖动：章节导入
+### 32 直流电机的电力拖动：章节导入
 
-页面 ID：dc-drives。地址：`/#dc-drives`。类型：chapter。主位置：23 / 30。所属：04 直流电机的电力拖动 / DC ELECTRIC DRIVES / 直流电机。标签：已完成。
+页面 ID：dc-drives。地址：`/#dc-drives`。类型：chapter。主位置：32 / 39。所属：04 直流电机的电力拖动 / DC ELECTRIC DRIVES / 直流电机。标签：已完成。
 
 已完成内容：眉题“CHAPTER 04 / 直流电机”；标题“直流电机的电力拖动”；问题“如何让直流电动机按要求起动、调速和制动？”；按钮“本章内容”；右侧章号“04”和“学习目标 / LEARNING OBJECTIVES”：
 
@@ -660,9 +660,9 @@
 
 跨页联系：上一页 `#dc-machines-outline`；下一页及按钮目标 `#dc-drives-outline`。封面知识线由直流电机理论进入本章；与异步拖动构成两类电机控制方法的后续比较。
 
-### 24 直流电机的电力拖动：本章内容
+### 33 直流电机的电力拖动：本章内容
 
-页面 ID：dc-drives-outline。地址：`/#dc-drives-outline`。类型：outline。主位置：24 / 30。标签：未完成。
+页面 ID：dc-drives-outline。地址：`/#dc-drives-outline`。类型：outline。主位置：33 / 39。标签：未完成。
 
 已完成内容：眉题“CHAPTER 04 / 直流电机的电力拖动”；标题“本章内容”；问题“如何让直流电动机按要求起动、调速和制动？”；四个编号主题：
 
@@ -679,9 +679,9 @@
 
 跨页联系：上一页 `#dc-drives`；下一页 `#transformers`，顺序切换到交流方向。概念基础来自直流电机理论，方法可与 `#induction-drives-outline` 比较；回馈制动可回顾 EV 能量回收。
 
-### 25 变压器：章节导入
+### 34 变压器：章节导入
 
-页面 ID：transformers。地址：`/#transformers`。类型：chapter。主位置：25 / 30。所属：05 变压器 / TRANSFORMERS / 交流电机。标签：已完成。
+页面 ID：transformers。地址：`/#transformers`。类型：chapter。主位置：34 / 39。所属：05 变压器 / TRANSFORMERS / 交流电机。标签：已完成。
 
 已完成内容：眉题“CHAPTER 05 / 交流电机”；标题“变压器”；问题“静止的电磁装置如何改变电压并传递能量？”；按钮“本章内容”；右侧章号“05”和“学习目标 / LEARNING OBJECTIVES”：
 
@@ -695,9 +695,9 @@
 
 跨页联系：上一页 `#dc-drives-outline`；下一页及按钮目标 `#transformers-outline`。知识依赖来自磁路的交流磁路，与线性翻页前一章不同；等效电路方法支撑异步电机理论。
 
-### 26 变压器：本章内容
+### 35 变压器：本章内容
 
-页面 ID：transformers-outline。地址：`/#transformers-outline`。类型：outline。主位置：26 / 30。标签：未完成。
+页面 ID：transformers-outline。地址：`/#transformers-outline`。类型：outline。主位置：35 / 39。标签：未完成。
 
 已完成内容：眉题“CHAPTER 05 / 变压器”；标题“本章内容”；问题“静止的电磁装置如何改变电压并传递能量？”；四个编号主题：
 
@@ -714,9 +714,9 @@
 
 跨页联系：上一页 `#transformers`；下一页 `#induction-machines`。磁路提供电磁基础，参数折算和等效电路可迁移到异步电机。
 
-### 27 异步电机理论：章节导入
+### 36 异步电机理论：章节导入
 
-页面 ID：induction-machines。地址：`/#induction-machines`。类型：chapter。主位置：27 / 30。所属：06 异步电机理论 / INDUCTION MACHINES / 交流电机。标签：已完成。
+页面 ID：induction-machines。地址：`/#induction-machines`。类型：chapter。主位置：36 / 39。所属：06 异步电机理论 / INDUCTION MACHINES / 交流电机。标签：已完成。
 
 已完成内容：眉题“CHAPTER 06 / 交流电机”；标题“异步电机理论”；问题“旋转磁场怎样带动转子旋转？”；按钮“本章内容”；右侧章号“06”和“学习目标 / LEARNING OBJECTIVES”：
 
@@ -730,9 +730,9 @@
 
 跨页联系：上一页 `#transformers-outline`；下一页及按钮目标 `#induction-machines-outline`。星系同时由磁路、变压器连入本章，并向异步拖动连出。
 
-### 28 异步电机理论：本章内容
+### 37 异步电机理论：本章内容
 
-页面 ID：induction-machines-outline。地址：`/#induction-machines-outline`。类型：outline。主位置：28 / 30。标签：未完成。
+页面 ID：induction-machines-outline。地址：`/#induction-machines-outline`。类型：outline。主位置：37 / 39。标签：未完成。
 
 已完成内容：眉题“CHAPTER 06 / 异步电机理论”；标题“本章内容”；问题“旋转磁场怎样带动转子旋转？”；四个编号主题：
 
@@ -749,9 +749,9 @@
 
 跨页联系：上一页 `#induction-machines`；下一页 `#induction-drives`。等效分析承接变压器，转矩关系支持机械特性与调速。
 
-### 29 异步电机的电力拖动：章节导入
+### 38 异步电机的电力拖动：章节导入
 
-页面 ID：induction-drives。地址：`/#induction-drives`。类型：chapter。主位置：29 / 30。所属：07 异步电机的电力拖动 / INDUCTION MOTOR DRIVES / 交流电机。标签：已完成。
+页面 ID：induction-drives。地址：`/#induction-drives`。类型：chapter。主位置：38 / 39。所属：07 异步电机的电力拖动 / INDUCTION MOTOR DRIVES / 交流电机。标签：已完成。
 
 已完成内容：眉题“CHAPTER 07 / 交流电机”；标题“异步电机的电力拖动”；问题“如何实现异步电动机的可控运行？”；按钮“本章内容”；右侧章号“07”和“学习目标 / LEARNING OBJECTIVES”：
 
@@ -765,9 +765,9 @@
 
 跨页联系：上一页 `#induction-machines-outline`；下一页及按钮目标 `#induction-drives-outline`。承接异步电机理论，并与直流拖动共享系统层面的任务。
 
-### 30 异步电机的电力拖动：本章内容
+### 39 异步电机的电力拖动：本章内容
 
-页面 ID：induction-drives-outline。地址：`/#induction-drives-outline`。类型：outline。主位置：30 / 30。标签：未完成。
+页面 ID：induction-drives-outline。地址：`/#induction-drives-outline`。类型：outline。主位置：39 / 39。标签：未完成。
 
 已完成内容：眉题“CHAPTER 07 / 异步电机的电力拖动”；标题“本章内容”；问题“如何实现异步电动机的可控运行？”；四个编号主题：
 
@@ -847,7 +847,7 @@
 
 未完成内容：无明确待办。修改 React 正文或模块样式后必须运行 `npm run export:ship-pod` 同步生成；不要只改导出 HTML。
 
-页内联系：下拉选择负责跳转，左右按钮负责讲解推进，页码说明专题内位置；专题编号不同于全站 30 页编号。
+页内联系：下拉选择负责跳转，左右按钮负责讲解推进，页码说明专题内位置；专题编号不同于全站 39 页编号。
 
 跨页联系：独立版复用课程吊舱八页，同 ID 指向相同内容；它不是主课程目前 iframe 嵌入的对象，课程直接渲染 React 组件。独立版没有课程七章目录或返回课程按钮。
 
@@ -961,14 +961,16 @@
 
 ### 绪论末尾新增规划：电机的优势
 
-标签：未完成。以下四页按“环保 → 应用便捷 → 高性能 → 适应性强”顺序，作为绪论最后四个独立翻页位置，插在 `#introduction-outline` 之后、`#magnetic-circuits` 之前。本次只编写规划，不修改课程源码；上文现有 37 个内容记录、30 个翻页位置和前后页关系仍按当前网站记录。仅实现这四页后，内容记录将为 41 个，翻页位置将为 34 个，绪论将占 21 个翻页位置，届时同步更新计数、侧栏与相关页面关系。
+2026-09-13 实现更新：下述第一部分“环保”已接入正式课程并添加用户提供的应用图片；其余三部分继续作为规划。历史七页已接入，播放器现为 39 个翻页位置，“环保”为第 19 页，其后衔接历史第 20—26 页。以下优势四页的完整实施计数仅为旧规划条件，不代表当前计数。
 
-### 规划页 1：电机的优势——环保
+标签：未完成（优势四页整体）。原规划顺序为“环保 → 应用便捷 → 高性能 → 适应性强 → 历史七页 → 磁路”。当前只实现环保与历史七页，实际计数见文首；旧规划的 37 个记录、30 个翻页位置仅为当时基线。今后若再接入其余三页优势，应放在环保与历史之间，并按实际源码重新统计，不能沿用旧计数。
+
+### 电机的优势——环保（已接入课程）
 
 页面 ID：introduction-motor-advantages-environment。
-地址：拟定 `/#introduction-motor-advantages-environment`。
-所属章节与位置：introduction；位于 `#introduction-outline` 之后、规划页 2 之前；独立翻页位置。
-标签：未完成。
+地址：`/#introduction-motor-advantages-environment`。
+所属章节与位置：introduction；当前位于 `#introduction-outline` 之后、`#introduction-motor-history-overview` 之前；独立翻页位置，当前为 19 / 39。其余三页优势仍保留规划。
+标签：已完成。
 
 教学目的：以 ELI5“大图、少字”的故事说明三个重点：发电机在风能、海浪能、潮汐能等常见机械能发电方案中的关键作用；电能通过电网远距离传输、分支配送的便捷性；电动机在用电器中的广泛应用。串联清洁能源到日常运动的完整链路，并区分运行阶段的直接排放与全生命周期环境影响。
 
@@ -985,12 +987,12 @@
 - 收束“电机连接清洁能源和身边的运动”；资料入口链接 [美国能源部：海洋能基础](https://www.energy.gov/cmei/water/marine-energy-basics)、[波浪能发电机案例](https://www.energy.gov/eere/water/articles/overcoming-major-wave-energy-challenge)、[风机与远距离输电图解](https://www.energy.gov/cmei/systems/explore-wind-turbine-text-version)、[核能优势与环境边界](https://www.energy.gov/ne/articles/advantages-and-challenges-nuclear-energy)。查阅日期：2026-09-13；分别支持海浪与潮汐能形式、波浪机电转换、风力发电与电能传输、核能环境边界。具体用电器内部电机图解仍需核对对应资料。
 
 页内联系：三段图解依次回答“为什么需要发电机”“为什么变成电后方便送到远处”“送到后为什么又需要电动机”，共同解释电机在清洁能源利用与日常用电两端的作用；环保说明与简短注释限定排放范围。
-跨页联系：规划上一页 `#introduction-outline`；规划下一页 `#introduction-motor-advantages-convenience`；回顾新能源汽车的能量路径与 `#ship-pod-energy` 的“电推进不等于零燃料”。
+跨页联系：当前上一页 `#introduction-outline`；当前下一页 `#introduction-motor-history-overview`；优势三页后续仍为规划；回顾新能源汽车的能量路径与 `#ship-pod-energy` 的“电推进不等于零燃料”。
 交互：主体为静态图解；资料链接在新标签页打开，继承全站翻页与全屏控制。
-已完成内容：无网站页面实现；已按 eli5 技能编写三段说明规划与独立 HTML 图解草稿，尚未接入课程。
-未完成内容：将 ELI5 图解接入课程数据与页面；核对风、海浪、潮汐捕获装置与发电机的对应关系；补充家用、工业、交通与机器人电机用途的依据；核对清洁能源范围、光伏例外与环保表述。
+已完成内容：三段原理图已通过 `components/motor-advantages-lesson.tsx` 接入正式课程，保留标题、导语、能量转换主链、环境边界注释及三个能源部参考入口。在原理图下方插入用户提供的三张本地应用配图，图注分别为“风能｜海上风电”“潮汐能｜潮汐电站”“海浪能｜波浪能发电装置”。图片保留完整画面并提供中文替代文本，不添加未经确认的具体项目名称或实拍来源说明。
+未完成内容：规划中的扩展图注与能源说明、家用及工业电机用途的进一步资料核对；投影设备上的可读性检查。上述扩展规划不视为当前页面已实现的文案。
 验收：用大图与短句呈现三个指定重点；学生能指出风、浪、潮的常见发电链路中发电机的关键作用，解释电能通过电网传输与分支配送的便利，举出至少三种用电器中的电动机用途，并复述“运动 → 发电机 → 电网 → 电动机 → 运动”；不把光伏画成发电机发电，不把所有用电器都称为含有电机，不把清洁电驱一概称为全程无污染；三段图解与简短注释在 1600 × 900 画布内完整呈现。
-源码位置：现有规划预览 `docs/previews/motor-environment-eli5.html`；拟在 `content/course.ts` 添加数据，在 `components/course-player.tsx` 接入页面；图解使用本地 SVG，实际接入路径在实现时登记。
+源码位置：`content/course.ts` 的 `motor-advantage` 数据与环保页入口；`components/course-player.tsx` 的优势页模板；`components/motor-advantages-lesson.tsx` 与 `app/globals.css` 的正式页面；图片为 `public/images/motor-advantages/offshore-wind.png`、`tidal-power.png`、`wave-power.png`。`docs/previews/motor-environment-eli5.html` 仍为原规划草稿，本次未更新。
 
 ### 规划页 2：电机的优势——应用便捷
 
@@ -1070,7 +1072,7 @@
 
 页面 ID：introduction-motor-advantages-adaptability。
 地址：拟定 `/#introduction-motor-advantages-adaptability`。
-所属章节与位置：introduction；位于规划页 3 之后、`#magnetic-circuits` 之前；独立翻页位置，作为绪论最后一页。
+所属章节与位置：introduction；位于规划页 3 之后、历史规划首页 `#introduction-motor-history-overview` 之前；独立翻页位置，作为电机优势部分最后一页。
 标签：未完成。
 
 教学目的：理解电机配合驱动器，可以在较宽的速度范围内灵活、快速地调速与调节出力，适应不同负载和运动过程；通过电磁弹射认识直线电机的推力与速度控制。
@@ -1088,12 +1090,203 @@
 - 简短注释“宽速度范围内的调节仍受电机、驱动器、供电、散热和机械系统能力限制，不表示任意速度下都能输出任意推力。”收束“适应性强：速度与出力可以按任务灵活调整”；课堂思考“轻飞机与重飞机如果要达到相同速度，弹射时的出力需求会一样吗？”
 
 页内联系：概念卡区分调速与调力，过程图说明控制随运动过程变化，电磁弹射把速度变化、出力调节与负载适应连起来，视频提供直观案例。前页侧重快、准、稳，本页侧重较宽速度范围与不同任务下的调节能力。
-跨页联系：规划上一页 `#introduction-motor-advantages-performance`；规划下一页 `#magnetic-circuits`；回顾规划页 2 的直线电机动子概念及舰船综合电力页的短时大负载与储能，后续电力拖动章节展开机械特性、起动与调速。
+跨页联系：规划上一页 `#introduction-motor-advantages-performance`；规划下一页 `#introduction-motor-history-overview`；回顾规划页 2 的直线电机动子概念及舰船综合电力页的短时大负载与储能，历史部分解释这些能力的技术演进，后续电力拖动章节展开机械特性、起动与调速。
 交互：嵌入视频支持播放与全屏，外部观看和资料入口在新标签页打开；观看操作不改变课程 hash 与页码，继承现有视频页与全站导航习惯。
 已完成内容：无页面实现；已记录用户提供的视频标题与链接，并查阅公开原理资料，未观看视频。
 未完成内容：编写课程数据与页面；绘制直线电机弹射链路和速度 / 推力示意图；核对用户视频的播放可用性、实际内容与教学片段；确认中文观看提示与视频一致；核对调速调力表述及原理来源适用范围。
-验收：明确呈现较宽速度范围内灵活、快速调速调力的能力，区分旋转转矩与直线推力；学生能解释电磁弹射如何根据不同飞机和加速过程调整出力；至少提供用户指定视频的有效观看入口，不能只有占位框；图解不把推力画成随速度必然增大；页面完整适配 1600 × 900 画布。实现后核对四页连续顺序、绪论末页与磁路首页的连接及 34 个翻页位置。
+验收：明确呈现较宽速度范围内灵活、快速调速调力的能力，区分旋转转矩与直线推力；学生能解释电磁弹射如何根据不同飞机和加速过程调整出力；至少提供用户指定视频的有效观看入口，不能只有占位框；图解不把推力画成随速度必然增大；页面完整适配 1600 × 900 画布。实现后核对四页连续顺序及其与历史首页的连接；仅实现优势四页时为 34 个翻页位置，同时实现历史七页时为 41 个，绪论末页与磁路首页按实际实现连接。
 源码位置：拟在 `content/course.ts` 添加数据，在 `components/course-player.tsx` 接入图解与视频；图解素材保持本地，实际路径在实现时登记。
+
+### 绪论：电机发展历史——从电磁实验到现代电驱系统
+
+标签：已完成。2026-09-13 按 eli5“大图、少字”方式接入正式课程，采用“1 页总览 + 6 页阶段故事”。当前为全站第 20—26 页，均归属 introduction，位于已实现的 `#introduction-motor-advantages-environment` 之后、`#magnetic-circuits` 之前；其余三页电机优势仍为规划，不在本次实现范围。
+
+教学主线：能够转动 → 实用动力 → 广泛应用 → 受控运动 → 系统协同。六阶段是教学分期，时期交叠，不表示技术完全替代。范围包含电动机、发电机及供电、驱动技术，变压器仅作为三相系统的一环。
+
+七页公共内容与交互：固定 1600 × 900 外层课程画布，继承现有导航、页码、hash、键盘、触屏和全屏；无内部滚动或页内标签组。眉题“电机发展历史 / 总览”或“电机发展历史 / 01—06 · 阶段名称”，右上“ELI5 · N / 7”。每页有标题、导语、主图、代表性突破、能力与应用总结、课堂问题、边界注释和资料入口，来源在新标签页打开，标“核查：2026-09-13”。图解为本地原创教学简图，不使用第三方历史照片；线性阅读顺序不表示同一型号逐代升级。实验 SVG 有中文无障碍名称。
+
+历史资料入口与使用范围（查阅日期：2026-09-13）：
+
+- history-ri：[英国皇家研究所：电动运动的诞生](https://www.rigb.org/explore-science/explore/blog/birth-electric-motion)。支持奥斯特 1820 年电流磁效应、法拉第 1821 年电磁旋转与 1831 年电磁感应；不把实验装置等同于现代工业电动机。
+- history-kit-early：[KIT：电动机的发明，1800—1854](https://www.eti.kit.edu/1376.php)。支持雅可比等早期电机探索、电动船试验及早期电源的实用限制。
+- history-kit-industrial：[KIT：电动机的发明，1856—1893](https://www.eti.kit.edu/1390.php)。支持自励发电机、直流电机结构演进、交流电机与三相系统；按具体贡献介绍人物，不以单一“发明者”概括全部发展。
+- history-vde：[VDE：电机与驱动技术年表](https://www.vde.com/de/etg/arbeitsgebiete/informationen/chronik-motoren-antriebe)。支持 Ward–Leonard 系统、家用电器普及及功率电子和驱动技术演进；综合年表用于交叉核对，具体争议事件应补查原始文献。
+- history-danfoss：[丹佛斯：交流驱动五十年](https://www.danfoss.com/en-gb/about-danfoss/news/dds/50-years-of-passion-for-drives/)。支持丹佛斯 1968 年开始批量生产交流驱动器；不据此把所有交流调速的起点定在 1968 年。
+- history-foc：[Blaschke：异步电机磁场定向控制专利 US3805135A](https://patents.google.com/patent/US3805135A/en)。支持 1970 年代磁场定向控制的具体技术实例；专利优先权日 1971-09-04、公开日 1974-04-16 不等同于该控制思想唯一的发明日期。
+- history-magnets：[英国女王伊丽莎白工程奖：高性能永磁材料](https://qeprize.org/winners/the-worlds-strongest-permanent-magnet)。支持佐川真人的烧结钕铁硼贡献、材料实用化及其在电机和发电机中的作用；永久磁体和永磁电机并非到 1980 年代才出现。
+- history-doe-drive：[美国能源部：电驱系统研发](https://www.energy.gov/cmei/vehicles/electric-drive-systems-research-and-development)。支持宽禁带器件、低稀土电机、封装、热管理与集成研究方向，不把研究目标当作所有量产产品已具备的性能。
+
+### 历史第 1 页：两百多年，电机怎样改变世界？
+
+页面 ID：introduction-motor-history-overview。地址：`/#introduction-motor-history-overview`。类型：motor-history / overview。主位置：20 / 39；绪论第 19 / 25 页。标签：已完成。
+
+教学目的：认识六阶段全貌，区分原理成立与工程实用。
+
+已完成内容：
+
+- 标题“两百多年，电机怎样改变世界？”；导语“从能够转动，到实用、普及、可控，再到高性能电驱系统。”。
+- 主图以 3 × 2 六阶段卡片构成阅读顺序，每卡显示阶段编号、时期、名称、能力短句、代表突破和应用。总结“发现规律 → 实用动力 → 广泛应用 → 受控运动 → 系统协同”；补充“能转 ≠ 能广泛应用；功率、电源、结构、成本与控制都需要发展”。
+- 电磁原理发现（1820—1830 年代初）：“让电变成运动”；突破“电流的磁效应、电磁旋转、电磁感应”；应用“实验室里的运动与发电演示”。
+- 走向实用电机（1830—1870 年代）：“从能转到能干活”；突破“机械输出提高，发电与电枢结构改进”；应用“电动船试验 → 可带负载的直流机器”。
+- 交流电机与三相系统（1880—1890 年代）：“把动力送到远处”；突破“旋转磁场、笼型感应电机、三相供电”；应用“发电 → 变压输电 → 远处的电机”。
+- 普及与调速发展（1890 年代—20 世纪中叶）：“各处都能出力”；突破“电力拖动扩展，并发展机组调压调速”；应用“生产机械、洗衣机、吸尘器”。
+- 电力电子与数字控制（1960—1990 年代）：“运动听懂指令”；突破“功率半导体、变频驱动、磁场定向与数字控制”；应用“可控交流驱动与精准伺服运动”。
+- 高性能材料与系统集成（1980 年代至今）：“整套系统一起进步”；突破“高性能永磁材料与电机、电控、冷却协同”；应用“新能源汽车、机器人、航空、船舶”。
+- 课堂思考“最早的电机已经能转，为什么没有马上广泛应用？”；注释“教学分期：各阶段相互交叠，新技术不代表完全替代旧技术。图解为原创教学简化示意。”。
+- 资料入口：皇家研究所 · 电磁实验、KIT · 直流与三相系统、VDE · 驱动技术年表、美国能源部 · 电驱研发，URL 对应上方来源表。
+
+未完成内容：无明确内容待办；实际投影与课堂设备全屏权限需现场检查。
+
+页内联系：六阶段建立全貌，问题引出后续工程条件。
+跨页联系：上一页 `#introduction-motor-advantages-environment`；下一页 `#introduction-motor-history-principles`。阶段顺序与总览一致，后续章节展开磁场、直流机器、三相机器和调速。
+验收：主图、事件、应用、结论、思考与来源完整呈现；继承公共导航，且不混淆实验与商业应用、机械与电气连接、感应转子与永磁体、研究目标与量产结果。
+源码位置：`content/motor-history.ts`、`components/motor-history-lesson.tsx`、`components/motor-history-lesson.css`；`content/course.ts` 生成稳定 ID，`components/course-player.tsx` 接入原生 HTML/SVG 模板。
+
+### 历史第 2 页：电与磁，让运动成为可能
+
+页面 ID：introduction-motor-history-principles。地址：`/#introduction-motor-history-principles`。类型：motor-history / principles。主位置：21 / 39；绪论第 20 / 25 页。标签：已完成。
+
+教学目的：看不见的电，怎样推动看得见的东西？
+
+已完成内容：
+
+- 标题“电与磁，让运动成为可能”；导语“先发现电与磁的联系，才有电动和发电的可能。”。
+- 三幅原创 SVG 分别画通电导线、环绕磁场与偏转指南针；通电导线绕磁铁旋转；磁铁向线圈移动、闭合回路连接检流计。图卡标题“电流 → 磁场”“电 + 磁 → 运动”“磁通变化 → 感应”；人物及年份逐图对应。页底双向能量链“电动：电能 → 机械能”“发电：机械能 → 电能”。
+- 代表性突破：“1820 / 奥斯特：通电导线使指南针偏转”。
+- 代表性突破：“1821 / 法拉第：通电导线绕磁铁旋转”。
+- 代表性突破：“1831 / 法拉第：发现电磁感应”。
+- “能力 → 应用”：实验室里的运动与发电演示；结论“电机的起点，是电与磁的联系。”。
+- 课堂思考“看不见的电，怎样推动看得见的东西？”；注释“教学示意，不复原含汞的历史装置；有磁铁不等于持续发电，关键是磁通变化等感应条件。”。
+- 资料入口：皇家研究所 · 电磁实验、KIT · 早期电机，URL 对应上方来源表。
+
+未完成内容：无明确内容待办；实际投影与课堂设备全屏权限需现场检查。
+
+页内联系：主图解释突破带来的能力，年份定位代表事件，应用总结把技术与任务联系起来，问题与注释检查概念边界。
+跨页联系：上一页 `#introduction-motor-history-overview`；下一页 `#introduction-motor-history-practical`。阶段顺序与总览一致，后续章节展开磁场、直流机器、三相机器和调速。
+验收：主图、事件、应用、结论、思考与来源完整呈现；继承公共导航，且不混淆实验与商业应用、机械与电气连接、感应转子与永磁体、研究目标与量产结果。
+源码位置：`content/motor-history.ts`、`components/motor-history-lesson.tsx`、`components/motor-history-lesson.css`；`content/course.ts` 生成稳定 ID，`components/course-player.tsx` 接入原生 HTML/SVG 模板。
+
+### 历史第 3 页：从能转，到能干活
+
+页面 ID：introduction-motor-history-practical。地址：`/#introduction-motor-history-practical`。类型：motor-history / practical。主位置：22 / 39；绪论第 21 / 25 页。标签：已完成。
+
+教学目的：能转的装置，为什么还不一定是好用的机器？
+
+已完成内容：
+
+- 标题“从能转，到能干活”；导语“像从小玩具变成小帮手：要有力气，也要供得起、用得久。”。
+- 两条图链分别为“电池供能 → 电机出力 → 传动 → 桨轮（推动船这一负载）”与“发电与供电改进 → 电枢与绕组改进 → 带动工作负载”；后者为逐步实用化的直流机器。四个工程条件标签“功率：带得动”“电源：供得起”“结构：用得久”“成本：有价值”。
+- 代表性突破：“1834 / 1838 / 雅可比：旋转电动机 / 电动船试验”。
+- 代表性突破：“1866 / 西门子：自励发电机”。
+- 代表性突破：“1870 年代 / 电枢结构与绕组继续改进”。
+- “能力 → 应用”：电动船试验 → 可带负载的直流机器；结论“能转只是起点，还要能干活、能持续用。”。
+- 课堂思考“能转的装置，为什么还不一定是好用的机器？”；注释“两图不是同一型号的升级；船是早期试验，自励发电机并非首个发电机，也未一次解决所有实用问题。”。
+- 资料入口：KIT · 早期电机、KIT · 直流与三相系统，URL 对应上方来源表。
+
+未完成内容：无明确内容待办；实际投影与课堂设备全屏权限需现场检查。
+
+页内联系：主图解释突破带来的能力，年份定位代表事件，应用总结把技术与任务联系起来，问题与注释检查概念边界。
+跨页联系：上一页 `#introduction-motor-history-principles`；下一页 `#introduction-motor-history-ac-system`。阶段顺序与总览一致，后续章节展开磁场、直流机器、三相机器和调速。
+验收：主图、事件、应用、结论、思考与来源完整呈现；继承公共导航，且不混淆实验与商业应用、机械与电气连接、感应转子与永磁体、研究目标与量产结果。
+源码位置：`content/motor-history.ts`、`components/motor-history-lesson.tsx`、`components/motor-history-lesson.css`；`content/course.ts` 生成稳定 ID，`components/course-player.tsx` 接入原生 HTML/SVG 模板。
+
+### 历史第 4 页：不用机械换向，也能让转子转起来
+
+页面 ID：introduction-motor-history-ac-system。地址：`/#introduction-motor-history-ac-system`。类型：motor-history / ac-system。主位置：23 / 39；绪论第 22 / 25 页。标签：已完成。
+
+教学目的：磁铁不用真的转，磁场也能转起来吗？
+
+已完成内容：
+
+- 标题“不用机械换向，也能让转子转起来”；导语“三相电流配合，让合成磁场转起来，带动感应转子。”。
+- 三幅并列 SVG 表示旋转磁场方向依次转动，灰色笼型转子稍慢跟随。图例“橙色箭头：旋转磁场；灰色导条：笼型转子（不是磁铁）”；辅助图链“发电机 → 变压器与输电 → 三相电动机”。
+- 代表性突破：“1880 年代 / 费拉里斯与特斯拉分别研究旋转磁场和感应电机”。
+- 代表性突破：“1889—1891 / 多利沃—多布罗沃尔斯基推动三相笼型异步电机与系统实用化”。
+- 代表性突破：“1891 / 劳芬—法兰克福三相远距离输电示范”。
+- “能力 → 应用”：发电 → 变压输电 → 远处的电机；结论“三相系统把电机发展推进到系统电气化。”。
+- 课堂思考“磁铁不用真的转，磁场也能转起来吗？”；注释“此处以笼型感应电机为例：转子不是永磁体，电动时通常比磁场慢；多位研究者贡献不同。”。
+- 资料入口：KIT · 直流与三相系统，URL 对应上方来源表。
+
+未完成内容：无明确内容待办；实际投影与课堂设备全屏权限需现场检查。
+
+页内联系：主图解释突破带来的能力，年份定位代表事件，应用总结把技术与任务联系起来，问题与注释检查概念边界。
+跨页联系：上一页 `#introduction-motor-history-practical`；下一页 `#introduction-motor-history-adoption`。阶段顺序与总览一致，后续章节展开磁场、直流机器、三相机器和调速。
+验收：主图、事件、应用、结论、思考与来源完整呈现；继承公共导航，且不混淆实验与商业应用、机械与电气连接、感应转子与永磁体、研究目标与量产结果。
+源码位置：`content/motor-history.ts`、`components/motor-history-lesson.tsx`、`components/motor-history-lesson.css`；`content/course.ts` 生成稳定 ID，`components/course-player.tsx` 接入原生 HTML/SVG 模板。
+
+### 历史第 5 页：电机进入工厂，也进入家庭
+
+页面 ID：introduction-motor-history-adoption。地址：`/#introduction-motor-history-adoption`。类型：motor-history / adoption。主位置：24 / 39；绪论第 23 / 25 页。标签：已完成。
+
+教学目的：工厂和家庭需要的运动，都是一样的吗？
+
+已完成内容：
+
+- 标题“电机进入工厂，也进入家庭”；导语“不仅要转起来，还要按任务转快、转慢。电子变频器之前，已有调速。”。
+- 三个大图标分别显示“生产机械 / 电机 → 工作机构”“洗衣机 / 电机 → 洗涤机构”“吸尘器 / 电机 → 风机”。下方 Ward–Leonard 图按“交流电动机 —机械轴— 直流发电机 —电气连接— 直流电动机 —机械传动— 负载”排列，灰色双线表示机械连接，金色实线表示电气连接；控制说明“调节发电机励磁 → 改变输出电压 → 调节电动机速度”。
+- 代表性突破：“1891 / Ward–Leonard 机组调速系统”。
+- 代表性突破：“20 世纪初 / 电动家用电器逐步出现与普及”。
+- 代表性突破：“应用需求 / 从带动工作机构，走向按任务调节运动”。
+- “能力 → 应用”：生产机械、洗衣机、吸尘器；结论“电机不只是出力，还需要按任务调节运动。”。
+- 课堂思考“工厂和家庭需要的运动，都是一样的吗？”；注释“机械轴与电气连接分开画；家电普及因地区而异，示例年份不等于所有家庭开始使用的年份。”。
+- 资料入口：VDE · 驱动技术年表，URL 对应上方来源表。
+
+未完成内容：无明确内容待办；实际投影与课堂设备全屏权限需现场检查。
+
+页内联系：主图解释突破带来的能力，年份定位代表事件，应用总结把技术与任务联系起来，问题与注释检查概念边界。
+跨页联系：上一页 `#introduction-motor-history-ac-system`；下一页 `#introduction-motor-history-electronic-control`。阶段顺序与总览一致，后续章节展开磁场、直流机器、三相机器和调速。
+验收：主图、事件、应用、结论、思考与来源完整呈现；继承公共导航，且不混淆实验与商业应用、机械与电气连接、感应转子与永磁体、研究目标与量产结果。
+源码位置：`content/motor-history.ts`、`components/motor-history-lesson.tsx`、`components/motor-history-lesson.css`；`content/course.ts` 生成稳定 ID，`components/course-player.tsx` 接入原生 HTML/SVG 模板。
+
+### 历史第 6 页：给电机装上可调电源和控制大脑
+
+页面 ID：introduction-motor-history-electronic-control。地址：`/#introduction-motor-history-electronic-control`。类型：motor-history / electronic-control。主位置：25 / 39；绪论第 24 / 25 页。标签：已完成。
+
+教学目的：怎样让电机不仅能转，还能按要求运动？
+
+已完成内容：
+
+- 标题“给电机装上可调电源和控制大脑”；导语“驱动器像可调水龙头，反馈像眼睛，控制系统边看边调整。”。
+- 主图对照“过去：旋转机组 / 电动机带发电机 → 调整供电”和“后来：电子驱动 / 功率器件开关 → 调整供电”。下方带反馈示例“指令 → 驱动器 → 电机 → 负载”，反馈箭头文字“传感器反馈：实际位置 / 速度，从电机或负载返回驱动器”。
+- 代表性突破：“1960 年代 / 1968 / 功率半导体推动电子驱动；丹佛斯开始批量生产交流驱动器”。
+- 代表性突破：“1970 年代 / 磁场定向控制发展；Blaschke 专利是技术实例”。
+- 代表性突破：“1980—1990 年代 / 功率器件与数字控制推动交流调速、伺服”。
+- “能力 → 应用”：可控交流驱动与精准伺服运动；结论“电机 + 驱动器 + 反馈，让运动按要求进行。”。
+- 课堂思考“怎样让电机不仅能转，还能按要求运动？”；注释“闭环是带传感器反馈的示例，并非所有变频驱动的统一接法；“大脑”不表示电机内部必有计算机。”。
+- 资料入口：VDE · 驱动技术年表、丹佛斯 · 1968 年交流驱动、Blaschke · 磁场定向控制专利，URL 对应上方来源表。
+
+未完成内容：无明确内容待办；实际投影与课堂设备全屏权限需现场检查。
+
+页内联系：主图解释突破带来的能力，年份定位代表事件，应用总结把技术与任务联系起来，问题与注释检查概念边界。
+跨页联系：上一页 `#introduction-motor-history-adoption`；下一页 `#introduction-motor-history-modern-drive`。阶段顺序与总览一致，后续章节展开磁场、直流机器、三相机器和调速。
+验收：主图、事件、应用、结论、思考与来源完整呈现；继承公共导航，且不混淆实验与商业应用、机械与电气连接、感应转子与永磁体、研究目标与量产结果。
+源码位置：`content/motor-history.ts`、`components/motor-history-lesson.tsx`、`components/motor-history-lesson.css`；`content/course.ts` 生成稳定 ID，`components/course-player.tsx` 接入原生 HTML/SVG 模板。
+
+### 历史第 7 页：今天的发展，是整套电驱系统的发展
+
+页面 ID：introduction-motor-history-modern-drive。地址：`/#introduction-motor-history-modern-drive`。类型：motor-history / modern-drive。主位置：26 / 39；绪论第 25 / 25 页。标签：已完成。
+
+教学目的：只有更强的磁铁，整套电驱就一定更好吗？
+
+已完成内容：
+
+- 标题“今天的发展，是整套电驱系统的发展”；导语“像一支配合默契的队伍：材料、电机、供电、控制、冷却缺一不可。”。
+- 中心图标“现代电驱系统 / 高效 · 紧凑 · 可靠 · 精准”，连接五要素“材料：永磁与软磁材料”“电机：结构与电磁设计”“功率电子：匹配需要的电”“控制：按任务调节运动”“冷却：管理发热”。图下引导“更强的磁铁 ≠ 自动更好的系统；还要匹配供电、控制、热与机械限制”。应用图标为车、机器人、飞机、船；课程桥梁“下一章：先认识电与磁，再计算磁路 →”。
+- 代表性突破：“1980 年代以来 / 佐川真人等推动高性能钕铁硼材料实用化”。
+- 代表性突破：“今天的研发方向 / 宽禁带功率器件、低稀土电机设计”。
+- 代表性突破：“系统协同 / 封装、热管理与电机—驱动器集成”。
+- “能力 → 应用”：新能源汽车、机器人、航空、船舶；结论“从发现规律到实用动力，再到高效、精准、可靠的受控运动。”。
+- 课堂思考“只有更强的磁铁，整套电驱就一定更好吗？”；注释“研发方向不等于所有量产产品的实测性能；永磁电机早已存在，也不会必然取代所有电机路线。”。
+- 资料入口：QEPrize · 高性能永磁材料、美国能源部 · 电驱研发，URL 对应上方来源表。
+
+未完成内容：无明确内容待办；实际投影与课堂设备全屏权限需现场检查。
+
+页内联系：主图解释突破带来的能力，年份定位代表事件，应用总结把技术与任务联系起来，问题与注释检查概念边界。
+跨页联系：上一页 `#introduction-motor-history-electronic-control`；下一页 `#magnetic-circuits`。回顾新能源汽车、分布式电推进和吊舱应用，并衔接磁路。
+验收：主图、事件、应用、结论、思考与来源完整呈现；继承公共导航，且不混淆实验与商业应用、机械与电气连接、感应转子与永磁体、研究目标与量产结果。
+源码位置：`content/motor-history.ts`、`components/motor-history-lesson.tsx`、`components/motor-history-lesson.css`；`content/course.ts` 生成稳定 ID，`components/course-player.tsx` 接入原生 HTML/SVG 模板。
+
+历史核查边界：不同研究者分别贡献原理、结构、供电与控制，不概括为单一“电机发明者”；调速早于电子变频器；永磁电机早于 1980 年代，也不必然取代其他路线；不提供未经核实的统一性能比例。
 
 ### 磁路内容规划：先认识电与磁，再计算磁路
 
@@ -1130,7 +1323,7 @@
 - 原理来源：[OpenStax：Maxwell’s Equations and Electromagnetic Waves](https://openstax.org/books/university-physics-volume-2/pages/16-1-maxwells-equations-and-electromagnetic-waves)，用于核对四条定律、位移电流与电磁力的区别；[MIT OCW：电磁场与能量，第 2 章](https://ocw.mit.edu/courses/res-6-001-electromagnetic-fields-and-energy-spring-2008/pages/chapter-2/)，用于后续磁通连续性及安培、法拉第定律的教学衔接。查阅日期：2026-09-13。上述类比和版式为教学设计，不替代完整定律。
 
 页内联系：入门图例提供读图词汇，四图分别解释场的来源、磁通连续性与电磁变化的联系，课程桥梁筛出后续磁路重点，课堂思考检查“变化”这一条件是否理解。
-跨页联系：当前上一页 `#introduction-outline`；若绪论四张优势页实现，则上一页为 `#introduction-motor-advantages-adaptability`。下一页 `#magnetic-circuits-outline`，提纲规划增加首页科普对应的学习起点；后续基本量解释 B、H、Φ，定律页展开安培环路定律，交流磁路页展开法拉第定律，最终支撑直流电机、变压器与异步电机。
+跨页联系：当前上一页 `#introduction-outline`；若仅绪论四张优势页实现，则上一页为 `#introduction-motor-advantages-adaptability`；若再实现历史七页，则上一页为 `#introduction-motor-history-modern-drive`。下一页 `#magnetic-circuits-outline`，提纲规划增加首页科普对应的学习起点；后续基本量解释 B、H、Φ，定律页展开安培环路定律，交流磁路页展开法拉第定律，最终支撑直流电机、变压器与异步电机。
 交互：主体静态图解，继承全站翻页、全屏和 hash 定位；下一页入口沿用课程导航，资料链接在新标签页打开。独立草稿只展示图解，不承担课程导航。
 已完成内容：正式课程页已采用与预览完全相同的本地 HTML 内容，四条规则均含积分公式与符号说明，并查阅原理资料。
 未完成内容：验证正式嵌入页在部署环境中的加载、投影可读性和实际导航；后续再同步磁路提纲与侧栏名称。
@@ -1158,7 +1351,8 @@
 ## 内容与源码对应
 
 - `content/course.ts`：七章问题、目标、提纲、教师资料、考核方案、课程页面 ID 与数据顺序、外部视频与分布式推进内容。
-- `components/course-player.tsx`：30 个主翻页位置的组织、八个 EV 标签映射、公共导航、封面、教师页、考核页、视频页、思考页、提纲模板及专题接入。
+- `components/course-player.tsx`：39 个主翻页位置的组织、八个 EV 标签映射、公共导航与专题接入。
+- `content/motor-history.ts`、`components/motor-history-lesson.tsx`、`components/motor-history-lesson.css`：历史七页数据、来源、本地 HTML/SVG 图解与样式。
 - `components/chapter-galaxy.tsx`：封面七星球、颜色图例、符号、知识依赖线和悬停提示。
 - `components/electrification-trend.tsx`：传统动力 → 电机 → 车、飞机、船的趋势图与文案。
 - `components/ev-roadmap.tsx`：五路线的详情数据、实际能量路径、共同原理、回收交互、对比表、记忆卡和页内导航。

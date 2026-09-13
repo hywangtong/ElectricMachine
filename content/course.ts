@@ -1,4 +1,5 @@
 import { podPages, type PodView } from '@/content/ship-pod';
+import { motorHistoryPages, type MotorHistoryPage } from '@/content/motor-history';
 
 export type Topic = { title: string; description: string };
 export type TeacherProfile = {
@@ -165,6 +166,20 @@ export const chapters: Chapter[] = [
 ];
 export type Slide =
   | { id: string; kind: 'home'; title: string }
+  | {
+      id: string;
+      kind: 'motor-history';
+      title: string;
+      chapterId: string;
+      page: MotorHistoryPage;
+    }
+  | {
+      id: string;
+      kind: 'motor-advantage';
+      title: string;
+      chapterId: string;
+      advantage: 'environment' | 'convenience' | 'performance' | 'adaptability';
+    }
   | {
       id: string;
       kind: 'ev';
@@ -425,6 +440,25 @@ export const slides: Slide[] = [
       title: '本章内容',
       chapterId: chapter.id,
     });
+
+    if (chapter.id === 'introduction') {
+      chapterSlides.push({
+        id: 'introduction-motor-advantages-environment',
+        kind: 'motor-advantage',
+        title: '电机的优势：环保',
+        chapterId: chapter.id,
+        advantage: 'environment',
+      });
+      chapterSlides.push(
+        ...motorHistoryPages.map(({ page, title }): Slide => ({
+          id: `introduction-motor-history-${page}`,
+          kind: 'motor-history',
+          title,
+          chapterId: chapter.id,
+          page,
+        })),
+      );
+    }
 
     if (chapter.id === 'magnetic-circuits') {
       chapterSlides.push({

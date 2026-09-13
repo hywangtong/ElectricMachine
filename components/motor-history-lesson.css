@@ -1,0 +1,418 @@
+.motor-history-lesson {
+  margin-top: 20px;
+  color: #203d38;
+}
+.motor-history-lesson p {
+  line-height: 1.4;
+}
+.mh-eyebrow {
+  display: flex;
+  justify-content: space-between;
+  color: #9b633d;
+  font-size: 18px;
+  letter-spacing: 2px;
+}
+.mh-eyebrow span {
+  color: #738880;
+  font-size: 16px;
+}
+.motor-history-lesson h1 {
+  font-size: 42px;
+  line-height: 1.2;
+  letter-spacing: -1px;
+  margin: 13px 0 10px;
+  font-weight: 700;
+}
+.mh-lead {
+  font-size: 22px;
+  color: #647a73;
+  margin: 0 0 22px;
+}
+.mh-stage-grid {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 24px;
+  height: 370px;
+}
+.mh-diagram {
+  background: #f3f6f2;
+  border: 1px solid #dce6de;
+  border-radius: 16px;
+  padding: 22px;
+}
+.motor-history-lesson h3 {
+  font-size: 19px;
+  line-height: 1.2;
+  margin: 0 0 12px;
+}
+.mh-events {
+  border-left: 2px solid #cfb793;
+  padding-left: 24px;
+}
+.mh-events > span {
+  font-size: 14px;
+  color: #7d8d83;
+  letter-spacing: 2px;
+}
+.mh-events > div {
+  margin: 15px 0 20px;
+}
+.mh-events strong {
+  color: #a56c37;
+  font-size: 25px;
+}
+.mh-events p {
+  font-size: 20px;
+  line-height: 1.45;
+  margin: 5px 0 0;
+}
+.mh-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+}
+.mh-node > svg {
+  width: 52px;
+  height: 52px;
+  color: #436e61;
+  stroke-width: 1.5;
+}
+.mh-node strong {
+  font-size: 20px;
+}
+.mh-node span {
+  font-size: 16px;
+  color: #687e73;
+}
+.mh-chain {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 12px;
+}
+.mh-chain-part {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  gap: 12px;
+}
+.mh-arrow {
+  width: 27px;
+  flex-shrink: 0;
+  color: #b67d43;
+}
+.mh-practical .mh-chain {
+  margin-bottom: 12px;
+}
+.mh-practical .mh-node > svg {
+  width: 34px;
+  height: 34px;
+}
+.mh-chips {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  border-top: 1px solid #dce6de;
+  padding-top: 13px;
+}
+.mh-chips span {
+  font-size: 16px;
+  padding: 5px 12px;
+  background: #e5ece4;
+  border-radius: 6px;
+}
+.mh-experiments {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.mh-experiments > div:not(.mh-energy) {
+  text-align: center;
+}
+.mh-experiments svg {
+  width: 100%;
+  height: 180px;
+}
+.mh-experiments svg text,
+.mh-field-sequence text {
+  font-size: 15px;
+  font-family: inherit;
+}
+.mh-experiments p {
+  font-size: 21px;
+  color: #a56c37;
+  margin: 7px 0;
+}
+.mh-energy {
+  display: flex;
+  grid-column: 1 / -1;
+  justify-content: space-around;
+  background: #e1ece3;
+  padding: 12px;
+  font-size: 21px;
+  border-radius: 8px;
+}
+.mh-field-sequence {
+  display: flex;
+  justify-content: space-around;
+}
+.mh-field-sequence svg {
+  height: 205px;
+  width: 220px;
+}
+.mh-legend {
+  font-size: 16px;
+  text-align: center;
+  color: #718279;
+  margin: 0 0 15px;
+}
+.mh-field-sequence ~ .mh-chain .mh-node > svg {
+  width: 32px;
+  height: 32px;
+}
+.mh-field-sequence ~ .mh-chain .mh-node strong {
+  font-size: 18px;
+}
+.mh-use-cards {
+  display: flex;
+  margin-bottom: 24px;
+}
+.mh-use-cards .mh-node {
+  border-right: 1px solid #dce6de;
+}
+.mh-use-cards .mh-node:last-child {
+  border: 0;
+}
+.mh-machines {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.mh-machines .mh-node > svg {
+  width: 36px;
+  height: 36px;
+}
+.mh-machines .mh-node strong {
+  font-size: 16px;
+}
+.mh-shaft {
+  width: 35px;
+  border-top: 7px double #78838a;
+  flex-shrink: 0;
+}
+.mh-wire {
+  width: 52px;
+  border-top: 3px solid #b77d3e;
+  flex-shrink: 0;
+}
+.mh-connection-labels {
+  display: flex;
+  justify-content: space-around;
+  color: #9d713f;
+  font-size: 14px;
+  margin: 0 0 10px;
+}
+.mh-control {
+  font-size: 17px;
+  text-align: center;
+  margin: 17px 0 0;
+  color: #617d6d;
+}
+.mh-comparison {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 14px;
+  margin-bottom: 23px;
+}
+.mh-comparison > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.mh-comparison svg {
+  width: 40px;
+  height: 40px;
+  color: #a8753f;
+}
+.mh-comparison strong {
+  font-size: 22px;
+}
+.mh-comparison span {
+  font-size: 16px;
+}
+.mh-feedback {
+  border: 2px solid #749c88;
+  border-top: 0;
+  margin: 16px 80px 0 150px;
+  border-radius: 0 0 9px 9px;
+  padding: 8px;
+  font-size: 15px;
+  color: #436e61;
+  text-align: center;
+}
+.mh-system-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.mh-system-center svg {
+  width: 64px;
+  height: 64px;
+  color: #a8753f;
+}
+.mh-system-center strong {
+  font-size: 28px;
+}
+.mh-system-center span {
+  font-size: 18px;
+  color: #6c8275;
+}
+.mh-system-team {
+  display: flex;
+  margin-top: 23px;
+  gap: 10px;
+}
+.mh-system-team > div {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  border-top: 2px solid #a4bbab;
+  padding-top: 13px;
+}
+.mh-system-team svg {
+  width: 33px;
+  height: 33px;
+  color: #436e61;
+}
+.mh-system-team strong {
+  font-size: 19px;
+}
+.mh-system-team span {
+  font-size: 14px;
+}
+.mh-overview {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  height: 370px;
+}
+.mh-overview article {
+  background: #f3f6f2;
+  border: 1px solid #dce6de;
+  border-radius: 12px;
+  padding: 12px 20px;
+}
+.mh-overview-top {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  font-size: 15px;
+  color: #a17340;
+}
+.mh-overview-top svg {
+  width: 28px;
+  height: 28px;
+}
+.mh-overview h2 {
+  font-size: 23px;
+  line-height: 1.2;
+  margin: 8px 0 4px;
+}
+.mh-overview article > strong {
+  font-size: 17px;
+  color: #568073;
+}
+.mh-overview article p {
+  font-size: 15px;
+  margin: 5px 0 0;
+}
+.mh-takeaway {
+  position: relative;
+  background: #244b44;
+  color: #fff;
+  border-radius: 12px;
+  margin-top: 20px;
+  padding: 16px 23px;
+}
+.mh-takeaway > div:first-child {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.mh-takeaway span {
+  color: #bcd1bf;
+  font-size: 15px;
+  letter-spacing: 2px;
+}
+.mh-takeaway strong {
+  font-size: 24px;
+}
+.mh-takeaway p {
+  font-size: 18px;
+  margin: 8px 0 0;
+  color: #e0e8db;
+}
+.mh-application-icons {
+  position: absolute;
+  right: 23px;
+  top: 16px;
+  display: flex;
+  gap: 20px;
+}
+.mh-application-icons svg {
+  width: 26px;
+  height: 26px;
+}
+.mh-question {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 16px 0 12px;
+  font-size: 19px;
+}
+.mh-question > svg {
+  width: 23px;
+  height: 23px;
+  color: #a8753f;
+}
+.mh-question b {
+  font-size: 16px;
+  font-weight: 500;
+  margin-left: auto;
+  color: #698776;
+}
+.mh-note {
+  font-size: 14px;
+  line-height: 1.4;
+  color: #7c897e;
+  margin: 0 0 9px;
+}
+.mh-sources {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: #7c897e;
+  font-size: 13px;
+}
+.mh-sources a {
+  color: #547969;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.mh-sources a:focus-visible {
+  outline: 2px solid #a8753f;
+  outline-offset: 4px;
+}
+.mh-sources > span:last-child {
+  margin-left: auto;
+}

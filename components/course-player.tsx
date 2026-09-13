@@ -29,6 +29,7 @@ import { EvLesson, type EvPage } from '@/components/ev-roadmap';
 import { ShipPodExplainer } from '@/components/ship-pod-explainer';
 import { DistributedPropulsion } from '@/components/distributed-propulsion';
 import { MotorAdvantagesLesson } from '@/components/motor-advantages-lesson';
+import { MotorHistoryLesson } from '@/components/motor-history-lesson';
 const number = (n: number) => String(n).padStart(2, '0');
 type IntroTabSlide = Extract<Slide, { kind: 'ev' }>;
 
@@ -516,6 +517,8 @@ export default function CoursePlayer() {
                         page={slide.page}
                         onNavigate={jump}
                       />
+                    ) : slide.kind === 'motor-history' ? (
+                      <MotorHistoryLesson page={slide.page} />
                     ) : slide.kind === 'pod' ? (
                       <ShipPodExplainer view={slide.view} />
                     ) : slide.kind === 'assessment' ? (
