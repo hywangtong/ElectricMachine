@@ -200,6 +200,13 @@ export type Slide =
       chapterId: string;
       lead: string;
       points: Topic[];
+      explainer?: 'distributed-propulsion';
+      links?: {
+        title: string;
+        url: string;
+        kind: 'video' | 'reference';
+      }[];
+      note?: string;
     }
   | {
       id: string;
@@ -349,6 +356,52 @@ export const slides: Slide[] = [
             page,
           }),
         ),
+
+        {
+          id: 'introduction-distributed-electric-propulsion',
+          kind: 'content',
+          title: '电机上天：分布式电推进',
+          chapterId: chapter.id,
+          lead: '像给机翼装一排小风扇：螺旋桨不仅提供推力，还让吹出的风帮助机翼产生升力。',
+          explainer: 'distributed-propulsion',
+          points: [
+            {
+              title: '一块电池',
+              description: '像插线板一样，把电送给机翼上的许多小电机。',
+            },
+            {
+              title: '大家一起吹',
+              description: '小螺旋桨把气流加速，机翼慢慢飞也托得住飞机。',
+            },
+            {
+              title: '只留两个大桨',
+              description: '小桨停转并折叠；窄机翼阻力小，飞得更省电。',
+            },
+            {
+              title: '少一个也能干活',
+              description:
+                '其余电机还能继续推；但电池、母线和软件也要有隔离与备份。',
+            },
+          ],
+          links: [
+            {
+              title: '分布式电推进系统简述',
+              url: 'https://www.bilibili.com/video/BV1RH4y1q7yd/',
+              kind: 'video',
+            },
+            {
+              title: 'NASA X57 分布式电推进飞行器',
+              url: 'https://www.bilibili.com/video/BV1hK4y197uE/',
+              kind: 'video',
+            },
+            {
+              title: 'NASA X-57 官方资料',
+              url: 'https://www.nasa.gov/x-57-maxwell/',
+              kind: 'reference',
+            },
+          ],
+          note: '工程边界：冗余依赖供电隔离与控制备份，电池重量和散热仍是难题。X-57 为全电研究方案，项目于 2024 年首飞前结束，不能把设计目标当作飞行实测结果。',
+        },
         ...podPages.map(
           (page): Slide => ({
             ...page,

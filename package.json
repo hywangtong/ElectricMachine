@@ -10,7 +10,7 @@
     "build": "node scripts/build.mjs",
     "export:ship-pod": "node scripts/export-ship-pod.mjs",
     "start": "vite preview --outDir dist/client --host 127.0.0.1 --port 4173",
-    "lint": "oxlint app content scripts components/chapter-galaxy.tsx components/course-player.tsx components/electrification-trend.tsx components/ev-roadmap.tsx components/ship-pod-explainer.tsx components/ui/button.tsx components/ui/dialog.tsx lib/utils.ts vite.config.ts next.config.ts",
+    "lint": "oxlint app content scripts components/chapter-galaxy.tsx components/course-player.tsx components/distributed-propulsion.tsx components/electrification-trend.tsx components/ev-roadmap.tsx components/ship-pod-explainer.tsx components/ui/button.tsx components/ui/dialog.tsx lib/utils.ts vite.config.ts next.config.ts",
     "format": "oxfmt",
     "typecheck": "tsc --noEmit"
   },

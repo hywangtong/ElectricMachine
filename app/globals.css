@@ -1083,6 +1083,160 @@ a:focus-visible {
   color: #53685d;
   margin-right: 5px;
 }
+
+.propulsion-content {
+  padding-top: 22px;
+}
+.propulsion-content h1 {
+  margin: 18px 0 10px;
+  font-size: 48px;
+}
+.propulsion-content .outline-lead {
+  font-size: 23px;
+  margin: 0;
+}
+.distributed-propulsion {
+  margin-top: 12px;
+  --dep-small: #396050;
+  --dep-tip: #9b5c36;
+  --dep-power: #aa8532;
+}
+.dep-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+}
+.dep-tabs button {
+  padding: 10px 24px;
+  border: 1px solid #dbe5de;
+  border-radius: 4px;
+  background: #fff;
+  color: #466154;
+  font-size: 21px;
+  cursor: pointer;
+}
+.dep-tabs button[aria-selected='true'] {
+  color: #fff;
+  background: #274b42;
+  border-color: #274b42;
+}
+.dep-stage {
+  display: block;
+  width: 100%;
+  height: 280px;
+  margin: 8px 0;
+}
+.dep-small {
+  color: var(--dep-small);
+}
+.dep-tip {
+  color: var(--dep-tip);
+}
+.dep-blades {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.dep-motor[data-running='true'] .dep-blades {
+  animation: dep-spin 0.85s linear infinite;
+}
+.dep-motor[data-folded='true'],
+.dep-motor[data-failed='true'] {
+  opacity: 0.22;
+}
+.dep-airflow,
+.dep-power-line,
+.dep-lift,
+.dep-fault {
+  opacity: 0;
+  transition: opacity 220ms ease;
+}
+.distributed-propulsion[data-step='energy'] .dep-power-line,
+.distributed-propulsion[data-step='takeoff'] .dep-airflow,
+.distributed-propulsion[data-step='takeoff'] .dep-lift,
+.distributed-propulsion[data-step='cruise'] .dep-airflow-tip,
+.distributed-propulsion[data-step='fault']
+  .dep-airflow:not(.dep-airflow-failed),
+.distributed-propulsion[data-step='fault'] .dep-fault {
+  opacity: 1;
+}
+.dep-status {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 28px;
+  min-height: 36px;
+}
+.dep-status strong {
+  font-size: 28px;
+  font-weight: 500;
+  color: #396050;
+}
+.dep-status p {
+  margin: 0;
+  font-size: 23px;
+  color: #466154;
+}
+.dep-takeaway {
+  text-align: center;
+  border-top: 1px solid #dbe5de;
+  padding-top: 8px;
+  margin: 8px 0 0;
+  color: #466154;
+  font-size: 21px;
+}
+.propulsion-content .content-links {
+  margin-top: 14px;
+}
+@keyframes dep-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dep-motor[data-running='true'] .dep-blades {
+    animation: none;
+  }
+  .dep-airflow,
+  .dep-power-line,
+  .dep-lift,
+  .dep-fault {
+    transition: none;
+  }
+}
+.content-links {
+  display: flex;
+  gap: 18px;
+  margin-top: 22px;
+}
+.content-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  gap: 12px;
+  padding: 16px 12px;
+  border: 1px solid #dbe5de;
+  border-radius: 4px;
+  color: #274b42;
+  font-size: 20px;
+  text-decoration: none;
+}
+.content-links a:hover {
+  background: #eff5f1;
+  text-decoration: underline;
+}
+.content-links svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+.content-note {
+  color: #748679;
+  font-size: 17px;
+  line-height: 1.6;
+  margin: 17px 0 0;
+}
+
 .video-body {
   padding-top: 42px;
 }

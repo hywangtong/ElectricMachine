@@ -27,6 +27,7 @@ import { ChapterGalaxy } from '@/components/chapter-galaxy';
 import { ElectrificationTrend } from '@/components/electrification-trend';
 import { EvLesson } from '@/components/ev-roadmap';
 import { ShipPodExplainer } from '@/components/ship-pod-explainer';
+import { DistributedPropulsion } from '@/components/distributed-propulsion';
 const number = (n: number) => String(n).padStart(2, '0');
 
 export default function CoursePlayer() {
@@ -622,7 +623,9 @@ export default function CoursePlayer() {
                     ) : slide.kind === 'trend' ? (
                       <ElectrificationTrend />
                     ) : (
-                      <div className="outline-body">
+                      <div
+                        className={`outline-body${slide.kind === 'content' && slide.explainer ? ' propulsion-content' : ''}`}
+                      >
                         <div className="eyebrow">
                           <span />
                           CHAPTER {number(chapterIndex + 1)}{' '}
@@ -636,20 +639,50 @@ export default function CoursePlayer() {
                             ? slide.lead
                             : chapter.question}
                         </p>
-                        <div className="topic-grid">
-                          {(slide.kind === 'content'
-                            ? slide.points
-                            : chapter.topics
-                          ).map((topic, i) => (
-                            <section className="topic" key={topic.title}>
-                              <span>{number(i + 1)}</span>
-                              <div>
-                                <h2>{topic.title}</h2>
-                                <p>{topic.description}</p>
-                              </div>
-                            </section>
-                          ))}
-                        </div>
+                        {slide.kind === 'content' && slide.explainer ? (
+                          <DistributedPropulsion points={slide.points} />
+                        ) : (
+                          <div className="topic-grid">
+                            {(slide.kind === 'content'
+                              ? slide.points
+                              : chapter.topics
+                            ).map((topic, i) => (
+                              <section className="topic" key={topic.title}>
+                                <span>{number(i + 1)}</span>
+                                <div>
+                                  <h2>{topic.title}</h2>
+                                  <p>{topic.description}</p>
+                                </div>
+                              </section>
+                            ))}
+                          </div>
+                        )}
+                        {slide.kind === 'content' && slide.links && (
+                          <nav
+                            className="content-links"
+                            aria-label="视频与参考资料"
+                          >
+                            {slide.links.map((link) => (
+                              <a
+                                key={link.url}
+                                href={link.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              >
+                                {link.kind === 'video' ? (
+                                  <Play />
+                                ) : (
+                                  <BookOpen />
+                                )}
+                                <span>{link.title}</span>
+                                <ArrowRight />
+                              </a>
+                            ))}
+                          </nav>
+                        )}
+                        {slide.kind === 'content' && slide.note && (
+                          <p className="content-note">{slide.note}</p>
+                        )}
                         {slide.kind === 'outline' && (
                           <div className="outline-note">
                             <span />
