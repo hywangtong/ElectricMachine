@@ -33,7 +33,7 @@ export const chapters: Chapter[] = [
       role: '《电机与拖动》授课教师',
       education: '2019 年，浙江大学电气工程博士毕业',
       experience:
-        '2019—2023 年，在美的威灵（上海）电机技术有限公司从事电机控制软件方面的工作',
+        '2019—2023 年，美的威灵（上海）电机技术有限公司，MVD&LVD研究室软件组长',
       research: '电机设计、电机驱动器、电机控制算法',
       phone: '18758566499',
       email: 'wangtong@hzcu.edu.cn',
