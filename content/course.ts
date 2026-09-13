@@ -1,5 +1,8 @@
 import { podPages, type PodView } from '@/content/ship-pod';
-import { motorHistoryPages, type MotorHistoryPage } from '@/content/motor-history';
+import {
+  motorHistoryPages,
+  type MotorHistoryPage,
+} from '@/content/motor-history';
 
 export type Topic = { title: string; description: string };
 export type TeacherProfile = {
@@ -442,21 +445,46 @@ export const slides: Slide[] = [
     });
 
     if (chapter.id === 'introduction') {
-      chapterSlides.push({
-        id: 'introduction-motor-advantages-environment',
-        kind: 'motor-advantage',
-        title: '电机的优势：环保',
-        chapterId: chapter.id,
-        advantage: 'environment',
-      });
       chapterSlides.push(
-        ...motorHistoryPages.map(({ page, title }): Slide => ({
-          id: `introduction-motor-history-${page}`,
-          kind: 'motor-history',
-          title,
+        {
+          id: 'introduction-motor-advantages-environment',
+          kind: 'motor-advantage',
+          title: '电机的优势：环保',
           chapterId: chapter.id,
-          page,
-        })),
+          advantage: 'environment',
+        },
+        {
+          id: 'introduction-motor-advantages-convenience',
+          kind: 'motor-advantage',
+          title: '电机的优势：应用便捷',
+          chapterId: chapter.id,
+          advantage: 'convenience',
+        },
+        {
+          id: 'introduction-motor-advantages-performance',
+          kind: 'motor-advantage',
+          title: '电机的优势：高性能',
+          chapterId: chapter.id,
+          advantage: 'performance',
+        },
+        {
+          id: 'introduction-motor-advantages-adaptability',
+          kind: 'motor-advantage',
+          title: '电机的优势：适应性强',
+          chapterId: chapter.id,
+          advantage: 'adaptability',
+        },
+      );
+      chapterSlides.push(
+        ...motorHistoryPages.map(
+          ({ page, title }): Slide => ({
+            id: `introduction-motor-history-${page}`,
+            kind: 'motor-history',
+            title,
+            chapterId: chapter.id,
+            page,
+          }),
+        ),
       );
     }
 
