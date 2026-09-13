@@ -1,0 +1,218 @@
+.calculation-lesson {
+  padding: 12px 22px;
+  grid-template-rows: auto minmax(0, 1fr) auto auto;
+  gap: 10px;
+}
+.calculation-lesson .eyebrow {
+  font-size: 17px;
+}
+.calculation-lesson h1 {
+  font-size: 34px;
+}
+.calculation-lesson .lead {
+  font-size: 20px;
+}
+.calculation-lesson .card {
+  padding: 12px 18px;
+}
+.calculation-lesson .card h2 {
+  font-size: 25px;
+}
+.calculation-grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 14px;
+  min-height: 0;
+}
+.fundamentals {
+  display: grid;
+  grid-template-rows: auto 1fr auto auto auto auto;
+  gap: 4px;
+}
+.analogy-table {
+  display: grid;
+  gap: 5px;
+}
+.analogy-table > div {
+  display: grid;
+  grid-template-columns: 1fr 30px 1.2fr 50px;
+  gap: 8px;
+  align-items: center;
+  padding: 3px 12px;
+  border-radius: 7px;
+  background: #f1f6f4;
+  font-size: 22px;
+}
+.analogy-table > div > span {
+  color: #55736d;
+}
+.ohm-law {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 30px;
+}
+.ohm-law > span:nth-child(2) {
+  color: #7b918c;
+}
+.definition-pair {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 10px;
+}
+.calculation-lesson .formula {
+  padding: 5px;
+  font-size: 30px;
+}
+.calculation-lesson .formula small {
+  font-size: 18px;
+}
+.resistance-trends {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 22px;
+}
+.single-branch {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 7px 14px;
+  border-radius: 9px;
+  background: #173b3b;
+  color: #fff;
+}
+.single-branch strong {
+  font:
+    bold 32px Georgia,
+    'Times New Roman',
+    serif;
+}
+.single-branch span {
+  font-size: 20px;
+  color: #bce8dc;
+}
+.kirchhoff {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 12px;
+}
+.law-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  min-height: 0;
+}
+.law {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto auto auto;
+  gap: 7px;
+  min-width: 0;
+  min-height: 0;
+}
+.law + .law {
+  border-left: 1px solid #d4e5df;
+  padding-left: 14px;
+}
+.calculation-lesson .law h3 {
+  font-size: 22px;
+  white-space: nowrap;
+}
+.law-number {
+  color: #397f73;
+  font-size: 19px;
+}
+.law svg {
+  min-height: 0;
+}
+.law .symbol {
+  font-size: 34px;
+  font-family: Georgia, 'Times New Roman', serif;
+}
+.law .diagram-note {
+  font-size: 25px;
+  fill: #55736d;
+}
+.law-equation {
+  padding: 9px 5px;
+  border-radius: 8px;
+  background: #e5f2ee;
+  text-align: center;
+  font:
+    bold 27px Georgia,
+    'Times New Roman',
+    serif;
+  white-space: nowrap;
+}
+.calculation-lesson .law p {
+  margin: 0;
+  font-size: 21px;
+  text-align: center;
+}
+.general-law {
+  font-size: 22px;
+  text-align: center;
+  color: #39796f;
+}
+.calculation-chain h2 {
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+}
+.calculation-chain h2 span {
+  font-size: 20px;
+  color: #55736d;
+  font-weight: 400;
+}
+.calculation-steps {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 24px;
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0;
+}
+.calculation-steps li {
+  position: relative;
+  display: grid;
+  gap: 4px;
+  padding: 7px 8px;
+  border-radius: 8px;
+  background: #edf6f2;
+  text-align: center;
+}
+.calculation-steps li + li::before {
+  content: '→';
+  position: absolute;
+  left: -23px;
+  top: 25px;
+  color: #397f73;
+  font-size: 24px;
+}
+.calculation-steps span {
+  font-size: 21px;
+}
+.calculation-steps strong {
+  font-size: 28px;
+  line-height: 1.2;
+}
+.calculation-steps li:last-child {
+  background: #173b3b;
+  color: #fff;
+}
+.calculation-lesson .engineering {
+  min-height: 42px;
+  font-size: 20px;
+}
+/* The course embeds this page in a fixed canvas and scales the whole slide. */
+@media (max-width: 900px) {
+  body {
+    overflow: hidden;
+  }
+  .calculation-lesson {
+    height: 100%;
+    min-height: 0;
+  }
+}

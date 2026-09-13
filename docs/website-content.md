@@ -683,13 +683,15 @@
 
 已完成内容：电路—磁路类比 `U ↔ F`、`I ↔ Φ`、`R ↔ R_m`；并列 `I = U/R` 与 `Φ = F/R_m`；核心式 `F = NI`、`R_m = l/(μA)`、`Φ = NI/R_m`；长度、截面积、磁导率对磁阻的趋势；三支路图说明磁通连续，闭合磁路图说明 `U_m = Hl`、`ΣU_m = ΣF`；标准计算链 `Φ → B_i = Φ_i/A_i → 查 B-H 得 H_i → H_i l_i → ΣH_i l_i = NI`。
 
+页面呈现：采用本页专用布局，正文与步骤字号为 20–23px，核心公式为 27–32px；左侧集中电路类比和核心式，右侧并列“节点 · 磁通连续”和“回路 · 磁位降求和”。节点图明确 Φ 流入、Φ₁ 与 Φ₂ 流出，列 `Φ = Φ₁ + Φ₂`、`ΣΦ = 0`；回路图采用单源等效磁路，标 F = NI 和三个磁位降，列 `Uₘ₁ + Uₘ₂ + Uₘ₃ = F`、`Uₘᵢ = Hᵢlᵢ`、一般形式 `ΣUₘ = ΣF`。底部五步计算链横向贯通，并说明非线性铁心须由 B-H 曲线查 H、常数 μ 仅适用于明确的线性近似。
+
 未完成内容：实际课堂投影可读性和部署环境加载需现场验证。
 
 页内联系：类比建立直觉，F 与 R_m 给参数，KCL/KVL 类比和五步链负责复杂磁路。
 
 跨页联系：上一页 `#magnetic-circuits-saturation`；下一页 `#magnetic-circuits-air-gap`。
 
-源码位置：`public/magnetic-calculation.html`、`public/magnetic-circuit-lesson.css`、`content/course.ts`。
+源码位置：`public/magnetic-calculation.html`、`public/magnetic-calculation.css`、`public/magnetic-circuit-lesson.css`、`content/course.ts`。
 
 ### 37 磁路：为什么气隙最关键？
 

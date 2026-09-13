@@ -1,77 +1,210 @@
 <!doctype html>
 <html lang="zh-CN">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>怎样把磁场问题变成磁路计算？</title>
-  <link rel="stylesheet" href="/magnetic-circuit-lesson.css" />
-</head>
-<body>
-<main class="lesson">
-  <header class="lesson-head">
-    <div class="eyebrow">磁路 / 07 计算方法 · ELI5</div>
-    <h1>怎样把磁场问题变成磁路计算？</h1>
-    <p class="lead">把“空间里的磁场”压缩成一条主磁通通道：谁推动？哪里难走？磁通怎么分、磁位降怎么加？</p>
-  </header>
-  <section class="grid-2">
-    <div class="stack">
-      <article class="card">
-        <h2>先借电路做一个“只用于建直觉”的类比</h2>
-        <div class="table" style="margin-top:8px">
-          <div class="table-row head"><span>电路</span><span>磁路</span><span>对应关系</span></div>
-          <div class="table-row"><span>电压 U</span><span>磁通势 F</span><span>推动</span></div>
-          <div class="table-row"><span>电流 I</span><span>磁通 Φ</span><span>通过</span></div>
-          <div class="table-row"><span>电阻 R</span><span>磁阻 R<sub>m</sub></span><span>限制</span></div>
-        </div>
-        <div class="formula-row" style="margin-top:8px">
-          <div class="formula">I = U/R</div>
-          <div class="formula emphasis">Φ = F/R<sub>m</sub></div>
-        </div>
-      </article>
-      <article class="card">
-        <h2>磁路的三个核心式</h2>
-        <div class="formula-row three" style="margin-top:8px">
-          <div class="formula">F = NI<small>磁通势，A·turn</small></div>
-          <div class="formula">R<sub>m</sub> = l/(μA)<small>磁阻，A·turn/Wb</small></div>
-          <div class="formula emphasis">Φ = NI/R<sub>m</sub><small>简单单支路磁路</small></div>
-        </div>
-        <p><strong>看趋势：</strong> l ↑ → R<sub>m</sub> ↑；A ↑ → R<sub>m</sub> ↓；μ ↑ → R<sub>m</sub> ↓。</p>
-      </article>
-    </div>
-    <div class="stack">
-      <article class="card hero-card">
-        <div class="compare-title"><h2>复杂磁路：磁通要连续，磁位降要闭合求和</h2><span class="tag">KCL / KVL 类比</span></div>
-        <svg viewBox="0 0 720 270" role="img" aria-label="三支路磁路满足磁通连续，闭合磁路中各段磁位降之和等于磁通势">
-          <defs><marker id="c4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#397f73"/></marker></defs>
-          <path d="M85 60v150M85 135h170M255 135v-75M255 135v75" fill="none" stroke="#7b918c" stroke-width="32" stroke-linecap="round"/>
-          <path d="M95 135h135" stroke="#397f73" stroke-width="7" marker-end="url(#c4)"/>
-          <path d="M255 125v-45" stroke="#397f73" stroke-width="7" marker-end="url(#c4)"/>
-          <path d="M255 145v45" stroke="#397f73" stroke-width="7" marker-end="url(#c4)"/>
-          <text x="126" y="112" font-size="20">Φ</text><text x="275" y="87" font-size="20">Φ₁</text><text x="275" y="202" font-size="20">Φ₂</text>
-          <text x="105" y="246" font-size="20">磁通连续：Φ = Φ₁ + Φ₂</text>
-          <path d="M420 60H650V210H420Z" fill="none" stroke="#829792" stroke-width="34" stroke-linejoin="round"/>
-          <path d="M445 70h160v125H445" fill="none" stroke="#397f73" stroke-width="6" marker-end="url(#c4)"/>
-          <text x="493" y="125" font-size="20">Uₘ = Hl</text>
-          <text x="415" y="246" font-size="20">闭合回路：ΣUₘ = ΣF</text>
-        </svg>
-      </article>
-      <article class="card">
-        <h2>标准解题链：别一上来硬套 μ</h2>
-        <div class="flow-steps" style="margin-top:8px">
-          <div class="flow-step">① 给定/求<br><strong>Φ</strong></div><div class="flow-arrow">→</div>
-          <div class="flow-step">② Bᵢ = Φᵢ/Aᵢ</div><div class="flow-arrow">→</div>
-          <div class="flow-step">③ 查 B-H<br>得到 Hᵢ</div>
-        </div>
-        <div class="flow-steps" style="grid-template-columns:1fr auto 1fr auto 1fr; margin-top:6px">
-          <div class="flow-step">④ Uₘᵢ = Hᵢlᵢ</div><div class="flow-arrow">→</div>
-          <div class="flow-step">⑤ ΣHᵢlᵢ = NI</div><div class="flow-arrow">→</div>
-          <div class="flow-step">得到所需安匝数</div>
-        </div>
-        <p class="mini">铁磁材料非线性时，H 应从 B-H 曲线查取；把 μ 当常数只适用于明确的线性近似。</p>
-      </article>
-    </div>
-  </section>
-  <footer class="engineering"><strong>工程结论</strong><span>磁通势推动磁通，磁阻限制磁通；复杂磁路靠“磁通连续 + 磁位降求和”组织计算。下一页用同一套框架看气隙。</span></footer>
-</main>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>怎样把磁场问题变成磁路计算？</title>
+    <link rel="stylesheet" href="/magnetic-circuit-lesson.css" />
+    <link rel="stylesheet" href="/magnetic-calculation.css" />
+  </head>
+  <body>
+    <main class="lesson calculation-lesson">
+      <header class="lesson-head">
+        <div class="eyebrow">磁路 / 07 计算方法 · ELI5</div>
+        <h1>怎样把磁场问题变成磁路计算？</h1>
+        <p class="lead">
+          抓住主磁通通道：磁通势推动，磁阻限制；在节点分磁通，沿回路加磁位降。
+        </p>
+      </header>
+      <section class="calculation-grid">
+        <article class="card fundamentals">
+          <h2>电路 → 磁路：用类比建立直觉</h2>
+          <div class="analogy-table">
+            <div>
+              <strong>电压 U</strong><span>→</span><strong>磁通势 F</strong
+              ><span>推动</span>
+            </div>
+            <div>
+              <strong>电流 I</strong><span>→</span><strong>磁通 Φ</strong
+              ><span>通过</span>
+            </div>
+            <div>
+              <strong>电阻 R</strong><span>→</span
+              ><strong>磁阻 R<sub>m</sub></strong
+              ><span>限制</span>
+            </div>
+          </div>
+          <div class="ohm-law">
+            <span>I = U/R</span><span>↔</span
+            ><strong>Φ = F/R<sub>m</sub></strong>
+          </div>
+          <div class="definition-pair">
+            <div class="formula">F = NI<small>磁通势 · A·turn</small></div>
+            <div class="formula">
+              R<sub>m</sub> = l/(μA)<small>磁阻 · A·turn/Wb</small>
+            </div>
+          </div>
+          <div class="resistance-trends">
+            <span>l ↑ → R<sub>m</sub> ↑</span><span>A ↑ → R<sub>m</sub> ↓</span
+            ><span>μ ↑ → R<sub>m</sub> ↓</span>
+          </div>
+          <div class="single-branch">
+            <strong>Φ = NI/R<sub>m</sub></strong
+            ><span>简单单支路磁路</span>
+          </div>
+        </article>
+        <article class="card kirchhoff">
+          <h2>基尔霍夫定律：先分磁通，再列回路</h2>
+          <div class="law-pair">
+            <section class="law">
+              <h3><span class="law-number">01</span> 节点 · 磁通连续</h3>
+              <svg
+                viewBox="0 0 360 230"
+                role="img"
+                aria-label="节点磁通示意：磁通 Φ 流入节点，Φ₁ 和 Φ₂ 流出节点，Φ 等于 Φ₁ 加 Φ₂"
+              >
+                <defs>
+                  <marker
+                    id="flux-arrow"
+                    viewBox="0 0 10 10"
+                    refX="8"
+                    refY="5"
+                    markerWidth="5"
+                    markerHeight="5"
+                    orient="auto"
+                  >
+                    <path d="M0 0L10 5L0 10Z" fill="#397f73" />
+                  </marker>
+                </defs>
+                <path
+                  d="M30 115H180L302 43M180 115L302 187"
+                  fill="none"
+                  stroke="#bbd4cb"
+                  stroke-width="12"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <g
+                  fill="none"
+                  stroke="#397f73"
+                  stroke-width="4"
+                  marker-end="url(#flux-arrow)"
+                >
+                  <path d="M54 115H139" />
+                  <path d="M207 99L274 59" />
+                  <path d="M207 131L274 171" />
+                </g>
+                <circle
+                  cx="180"
+                  cy="115"
+                  r="9"
+                  fill="#173b3b"
+                  stroke="white"
+                  stroke-width="3"
+                />
+                <text x="77" y="87" class="symbol">Φ</text>
+                <text x="272" y="33" class="symbol">Φ₁</text>
+                <text x="272" y="221" class="symbol">Φ₂</text>
+                <text x="163" y="158" class="diagram-note">节点</text>
+              </svg>
+              <div class="law-equation">Φ = Φ₁ + Φ₂</div>
+              <p>流入的磁通 = 流出的磁通</p>
+              <div class="general-law">代数和：ΣΦ = 0</div>
+            </section>
+            <section class="law">
+              <h3><span class="law-number">02</span> 回路 · 磁位降求和</h3>
+              <svg
+                viewBox="0 0 360 240"
+                role="img"
+                aria-label="单源磁路等效回路：左侧磁通势 F 等于 NI，三个磁阻段分别产生磁位降 Uₘ₁、Uₘ₂、Uₘ₃，沿顺时针方向求和等于 F"
+              >
+                <defs>
+                  <marker
+                    id="loop-arrow"
+                    viewBox="0 0 10 10"
+                    refX="8"
+                    refY="5"
+                    markerWidth="5"
+                    markerHeight="5"
+                    orient="auto"
+                  >
+                    <path d="M0 0L10 5L0 10Z" fill="#397f73" />
+                  </marker>
+                </defs>
+                <path
+                  d="M70 89V47H302V193H70V141"
+                  fill="none"
+                  stroke="#6b9185"
+                  stroke-width="3"
+                  stroke-linejoin="round"
+                />
+                <g fill="#edf6f2" stroke="#397f73" stroke-width="2">
+                  <rect x="160" y="36" width="76" height="22" rx="3" />
+                  <rect x="291" y="87" width="22" height="66" rx="3" />
+                  <rect x="160" y="182" width="76" height="22" rx="3" />
+                </g>
+                <circle
+                  cx="70"
+                  cy="115"
+                  r="26"
+                  fill="#fff3df"
+                  stroke="#ad6a36"
+                  stroke-width="3"
+                />
+                <text x="70" y="123" text-anchor="middle" font-size="24">
+                  F
+                </text>
+                <text x="37" y="172" class="diagram-note">NI</text>
+                <text x="198" y="25" text-anchor="middle" class="symbol">
+                  Uₘ₁
+                </text>
+                <text x="273" y="128" text-anchor="end" class="symbol">
+                  Uₘ₂
+                </text>
+                <text x="198" y="230" text-anchor="middle" class="symbol">
+                  Uₘ₃
+                </text>
+                <path
+                  d="M120 143V83H250"
+                  fill="none"
+                  stroke="#397f73"
+                  stroke-width="3"
+                  stroke-dasharray="6 5"
+                  marker-end="url(#loop-arrow)"
+                />
+                <text x="183" y="152" text-anchor="middle" class="diagram-note">
+                  沿回路求和
+                </text>
+              </svg>
+              <div class="law-equation">Uₘ₁ + Uₘ₂ + Uₘ₃ = F</div>
+              <p>每段磁位降：Uₘᵢ = Hᵢlᵢ</p>
+              <div class="general-law">一般形式：ΣUₘ = ΣF</div>
+            </section>
+          </div>
+        </article>
+      </section>
+      <section class="card calculation-chain">
+        <h2>
+          标准计算链
+          <span
+            >铁心非线性时，由 B-H 曲线查 H；常数 μ 只用于明确的线性近似。</span
+          >
+        </h2>
+        <ol class="calculation-steps">
+          <li><span>① 确定磁通</span><strong>Φ / Φᵢ</strong></li>
+          <li><span>② 求磁通密度</span><strong>Bᵢ = Φᵢ/Aᵢ</strong></li>
+          <li><span>③ 查 B-H 曲线</span><strong>得到 Hᵢ</strong></li>
+          <li><span>④ 求各段磁位降</span><strong>Uₘᵢ = Hᵢlᵢ</strong></li>
+          <li><span>⑤ 得到所需安匝数</span><strong>NI = ΣHᵢlᵢ</strong></li>
+        </ol>
+      </section>
+      <footer class="engineering">
+        <strong>工程结论</strong
+        ><span
+          >磁通势推动磁通，磁阻限制磁通；复杂磁路靠“磁通连续 +
+          磁位降求和”组织计算。</span
+        >
+      </footer>
+    </main>
+  </body>
 </html>
