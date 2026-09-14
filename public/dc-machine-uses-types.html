@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>直流电机的用途与种类</title>
+    <link rel="stylesheet" href="/dc-machine-uses-types.css" />
+    <script src="/dc-machine-uses-types.js" defer></script>
+  </head>
+  <body>
+    <main class="lesson" data-mode="motor">
+      <header>
+        <div class="eyebrow">直流电机理论 / 01 · ELI5</div>
+        <h1>直流电机的用途与种类</h1>
+        <p>看能量往哪走，分用途；看磁场怎样供电，分种类。</p>
+      </header>
+      <section class="uses" aria-labelledby="uses-title">
+        <div class="role-list">
+          <h2 id="uses-title"><span>01</span> 两种用途，两个方向</h2>
+          <div class="role motor-role">
+            <strong>直流电动机</strong>
+            <div>电能 <b>→</b> 机械能</div>
+            <small>用电，让轴转起来</small>
+          </div>
+          <div class="role generator-role">
+            <strong>直流发电机</strong>
+            <div>机械能 <b>→</b> 电能</div>
+            <small>带动轴，把电送出去</small>
+          </div>
+        </div>
+        <div class="reversible">
+          <div class="experiment-head">
+            <h2>同一台电机，可以换角色</h2>
+            <div class="mode-buttons" role="group" aria-label="切换运行角色">
+              <button type="button" data-mode="motor" aria-pressed="true">
+                电动运行
+              </button>
+              <button type="button" data-mode="generator" aria-pressed="false">
+                发电运行
+              </button>
+            </div>
+          </div>
+          <div class="energy-scene" aria-live="polite">
+            <div class="energy electrical">
+              <svg viewBox="0 0 80 70" aria-hidden="true">
+                <rect x="12" y="18" width="52" height="36" rx="6" />
+                <path d="M65 29h5v14h-5M36 24l-9 15h12l-4 10 15-17H38z" /></svg
+              ><strong>电能</strong><small id="electrical-port">输入</small>
+            </div>
+            <div class="flow" aria-hidden="true">→</div>
+            <div class="machine">
+              <svg
+                viewBox="0 0 180 120"
+                role="img"
+                aria-label="同一台直流电机，切换角色时不更换结构"
+              >
+                <path class="shaft" d="M132 61h36" />
+                <rect
+                  class="housing"
+                  x="26"
+                  y="24"
+                  width="110"
+                  height="74"
+                  rx="16"
+                />
+                <path class="ribs" d="M46 35v52M62 35v52M78 35v52M94 35v52" />
+                <circle cx="117" cy="61" r="13" />
+                <path class="foot" d="M44 98v10h76V98" />
+                <path
+                  class="spin"
+                  d="M151 35a27 27 0 0 1 0 52m0-52 10 3-4 9"
+                /></svg
+              ><strong id="machine-role">电动机</strong
+              ><small>始终是这一台</small>
+            </div>
+            <div class="flow" aria-hidden="true">→</div>
+            <div class="energy mechanical">
+              <svg viewBox="0 0 80 70" aria-hidden="true">
+                <circle cx="40" cy="35" r="22" />
+                <circle cx="40" cy="35" r="7" />
+                <path
+                  d="M40 13v15M40 42v15M18 35h15M47 35h15M24 19l11 11M45 40l11 11M24 51l11-11M45 30l11-11"
+                /></svg
+              ><strong>机械能</strong><small id="mechanical-port">输出</small>
+            </div>
+          </div>
+          <p class="reversible-message">
+            电动 ⇄ 发电：无需换电机，可在运行中随时平滑切换。
+          </p>
+          <p class="boundary">
+            实际切换需满足运行条件，并由驱动与电源支持双向能量流；不是把转向反过来。
+          </p>
+        </div>
+      </section>
+      <section class="types" aria-labelledby="types-title">
+        <div class="types-head">
+          <h2 id="types-title"><span>02</span> 四种励磁方式</h2>
+          <p>
+            <i class="armature-key"></i> 电枢：能量转换
+            <i class="field-key"></i> 励磁绕组：建立磁场
+          </p>
+        </div>
+        <svg class="symbols" aria-hidden="true">
+          <defs>
+            <symbol id="armature" viewBox="0 0 60 60">
+              <circle class="armature" cx="30" cy="30" r="26" />
+              <text class="armature-text" x="30" y="38">A</text>
+            </symbol>
+            <symbol id="field" viewBox="0 0 60 60">
+              <rect class="field" x="8" y="3" width="44" height="54" rx="8" />
+              <path
+                class="coil"
+                d="M30 3v6c-24 0-24 10 0 10s24 10 0 10-24 10 0 10 24 10 0 10v8"
+              />
+            </symbol>
+          </defs>
+        </svg>
+        <div class="type-grid">
+          <article class="type-card">
+            <div class="type-name">
+              <span>独立</span>
+              <h3>他励直流电机</h3>
+            </div>
+            <svg
+              viewBox="0 0 320 180"
+              role="img"
+              aria-label="他励：励磁绕组由独立电源供电，与电枢电路分开"
+            >
+              <g class="wire">
+                <path
+                  d="M28 45h94v20M122 125v30H28M212 45h66v22M278 123v32h-66"
+                />
+              </g>
+              <g class="terminal">
+                <circle cx="28" cy="45" r="4" />
+                <circle cx="28" cy="155" r="4" />
+                <circle cx="212" cy="45" r="4" />
+                <circle cx="212" cy="155" r="4" />
+              </g>
+              <use href="#field" x="92" y="65" width="60" height="60" />
+              <use href="#armature" x="248" y="65" width="60" height="60" />
+              <text x="74" y="26">独立电源</text>
+              <text x="249" y="26">电枢电路</text>
+              <text x="122" y="143">励磁</text>
+            </svg>
+            <p>磁场有自己的“小电源”</p>
+            <small>励磁单独供电</small>
+          </article>
+          <article class="type-card">
+            <div class="type-name">
+              <span>两路</span>
+              <h3>并励直流电机</h3>
+            </div>
+            <svg
+              viewBox="0 0 320 180"
+              role="img"
+              aria-label="并励：励磁绕组与电枢并联，分成两条支路"
+            >
+              <g class="wire">
+                <path d="M25 40h240v27M25 160h240v-37M145 40v25M145 125v35" />
+              </g>
+              <g class="terminal">
+                <circle cx="25" cy="40" r="4" />
+                <circle cx="25" cy="160" r="4" />
+                <circle cx="145" cy="40" r="4" />
+                <circle cx="145" cy="160" r="4" />
+              </g>
+              <use href="#field" x="115" y="65" width="60" height="60" />
+              <use href="#armature" x="235" y="65" width="60" height="60" />
+              <text x="145" y="143">励磁</text>
+              <text x="71" y="105">端口</text>
+            </svg>
+            <p>一条给电枢，一条给磁场</p>
+            <small>励磁与电枢并联</small>
+          </article>
+          <article class="type-card">
+            <div class="type-name">
+              <span>一路</span>
+              <h3>串励直流电机</h3>
+            </div>
+            <svg
+              viewBox="0 0 320 180"
+              role="img"
+              aria-label="串励：励磁绕组与电枢串联，同一股电流依次通过"
+            >
+              <g class="wire">
+                <path d="M25 40h85M170 40h95v27M25 160h240v-37" />
+              </g>
+              <g class="terminal">
+                <circle cx="25" cy="40" r="4" />
+                <circle cx="25" cy="160" r="4" />
+              </g>
+              <use
+                href="#field"
+                x="110"
+                y="10"
+                width="60"
+                height="60"
+                transform="rotate(-90 140 40)"
+              />
+              <use href="#armature" x="235" y="65" width="60" height="60" />
+              <text x="140" y="91">励磁</text>
+              <text x="71" y="105">端口</text>
+            </svg>
+            <p>同一股电流，串着走</p>
+            <small>励磁与电枢串联</small>
+          </article>
+          <article class="type-card">
+            <div class="type-name">
+              <span>组合</span>
+              <h3>复励直流电机</h3>
+            </div>
+            <svg
+              viewBox="0 0 320 180"
+              role="img"
+              aria-label="复励的长并励示意：一组励磁绕组并接端口，另一组励磁绕组串接电枢支路"
+            >
+              <g class="wire">
+                <path
+                  d="M25 40h157M242 40h40v27M25 160h257v-37M100 40v25M100 125v35"
+                />
+              </g>
+              <g class="terminal">
+                <circle cx="25" cy="40" r="4" />
+                <circle cx="25" cy="160" r="4" />
+                <circle cx="100" cy="40" r="4" />
+                <circle cx="100" cy="160" r="4" />
+              </g>
+              <use href="#field" x="70" y="65" width="60" height="60" />
+              <use
+                href="#field"
+                x="182"
+                y="10"
+                width="60"
+                height="60"
+                transform="rotate(-90 212 40)"
+              />
+              <use href="#armature" x="252" y="65" width="60" height="60" />
+              <text x="100" y="143">并励</text>
+              <text x="212" y="91">串励</text>
+            </svg>
+            <p>并励 + 串励，一起搭配</p>
+            <small>有两组励磁绕组</small>
+          </article>
+        </div>
+      </section>
+      <footer>
+        <span>记住：用途看能量方向，种类看励磁连接。</span
+        ><small
+          >只示意连接关系，不展开励磁细节 ·
+          <a
+            href="https://onlinecourses.nptel.ac.in/noc24_ee103/preview"
+            target="_blank"
+            rel="noreferrer"
+            >课程资料：NPTEL 电机学</a
+          ></small
+        >
+      </footer>
+    </main>
+  </body>
+</html>

@@ -619,6 +619,16 @@ export const slides: Slide[] = [
       );
     }
 
+    if (chapter.id === 'dc-machines') {
+      chapterSlides.push({
+        id: 'dc-machines-uses-types',
+        kind: 'embed',
+        title: '直流电机的用途与种类',
+        chapterId: chapter.id,
+        embedUrl: '/dc-machine-uses-types.html',
+      });
+    }
+
     return chapterSlides;
   }),
 ];

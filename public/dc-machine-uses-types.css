@@ -1,0 +1,342 @@
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+body {
+  margin: 0;
+  overflow: hidden;
+  color: #243f38;
+  background: #fbfaf5;
+  font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+}
+.lesson {
+  height: 100%;
+  padding: 20px 24px 16px;
+  display: grid;
+  grid-template-rows: auto 286px minmax(0, 1fr) auto;
+  gap: 14px;
+  background:
+    radial-gradient(circle at 96% 0, #f7eacc, transparent 35%), #fbfaf5;
+}
+.eyebrow {
+  color: #947235;
+  font-size: 13px;
+  letter-spacing: 0.14em;
+}
+h1 {
+  margin: 5px 0 4px;
+  font-size: 34px;
+  line-height: 1.2;
+}
+header p {
+  margin: 0;
+  color: #718079;
+  font-size: 17px;
+}
+h2,
+h3,
+p {
+  margin: 0;
+}
+h2 {
+  font-size: 21px;
+  line-height: 1.3;
+}
+h2 > span {
+  color: #b48d45;
+  margin-right: 8px;
+  font-size: 16px;
+}
+.uses {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 16px;
+}
+.role-list {
+  display: grid;
+  grid-template-rows: auto 1fr 1fr;
+  gap: 10px;
+}
+.role {
+  padding: 10px 18px;
+  border-radius: 12px;
+  border: 1px solid #dddcd1;
+  background: #fff;
+  transition: background 0.2s;
+}
+.role strong {
+  font-size: 19px;
+}
+.role div {
+  display: inline-block;
+  float: right;
+  font-size: 22px;
+  font-weight: 650;
+}
+.role b {
+  color: #b18a40;
+  padding: 0 8px;
+}
+.role small {
+  display: block;
+  margin-top: 10px;
+  font-size: 15px;
+  color: #6d7f77;
+}
+[data-mode='motor'] .motor-role,
+[data-mode='generator'] .generator-role {
+  border-color: #b89148;
+  background: #fff3d8;
+}
+.reversible {
+  padding: 15px 20px;
+  border: 1px solid #d8ded5;
+  border-radius: 14px;
+  background: #fff;
+}
+.experiment-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.mode-buttons {
+  display: flex;
+  gap: 6px;
+}
+button {
+  border: 1px solid #d4ddd5;
+  border-radius: 8px;
+  background: #f6f8f4;
+  color: #4a6459;
+  padding: 8px 13px;
+  font: inherit;
+  font-size: 15px;
+  cursor: pointer;
+}
+button[aria-pressed='true'] {
+  background: #284c40;
+  color: #fff;
+  border-color: #284c40;
+}
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid #b58b35;
+  outline-offset: 3px;
+}
+.energy-scene {
+  display: grid;
+  grid-template-columns: 1fr 78px 190px 78px 1fr;
+  align-items: center;
+  text-align: center;
+  margin: 9px 0;
+}
+.energy svg {
+  width: 80px;
+  height: 70px;
+  fill: #edf5ed;
+  stroke: #557966;
+  stroke-width: 3;
+}
+.energy.electrical svg path {
+  fill: #bd964a;
+  stroke: #bd964a;
+}
+.energy strong,
+.machine strong {
+  display: block;
+  font-size: 22px;
+}
+.energy small,
+.machine small {
+  display: block;
+  margin-top: 2px;
+  color: #708279;
+  font-size: 14px;
+}
+.machine svg {
+  width: 140px;
+  height: 90px;
+  fill: #e9efe7;
+  stroke: #42674f;
+  stroke-width: 3;
+}
+.machine .shaft {
+  stroke-width: 9;
+}
+.machine .housing {
+  fill: #e9d7ac;
+  stroke: #a17d3a;
+}
+.machine .ribs {
+  stroke: #c3a86a;
+}
+.machine .spin {
+  fill: none;
+  stroke: #789581;
+  stroke-width: 2;
+}
+.flow {
+  font-size: 62px;
+  line-height: 1;
+  color: #b88c38;
+}
+[data-mode='generator'] .flow {
+  transform: rotate(180deg);
+  color: #397d70;
+}
+.reversible-message {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 650;
+}
+.boundary {
+  margin-top: 7px;
+  text-align: center;
+  color: #78847b;
+  font-size: 13px;
+}
+.types {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 10px;
+  min-height: 0;
+}
+.types-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.types-head p {
+  font-size: 14px;
+  color: #6b7e73;
+}
+.types-head i {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  margin: 0 5px 0 18px;
+}
+.armature-key {
+  background: #5c8f7c;
+}
+.field-key {
+  background: #c09945;
+}
+.symbols {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+.type-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  min-height: 0;
+}
+.type-card {
+  min-height: 0;
+  background: #fff;
+  border: 1px solid #dce1d6;
+  border-radius: 13px;
+  padding: 13px 14px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.type-name {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.type-name span {
+  padding: 3px 7px;
+  background: #f8efd9;
+  color: #9a772f;
+  border-radius: 5px;
+  font-size: 13px;
+}
+h3 {
+  font-size: 21px;
+}
+.type-card > svg {
+  width: 100%;
+  height: 120px;
+  flex: 1;
+  min-height: 0;
+  max-height: 180px;
+}
+.wire {
+  fill: none;
+  stroke: #789086;
+  stroke-width: 3;
+  stroke-linejoin: round;
+}
+.terminal {
+  fill: #fff;
+  stroke: #789086;
+  stroke-width: 2;
+}
+.armature {
+  fill: #e9f3ee;
+  stroke: #4d826e;
+  stroke-width: 3;
+}
+.field {
+  fill: #fff2d5;
+  stroke: #b48935;
+  stroke-width: 2;
+}
+.coil {
+  fill: none;
+  stroke: #b48935;
+  stroke-width: 2;
+}
+svg text {
+  fill: #667b70;
+  font-size: 14px;
+  text-anchor: middle;
+}
+svg .armature-text {
+  fill: #3d7661;
+  font-size: 24px;
+  font-weight: 650;
+}
+.type-card p {
+  font-size: 18px;
+  font-weight: 650;
+  white-space: nowrap;
+}
+.type-card small {
+  margin-top: 5px;
+  font-size: 14px;
+  color: #77877b;
+}
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 8px;
+  border-top: 1px solid #d9ddcf;
+}
+footer span {
+  font-size: 17px;
+  font-weight: 650;
+}
+footer small,
+footer a {
+  font-size: 11px;
+  color: #7b8778;
+}
+@media (prefers-reduced-motion: reduce) {
+  .role {
+    transition: none;
+  }
+}
