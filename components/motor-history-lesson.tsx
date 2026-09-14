@@ -28,6 +28,7 @@ import {
   type MotorHistoryPage,
 } from '@/content/motor-history';
 import './motor-history-lesson.css';
+import { MotorHistoryExperiments } from './motor-history-experiments';
 
 const stageIcons = [FlaskConical, Cog, RadioTower, Factory, Microchip, Magnet];
 
@@ -58,154 +59,6 @@ function Chain({ children }: { children: ReactNode[] }) {
           {child}
         </div>
       ))}
-    </div>
-  );
-}
-
-function Experiments() {
-  return (
-    <div className="mh-experiments">
-      <div>
-        <h3>电流 → 磁场</h3>
-        <svg
-          viewBox="0 0 240 160"
-          role="img"
-          aria-label="通电导线旁的指南针发生偏转，环绕线表示磁场"
-        >
-          <path d="M25 50H205" stroke="#c08041" strokeWidth="9" />
-          <path
-            d="M80 38h40l-12-9m12 9-12 9"
-            fill="none"
-            stroke="#244b44"
-            strokeWidth="4"
-          />
-          <ellipse
-            cx="127"
-            cy="51"
-            rx="26"
-            ry="38"
-            fill="none"
-            stroke="#6e9d98"
-            strokeWidth="3"
-            strokeDasharray="6 5"
-          />
-          <circle
-            cx="126"
-            cy="115"
-            r="32"
-            fill="#fff"
-            stroke="#244b44"
-            strokeWidth="4"
-          />
-          <path d="m111 95 30 40-15-9z" fill="#c08041" />
-          <path d="m141 135-30-40 15 9z" fill="#6e9d98" />
-          <text x="22" y="28">
-            电流 I →
-          </text>
-          <text x="165" y="139">
-            指南针
-          </text>
-        </svg>
-        <p>奥斯特 · 1820</p>
-      </div>
-      <div>
-        <h3>电 + 磁 → 运动</h3>
-        <svg
-          viewBox="0 0 240 160"
-          role="img"
-          aria-label="通电导线绕磁铁旋转的原理简图，不是历史装置复原"
-        >
-          <rect x="103" y="55" width="34" height="92" rx="4" fill="#244b44" />
-          <text x="113" y="81" fill="white">
-            N
-          </text>
-          <path
-            d="M120 14h60v104"
-            fill="none"
-            stroke="#c08041"
-            strokeWidth="7"
-          />
-          <path
-            d="M169 48v27l-7-10m7 10 7-10"
-            stroke="#244b44"
-            fill="none"
-            strokeWidth="3"
-          />
-          <path
-            d="M57 111c-28-49 124-66 151-19l-2-19m2 19-19-3"
-            fill="none"
-            stroke="#6e9d98"
-            strokeWidth="4"
-          />
-          <text x="20" y="146">
-            磁铁
-          </text>
-          <text x="175" y="142">
-            导线
-          </text>
-          <text x="13" y="32">
-            旋转 ↻
-          </text>
-        </svg>
-        <p>法拉第 · 1821</p>
-      </div>
-      <div>
-        <h3>磁通变化 → 感应</h3>
-        <svg
-          viewBox="0 0 240 160"
-          role="img"
-          aria-label="磁铁向线圈移动，磁通变化产生感应电动势，闭合回路接检流计"
-        >
-          <rect x="12" y="54" width="66" height="35" rx="3" fill="#244b44" />
-          <text x="22" y="78" fill="white">
-            S　N
-          </text>
-          <path
-            d="M25 37h56l-10-7m10 7-10 7"
-            fill="none"
-            stroke="#c08041"
-            strokeWidth="3"
-          />
-          {[100, 114, 128, 142].map((x) => (
-            <ellipse
-              key={x}
-              cx={x}
-              cy="72"
-              rx="12"
-              ry="33"
-              fill="none"
-              stroke="#c08041"
-              strokeWidth="4"
-            />
-          ))}
-          <path
-            d="M100 105v35h94V105h-52"
-            fill="none"
-            stroke="#244b44"
-            strokeWidth="3"
-          />
-          <circle
-            cx="194"
-            cy="84"
-            r="22"
-            fill="white"
-            stroke="#244b44"
-            strokeWidth="3"
-          />
-          <path d="m194 95 9-22" stroke="#c08041" strokeWidth="3" />
-          <text x="7" y="20">
-            移动 →
-          </text>
-          <text x="160" y="44">
-            检流计
-          </text>
-        </svg>
-        <p>法拉第 · 1831</p>
-      </div>
-      <div className="mh-energy">
-        <span>电动：电能 → 机械能</span>
-        <span>发电：机械能 → 电能</span>
-      </div>
     </div>
   );
 }
@@ -308,7 +161,7 @@ function MachineSet() {
 }
 
 function Diagram({ page }: { page: MotorHistoryPage }) {
-  if (page === 'principles') return <Experiments />;
+  if (page === 'principles') return <MotorHistoryExperiments />;
   if (page === 'practical')
     return (
       <div className="mh-practical">
@@ -467,7 +320,9 @@ export function MotorHistoryLesson({ page }: { page: MotorHistoryPage }) {
           })}
         </div>
       ) : (
-        <div className="mh-stage-grid">
+        <div
+          className={`mh-stage-grid${page === 'principles' ? ' mh-principles-grid' : ''}`}
+        >
           <div className="mh-diagram">
             <Diagram page={page} />
           </div>

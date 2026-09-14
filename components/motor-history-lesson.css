@@ -34,6 +34,9 @@
   gap: 24px;
   height: 370px;
 }
+.mh-principles-grid .mh-diagram {
+  padding-block: 10px;
+}
 .mh-diagram {
   background: #f3f6f2;
   border: 1px solid #dce6de;
@@ -129,32 +132,100 @@
 .mh-experiments {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
+  gap: 6px 12px;
 }
-.mh-experiments > div:not(.mh-energy) {
+.mh-experiment-card {
   text-align: center;
+  min-width: 0;
 }
-.mh-experiments svg {
+.mh-experiment-card h3 {
+  margin-bottom: 3px;
+}
+.mh-experiment-card > svg {
+  display: block;
   width: 100%;
-  height: 180px;
+  height: 188px;
 }
-.mh-experiments svg text,
+.mh-experiment-card svg text,
 .mh-field-sequence text {
   font-size: 15px;
   font-family: inherit;
 }
-.mh-experiments p {
+.mh-experiment-card svg .mh-apparatus-small {
+  font-size: 12px;
+}
+.mh-experiment-card p {
   font-size: 21px;
   color: #a56c37;
-  margin: 7px 0;
+  margin: 4px 0 0;
+}
+.mh-experiment-status {
+  font-size: 14px;
+  color: #436f61;
+  line-height: 20px;
+  white-space: nowrap;
+}
+.mh-experiment-toolbar {
+  display: flex;
+  grid-column: 1 / -1;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #6b8076;
+  height: 28px;
+}
+.mh-experiment-toolbar > div {
+  display: flex;
+  gap: 8px;
+}
+.mh-experiment-toolbar button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 9px;
+  border: 1px solid #c6d5c9;
+  border-radius: 6px;
+  background: #fffdf5;
+  color: #244b44;
+  font: inherit;
+  cursor: pointer;
+}
+.mh-experiment-toolbar button:hover {
+  background: #e1ece3;
+}
+.mh-experiment-toolbar button:focus-visible {
+  outline: 2px solid #a8753f;
+  outline-offset: 3px;
+}
+.mh-experiment-toolbar button svg {
+  width: 14px;
+  height: 14px;
+}
+.mh-lead-wire {
+  fill: none;
+  stroke: #607f73;
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+}
+.mh-current-arrow {
+  fill: none;
+  stroke: #244b44;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.mh-label-line {
+  fill: none;
+  stroke: #8b9d91;
+  stroke-width: 1;
 }
 .mh-energy {
   display: flex;
   grid-column: 1 / -1;
   justify-content: space-around;
   background: #e1ece3;
-  padding: 12px;
-  font-size: 21px;
+  padding: 6px 12px;
+  font-size: 18px;
   border-radius: 8px;
 }
 .mh-field-sequence {
