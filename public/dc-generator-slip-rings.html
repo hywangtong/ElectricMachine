@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>直流发电机原理：没有换向器</title>
+    <link rel="stylesheet" href="/dc-motor-lesson.css" />
+    <link rel="stylesheet" href="/dc-generator-lesson.css" />
+    <script type="module" src="/dc-generator-lesson.js"></script>
+  </head>
+  <body data-mode="slip-rings">
+    <main class="lesson">
+      <header>
+        <div class="eyebrow">直流电机 / 04 发电实验 · 没有换向器</div>
+        <h1>带动线圈旋转，为什么产生交变电动势？</h1>
+        <p class="lead">
+          机械带动转轴；两只完整滑环不交换接线，观察转速、线圈位置与感应电动势。
+        </p>
+      </header>
+      <div class="layout">
+        <section class="card motor-card" aria-label="发电机旋转与调速实验">
+          <div class="card-head">
+            <h2>磁场中的旋转线圈</h2>
+            <span class="tag" id="circuit-tag">完整滑环 · 无换向器</span>
+          </div>
+          <svg
+            id="motor"
+            viewBox="0 0 710 330"
+            role="img"
+            aria-label="上N下S的磁场中，线圈逆时针旋转；两条有效边的运动与感应电动势方向同步变化"
+          ></svg>
+          <div>
+            <div class="legend">
+              <span>绿色 ↓ 磁场 B</span>
+              <b>橙色 → 运动 v</b>
+              <strong>蓝色 ⊗ / ⊙ 感应方向（非电流）</strong>
+            </div>
+            <div class="control-row">
+              <div
+                id="knob"
+                class="knob"
+                role="slider"
+                tabindex="0"
+                aria-label="线圈旋转速度"
+                aria-valuemin="0"
+                aria-valuemax="120"
+                aria-valuenow="60"
+                aria-describedby="knob-hint"
+              >
+                <div id="knob-indicator" class="knob-indicator"></div>
+                <span id="knob-value" class="knob-value">60</span>
+              </div>
+              <div>
+                <div class="control-label">
+                  <label for="speed"
+                    >转速 n
+                    <input
+                      id="speed"
+                      type="number"
+                      min="0"
+                      max="120"
+                      step="1"
+                      value="60"
+                    />
+                    r/min</label
+                  >
+                  <span id="angle-reading">θ = 0° · 逆时针旋转</span>
+                </div>
+                <div class="buttons">
+                  <button type="button" data-speed="0">停止 0</button>
+                  <button type="button" data-speed="30">慢速 30</button>
+                  <button type="button" data-speed="60">中速 60</button>
+                  <button type="button" data-speed="120">快速 120</button>
+                  <button type="button" id="pause" aria-pressed="false">
+                    暂停实验
+                  </button>
+                  <button type="button" id="reset">复位</button>
+                </div>
+                <p id="knob-hint" class="hint">
+                  拖动旋钮调速；方向键 ±1，Shift ±10，Home / End 到最小 / 最大。
+                </p>
+                <p class="hint">
+                  暂停冻结线圈、读数与波形；暂停时调速仅设继续后的速度。
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+        <div class="right">
+          <section class="card">
+            <div class="card-head">
+              <h2>实时感应电动势示波器</h2>
+              <output id="emf" class="reading">+0.000 V</output>
+            </div>
+            <svg
+              id="scope"
+              viewBox="0 0 580 190"
+              role="img"
+              aria-label="最近八秒感应电动势波形，固定正负0.30伏量程"
+            ></svg>
+            <div class="scope-meta">
+              <span>纵轴 e / V · 固定量程 ±0.30</span>
+              <span id="clock">最近 8 s · t = 0.0 s</span>
+            </div>
+            <p class="hint scope-legend" id="scope-legend">
+              蓝色实线：滑环端输出 e_PQ = e_AB
+            </p>
+          </section>
+          <section class="card theory">
+            <h2 id="theory-title">法拉第定律：磁通变化产生电动势</h2>
+            <div class="formula">NΦ = NBS cos θ</div>
+            <div class="formula">e_AB = −d(NΦ)/dt = NBSω sin θ</div>
+            <div class="measurements">
+              <p id="linkage">NΦ = +0.0200 Wb·匝</p>
+              <p id="peak">Eₘ = 0.126 V</p>
+              <p id="frequency">线圈频率 f = 1.00 Hz</p>
+              <p id="coil-emf">线圈 e_AB = +0.000 V</p>
+            </div>
+            <p id="state">线圈在磁通极值位置，瞬时电动势为零。</p>
+            <p id="conclusion" class="conclusion">
+              没有换向器：每半圈极性反转，输出为交流。转得越快，电动势幅值越大、频率越高。
+            </p>
+            <p class="hint">
+              θ 沿用前页：从右侧水平轴量至有效边 A；θ = 0° 时线圈法向与 B 同向。
+            </p>
+          </section>
+        </div>
+      </div>
+      <footer>
+        <span
+          >教学模型：1 匝，B = 0.5 T，l = 0.2 m，r = 0.1 m，S = 2rl = 0.04
+          m²；开路测量，忽略负载、漏磁与电刷压降。暂停不是转速归零。</span
+        >
+        <a
+          href="https://openstax.org/books/university-physics-volume-2/pages/13-6-electric-generators-and-back-emf"
+          target="_blank"
+          rel="noreferrer"
+          >原理参考 ↗</a
+        >
+      </footer>
+    </main>
+  </body>
+</html>

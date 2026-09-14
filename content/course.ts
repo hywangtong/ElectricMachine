@@ -649,6 +649,20 @@ export const slides: Slide[] = [
           chapterId: chapter.id,
           embedUrl: '/dc-motor-reversibility.html',
         },
+        {
+          id: 'dc-generator-slip-rings',
+          kind: 'embed',
+          title: '直流发电机原理：没有换向器',
+          chapterId: chapter.id,
+          embedUrl: '/dc-generator-slip-rings.html',
+        },
+        {
+          id: 'dc-generator-commutator',
+          kind: 'embed',
+          title: '直流发电机原理：电刷与换向器',
+          chapterId: chapter.id,
+          embedUrl: '/dc-generator-commutator.html',
+        },
       );
     }
 
