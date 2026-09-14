@@ -1,0 +1,781 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>直流电机真实结构</title>
+    <link rel="stylesheet" href="/dc-motor-structure.css" />
+    <script src="/dc-motor-structure.js" defer></script>
+  </head>
+  <body>
+    <main class="lesson">
+      <section class="page" data-page="overview" hidden>
+        <header>
+          <div class="eyebrow">直流电机 / 06 真实结构 · 总览</div>
+          <h1>拆开直流电机，先看谁固定、谁旋转</h1>
+          <p class="lead">
+            从单线圈实验走向真实电机：定子、转子与滑动接触界面。
+          </p>
+        </header>
+        <div class="page-body overview">
+          <figure class="photo">
+            <img
+              src="/dc-motor-structure-assets/machine-cutaway.jpg"
+              alt="公开整机剖切实物，可见定子包围电枢，转轴由两端轴承支承，电刷接触换向器"
+            />
+            <figcaption>
+              整机剖切：定子包围电枢，电刷接触换向器。<br />照片中换向极因剖切被移除。<span
+                class="photo-credit"
+                ><a
+                  href="https://commons.wikimedia.org/wiki/File:Entire_DC_machine_cut_open.jpg"
+                  target="_blank"
+                  rel="noreferrer"
+                  >Christian Kral / Wikimedia Commons ↗</a
+                >
+                ·
+                <a
+                  href="https://creativecommons.org/licenses/by/4.0/"
+                  target="_blank"
+                  rel="noreferrer"
+                  >CC BY 4.0</a
+                >
+                · 原图未修改</span
+              >
+            </figcaption>
+          </figure>
+          <div class="stack">
+            <article class="card">
+              <h2><span>01</span>定子：固定的磁场与支撑</h2>
+              <p>
+                主磁极、换向磁极、机座、电刷装置与端盖。<br />磁极装在机座内壁，包围电枢。
+              </p>
+            </article>
+            <article class="card">
+              <h2><span>02</span>转子：旋转的电枢组件</h2>
+              <p>
+                电枢铁心、电枢绕组、换向器、转轴与风扇。<br />它们联成一个旋转体。
+              </p>
+            </article>
+            <article class="card">
+              <h2><span>03</span>接口：固定电刷 × 旋转换向器</h2>
+              <p>
+                电刷固定在刷握中，压向换向器表面；<br />轴承支承转轴，维持定子与转子的相对位置。
+              </p>
+            </article>
+          </div>
+        </div>
+        <footer class="conclusion">
+          <strong>定子固定 · 转子旋转 · 电刷固定 · 换向器旋转</strong
+          ><span>先分清运动关系，再记部件名称。</span>
+        </footer>
+      </section>
+      <section class="page" data-page="stator" hidden>
+        <header>
+          <div class="eyebrow">直流电机 / 07 真实结构 · 定子</div>
+          <h1>定子同时承担磁路、支撑与定位</h1>
+          <p class="lead">
+            极靴朝向电枢表面；主磁极与转子之间，留出小而均匀的气隙。
+          </p>
+        </header>
+        <div class="page-body stator">
+          <figure class="photo">
+            <img
+              src="/dc-motor-structure-assets/field-interpoles.png"
+              alt="公开直流电机实物，展示主励磁绕组、换向极和换向器"
+            />
+            <figcaption>
+              主励磁绕组、换向极与换向器实物<span class="photo-credit"
+                ><a
+                  href="https://commons.wikimedia.org/wiki/File:DC_motor_with_interpole_and_main_field_winding_as_well_as_commutator.png"
+                  target="_blank"
+                  rel="noreferrer"
+                  >Oliver Wallscheid / Wikimedia Commons ↗</a
+                >
+                ·
+                <a
+                  href="https://creativecommons.org/licenses/by/4.0/"
+                  target="_blank"
+                  rel="noreferrer"
+                  >CC BY 4.0</a
+                >
+                · 原图未修改</span
+              >
+            </figcaption>
+          </figure>
+          <div class="grid two">
+            <article class="card">
+              <h2><span>01</span>机座 / 磁轭</h2>
+              <p>
+                厚钢壳支撑磁极与端盖，同时构成磁通回路；<br />主磁极、换向极固定在内壁。
+              </p>
+            </article>
+            <article class="card">
+              <h2><span>02</span>主磁极 + 励磁绕组</h2>
+              <p>极身与极靴外套励磁线圈；<br />励磁电流在气隙建立主磁场。</p>
+            </article>
+            <article class="card">
+              <h2><span>03</span>换向磁极</h2>
+              <p>
+                位于相邻主磁极之间，靠近几何中性线；<br />辅助线圈换向，减小电刷火花。
+              </p>
+            </article>
+            <article class="card">
+              <h2><span>04</span>端盖 + 轴承</h2>
+              <p>
+                端盖连接机座，轴承支承转轴；<br />保持转子位置与气隙，并封闭机体。
+              </p>
+            </article>
+          </div>
+        </div>
+        <footer class="conclusion">
+          <strong>机座回磁通，主极建磁场，端盖与轴承定位置。</strong
+          ><span>换向极不是主磁极。</span>
+        </footer>
+      </section>
+      <section class="page" data-page="rotor" hidden>
+        <header>
+          <div class="eyebrow">直流电机 / 08 真实结构 · 转子</div>
+          <h1>电枢：一根轴上的能量转换中心</h1>
+          <p class="lead">
+            铁心提供磁路，绕组参与能量转换，换向器连接旋转线圈与固定电刷。
+          </p>
+        </header>
+        <div class="page-body rotor">
+          <figure class="photo">
+            <img
+              src="/dc-motor-structure-assets/armature.jpg"
+              alt="小型直流电机电枢实物，中部铜线绕在钢制铁心上，右侧为换向器，转轴穿过组件"
+            />
+            <figcaption>
+              <span class="photo-parts"
+                ><b>看铜线：</b>槽内导体与两端跨接的绕组<br /><b>看中部：</b
+                >电枢铁心　<b>看右侧：</b>铜片换向器</span
+              ><span class="photo-credit"
+                ><a
+                  href="https://commons.wikimedia.org/wiki/File:Dc_armature.jpg"
+                  target="_blank"
+                  rel="noreferrer"
+                  >Lucas Richardson / Wikimedia Commons ↗</a
+                >
+                · 公有领域 · 原图未修改</span
+              >
+            </figcaption>
+          </figure>
+          <div class="stack">
+            <article class="card">
+              <h2><span>01</span>电枢铁心</h2>
+              <p>
+                薄硅钢片叠压，外圆开槽；提供低磁阻通道，<br />并承载绕组。叠片结构减小涡流损耗。
+              </p>
+            </article>
+            <article class="card">
+              <h2><span>02</span>电枢绕组</h2>
+              <p>
+                绝缘铜导体嵌入槽内，端部跨接线圈；<br />通电产生电磁转矩，旋转产生感应电动势。
+              </p>
+            </article>
+            <article class="card">
+              <h2><span>03</span>换向器、转轴与风扇</h2>
+              <p>
+                分立铜片连接电枢线圈，随轴旋转；<br />转轴传递机械功，风扇通风散热。
+              </p>
+            </article>
+          </div>
+        </div>
+        <footer class="conclusion">
+          <strong>铜色端部是绕组，密集铜片是换向器，叠片圆柱是铁心。</strong
+          ><span>电枢铁心属于转子。</span>
+        </footer>
+      </section>
+      <section class="page" data-page="contact" hidden>
+        <header>
+          <div class="eyebrow">直流电机 / 09 真实结构 · 电刷与换向器</div>
+          <h1>电刷不转，换向器才转</h1>
+          <p class="lead">
+            固定电路通过滑动接触连接旋转电枢；换向器随转角改变线圈的连接关系。
+          </p>
+        </header>
+        <div class="page-body contact">
+          <div class="contact-visual">
+            <figure class="photo">
+              <img
+                src="/dc-motor-structure-assets/commutator-brushes.jpg"
+                alt="ABB直流电机的换向器和固定电刷实物，铜片表面与电刷接触"
+              />
+              <figcaption>
+                铜片换向器与固定电刷 · ABB 直流电机实物<span
+                  class="photo-credit"
+                  ><a
+                    href="https://commons.wikimedia.org/wiki/File:Commutator_and_brushes_DC_motor.jpg"
+                    target="_blank"
+                    rel="noreferrer"
+                    >Christian Kral / Wikimedia Commons ↗</a
+                  >
+                  ·
+                  <a
+                    href="https://creativecommons.org/licenses/by/4.0/"
+                    target="_blank"
+                    rel="noreferrer"
+                    >CC BY 4.0</a
+                  >
+                  · 原图未修改</span
+                >
+              </figcaption>
+            </figure>
+            <div class="diagram">
+              <svg
+                role="img"
+                viewBox="0 0 720 245"
+                aria-label="电刷换向器接触示意"
+              >
+                <g transform="translate(274,31)">
+                  <circle
+                    cx="92"
+                    cy="92"
+                    r="80"
+                    fill="#b66c37"
+                    stroke="#7b4827"
+                    stroke-width="3"
+                  />
+                  <g stroke="#f1d0a9" stroke-width="5">
+                    <line
+                      x1="92"
+                      y1="12"
+                      x2="92"
+                      y2="172"
+                      transform="rotate(0 92 92)"
+                    />
+                    <line
+                      x1="92"
+                      y1="12"
+                      x2="92"
+                      y2="172"
+                      transform="rotate(22.5 92 92)"
+                    />
+                    <line
+                      x1="92"
+                      y1="12"
+                      x2="92"
+                      y2="172"
+                      transform="rotate(45 92 92)"
+                    />
+                    <line
+                      x1="92"
+                      y1="12"
+                      x2="92"
+                      y2="172"
+                      transform="rotate(67.5 92 92)"
+                    />
+                    <line
+                      x1="92"
+                      y1="12"
+                      x2="92"
+                      y2="172"
+                      transform="rotate(90 92 92)"
+                    />
+                    <line
+                      x1="92"
+                      y1="12"
+                      x2="92"
+                      y2="172"
+                      transform="rotate(112.5 92 92)"
+                    />
+                    <line
+                      x1="92"
+                      y1="12"
+                      x2="92"
+                      y2="172"
+                      transform="rotate(135 92 92)"
+                    />
+                    <line
+                      x1="92"
+                      y1="12"
+                      x2="92"
+                      y2="172"
+                      transform="rotate(157.5 92 92)"
+                    />
+                  </g>
+                  <circle cx="92" cy="92" r="33" fill="#516970" />
+                </g>
+                <rect
+                  x="72"
+                  y="87"
+                  width="135"
+                  height="54"
+                  rx="5"
+                  fill="#2f3b3d"
+                />
+                <rect
+                  x="521"
+                  y="87"
+                  width="135"
+                  height="54"
+                  rx="5"
+                  fill="#2f3b3d"
+                />
+                <path
+                  d="M207,114 C240,114 245,114 274,114"
+                  stroke="#6f858b"
+                  stroke-width="6"
+                />
+                <path
+                  d="M446,114 C478,114 490,114 521,114"
+                  stroke="#6f858b"
+                  stroke-width="6"
+                />
+                <path
+                  d="M84,75 l22,-24 l22,24 l22,-24 l22,24"
+                  fill="none"
+                  stroke="#789087"
+                  stroke-width="4"
+                />
+                <path
+                  d="M533,75 l22,-24 l22,24 l22,-24 l22,24"
+                  fill="none"
+                  stroke="#789087"
+                  stroke-width="4"
+                />
+                <g
+                  font-family="Microsoft YaHei,sans-serif"
+                  fill="#17353a"
+                  font-size="14"
+                >
+                  <text x="77" y="170">碳刷（固定）</text>
+                  <text x="529" y="170">碳刷（固定）</text>
+                  <text x="301" y="232">铜片换向器（随转子旋转）</text>
+                  <text x="286" y="18">铜片之间有绝缘缝</text>
+                </g>
+              </svg>
+            </div>
+          </div>
+          <div class="stack">
+            <article class="card">
+              <h2><span>01</span>刷握 + 弹簧 + 碳刷</h2>
+              <p>
+                刷握限制姿态，弹簧提供接触压力；<br />柔性铜辫线连接外部端子。电刷会逐渐磨损。
+              </p>
+            </article>
+            <article class="card">
+              <h2><span>02</span>铜片 + 片间绝缘</h2>
+              <p>
+                多片铜片围成圆筒，片间以云母等绝缘；<br />每片连接对应电枢线圈端头。
+              </p>
+            </article>
+            <article class="card">
+              <h2><span>03</span>同一接口，两种运行</h2>
+              <p>
+                <b>电动：</b>外部直流送入电枢，线圈适时换接。<br /><b>发电：</b
+                >内部交变电动势经换接，在电刷端得到单向电压。
+              </p>
+            </article>
+          </div>
+        </div>
+        <footer class="conclusion">
+          <strong>电刷负责接触，换向器负责随角度换接。</strong
+          ><span>它们共同构成滑动接触与机械换向装置。</span>
+        </footer>
+      </section>
+      <section class="page" data-page="assembly" hidden>
+        <header>
+          <div class="eyebrow">直流电机 / 10 真实结构 · 装配关系</div>
+          <h1>同心套合、两端支承、一端滑动接触</h1>
+          <p class="lead">
+            以下表达最终装配关系；实际工序随机型、尺寸和制造工艺而变化。
+          </p>
+        </header>
+        <div class="page-body assembly">
+          <div class="diagram">
+            <svg
+              role="img"
+              viewBox="0 0 1260 320"
+              aria-label="直流电机爆炸装配示意图"
+            >
+              <defs>
+                <linearGradient id="cu" x1="0" x2="1">
+                  <stop stop-color="#8f4e2b" />
+                  <stop offset=".5" stop-color="#d08b50" />
+                  <stop offset="1" stop-color="#8c4c28" />
+                </linearGradient>
+                <path
+                  id="assembly-fan-blade"
+                  d="M7-17C16-29 12-44 24-59C27-66 40-64 43-56C45-43 39-24 18-7Z"
+                />
+                <linearGradient
+                  id="assembly-fan-metal"
+                  x1="0"
+                  y1="0"
+                  x2="1"
+                  y2="1"
+                >
+                  <stop stop-color="#b8d0c5" />
+                  <stop offset=".5" stop-color="#7b9c92" />
+                  <stop offset="1" stop-color="#4f776c" />
+                </linearGradient>
+              </defs>
+              <g font-family="Microsoft YaHei,sans-serif" fill="#17353a">
+                <g transform="translate(44,72)">
+                  <rect
+                    x="0"
+                    y="37"
+                    width="98"
+                    height="116"
+                    rx="18"
+                    fill="#d9e1e2"
+                    stroke="#6a7e84"
+                    stroke-width="3"
+                  />
+                  <circle
+                    cx="49"
+                    cy="95"
+                    r="33"
+                    fill="#f6f9f8"
+                    stroke="#6a7e84"
+                    stroke-width="3"
+                  />
+                  <text x="8" y="190" font-size="14">驱动端盖/轴承</text>
+                </g>
+                <g transform="translate(320,48)">
+                  <rect
+                    x="0"
+                    y="28"
+                    width="390"
+                    height="166"
+                    rx="34"
+                    fill="#e7eceb"
+                    stroke="#667e83"
+                    stroke-width="4"
+                  />
+                  <rect
+                    x="20"
+                    y="50"
+                    width="350"
+                    height="122"
+                    rx="22"
+                    fill="#f7f9f8"
+                    stroke="#a8b9b5"
+                    stroke-width="2"
+                  />
+                  <rect
+                    x="70"
+                    y="69"
+                    width="252"
+                    height="84"
+                    rx="16"
+                    fill="#a9b5b5"
+                  />
+                  <line
+                    x1="-58"
+                    y1="111"
+                    x2="448"
+                    y2="111"
+                    stroke="#657a80"
+                    stroke-width="18"
+                    stroke-linecap="round"
+                  />
+                  <text x="72" y="16" font-size="15">
+                    转子：轴 + 电枢组件（绕组细节省略）
+                  </text>
+                </g>
+                <g
+                  transform="translate(185,78)"
+                  role="img"
+                  aria-label="轴装冷却风扇：六片弯曲叶片围绕中央轮毂，中心孔与转轴同心"
+                >
+                  <path d="M28 81h66" stroke="#657a80" stroke-width="14" />
+                  <g transform="translate(60,81)">
+                    <g transform="translate(8,0) scale(.8,1)" fill="#4f776c">
+                      <use href="#assembly-fan-blade" />
+                      <use href="#assembly-fan-blade" transform="rotate(60)" />
+                      <use href="#assembly-fan-blade" transform="rotate(120)" />
+                      <use href="#assembly-fan-blade" transform="rotate(180)" />
+                      <use href="#assembly-fan-blade" transform="rotate(240)" />
+                      <use href="#assembly-fan-blade" transform="rotate(300)" />
+                      <circle r="20" />
+                    </g>
+                    <g
+                      transform="scale(.8,1)"
+                      fill="url(#assembly-fan-metal)"
+                      stroke="#4f776c"
+                      stroke-width="1.5"
+                      stroke-linejoin="round"
+                    >
+                      <use href="#assembly-fan-blade" />
+                      <use href="#assembly-fan-blade" transform="rotate(60)" />
+                      <use href="#assembly-fan-blade" transform="rotate(120)" />
+                      <use href="#assembly-fan-blade" transform="rotate(180)" />
+                      <use href="#assembly-fan-blade" transform="rotate(240)" />
+                      <use href="#assembly-fan-blade" transform="rotate(300)" />
+                      <circle r="20" fill="#a9c2b7" stroke-width="2" />
+                      <circle r="12" fill="#d9e4de" />
+                      <circle
+                        r="7"
+                        fill="#657a80"
+                        stroke="#435e55"
+                        stroke-width="2"
+                      />
+                    </g>
+                  </g>
+                  <text x="40" y="190" font-size="14">风扇</text>
+                </g>
+                <g transform="translate(760,87)">
+                  <rect
+                    x="0"
+                    y="26"
+                    width="118"
+                    height="104"
+                    rx="10"
+                    fill="url(#cu)"
+                    stroke="#7f4b2b"
+                    stroke-width="3"
+                  />
+                  <g stroke="#f3d5ad" stroke-width="3">
+                    <line x1="15" y1="29" x2="15" y2="127" />
+                    <line x1="31" y1="29" x2="31" y2="127" />
+                    <line x1="47" y1="29" x2="47" y2="127" />
+                    <line x1="63" y1="29" x2="63" y2="127" />
+                    <line x1="79" y1="29" x2="79" y2="127" />
+                    <line x1="95" y1="29" x2="95" y2="127" />
+                  </g>
+                  <text x="18" y="166" font-size="14">换向器</text>
+                </g>
+                <g transform="translate(914,65)">
+                  <circle
+                    cx="77"
+                    cy="98"
+                    r="73"
+                    fill="none"
+                    stroke="#667e83"
+                    stroke-width="9"
+                  />
+                  <rect
+                    x="-8"
+                    y="76"
+                    width="58"
+                    height="44"
+                    rx="4"
+                    fill="#2f393b"
+                  />
+                  <rect
+                    x="104"
+                    y="76"
+                    width="58"
+                    height="44"
+                    rx="4"
+                    fill="#2f393b"
+                  />
+                  <text x="19" y="197" font-size="14">刷架/电刷（固定）</text>
+                </g>
+                <g transform="translate(1095,72)">
+                  <rect
+                    x="0"
+                    y="37"
+                    width="98"
+                    height="116"
+                    rx="18"
+                    fill="#d9e1e2"
+                    stroke="#6a7e84"
+                    stroke-width="3"
+                  />
+                  <circle
+                    cx="49"
+                    cy="95"
+                    r="33"
+                    fill="#f6f9f8"
+                    stroke="#6a7e84"
+                    stroke-width="3"
+                  />
+                  <text x="5" y="190" font-size="14">换向端盖/轴承</text>
+                </g>
+                <g
+                  stroke="#b96b2d"
+                  stroke-width="2"
+                  fill="none"
+                  stroke-dasharray="8 7"
+                >
+                  <line x1="143" y1="166" x2="185" y2="166" />
+                  <line x1="290" y1="166" x2="320" y2="166" />
+                  <line x1="710" y1="166" x2="760" y2="166" />
+                  <line x1="878" y1="166" x2="914" y2="166" />
+                  <line x1="1068" y1="166" x2="1095" y2="166" />
+                </g>
+                <rect
+                  x="311"
+                  y="39"
+                  width="580"
+                  height="236"
+                  rx="60"
+                  fill="none"
+                  stroke="#174c43"
+                  stroke-width="8"
+                  opacity=".22"
+                />
+                <text x="470" y="300" font-size="14" fill="#356b60">
+                  机座/磁轭包围转子；主磁极与换向极固定在内壁，极面朝向电枢并留气隙
+                </text>
+              </g>
+            </svg>
+          </div>
+          <div class="grid three">
+            <article class="card">
+              <h2><span>01</span>定子磁场系统</h2>
+              <p>
+                主磁极、换向极与励磁线圈固定在机座内；<br />极面朝向电枢，形成包围关系。
+              </p>
+            </article>
+            <article class="card">
+              <h2><span>02</span>完整转子组件</h2>
+              <p>
+                铁心压装在轴上，绕组嵌槽；<br />线圈连接换向片，风扇与换向器随轴旋转。
+              </p>
+            </article>
+            <article class="card">
+              <h2><span>03</span>支承、套合与接触</h2>
+              <p>
+                轴承与端盖支承转轴，转子套入定子；<br />刷架固定，电刷压向换向器。
+              </p>
+            </article>
+          </div>
+        </div>
+        <footer class="conclusion">
+          <strong>最终检查：同心 · 均匀气隙 · 轴向定位 · 电刷压力</strong
+          ><span>图中分开绘制，装配后相互套合。</span>
+        </footer>
+      </section>
+      <section class="page" data-page="function" hidden>
+        <header>
+          <div class="eyebrow">直流电机 / 11 真实结构 · 功能链</div>
+          <h1>把零件串成“电能 → 连续旋转”</h1>
+          <p class="lead">
+            主磁场与电枢电流共同产生转矩；换向装置让驱动转矩持续保持同向。
+          </p>
+        </header>
+        <div class="page-body function">
+          <div class="function-flow">
+            <article class="card">
+              <h2><span>01</span>励磁建场</h2>
+              <p>主磁极 + 励磁绕组<br />在气隙中建立主磁通</p>
+            </article>
+            <article class="card">
+              <h2><span>02</span>电刷进电</h2>
+              <p>外部直流经碳刷<br />接入换向器</p>
+            </article>
+            <article class="card">
+              <h2><span>03</span>换向器换接</h2>
+              <p>随转角改变连接<br />适时切换线圈电流</p>
+            </article>
+            <article class="card">
+              <h2><span>04</span>电枢受力</h2>
+              <p>槽内载流导体<br />在主磁场中形成转矩</p>
+            </article>
+            <article class="card">
+              <h2><span>05</span>转轴输出</h2>
+              <p>电枢与转轴旋转<br />带动机械负载</p>
+            </article>
+            <article class="card">
+              <h2><span>06</span>持续换向</h2>
+              <p>线圈经过中性区<br />换向极辅助改善换向</p>
+            </article>
+          </div>
+          <div class="symptoms">
+            <h2>结构失效，会在运行中留下什么痕迹？</h2>
+            <div class="grid three">
+              <article class="card">
+                <h2><span>接触</span>电刷磨损 / 换向不良</h2>
+                <p>接触压降增大、火花或发热。</p>
+              </article>
+              <article class="card">
+                <h2><span>机械</span>轴承与定位异常</h2>
+                <p>振动、气隙不均，严重时擦碰。</p>
+              </article>
+              <article class="card">
+                <h2><span>磁场</span>励磁异常</h2>
+                <p>电磁转矩与转速发生异常变化。</p>
+              </article>
+            </div>
+            <p class="boundary">
+              这些现象用于建立部件与功能的联系，单一症状不能直接判定故障原因。
+            </p>
+          </div>
+        </div>
+        <footer class="conclusion">
+          <strong>磁场 + 电流 → 电磁转矩；支承 + 换向 → 稳定运行。</strong
+          ><span>回到实物，就能说明每个零件为什么存在。</span>
+        </footer>
+      </section>
+      <section class="page" data-page="sources" hidden>
+        <header>
+          <div class="eyebrow">直流电机 / 12 真实结构 · 资料与术语</div>
+          <h1>从部件清单，到真实电机的结构对应</h1>
+          <p class="lead">
+            结构分类、实物识别与装配示意互相印证；示意图表达功能关系，不代表具体型号。
+          </p>
+        </header>
+        <div class="page-body sources">
+          <div class="card source-card">
+            <h2><span>01</span>参考文件所列公开资料</h2>
+            <ul class="references">
+              <li>
+                <a
+                  href="https://commons.wikimedia.org/wiki/File:Entire_DC_machine_cut_open.jpg"
+                  target="_blank"
+                  rel="noreferrer"
+                  >Wikimedia Commons · 直流电机剖切实物 ↗</a
+                ><small>观察定子、转子、端盖、轴承与接触系统</small>
+              </li>
+              <li>
+                <a
+                  href="https://commons.wikimedia.org/wiki/File:Commutator_and_brushes_DC_motor.jpg"
+                  target="_blank"
+                  rel="noreferrer"
+                  >Wikimedia Commons · 换向器与电刷实物 ↗</a
+                ><small>Christian Kral · CC BY 4.0</small>
+              </li>
+              <li>
+                <a
+                  href="https://commons.wikimedia.org/wiki/File:Dc_armature.jpg"
+                  target="_blank"
+                  rel="noreferrer"
+                  >Wikimedia Commons · 小型电枢实物 ↗</a
+                ><small>识别绕组、铁心与换向器</small>
+              </li>
+              <li>
+                <a
+                  href="https://commons.wikimedia.org/wiki/File:DC_motor_with_interpole_and_main_field_winding_as_well_as_commutator.png"
+                  target="_blank"
+                  rel="noreferrer"
+                  >Wikimedia Commons · 主磁极与换向极 ↗</a
+                ><small>观察励磁绕组及磁极位置</small>
+              </li>
+              <li>
+                <a
+                  href="https://electricalacademia.com/dc-machines/dc-motor-construction-parts/"
+                  target="_blank"
+                  rel="noreferrer"
+                  >Electrical Academia · 直流电机部件 ↗</a
+                ><small>磁轭、叠片铁心、铜片绝缘、刷握与弹簧</small>
+              </li>
+              <li>
+                <a
+                  href="https://downloads.unido.org/ot/48/19/4819494/15001-20000_17148.pdf"
+                  target="_blank"
+                  rel="noreferrer"
+                  >UNIDO · Electric Motors ↗</a
+                ><small>端盖、轴承与转轴支承</small>
+              </li>
+            </ul>
+          </div>
+          <div class="card term-note">
+            <h2><span>02</span>术语辨析</h2>
+            <p>电枢铁心属于转子 / 电枢磁路，不是定子主磁极本体。</p>
+          </div>
+        </div>
+        <footer class="conclusion">
+          <strong
+            >实物识别：换向器 → 电刷 → 电枢 → 磁极与励磁线圈 →
+            机座与端盖</strong
+          ><span>公开资料链接需要网络。</span>
+        </footer>
+      </section>
+    </main>
+  </body>
+</html>

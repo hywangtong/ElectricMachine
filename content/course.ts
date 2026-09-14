@@ -663,6 +663,23 @@ export const slides: Slide[] = [
           chapterId: chapter.id,
           embedUrl: '/dc-generator-commutator.html',
         },
+        ...[
+          ['overview', '直流电机真实结构：总体结构'],
+          ['stator', '直流电机真实结构：定子'],
+          ['rotor', '直流电机真实结构：转子与电枢'],
+          ['contact', '直流电机真实结构：电刷与换向器'],
+          ['assembly', '直流电机真实结构：装配关系'],
+          ['function', '直流电机真实结构：功能链'],
+          ['sources', '直流电机真实结构：资料与术语'],
+        ].map(
+          ([page, title]): Slide => ({
+            id: `dc-motor-structure-${page}`,
+            kind: 'embed',
+            title,
+            chapterId: chapter.id,
+            embedUrl: `/dc-motor-structure.html?page=${page}`,
+          }),
+        ),
       );
     }
 

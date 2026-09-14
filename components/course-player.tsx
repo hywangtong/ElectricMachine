@@ -617,6 +617,11 @@ export default function CoursePlayer() {
                         className={`embed-body${slide.embedUrl.startsWith('/magnetic-') || slide.embedUrl === '/dc-machine-uses-types.html' || slide.embedUrl.startsWith('/dc-motor-') || slide.embedUrl.startsWith('/dc-generator-') ? ' embed-maxwell' : ''}${slide.embedUrl === '/ship-power-eli5.html' ? ' embed-ship-power' : ''}`}
                       >
                         <iframe
+                          key={
+                            slide.id.startsWith('dc-motor-structure-')
+                              ? slide.id
+                              : undefined
+                          }
                           src={slide.embedUrl}
                           title={slide.title}
                           className="embed-frame"
