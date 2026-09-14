@@ -1,66 +1,300 @@
 <!doctype html>
 <html lang="zh-CN">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>交流磁场为什么会产生铁耗？</title>
-  <link rel="stylesheet" href="/magnetic-circuit-lesson.css" />
-</head>
-<body>
-<main class="lesson">
-  <header class="lesson-head">
-    <div class="eyebrow">磁路 / 09 交流磁路 · ELI5</div>
-    <h1>交流磁场为什么会产生铁耗？</h1>
-    <p class="lead">交流电压不只“让磁通来回变”，还让铁心每个周期都为磁滞和涡流付出能量。</p>
-  </header>
-  <section class="grid-2 equal">
-    <div class="stack">
-      <article class="card">
-        <h2>先把交流电压和主磁通连起来</h2>
-        <div class="chain" style="margin-top:8px"><b>u</b><span class="arrow">→</span><b>i</b><span class="arrow">→</span><b>Ni</b><span class="arrow">→</span><b>Φ</b><span class="arrow">→</span><b>e</b></div>
-        <div class="formula-row" style="margin-top:9px">
-          <div class="formula">e = −N dΦ/dt<small>法拉第电磁感应</small></div>
-          <div class="formula emphasis">E = 4.44 fNΦ<sub>m</sub><small>正弦磁通、有效值形式</small></div>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>交流磁场为什么会产生铁耗？</title>
+    <link rel="stylesheet" href="/magnetic-circuit-lesson.css" />
+    <link rel="stylesheet" href="/magnetic-ac-losses.css" />
+    <script type="module" src="/magnetic-ac-losses.js"></script>
+  </head>
+  <body>
+    <main class="lesson">
+      <header class="lesson-head">
+        <div class="eyebrow">磁路 / 09 交流磁路</div>
+        <div class="heading-row">
+          <h1>交流磁场为什么会产生铁耗？</h1>
+          <button id="pause" type="button" aria-pressed="false">
+            暂停演示
+          </button>
+          <button id="reset" type="button">复位</button>
         </div>
-        <div class="formula warn" style="margin-top:8px">U ≈ E &nbsp; ⇒ &nbsp; Φ<sub>m</sub> ≈ U/(4.44 fN) &nbsp; ⇒ &nbsp; <strong>Φ<sub>m</sub> ∝ U/f</strong><small>近似条件：忽略绕组电阻和漏抗压降等影响</small></div>
-        <p class="mini">这就是后续“恒 U/f”控制的磁通直觉；详细控制方法留到电力拖动章节。</p>
-      </article>
-      <article class="card">
-        <h2>一句话先分清两类铁耗</h2>
-        <div class="formula emphasis" style="margin-top:8px">P<sub>Fe</sub> = P<sub>h</sub> + P<sub>e</sub></div>
-        <p><strong>P<sub>h</sub>：</strong>磁畴来回翻转有“内耗”；<strong>P<sub>e</sub>：</strong>变化磁通在导电铁心里感应出闭合电流并发热。</p>
-      </article>
-    </div>
-    <div class="stack">
-      <article class="card hero-card">
-        <div class="compare-title"><h2>磁滞损耗 P<sub>h</sub>：回线每绕一圈都要付能量</h2><span class="tag">回线面积</span></div>
-        <svg viewBox="0 0 700 210" role="img" aria-label="磁滞回线填充面积表示每周期单位体积的磁滞能量损耗">
-          <line x1="60" y1="110" x2="640" y2="110" stroke="#819690" stroke-width="2"/>
-          <line x1="350" y1="190" x2="350" y2="20" stroke="#819690" stroke-width="2"/>
-          <path d="M100 150C170 35 285 38 350 70C420 105 535 88 605 35C535 180 420 180 350 148C285 118 170 125 100 150Z" fill="#cfe6df" stroke="#3f8276" stroke-width="5"/>
-          <text x="610" y="128" font-size="17">H</text><text x="365" y="28" font-size="17">B</text>
-          <text x="100" y="28" font-size="17" class="muted">面积越大 → 每周期磁滞能量越大</text>
-        </svg>
-        <div class="formula-row">
-          <div class="formula">P<sub>h</sub> = Vf∮H dB<small>由回线面积得到</small></div>
-          <div class="formula">P<sub>h</sub> = K<sub>h</sub> f B<sub>m</sub><sup>α</sup> V<small>常用工程经验式</small></div>
+        <p class="lead">
+          磁滞：循环磁化消耗能量。涡流：变化磁通感应出闭合电流，产生焦耳热。
+        </p>
+      </header>
+      <section class="ac-layout">
+        <aside class="card theory">
+          <h2>交流电压 → 主磁通</h2>
+          <div class="chain">
+            <b>u</b> → <b>i</b> → <b>Ni</b> → <b>Φ</b> → <b>e</b>
+          </div>
+          <div class="formula">e = −N dΦ/dt</div>
+          <div class="formula emphasis">
+            E = 4.44 fNΦ<sub>m</sub><small>正弦磁通；E 为有效值</small>
+          </div>
+          <div class="formula warn">
+            Φ<sub>m</sub> ≈ U/(4.44 fN)<br /><strong>Φ<sub>m</sub> ∝ U/f</strong
+            ><small>忽略绕组电阻、漏抗压降：U ≈ E</small>
+          </div>
+          <h2 class="loss-title">两类铁耗相加</h2>
+          <div class="formula emphasis">
+            P<sub>Fe</sub> = P<sub>h</sub> + P<sub>e</sub>
+          </div>
+          <p class="model-note">
+            教学模型，非材料实测。<br />0—3 Hz 便于观察；暖色示意瞬时发热强弱。
+          </p>
+        </aside>
+        <div class="experiments">
+          <article class="card hysteresis-card">
+            <h2>① 磁滞损耗 <span>H 来回变化，B 沿不同路径返回</span></h2>
+            <div class="controls">
+              <label for="h-frequency"
+                >H 频率 <output id="h-frequency-value">0.60 Hz</output
+                ><input
+                  id="h-frequency"
+                  type="range"
+                  min="0"
+                  max="3"
+                  step="0.05"
+                  value="0.6"
+              /></label>
+              <label for="h-amplitude"
+                >H 幅值 <output id="h-amplitude-value">400 A/m</output
+                ><input
+                  id="h-amplitude"
+                  type="range"
+                  min="0"
+                  max="600"
+                  step="10"
+                  value="400"
+              /></label>
+            </div>
+            <div class="plots">
+              <svg
+                id="h-loop"
+                viewBox="0 0 480 120"
+                role="img"
+                aria-label="B-H 磁滞回线，阴影为当前幅值的循环面积，圆点表示实时工作点"
+              >
+                <defs>
+                  <pattern
+                    id="loop-shadow"
+                    width="7"
+                    height="7"
+                    patternUnits="userSpaceOnUse"
+                  >
+                    <path d="M0 7L7 0" stroke="#397f7355" stroke-width="2" />
+                  </pattern>
+                </defs>
+                <path d="M45 60H447M246 99V21" class="axis" />
+                <text x="10" y="20">B / T</text>
+                <text x="366" y="117">H / (A/m)</text>
+                <text x="35" y="80" class="tick">−600</text>
+                <text x="246" y="80" class="tick">0</text>
+                <text x="415" y="80" class="tick">600</text>
+                <text x="211" y="31" class="tick">1.6</text>
+                <text x="202" y="100" class="tick">−1.6</text>
+                <path id="loop-fill" fill="#d1e9e1" />
+                <path id="loop-hatch" fill="url(#loop-shadow)" />
+                <path id="loop-path" class="b-trace" />
+                <g id="loop-landmarks"></g>
+                <circle
+                  id="loop-dot"
+                  r="6"
+                  fill="#ec9d39"
+                  stroke="#173b3b"
+                  stroke-width="2"
+                />
+                <text id="loop-area" x="280" y="20" class="plot-note"></text>
+              </svg>
+              <svg
+                id="h-scope"
+                viewBox="0 0 480 120"
+                role="img"
+                aria-label="实时示波器：H 和 B 的时域波形，固定四秒时间窗"
+              >
+                <g class="scope-grid">
+                  <path
+                    d="M48 27H456M48 60H456M48 93H456M48 27V93M150 27V93M252 27V93M354 27V93M456 27V93"
+                  />
+                </g>
+                <text x="48" y="20" class="h-label">H / 600 A/m</text>
+                <text x="257" y="20" class="b-label">B / 1.6 T</text>
+                <text x="8" y="32" class="tick">+1</text>
+                <text x="19" y="65" class="tick">0</text>
+                <text x="8" y="98" class="tick">−1</text>
+                <path id="h-wave" class="h-trace" />
+                <path id="hb-wave" class="b-trace" />
+                <circle id="h-now" r="4" class="h-point" />
+                <circle id="hb-now" r="4" class="b-point" />
+                <text x="48" y="117" class="tick">−4 s</text>
+                <text x="241" y="117" class="tick">−2 s</text>
+                <text x="401" y="117" class="tick">现在 → t</text>
+              </svg>
+            </div>
+            <div class="domain-row">
+              <div class="domain-caption">
+                <strong>铁芯中的磁畴</strong
+                ><span id="domain-field">外加 H →</span
+                ><small>圈内箭头：磁化方向<br />转向时暖色边缘：耗散</small>
+              </div>
+              <svg
+                id="domains"
+                viewBox="0 0 730 62"
+                role="img"
+                aria-label="铁芯内圆形磁畴及磁化箭头，随循环磁化转向，转向时边缘呈暖色"
+              >
+                <rect
+                  x="2"
+                  y="2"
+                  width="726"
+                  height="58"
+                  rx="8"
+                  fill="#e6eeea"
+                  stroke="#9bb2aa"
+                />
+                <g id="domain-circles"></g>
+              </svg>
+            </div>
+            <div class="equation-line">
+              <span class="main-equation">P<sub>h</sub> = Vf ∮ H dB</span>
+              <span>阴影面积 = 每周期单位体积损耗</span
+              ><span class="empirical"
+                >工程式：P<sub>h</sub> = K<sub>h</sub> f B<sub>m</sub
+                ><sup>α</sup> V</span
+              >
+            </div>
+          </article>
+          <article class="card eddy-card">
+            <h2>
+              ② 涡流损耗 <span>磁通穿过铁块，涡流在垂直于 B 的截面内闭合</span>
+            </h2>
+            <div class="controls">
+              <label for="b-frequency"
+                >B 频率 <output id="b-frequency-value">0.60 Hz</output
+                ><input
+                  id="b-frequency"
+                  type="range"
+                  min="0"
+                  max="3"
+                  step="0.05"
+                  value="0.6"
+              /></label>
+              <label for="b-amplitude"
+                >B 幅值 <output id="b-amplitude-value">1.00 T</output
+                ><input
+                  id="b-amplitude"
+                  type="range"
+                  min="0"
+                  max="1.5"
+                  step="0.05"
+                  value="1"
+              /></label>
+            </div>
+            <div class="plots eddy-plots">
+              <svg
+                id="eddy-block"
+                viewBox="0 0 480 115"
+                role="img"
+                aria-label="半透明立体铁块，沿竖直方向穿过铁块的磁感线及内部水平截面上的闭合涡流"
+              >
+                <defs>
+                  <marker
+                    id="b-arrow"
+                    viewBox="0 0 10 10"
+                    refX="8"
+                    refY="5"
+                    markerWidth="5"
+                    markerHeight="5"
+                    orient="auto"
+                  >
+                    <path d="M0 0L10 5L0 10Z" fill="#397f73" />
+                  </marker>
+                </defs>
+                <g transform="translate(0 -2) scale(1 .8)">
+                  <g id="block-faces" stroke="#738d84" stroke-width="2">
+                    <path d="M105 40L163 20H337L279 40Z" />
+                    <path d="M279 40L337 20V102L279 125Z" />
+                    <path d="M105 40H279V125H105Z" />
+                  </g>
+                  <g
+                    id="eddy-field"
+                    stroke="#397f73"
+                    marker-end="url(#b-arrow)"
+                  ></g>
+                  <path
+                    d="M117 82L161 62H324L279 82Z"
+                    fill="#fff8eb55"
+                    stroke="#a76a3a"
+                    stroke-dasharray="4 4"
+                  />
+                  <g id="eddy-loops" fill="none" stroke="#bd632c"></g>
+                  <g id="eddy-charges" fill="#bd632c"></g>
+                </g>
+                <text x="10" y="19" class="b-label">B ↑ 为正</text>
+                <text x="352" y="50" class="e-label">闭合涡流</text>
+                <text
+                  id="eddy-direction"
+                  x="350"
+                  y="77"
+                  class="plot-note"
+                ></text>
+                <text id="eddy-heat" x="350" y="100" class="plot-note"></text>
+                <text x="107" y="113" class="tick">
+                  透明显示内部；暖色 ∝ E²/R
+                </text>
+              </svg>
+              <svg
+                id="b-scope"
+                viewBox="0 0 480 115"
+                role="img"
+                aria-label="实时示波器：B 与回路电动势 E，E 等于负的面积乘 B 的时间导数"
+              >
+                <g class="scope-grid">
+                  <path
+                    d="M48 27H456M48 57H456M48 87H456M48 27V87M150 27V87M252 27V87M354 27V87M456 27V87"
+                  />
+                </g>
+                <text x="48" y="19" class="b-label">B / 1.5 T</text>
+                <text x="250" y="19" class="e-label">E / 0.283 V</text>
+                <text x="8" y="32" class="tick">+1</text>
+                <text x="19" y="62" class="tick">0</text>
+                <text x="8" y="92" class="tick">−1</text>
+                <path id="b-wave" class="b-trace" />
+                <path id="e-wave" class="e-trace" />
+                <circle id="b-now" r="4" class="b-point" />
+                <circle id="e-now" r="4" class="e-point" />
+                <text x="48" y="113" class="tick">−4 s</text>
+                <text x="241" y="113" class="tick">−2 s</text>
+                <text x="401" y="113" class="tick">现在 → t</text>
+              </svg>
+            </div>
+            <div class="eddy-equations">
+              <div>
+                ∇ × <b>𝐄</b> = −∂<b>𝐁</b>/∂t <span>∮ 𝐄·d𝐥 = −d/dt ∫ 𝐁·d𝐒</span
+                ><small
+                  >回路 E = −A dB/dt；A = 0.01 m²；俯视逆时针为 E
+                  正向；忽略自感</small
+                >
+              </div>
+              <div>
+                P<sub>e</sub> = K<sub>e</sub>
+                <strong>d² f²</strong> B<sub>m</sub>² V<small
+                  >工程近似式；下一页：能否把铁芯做薄？</small
+                >
+              </div>
+            </div>
+          </article>
         </div>
-      </article>
-      <article class="card hero-card">
-        <div class="compare-title"><h2>涡流损耗 P<sub>e</sub>：铁心里自己绕起“短路线”</h2><span class="tag">下一页的悬念</span></div>
-        <svg viewBox="0 0 700 180" role="img" aria-label="实心铁心内部因变化磁通产生闭合涡流环">
-          <defs><marker id="e6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#b36b39"/></marker></defs>
-          <rect x="75" y="25" width="300" height="125" rx="12" fill="#d6dfdc" stroke="#728781" stroke-width="3"/>
-          <path d="M140 90C140 45 300 45 300 90S140 135 140 90Z" fill="none" stroke="#b36b39" stroke-width="7" marker-end="url(#e6)"/>
-          <path d="M430 145V40" stroke="#397f73" stroke-width="8"/>
-          <text x="445" y="70" font-size="18">变化的 Φ</text><text x="155" y="95" font-size="18" class="accent">闭合涡流</text>
-        </svg>
-        <div class="formula warn">P<sub>e</sub> = K<sub>e</sub> <strong>d²</strong> <strong>f²</strong> B<sub>m</sub>² V<small>K<sub>e</sub> 随材料、单位制和模型定义而定；这里看依赖关系</small></div>
-        <p><strong>问题：</strong>既然 P<sub>e</sub> 和厚度 d 的平方有关，能不能把铁心做薄？</p>
-      </article>
-    </div>
-  </section>
-  <footer class="engineering"><strong>工程结论</strong><span>交流磁化一边建立主磁通，一边产生磁滞与涡流损耗。U/f 控制磁通量级，而 d²、f² 直接提示了下一页的结构答案。</span></footer>
-</main>
-</body>
+      </section>
+      <footer class="engineering">
+        <strong>观察</strong
+        ><span
+          >磁滞回线越大，每圈损耗越大；涡流取决于磁通变化率，B 过零时最强，B
+          到峰值时为零。</span
+        >
+      </footer>
+    </main>
+  </body>
 </html>

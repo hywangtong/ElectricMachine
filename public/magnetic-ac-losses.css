@@ -1,0 +1,278 @@
+.lesson {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 1444px;
+  height: 744px;
+  min-height: 0;
+  padding: 14px 18px;
+  gap: 8px;
+  transform: translate(-50%, -50%) scale(var(--lesson-scale, 1));
+}
+body {
+  overflow: hidden;
+}
+.lesson-head {
+  gap: 3px;
+}
+.eyebrow {
+  font-size: 14px;
+}
+.heading-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+h1 {
+  font-size: 32px;
+  margin-right: auto;
+}
+.lead {
+  font-size: 19px;
+}
+.ac-layout {
+  display: grid;
+  grid-template-columns: 330px minmax(0, 1fr);
+  gap: 10px;
+  min-height: 0;
+}
+.card {
+  padding: 10px 12px;
+  border-radius: 12px;
+}
+.card h2 {
+  font-size: 23px;
+}
+.card h2 span {
+  font-size: 18px;
+  margin-left: 10px;
+  font-weight: 500;
+}
+.theory {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.theory .chain {
+  gap: 4px;
+  padding: 8px 4px;
+  font-size: 22px;
+  flex-wrap: nowrap;
+}
+.theory .chain b {
+  min-width: 0;
+  padding: 3px 5px;
+}
+.theory .formula {
+  font-size: 26px;
+  padding: 8px 4px;
+  line-height: 1.25;
+}
+.formula.emphasis small {
+  color: #c8e1d7;
+}
+.formula small {
+  font-size: 16px;
+}
+.card p {
+  font-size: 20px;
+  line-height: 1.4;
+  margin: 0;
+}
+.theory .loss-title {
+  margin-top: 2px;
+}
+.theory .model-note {
+  font-size: 16px;
+  line-height: 1.35;
+  margin-top: auto;
+}
+.experiments {
+  display: grid;
+  grid-template-rows: 1.18fr 1fr;
+  gap: 8px;
+  min-height: 0;
+}
+.hysteresis-card,
+.eddy-card {
+  display: grid;
+  gap: 5px;
+}
+.hysteresis-card {
+  grid-template-rows: auto 43px minmax(0, 1fr) 60px auto;
+}
+.eddy-card {
+  grid-template-rows: auto 43px minmax(0, 1fr) auto;
+}
+.controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  padding: 0 8px;
+}
+.controls label {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  font-size: 20px;
+  font-weight: 650;
+}
+output {
+  color: #a35428;
+  font-variant-numeric: tabular-nums;
+}
+input[type='range'] {
+  grid-column: 1 / -1;
+  width: 100%;
+  height: 22px;
+  margin: 0;
+  accent-color: #397f73;
+  cursor: pointer;
+}
+button {
+  border: 1px solid #afc8bf;
+  border-radius: 8px;
+  padding: 5px 14px;
+  color: #286c62;
+  background: #edf6f2;
+  font: inherit;
+  font-size: 18px;
+  cursor: pointer;
+}
+button:hover {
+  background: #d8eae1;
+}
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid #b66c39;
+  outline-offset: 2px;
+}
+.plots {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  min-height: 0;
+}
+.plots svg {
+  background: #f5f9f6;
+  border-radius: 8px;
+}
+svg text {
+  font-size: 20px;
+}
+svg .tick {
+  font-size: 16px;
+  fill: #5a716a;
+}
+svg .plot-note {
+  font-size: 17px;
+}
+.axis {
+  fill: none;
+  stroke: #90a69e;
+  stroke-width: 1.5;
+}
+.scope-grid {
+  fill: none;
+  stroke: #d3e1db;
+  stroke-width: 1;
+}
+.h-trace,
+.b-trace,
+.e-trace {
+  fill: none;
+  stroke-width: 3;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.h-trace {
+  stroke: #6963b6;
+}
+.b-trace {
+  stroke: #287e70;
+}
+.e-trace {
+  stroke: #bf632c;
+}
+svg .h-label,
+.h-point {
+  fill: #6963b6;
+}
+svg .b-label,
+.b-point {
+  fill: #287e70;
+}
+svg .e-label,
+.e-point {
+  fill: #bf632c;
+}
+.domain-row {
+  display: grid;
+  grid-template-columns: 224px 1fr;
+  gap: 8px;
+  align-items: center;
+  min-height: 0;
+}
+.domain-caption {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  font-size: 18px;
+}
+.domain-caption span {
+  font-size: 16px;
+  color: #6963b6;
+}
+.domain-caption small {
+  grid-column: 1 / -1;
+  font-size: 15px;
+  line-height: 1.3;
+  color: #5a716a;
+}
+.equation-line {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 23px;
+  white-space: nowrap;
+}
+.equation-line span {
+  font-size: 17px;
+  color: #55736d;
+}
+.equation-line .main-equation {
+  color: #173b3b;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 23px;
+}
+.equation-line .empirical {
+  margin-left: auto;
+}
+.eddy-equations {
+  display: grid;
+  grid-template-columns: 1.48fr 1fr;
+  gap: 8px;
+  font-size: 23px;
+  line-height: 1.2;
+}
+.eddy-equations > div {
+  background: #edf6f2;
+  border-radius: 7px;
+  padding: 4px 8px;
+}
+.eddy-equations > div:last-child {
+  background: #fff3df;
+}
+.eddy-equations span {
+  margin-left: 12px;
+  font-size: 20px;
+}
+.eddy-equations small {
+  display: block;
+  font-size: 14px;
+  margin-top: 2px;
+  color: #55736d;
+}
+.engineering {
+  min-height: 32px;
+  padding: 5px 12px;
+  font-size: 19px;
+}
