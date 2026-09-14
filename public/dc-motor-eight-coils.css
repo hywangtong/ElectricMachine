@@ -1,0 +1,278 @@
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+body {
+  margin: 0;
+  overflow: hidden;
+  color: #173b3b;
+  background: #f8fbf7;
+  font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+}
+.lesson {
+  position: absolute;
+  width: 1444px;
+  height: 744px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(var(--lesson-scale, 1));
+  padding: 18px 24px;
+  display: grid;
+  grid-template-rows: 86px 1fr 38px;
+  gap: 12px;
+  transform-origin: center;
+}
+.eyebrow {
+  color: #39796f;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+}
+h1 {
+  margin: 5px 0;
+  font-size: 31px;
+  line-height: 1.2;
+}
+.lead {
+  margin: 0;
+  color: #55736d;
+  font-size: 17px;
+}
+.lead span {
+  color: #173b3b;
+}
+.layout {
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 810px 1fr;
+  gap: 14px;
+}
+.card {
+  border: 1px solid #c8d9d4;
+  border-radius: 14px;
+  background: #fff;
+  padding: 14px 18px;
+  overflow: hidden;
+}
+.card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+h2 {
+  font-size: 20px;
+  margin: 0;
+}
+.tag {
+  font-size: 13px;
+  color: #39796f;
+  background: #edf6f2;
+  border-radius: 20px;
+  padding: 5px 10px;
+  white-space: nowrap;
+}
+.machine-card {
+  display: grid;
+  grid-template-rows: 30px 365px 23px 74px 20px;
+  gap: 4px;
+}
+.viewport {
+  position: relative;
+  background: radial-gradient(ellipse at center, #edf5f4, #fbfdfb 70%);
+  border-radius: 10px;
+}
+#machine {
+  width: 100%;
+  height: 100%;
+  display: block;
+  cursor: grab;
+  touch-action: none;
+}
+#machine:active {
+  cursor: grabbing;
+}
+.view-tools {
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  display: flex;
+  gap: 5px;
+}
+.view-tools button {
+  padding: 4px 8px;
+  font-size: 12px;
+  background: #ffffffdd;
+}
+.view-hint {
+  position: absolute;
+  bottom: 7px;
+  right: 10px;
+  font-size: 12px;
+  color: #607f77;
+  pointer-events: none;
+}
+.legend {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  font-size: 13px;
+  color: #607f77;
+}
+.upper {
+  color: #306caf;
+}
+.lower {
+  color: #288466;
+}
+.commuting {
+  color: #bc6830;
+}
+.controls {
+  display: grid;
+  gap: 8px;
+  align-content: center;
+}
+.control-line {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 14px;
+}
+button,
+select {
+  font: inherit;
+  color: #214e4a;
+  background: #f4f9f5;
+  border: 1px solid #bcd1c8;
+  border-radius: 7px;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+button:hover {
+  background: #e4f0e9;
+}
+button[aria-pressed='true'] {
+  background: #214e4a;
+  color: #fff;
+}
+button:focus-visible,
+select:focus-visible,
+input:focus-visible,
+canvas:focus-visible {
+  outline: 3px solid #bd7636;
+  outline-offset: 2px;
+}
+select {
+  padding: 5px;
+}
+.angle-line input {
+  width: 340px;
+  accent-color: #39796f;
+}
+.angle-line output {
+  width: 60px;
+  font-variant-numeric: tabular-nums;
+}
+.hint {
+  font-size: 13px;
+  line-height: 1.5;
+  color: #60796f;
+  margin: 0;
+}
+.right {
+  display: grid;
+  grid-template-rows: 213px 230px 97px;
+  gap: 10px;
+  min-height: 0;
+}
+.circuit-card {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+#circuit {
+  display: block;
+  width: 100%;
+  height: 162px;
+}
+svg text {
+  font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+}
+.tracking-card {
+  padding-top: 10px;
+}
+#current-value {
+  color: #306caf;
+  font-size: 21px;
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+}
+.coil-cards {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 5px;
+  margin: 7px 0 0;
+}
+.coil-cards button {
+  display: grid;
+  gap: 1px;
+  padding: 3px 0;
+  font-size: 12px;
+  border-color: var(--coil-color);
+  color: var(--coil-color);
+  background: #fff;
+}
+.coil-cards button[aria-pressed='true'] {
+  background: #eef3f1;
+  outline: 2px solid var(--coil-color);
+}
+.coil-cards small {
+  font-size: 10px;
+}
+#wave {
+  display: block;
+  width: 100%;
+  height: 90px;
+}
+.tracking-state {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 3px;
+}
+.tracking-card .hint {
+  font-size: 11px;
+}
+.conclusion-card {
+  padding-top: 10px;
+}
+.conclusion-card h2 {
+  font-size: 18px;
+}
+.conclusion-card p {
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 4px 0;
+}
+.sequence {
+  color: #a0592e;
+  font-size: 13px;
+}
+footer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: space-between;
+  color: #60796f;
+  font-size: 11px;
+  line-height: 1.45;
+}
+footer span {
+  max-width: 1220px;
+}
+footer a {
+  white-space: nowrap;
+  color: #39796f;
+}

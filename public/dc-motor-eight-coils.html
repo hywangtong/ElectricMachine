@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>八线圈电枢：两支路与电流换向</title>
+    <link rel="stylesheet" href="/dc-motor-eight-coils.css" />
+    <script type="module" src="/dc-motor-eight-coils.js"></script>
+  </head>
+  <body>
+    <main class="lesson">
+      <header>
+        <div class="eyebrow">直流电机 / 13 八线圈电枢 · 3D 换向动画</div>
+        <h1>电刷不动，线圈旋转；两条支路不断重新分组</h1>
+        <p class="lead">
+          8 个线圈 · 8 片换向片 · A / B 两电刷 · 1 对磁极　<span
+            >A 接正极，B 接负极；箭头表示传统电流。</span
+          >
+        </p>
+      </header>
+      <div class="layout">
+        <section class="card machine-card" aria-label="三维径向绕组电枢动画">
+          <div class="card-head">
+            <h2>径向电枢齿绕组 · 透视结构</h2>
+            <span class="tag">转子与换向器同轴旋转</span>
+          </div>
+          <div class="viewport">
+            <canvas
+              id="machine"
+              width="1600"
+              height="756"
+              tabindex="0"
+              aria-label="三维八线圈径向齿绕组电枢，紫色励磁箭头沿转子表面法向。拖动改变观察视角；使用下方控件调整转角、选择线圈。"
+            ></canvas>
+            <div class="view-tools">
+              <button id="perspective">透视</button
+              ><button id="front">轴端</button
+              ><button id="focus" aria-pressed="false">仅突出所选线圈</button>
+            </div>
+            <span class="view-hint">拖动旋转视角 · 金色箭头沿导线流动</span>
+          </div>
+          <div class="legend">
+            <span class="upper">● 上支路</span
+            ><span class="lower">● 下支路</span
+            ><span class="commuting">● 电刷跨片：短接换向</span
+            ><span style="color: #8b58ae">紫色 → 径向励磁</span
+            ><span>灰色：铁心</span>
+          </div>
+          <div class="controls">
+            <div class="control-line">
+              <button id="play" aria-pressed="true">暂停</button
+              ><button id="step">步进 45°</button
+              ><button id="commute">看所选线圈换向</button
+              ><button id="reset">复位</button
+              ><label for="speed"
+                >转速
+                <select id="speed">
+                  <option value="9">慢速 9°/s</option>
+                  <option value="18" selected>18°/s</option>
+                  <option value="36">36°/s</option>
+                </select></label
+              >
+            </div>
+            <div class="control-line angle-line">
+              <label for="angle">转子角度</label
+              ><input
+                id="angle"
+                type="range"
+                min="0"
+                max="359.9"
+                step="0.1"
+                value="0"
+              /><output id="angle-value">0.0°</output
+              ><label for="coil"
+                >跟踪线圈
+                <select id="coil" aria-label="跟踪线圈"></select
+              ></label>
+            </div>
+          </div>
+          <p class="hint">
+            线圈平面：切向—轴向；励磁轴线：径向法线。两侧轴向导体电流相反，线圈两端接相邻换向片。
+          </p>
+        </section>
+        <div class="right">
+          <section class="card circuit-card">
+            <div class="card-head">
+              <h2>绕组圆环 · 同步旋转简图</h2>
+              <span class="tag">Iₐ = 2 A</span>
+            </div>
+            <svg
+              id="circuit"
+              viewBox="0 0 550 180"
+              role="img"
+              aria-label="与三维动画同步旋转的八线圈圆环简图，外圈绕组、内圈换向片和固定A/B电刷，实时显示两支路、电流方向与短接换向"
+            ></svg>
+          </section>
+          <section class="card tracking-card">
+            <div class="card-head">
+              <h2 id="tracking-title">跟踪线圈 1</h2>
+              <output id="current-value"></output>
+            </div>
+            <div
+              id="coil-cards"
+              class="coil-cards"
+              aria-label="八个线圈的实时有符号电流"
+            ></div>
+            <svg
+              id="wave"
+              viewBox="0 0 550 132"
+              role="img"
+              aria-label="所选线圈电流随转子角度的曲线，工作点与三维动画同步"
+            ></svg>
+            <p id="tracking-state" class="tracking-state"></p>
+            <p class="hint">
+              正方向：该线圈首端 → 末端；负方向：末端 →
+              首端。端子随线圈旋转，编号不变。
+            </p>
+          </section>
+          <section class="card conclusion-card">
+            <h2>换向不是电源反接</h2>
+            <p>A 流入、B 流出；线圈每半圈反向，电源极性不变。</p>
+            <div class="sequence">
+              接入一支路 → 电刷跨片短接 → 电流反向 → 接入另一支路
+            </div>
+          </section>
+        </div>
+      </div>
+      <footer>
+        <span
+          >保留参考图的八线圈闭合连接拓扑，三维绕组采用径向齿绕组教学示意。恒定支路电流
+          Iₐ/2 = 1 A；跨片区 12°
+          内理想线性换向，忽略电感、反电动势与火花；转速外部设定。</span
+        ><a
+          href="https://bharatskills.gov.in/pdf/E_Books/Wireman3Sem_TT.pdf"
+          target="_blank"
+          rel="noreferrer"
+          >换向原理参考 ↗</a
+        >
+      </footer>
+    </main>
+  </body>
+</html>

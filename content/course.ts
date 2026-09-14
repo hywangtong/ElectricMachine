@@ -680,6 +680,13 @@ export const slides: Slide[] = [
             embedUrl: `/dc-motor-structure.html?page=${page}`,
           }),
         ),
+        {
+          id: 'dc-motor-eight-coils',
+          kind: 'embed',
+          title: '八线圈电枢：两支路与电流换向',
+          chapterId: chapter.id,
+          embedUrl: '/dc-motor-eight-coils.html',
+        },
       );
     }
 
