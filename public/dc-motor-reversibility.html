@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>换向装置与直流电机的可逆原理</title>
+    <link rel="stylesheet" href="/dc-motor-lesson.css" />
+    <link rel="stylesheet" href="/dc-motor-reversibility.css" />
+    <script src="/dc-motor-reversibility.js" defer></script>
+  </head>
+  <body>
+    <main class="lesson">
+      <header>
+        <div class="eyebrow">直流电机 / 03 换向装置与可逆原理</div>
+        <h1>换向保证同向转矩，电磁关系决定可逆运行</h1>
+        <p class="lead">从刚才的单线圈实验，走向直流电机的电磁能量转换。</p>
+      </header>
+      <div class="principles">
+        <section class="card necessity" aria-labelledby="necessity-title">
+          <h2 id="necessity-title">
+            <span class="step">01</span> 为什么必须换向？
+          </h2>
+          <p>
+            线圈边转到另一磁极下，磁场方向改变；若线圈电流不变，<strong
+              class="mechanical"
+              >电磁转矩就会反向</strong
+            >。
+          </p>
+          <p>
+            <strong>换向器配合电刷，及时反转线圈电流</strong
+            >，使同一磁极下导体的电流方向保持一致，持续产生同向驱动转矩。
+          </p>
+        </section>
+        <section class="card conversion" aria-labelledby="conversion-title">
+          <div class="card-head">
+            <h2 id="conversion-title">
+              <span class="step">02</span> 换向器：外部直流 → 线圈内部交变电流
+            </h2>
+            <span class="tag">电动运行的电磁关系</span>
+          </div>
+          <svg
+            viewBox="0 0 1356 228"
+            role="img"
+            aria-labelledby="flow-title flow-desc"
+          >
+            <title id="flow-title">直流电动机电磁关系框图</title>
+            <desc id="flow-desc">
+              外部直流电流通过电刷和换向器变为旋转线圈内部交变电流，在磁通作用下产生电磁转矩，使转轴旋转并对机械负载做功。旋转同时产生反电动势，外部电源需克服反电动势以维持电流。
+            </desc>
+            <defs>
+              <marker
+                id="blue-arrow"
+                viewBox="0 0 10 10"
+                refX="9"
+                refY="5"
+                markerWidth="7"
+                markerHeight="7"
+                orient="auto-start-reverse"
+              >
+                <path d="M0 0 10 5 0 10z" fill="#356eaf" />
+              </marker>
+              <marker
+                id="orange-arrow"
+                viewBox="0 0 10 10"
+                refX="9"
+                refY="5"
+                markerWidth="7"
+                markerHeight="7"
+                orient="auto-start-reverse"
+              >
+                <path d="M0 0 10 5 0 10z" fill="#be632c" />
+              </marker>
+              <marker
+                id="green-arrow"
+                viewBox="0 0 10 10"
+                refX="9"
+                refY="5"
+                markerWidth="7"
+                markerHeight="7"
+                orient="auto"
+              >
+                <path d="M0 0 10 5 0 10z" fill="#39796f" />
+              </marker>
+            </defs>
+            <g class="electrical-box">
+              <rect x="12" y="40" width="162" height="88" rx="12" />
+              <rect x="356" y="40" width="218" height="88" rx="12" />
+            </g>
+            <rect
+              class="torque-box"
+              x="700"
+              y="40"
+              width="230"
+              height="88"
+              rx="12"
+            />
+            <rect
+              class="load-box"
+              x="1138"
+              y="40"
+              width="196"
+              height="88"
+              rx="12"
+            />
+            <rect
+              class="emf-box"
+              x="924"
+              y="160"
+              width="196"
+              height="58"
+              rx="12"
+            />
+            <g class="diagram-label" text-anchor="middle">
+              <text class="electrical" x="93" y="76">直流电流</text>
+              <text class="sub-label" x="93" y="106">外部电源侧</text>
+              <text class="electrical" x="465" y="76">交变电流</text>
+              <text class="sub-label" x="465" y="106">旋转线圈内部</text>
+              <text class="mechanical" x="815" y="76">电磁转矩 T</text>
+              <text class="sub-label" x="815" y="106">驱动转轴</text>
+              <text class="mechanical" x="1236" y="76">机械负载</text>
+              <text class="sub-label" x="1236" y="106">获得机械功率</text>
+              <text class="electrical" x="1022" y="198">反电动势 E</text>
+            </g>
+            <g class="wire electrical-wire" marker-end="url(#blue-arrow)">
+              <path d="M180 84H346" />
+              <path d="M580 84H690" />
+            </g>
+            <path
+              class="wire mechanical-wire"
+              d="M936 84H1128"
+              marker-end="url(#orange-arrow)"
+            />
+            <path
+              class="wire mechanical-wire"
+              d="M1022 84V150"
+              marker-end="url(#orange-arrow)"
+            />
+            <path
+              class="wire source-wire"
+              d="M93 134V189H914"
+              marker-end="url(#green-arrow)"
+            />
+            <circle cx="1022" cy="84" r="5" fill="#be632c" />
+            <g class="arrow-label" text-anchor="middle">
+              <text x="263" y="31">电刷 + 换向器</text>
+              <text class="electrical" x="263" y="119">每半圈换向</text>
+              <text class="magnetic" x="636" y="65">磁通 Φ</text>
+              <text class="mechanical" x="1034" y="31">旋转 · 做功</text>
+              <text class="mechanical" x="1092" y="146">感应</text>
+              <text class="magnetic" x="492" y="176">
+                外部电源克服反电动势，维持电流
+              </text>
+            </g>
+          </svg>
+          <p class="diagram-note">
+            “直流 → 交流”指线圈电流随转角交替反向；外部直流电源的极性保持不变。
+          </p>
+        </section>
+        <section
+          class="card reversibility"
+          aria-labelledby="reversibility-title"
+        >
+          <div>
+            <h2 id="reversibility-title">
+              <span class="step">03</span> 可逆原理：同一台直流电机，可以换角色
+            </h2>
+            <p>
+              通电产生转矩，转动产生电动势；<strong>电磁力与电磁感应同时存在</strong>。
+            </p>
+            <p>
+              改变运行条件与能量流向，就能在<strong>电动机 ⇄ 发电机</strong
+              >之间切换。
+            </p>
+          </div>
+          <div class="energy-directions">
+            <div>
+              <b class="mechanical">电动运行</b><span>电能 → 机械能</span>
+            </div>
+            <div>
+              <b class="electrical">发电运行</b><span>机械能 → 电能</span>
+            </div>
+            <p>发电时：线圈内部交变电动势经换向器，在电刷端得到单向电压。</p>
+          </div>
+        </section>
+      </div>
+      <footer>
+        单线圈同向转矩仍有脉动，死点靠惯性越过；实际可逆运行需电源与驱动支持双向能量流。
+      </footer>
+    </main>
+  </body>
+</html>

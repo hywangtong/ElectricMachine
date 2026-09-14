@@ -1,0 +1,106 @@
+.lesson {
+  grid-template-rows: 76px 1fr 28px;
+}
+.principles {
+  display: grid;
+  grid-template-rows: 122px 300px 1fr;
+  gap: 12px;
+  min-height: 0;
+}
+.step {
+  color: #39796f;
+  margin-right: 10px;
+  font-size: 16px;
+}
+.necessity p,
+.reversibility p {
+  margin: 8px 0 0;
+  font-size: 18px;
+  line-height: 1.45;
+}
+.necessity p {
+  margin-top: 6px;
+  font-size: 17px;
+}
+.conversion svg {
+  display: block;
+  width: 100%;
+  height: 214px;
+}
+.electrical,
+.electrical-box {
+  color: #356eaf;
+  fill: #356eaf;
+}
+.electrical-box rect,
+.emf-box {
+  fill: #eef4fc;
+  stroke: #a7bfda;
+  stroke-width: 1.5;
+}
+.torque-box,
+.load-box {
+  fill: #fbf1e7;
+  stroke: #d7ad87;
+  stroke-width: 1.5;
+}
+.mechanical {
+  color: #be632c;
+  fill: #be632c;
+}
+.magnetic {
+  fill: #39796f;
+}
+.diagram-label {
+  font-size: 26px;
+  font-weight: 700;
+}
+.sub-label {
+  fill: #55736d;
+  font-size: 17px;
+  font-weight: 400;
+}
+.wire {
+  fill: none;
+  stroke-width: 4;
+  stroke-linejoin: round;
+}
+.electrical-wire {
+  stroke: #356eaf;
+}
+.mechanical-wire {
+  stroke: #be632c;
+}
+.source-wire {
+  stroke: #39796f;
+}
+.arrow-label {
+  fill: #173b3b;
+  font-size: 18px;
+  font-weight: 600;
+}
+.diagram-note {
+  margin: 3px 0 0;
+  font-size: 16px;
+  color: #55736d;
+}
+.reversibility {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 24px;
+  background: #edf6f2;
+}
+.energy-directions {
+  padding-left: 24px;
+  border-left: 1px solid #c8d9d4;
+}
+.energy-directions div {
+  display: flex;
+  gap: 24px;
+  font-size: 21px;
+  margin-bottom: 8px;
+}
+.energy-directions p {
+  font-size: 15px;
+  color: #55736d;
+}

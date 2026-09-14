@@ -642,6 +642,13 @@ export const slides: Slide[] = [
           chapterId: chapter.id,
           embedUrl: '/dc-motor-commutator.html',
         },
+        {
+          id: 'dc-motor-reversibility',
+          kind: 'embed',
+          title: '换向装置与直流电机的可逆原理',
+          chapterId: chapter.id,
+          embedUrl: '/dc-motor-reversibility.html',
+        },
       );
     }
 
