@@ -27,6 +27,12 @@ body {
   font-size: 13px;
   letter-spacing: 0.14em;
 }
+header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 610px;
+  align-items: center;
+  gap: 24px;
+}
 h1 {
   margin: 5px 0 4px;
   font-size: 34px;
@@ -36,6 +42,23 @@ header p {
   margin: 0;
   color: #718079;
   font-size: 17px;
+}
+.legacy-note {
+  padding: 10px 16px;
+  border-left: 4px solid #b48d45;
+  border-radius: 0 10px 10px 0;
+  background: #fff3d8;
+}
+.legacy-note strong {
+  display: block;
+  margin-bottom: 4px;
+  color: #947235;
+  font-size: 20px;
+}
+.legacy-note p {
+  color: #4a6459;
+  font-size: 16px;
+  line-height: 1.5;
 }
 h2,
 h3,
