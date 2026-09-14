@@ -42,33 +42,40 @@ const EnvironmentLesson = () => (
           viewBox="0 0 360 190"
           aria-label="风能、海浪能和潮汐能经捕获装置汇入发电机"
         >
-          <path d="M25 45h44m-35 15h32M145 60q16-15 32 0t32 0t32 0M272 40h50m-40 17h37" />
-          <path d="M67 38v50m0-50-24-17m24 17 25-17m-25 17V14M176 48v42M296 30v58m-26-29h52m-42-20 32 40m0-40-32 40" />
-          <circle cx="67" cy="38" r="7" />
-          <rect x="160" y="29" width="32" height="25" rx="7" />
-          <circle cx="296" cy="59" r="30" />
+          <g transform="translate(13.4 10) scale(0.8)">
+            <path d="M25 45h44m-35 15h32M67 38v50m0-50-24-17m24 17 25-17m-25 17V14" />
+            <circle cx="67" cy="38" r="7" />
+          </g>
+          <g transform="translate(35.2 10) scale(0.8)">
+            <path d="M145 60q16-15 32 0t32 0t32 0M176 48v42" />
+            <rect x="160" y="29" width="32" height="25" rx="7" />
+          </g>
+          <g transform="translate(59.2 10) scale(0.8)">
+            <path d="M272 40h50m-40 17h37M296 30v58m-26-29h52m-42-20 32 40m0-40-32 40" />
+            <circle cx="296" cy="59" r="30" />
+          </g>
           <path
             className="accent"
-            d="M67 100v17h111m-2-17v17m120-17v17H178v10"
+            d="M67 124v18h111m-2-18v18m120-18v18H178v10"
           />
           <rect
             x="123"
-            y="135"
+            y="154"
             width="112"
-            height="36"
+            height="34"
             rx="9"
             className="fill"
           />
-          <text x="39" y="130">
+          <text x="67" y="111" textAnchor="middle">
             风能
           </text>
-          <text x="146" y="130">
+          <text x="176" y="111" textAnchor="middle">
             海浪能
           </text>
-          <text x="269" y="130">
+          <text x="296" y="111" textAnchor="middle">
             潮汐能
           </text>
-          <text x="149" y="158">
+          <text x="179" y="171" textAnchor="middle" dominantBaseline="middle">
             发电机
           </text>
         </svg>
@@ -89,16 +96,16 @@ const EnvironmentLesson = () => (
           />
           <rect x="158" y="63" width="54" height="55" rx="8" className="fill" />
           <path d="M283 49V29l25-18 25 18v20zM294 49V32h17v17M278 148v-30l26-15v15l28-15v45z" />
-          <text x="10" y="146">
+          <text x="43" y="150" textAnchor="middle">
             发电
           </text>
-          <text x="169" y="95">
+          <text x="185" y="150" textAnchor="middle">
             变电
           </text>
-          <text x="280" y="75">
+          <text x="308" y="83" textAnchor="middle">
             家庭
           </text>
-          <text x="282" y="180">
+          <text x="305" y="183" textAnchor="middle">
             工厂
           </text>
         </svg>
@@ -118,27 +125,35 @@ const EnvironmentLesson = () => (
           <circle cx="157" cy="43" r="17" className="accent" />
           <circle cx="280" cy="43" r="22" className="accent" />
           <path d="M258 43h-19m63 0h31v22" />
-          <path d="M24 133h72v18H24zM119 148v-19h18l12-17h27l15 17h10v19zM271 145l20-23 24 11 27-20m-51 9-13-21m37 32-3 22" />
-          <circle cx="139" cy="149" r="9" className="accent" />
-          <circle cx="181" cy="149" r="9" className="accent" />
-          <circle cx="291" cy="122" r="6" className="accent" />
-          <circle cx="315" cy="133" r="6" className="accent" />
-          <text x="25" y="98">
+          <g transform="translate(18 40) scale(0.7)">
+            <path d="M24 133h72v18H24z" />
+          </g>
+          <g transform="translate(48 40) scale(0.7)">
+            <path d="M119 148v-19h18l12-17h27l15 17h10v19z" />
+            <circle cx="139" cy="149" r="9" className="accent" />
+            <circle cx="181" cy="149" r="9" className="accent" />
+          </g>
+          <g transform="translate(90.6 40) scale(0.7)">
+            <path d="M271 145l20-23 24 11 27-20m-51 9-13-21m37 32-3 22" />
+            <circle cx="291" cy="122" r="6" className="accent" />
+            <circle cx="315" cy="133" r="6" className="accent" />
+          </g>
+          <text x="51" y="103" textAnchor="middle">
             风扇
           </text>
-          <text x="127" y="98">
+          <text x="157" y="103" textAnchor="middle">
             洗衣机
           </text>
-          <text x="263" y="98">
+          <text x="280" y="103" textAnchor="middle">
             水泵
           </text>
-          <text x="19" y="181">
+          <text x="60" y="186" textAnchor="middle">
             传送带
           </text>
-          <text x="132" y="181">
+          <text x="160" y="186" textAnchor="middle">
             电动车
           </text>
-          <text x="276" y="181">
+          <text x="302" y="186" textAnchor="middle">
             机器人
           </text>
         </svg>
@@ -266,22 +281,22 @@ const ConvenienceLesson = () => {
             <path d="M306 31h5m18 0h5" />
             <rect
               className="battery-shell"
-              x="15"
-              y="23"
-              width="84"
-              height="57"
+              x="5"
+              y="10"
+              width="110"
+              height="75"
               rx="10"
             />
-            <text x="57" y="48" textAnchor="middle">
+            <text x="60" y="42" textAnchor="middle">
               一块电池
             </text>
-            <text x="57" y="69" textAnchor="middle">
+            <text x="60" y="74" textAnchor="middle">
               ＋　−
             </text>
-            <path className="power-positive" d="M39 80v15h86V45m0 50v248" />
+            <path className="power-positive" d="M39 85v10h86V45m0 50v248" />
             <path
               className="power-negative"
-              d="M75 80v24h45m10 0h7V45m0 59v234"
+              d="M75 85v19h45m10 0h7V45m0 59v234"
             />
             <text className="positive-label" x="110" y="22">
               ＋
@@ -289,13 +304,13 @@ const ConvenienceLesson = () => {
             <text className="negative-label" x="138" y="22">
               −
             </text>
-            <text x="21" y="140">
+            <text x="15" y="135">
               两根线
             </text>
-            <text x="21" y="165">
+            <text x="15" y="165">
               一直延伸
             </text>
-            <text x="21" y="190">
+            <text x="15" y="195">
               就近分支
             </text>
             {joints.map(({ x, y }, index) => (
@@ -338,32 +353,32 @@ const ConvenienceLesson = () => {
                 <circle className="joint-motor" cx={x} cy={y} r="10" />
               </g>
             ))}
-            <text x="446" y="84">
+            <text x="458" y="84">
               颈
             </text>
-            <text x="446" y="117">
+            <text x="458" y="117">
               肩
             </text>
-            <text x="446" y="172">
+            <text x="458" y="167">
               肘
             </text>
-            <text x="446" y="197">
+            <text x="458" y="200">
               腰
             </text>
-            <text x="446" y="224">
+            <text x="458" y="233">
               腕
             </text>
-            <text x="446" y="244">
+            <text x="458" y="266">
               髋
             </text>
-            <text x="446" y="287">
+            <text x="458" y="299">
               膝
             </text>
-            <text x="446" y="337">
+            <text x="458" y="332">
               踝
             </text>
             {handsConnected && (
-              <text className="positive-label" x="465" y="257">
+              <text className="positive-label" x="510" y="180">
                 ＋双手
               </text>
             )}
@@ -380,35 +395,38 @@ const ConvenienceLesson = () => {
                 每台各自控制
               </text>
             </g>
-            <g transform="translate(510 240)">
+            <g transform="translate(510 210)">
               <path
                 className="robot-limb"
                 d="M12 22h126M22 22 9 52 24 80M58 22 45 52 60 80M101 22 87 52 101 80M134 22 121 52 135 80"
               />
               <rect
                 className="battery-shell"
-                x="56"
+                x="46"
                 y="0"
-                width="46"
-                height="25"
+                width="66"
+                height="32"
                 rx="5"
               />
-              <text x="79" y="18" textAnchor="middle">
+              <text x="79" y="16" textAnchor="middle" dominantBaseline="middle">
                 电池
               </text>
               <path
                 className="power-positive"
-                d="M67 25v8H9v19m58-19H121v19M45 33v19m42-19v19"
+                d="M67 32v8H9v12m58-12H121v12M45 40v12m42-12v12"
               />
               <path
                 className="power-negative"
-                d="M80 25v14H15v13m65-13h47v13M51 39v13m42-13v13"
+                d="M80 32v14H15v6m65-6h47v6M51 46v6m42-6v6"
               />
               {[9, 45, 87, 121].map((x) => (
                 <circle key={x} className="joint-motor" cx={x} cy="52" r="7" />
               ))}
-              <text x="77" y="107" textAnchor="middle">
-                四足也一样（驱动器略）
+              <text x="77" y="110" textAnchor="middle">
+                <tspan x="77">四足也一样</tspan>
+                <tspan x="77" dy="30">
+                  （驱动器略）
+                </tspan>
               </text>
             </g>
           </svg>
@@ -436,23 +454,32 @@ const ConvenienceLesson = () => {
             viewBox="0 0 610 360"
             aria-label="肘关节结构示意：定子固定在上臂结构内，转子与前臂连接；装在一起后，外圈不动，内圈旋转并带动前臂，无需另挂一个完整电机外壳"
           >
-            <text x="110" y="30" textAnchor="middle">
-              定子：固定在上臂里
+            <text x="110" y="22" textAnchor="middle">
+              <tspan x="110">定子：</tspan>
+              <tspan x="110" dy="28">
+                固定在上臂里
+              </tspan>
             </text>
-            <path className="fixed-arm" d="M110 62v67" />
+            <path className="fixed-arm" d="M110 82v47" />
             <circle className="stator-section" cx="110" cy="160" r="48" />
             <circle className="stator-gap" cx="110" cy="160" r="31" />
-            <text x="110" y="242" textAnchor="middle">
+            <text x="110" y="250" textAnchor="middle">
               外圈不动
             </text>
-            <text x="302" y="30" textAnchor="middle">
-              转子：连着前臂
+            <text x="302" y="22" textAnchor="middle">
+              <tspan x="302">转子：</tspan>
+              <tspan x="302" dy="28">
+                连着前臂
+              </tspan>
             </text>
-            <path className="moving-arm" d="M302 160l36 94" />
+            <path className="moving-arm" d="M302 160l36 80" />
             <circle className="rotor-section" cx="302" cy="160" r="27" />
             <path className="rotor-spoke" d="M285 160h34m-17-17v34" />
-            <text x="302" y="290" textAnchor="middle">
-              内圈带着前臂转
+            <text x="302" y="286" textAnchor="middle">
+              <tspan x="302">内圈带着</tspan>
+              <tspan x="302" dy="28">
+                前臂转
+              </tspan>
             </text>
             <path
               className="assembly-arrow"
@@ -461,14 +488,17 @@ const ConvenienceLesson = () => {
             <text x="211" y="128" textAnchor="middle">
               套进去
             </text>
-            <text x="497" y="30" textAnchor="middle">
-              就是机器人的肘关节
+            <text x="497" y="22" textAnchor="middle">
+              <tspan x="497">就是机器人的</tspan>
+              <tspan x="497" dy="28">
+                肘关节
+              </tspan>
             </text>
-            <path className="fixed-arm" d="M497 62v67" />
+            <path className="fixed-arm" d="M497 82v47" />
             <circle className="stator-section" cx="497" cy="160" r="48" />
             <circle className="stator-gap" cx="497" cy="160" r="31" />
             <g className="integrated-forearm">
-              <path className="moving-arm" d="M497 160l36 94" />
+              <path className="moving-arm" d="M497 160l36 80" />
               <circle className="rotor-section" cx="497" cy="160" r="27" />
               <path className="rotor-spoke" d="M480 160h34m-17-17v34" />
             </g>
@@ -476,10 +506,13 @@ const ConvenienceLesson = () => {
               className="rotation-arrow"
               d="M551 190q26 49-15 80m2-16-2 16 16-2"
             />
-            <text x="497" y="316" textAnchor="middle">
-              电机与本体融为一体
+            <text x="497" y="306" textAnchor="middle">
+              <tspan x="497">电机与本体</tspan>
+              <tspan x="497" dy="28">
+                融为一体
+              </tspan>
             </text>
-            <text x="497" y="345" textAnchor="middle">
+            <text x="305" y="350" textAnchor="middle">
               肩、髋、膝也可这样集成
             </text>
           </svg>

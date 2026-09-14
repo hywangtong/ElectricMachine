@@ -876,24 +876,33 @@ a:focus-visible {
 }
 
 /* Four ELI5 pages at the end of the introduction chapter. */
+.slide-motor-advantage {
+  padding: 28px 56px 0;
+}
+.slide-motor-advantage .slide-footer {
+  left: 56px;
+  right: 56px;
+  bottom: 18px;
+}
 .advantage-body {
-  padding-top: 30px;
+  padding-top: 8px;
 }
 .advantage-body h1 {
-  font-size: 48px;
+  font-size: 52px;
   font-weight: 600;
-  letter-spacing: 2px;
-  margin: 15px 0 4px;
+  letter-spacing: 1px;
+  line-height: 1.2;
+  margin: 10px 0 6px;
 }
 .advantage-lead {
-  color: #71847a;
-  font-size: 21px;
+  color: #526d61;
+  font-size: 26px;
   line-height: 1.5;
-  margin: 0 0 18px;
+  margin: 0 0 14px;
 }
 .advantage-body svg text {
   fill: #476963;
-  font: 15px var(--font-sans);
+  font: 26px var(--font-sans);
 }
 .advantage-body svg path,
 .advantage-body svg circle,
@@ -927,7 +936,7 @@ a:focus-visible {
 .environment-steps section > span,
 .launch-case > span {
   color: #a5683e;
-  font-size: 15px;
+  font-size: 22px;
   letter-spacing: 1px;
 }
 .environment-steps svg {
@@ -938,25 +947,25 @@ a:focus-visible {
 }
 .environment-steps p {
   color: #60776e;
-  font-size: 18px;
-  line-height: 1.55;
+  font-size: 24px;
+  line-height: 1.4;
   margin: 0;
 }
 .environment-steps p b {
   color: #2d5b4e;
 }
 .advantage-environment .environment-steps section {
-  min-height: 252px;
-  padding: 14px 19px;
+  min-height: 265px;
+  padding: 10px 19px;
 }
 .advantage-environment .environment-steps svg {
-  height: 125px;
+  height: 145px;
 }
 .environment-applications {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 18px;
-  margin-top: 14px;
+  margin-top: 12px;
 }
 .environment-applications figure {
   margin: 0;
@@ -968,29 +977,29 @@ a:focus-visible {
 .environment-applications img {
   display: block;
   width: 100%;
-  height: 132px;
+  height: 116px;
   object-fit: contain;
   background: #eaf2ee;
 }
 .environment-applications figcaption {
   padding: 6px 12px;
   color: #2d5b4e;
-  font-size: 16px;
+  font-size: 22px;
   line-height: 1.5;
 }
 .advantage-chain {
-  margin: 15px 0 7px;
+  margin: 12px 0 7px;
   border-radius: 9px;
   background: #e4f3ec;
   color: #327563;
-  padding: 13px 20px;
+  padding: 11px 20px;
   text-align: center;
-  font-size: 22px;
+  font-size: 28px;
   letter-spacing: 1px;
 }
 .advantage-note {
-  color: #6f827a;
-  font-size: 14px;
+  color: #526d61;
+  font-size: 20px;
   line-height: 1.5;
   margin: 6px 0;
 }
@@ -1018,15 +1027,25 @@ a:focus-visible {
   width: 14px;
   height: 14px;
 }
+.advantage-body .advantage-links a,
+.advantage-body .media-link {
+  font-size: 20px;
+}
+.advantage-body .advantage-links svg,
+.advantage-body .media-link svg {
+  width: 20px;
+  height: 20px;
+}
 .advantage-convenience {
   padding-top: 10px;
 }
 .advantage-convenience h1 {
-  font-size: 44px;
+  font-size: 52px;
   line-height: 1.2;
 }
 .advantage-convenience .advantage-lead {
   margin-bottom: 12px;
+  line-height: 1.35;
 }
 .robot-advantages-grid {
   display: grid;
@@ -1046,7 +1065,7 @@ a:focus-visible {
   gap: 10px;
   margin: 0 0 7px;
   color: #285e50;
-  font-size: 24px;
+  font-size: 28px;
   font-weight: 650;
 }
 .robot-advantage-panel h2 > span {
@@ -1062,18 +1081,21 @@ a:focus-visible {
 .robot-advantage-panel > p {
   margin: 0;
   color: #577369;
-  font-size: 17px;
+  font-size: 22px;
   line-height: 1.5;
 }
 .robot-advantage-panel > svg {
   display: block;
   width: 100%;
-  height: 300px;
-  margin: 7px 0;
+  height: 280px;
+  margin: 3px 0;
 }
 .advantage-convenience svg text {
-  font-size: 17px;
+  font-size: 24px;
   fill: #365a50;
+}
+.advantage-convenience .joint-integration text {
+  font-size: 24px;
 }
 .advantage-convenience svg .robot-limb {
   stroke: #b6c8c0;
@@ -1140,7 +1162,7 @@ a:focus-visible {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 47px;
+  min-height: 58px;
   gap: 10px;
 }
 .robot-expand-row button {
@@ -1149,7 +1171,7 @@ a:focus-visible {
   border-radius: 8px;
   background: #2d7361;
   color: #fff;
-  font-size: 18px;
+  font-size: 22px;
   cursor: pointer;
 }
 .robot-expand-row button:hover {
@@ -1157,13 +1179,13 @@ a:focus-visible {
 }
 .robot-expand-row > span {
   color: #285e50;
-  font-size: 18px;
+  font-size: 22px;
 }
 .robot-expand-row small {
   display: block;
   text-align: right;
   color: #71847a;
-  font-size: 12px;
+  font-size: 17px;
 }
 .joint-integration-panel {
   background: #fdfbf7;
@@ -1217,9 +1239,9 @@ a:focus-visible {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 24px;
-  height: 47px;
-  font-size: 18px;
+  gap: 16px;
+  min-height: 58px;
+  font-size: 22px;
 }
 .joint-integration-legend span:first-child {
   color: #326650;
@@ -1228,10 +1250,10 @@ a:focus-visible {
   color: #a7662b;
 }
 .robot-convenience-note {
-  margin: 10px 0;
-  color: #65786e;
-  font-size: 14px;
-  line-height: 1.55;
+  margin: 8px 0;
+  color: #526d61;
+  font-size: 20px;
+  line-height: 1.3;
 }
 .robot-video-links {
   display: grid;
@@ -1242,7 +1264,7 @@ a:focus-visible {
   display: flex;
   align-items: center;
   gap: 15px;
-  padding: 14px 19px;
+  padding: 10px 19px;
   border: 1px solid #244f43;
   border-radius: 11px;
   background: #285e50;
@@ -1280,12 +1302,14 @@ a:focus-visible {
 .robot-video-links small {
   display: block;
   margin-bottom: 3px;
-  font-size: 14px;
+  font-size: 18px;
   color: #ffffffbf;
+  line-height: 1.25;
 }
 .robot-video-links strong {
-  font-size: 22px;
+  font-size: 26px;
   font-weight: 600;
+  line-height: 1.25;
 }
 .robot-video-links > a > svg {
   margin-left: auto;
@@ -1297,7 +1321,7 @@ a:focus-visible {
   display: inline-block;
   margin-top: 7px;
   color: #65786e;
-  font-size: 13px;
+  font-size: 18px;
   text-decoration: none;
 }
 .robot-reference-links {
@@ -1312,7 +1336,7 @@ a:focus-visible {
 }
 .performance-layout {
   display: grid;
-  grid-template-columns: 0.88fr 1.12fr;
+  grid-template-columns: 1fr 1.18fr;
   gap: 24px;
 }
 .servo-intro,
@@ -1323,23 +1347,26 @@ a:focus-visible {
   padding: 18px;
 }
 .servo-loop {
-  display: flex;
-  align-items: center;
-  gap: 11px;
-  min-height: 130px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: start;
+  gap: 12px 18px;
+  min-height: 145px;
+  padding-top: 8px;
   position: relative;
 }
 .servo-loop > span,
 .servo-loop > b {
   position: relative;
   z-index: 1;
-  min-width: 76px;
+  flex: 1;
+  min-width: 0;
   border-radius: 8px;
   background: #edf3ef;
   color: #476963;
   padding: 12px 7px;
   text-align: center;
-  font-size: 14px;
+  font-size: 24px;
 }
 .servo-loop > b {
   background: #e2f3eb;
@@ -1348,45 +1375,50 @@ a:focus-visible {
 .servo-loop > b::after,
 .servo-loop > span:not(:last-of-type)::after {
   position: absolute;
-  right: -12px;
+  right: -19px;
   top: 50%;
   color: #a5683e;
   content: '→';
   transform: translateY(-50%);
 }
 .servo-loop i {
-  position: absolute;
-  bottom: 1px;
-  left: 25%;
+  grid-column: 2 / -1;
+  justify-self: center;
   border-bottom: 2px solid #b57948;
   color: #8b5a39;
   padding: 0 20px 4px;
-  font-size: 12px;
+  font-size: 21px;
   font-style: normal;
+  line-height: 1.25;
 }
 .ability-grid {
   display: grid;
-  gap: 8px;
-  margin: 13px 0;
+  gap: 10px;
+  margin: 16px 0;
 }
 .ability-grid p {
   margin: 0;
   color: #647a71;
-  font-size: 16px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: #edf3ef;
+  font-size: 26px;
+  line-height: 1.4;
 }
 .ability-grid b {
   display: inline-block;
-  width: 32px;
+  width: 48px;
   color: #a5683e;
-  font-size: 20px;
+  font-size: 32px;
 }
 .servo-intro small {
-  color: #74867d;
-  font-size: 13px;
+  color: #526d61;
+  font-size: 20px;
   line-height: 1.4;
 }
 .performance-tabs {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   gap: 7px;
 }
 .performance-tabs button {
@@ -1396,7 +1428,7 @@ a:focus-visible {
   color: #587068;
   padding: 7px 9px;
   font: inherit;
-  font-size: 13px;
+  font-size: 20px;
 }
 .performance-tabs button[aria-selected='true'] {
   background: #2f6a5b;
@@ -1406,20 +1438,20 @@ a:focus-visible {
 .performance-media h2 {
   margin: 13px 0 3px;
   color: #2b5147;
-  font-size: 24px;
+  font-size: 28px;
 }
 .performance-media > p {
   margin: 0 0 9px;
-  color: #71847a;
-  font-size: 15px;
+  color: #526d61;
+  font-size: 22px;
   line-height: 1.4;
 }
 .performance-player-slot {
-  height: 300px;
+  height: 265px;
 }
 .performance-player {
   position: relative;
-  height: 300px;
+  height: 265px;
   overflow: hidden;
   border-radius: 8px;
   background: #101820;
@@ -1494,21 +1526,21 @@ a:focus-visible {
 }
 .adaptability-concepts p {
   color: #637b71;
-  font-size: 19px;
-  margin: 15px 0;
+  font-size: 28px;
+  margin: 12px 0;
 }
 .adaptability-concepts b {
   display: inline-block;
-  width: 65px;
+  width: 80px;
   color: #a5683e;
-  font-size: 23px;
+  font-size: 32px;
 }
 .adaptability-concepts small {
   display: block;
   border-top: 1px solid #dce6e0;
   color: #72857c;
   padding-top: 15px;
-  font-size: 14px;
+  font-size: 22px;
   line-height: 1.5;
 }
 .launch-stages {
@@ -1525,7 +1557,7 @@ a:focus-visible {
   color: #386b5d;
   padding: 12px;
   text-align: center;
-  font-size: 15px;
+  font-size: 24px;
 }
 .launch-stages p:not(:last-child)::after {
   position: absolute;
@@ -1541,7 +1573,7 @@ a:focus-visible {
 }
 .launch-stages i {
   color: #a5683e;
-  font-size: 13px;
+  font-size: 21px;
   font-style: normal;
   margin-top: 8px;
 }
@@ -1555,7 +1587,7 @@ a:focus-visible {
   border-radius: 5px;
   background: #f3eadf;
   padding: 6px;
-  font-size: 13px;
+  font-size: 21px;
   text-align: center;
 }
 .launch-chain svg {
@@ -1564,8 +1596,8 @@ a:focus-visible {
   color: #a5683e;
 }
 .launch-case > p {
-  color: #71847a;
-  font-size: 15px;
+  color: #526d61;
+  font-size: 22px;
   line-height: 1.45;
   margin: 14px 0 0;
 }
@@ -1579,7 +1611,7 @@ a:focus-visible {
 .adaptability-video iframe {
   display: block;
   width: 100%;
-  height: 205px;
+  height: 225px;
   border: 0;
   border-radius: 9px;
   background: #101820;
@@ -1588,18 +1620,18 @@ a:focus-visible {
   border: 1px solid #d5e1db;
   border-radius: 9px;
   background: #fbfcfb;
-  padding: 17px;
+  padding: 14px;
 }
 .adaptability-video h2 {
   color: #2d5b4e;
-  font-size: 23px;
+  font-size: 30px;
   margin: 0 0 8px;
 }
 .adaptability-video p {
-  color: #71847a;
-  font-size: 15px;
-  line-height: 1.5;
-  margin: 0 0 14px;
+  color: #526d61;
+  font-size: 24px;
+  line-height: 1.4;
+  margin: 0 0 8px;
 }
 .assessment-body {
   padding-top: 30px;
