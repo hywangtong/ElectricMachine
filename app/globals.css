@@ -810,11 +810,60 @@ a:focus-visible {
     16px ui-monospace,
     monospace;
 }
-.objectives p > .teacher-contact-details {
+.teachers-body {
+  padding-top: 38px;
+}
+.teachers-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 18px 0 28px;
+}
+.teachers-heading h1 {
+  font-size: 50px;
+  font-weight: 600;
+}
+.teacher-grid {
   display: grid;
-  gap: 2px;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+.teacher-card {
+  padding: 28px 32px;
+  border: 1px solid #dce5df;
+  border-radius: 18px;
+  background: #ffffff80;
+}
+.teacher-card header {
+  margin-bottom: 22px;
+}
+.teacher-card h2 {
+  font-size: 38px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.teacher-card header p {
+  font-size: 21px;
+  color: #74877e;
+}
+.teacher-card dl > div {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 18px;
+  padding: 16px 0;
+  border-top: 1px solid #e4eae6;
+}
+.teacher-card dt {
+  font-size: 20px;
+  color: #aa7046;
+  line-height: 1.65;
+}
+.teacher-card dd {
+  margin: 0;
+  font-size: 22px;
   color: #5b7064;
-  font: inherit;
+  line-height: 1.65;
+  white-space: pre-line;
 }
 .outline-body {
   padding-top: 70px;

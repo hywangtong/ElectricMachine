@@ -259,11 +259,7 @@ export default function CoursePlayer() {
                         s.id === containerSlide.id ? 'page' : undefined
                       }
                     >
-                      {s.kind === 'chapter'
-                        ? c.teacher
-                          ? '教师简介'
-                          : '章节导入'
-                        : s.title}
+                      {s.kind === 'chapter' ? '章节导入' : s.title}
                     </button>
                   ))}
                 </div>
@@ -320,24 +316,24 @@ export default function CoursePlayer() {
               {slide.kind === 'home'
                 ? '课程封面'
                 : slide.kind === 'chapter'
-                  ? chapter?.teacher
+                  ? '章节导入'
+                  : slide.kind === 'teachers'
                     ? '教师简介'
-                    : '章节导入'
-                  : slide.kind === 'video'
-                    ? '视频导入'
-                    : slide.kind === 'embed'
-                      ? '互动图解'
-                      : slide.kind === 'assessment'
-                        ? '考核方案'
-                        : slide.kind === 'question'
-                          ? '课堂思考'
-                          : slide.kind === 'trend'
-                            ? '趋势示意'
-                            : slide.kind === 'motor-advantage'
-                              ? '互动图解'
-                              : slide.kind === 'outline'
-                                ? '内容提纲'
-                                : '课堂讲义'}
+                    : slide.kind === 'video'
+                      ? '视频导入'
+                      : slide.kind === 'embed'
+                        ? '互动图解'
+                        : slide.kind === 'assessment'
+                          ? '考核方案'
+                          : slide.kind === 'question'
+                            ? '课堂思考'
+                            : slide.kind === 'trend'
+                              ? '趋势示意'
+                              : slide.kind === 'motor-advantage'
+                                ? '互动图解'
+                                : slide.kind === 'outline'
+                                  ? '内容提纲'
+                                  : '课堂讲义'}
             </span>
           </div>
           <div
@@ -439,28 +435,16 @@ export default function CoursePlayer() {
                         <div className="chapter-copy">
                           <div className="eyebrow">
                             <span />
-                            {chapter.teacher
-                              ? 'COURSE INSTRUCTOR'
-                              : `CHAPTER ${number(chapterIndex + 1)}`}{' '}
-                            <b>
-                              {chapter.teacher ? '授课教师' : chapter.category}
-                            </b>
+                            {`CHAPTER ${number(chapterIndex + 1)}`}{' '}
+                            <b>{chapter.category}</b>
                           </div>
-                          <h1>
-                            {chapter.teacher
-                              ? chapter.teacher.name
-                              : chapter.title}
-                          </h1>
-                          <p className="chapter-question">
-                            {chapter.teacher
-                              ? chapter.teacher.role
-                              : chapter.question}
-                          </p>
+                          <h1>{chapter.title}</h1>
+                          <p className="chapter-question">{chapter.question}</p>
                           <Button
                             className="slide-primary"
                             onClick={() => navigate(index + 1)}
                           >
-                            本章内容
+                            {chapter.teachers ? '认识授课教师' : '本章内容'}
                             <ArrowRight />
                           </Button>
                         </div>
@@ -469,47 +453,52 @@ export default function CoursePlayer() {
                             {number(chapterIndex + 1)}
                           </span>
                           <h2>
-                            {chapter.teacher ? '教师简介' : '学习目标'}{' '}
-                            <small>
-                              {chapter.teacher
-                                ? 'EDUCATION · EXPERIENCE · RESEARCH'
-                                : 'LEARNING OBJECTIVES'}
-                            </small>
+                            学习目标 <small>LEARNING OBJECTIVES</small>
                           </h2>
-                          {chapter.teacher ? (
-                            <>
-                              <p>
-                                <span>学历</span>
-                                {chapter.teacher.education}
-                              </p>
-                              <p>
-                                <span>经历</span>
-                                {chapter.teacher.experience}
-                              </p>
-                              <p>
-                                <span>方向</span>
-                                {chapter.teacher.research}
-                              </p>
-                              <p>
-                                <span>联系</span>
-                                <span className="teacher-contact-details">
-                                  <span>电话：{chapter.teacher.phone}</span>
-                                  <span>邮箱：{chapter.teacher.email}</span>
-                                  <span>
-                                    办公地点：{chapter.teacher.office}
-                                  </span>
-                                </span>
-                              </p>
-                            </>
-                          ) : (
-                            chapter.objectives.map((goal, i) => (
-                              <p key={goal}>
-                                <span>{number(i + 1)}</span>
-                                {goal}
-                              </p>
-                            ))
-                          )}
+                          {chapter.objectives.map((goal, i) => (
+                            <p key={goal}>
+                              <span>{number(i + 1)}</span>
+                              {goal}
+                            </p>
+                          ))}
                         </section>
+                      </div>
+                    ) : slide.kind === 'teachers' ? (
+                      <div className="teachers-body">
+                        <div className="eyebrow">
+                          <span />
+                          COURSE INSTRUCTORS <b>授课教师</b>
+                        </div>
+                        <div className="teachers-heading">
+                          <h1>教师简介</h1>
+                          <Button
+                            className="slide-primary"
+                            onClick={() => navigate(index + 1)}
+                          >
+                            本章内容 <ArrowRight />
+                          </Button>
+                        </div>
+                        <div className="teacher-grid">
+                          {chapter.teachers?.map((teacher) => (
+                            <section
+                              className="teacher-card"
+                              key={teacher.name}
+                            >
+                              <header>
+                                <h2>{teacher.name}</h2>
+                                <p>{teacher.role}</p>
+                              </header>
+                              <dl>
+                                {teacher.details.map((detail) => (
+                                  <div key={detail.title}>
+                                    <dt>{detail.title}</dt>
+                                    <dd>{detail.description}</dd>
+                                  </div>
+                                ))}
+                              </dl>
+                            </section>
+                          ))}
+                        </div>
                       </div>
                     ) : slide.kind === 'ev' ? (
                       <EvLesson

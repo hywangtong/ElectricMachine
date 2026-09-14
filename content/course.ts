@@ -8,12 +8,7 @@ export type Topic = { title: string; description: string };
 export type TeacherProfile = {
   name: string;
   role: string;
-  education: string;
-  experience: string;
-  research: string;
-  phone: string;
-  email: string;
-  office: string;
+  details: Topic[];
 };
 export type Chapter = {
   id: string;
@@ -23,7 +18,7 @@ export type Chapter = {
   question: string;
   objectives: string[];
   topics: Topic[];
-  teacher?: TeacherProfile;
+  teachers?: TeacherProfile[];
 };
 export const chapters: Chapter[] = [
   {
@@ -32,17 +27,54 @@ export const chapters: Chapter[] = [
     english: 'INTRODUCTION',
     category: '课程基础',
     question: '电能如何转化为我们需要的运动？',
-    teacher: {
-      name: '王彤',
-      role: '《电机与拖动》授课教师',
-      education: '2019 年，浙江大学电气工程博士（电机与电器）毕业',
-      experience:
-        '2019—2023 年，美的威灵（上海）电机技术有限公司，MVD&LVD研究室软件组长',
-      research: '电机设计、电机驱动器、电机控制算法',
-      phone: '18758566499',
-      email: 'wangtong@hzcu.edu.cn',
-      office: '理工 5 楼 A 座 409-3',
-    },
+    teachers: [
+      {
+        name: '王彤',
+        role: '《电机与拖动》授课教师',
+        details: [
+          {
+            title: '学历',
+            description: '2019 年，浙江大学电气工程博士（电机与电器）毕业',
+          },
+          {
+            title: '经历',
+            description:
+              '2019—2023 年，美的威灵（上海）电机技术有限公司，MVD&LVD研究室软件组长',
+          },
+          { title: '方向', description: '电机设计、电机驱动器、电机控制算法' },
+          {
+            title: '联系',
+            description:
+              '电话：18758566499\n邮箱：wangtong@hzcu.edu.cn\n办公地点：理工 5 楼 A 座 409-3',
+          },
+        ],
+      },
+      {
+        name: '王雪洁',
+        role: '电气系主任 · 电气系专任教师',
+        details: [
+          {
+            title: '职务',
+            description:
+              '浙大城市学院信息与电气工程学院电气系主任，同时担任学院课程思政建设中心主任',
+          },
+          {
+            title: '经历',
+            description: '2003 年入职浙大城市学院，已在教育教学一线耕耘30余年',
+          },
+          {
+            title: '课程',
+            description:
+              '国家级一流课程《电机与拖动》负责人，国家级一流专业自动化建设的核心成员',
+          },
+          {
+            title: '荣誉',
+            description:
+              '杭州市教学名师、杭州市教育系统优秀教师、浙大城市学院首届胡建雄奖教金杰出教学奖、“我最喜爱的老师”、优秀共产党员等',
+          },
+        ],
+      },
+    ],
     objectives: [
       '认识电机与电力拖动系统',
       '建立能量转换的整体视角',
@@ -231,7 +263,7 @@ export type Slide =
     }
   | {
       id: string;
-      kind: 'chapter' | 'outline';
+      kind: 'chapter' | 'teachers' | 'outline';
       title: string;
       chapterId: string;
     }
@@ -306,13 +338,19 @@ export const slides: Slide[] = [
       {
         id: chapter.id,
         kind: 'chapter',
-        title: chapter.teacher ? '教师简介' : chapter.title,
+        title: chapter.title,
         chapterId: chapter.id,
       },
     ];
 
     if (chapter.id === 'introduction') {
       chapterSlides.push(
+        {
+          id: 'introduction-teachers',
+          kind: 'teachers',
+          title: '教师简介',
+          chapterId: chapter.id,
+        },
         {
           id: 'introduction-outline',
           kind: 'outline',
