@@ -1,0 +1,128 @@
+.lesson {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 1444px;
+  height: 744px;
+  min-height: 0;
+  transform: translate(-50%, -50%) scale(var(--lesson-scale, 1));
+}
+body {
+  overflow: hidden;
+}
+.grid-2 {
+  grid-template-columns: 1.18fr 1fr;
+}
+.hero-card {
+  grid-template-rows: auto minmax(0, 1fr) auto auto auto;
+}
+.stack {
+  grid-template-rows: 1fr 1fr;
+}
+.field-caption {
+  text-align: center;
+  font-weight: 650;
+  color: #286c62 !important;
+}
+.model-note {
+  font-size: 12px !important;
+}
+.diagram-labels text {
+  paint-order: stroke;
+  stroke: #e6eeea;
+  stroke-width: 6px;
+  stroke-linejoin: round;
+}
+svg .pole-n {
+  fill: #ad5d2d;
+}
+svg .pole-s {
+  fill: #286c62;
+}
+button {
+  border: 1px solid #c8d9d4;
+  border-radius: 8px;
+  padding: 4px 10px;
+  background: #edf6f2;
+  color: #286c62;
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+button:hover {
+  background: #dcefe6;
+}
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid #b66c39;
+  outline-offset: 3px;
+}
+.slider-control {
+  margin: 6px 0;
+}
+.slider-control label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 17px;
+  font-weight: 650;
+}
+.slider-control output {
+  color: #ad5d2d;
+  font-variant-numeric: tabular-nums;
+}
+input[type='range'] {
+  width: 100%;
+  height: 22px;
+  margin: 0;
+  accent-color: #397f73;
+  cursor: pointer;
+}
+.range-labels {
+  display: flex;
+  justify-content: space-between;
+  color: #607a74;
+  font-size: 12px;
+}
+.controls-card .formula {
+  margin-top: 4px;
+  padding: 7px 10px;
+  font-size: 23px;
+}
+.controls-card p {
+  font-size: 13px;
+}
+.drops-card {
+  display: grid;
+  align-content: space-between;
+  gap: 4px;
+}
+.drops-card p {
+  margin: 0;
+}
+.bar-row {
+  grid-template-columns: 80px minmax(0, 1fr) 110px;
+  font-size: 15px;
+}
+.bar-row output {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.bar-track {
+  height: 22px;
+}
+.bar {
+  width: 0;
+  transition: width 120ms linear;
+}
+.drops-card .formula small {
+  font-size: 15px;
+}
+.drops-card .formula {
+  padding: 6px 10px;
+  font-size: 20px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .bar {
+    transition: none;
+  }
+}
