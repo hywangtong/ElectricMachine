@@ -460,7 +460,7 @@ export default function CoursePlayer() {
                             className="slide-primary"
                             onClick={() => navigate(index + 1)}
                           >
-                            {chapter.teacher ? '查看考核方案' : '本章内容'}
+                            本章内容
                             <ArrowRight />
                           </Button>
                         </div>
@@ -751,7 +751,11 @@ export default function CoursePlayer() {
                         {slide.kind === 'outline' && (
                           <div className="outline-note">
                             <span />
-                            章节提纲 · 详细教学内容将陆续补充
+                            {chapter.id === 'introduction'
+                              ? '本章学习路线 · 学习要求 → 应用案例 → 电机优势 → 发展历史'
+                              : chapter.id === 'magnetic-circuits'
+                                ? '本章学习路线 · 电磁规律 → 铁心特性 → 磁路与气隙 → 交流铁耗与叠片'
+                                : '章节提纲 · 详细教学内容将陆续补充'}
                           </div>
                         )}
                       </div>

@@ -49,10 +49,22 @@ export const chapters: Chapter[] = [
       '了解本课程的知识结构',
     ],
     topics: [
-      { title: '电机与电力拖动', description: '电机的作用、分类与典型应用' },
-      { title: '机电能量转换', description: '电能、磁场与机械能之间的联系' },
-      { title: '电力拖动系统', description: '电源、电机、传动机构与生产机械' },
-      { title: '课程学习路线', description: '从基本原理到运行分析与控制' },
+      {
+        title: '课程考核与学习要求',
+        description: '平时作业、课堂练习、实验与期末考试',
+      },
+      {
+        title: '电机应用与电动化',
+        description: '新能源汽车、分布式电推进、吊舱推进与舰船综合电力系统',
+      },
+      {
+        title: '电机的四大优势',
+        description: '环保、应用便捷、高性能与适应性强',
+      },
+      {
+        title: '电机的发展历史',
+        description: '从电磁原理发现到实用电机、三相系统与现代电驱',
+      },
     ],
   },
   {
@@ -60,17 +72,29 @@ export const chapters: Chapter[] = [
     title: '磁路',
     english: 'MAGNETIC CIRCUITS',
     category: '课程基础',
-    question: '如何描述和计算电机中的磁场？',
+    question: '电流怎样建立磁场，铁心、气隙与交流励磁又会带来什么变化？',
     objectives: [
-      '理解磁路的基本物理量',
-      '掌握磁路分析的基本方法',
-      '认识铁磁材料的特性与损耗',
+      '从电磁规律认识 H、B、Φ 与磁导率，解释铁心作用和磁饱和',
+      '用磁通势、磁阻与磁路定律计算磁通，分析气隙对励磁的影响',
+      '理解交流感应电动势、磁滞与涡流损耗，解释硅钢片叠片降损',
     ],
     topics: [
-      { title: '磁场与磁路', description: '磁感应强度、磁通与磁场强度' },
-      { title: '磁路基本定律', description: '安培环路定律与磁路计算' },
-      { title: '铁磁材料', description: '磁化曲线、磁饱和与磁滞' },
-      { title: '交流磁路', description: '感应电动势与铁芯损耗' },
+      {
+        title: '电与磁的基本规律',
+        description: '麦克斯韦四条规则；电流建立磁场，认识 H、B、Φ 与磁导率',
+      },
+      {
+        title: '铁心与磁饱和',
+        description: '铁心为什么导磁；磁畴、B-H 曲线与饱和边界',
+      },
+      {
+        title: '磁路计算与气隙',
+        description: '磁通势、磁阻、磁路欧姆定律与 KCL / KVL；气隙的励磁需求',
+      },
+      {
+        title: '交流磁路与叠片降损',
+        description: '感应电动势与 U/f；磁滞、涡流铁耗和硅钢片叠片',
+      },
     ],
   },
   {
@@ -290,6 +314,12 @@ export const slides: Slide[] = [
     if (chapter.id === 'introduction') {
       chapterSlides.push(
         {
+          id: 'introduction-outline',
+          kind: 'outline',
+          title: '本章内容',
+          chapterId: chapter.id,
+        },
+        {
           id: 'introduction-assessment',
           kind: 'assessment',
           title: '课程考核方案',
@@ -437,12 +467,14 @@ export const slides: Slide[] = [
       );
     }
 
-    chapterSlides.push({
-      id: `${chapter.id}-outline`,
-      kind: 'outline',
-      title: '本章内容',
-      chapterId: chapter.id,
-    });
+    if (chapter.id !== 'introduction') {
+      chapterSlides.push({
+        id: `${chapter.id}-outline`,
+        kind: 'outline',
+        title: '本章内容',
+        chapterId: chapter.id,
+      });
+    }
 
     if (chapter.id === 'introduction') {
       chapterSlides.push(
