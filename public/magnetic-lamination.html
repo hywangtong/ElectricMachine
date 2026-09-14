@@ -1,61 +1,161 @@
 <!doctype html>
 <html lang="zh-CN">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>为什么电机铁芯必须由硅钢片叠成？</title>
-  <link rel="stylesheet" href="/magnetic-circuit-lesson.css" />
-</head>
-<body>
-<main class="lesson">
-  <header class="lesson-head">
-    <div class="eyebrow">磁路 / 10 叠片铁芯 · ELI5</div>
-    <h1>为什么电机铁芯必须由硅钢片叠成？</h1>
-    <p class="lead">不是为了“好加工”：把大涡流环切碎、把片厚 d 变小，才能把涡流损耗和温升压下去。</p>
-  </header>
-  <section class="grid-2 equal">
-    <article class="card hero-card">
-      <div class="compare-title"><h2>实心铁芯：大回路容易绕起来</h2><span class="tag">d 大 · 路径连续</span></div>
-      <svg viewBox="0 0 700 410" role="img" aria-label="实心铁芯中存在大面积闭合涡流环，涡流路径连续">
-        <defs><marker id="l7a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#b36b39"/></marker></defs>
-        <rect x="105" y="55" width="430" height="285" rx="18" fill="#cfd9d6" stroke="#718680" stroke-width="4"/>
-        <path d="M180 195C180 100 455 100 455 195S180 290 180 195Z" fill="none" stroke="#b36b39" stroke-width="13" marker-end="url(#l7a)"/>
-        <path d="M240 195C240 140 395 140 395 195S240 250 240 195Z" fill="none" stroke="#d08b5a" stroke-width="8" marker-end="url(#l7a)"/>
-        <text x="320" y="32" text-anchor="middle" font-size="23">变化磁通穿过导电铁心</text>
-        <text x="320" y="190" text-anchor="middle" font-size="24" class="accent">大面积闭合涡流</text>
-        <text x="320" y="380" text-anchor="middle" font-size="20" class="muted">回路面积大、路径连续 → 涡流更容易变大</text>
-      </svg>
-      <div class="formula warn">P<sub>e</sub> 大</div>
-    </article>
-    <div class="stack">
-      <article class="card hero-card">
-        <div class="compare-title"><h2>薄硅钢片 + 片间绝缘：把大回路切碎</h2><span class="tag">d 小 · 绝缘分隔</span></div>
-        <svg viewBox="0 0 700 245" role="img" aria-label="多层薄硅钢片之间有绝缘层，每片内部只有较小的涡流环">
-          <defs><marker id="l7b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#397f73"/></marker></defs>
-          <g transform="translate(70 25)">
-            <rect x="0" y="0" width="470" height="28" rx="4" fill="#c7d3cf" stroke="#718680"/>
-            <rect x="0" y="38" width="470" height="28" rx="4" fill="#c7d3cf" stroke="#718680"/>
-            <rect x="0" y="76" width="470" height="28" rx="4" fill="#c7d3cf" stroke="#718680"/>
-            <rect x="0" y="114" width="470" height="28" rx="4" fill="#c7d3cf" stroke="#718680"/>
-            <rect x="0" y="152" width="470" height="28" rx="4" fill="#c7d3cf" stroke="#718680"/>
-            <g fill="none" stroke="#397f73" stroke-width="5" marker-end="url(#l7b)"><path d="M80 14c0-13 110-13 110 0s-110 13-110 0Z"/><path d="M240 52c0-13 110-13 110 0s-110 13-110 0Z"/><path d="M100 90c0-13 110-13 110 0s-110 13-110 0Z"/><path d="M260 128c0-13 110-13 110 0s-110 13-110 0Z"/><path d="M120 166c0-13 110-13 110 0s-110 13-110 0Z"/></g>
-          </g>
-          <text x="590" y="65" font-size="18">每片之间绝缘</text><text x="590" y="102" font-size="18">大回路被切断</text><text x="590" y="139" font-size="18">单片 d 变小</text><text x="590" y="176" font-size="18">等效回路电阻增大</text>
-        </svg>
-      </article>
-      <article class="card">
-        <h2>公式直接告诉你：为什么要“薄”</h2>
-        <div class="formula emphasis" style="margin-top:8px">P<sub>e</sub> = K<sub>e</sub> d² f² B<sub>m</sub>² V &nbsp; ⇒ &nbsp; <strong>P<sub>e</sub> ∝ d²</strong></div>
-        <div class="formula warn" style="margin-top:8px"><strong>d → d/2</strong> &nbsp;（其他条件不变）&nbsp; ⇒ &nbsp; <strong>P<sub>e</sub> → P<sub>e</sub>/4</strong></div>
-        <p>教材列举的典型片厚：<strong>0.35、0.30、0.27、0.22 mm</strong>。这是示例范围，不表示所有电机都使用这些厚度。</p>
-      </article>
-      <article class="card">
-        <h2>把结构记成三个词</h2>
-        <div class="chain" style="margin-top:8px"><b>硅钢</b><span class="arrow">+</span><b>薄片</b><span class="arrow">+</span><b>片间绝缘</b></div>
-      </article>
-    </div>
-  </section>
-  <footer class="engineering"><strong>整章闭环</strong><span>I → H → B → Φ → 磁路 → 气隙 → 交流铁耗 → 叠片降损。叠片的核心目的：抑制涡流，降低铁耗与温升。</span></footer>
-</main>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>为什么电机铁芯必须由硅钢片叠成？</title>
+    <link rel="stylesheet" href="/magnetic-circuit-lesson.css" />
+    <link rel="stylesheet" href="/magnetic-lamination.css" />
+    <script src="/magnetic-lamination.js" defer></script>
+  </head>
+  <body>
+    <main class="lesson">
+      <header class="lesson-head">
+        <div class="eyebrow">磁路 / 10 叠片铁芯 · 交互实验</div>
+        <h1>为什么电机铁芯必须由硅钢片叠成？</h1>
+        <p class="lead">
+          同样的交变磁场穿过铁芯：片间绝缘限制涡流回路，片数越多，回路越窄，涡流越弱。
+        </p>
+      </header>
+      <section class="grid-2">
+        <article class="card experiment">
+          <div class="controls">
+            <label for="sheet-count"
+              >叠片个数 n
+              <input
+                id="sheet-count"
+                type="number"
+                min="1"
+                max="24"
+                step="1"
+                value="6"
+                aria-describedby="count-hint"
+              />
+            </label>
+            <span id="count-hint">1—24 片 · 总铁厚 D 不变</span>
+            <button id="pause" type="button">暂停动画</button>
+            <button id="reset" type="button">复位</button>
+          </div>
+          <div class="core-comparison">
+            <section class="core-panel">
+              <h2>整体铁芯</h2>
+              <span class="tag">导电路径连续 · d = D</span>
+              <svg
+                id="solid-core"
+                viewBox="0 0 400 350"
+                role="img"
+                aria-label="整体铁芯：磁感线沿深度方向穿过铁芯，垂直磁场的截面内形成宽涡流回路"
+              ></svg>
+              <div class="reading solid-reading">
+                涡流强弱基准 <strong>1</strong
+                ><small>周期平均涡流损耗：100%</small>
+              </div>
+            </section>
+            <section class="core-panel">
+              <h2>叠片铁芯</h2>
+              <span class="tag">片间绝缘 · d = D/n</span>
+              <svg
+                id="laminated-core"
+                viewBox="0 0 400 350"
+                role="img"
+                aria-label="叠片铁芯：磁感线平行片面穿过铁芯，每片截面内形成独立的窄涡流回路"
+              ></svg>
+              <div class="reading">
+                涡流强弱约 <strong id="current-ratio">1/6</strong
+                ><small>周期平均涡流损耗：<b id="loss-ratio">2.78%</b></small>
+              </div>
+            </section>
+          </div>
+          <div class="legend-line">
+            <span class="field-legend"
+              >绿色：磁感线 B（疏密、箭头长度 ∝ |B|）</span
+            ><span class="eddy-legend">橙色：涡流（箭头为电流方向）</span>
+          </div>
+          <div class="phase-row">
+            <svg
+              id="waveform"
+              viewBox="0 0 420 92"
+              role="img"
+              aria-label="正弦交变磁场与涡流变化率波形，运动光标表示当前相位"
+            ></svg>
+            <div>
+              <strong id="field-state"></strong>
+              <p id="eddy-state"></p>
+              <p class="mini">B = Bₘ sin(2πft) · f = 0.25 Hz（慢速演示）</p>
+            </div>
+          </div>
+          <p class="model-note">
+            正面为垂直 B 的截面；叠片沿深度延伸，片面平行
+            B。绿色磁感线疏密与箭头长度随下方 B
+            波形同步变化；橙色箭头粗细与亮度表示涡流强弱。忽略集肤效应，采用均匀磁场、电阻主导的示意模型。
+          </p>
+        </article>
+        <div class="stack">
+          <article class="card circuit-card">
+            <div class="compare-title">
+              <h2>叠片回路 · 截面放大</h2>
+              <span class="tag">⊙ 出截面 / ⊗ 入截面</span>
+            </div>
+            <svg
+              id="sheet-circuits"
+              viewBox="0 0 550 155"
+              role="img"
+              aria-label="与叠片数量同步的截面回路图：磁场垂直截面，每个涡流回路限制在单片内部"
+            ></svg>
+            <p>
+              绝缘层阻断跨片电流；回路仍在每片内部闭合。<strong
+                >涡流反抗的是 B 的变化。</strong
+              >
+            </p>
+          </article>
+          <article class="card formula-card">
+            <h2>为什么要“薄”？看厚度的平方</h2>
+            <div class="formula emphasis">
+              P<sub>e</sub> = K<sub>e</sub> d² f² B<sub>m</sub>² V
+            </div>
+            <div class="formula">
+              d = D/n &nbsp; ⇒ &nbsp;
+              <strong>P<sub>e</sub>/P<sub>e,整体</sub> ≈ 1/n²</strong>
+            </div>
+            <div class="loss-row">
+              <span>整体</span>
+              <div class="bar-track"><div class="bar solid-bar"></div></div>
+              <b>100%</b>
+            </div>
+            <div class="loss-row">
+              <span>叠片</span>
+              <div class="bar-track"><div id="loss-bar" class="bar"></div></div>
+              <b id="bar-value">2.78%</b>
+            </div>
+            <p class="mini">
+              同材料、同频率、同
+              Bₘ、同铁体积；绝缘间隙夸张绘制。强弱读数表示涡流电流密度幅值的近似比例。
+            </p>
+            <div class="formula warn">
+              <strong>d → d/2</strong> ⇒
+              <strong>P<sub>e</sub> → P<sub>e</sub>/4</strong>
+            </div>
+          </article>
+          <article class="card material-card">
+            <h2>把结构记成三个词</h2>
+            <div class="chain">
+              <b>硅钢</b><span class="arrow">+</span><b>薄片</b
+              ><span class="arrow">+</span><b>片间绝缘</b>
+            </div>
+            <p>
+              教材典型片厚：<strong>0.35、0.30、0.27、0.22 mm</strong
+              >，并非所有电机的固定取值。
+            </p>
+          </article>
+        </div>
+      </section>
+      <footer class="engineering">
+        <strong>整章闭环</strong
+        ><span
+          >I → H → B → Φ → 磁路 → 气隙 → 交流铁耗 →
+          叠片降损。叠片的核心目的：抑制涡流，降低铁耗与温升。</span
+        >
+      </footer>
+    </main>
+  </body>
 </html>

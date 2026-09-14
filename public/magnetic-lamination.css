@@ -1,0 +1,202 @@
+.lesson {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 1444px;
+  height: 744px;
+  min-height: 0;
+  transform: translate(-50%, -50%) scale(var(--lesson-scale, 1));
+}
+body {
+  overflow: hidden;
+}
+.grid-2 {
+  grid-template-columns: 1.55fr 1fr;
+}
+.experiment {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto 94px auto;
+  gap: 9px;
+}
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #d4e5df;
+}
+.controls label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 18px;
+}
+.controls span {
+  font-size: 13px;
+  color: #55736d;
+  margin-right: auto;
+}
+input,
+button {
+  font: inherit;
+  color: #214e4a;
+  background: #edf6f2;
+  border: 1px solid #adc9bf;
+  border-radius: 7px;
+  padding: 6px 9px;
+}
+input {
+  width: 70px;
+  font-size: 20px;
+  background: #fff;
+}
+button {
+  cursor: pointer;
+  font-size: 14px;
+}
+button:hover {
+  background: #d7eee7;
+}
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid #b66c39;
+  outline-offset: 2px;
+}
+.core-comparison {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  min-height: 0;
+}
+.core-panel {
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr) auto;
+  gap: 5px;
+  text-align: center;
+  min-height: 0;
+}
+.core-panel + .core-panel {
+  border-left: 1px solid #d4e5df;
+}
+.core-panel .tag {
+  justify-self: center;
+}
+.reading {
+  padding: 8px;
+  border-radius: 9px;
+  background: #edf6f2;
+  font-size: 16px;
+}
+.reading strong {
+  font-size: 25px;
+  margin-left: 8px;
+}
+.reading small {
+  display: block;
+  margin-top: 3px;
+  font-size: 14px;
+}
+.solid-reading {
+  background: #fff3df;
+}
+.legend-line {
+  justify-content: center;
+}
+.legend-line .field-legend::before {
+  color: #287e70;
+}
+.legend-line .eddy-legend::before {
+  color: #bf632c;
+}
+.phase-row {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 10px;
+  align-items: center;
+  border-top: 1px solid #d4e5df;
+  padding-top: 5px;
+}
+.phase-row strong {
+  color: #287e70;
+  font-size: 16px;
+}
+.phase-row p {
+  font-size: 13px;
+}
+.experiment .model-note {
+  font-size: 12px;
+  margin: 0;
+}
+.stack {
+  grid-template-rows: minmax(0, 1fr) 270px auto;
+}
+.circuit-card {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: 4px;
+}
+.formula-card {
+  display: grid;
+  gap: 4px;
+  align-content: start;
+}
+.formula-card .formula {
+  font-size: 22px;
+  padding: 6px;
+}
+.formula-card .formula.emphasis {
+  font-size: 26px;
+}
+.loss-row {
+  display: grid;
+  grid-template-columns: 38px 1fr 70px;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+.loss-row b {
+  text-align: right;
+}
+.solid-bar {
+  width: 100%;
+  background: #bf632c;
+}
+.material-card .chain {
+  margin-top: 7px;
+  padding: 4px 8px;
+}
+svg .field-line {
+  stroke: #397f73;
+  fill: none;
+}
+svg .b-line {
+  stroke-width: 1.5;
+}
+svg .b-vector {
+  stroke-width: 3.5;
+  stroke-linecap: round;
+}
+svg .field-halo,
+svg .vector-halo {
+  fill: none;
+  stroke: #f8fbf7;
+  stroke-width: 4;
+  stroke-linecap: round;
+  opacity: 0.85;
+}
+svg .vector-halo {
+  stroke-width: 6;
+}
+svg .eddy-loop {
+  stroke: #bf632c;
+  fill: none;
+}
+svg .field-symbol {
+  stroke: #287e70;
+  fill: #fff;
+  stroke-width: 1.8;
+}
+svg .diagram-caption {
+  font-size: 15px;
+}
