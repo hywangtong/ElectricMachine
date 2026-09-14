@@ -620,13 +620,29 @@ export const slides: Slide[] = [
     }
 
     if (chapter.id === 'dc-machines') {
-      chapterSlides.push({
-        id: 'dc-machines-uses-types',
-        kind: 'embed',
-        title: '直流电机的用途与种类',
-        chapterId: chapter.id,
-        embedUrl: '/dc-machine-uses-types.html',
-      });
+      chapterSlides.push(
+        {
+          id: 'dc-machines-uses-types',
+          kind: 'embed',
+          title: '直流电机的用途与种类',
+          chapterId: chapter.id,
+          embedUrl: '/dc-machine-uses-types.html',
+        },
+        {
+          id: 'dc-motor-fixed-current',
+          kind: 'embed',
+          title: '直流电动机原理：不换向的线圈',
+          chapterId: chapter.id,
+          embedUrl: '/dc-motor-fixed-current.html',
+        },
+        {
+          id: 'dc-motor-commutator',
+          kind: 'embed',
+          title: '直流电动机原理：电刷与换向器',
+          chapterId: chapter.id,
+          embedUrl: '/dc-motor-commutator.html',
+        },
+      );
     }
 
     return chapterSlides;

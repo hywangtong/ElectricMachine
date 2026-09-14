@@ -1,0 +1,253 @@
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+body {
+  margin: 0;
+  overflow: hidden;
+  color: #173b3b;
+  background: #f8fbf7;
+  font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+}
+.lesson {
+  position: absolute;
+  width: 1444px;
+  height: 744px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(var(--lesson-scale, 1));
+  padding: 18px 24px;
+  display: grid;
+  grid-template-rows: 86px 1fr 38px;
+  gap: 12px;
+  transform-origin: center;
+}
+.eyebrow {
+  color: #39796f;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+}
+h1 {
+  margin: 5px 0;
+  font-size: 32px;
+  line-height: 1.15;
+}
+.lead {
+  margin: 0;
+  color: #55736d;
+  font-size: 17px;
+}
+.layout {
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 750px 1fr;
+  gap: 14px;
+}
+.card {
+  border: 1px solid #c8d9d4;
+  border-radius: 14px;
+  background: #fff;
+  padding: 14px 18px;
+  overflow: hidden;
+}
+.motor-card {
+  display: grid;
+  grid-template-rows: 30px 330px 1fr;
+}
+.card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+h2 {
+  margin: 0;
+  font-size: 21px;
+}
+.tag {
+  font-size: 14px;
+  color: #39796f;
+  background: #edf6f2;
+  border-radius: 20px;
+  padding: 5px 12px;
+}
+#motor {
+  width: 100%;
+  height: 330px;
+}
+svg text {
+  font-family: inherit;
+}
+.legend {
+  display: flex;
+  gap: 20px;
+  font-size: 14px;
+  color: #55736d;
+}
+.legend b {
+  color: #be632c;
+}
+.legend strong {
+  color: #356eaf;
+}
+.control-row {
+  display: grid;
+  grid-template-columns: 134px 1fr;
+  align-items: center;
+  gap: 16px;
+  margin-top: 6px;
+}
+.knob {
+  width: 118px;
+  height: 118px;
+  border-radius: 50%;
+  border: 8px solid #dcebe5;
+  background: radial-gradient(circle, #fff 46%, #eff6f2 47%);
+  position: relative;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  box-shadow: 0 3px 12px #173b3b15;
+}
+.knob:active {
+  cursor: grabbing;
+}
+.knob:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid #356eaf;
+  outline-offset: 4px;
+}
+.knob-indicator {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.knob-indicator::before {
+  content: '';
+  position: absolute;
+  height: 6px;
+  width: 24px;
+  right: 5px;
+  top: calc(50% - 3px);
+  border-radius: 5px;
+  background: #be632c;
+}
+.knob-value {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: 24px;
+  pointer-events: none;
+}
+.control-label {
+  font-size: 15px;
+  color: #55736d;
+  margin-bottom: 7px;
+}
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  align-items: center;
+}
+button {
+  background: #f6faf8;
+  color: #214e4a;
+  border: 1px solid #c8d9d4;
+  border-radius: 7px;
+  padding: 7px 10px;
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+button[aria-pressed='true'],
+#scan {
+  background: #214e4a;
+  color: white;
+}
+input[type='number'] {
+  width: 76px;
+  font: inherit;
+  font-size: 17px;
+  padding: 6px;
+  border: 1px solid #c8d9d4;
+  border-radius: 6px;
+}
+.hint {
+  font-size: 13px;
+  color: #55736d;
+  margin: 7px 0 0;
+}
+.right {
+  display: grid;
+  grid-template-rows: 222px 1fr;
+  gap: 12px;
+  min-height: 0;
+}
+.reading {
+  color: #be632c;
+  font-size: 26px;
+  font-variant-numeric: tabular-nums;
+}
+#scope {
+  width: 100%;
+  height: 129px;
+  display: block;
+}
+.scope-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #55736d;
+}
+.explanation {
+  display: grid;
+  grid-template-columns: 206px 1fr;
+  gap: 14px;
+  margin-top: 6px;
+}
+#hand {
+  width: 206px;
+  height: 220px;
+}
+.theory {
+  padding-top: 5px;
+}
+.formula {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0 0 7px;
+  color: #214e4a;
+}
+.theory p {
+  margin: 6px 0;
+  font-size: 15px;
+  line-height: 1.42;
+}
+#state {
+  color: #be632c;
+  font-weight: 700;
+}
+.conclusion {
+  background: #edf6f2;
+  border-radius: 8px;
+  padding: 7px 9px;
+}
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  color: #55736d;
+  font-size: 13px;
+  border-top: 1px solid #c8d9d4;
+}
+footer a {
+  color: #39796f;
+}

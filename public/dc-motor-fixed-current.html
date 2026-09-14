@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>直流电动机原理：不换向的线圈</title>
+    <link rel="stylesheet" href="/dc-motor-lesson.css" />
+    <script type="module" src="/dc-motor-lesson.js"></script>
+  </head>
+  <body data-mode="fixed">
+    <main class="lesson">
+      <header>
+        <div class="eyebrow" id="eyebrow">
+          直流电机 / 01 固定电流 · 交互实验
+        </div>
+        <h1 id="title">没有换向器，线圈能一直沿同一方向转吗？</h1>
+        <p class="lead" id="lead">
+          保持电枢端电压极性和电流方向不变，旋转线圈，观察安培力与力矩。
+        </p>
+      </header>
+      <div class="layout">
+        <section class="card motor-card" aria-label="电枢角度与受力实验">
+          <div class="card-head">
+            <h2>磁场中的单个电枢线圈</h2>
+            <span class="tag" id="circuit-tag">无电刷 · 直接接线</span>
+          </div>
+          <svg
+            id="motor"
+            viewBox="0 0 710 330"
+            role="img"
+            aria-label="沿轴端视图与立体线圈图，实时标注磁场、电流、安培力、角度和力臂"
+          ></svg>
+          <div>
+            <div class="legend">
+              <span>绿色 ↓ 磁场 B</span
+              ><strong>蓝色 ⊗ 入纸面 / ⊙ 出纸面电流</strong
+              ><b>橙色 → 安培力 F</b>
+            </div>
+            <div class="control-row">
+              <div
+                id="knob"
+                class="knob"
+                role="slider"
+                tabindex="0"
+                aria-label="电枢线圈角度"
+                aria-valuemin="0"
+                aria-valuemax="360"
+                aria-valuenow="45"
+                aria-describedby="knob-hint"
+              >
+                <div id="knob-indicator" class="knob-indicator"></div>
+                <span id="knob-value" class="knob-value">45°</span>
+              </div>
+              <div>
+                <div class="control-label">
+                  <label for="angle"
+                    >电枢角度 θ
+                    <input
+                      id="angle"
+                      type="number"
+                      min="0"
+                      max="360"
+                      step="1"
+                      value="45"
+                    />
+                    °</label
+                  >　逆时针为正
+                </div>
+                <div class="buttons">
+                  <button data-angle="0">0°</button
+                  ><button data-angle="90">90°</button
+                  ><button data-angle="180">180°</button
+                  ><button data-angle="270">270°</button
+                  ><button id="scan" aria-pressed="false">自动扫角</button
+                  ><button id="pause" aria-pressed="false">冻结示波器</button
+                  ><button id="reset">复位</button>
+                </div>
+                <p id="knob-hint" class="hint">
+                  拖动旋钮；方向键 ±1°，Shift ±10°。扫角
+                  45°/s；手动调节停止扫角。
+                </p>
+                <p class="hint">
+                  θ 从右侧水平轴量至导体 A；看轴端，正力矩为逆时针。
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+        <div class="right">
+          <section class="card">
+            <div class="card-head">
+              <h2>实时力矩示波器</h2>
+              <output id="torque" class="reading">+0.0283 N·m</output>
+            </div>
+            <svg
+              id="scope"
+              viewBox="0 0 580 165"
+              role="img"
+              aria-label="力矩随时间变化的示波器，固定八秒时间窗与正负力矩刻度"
+            ></svg>
+            <div class="scope-meta">
+              <span>纵轴 T / N·m · 正负量程 ±0.04</span
+              ><span id="clock">最近 8 s · t = 0.0 s</span>
+            </div>
+            <p class="hint">
+              实线记录操作历史；右端圆点是当前角度的力矩，固定角度时为水平线。
+            </p>
+          </section>
+          <section class="card">
+            <h2>安培力：左手定则</h2>
+            <div class="explanation">
+              <div>
+                <svg
+                  id="hand"
+                  viewBox="0 0 206 220"
+                  role="img"
+                  aria-label="左手掌心、四指与拇指互相垂直：磁感线穿入掌心，四指沿传统电流，拇指指向安培力"
+                ></svg>
+              </div>
+              <div class="theory">
+                <div class="formula">F = BIl；|T| = 2Fd</div>
+                <div class="formula" id="torque-formula">T = Tₘ sin θ</div>
+                <p id="current">Iₐ = +2.00 A；U_AB = +U₀</p>
+                <p id="arm">d = r |sin θ| = 0.071 m</p>
+                <p id="state">正力矩：倾向逆时针转动。</p>
+                <p id="conclusion" class="conclusion">
+                  受力方向固定，力臂位置变化：半圈驱动，半圈反向。没有换向就不能持续提供同向力矩。
+                </p>
+              </div>
+            </div>
+            <p class="hint">
+              磁感线穿入左手掌心，四指沿传统电流，拇指沿力；手型为局部视角。
+            </p>
+          </section>
+        </div>
+      </div>
+      <footer>
+        <span
+          >教学模型：1 匝，B = 0.5 T，I = 2 A，l = 0.2 m，r = 0.1 m；Tₘ = 0.04
+          N·m。恒流近似，忽略反电动势与电感；扫角为外部设定。</span
+        ><a
+          href="https://openstax.org/books/university-physics-volume-2/pages/11-5-force-and-torque-on-a-current-loop"
+          target="_blank"
+          rel="noreferrer"
+          >原理参考 ↗</a
+        >
+      </footer>
+    </main>
+  </body>
+</html>
