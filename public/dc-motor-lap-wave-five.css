@@ -1,0 +1,24 @@
+.coil-cards {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+#current-value .lap-value {
+  color: #2f6eb5;
+}
+
+#current-value .wave-value {
+  color: #8459a6;
+}
+
+.machine-card {
+  grid-template-rows: 30px 365px 23px 74px 20px;
+}
+
+.topology-card #circuit {
+  height: 194px;
+}
+
+.safety-note {
+  color: #9b522c;
+  white-space: nowrap;
+}

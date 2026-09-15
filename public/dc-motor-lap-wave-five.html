@@ -3,27 +3,28 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>4P·8S·8C：Frog-Leg 与 Simplex 可重构电枢</title>
+    <title>4P·5S·5C：叠绕组与波绕组可重构电枢</title>
     <link rel="stylesheet" href="/dc-motor-eight-coils.css" />
     <link rel="stylesheet" href="/dc-motor-frogleg-simplex.css" />
-    <script type="module" src="/dc-motor-frogleg-simplex.js"></script>
+    <link rel="stylesheet" href="/dc-motor-lap-wave-five.css" />
+    <script type="module" src="/dc-motor-lap-wave-five.js"></script>
   </head>
   <body>
     <main class="lesson">
       <header>
-        <div class="eyebrow">直流电机 / 15 4P·8S·8C 可重构电枢</div>
-        <h1>同一八槽转子，在 Frog-Leg 与 Simplex 之间改接</h1>
+        <div class="eyebrow">直流电机 / 14 4P·5S·5C 可重构电枢</div>
+        <h1>同一五槽转子，在叠绕组与波绕组之间重接</h1>
         <p id="configuration-summary" class="lead">
-          4 极 · 8 槽 · 8 片换向片 · 8 个复合线圈　<span
-            >每个线圈跨 2 槽；箭头表示传统电流。</span
+          4 极 · 5 槽 · 5 片换向片 · 5 个实体线圈　<span
+            >每个线圈跨 1 槽；箭头表示传统电流。</span
           >
         </p>
       </header>
       <div class="layout">
-        <section class="card machine-card" aria-label="八槽可重构直流电枢动画">
+        <section class="card machine-card" aria-label="五槽可重构直流电枢动画">
           <div class="card-head">
-            <h2>八槽电枢 · 单匝嵌线示意</h2>
-            <span id="machine-tag" class="tag">Frog-Leg · 8 条导电支路</span>
+            <h2>五槽电枢 · 双层单匝嵌线示意</h2>
+            <span id="machine-tag" class="tag">叠绕组 · 4 刷臂</span>
           </div>
           <div class="viewport">
             <canvas
@@ -31,32 +32,30 @@
               width="1600"
               height="756"
               tabindex="0"
-              aria-label="四极八槽八换向片电枢，显示每个复合线圈的槽边、端部连接和实时电流方向。拖动改变观察视角。"
+              aria-label="四极五槽五线圈五换向片电枢，显示实体线圈的双层槽边、端部连接和实时电流方向。拖动改变观察视角。"
             ></canvas>
             <div class="view-tools">
               <button id="perspective">透视</button
               ><button id="front">轴端</button
               ><button id="focus" aria-pressed="false">仅突出所选线圈</button>
             </div>
-            <span class="view-hint">拖动旋转视角 · S1—S8 为实际槽位</span>
+            <span class="view-hint">拖动旋转视角 · S1—S5 为实际槽位</span>
           </div>
           <div class="legend">
-            <span class="lap">● Lap section</span
-            ><span class="wave-family">● Wave section</span
-            ><span class="commuting">● 电刷跨片：短接</span
+            <span class="lap">● 叠绕组路径</span
+            ><span class="wave-family">● 波绕组路径</span
+            ><span class="commuting">● 电刷跨片：网络换向</span
             ><span class="current-arrow">→ 实时电流方向</span
-            ><span>灰色：八槽铁心</span>
+            ><span>灰色：五槽铁心</span>
           </div>
           <div class="controls">
             <div class="control-line">
               <div class="mode-switch" role="group" aria-label="接线模式">
-                <button id="frogleg-mode" aria-pressed="true">Frog-Leg</button
-                ><button id="simplex-mode" aria-pressed="false">
-                  Simplex-B
-                </button>
+                <button id="lap-mode" aria-pressed="true">叠绕组</button
+                ><button id="wave-mode" aria-pressed="false">波绕组</button>
               </div>
               <button id="play" aria-pressed="true">暂停</button
-              ><button id="step">步进 45°</button
+              ><button id="step">步进 36°</button
               ><button id="commute">看所选线圈换向</button
               ><button id="reset">复位</button
               ><label for="speed"
@@ -79,65 +78,65 @@
                 value="0"
               /><output id="angle-value">0.0°</output
               ><label for="coil"
-                >跟踪复合线圈
-                <select id="coil" aria-label="跟踪复合线圈"></select
+                >跟踪线圈
+                <select id="coil" aria-label="跟踪线圈"></select
               ></label>
             </div>
           </div>
           <p id="slot-summary" class="hint">
-            F1 = L1 + W8：两组独立 section 同槽嵌入 S1—S3，均为 2 槽整距。
+            Q1：S1 上层 → S2 下层，实体线圈跨 1 槽。
           </p>
         </section>
         <div class="right">
           <section class="card circuit-card topology-card">
             <div class="card-head">
-              <h2>两种换向器接法</h2>
-              <span id="topology-tag" class="tag">当前：Frog-Leg</span>
+              <h2>叠绕组与波绕组接法</h2>
+              <span id="topology-tag" class="tag">当前：叠绕组</span>
             </div>
             <svg
               id="circuit"
               viewBox="0 0 516 224"
               role="img"
-              aria-label="Frog-Leg 与 Simplex-B 两种换向器连接示意，当前模式高亮"
+              aria-label="五片换向器的叠绕组与波绕组连接示意，当前模式高亮"
             ></svg>
           </section>
           <section class="card tracking-card">
             <div class="card-head">
-              <h2 id="tracking-title">跟踪复合线圈 F1</h2>
+              <h2 id="tracking-title">跟踪线圈 Q1</h2>
               <output id="current-value"></output>
             </div>
             <div
               id="coil-cards"
               class="coil-cards"
-              aria-label="八个复合线圈的实时电流方向"
+              aria-label="五个实体线圈的实时电流方向"
             ></div>
             <svg
               id="wave"
               viewBox="0 0 550 132"
               role="img"
-              aria-label="所选复合线圈中 Lap 与 Wave section 电流随转子角度的曲线"
+              aria-label="所选线圈电流随转子角度的曲线"
             ></svg>
             <p id="tracking-state" class="tracking-state"></p>
             <p class="hint">
-              正值按 section 起头 → 尾端；负值反向。L/W 是彼此绝缘的独立导体。
+              正值按 Ai 起头 → Bi 尾端；切换模式只改变 Bi 所接换向片。
             </p>
           </section>
           <section class="card conclusion-card">
-            <h2>机械结构不变，只改 Wave 端头</h2>
+            <h2>实体线圈不变，只重接 5 根 B 端</h2>
             <p id="commutation-summary">
-              Lap 永久接相邻片；Frog-Leg 的 Wave 跨 3 片，Simplex-B 改接相邻片。
+              叠绕组接相邻片；波绕组每次跨 2 片并遍历全部换向片。
             </p>
             <div id="connection-sequence" class="sequence">
-              Fx = Lx + W(x−1) · 同槽对、同绕向、彼此绝缘
+              Lap：C1 → C2 → C3 → C4 → C5 → C1
             </div>
           </section>
         </div>
       </div>
       <footer>
         <span id="model-boundary"
-          >依据 4P_8S_8C_frogleg_simplex_design.md：固定 4 极、8 槽、8 片与 2
-          槽跨距；动画用电阻网络示意实时电流方向，忽略电感、反电动势与火花。</span
-        ><span class="safety-note">实机改接须停机、断电并完成动平衡检查。</span>
+          >依据 4极5槽5线圈_叠绕组与波绕组对比方案.md：固定 4 极、5 槽、5
+          片、双层与 1 槽跨距；动画用电阻网络示意实时电流方向。</span
+        ><span class="safety-note">低压限流演示；实机改接须停机、断电。</span>
       </footer>
     </main>
   </body>

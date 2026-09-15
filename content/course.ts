@@ -688,6 +688,13 @@ export const slides: Slide[] = [
           embedUrl: '/dc-motor-eight-coils.html',
         },
         {
+          id: 'dc-motor-lap-wave-five',
+          kind: 'embed',
+          title: '4P·5S·5C：叠绕组与波绕组可重构电枢',
+          chapterId: chapter.id,
+          embedUrl: '/dc-motor-lap-wave-five.html',
+        },
+        {
           id: 'dc-motor-frogleg-simplex',
           kind: 'embed',
           title: '4P·8S·8C：Frog-Leg 与 Simplex 可重构电枢',
