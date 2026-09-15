@@ -1,0 +1,78 @@
+.machine-card {
+  grid-template-rows: 30px 365px 23px 74px 20px;
+}
+
+.lap {
+  color: #2f6eb5;
+}
+
+.wave-family {
+  color: #8459a6;
+}
+
+.current-arrow {
+  color: #b36d18;
+}
+
+.mode-switch {
+  display: inline-flex;
+  padding: 2px;
+  border: 1px solid #bcd1c8;
+  border-radius: 9px;
+  background: #edf5f1;
+}
+
+.mode-switch button {
+  border: 0;
+  padding: 4px 8px;
+  background: transparent;
+}
+
+.mode-switch button[aria-pressed='true'] {
+  color: #fff;
+  background: #214e4a;
+}
+
+.topology-card {
+  padding: 8px 10px 6px;
+}
+
+.topology-card #circuit {
+  height: 194px;
+}
+
+.right {
+  grid-template-rows: 235px 218px 87px;
+}
+
+.tracking-card .coil-cards button {
+  min-width: 0;
+}
+
+.tracking-card .coil-cards button span {
+  font-weight: 700;
+}
+
+.tracking-card .coil-cards button small {
+  white-space: nowrap;
+}
+
+#current-value {
+  display: flex;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 650;
+}
+
+#current-value .lap-value {
+  color: #2f6eb5;
+}
+
+#current-value .wave-value {
+  color: #8459a6;
+}
+
+.safety-note {
+  color: #9b522c;
+  white-space: nowrap;
+}

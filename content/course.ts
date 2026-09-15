@@ -687,6 +687,13 @@ export const slides: Slide[] = [
           chapterId: chapter.id,
           embedUrl: '/dc-motor-eight-coils.html',
         },
+        {
+          id: 'dc-motor-frogleg-simplex',
+          kind: 'embed',
+          title: '4P·8S·8C：Frog-Leg 与 Simplex 可重构电枢',
+          chapterId: chapter.id,
+          embedUrl: '/dc-motor-frogleg-simplex.html',
+        },
       );
     }
 
