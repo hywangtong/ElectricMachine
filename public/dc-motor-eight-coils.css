@@ -185,7 +185,7 @@ select {
 }
 .right {
   display: grid;
-  grid-template-rows: 213px 230px 97px;
+  grid-template-rows: 235px 218px 87px;
   gap: 10px;
   min-height: 0;
 }
@@ -196,7 +196,7 @@ select {
 #circuit {
   display: block;
   width: 100%;
-  height: 162px;
+  height: 184px;
 }
 svg text {
   font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;

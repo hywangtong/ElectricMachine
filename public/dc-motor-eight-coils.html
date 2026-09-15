@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>八线圈电枢：两支路与电流换向</title>
+    <title>八线圈电枢：多极换向与并联支路</title>
     <link rel="stylesheet" href="/dc-motor-eight-coils.css" />
     <script type="module" src="/dc-motor-eight-coils.js"></script>
   </head>
@@ -11,9 +11,9 @@
     <main class="lesson">
       <header>
         <div class="eyebrow">直流电机 / 13 八线圈电枢 · 3D 换向动画</div>
-        <h1>电刷不动，线圈旋转；两条支路不断重新分组</h1>
-        <p class="lead">
-          8 个线圈 · 8 片换向片 · A / B 两电刷 · 1 对磁极　<span
+        <h1>电刷不动，线圈旋转；并联支路不断重新分组</h1>
+        <p id="configuration-summary" class="lead">
+          8 个线圈 · 8 片换向片 · 2 个电刷 · 1 对磁极　<span
             >A 接正极，B 接负极；箭头表示传统电流。</span
           >
         </p>
@@ -40,8 +40,8 @@
             <span class="view-hint">拖动旋转视角 · 金色箭头沿导线流动</span>
           </div>
           <div class="legend">
-            <span class="upper">● 上支路</span
-            ><span class="lower">● 下支路</span
+            <span class="upper">● 首端 → 末端支路</span
+            ><span class="lower">● 末端 → 首端支路</span
             ><span class="commuting">● 电刷跨片：短接换向</span
             ><span style="color: #8b58ae">紫色 → 径向励磁</span
             ><span>灰色：铁心</span>
@@ -52,6 +52,13 @@
               ><button id="step">步进 45°</button
               ><button id="commute">看所选线圈换向</button
               ><button id="reset">复位</button
+              ><label for="pole-pairs"
+                >极对数
+                <select id="pole-pairs">
+                  <option value="1" selected>1 对极</option>
+                  <option value="2">2 对极</option>
+                  <option value="4">4 对极</option>
+                </select></label
               ><label for="speed"
                 >转速
                 <select id="speed">
@@ -85,11 +92,11 @@
           <section class="card circuit-card">
             <div class="card-head">
               <h2>绕组圆环 · 同步旋转简图</h2>
-              <span class="tag">Iₐ = 2 A</span>
+              <span id="armature-tag" class="tag">Iₐ = 2 A · 2 支路</span>
             </div>
             <svg
               id="circuit"
-              viewBox="0 0 550 180"
+              viewBox="0 -18 550 216"
               role="img"
               aria-label="与三维动画同步旋转的八线圈圆环简图，外圈绕组、内圈换向片和固定A/B电刷，实时显示两支路、电流方向与短接换向"
             ></svg>
@@ -118,7 +125,9 @@
           </section>
           <section class="card conclusion-card">
             <h2>换向不是电源反接</h2>
-            <p>A 流入、B 流出；线圈每半圈反向，电源极性不变。</p>
+            <p id="commutation-summary">
+              A 流入、B 流出；线圈每半圈反向，电源极性不变。
+            </p>
             <div class="sequence">
               接入一支路 → 电刷跨片短接 → 电流反向 → 接入另一支路
             </div>
@@ -126,7 +135,7 @@
         </div>
       </div>
       <footer>
-        <span
+        <span id="model-boundary"
           >保留参考图的八线圈闭合连接拓扑，三维绕组采用径向齿绕组教学示意。恒定支路电流
           Iₐ/2 = 1 A；跨片区 12°
           内理想线性换向，忽略电感、反电动势与火花；转速外部设定。</span

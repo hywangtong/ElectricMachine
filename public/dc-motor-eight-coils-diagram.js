@@ -31,14 +31,45 @@ function arc(radius, start, end, sweep) {
 export function windingDiagram(state, selected, flows) {
   let svg =
     '<defs><marker id="ring-current-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#d28a27"/></marker></defs>';
+  const poleStep = 360 / state.poleCount;
+  for (let index = 0; index < state.poleCount; index++) {
+    const center = 180 - index * poleStep;
+    const halfWidth = poleStep * 0.31;
+    const start = center + halfWidth;
+    const end = center - halfWidth;
+    const north = index % 2 === 0;
+    const path = `${arc(104, start, end, 1)}L${pair(point(94, end))}A94 94 0 0 0 ${pair(point(94, start))}Z`;
+    svg += `<path data-pole="${index + 1}" d="${path}" fill="${north ? '#bd6859' : '#5f83ad'}" opacity="0.78"/>`;
+    const [x, y] = point(99, center);
+    svg += text(
+      x.toFixed(3),
+      (y + 3).toFixed(3),
+      `${north ? 'N' : 'S'}${state.polePairs > 1 ? Math.floor(index / 2) + 1 : ''}`,
+      'white',
+      state.polePairs === 4 ? 8 : 10,
+      'middle',
+    );
+  }
   svg += `<g data-rotor-angle="${state.angle}">`;
   for (let k = 0; k < 8; k++) {
     const center = 180 - k * 45 - state.angle,
       a = center + 22,
       b = center - 22;
-    const contacted = state.brushA.includes(k) || state.brushB.includes(k);
+    const segmentBrushes = state.brushes.filter((brush) =>
+      brush.contacts.includes(k),
+    );
+    const hasPositive = segmentBrushes.some((brush) => brush.positive);
+    const hasNegative = segmentBrushes.some((brush) => !brush.positive);
+    const segmentFill =
+      hasPositive && hasNegative
+        ? colors.comm
+        : hasPositive
+          ? colors.upper
+          : hasNegative
+            ? colors.lower
+            : '#c98228';
     const path = `${arc(52, a, b, 1)}L${pair(point(39, b))}A39 39 0 0 0 ${pair(point(39, a))}Z`;
-    svg += `<path data-segment="${k + 1}" d="${path}" fill="${contacted ? '#e3a64e' : '#c98228'}"/>`;
+    svg += `<path data-segment="${k + 1}" d="${path}" fill="${segmentFill}"/>`;
     svg += `<path d="M${pair(point(52, center))}L${pair(point(66, center))}" stroke="#294a49" stroke-width="1.7"/>`;
   }
   for (const coil of state.coils) {
@@ -76,14 +107,28 @@ export function windingDiagram(state, selected, flows) {
     }
   }
   svg += '</g>';
-  // Brushes stay fixed; only copper segments, winding leads and coils rotate.
-  svg +=
-    '<g data-brush="A"><rect x="74" y="83" width="12" height="14" fill="#334b65"/><path d="M86 90H104" stroke="#306caf" stroke-width="2"/><circle cx="104" cy="90" r="2.5" fill="white" stroke="#306caf" stroke-width="1.5"/></g>';
-  svg +=
-    '<g data-brush="B"><rect x="164" y="83" width="12" height="14" fill="#334b65"/><path d="M146 90H164" stroke="#288466" stroke-width="2"/><circle cx="146" cy="90" r="2.5" fill="white" stroke="#288466" stroke-width="1.5"/></g>';
-  svg +=
-    text(104, 78, 'A ＋', colors.upper, 14, 'middle') +
-    text(146, 78, 'B −', colors.lower, 14, 'middle');
+  // Brushes and poles stay fixed; only the copper and winding rotate.
+  for (const brush of state.brushes) {
+    const width = Math.min(7, poleStep * 0.12);
+    const a = brush.position + width;
+    const b = brush.position - width;
+    const color = brush.positive ? colors.upper : colors.lower;
+    const path = `M${pair(point(47, a))}L${pair(point(61, a))}L${pair(point(61, b))}L${pair(point(47, b))}Z`;
+    svg += `<g data-brush="${brush.id}" data-position="${brush.position}"><path d="${path}" fill="#334b65"/><path d="M${pair(point(46, brush.position))}L${pair(point(38, brush.position))}" stroke="${color}" stroke-width="2"/></g>`;
+    const [x, y] = point(state.polePairs === 4 ? 29 : 32, brush.position);
+    const brushLabel =
+      state.polePairs === 1
+        ? `${brush.positive ? 'A' : 'B'}${brush.positive ? '＋' : '−'}`
+        : `${brush.id}${brush.positive ? '＋' : '−'}`;
+    svg += text(
+      x.toFixed(3),
+      (y + 4).toFixed(3),
+      brushLabel,
+      color,
+      state.polePairs === 4 ? 8 : 10,
+      'middle',
+    );
+  }
   svg +=
     text(234, 96, '↻', colors.lower, 28, 'middle') +
     text(234, 115, '顺时针', '#60796f', 11, 'middle');
@@ -94,47 +139,83 @@ export function windingDiagram(state, selected, flows) {
     '#60796f',
     13,
   );
-  svg += text(278, 47, '上支路 · 1 A', colors.upper, 14);
+  const branchText = (branch) => {
+    const coils = branch.coils.map((coil) => coil.id).join('→') || '换向中';
+    return `${branch.from.id}→${coils}→${branch.to.id}`;
+  };
+  const positiveBranches = state.branches.filter(
+    (branch) => branch.direction > 0,
+  );
+  const negativeBranches = state.branches.filter(
+    (branch) => branch.direction < 0,
+  );
+  const branchSize = state.polePairs === 1 ? 12 : 10;
   svg += text(
     278,
-    66,
-    `A → ${state.upper.map((c) => c.id).join(' → ')} → B`,
+    43,
+    `首端→末端（＋） · ${state.branchCurrent.toFixed(2)} A`,
     colors.upper,
-    14,
+    11,
   );
-  svg += text(278, 92, '下支路 · 1 A', colors.lower, 14);
   svg += text(
-    278,
-    111,
-    `A → ${state.lower.map((c) => c.id).join(' → ')} → B`,
+    414,
+    43,
+    `末端→首端（−） · ${state.branchCurrent.toFixed(2)} A`,
     colors.lower,
-    14,
+    11,
   );
+  positiveBranches.forEach((branch, index) => {
+    svg += text(
+      278,
+      59 + index * 15,
+      branchText(branch),
+      colors.upper,
+      branchSize,
+    );
+  });
+  negativeBranches.forEach((branch, index) => {
+    svg += text(
+      414,
+      59 + index * 15,
+      branchText(branch),
+      colors.lower,
+      branchSize,
+    );
+  });
   svg += text(
     278,
-    137,
+    126,
     state.commuting.length
       ? `短接换向：线圈 ${state.commuting.map((c) => c.id).join(' / ')}`
-      : '无短接线圈 · 每支路 4 个线圈',
+      : `无短接线圈 · ${state.brushCount} 条并联支路`,
     state.commuting.length ? colors.comm : '#60796f',
     12,
   );
   if (state.commuting.length)
     svg += text(
       278,
-      153,
+      142,
       state.commuting
         .map((c) => `${c.id}：${c.current.toFixed(2)} A`)
         .join('　'),
       colors.comm,
       11,
     );
+  const contactText = (positive) =>
+    state.brushes
+      .filter((brush) => brush.positive === positive)
+      .map(
+        (brush) =>
+          `${brush.id}:${brush.contacts.map((segment) => segment + 1).join('/')}`,
+      )
+      .join('　');
+  svg += text(278, 159, `正电刷接触片　${contactText(true)}`, colors.upper, 10);
   svg += text(
     278,
-    173,
-    `接触片　A：${state.brushA.map((k) => k + 1).join('/')}　B：${state.brushB.map((k) => k + 1).join('/')}`,
-    '#60796f',
-    12,
+    174,
+    `负电刷接触片　${contactText(false)}`,
+    colors.lower,
+    10,
   );
   return svg;
 }

@@ -683,7 +683,7 @@ export const slides: Slide[] = [
         {
           id: 'dc-motor-eight-coils',
           kind: 'embed',
-          title: '八线圈电枢：两支路与电流换向',
+          title: '八线圈电枢：多极换向与并联支路',
           chapterId: chapter.id,
           embedUrl: '/dc-motor-eight-coils.html',
         },

@@ -1,4 +1,5 @@
 import {
+  COMMUTATION_HALF_WIDTH,
   advanceAngle,
   mod,
   radians,
@@ -23,6 +24,7 @@ let angle = 0;
 let running = !matchMedia('(prefers-reduced-motion: reduce)').matches;
 let selected = 1;
 let speed = 18;
+let polePairs = 1;
 let flow = Array(8).fill(0);
 let yaw = -0.58;
 let pitch = 0.3;
@@ -183,6 +185,32 @@ function ring(outer, inner, front, back, rotation, sectors, fill) {
       );
   }
 }
+function radialPrism(inner, outer, tangent, back, front, degrees, fill) {
+  const vertices = [
+    [inner, -tangent, back],
+    [outer, -tangent, back],
+    [outer, tangent, back],
+    [inner, tangent, back],
+    [inner, -tangent, front],
+    [outer, -tangent, front],
+    [outer, tangent, front],
+    [inner, tangent, front],
+  ].map(([radius, offset, axial]) =>
+    toothPoint(degrees, radius, offset, axial),
+  );
+  for (const ids of [
+    [0, 1, 2, 3],
+    [4, 5, 6, 7],
+    [0, 1, 5, 4],
+    [1, 2, 6, 5],
+    [2, 3, 7, 6],
+    [3, 0, 4, 7],
+  ])
+    polygon(
+      ids.map((index) => vertices[index]),
+      fill,
+    );
+}
 function renderTooth(degrees) {
   const vertices = [
     [150, -24, -86],
@@ -242,16 +270,39 @@ function renderMachine(state) {
   geometry = [];
   ctx.setTransform(2, 0, 0, 2, 0, 0);
   ctx.clearRect(0, 0, 800, 400);
-  // Left N / right S matches radial coil moments and the existing brush phase.
-  box(-270, -238, -210, 210, -112, 90, '#bc665435');
-  box(238, 270, -210, 210, -112, 90, '#557eaa35');
-  label([-254, 225, 105], 'N · 固定磁极', '#a84f42', 17);
-  label([254, 225, 105], 'S · 固定磁极', colors.upper, 17);
-  for (const y of [-225, 225]) {
-    for (const x of [-155, -30, 95])
-      arrow([x, y, 0], [x + 65, y, 0], '#6e9d9066', 1.6);
+  const poleStep = 360 / state.poleCount;
+  const poleWidth = { 1: 190, 2: 102, 4: 46 }[state.polePairs];
+  for (let index = 0; index < state.poleCount; index++) {
+    const degrees = 180 - index * poleStep;
+    const north = index % 2 === 0;
+    radialPrism(
+      238,
+      270,
+      poleWidth,
+      -112,
+      90,
+      degrees,
+      north ? '#bc665435' : '#557eaa35',
+    );
+    label(
+      radial(282, degrees, 105),
+      `${north ? 'N' : 'S'}${state.polePairs > 1 ? Math.floor(index / 2) + 1 : ''}`,
+      north ? '#a84f42' : colors.upper,
+      state.polePairs === 4 ? 12 : 16,
+    );
+    arrow(
+      radial(north ? 292 : 216, degrees, 0),
+      radial(north ? 216 : 292, degrees, 0),
+      '#6e9d90aa',
+      1.8,
+    );
   }
-  label([0, -244, 0], '主磁场 B →', '#39796f', 15);
+  label(
+    [0, -294, 0],
+    `${state.polePairs} 对极 · ${state.poleCount} 个固定磁极`,
+    '#39796f',
+    14,
+  );
   ring(156, 118, 86, -86, -angle, 48, '#a4bbb51d');
   state.coils.forEach((coil) => renderTooth(coil.degrees));
   // Laminations and a keyed mark reveal rotation without obscuring the coils.
@@ -267,6 +318,19 @@ function renderMachine(state) {
   ring(18, 0, 242, -135, 0, 16, '#8ba29a88');
   for (let i = 0; i < 8; i++) {
     const center = 180 - i * 45 - angle;
+    const segmentBrushes = state.brushes.filter((brush) =>
+      brush.contacts.includes(i),
+    );
+    const hasPositive = segmentBrushes.some((brush) => brush.positive);
+    const hasNegative = segmentBrushes.some((brush) => !brush.positive);
+    const copper =
+      hasPositive && hasNegative
+        ? '#bc6830ea'
+        : hasPositive
+          ? '#4f7fb4ea'
+          : hasNegative
+            ? '#3e9474ea'
+            : '#cb873dea';
     // A narrow insulating slit separates neighboring copper segments.
     for (let j = -22; j < 22; j += 5.5) {
       const a = center + j,
@@ -278,8 +342,8 @@ function renderMachine(state) {
           radial(84, b, 193),
           radial(84, a, 193),
         ],
-        '#cb873dea',
-        '#cb873dea',
+        copper,
+        copper,
       );
       polygon(
         [
@@ -336,15 +400,28 @@ function renderMachine(state) {
       active ? 21 : 17,
     );
   }
-  // Fixed brushes only touch the radial surface of the commutator.
-  box(-118, -83, -13, 13, 151, 191, '#334b65');
-  box(83, 118, -13, 13, 151, 191, '#334b65');
-  arrow([-176, 0, 175], [-122, 0, 175], colors.upper, 3);
-  arrow([122, 0, 175], [176, 0, 175], colors.lower, 3);
-  label([-155, 28, 186], 'A ＋', colors.upper, 19);
-  label([155, 28, 186], 'B −', colors.lower, 19);
+  // Fixed brushes inject the same DC voltage at equally spaced positions.
+  for (const brush of state.brushes) {
+    radialPrism(83, 118, 13, 151, 191, brush.position, '#334b65');
+    const inner = radial(122, brush.position, 175);
+    const outer = radial(176, brush.position, 175);
+    arrow(
+      brush.positive ? outer : inner,
+      brush.positive ? inner : outer,
+      brush.positive ? colors.upper : colors.lower,
+      state.polePairs === 4 ? 2 : 3,
+    );
+    label(
+      radial(154, brush.position, 205),
+      state.polePairs === 1
+        ? `${brush.positive ? 'A' : 'B'} ${brush.positive ? '＋' : '−'}`
+        : `${brush.id}${brush.positive ? '＋' : '−'}`,
+      brush.positive ? colors.upper : colors.lower,
+      state.polePairs === 4 ? 11 : 16,
+    );
+  }
   for (const coil of state.commuting) {
-    const position = coil.degrees > 90 && coil.degrees < 270 ? 180 : 0;
+    const position = state.brushes[coil.commutingBrushIndex].position;
     label(radial(140, position, 224), '短接换向', colors.comm, 14);
   }
   geometry.sort((a, b) => a.depth - b.depth).forEach((item) => item.draw());
@@ -365,8 +442,8 @@ function renderTracking(state) {
   $('tracking-state').textContent = coil.commuting
     ? '电刷跨接两片 → 线圈短接 → 电流正在反向'
     : coil.current > 0
-      ? '上支路：首端 → 末端（+1 A）'
-      : '下支路：末端 → 首端（−1 A）';
+      ? `首端 → 末端（+${state.branchCurrent.toFixed(2)} A）`
+      : `末端 → 首端（−${state.branchCurrent.toFixed(2)} A）`;
   state.coils.forEach((c) => {
     const button = $(`coil-${c.id}`);
     button.style.setProperty('--coil-color', coilColor(c));
@@ -375,42 +452,60 @@ function renderTracking(state) {
       'aria-label',
       `线圈 ${c.id}，${c.current.toFixed(2)} 安，${c.commuting ? '正在换向' : c.current > 0 ? '上支路' : '下支路'}`,
     );
-    button.innerHTML = `<span>${c.id}</span><small>${c.current >= 0 ? '+' : ''}${c.current.toFixed(1)}</small>`;
+    button.innerHTML = `<span>${c.id}</span><small>${c.current >= 0 ? '+' : ''}${c.current.toFixed(2)}</small>`;
   });
   let svg =
     '<path d="M45 18V102H531M45 60H531" stroke="#b8cec6" stroke-width="1" fill="none"/>';
+  const amplitude = state.branchCurrent;
   svg +=
-    svgText(32, 26, '+1', colors.ink, 12) +
+    svgText(32, 26, `+${amplitude.toFixed(2)}`, colors.ink, 11) +
     svgText(32, 64, '0', colors.ink, 12) +
-    svgText(32, 100, '−1', colors.ink, 12);
+    svgText(32, 100, `−${amplitude.toFixed(2)}`, colors.ink, 11);
   for (const d of [0, 90, 180, 270, 360]) {
     const x = 45 + d * 1.35;
     svg +=
       `<path d="M${x} 18V102" stroke="#dce7e0" stroke-dasharray="3 4"/>` +
       svgText(x, 120, `${d}°`, '#60796f', 12);
   }
-  if (!wavePoints.has(selected)) {
+  const waveKey = `${state.polePairs}:${selected}`;
+  if (!wavePoints.has(waveKey)) {
     wavePoints.set(
-      selected,
+      waveKey,
       Array.from({ length: 721 }, (_, i) => {
         const d = i / 2,
-          c = windingState(d).coils[selected - 1];
-        return `${45 + d * 1.35},${60 - c.current * 36}`;
+          c = windingState(d, state.polePairs).coils[selected - 1];
+        return `${45 + d * 1.35},${60 - (c.current / amplitude) * 36}`;
       }).join(' '),
     );
   }
-  const points = wavePoints.get(selected);
+  const points = wavePoints.get(waveKey);
   svg += `<polyline points="${points}" fill="none" stroke="#507b92" stroke-width="2.5"/>`;
   const x = 45 + state.angle * 1.35,
-    y = 60 - coil.current * 36;
+    y = 60 - (coil.current / amplitude) * 36;
   svg += `<path d="M${x} 15V102" stroke="${color}" stroke-dasharray="3 3"/><circle cx="${x}" cy="${y}" r="5" fill="${color}" stroke="white" stroke-width="2"/>`;
   svg += svgText(290, 13, 'I / A　　　　　　　　　转子角度 θ', '#60796f', 11);
   $('wave').innerHTML = svg;
 }
 function render() {
-  const state = windingState(angle);
+  const state = windingState(angle, polePairs);
   $('angle').value = String(state.angle);
   $('angle-value').textContent = `${state.angle.toFixed(1)}°`;
+  $('configuration-summary').innerHTML =
+    `8 个线圈 · 8 片换向片 · ${state.brushCount} 个电刷 · ${state.polePairs} 对磁极　<span>A 组接正极，B 组接负极；箭头表示传统电流。</span>`;
+  $('armature-tag').textContent =
+    `Iₐ = 2 A · ${state.brushCount} 支路 · ${state.branchCurrent.toFixed(2)} A/支路`;
+  $('commutation-summary').textContent =
+    `A 组流入、B 组流出；线圈每转过 ${(180 / state.polePairs).toFixed(0)}° 换向，电源极性不变。`;
+  $('model-boundary').textContent =
+    `保留八线圈闭合连接拓扑，三维绕组采用径向齿绕组教学示意。${state.polePairs} 对极时采用 ${state.brushCount} 个等距电刷与 ${state.brushCount} 条并联支路，恒定支路电流 Iₐ/${state.brushCount} = ${state.branchCurrent.toFixed(2)} A；跨片区 12° 内理想线性换向，忽略电感、反电动势与火花；转速外部设定。`;
+  canvas.setAttribute(
+    'aria-label',
+    `三维八线圈径向齿绕组电枢，${state.polePairs} 对磁极、${state.brushCount} 个固定电刷。拖动改变观察视角；使用下方控件调整转角、选择线圈。`,
+  );
+  $('circuit').setAttribute(
+    'aria-label',
+    `与三维动画同步的八线圈圆环简图，显示 ${state.poleCount} 个磁极、${state.brushCount} 个固定电刷、${state.brushCount} 条并联支路及电流换向。`,
+  );
   renderMachine(state);
   renderCircuit(state);
   renderTracking(state);
@@ -455,10 +550,13 @@ $('step').addEventListener('click', () => {
 $('commute').addEventListener('click', () => {
   pause();
   const phase = 157.5 - (selected - 1) * 45;
-  const candidates = [mod(phase), mod(phase - 180)];
+  const candidates = windingState(angle, polePairs).brushes.map((brush) =>
+    mod(phase - brush.position),
+  );
   const center = candidates.sort((a, b) => mod(a - angle) - mod(b - angle))[0];
-  angle = mod(center - 8);
-  commutationDemo = { remaining: 16 };
+  const demoMargin = COMMUTATION_HALF_WIDTH + 2;
+  angle = mod(center - demoMargin);
+  commutationDemo = { remaining: demoMargin * 2 };
   running = true;
   lastTime = null;
   syncPlay();
@@ -472,12 +570,20 @@ $('reset').addEventListener('click', () => {
   pitch = 0.3;
   isolate = false;
   speed = 18;
+  polePairs = 1;
   $('speed').value = '18';
+  $('pole-pairs').value = '1';
   $('focus').setAttribute('aria-pressed', 'false');
   choose(1);
 });
 $('speed').addEventListener('change', (e) => {
   speed = Number(e.target.value);
+});
+$('pole-pairs').addEventListener('change', (e) => {
+  pause();
+  polePairs = Number(e.target.value);
+  flow = Array(8).fill(0);
+  render();
 });
 $('angle').addEventListener('input', (e) => {
   pause();
@@ -604,7 +710,7 @@ function frame(time) {
     } else {
       angle = advanceAngle(angle, dt, speed, true);
     }
-    for (const coil of windingState(angle).coils) {
+    for (const coil of windingState(angle, polePairs).coils) {
       flow[coil.id - 1] += dt * 100 * Math.abs(coil.current);
     }
     render();
