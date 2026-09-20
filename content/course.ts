@@ -722,6 +722,13 @@ export const slides: Slide[] = [
           chapterId: chapter.id,
           embedUrl: '/dc-generator-self-excitation.html',
         },
+        {
+          id: 'dc-machine-rated-data',
+          kind: 'embed',
+          title: '电机铭牌：额定数据与额定工况',
+          chapterId: chapter.id,
+          embedUrl: '/dc-machine-rated-data.html',
+        },
       );
     }
 

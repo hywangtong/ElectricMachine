@@ -1,0 +1,390 @@
+.rated-data-page {
+  grid-template-rows: 74px 82px 50px 310px 111px 27px;
+  gap: 10px;
+}
+
+.rated-callout {
+  display: grid;
+  grid-template-columns: 155px minmax(0, 1fr);
+  align-items: center;
+  gap: 17px;
+  padding: 7px 20px;
+  border: 2px solid #79aa95;
+  border-radius: 14px;
+  background: linear-gradient(110deg, #e5f5e9, #f8fbf1);
+}
+
+.rated-callout > strong {
+  color: #277363;
+  font-size: 22px;
+}
+
+.rated-callout h2 {
+  margin-bottom: 2px;
+  color: #205e51;
+  font-size: 22px;
+  line-height: 1.15;
+}
+
+.rated-callout p {
+  color: #365f53;
+  font-size: 16px;
+  line-height: 1.25;
+}
+
+.metric-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.metric-toolbar > strong {
+  width: 120px;
+  flex: none;
+  color: #35695c;
+  font-size: 18px;
+}
+
+.metric-toolbar button {
+  min-width: 136px;
+  height: 42px;
+  padding: 0 14px;
+  border: 1px solid #bdd6c7;
+  border-radius: 10px;
+  color: #315f51;
+  background: #fff;
+  font: inherit;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.metric-toolbar button:hover {
+  border-color: #58a085;
+}
+
+.metric-toolbar button[aria-pressed='true'] {
+  border-color: #2f8e76;
+  color: #fff;
+  background: #2f8e76;
+}
+
+.metric-toolbar button:focus-visible {
+  outline: 3px solid #b48d45;
+  outline-offset: 2px;
+}
+
+.metric-toolbar i,
+.detail-panel i {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-style: italic;
+}
+
+.metric-toolbar sub,
+.detail-panel sub {
+  font-size: 0.58em;
+  font-style: normal;
+}
+
+.machine-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.machine-card {
+  min-width: 0;
+  padding: 10px 12px;
+  display: grid;
+  grid-template-rows: 36px 168px 74px;
+  gap: 6px;
+  border: 1px solid #c8d9d4;
+  border-radius: 15px;
+  background: #fff;
+}
+
+.machine-card.motor {
+  background: #f9fbf8;
+}
+
+.machine-card.generator {
+  background: #fffcf5;
+}
+
+.machine-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.machine-title h2 {
+  color: #265e50;
+  font-size: 23px;
+}
+
+.machine-title h2 span {
+  margin-left: 5px;
+  color: #699283;
+  font-size: 16px;
+}
+
+.machine-title strong {
+  color: #9a743d;
+  font-size: 17px;
+}
+
+.machine-visual {
+  display: block;
+  width: 100%;
+  height: 168px;
+  border-radius: 9px;
+  background: radial-gradient(circle at 50% 50%, #f4f8f3, #fff 68%);
+}
+
+.port-shell {
+  fill: #fff7e8;
+  stroke: #b9a478;
+  stroke-width: 2.5;
+}
+
+.port-name,
+.port-sign {
+  fill: #514f43;
+  font-size: 17px;
+  font-weight: 700;
+  text-anchor: middle;
+}
+
+.port-sign {
+  fill: #bb8134;
+  font-size: 22px;
+}
+
+.energy-line {
+  fill: none;
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-dasharray: 12 9;
+  animation: rated-energy-flow 1s linear infinite;
+}
+
+.electric-flow {
+  stroke: #d69137;
+}
+
+.mechanical-flow {
+  stroke: #3f9b8b;
+}
+
+.flow-name {
+  font-size: 15px;
+  font-weight: 800;
+  text-anchor: middle;
+}
+
+.electric-name {
+  fill: #ad712c;
+}
+
+.mechanical-name {
+  fill: #2c8475;
+}
+
+.machine-shell {
+  fill: #e9f3ec;
+  stroke: #739987;
+  stroke-width: 4;
+}
+
+.pole-name {
+  fill: #2e7568;
+  font-size: 17px;
+  font-weight: 800;
+  text-anchor: middle;
+}
+
+.brush {
+  fill: #856b47;
+}
+
+.armature-ring {
+  fill: #fff5db;
+  stroke: #c69b51;
+  stroke-width: 3;
+}
+
+.armature-winding {
+  fill: none;
+  stroke: #bd8d3e;
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.rotating-armature {
+  transform-origin: 310px 92px;
+  animation: rated-rotor-spin 2.4s linear infinite;
+}
+
+.axle-center {
+  fill: #816d49;
+}
+
+.shaft-line,
+.rotating-wheel circle,
+.rotating-wheel path {
+  fill: none;
+  stroke: #4b9d8c;
+  stroke-width: 4;
+  stroke-linecap: round;
+}
+
+.rotating-wheel {
+  transform-origin: 543px 92px;
+  animation: rated-rotor-spin 2.4s linear infinite;
+}
+
+.generator .rotating-wheel {
+  transform-origin: 76px 92px;
+}
+
+.electrical-node.is-focused .port-shell,
+.conversion-node.is-focused .machine-shell,
+.shaft-node.is-focused .rotating-wheel circle {
+  stroke: #db8031;
+  stroke-width: 5;
+  filter: drop-shadow(0 0 6px #f8c16f);
+}
+
+.spot-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 6px;
+}
+
+.spot {
+  position: relative;
+  display: grid;
+  place-items: center;
+  padding: 6px;
+  border: 2px solid #d99847;
+  border-radius: 9px;
+  color: #75521f;
+  background: #fff3d9;
+  font-size: 15px;
+  font-weight: 750;
+  line-height: 1.25;
+  text-align: center;
+}
+
+.spot::before {
+  content: '';
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  height: 10px;
+  border-left: 2px solid #d99847;
+}
+
+.spot[hidden] {
+  visibility: hidden;
+}
+
+.motor [data-spot='electrical'],
+.generator [data-spot='shaft'] {
+  grid-column: 1;
+}
+
+.motor [data-spot='conversion'],
+.generator [data-spot='conversion'] {
+  grid-column: 2;
+}
+
+.motor [data-spot='shaft'],
+.generator [data-spot='electrical'] {
+  grid-column: 3;
+}
+
+.metric-explanation {
+  min-width: 0;
+  padding: 7px 13px;
+  border: 1px solid #c8d9d4;
+  border-radius: 12px;
+  background: #f2f7f1;
+}
+
+#metric-summary {
+  height: 24px;
+  color: #2f6a5b;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.detail-panel {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.detail-panel[hidden] {
+  display: none;
+}
+
+.detail-panel > div {
+  min-width: 0;
+  height: 68px;
+  padding: 6px 13px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid #d3e1d6;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.detail-panel strong {
+  color: #658075;
+  font-size: 14px;
+}
+
+.detail-panel b {
+  color: #245d4f;
+  font-size: 23px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.detail-panel[data-detail='efficiency'] > div:last-child b {
+  font-size: 19px;
+}
+
+.plain-detail span {
+  color: #365f53;
+  font-size: 17px;
+}
+
+.rated-footnote {
+  color: #5b7168;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+@keyframes rated-energy-flow {
+  to {
+    stroke-dashoffset: -42;
+  }
+}
+
+@keyframes rated-rotor-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .energy-line,
+  .rotating-armature,
+  .rotating-wheel {
+    animation: none;
+  }
+}

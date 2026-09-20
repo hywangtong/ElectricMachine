@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>电机铭牌：额定数据与额定工况</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/dc-machine-rated-data.css" />
+    <script src="/dc-machine-basics.js" defer></script>
+    <script type="module" src="/dc-machine-rated-data.js"></script>
+  </head>
+  <body>
+    <main class="lesson rated-data-page">
+      <header class="page-head">
+        <div class="eyebrow">直流电机 / 19 · 铭牌数据</div>
+        <h1>额定数据，究竟额定了什么？</h1>
+        <p>点选一个物理量，看它在电动机和发电机上各指哪里。</p>
+      </header>
+
+      <section class="rated-callout" aria-labelledby="rated-point-title">
+        <strong>额定工况</strong>
+        <div>
+          <h2 id="rated-point-title">设计的长期运行工况</h2>
+          <p>
+            电机及所有用电器都按额定工况设计长期工作；工程师通常在额定点或其附近追求最高效率、最大连续出力等主要指标。
+          </p>
+        </div>
+      </section>
+
+      <div class="metric-toolbar" role="group" aria-label="选择额定物理量">
+        <strong>选择铭牌量</strong>
+        <button type="button" data-metric="power" aria-pressed="true">
+          功率 <i>P<sub>N</sub></i>
+        </button>
+        <button type="button" data-metric="voltage" aria-pressed="false">
+          电压 <i>U<sub>N</sub></i>
+        </button>
+        <button type="button" data-metric="current" aria-pressed="false">
+          电流 <i>I<sub>N</sub></i>
+        </button>
+        <button type="button" data-metric="speed" aria-pressed="false">
+          转速 <i>n<sub>N</sub></i>
+        </button>
+        <button type="button" data-metric="efficiency" aria-pressed="false">
+          效率 <i>η<sub>N</sub></i>
+        </button>
+      </div>
+
+      <section
+        class="machine-cards"
+        aria-label="直流电动机与直流发电机的能量流向"
+      >
+        <article class="machine-card motor" data-machine="motor">
+          <div class="machine-title">
+            <h2>直流电动机 <span>M</span></h2>
+            <strong>电能 → 机械能</strong>
+          </div>
+          <svg
+            class="machine-visual"
+            viewBox="0 0 620 172"
+            role="img"
+            aria-label="直流电动机：左侧输入电能，转轴向右输出机械能；转子持续旋转"
+          >
+            <defs>
+              <marker
+                id="motor-electric-arrow"
+                markerWidth="9"
+                markerHeight="9"
+                refX="7"
+                refY="4.5"
+                orient="auto"
+              >
+                <path d="M0 0L9 4.5 0 9Z" fill="#d69137" />
+              </marker>
+              <marker
+                id="motor-mechanical-arrow"
+                markerWidth="9"
+                markerHeight="9"
+                refX="7"
+                refY="4.5"
+                orient="auto"
+              >
+                <path d="M0 0L9 4.5 0 9Z" fill="#3f9b8b" />
+              </marker>
+            </defs>
+            <g data-node="electrical" class="node electrical-node">
+              <rect
+                class="port-shell"
+                x="12"
+                y="48"
+                width="122"
+                height="88"
+                rx="13"
+              />
+              <text class="port-name" x="73" y="84">直流电源</text>
+              <text class="port-sign" x="73" y="111">＋　－</text>
+            </g>
+            <path
+              class="energy-line electric-flow"
+              d="M143 92H229"
+              marker-end="url(#motor-electric-arrow)"
+            />
+            <text class="flow-name electric-name" x="186" y="72">电能输入</text>
+            <g data-node="conversion" class="node conversion-node">
+              <circle class="machine-shell" cx="310" cy="92" r="66" />
+              <text class="pole-name" x="310" y="49">N</text>
+              <text class="pole-name" x="310" y="145">S</text>
+              <rect
+                class="brush"
+                x="262"
+                y="84"
+                width="12"
+                height="16"
+                rx="2"
+              />
+              <rect
+                class="brush"
+                x="346"
+                y="84"
+                width="12"
+                height="16"
+                rx="2"
+              />
+              <g class="rotating-armature">
+                <circle class="armature-ring" cx="310" cy="92" r="35" />
+                <path
+                  class="armature-winding"
+                  d="M279 92h62M310 61v62M288 70l44 44M332 70l-44 44"
+                />
+              </g>
+              <circle class="axle-center" cx="310" cy="92" r="9" />
+            </g>
+            <path
+              class="energy-line mechanical-flow"
+              d="M391 92H484"
+              marker-end="url(#motor-mechanical-arrow)"
+            />
+            <text class="flow-name mechanical-name" x="439" y="72">
+              机械能输出
+            </text>
+            <g data-node="shaft" class="node shaft-node">
+              <path class="shaft-line" d="M485 92H600" />
+              <g class="rotating-wheel">
+                <circle cx="543" cy="92" r="25" />
+                <path d="M543 67v50M518 92h50" />
+              </g>
+              <text class="port-name" x="543" y="150">负载轴</text>
+            </g>
+          </svg>
+          <div class="spot-row" aria-label="电动机当前选中额定量的位置">
+            <div class="spot" data-spot="electrical"></div>
+            <div class="spot" data-spot="conversion"></div>
+            <div class="spot" data-spot="shaft"></div>
+          </div>
+        </article>
+
+        <article class="machine-card generator" data-machine="generator">
+          <div class="machine-title">
+            <h2>直流发电机 <span>G</span></h2>
+            <strong>机械能 → 电能</strong>
+          </div>
+          <svg
+            class="machine-visual"
+            viewBox="0 0 620 172"
+            role="img"
+            aria-label="直流发电机：左侧转轴输入机械能，右侧向负载输出电能；转子持续旋转"
+          >
+            <defs>
+              <marker
+                id="generator-mechanical-arrow"
+                markerWidth="9"
+                markerHeight="9"
+                refX="7"
+                refY="4.5"
+                orient="auto"
+              >
+                <path d="M0 0L9 4.5 0 9Z" fill="#3f9b8b" />
+              </marker>
+              <marker
+                id="generator-electric-arrow"
+                markerWidth="9"
+                markerHeight="9"
+                refX="7"
+                refY="4.5"
+                orient="auto"
+              >
+                <path d="M0 0L9 4.5 0 9Z" fill="#d69137" />
+              </marker>
+            </defs>
+            <g data-node="shaft" class="node shaft-node">
+              <path class="shaft-line" d="M20 92H135" />
+              <g class="rotating-wheel">
+                <circle cx="76" cy="92" r="25" />
+                <path d="M76 67v50M51 92h50" />
+              </g>
+              <text class="port-name" x="76" y="150">原动机轴</text>
+            </g>
+            <path
+              class="energy-line mechanical-flow"
+              d="M137 92H228"
+              marker-end="url(#generator-mechanical-arrow)"
+            />
+            <text class="flow-name mechanical-name" x="183" y="72">
+              机械能输入
+            </text>
+            <g data-node="conversion" class="node conversion-node">
+              <circle class="machine-shell" cx="310" cy="92" r="66" />
+              <text class="pole-name" x="310" y="49">N</text>
+              <text class="pole-name" x="310" y="145">S</text>
+              <rect
+                class="brush"
+                x="262"
+                y="84"
+                width="12"
+                height="16"
+                rx="2"
+              />
+              <rect
+                class="brush"
+                x="346"
+                y="84"
+                width="12"
+                height="16"
+                rx="2"
+              />
+              <g class="rotating-armature">
+                <circle class="armature-ring" cx="310" cy="92" r="35" />
+                <path
+                  class="armature-winding"
+                  d="M279 92h62M310 61v62M288 70l44 44M332 70l-44 44"
+                />
+              </g>
+              <circle class="axle-center" cx="310" cy="92" r="9" />
+            </g>
+            <path
+              class="energy-line electric-flow"
+              d="M391 92H483"
+              marker-end="url(#generator-electric-arrow)"
+            />
+            <text class="flow-name electric-name" x="438" y="72">电能输出</text>
+            <g data-node="electrical" class="node electrical-node">
+              <rect
+                class="port-shell"
+                x="486"
+                y="48"
+                width="122"
+                height="88"
+                rx="13"
+              />
+              <text class="port-name" x="547" y="84">负载端</text>
+              <text class="port-sign" x="547" y="111">＋　－</text>
+            </g>
+          </svg>
+          <div class="spot-row" aria-label="发电机当前选中额定量的位置">
+            <div class="spot" data-spot="shaft"></div>
+            <div class="spot" data-spot="conversion"></div>
+            <div class="spot" data-spot="electrical"></div>
+          </div>
+        </article>
+      </section>
+
+      <section class="metric-explanation" aria-live="polite">
+        <p id="metric-summary">
+          额定功率 Pₙ 总指有用输出：电动机看转轴，发电机看输出端。
+        </p>
+        <div class="detail-panel" data-detail="power">
+          <div>
+            <strong>电动机 · 轴输出</strong
+            ><b
+              ><i>P<sub>N</sub></i> =
+              <i>U<sub>N</sub>I<sub>N</sub>η<sub>N</sub></i></b
+            >
+          </div>
+          <div>
+            <strong>发电机 · 端口输出</strong
+            ><b
+              ><i>P<sub>N</sub></i> = <i>U<sub>N</sub>I<sub>N</sub></i></b
+            >
+          </div>
+        </div>
+        <div class="detail-panel" data-detail="efficiency" hidden>
+          <div>
+            <strong>电动机 · 输出 ÷ 输入</strong
+            ><b
+              ><i>η<sub>N</sub></i> = <i>P<sub>N</sub></i> / (<i
+                >U<sub>N</sub>I<sub>N</sub></i
+              >)</b
+            >
+          </div>
+          <div>
+            <strong>发电机 · 输出 ÷ 输入</strong
+            ><b
+              ><i>η<sub>N</sub></i> = <i>P<sub>N</sub></i> /
+              <i>P<sub>轴入,N</sub></i> = <i>U<sub>N</sub>I<sub>N</sub></i> /
+              <i>P<sub>轴入,N</sub></i></b
+            >
+          </div>
+        </div>
+        <div class="detail-panel plain-detail" data-detail="plain" hidden>
+          <div>
+            <strong>读图方法</strong
+            ><span>亮起的电端、机体或转轴，就是该额定值的定义位置。</span>
+          </div>
+          <div>
+            <strong>两种能量方向</strong
+            ><span>电动机电入机出；发电机机入电出。</span>
+          </div>
+        </div>
+      </section>
+
+      <footer class="rated-footnote">
+        功率用 W，转速用
+        r/min。功率／效率简式按单电源直流电机计算；他励电源另供励磁时须计入励磁输入。额定连续出力不等于瞬时峰值。
+      </footer>
+    </main>
+  </body>
+</html>
