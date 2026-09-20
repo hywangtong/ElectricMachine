@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>直流电机：定子、转子、励磁与电枢</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <script src="/dc-machine-basics.js" defer></script>
+  </head>
+  <body>
+    <main class="lesson parts-page">
+      <header class="page-head">
+        <div class="eyebrow">直流电机 / 16 · ELI5</div>
+        <h1>谁造磁场？谁跟着轴转？</h1>
+        <p>先找“不动的外圈”，再找“旋转的内圈”。</p>
+      </header>
+
+      <div class="parts-layout">
+        <section class="panel cutaway" aria-labelledby="cutaway-title">
+          <h2 id="cutaway-title">一眼看懂有刷直流电机</h2>
+          <svg viewBox="0 0 760 410" role="img" aria-labelledby="machine-title machine-desc">
+            <title id="machine-title">有刷直流电机定转子示意</title>
+            <desc id="machine-desc">外圈定子上有励磁磁极和励磁绕组，内圈转子上有电枢绕组。换向器随转子转动，电刷固定并与换向器接触。</desc>
+            <defs>
+              <marker id="parts-arrow" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+                <path d="M1 1L8 4.5 1 8" fill="none" stroke="#b68a3e" stroke-width="2" />
+              </marker>
+            </defs>
+            <circle cx="322" cy="210" r="177" fill="#eff5f0" stroke="#497366" stroke-width="13" />
+            <path d="M194 89A177 177 0 0 1 450 89M194 331A177 177 0 0 0 450 331" fill="none" stroke="#9fc8b5" stroke-width="12" />
+            <path d="M180 175H227V245H180M464 175H417V245H464" fill="#d3e8dd" stroke="#497366" stroke-width="5" />
+            <text x="200" y="218" class="pole-label">N</text>
+            <text x="439" y="218" class="pole-label">S</text>
+            <path d="M174 170q-24 12 0 24t0 24t0 24t0 24M470 170q24 12 0 24t0 24t0 24t0 24" fill="none" stroke="#328b7d" stroke-width="8" stroke-linecap="round" />
+            <circle cx="322" cy="210" r="100" fill="#fff8e8" stroke="#b68a3e" stroke-width="8" />
+            <circle cx="322" cy="210" r="76" fill="#fae9c6" stroke="#e8d4a9" stroke-width="2" />
+            <path d="M322 111V309M223 210H421M252 140l140 140M392 140L252 280" stroke="#bd9956" stroke-width="11" stroke-linecap="round" />
+            <path d="M264 132q58-27 116 0M398 153q28 57 0 114M380 287q-58 27-116 0M246 267q-28-57 0-114" fill="none" stroke="#4777a6" stroke-width="11" stroke-linecap="round" />
+            <circle cx="322" cy="210" r="20" fill="#fff" stroke="#956b2b" stroke-width="5" />
+            <path d="M322 210H591" stroke="#956b2b" stroke-width="12" stroke-linecap="round" />
+            <path d="M536 187A31 31 0 0 1 536 233M547 187A31 31 0 0 0 547 233" fill="none" stroke="#d4a74e" stroke-width="12" />
+            <path d="M520 165v22M563 233v22" stroke="#497366" stroke-width="14" stroke-linecap="round" />
+            <path d="M543 160h62M543 260h62" stroke="#497366" stroke-width="4" />
+            <text x="60" y="42" class="diagram-label fixed-label">定子：不动</text>
+            <path d="M177 50L225 77" class="guide" />
+            <text x="30" y="374" class="diagram-label field-label">励磁：建立磁场</text>
+            <path d="M188 346L173 272" class="guide" />
+            <text x="403" y="64" class="diagram-label rotor-label">转子 / 电枢：随轴转</text>
+            <path d="M449 72L394 137" class="guide" />
+            <text x="520" y="328" class="diagram-label brush-label">电刷固定</text>
+            <text x="520" y="357" class="diagram-label brush-label">换向器转动</text>
+            <path d="M541 306L541 254" class="guide" />
+            <path d="M300 357q35 16 68 0" fill="none" stroke="#b68a3e" stroke-width="4" marker-end="url(#parts-arrow)" />
+          </svg>
+          <p class="diagram-note">位置关系示意 · 不表示实际尺寸或绕组匝数</p>
+        </section>
+
+        <div class="parts-side">
+          <section class="part-card stator-card">
+            <span class="number">01 / 不动</span>
+            <h2>定子 <small>外圈</small></h2>
+            <p>磁极 + 励磁绕组</p>
+            <strong>励磁 = 造磁场</strong>
+          </section>
+          <section class="part-card rotor-card">
+            <span class="number">02 / 转动</span>
+            <h2>转子 <small>内圈</small></h2>
+            <p>电枢铁心 + 电枢绕组 + 换向器</p>
+            <strong>电枢 = 电能与机械能转换处</strong>
+          </section>
+          <section class="part-card contact-card">
+            <span class="number">03 / 接触</span>
+            <h2>电刷 <small>固定</small></h2>
+            <p>贴着旋转的换向器，连接外电路与电枢。</p>
+          </section>
+        </div>
+      </div>
+
+      <footer class="lesson-footer">
+        <strong>电动机：</strong>电 → 转轴　 <strong>发电机：</strong>转轴 → 电
+        <span>同一套典型有刷结构，能量方向不同。</span>
+      </footer>
+    </main>
+  </body>
+</html>

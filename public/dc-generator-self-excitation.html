@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>直流发电机：自励如何建压？</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <script src="/dc-machine-basics.js" defer></script>
+    <script type="module" src="/dc-generator-self-excitation.js"></script>
+  </head>
+  <body>
+    <main class="lesson self-excitation-page">
+      <header class="page-head">
+        <div class="eyebrow">直流电机 / 18 · ELI5</div>
+        <h1>关掉负载，谁还能自励？</h1>
+        <p>右侧拨动五个条件，对比两台发电机的电流路径和建压结果。</p>
+      </header>
+
+      <div class="self-simulator">
+        <section id="shunt-machine" class="machine-panel" aria-labelledby="shunt-title">
+          <div class="machine-head">
+            <h2 id="shunt-title">并励发电机</h2>
+            <span class="result-badge" id="shunt-badge">准备建压</span>
+          </div>
+          <svg viewBox="0 0 430 226" role="img" aria-label="并励发电机：励磁绕组与外部负载分成两条支路">
+            <circle class="flux-halo" cx="226" cy="126" r="51" />
+            <path class="machine-wire" d="M87 96V57H370M87 158V192H370M226 57v35M226 158v34M370 57v30M370 103v13M370 150v42" />
+            <path class="field-winding" d="M226 92q-17 8 0 16t0 16t0 16t0 18" />
+            <rect class="load-symbol" x="356" y="116" width="28" height="34" rx="3" />
+            <path class="load-switch switch-open" d="M370 87l18 16" />
+            <path class="load-switch switch-closed" d="M370 87v16" />
+            <path class="current-trace field-trace" d="M87 57H226V192H87" />
+            <path class="current-trace load-trace" d="M226 57H370V192H226" />
+            <circle class="generator-symbol" cx="87" cy="127" r="31" />
+            <g class="rotor-mark"><circle cx="87" cy="127" r="19" stroke-dasharray="23 12" /></g>
+            <text class="machine-letter" x="87" y="135">G</text>
+            <text class="diagram-caption" x="8" y="81">外力转轴 →</text>
+            <text class="diagram-caption" x="175" y="216">并励绕组</text>
+            <text class="diagram-caption" x="326" y="216">外部负载</text>
+          </svg>
+          <div class="path-note" id="shunt-path">励磁支路闭合，不经过负载</div>
+          <div class="voltage-row"><span>电压建立</span><div class="voltage-track"><div id="shunt-voltage" class="voltage-fill"></div></div><b id="shunt-voltage-label">—</b></div>
+          <p class="result-reason" id="shunt-reason" aria-live="polite">等待动画开始。</p>
+        </section>
+
+        <section id="series-machine" class="machine-panel" aria-labelledby="series-title">
+          <div class="machine-head">
+            <h2 id="series-title">串励发电机</h2>
+            <span class="result-badge" id="series-badge">准备建压</span>
+          </div>
+          <svg viewBox="0 0 430 226" role="img" aria-label="串励发电机：电枢、励磁绕组和负载依次构成同一条回路">
+            <circle class="flux-halo" cx="229" cy="58" r="47" />
+            <path class="machine-wire" d="M87 96V57h106M265 57h105v30M370 103v13M370 150v42H87v-34" />
+            <path class="field-winding" d="M193 57q9-17 18 0t18 0t18 0t18 0" />
+            <rect class="load-symbol" x="356" y="116" width="28" height="34" rx="3" />
+            <path class="load-switch switch-open" d="M370 87l18 16" />
+            <path class="load-switch switch-closed" d="M370 87v16" />
+            <path class="current-trace field-trace" d="M87 57H370V192H87" />
+            <circle class="generator-symbol" cx="87" cy="127" r="31" />
+            <g class="rotor-mark"><circle cx="87" cy="127" r="19" stroke-dasharray="23 12" /></g>
+            <text class="machine-letter" x="87" y="135">G</text>
+            <text class="diagram-caption" x="8" y="81">外力转轴 →</text>
+            <text class="diagram-caption" x="183" y="31">串励绕组</text>
+            <text class="diagram-caption" x="326" y="216">外部负载</text>
+          </svg>
+          <div class="path-note" id="series-path">励磁与负载在同一回路</div>
+          <div class="voltage-row"><span>电压建立</span><div class="voltage-track"><div id="series-voltage" class="voltage-fill"></div></div><b id="series-voltage-label">—</b></div>
+          <p class="result-reason" id="series-reason" aria-live="polite">等待动画开始。</p>
+        </section>
+
+        <aside class="switch-panel" aria-labelledby="switch-title">
+          <div class="switch-head"><h2 id="switch-title">改变建压条件</h2><span>同时作用于两台</span></div>
+          <div class="switch-list">
+            <button type="button" class="condition-switch" role="switch" data-condition="residual" aria-checked="true" aria-label="剩磁：有"><span class="switch-text">① 磁极剩磁</span><span class="switch-state">有</span><i aria-hidden="true"></i></button>
+            <button type="button" class="condition-switch" role="switch" data-condition="aiding" aria-checked="true" aria-label="励磁方向：助磁"><span class="switch-text">② 励磁方向</span><span class="switch-state">助磁</span><i aria-hidden="true"></i></button>
+            <button type="button" class="condition-switch" role="switch" data-condition="speed" aria-checked="true" aria-label="转速：足够"><span class="switch-text">③ 转速</span><span class="switch-state">足够</span><i aria-hidden="true"></i></button>
+            <button type="button" class="condition-switch" role="switch" data-condition="resistance" aria-checked="true" aria-label="回路电阻：合适"><span class="switch-text">④ 回路电阻</span><span class="switch-state">合适</span><i aria-hidden="true"></i></button>
+            <button type="button" class="condition-switch" role="switch" data-condition="load" aria-checked="false" aria-label="负载回路：断开"><span class="switch-text">⑤ 负载回路</span><span class="switch-state">断开</span><i aria-hidden="true"></i></button>
+          </div>
+          <div class="switch-actions"><button id="reset" type="button">恢复默认</button><button id="replay" type="button">↻ 重播</button><button id="pause" type="button" aria-pressed="false">暂停</button></div>
+          <p class="switch-hint">默认只断开负载：并励可成功，串励会失败。</p>
+        </aside>
+      </div>
+
+      <section class="compound-strip" aria-label="复励发电机简要说明">
+        <strong>复励</strong><span class="compound-diagram">并励绕组 → 先建立磁场 <em>＋</em> 串励绕组 → 有负载电流时参与</span><span>串励可助磁或去磁，取决于接线方向。</span>
+      </section>
+      <footer class="self-footnote">定性动画：电压条不是实测值；“负载闭合”代表合适轻载，“转速／电阻”代表建压阈值两侧。外部机械能始终必需。</footer>
+    </main>
+  </body>
+</html>

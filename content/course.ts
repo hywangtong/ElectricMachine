@@ -701,6 +701,27 @@ export const slides: Slide[] = [
           chapterId: chapter.id,
           embedUrl: '/dc-motor-frogleg-simplex.html',
         },
+        {
+          id: 'dc-machine-main-parts',
+          kind: 'embed',
+          title: '直流电机：定子、转子、励磁与电枢',
+          chapterId: chapter.id,
+          embedUrl: '/dc-machine-main-parts.html',
+        },
+        {
+          id: 'dc-machine-excitation',
+          kind: 'embed',
+          title: '直流电动机与发电机的励磁方式',
+          chapterId: chapter.id,
+          embedUrl: '/dc-machine-excitation.html',
+        },
+        {
+          id: 'dc-generator-self-excitation',
+          kind: 'embed',
+          title: '直流发电机：自励如何建压？',
+          chapterId: chapter.id,
+          embedUrl: '/dc-generator-self-excitation.html',
+        },
       );
     }
 

@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>直流电动机与发电机的励磁方式</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <script src="/dc-machine-basics.js" defer></script>
+  </head>
+  <body>
+    <main class="lesson excitation-page">
+      <header class="page-head">
+        <div class="eyebrow">直流电机 / 17 · ELI5</div>
+        <h1>励磁绕组，和电枢怎样接？</h1>
+        <p>记住四种关系：分开、并排、排队、两种都有。</p>
+      </header>
+
+      <div class="role-strip" aria-label="电动机与发电机共用四种励磁分类">
+        <div><b>电动机 M</b><span>外部送电 → 带动转轴</span></div>
+        <span class="same-connection">接线关系相同</span>
+        <div><b>发电机 G</b><span>转轴带动 → 对外送电</span></div>
+      </div>
+
+      <section class="excitation-grid" aria-label="四种励磁方式">
+        <article class="excitation-card">
+          <div class="card-top"><span class="card-index">01</span><h2>他励</h2><strong>分开供电</strong></div>
+          <svg viewBox="0 0 480 150" role="img" aria-label="励磁绕组 F 与电枢 A 分属两个独立电路">
+            <path d="M35 28h150v92h-50M87 120H35M285 56V28h150v92h-28M337 120h-52V90" class="wire" />
+            <path d="M272 62h26M278 80h14" class="source" />
+            <circle cx="35" cy="28" r="5" class="terminal" /><circle cx="35" cy="120" r="5" class="terminal" />
+            <circle cx="111" cy="120" r="24" class="armature" /><text x="111" y="129" class="symbol">A</text>
+            <path d="M346 120q10-22 20 0t20 0t20 0" class="field-coil" />
+            <text x="31" y="20" class="wire-label">电枢回路</text><text x="285" y="20" class="wire-label">独立励磁电源</text>
+            <text x="367" y="87" class="symbol field-symbol">F</text>
+          </svg>
+          <p>磁场由另一套电源提供。</p>
+        </article>
+        <article class="excitation-card">
+          <div class="card-top"><span class="card-index">02</span><h2>并励</h2><strong>并排两路</strong></div>
+          <svg viewBox="0 0 480 150" role="img" aria-label="电枢 A 与励磁绕组 F 并联，接在同一对端子上">
+            <circle cx="43" cy="73" r="5" class="terminal" /><circle cx="437" cy="73" r="5" class="terminal" />
+            <path d="M48 73h45V30h112M285 30h102v43h45M93 73h123M264 73h123" class="wire" />
+            <circle cx="240" cy="73" r="24" class="armature" /><text x="240" y="82" class="symbol">A</text>
+            <path d="M205 30q10-20 20 0t20 0t20 0t20 0" class="field-coil" />
+            <text x="311" y="25" class="symbol field-symbol">F</text>
+            <text x="163" y="146" class="wire-label">同一对端子 · 两条支路</text>
+          </svg>
+          <p>励磁绕组与电枢并联。</p>
+        </article>
+        <article class="excitation-card">
+          <div class="card-top"><span class="card-index">03</span><h2>串励</h2><strong>排成一路</strong></div>
+          <svg viewBox="0 0 480 150" role="img" aria-label="励磁绕组 F 与电枢 A 串联，同一电流依次流过">
+            <circle cx="43" cy="75" r="5" class="terminal" /><circle cx="437" cy="75" r="5" class="terminal" />
+            <path d="M48 75h116M226 75h89M395 75h37" class="wire" />
+            <circle cx="195" cy="75" r="31" class="armature" /><text x="195" y="85" class="symbol">A</text>
+            <path d="M315 75q10-20 20 0t20 0t20 0t20 0" class="field-coil" />
+            <text x="345" y="43" class="symbol field-symbol">F</text>
+            <text x="151" y="139" class="wire-label">只有一条电流通路</text>
+          </svg>
+          <p>励磁绕组与电枢串联。</p>
+        </article>
+        <article class="excitation-card">
+          <div class="card-top"><span class="card-index">04</span><h2>复励</h2><strong>串 + 并</strong></div>
+          <svg viewBox="0 0 480 150" role="img" aria-label="同时具有串联励磁绕组 Fs 和并联励磁绕组 Fp">
+            <circle cx="43" cy="76" r="5" class="terminal" /><circle cx="437" cy="76" r="5" class="terminal" />
+            <path d="M48 76h50V28h108M286 28h102v48h44M98 76h55M212 76h44M336 76h52" class="wire" />
+            <circle cx="183" cy="76" r="29" class="armature" /><text x="183" y="85" class="symbol">A</text>
+            <path d="M256 76q10-19 20 0t20 0t20 0t20 0" class="field-coil" />
+            <path d="M206 28q10-19 20 0t20 0t20 0t20 0" class="field-coil" />
+            <text x="278" y="55" class="symbol field-symbol">F串</text>
+            <text x="302" y="22" class="symbol field-symbol">F并</text>
+            <text x="151" y="146" class="wire-label">同时有串励、并励两组绕组</text>
+          </svg>
+          <p>两组励磁一起用（图示长复励）。</p>
+        </article>
+      </section>
+
+      <footer class="lesson-footer excitation-footer">
+        <span><b>A</b> 电枢　<b>F</b> 励磁绕组　<span class="line-key">绿线：连接关系，不代表电流方向</span></span>
+        <span>发电机的并励 / 串励 / 复励可自励；需满足建压条件。</span>
+      </footer>
+    </main>
+  </body>
+</html>
