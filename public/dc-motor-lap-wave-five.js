@@ -3,6 +3,7 @@ import {
   SEGMENT_COUNT,
   SLOT_COUNT,
   advanceAngle,
+  commutatorAngle,
   mod,
   radians,
   toothPoint,
@@ -252,7 +253,7 @@ function renderRotor(state) {
   }
   ring(18, 0, 242, -135, 0, 16, '#8ba29a88');
   for (let index = 0; index < SEGMENT_COUNT; index++) {
-    const center = 180 - index * segmentStep - angle;
+    const center = commutatorAngle(index, angle);
     const potential = state.potentials[index];
     const copper =
       potential > 0.5
@@ -493,7 +494,7 @@ function render() {
   $('commutation-summary').textContent =
     mode === 'lap'
       ? '叠绕组按 Ci → C(i+1) 接相邻片，理论并联支路 A = 4。'
-      : '波绕组按 Ci → C(i+2) 跨 2 片，理论并联支路 A = 2。';
+      : '波绕组跨 2 片，B 端更短；理论并联支路 A = 2。';
   $('connection-sequence').textContent =
     mode === 'lap'
       ? 'Lap：C1 → C2 → C3 → C4 → C5 → C1'

@@ -6,6 +6,7 @@ import {
   SLOT_COUNT,
   advanceAngle,
   brushCount,
+  commutatorAngle,
   coils,
   sectionPath,
   windingSections,
@@ -40,9 +41,16 @@ for (let index = 0; index < 5; index++) {
   assert.deepEqual(wave[index].terminals, [index, (index + 2) % 5]);
   assert.deepEqual(lap[index].slots, [index, (index + 1) % 5]);
   assert.deepEqual(wave[index].slots, [index, (index + 1) % 5]);
-  assert.ok(sectionPath(lap[index], 0).length >= 14);
-  assert.ok(sectionPath(wave[index], 0).length >= 14);
+  const lapPath = sectionPath(lap[index], 0);
+  const wavePath = sectionPath(wave[index], 0);
+  assert.ok(lapPath.length >= 14);
+  assert.ok(wavePath.length >= 14);
+  const endLeadLength = (path) =>
+    Math.hypot(...path.at(-1).map((value, axis) => value - path.at(-2)[axis]));
+  assert.deepEqual(lapPath[0], wavePath[0]);
+  assert.ok(endLeadLength(wavePath) < endLeadLength(lapPath));
 }
+assert.equal(commutatorAngle(2, 0), 108);
 
 for (const mode of ['lap', 'wave']) {
   const brushTotal = brushCount(mode);

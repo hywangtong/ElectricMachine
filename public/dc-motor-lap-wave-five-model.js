@@ -3,12 +3,15 @@ export const SEGMENT_COUNT = 5;
 export const POLE_COUNT = 4;
 export const ARMATURE_CURRENT = 2;
 export const COMMUTATION_HALF_WIDTH = 5;
+export const COMMUTATOR_OFFSET = 360 / SLOT_COUNT;
 export const MODES = ['lap', 'wave'];
 
 export const mod = (value, period = 360) =>
   ((value % period) + period) % period;
 export const radians = (degrees) => (degrees * Math.PI) / 180;
 export const modIndex = (value) => mod(value, SEGMENT_COUNT);
+export const commutatorAngle = (segment, rotorAngle) =>
+  180 + COMMUTATOR_OFFSET - segment * (360 / SEGMENT_COUNT) - rotorAngle;
 
 function angularDistance(a, b) {
   return Math.abs(mod(a - b + 180) - 180);
@@ -107,8 +110,7 @@ export function sectionPath(section, rotorAngle) {
   const slotStep = 360 / SLOT_COUNT;
   const startAngle = 180 - section.slots[0] * slotStep - rotorAngle;
   const endAngle = 180 - section.slots[1] * slotStep - rotorAngle;
-  const terminalAngle = (segment) =>
-    180 - segment * (360 / SEGMENT_COUNT) - rotorAngle;
+  const terminalAngle = (segment) => commutatorAngle(segment, rotorAngle);
   const arc = (from, to, radius, axial) => {
     let sweep = mod(to - from);
     if (sweep > 180) sweep -= 360;
@@ -149,10 +151,7 @@ export function windingState(angle, mode = 'lap') {
       (_, index) => index,
     ).filter(
       (index) =>
-        angularDistance(
-          180 - index * (360 / SEGMENT_COUNT) - rotorAngle,
-          brush.position,
-        ) <=
+        angularDistance(commutatorAngle(index, rotorAngle), brush.position) <=
         180 / SEGMENT_COUNT + COMMUTATION_HALF_WIDTH,
     );
   }
