@@ -31,6 +31,29 @@ import { DistributedPropulsion } from '@/components/distributed-propulsion';
 import { MotorAdvantagesLesson } from '@/components/motor-advantages-lesson';
 import { MotorHistoryLesson } from '@/components/motor-history-lesson';
 const number = (n: number) => String(n).padStart(2, '0');
+
+function MaxwellDetailFrame({ url, title }: { url: string; title: string }) {
+  const frame = useRef<HTMLIFrameElement>(null);
+  const law = new URL(url, 'http://localhost').searchParams.get('law');
+  const showLaw = useCallback(() => {
+    frame.current?.contentWindow?.postMessage(
+      { type: 'maxwell-law', law },
+      window.location.origin,
+    );
+  }, [law]);
+
+  useEffect(showLaw, [showLaw]);
+
+  return (
+    <iframe
+      ref={frame}
+      src="/magnetic-maxwell-detail.html"
+      onLoad={showLaw}
+      title={title}
+      className="embed-frame"
+    />
+  );
+}
 type IntroTabSlide = Extract<Slide, { kind: 'ev' }>;
 
 const introTabAnchorId = 'introduction-ev-principle';
@@ -616,16 +639,25 @@ export default function CoursePlayer() {
                       <div
                         className={`embed-body${slide.embedUrl.startsWith('/magnetic-') || slide.embedUrl === '/dc-machine-uses-types.html' || slide.embedUrl.startsWith('/dc-motor-') || slide.embedUrl.startsWith('/dc-generator-') ? ' embed-maxwell' : ''}${slide.embedUrl === '/ship-power-eli5.html' ? ' embed-ship-power' : ''}`}
                       >
-                        <iframe
-                          key={
-                            slide.id.startsWith('dc-motor-structure-')
-                              ? slide.id
-                              : undefined
-                          }
-                          src={slide.embedUrl}
-                          title={slide.title}
-                          className="embed-frame"
-                        />
+                        {slide.embedUrl.startsWith(
+                          '/magnetic-maxwell-detail.html',
+                        ) ? (
+                          <MaxwellDetailFrame
+                            url={slide.embedUrl}
+                            title={slide.title}
+                          />
+                        ) : (
+                          <iframe
+                            key={
+                              slide.id.startsWith('dc-motor-structure-')
+                                ? slide.id
+                                : undefined
+                            }
+                            src={slide.embedUrl}
+                            title={slide.title}
+                            className="embed-frame"
+                          />
+                        )}
                       </div>
                     ) : slide.kind === 'video' ? (
                       <div className="video-body">

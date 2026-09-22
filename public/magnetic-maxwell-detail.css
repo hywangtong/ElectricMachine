@@ -1,0 +1,468 @@
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+body {
+  margin: 0;
+  overflow: hidden;
+  color: #183b3b;
+  background: #f8fbf7;
+  font-family: 'Segoe UI', 'Microsoft YaHei', 'PingFang SC', sans-serif;
+}
+.lesson {
+  height: 100%;
+  padding: 22px 26px 20px;
+  display: grid;
+  grid-template-rows: 96px minmax(0, 1fr) 56px;
+  gap: 14px;
+  background:
+    radial-gradient(circle at 88% 5%, #e4f3ee, transparent 30%), #f8fbf7;
+}
+.heading {
+  display: grid;
+  align-content: start;
+  gap: 4px;
+}
+.eyebrow {
+  color: #39796f;
+  font-size: 14px;
+  letter-spacing: 0.12em;
+}
+h1 {
+  margin: 0;
+  font-size: 34px;
+  line-height: 1.15;
+}
+.heading p {
+  margin: 0;
+  color: #58746e;
+  font-size: 18px;
+}
+.workbench {
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(0, 0.85fr);
+  gap: 14px;
+}
+.card {
+  min-width: 0;
+  min-height: 0;
+  border: 1px solid #c6d9d2;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 9px 28px #1f4d4310;
+}
+.visual {
+  display: grid;
+  grid-template-rows: 44px minmax(0, 1fr) 55px;
+  padding: 12px 14px;
+}
+.visual-top,
+.visual-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.visual-top strong {
+  font-size: 21px;
+}
+.diagram-note {
+  color: #729087;
+  font-size: 12px;
+}
+svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+svg text {
+  fill: #183b3b;
+  font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+}
+svg .label {
+  font-size: 20px;
+  font-weight: 650;
+}
+svg .small-label {
+  font-size: 15px;
+}
+svg .muted-label {
+  fill: #647e77;
+  font-size: 15px;
+}
+svg .field-line {
+  fill: none;
+  stroke: #217e70;
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+svg .surface {
+  fill: #dcefe9a6;
+  stroke: #4c9586;
+  stroke-width: 4;
+}
+svg .patch {
+  fill: #eaa44f;
+  stroke: #b86a26;
+  stroke-width: 2;
+}
+svg .in {
+  fill: #5872b5;
+}
+svg .out {
+  fill: #c97236;
+}
+svg .pulse {
+  animation: pulse 1.15s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+svg .magnetic-field {
+  fill: none;
+  stroke: #91cce9;
+  stroke-width: 3.5;
+  stroke-linecap: round;
+}
+svg .magnetic-arrow {
+  fill: none;
+  stroke: #91cce9;
+  stroke-width: 3.5;
+  stroke-linecap: round;
+}
+svg .magnetic-magnet-edge {
+  stroke: #9e825d;
+  stroke-width: 2.3;
+  stroke-dasharray: 7 6;
+  stroke-linejoin: round;
+}
+svg .magnetic-rim {
+  stroke: #5d9baa;
+  stroke-width: 2.8;
+  stroke-dasharray: 7 6;
+}
+svg .magnetic-rear {
+  fill: none;
+  stroke: #568d9d;
+  stroke-width: 1.8;
+  stroke-dasharray: 5 6;
+  opacity: 0.5;
+}
+svg .magnetic-front {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 2.2;
+  opacity: 0.82;
+}
+svg .magnetic-pole {
+  font-size: 31px;
+  font-weight: 800;
+  opacity: 0.82;
+}
+svg .magnetic-n {
+  fill: #a96e36;
+}
+svg .magnetic-s {
+  fill: #34849c;
+}
+svg .magnetic-crossing {
+  stroke: #fff;
+  stroke-width: 2.5;
+}
+svg .faraday-field {
+  fill: none;
+  stroke: #327fbd;
+  stroke-linecap: round;
+}
+svg .faraday-b-label {
+  fill: #246eaa;
+  font:
+    italic 25px Georgia,
+    serif;
+}
+svg .faraday-coil-rear {
+  fill: none;
+  stroke: #b88358;
+  stroke-width: 12;
+  stroke-linecap: round;
+  opacity: 0.7;
+}
+svg .faraday-coil-front {
+  fill: none;
+  stroke: url(#faraday-coil);
+  stroke-width: 14;
+  stroke-linecap: round;
+}
+svg .faraday-coil-highlight {
+  fill: none;
+  stroke: #ffe0ae;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  opacity: 0.85;
+}
+svg .faraday-segment {
+  fill: none;
+  stroke: #b5d7cd;
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+svg .faraday-segment.lit {
+  stroke: #176e62;
+  stroke-width: 7;
+}
+svg .ampere-h-loop {
+  fill: none;
+  stroke: #277d70;
+  stroke-width: 3.5;
+  stroke-linecap: round;
+}
+svg .ampere-h-loop.rear {
+  stroke-dasharray: 7 7;
+  opacity: 0.48;
+}
+svg .ampere-h-loop.front {
+  filter: drop-shadow(0 2px 1px #173e3a26);
+}
+svg .ampere-path {
+  fill: none;
+  stroke: #406e66;
+  stroke-width: 3.5;
+  stroke-dasharray: 10 8;
+}
+svg .ampere-dl {
+  fill: none;
+  stroke: #b7d4cc;
+  stroke-width: 3.5;
+  stroke-linecap: round;
+}
+svg .ampere-dl.lit {
+  stroke: #176e62;
+  stroke-width: 7;
+  filter: drop-shadow(0 2px 2px #176e6240);
+}
+svg .ampere-current-vector,
+svg .ampere-lead-current {
+  fill: none;
+  stroke: #b95f2f;
+  stroke-width: 7;
+  stroke-linecap: round;
+  stroke-dasharray: 15 8;
+  animation: current-flow 1.2s linear infinite;
+}
+svg .ampere-charge {
+  fill: #fff3d6;
+  stroke: #8f431f;
+  stroke-width: 1.5;
+  filter: drop-shadow(0 1px 2px #57230d66);
+}
+svg .ampere-i-label {
+  fill: #8e431f;
+  font:
+    italic 28px Georgia,
+    serif;
+  font-weight: 700;
+}
+svg .ampere-wire {
+  fill: none;
+  stroke: url(#ampere-copper);
+  stroke-width: 20;
+  stroke-linecap: round;
+}
+svg .ampere-d-vector {
+  fill: none;
+  stroke: #397ec4;
+  stroke-width: 4;
+  stroke-linecap: round;
+  filter: drop-shadow(0 1px 2px #397ec43d);
+}
+svg .ampere-charge-label {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+svg .ampere-charge-label.plus {
+  fill: #9a4d25;
+}
+svg .ampere-charge-label.minus {
+  fill: #3973a9;
+}
+svg .ampere-callout {
+  fill: none;
+  stroke: #759a91;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+@keyframes current-flow {
+  to {
+    stroke-dashoffset: -46;
+  }
+}
+@keyframes pulse {
+  50% {
+    opacity: 0.48;
+    transform: scale(1.13);
+  }
+}
+.step-dots {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #627e75;
+  font-size: 14px;
+}
+.step-dots b {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #c9dad4;
+}
+.step-dots b.active {
+  width: 24px;
+  border-radius: 8px;
+  background: #247e70;
+}
+.controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+button {
+  appearance: none;
+  border: 1px solid #a4c6ba;
+  border-radius: 9px;
+  background: #edf6f2;
+  color: #235d55;
+  padding: 9px 14px;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+}
+button:hover {
+  background: #dcefe8;
+}
+button:focus-visible {
+  outline: 3px solid #c78c43;
+  outline-offset: 2px;
+}
+button.primary {
+  color: white;
+  background: #176e62;
+  border-color: #176e62;
+}
+button.primary:hover {
+  background: #10574e;
+}
+.explain {
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr) auto auto;
+  gap: 12px;
+  padding: 22px;
+}
+.law-name {
+  color: #39796f;
+  font-weight: 750;
+  font-size: 15px;
+  letter-spacing: 0.04em;
+}
+.formula {
+  min-height: 88px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  border: 1px solid #d7e8e1;
+  border-radius: 13px;
+  background: #edf6f2;
+  color: #163f3a;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 30px;
+  text-align: center;
+}
+.formula small {
+  display: block;
+  font:
+    14px 'Segoe UI',
+    'Microsoft YaHei',
+    sans-serif;
+  color: #638079;
+}
+.formula-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  font-size: 25px;
+  line-height: 1.25;
+  white-space: nowrap;
+}
+.meaning {
+  align-self: center;
+  font-size: 22px;
+  line-height: 1.55;
+}
+.meaning strong {
+  color: #ad602e;
+}
+.metric {
+  padding: 13px 14px;
+  border-radius: 12px;
+  background: #173e3a;
+  color: white;
+  font-size: 21px;
+  font-weight: 750;
+  line-height: 1.35;
+}
+.metric small {
+  display: block;
+  margin-top: 4px;
+  color: #c4e0d8;
+  font-size: 14px;
+  font-weight: 400;
+}
+.boundary {
+  margin: 0;
+  color: #667e77;
+  font-size: 14px;
+  line-height: 1.45;
+}
+.takeaway {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 0 18px;
+  border-radius: 13px;
+  background: #173e3a;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+}
+.course-link {
+  color: #bde5d9;
+  font-size: 15px;
+  font-weight: 500;
+}
+@media (max-width: 900px) {
+  body {
+    overflow: auto;
+  }
+  .lesson {
+    height: auto;
+    min-height: 100%;
+    grid-template-rows: auto auto auto;
+  }
+  .workbench {
+    grid-template-columns: 1fr;
+  }
+  .visual {
+    min-height: 500px;
+  }
+  .explain {
+    min-height: 340px;
+  }
+}

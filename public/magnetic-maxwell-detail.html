@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>麦克斯韦方程图解</title>
+    <link rel="stylesheet" href="/magnetic-maxwell-detail.css?v=8" />
+    <script type="module" src="/magnetic-maxwell-detail.js?v=13"></script>
+  </head>
+  <body>
+    <main class="lesson">
+      <header class="heading">
+        <div class="eyebrow" id="eyebrow"></div>
+        <h1 id="title"></h1>
+        <p id="lead"></p>
+      </header>
+      <section class="workbench">
+        <div class="visual card">
+          <div class="visual-top">
+            <strong id="scene-title"></strong>
+            <span class="diagram-note">空间图为示意，不按场强比例绘制</span>
+          </div>
+          <svg id="diagram" viewBox="0 0 900 440" role="img"></svg>
+          <div class="visual-bottom">
+            <div class="step-dots" id="step-dots" aria-label="演示步骤"></div>
+            <div class="controls" id="controls"></div>
+          </div>
+        </div>
+        <aside class="explain card">
+          <div class="law-name" id="law-name"></div>
+          <div class="formula" id="formula"></div>
+          <div class="meaning" id="meaning" aria-live="polite"></div>
+          <div class="metric" id="metric" aria-live="polite"></div>
+          <p class="boundary" id="boundary"></p>
+        </aside>
+      </section>
+      <footer class="takeaway">
+        <span id="takeaway"></span>
+        <span class="course-link" id="course-link"></span>
+      </footer>
+    </main>
+  </body>
+</html>
