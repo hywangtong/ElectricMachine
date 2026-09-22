@@ -227,6 +227,9 @@ svg .ampere-h-loop.rear {
 svg .ampere-h-loop.front {
   filter: drop-shadow(0 2px 1px #173e3a26);
 }
+svg .ampere-h-loop.displacement-h {
+  stroke: #3f6ea4;
+}
 svg .ampere-path {
   fill: none;
   stroke: #406e66;
@@ -243,6 +246,13 @@ svg .ampere-dl.lit {
   stroke: #176e62;
   stroke-width: 7;
   filter: drop-shadow(0 2px 2px #176e6240);
+}
+svg .ampere-dl.displacement-integral {
+  stroke: #b8c9df;
+}
+svg .ampere-dl.displacement-integral.lit {
+  stroke: #3f6ea4;
+  filter: drop-shadow(0 2px 2px #3f6ea440);
 }
 svg .ampere-current-vector,
 svg .ampere-lead-current {
@@ -274,10 +284,9 @@ svg .ampere-wire {
 }
 svg .ampere-d-vector {
   fill: none;
-  stroke: #397ec4;
-  stroke-width: 4;
+  stroke: #28966a;
   stroke-linecap: round;
-  filter: drop-shadow(0 1px 2px #397ec43d);
+  filter: drop-shadow(0 1px 2px #28966a3d);
 }
 svg .ampere-charge-label {
   font-size: 20px;

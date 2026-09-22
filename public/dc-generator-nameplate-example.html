@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>例 7-2：直流发电机额定运行计算</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/dc-motor-nameplate-example.css" />
+    <link rel="stylesheet" href="/dc-generator-nameplate-example.css" />
+    <script src="/dc-machine-basics.js" defer></script>
+  </head>
+  <body>
+    <main class="lesson nameplate-example-page generator-example-page">
+      <header class="page-head example-head">
+        <div class="eyebrow">直流电机 / 22 · 一页例题</div>
+        <h1>沿着发电机能量流，算清“输入”和“输出”</h1>
+        <p>
+          例 7-2 · 某直流发电机额定运行，求输入机械功率、输入转矩和额定电流。
+        </p>
+      </header>
+
+      <section class="example-stage" aria-label="直流发电机铭牌与额定运行动画">
+        <article class="nameplate-panel">
+          <div class="panel-caption">
+            <strong>先读铭牌，再判断能量方向</strong>
+            <span>名称 → 数值 → 单位 → 输入／输出位置</span>
+          </div>
+          <div
+            class="metal-plate"
+            role="img"
+            aria-label="教学示意直流发电机铭牌，额定功率九十千瓦，额定电压二百三十伏，额定转速每分钟一千四百五十转，额定效率百分之八十九点六"
+          >
+            <i class="rivet top-left"></i>
+            <i class="rivet top-right"></i>
+            <i class="rivet bottom-left"></i>
+            <i class="rivet bottom-right"></i>
+            <div class="plate-brand">
+              <span>DC GENERATOR</span>
+              <strong>直流发电机</strong>
+              <small>教学示意铭牌</small>
+            </div>
+            <div class="plate-meta">
+              <span>型号　ZF—90</span>
+              <span>工作制　S1</span>
+              <span>编号　EM—072</span>
+            </div>
+            <div class="plate-grid">
+              <div class="plate-cell known">
+                <span>额定功率</span>
+                <b
+                  ><i>P<sub>N</sub></i> 90</b
+                >
+                <em>kW</em>
+              </div>
+              <div class="plate-cell known">
+                <span>额定电压</span>
+                <b
+                  ><i>U<sub>N</sub></i> 230</b
+                >
+                <em>V</em>
+              </div>
+              <div class="plate-cell known">
+                <span>额定转速</span>
+                <b
+                  ><i>n<sub>N</sub></i> 1450</b
+                >
+                <em>r/min</em>
+              </div>
+              <div class="plate-cell known">
+                <span>额定效率</span>
+                <b
+                  ><i>η<sub>N</sub></i> 89.6</b
+                >
+                <em>%</em>
+              </div>
+            </div>
+            <div class="plate-foot">标准　GB/T 755　　出厂日期　2024.09</div>
+          </div>
+          <div class="plate-note">
+            <span class="known-key">● 已知量</span>
+            <span>
+              发电机铭牌 <i>P<sub>N</sub></i> 是电端额定输出功率
+            </span>
+          </div>
+        </article>
+
+        <article class="motor-panel generator-panel">
+          <div class="motor-title">
+            <div>
+              <strong>额定运行中的直流发电机</strong>
+              <span>机械能输入 → 电磁转换 → 电能输出</span>
+            </div>
+            <div class="legend" aria-label="颜色图例">
+              <span class="legend-known">已知</span>
+              <span class="legend-unknown">待求</span>
+            </div>
+          </div>
+          <svg
+            class="motor-visual generator-visual"
+            viewBox="0 0 780 390"
+            role="img"
+            aria-label="直流发电机持续旋转，机械能从左侧轴端输入，电能从右侧电端输出，已知量用青绿色标注，待求量用橙红色标注"
+          >
+            <defs>
+              <linearGradient id="generator-body" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#87a59c" />
+                <stop offset="0.45" stop-color="#d7e2dc" />
+                <stop offset="0.58" stop-color="#b6c9c0" />
+                <stop offset="1" stop-color="#66867d" />
+              </linearGradient>
+              <linearGradient id="generator-shaft" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#eef3ef" />
+                <stop offset="0.48" stop-color="#879890" />
+                <stop offset="1" stop-color="#dce5e0" />
+              </linearGradient>
+              <filter
+                id="generator-shadow"
+                x="-20%"
+                y="-20%"
+                width="140%"
+                height="160%"
+              >
+                <feDropShadow
+                  dx="0"
+                  dy="10"
+                  stdDeviation="9"
+                  flood-color="#193f38"
+                  flood-opacity="0.22"
+                />
+              </filter>
+              <marker
+                id="generator-known-arrow"
+                markerWidth="10"
+                markerHeight="10"
+                refX="8"
+                refY="5"
+                orient="auto"
+              >
+                <path d="M0 0L10 5 0 10Z" fill="#238b7b" />
+              </marker>
+              <marker
+                id="generator-unknown-arrow"
+                markerWidth="10"
+                markerHeight="10"
+                refX="8"
+                refY="5"
+                orient="auto"
+              >
+                <path d="M0 0L10 5 0 10Z" fill="#d76543" />
+              </marker>
+            </defs>
+
+            <ellipse
+              cx="392"
+              cy="338"
+              rx="260"
+              ry="22"
+              fill="#356158"
+              opacity="0.14"
+            />
+
+            <path
+              class="flow mechanical-input-flow"
+              d="M26 228H171"
+              marker-end="url(#generator-unknown-arrow)"
+            />
+            <g class="input-shaft">
+              <path d="M143 217H292v24H143Z" />
+              <g class="shaft-rotor input-rotor">
+                <ellipse cx="157" cy="229" rx="19" ry="42" />
+                <path d="M157 187v84M138 229h38M144 200l26 58M170 200l-26 58" />
+              </g>
+            </g>
+
+            <g class="generator-body" filter="url(#generator-shadow)">
+              <path class="foot" d="M286 295h88l14 42H264l10-42Z" />
+              <path class="foot" d="M509 295h82l15 42H489l9-42Z" />
+              <path
+                class="barrel"
+                d="M286 133H538q55 0 55 99t-55 99H286q-45-20-45-99t45-99Z"
+              />
+              <ellipse class="end-shield" cx="286" cy="232" rx="51" ry="99" />
+              <ellipse class="hub" cx="282" cy="232" rx="28" ry="49" />
+              <path class="terminal-box" d="M366 108h119l13 62H353Z" />
+              <path class="terminal-lid" d="M359 95h132v24H359Z" />
+              <circle class="terminal-dot" cx="391" cy="139" r="8" />
+              <circle class="terminal-dot" cx="459" cy="139" r="8" />
+              <g class="cooling-fins">
+                <path d="M329 145v173M357 137v188M507 137v188M534 145v173" />
+              </g>
+              <g class="body-nameplate">
+                <rect x="383" y="196" width="118" height="77" rx="3" />
+                <circle cx="391" cy="204" r="2.5" />
+                <circle cx="493" cy="204" r="2.5" />
+                <text x="442" y="215">DC GENERATOR</text>
+                <text x="393" y="233">90 kW</text>
+                <text x="393" y="250">230 V</text>
+                <text x="393" y="267">1450 r/min</text>
+              </g>
+            </g>
+
+            <g class="output-leads">
+              <path d="M561 187H746" />
+              <path d="M561 258H746" />
+              <circle cx="746" cy="187" r="7" />
+              <circle cx="746" cy="258" r="7" />
+              <text x="716" y="174">+</text>
+              <text x="717" y="284">−</text>
+            </g>
+            <path
+              class="flow electric-output-flow"
+              d="M604 222H733"
+              marker-end="url(#generator-known-arrow)"
+            />
+            <path
+              class="rotation-orbit input-orbit"
+              d="M92 157a73 73 0 1 0 1 150"
+              marker-end="url(#generator-unknown-arrow)"
+            />
+
+            <g class="tag known-tag" transform="translate(7 18)">
+              <rect width="194" height="52" rx="12" />
+              <text x="14" y="20">已知 · 输入轴</text>
+              <text class="tag-value" x="14" y="43">nₙ = 1450 r/min</text>
+              <path d="M122 52L102 132" />
+            </g>
+            <g class="tag unknown-tag" transform="translate(7 310)">
+              <rect width="226" height="56" rx="12" />
+              <text x="14" y="21">待求 · 输入轴</text>
+              <text class="tag-value" x="14" y="45">P₁ = ?　T₁ = ?</text>
+              <path d="M157 0L164 -54" />
+            </g>
+            <g class="tag known-tag" transform="translate(293 18)">
+              <rect width="194" height="52" rx="12" />
+              <text x="14" y="20">已知 · 机体</text>
+              <text class="tag-value" x="14" y="43">ηₙ = 89.6%</text>
+              <path d="M97 52L102 79" />
+            </g>
+            <g class="tag known-tag" transform="translate(543 18)">
+              <rect width="226" height="75" rx="12" />
+              <text x="14" y="20">已知 · 电端输出</text>
+              <text class="tag-value" x="14" y="43">Pₙ = 90 kW</text>
+              <text class="tag-value small" x="14" y="64">Uₙ = 230 V</text>
+              <path d="M111 75L104 147" />
+            </g>
+            <g class="tag unknown-tag" transform="translate(564 310)">
+              <rect width="194" height="56" rx="12" />
+              <text x="14" y="21">待求 · 电端输出</text>
+              <text class="tag-value" x="14" y="45">Iₙ = ?</text>
+              <path d="M87 0L83 -47" />
+            </g>
+          </svg>
+        </article>
+      </section>
+
+      <section class="solution-strip generator-solution" aria-label="例题解答">
+        <article>
+          <span>01 · 由效率反求轴输入</span>
+          <strong
+            ><i>P<sub>1</sub></i> = <i>P<sub>N</sub></i> /
+            <i>η<sub>N</sub></i></strong
+          >
+          <b>90 / 0.896 = <em>100.45 kW</em></b>
+        </article>
+        <article>
+          <span>02 · 用输入功率求输入转矩</span>
+          <strong
+            ><i>T<sub>1</sub></i> = <i>P<sub>1</sub></i> /
+            <i>Ω<sub>N</sub></i></strong
+          >
+          <b>Ωₙ = 2πnₙ/60 = 151.84 rad/s</b>
+          <b>100.446 × 10³ / 151.84 = <em>661.51 N·m</em></b>
+        </article>
+        <article>
+          <span>03 · 用电输出功率求额定电流</span>
+          <strong
+            ><i>I<sub>N</sub></i> = <i>P<sub>N</sub></i> /
+            <i>U<sub>N</sub></i></strong
+          >
+          <b>90 × 10³ / 230 = <em>391.3 A</em></b>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>例 7-1：直流电动机铭牌计算</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/dc-motor-nameplate-example.css" />
+    <script src="/dc-machine-basics.js" defer></script>
+    <script type="module" src="/dc-motor-nameplate-example.js"></script>
+  </head>
+  <body>
+    <main class="lesson nameplate-example-page">
+      <header class="page-head example-head">
+        <div class="eyebrow" data-view="problem">直流电机 / 20 · 铭牌例题</div>
+        <div class="eyebrow" data-view="solution" hidden>
+          直流电机 / 21 · 解题
+        </div>
+        <h1 data-view="problem">先把铭牌，翻译成“电从哪里进、功从哪里出”</h1>
+        <h1 data-view="solution" hidden>沿着能量流，求输入功率、电流和转矩</h1>
+        <p data-view="problem">
+          例 7-1 · 青绿色是铭牌已知量，橙红色是要求的量。
+        </p>
+        <p data-view="solution" hidden>
+          例 7-1 · 先用效率找到输入，再分别回到电端和转轴。
+        </p>
+      </header>
+
+      <section class="example-stage" aria-label="电动机铭牌与额定运行动画">
+        <article class="nameplate-panel">
+          <div class="panel-caption">
+            <strong>真正的读牌顺序</strong>
+            <span>名称 → 数值 → 单位 → 物理位置</span>
+          </div>
+          <div
+            class="metal-plate"
+            role="img"
+            aria-label="教学示意直流电动机铭牌，额定功率十千瓦，额定电压二百二十伏，额定转速每分钟一千五百转，额定效率百分之八十八点六"
+          >
+            <i class="rivet top-left"></i>
+            <i class="rivet top-right"></i>
+            <i class="rivet bottom-left"></i>
+            <i class="rivet bottom-right"></i>
+            <div class="plate-brand">
+              <span>DC MOTOR</span>
+              <strong>直流电动机</strong>
+              <small>教学示意铭牌</small>
+            </div>
+            <div class="plate-meta">
+              <span>型号　Z2—52</span>
+              <span>工作制　S1</span>
+              <span>编号　EM—071</span>
+            </div>
+            <div class="plate-grid">
+              <div class="plate-cell known">
+                <span>额定功率</span>
+                <b
+                  ><i>P<sub>N</sub></i> 10</b
+                >
+                <em>kW</em>
+              </div>
+              <div class="plate-cell known">
+                <span>额定电压</span>
+                <b
+                  ><i>U<sub>N</sub></i> 220</b
+                >
+                <em>V</em>
+              </div>
+              <div class="plate-cell known">
+                <span>额定转速</span>
+                <b
+                  ><i>n<sub>N</sub></i> 1500</b
+                >
+                <em>r/min</em>
+              </div>
+              <div class="plate-cell known">
+                <span>额定效率</span>
+                <b
+                  ><i>η<sub>N</sub></i> 88.6</b
+                >
+                <em>%</em>
+              </div>
+            </div>
+            <div class="plate-foot">标准　GB/T 755　　出厂日期　2024.09</div>
+          </div>
+          <div class="plate-note">
+            <span class="known-key">● 已知量</span>
+            <span
+              >铭牌给出的 <i>P<sub>N</sub></i> 是轴上的额定输出功率</span
+            >
+          </div>
+        </article>
+
+        <article class="motor-panel">
+          <div class="motor-title">
+            <div>
+              <strong>额定运行中的直流电动机</strong>
+              <span>电能输入 → 电磁转换 → 机械能输出</span>
+            </div>
+            <div class="legend" aria-label="颜色图例">
+              <span class="legend-known">已知</span>
+              <span class="legend-unknown">待求</span>
+            </div>
+          </div>
+          <svg
+            class="motor-visual"
+            viewBox="0 0 780 390"
+            role="img"
+            aria-label="直流电动机持续旋转，铭牌已知量用青绿色标注，待求输入功率、电流和转矩用橙红色标注"
+          >
+            <defs>
+              <linearGradient id="body-metal" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#87a59c" />
+                <stop offset="0.45" stop-color="#d7e2dc" />
+                <stop offset="0.58" stop-color="#b6c9c0" />
+                <stop offset="1" stop-color="#66867d" />
+              </linearGradient>
+              <linearGradient id="shield-metal" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="#496d66" />
+                <stop offset="0.55" stop-color="#a9beb6" />
+                <stop offset="1" stop-color="#466a63" />
+              </linearGradient>
+              <linearGradient id="shaft-metal" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#eef3ef" />
+                <stop offset="0.48" stop-color="#879890" />
+                <stop offset="1" stop-color="#dce5e0" />
+              </linearGradient>
+              <filter
+                id="motor-shadow"
+                x="-20%"
+                y="-20%"
+                width="140%"
+                height="160%"
+              >
+                <feDropShadow
+                  dx="0"
+                  dy="10"
+                  stdDeviation="9"
+                  flood-color="#193f38"
+                  flood-opacity="0.22"
+                />
+              </filter>
+              <marker
+                id="known-arrow"
+                markerWidth="10"
+                markerHeight="10"
+                refX="8"
+                refY="5"
+                orient="auto"
+              >
+                <path d="M0 0L10 5 0 10Z" fill="#238b7b" />
+              </marker>
+              <marker
+                id="unknown-arrow"
+                markerWidth="10"
+                markerHeight="10"
+                refX="8"
+                refY="5"
+                orient="auto"
+              >
+                <path d="M0 0L10 5 0 10Z" fill="#d76543" />
+              </marker>
+            </defs>
+
+            <ellipse
+              cx="414"
+              cy="334"
+              rx="266"
+              ry="23"
+              fill="#356158"
+              opacity="0.14"
+            />
+
+            <g class="input-leads">
+              <path d="M25 163H149L186 195" />
+              <path d="M25 211H149L186 217" />
+              <circle cx="25" cy="163" r="7" />
+              <circle cx="25" cy="211" r="7" />
+              <text x="45" y="149">+</text>
+              <text x="45" y="235">−</text>
+            </g>
+            <path
+              class="flow electric-flow"
+              d="M49 187H167"
+              marker-end="url(#unknown-arrow)"
+            />
+
+            <g class="motor-body" filter="url(#motor-shadow)">
+              <path class="foot" d="M210 291h96l17 44H184l11-44Z" />
+              <path class="foot" d="M511 291h89l17 44H491l9-44Z" />
+              <path
+                class="rear-cover"
+                d="M176 139q-59 15-59 93t59 93l42-18V157Z"
+              />
+              <path
+                class="rear-grid"
+                d="M160 154q-33 23-33 78t33 78M179 164q-27 19-27 68t27 68M131 198h57M127 232h61M132 266h56"
+              />
+              <path
+                class="barrel"
+                d="M196 123H520q55 0 55 109t-55 109H196q-38-25-38-109t38-109Z"
+              />
+              <ellipse class="end-shield" cx="520" cy="232" rx="61" ry="109" />
+              <ellipse class="hub" cx="526" cy="232" rx="31" ry="56" />
+              <path class="shaft" d="M526 220H710v24H526Z" />
+              <g class="shaft-rotor">
+                <ellipse cx="695" cy="232" rx="19" ry="42" />
+                <path d="M695 190v84M676 232h38M682 203l26 58M708 203l-26 58" />
+              </g>
+              <path class="terminal-box" d="M272 100h131l14 68H257Z" />
+              <path class="terminal-lid" d="M264 86h145v25H264Z" />
+              <circle class="terminal-dot" cx="302" cy="132" r="9" />
+              <circle class="terminal-dot" cx="371" cy="132" r="9" />
+              <g class="cooling-fins">
+                <path
+                  d="M225 139v185M254 130v203M283 127v209M433 127v209M462 130v203"
+                />
+              </g>
+              <g class="body-nameplate">
+                <rect x="310" y="191" width="121" height="82" rx="3" />
+                <circle cx="318" cy="199" r="2.5" />
+                <circle cx="423" cy="199" r="2.5" />
+                <text x="370" y="210">DC MOTOR</text>
+                <text x="320" y="228">10 kW</text>
+                <text x="320" y="245">220 V</text>
+                <text x="320" y="262">1500 r/min</text>
+              </g>
+            </g>
+
+            <path
+              class="flow mechanical-flow"
+              d="M584 179H702"
+              marker-end="url(#known-arrow)"
+            />
+            <path
+              class="rotation-orbit"
+              d="M650 157a73 73 0 1 1-1 150"
+              marker-end="url(#known-arrow)"
+            />
+
+            <g class="tag known-tag" transform="translate(7 24)">
+              <rect width="183" height="48" rx="12" />
+              <text x="14" y="20">已知 · 电端</text>
+              <text class="tag-value" x="14" y="40">Uₙ = 220 V</text>
+              <path d="M139 48L177 126" />
+            </g>
+            <g class="tag unknown-tag" transform="translate(7 284)">
+              <rect width="216" height="67" rx="12" />
+              <text x="14" y="20">待求 · 电端</text>
+              <text class="tag-value" x="14" y="42">P₁ = ? 　 Iₙ = ?</text>
+              <text class="tag-hint" x="14" y="59">电能从这里输入</text>
+              <path d="M174 0L176 -63" />
+            </g>
+            <g class="tag known-tag" transform="translate(269 17)">
+              <rect width="211" height="48" rx="12" />
+              <text x="14" y="20">已知 · 机体</text>
+              <text class="tag-value" x="14" y="40">ηₙ = 88.6%</text>
+              <path d="M106 48L104 70" />
+            </g>
+            <g class="tag known-tag" transform="translate(535 16)">
+              <rect width="225" height="67" rx="12" />
+              <text x="14" y="20">已知 · 输出轴</text>
+              <text class="tag-value" x="14" y="42">Pₙ = 10 kW</text>
+              <text class="tag-value small" x="14" y="59">nₙ = 1500 r/min</text>
+              <path d="M112 67L111 137" />
+            </g>
+            <g class="tag unknown-tag" transform="translate(553 311)">
+              <rect width="207" height="54" rx="12" />
+              <text x="14" y="21">待求 · 输出轴</text>
+              <text class="tag-value" x="14" y="44">Tₙ = ?</text>
+              <path d="M82 0L95 -35" />
+            </g>
+          </svg>
+        </article>
+      </section>
+
+      <section class="problem-strip" data-view="problem">
+        <div class="question-mark">?</div>
+        <div class="given-summary">
+          <strong>某直流电动机按铭牌额定运行</strong>
+          <span
+            ><i>P<sub>N</sub></i> = 10 kW　·　<i>U<sub>N</sub></i> = 220
+            V　·　<i>n<sub>N</sub></i> = 1500 r/min　·　<i>η<sub>N</sub></i> =
+            88.6%</span
+          >
+        </div>
+        <ol>
+          <li>
+            求额定输入功率 <i>P<sub>1</sub></i>
+          </li>
+          <li>
+            求额定电流 <i>I<sub>N</sub></i> 与额定转矩 <i>T<sub>N</sub></i>
+          </li>
+        </ol>
+      </section>
+
+      <section
+        class="solution-strip"
+        data-view="solution"
+        hidden
+        aria-label="例题解答"
+      >
+        <article>
+          <span>01 · 先找输入</span>
+          <strong
+            ><i>P<sub>1</sub></i> = <i>P<sub>N</sub></i> /
+            <i>η<sub>N</sub></i></strong
+          >
+          <b>10 / 0.886 = <em>11.29 kW</em></b>
+        </article>
+        <article>
+          <span>02 · 再回电端</span>
+          <strong
+            ><i>I<sub>N</sub></i> = <i>P<sub>1</sub></i> /
+            <i>U<sub>N</sub></i></strong
+          >
+          <b>11.29 × 10³ / 220 = <em>51.3 A</em></b>
+        </article>
+        <article>
+          <span>03 · 最后回转轴</span>
+          <strong
+            ><i>T<sub>N</sub></i> = <i>P<sub>N</sub></i> /
+            <i>Ω<sub>N</sub></i></strong
+          >
+          <b>Ωₙ = 2πnₙ/60 → <em>63.66 N·m</em></b>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>

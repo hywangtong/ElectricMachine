@@ -4,11 +4,14 @@ const $ = (id) => document.getElementById(id);
 const svg = $('diagram');
 const faradaySegmentCount = 24;
 const faradayAnimationSeconds = 5;
+const displacementCycleSeconds = 12;
 const state = {
   step: 0,
   count: 0,
   frame: 0,
   faradayProgress: 0,
+  displacementProgress: 0,
+  displacementPaused: false,
   irregularInside: true,
 };
 
@@ -66,7 +69,7 @@ const pages = {
   'ampere-displacement': {
     eyebrow: '磁路 / 麦克斯韦图解 04B · 麦克斯韦位移电流',
     title: '位移电流怎样产生磁场？',
-    lead: '观察充电电容器：电荷不穿过间隙，但变化的电位移通量仍建立环绕磁场。',
+    lead: '观察电容器连续充放电：电荷不穿过间隙，但变化的电位移通量仍建立环绕磁场。',
     formula: '∮<sub>C</sub> H · dl = dΦ<sub>D</sub>/dt',
     boundary:
       'ΦD = ∫S D·dA。位移电流是电位移通量的变化率，不是自由电荷穿过电介质；完整形式为 ∮H·dl = I导 + dΦD/dt。',
@@ -474,15 +477,23 @@ function ellipseSegmentPath(cx, cy, rx, ry, start, end, samples = 5) {
   }).join('');
 }
 
-function amperePathSegments(count) {
+function amperePathSegments(
+  count,
+  half = 'all',
+  direction = 1,
+  markerId = 'ampere-h-arrow',
+  extraClass = '',
+) {
   const angleStep = (Math.PI * 2) / ampereSegmentCount;
   return Array.from({ length: ampereSegmentCount }, (_, index) => {
-    const start = -Math.PI / 2 - index * angleStep;
-    const end = start - angleStep * 0.7;
+    const start = -Math.PI / 2 - direction * index * angleStep;
+    const end = start - direction * angleStep * 0.7;
+    const isFront = Math.sin((start + end) / 2) > 0;
+    if (half !== 'all' && (half === 'front') !== isFront) return '';
     const lit = index < count;
     return `<path d="${ellipseSegmentPath(445, 220, 205, 82, start, end)}"
-      class="ampere-dl ${lit ? 'lit' : ''}"
-      ${lit ? 'marker-end="url(#ampere-h-arrow)"' : ''} />`;
+      class="ampere-dl ${extraClass} ${lit ? 'lit' : ''}"
+      ${lit ? `marker-end="url(#${markerId})"` : ''} />`;
   }).join('');
 }
 
@@ -509,29 +520,64 @@ function ampereDefs() {
     <marker id="ampere-loop-arrow" markerWidth="16" markerHeight="16" refX="14" refY="8" orient="auto" markerUnits="userSpaceOnUse">
       <path d="M1 1L15 8L1 15Z" fill="#176e62" stroke="#f8fbf7" stroke-width="1.4" />
     </marker>
+    <marker id="displacement-h-arrow" markerWidth="16" markerHeight="16" refX="14" refY="8" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M1 1L15 8L1 15Z" fill="#3f6ea4" stroke="#f8fbf7" stroke-width="1.4" />
+    </marker>
     <marker id="ampere-i-arrow" markerWidth="13" markerHeight="13" refX="11" refY="6.5" orient="auto" markerUnits="userSpaceOnUse">
       <path d="M1 1L12 6.5L1 12Z" fill="#b95f2f" stroke="#fff5e8" stroke-width="1" />
     </marker>
     <marker id="ampere-d-arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="userSpaceOnUse">
-      <path d="M1 1L11 6L1 11Z" fill="#397ec4" />
+      <path d="M1 1L11 6L1 11Z" fill="#28966a" />
     </marker>
   </defs>`;
 }
 
-function ampereFieldLoops(opacity = 1) {
-  return [
-    [122, 47, 0.45],
-    [164, 64, 0.68],
-    [205, 82, 1],
-  ]
-    .map(
-      ([rx, ry, alpha]) => `
+function ampereFieldLoops(
+  opacity = 1,
+  direction = 1,
+  half = 'all',
+  extraClass = '',
+  markerId = 'ampere-loop-arrow',
+) {
+  if (
+    direction === 1 &&
+    half === 'all' &&
+    !extraClass &&
+    markerId === 'ampere-loop-arrow'
+  ) {
+    return [
+      [122, 47, 0.45],
+      [164, 64, 0.68],
+      [205, 82, 1],
+    ]
+      .map(
+        ([rx, ry, alpha]) => `
     <path d="M${445 + rx} 220 A${rx} ${ry} 0 0 0 ${445 - rx} 220"
       class="ampere-h-loop rear" opacity="${alpha * opacity}" />
     <path d="M${445 - rx} 220 A${rx} ${ry} 0 0 0 ${445 + rx} 220"
       class="ampere-h-loop front" opacity="${alpha * opacity}"
       marker-end="url(#ampere-loop-arrow)" />`,
-    )
+      )
+      .join('');
+  }
+  return [
+    [122, 47, 0.45],
+    [164, 64, 0.68],
+    [205, 82, 1],
+  ]
+    .map(([rx, ry, alpha]) => {
+      const rearPath =
+        direction > 0
+          ? ellipseSegmentPath(445, 220, rx, ry, 0, -Math.PI, 32)
+          : ellipseSegmentPath(445, 220, rx, ry, -Math.PI, 0, 32);
+      const frontPath =
+        direction > 0
+          ? ellipseSegmentPath(445, 220, rx, ry, Math.PI, 0, 32)
+          : ellipseSegmentPath(445, 220, rx, ry, 0, Math.PI, 32);
+      return `
+    ${half === 'front' ? '' : `<path d="${rearPath}" class="ampere-h-loop rear ${extraClass}" opacity="${alpha * opacity}" />`}
+    ${half === 'rear' ? '' : `<path d="${frontPath}" class="ampere-h-loop front ${extraClass}" opacity="${alpha * opacity}" marker-end="url(#${markerId})" />`}`;
+    })
     .join('');
 }
 
@@ -641,6 +687,8 @@ function ampereCurrentDiagram() {
     <path d="M240 220 A205 82 0 0 1 650 220 A205 82 0 0 1 240 220Z"
       fill="url(#ampere-surface)" opacity="${state.step === 2 ? 0.72 : 0.34}" />
     ${showField ? ampereFieldLoops(state.step === 1 ? 1 : 0.5) : ''}
+    <path d="M650 220 A205 82 0 0 0 240 220" class="ampere-path" />
+    ${state.step === 2 ? amperePathSegments(visibleCount, 'rear') : ''}
     <rect x="410" y="87" width="70" height="270" fill="url(#ampere-copper)" />
     <ellipse cx="445" cy="87" rx="35" ry="12" fill="#ffd49b" stroke="#93451f" stroke-width="2.5" />
     <ellipse cx="445" cy="357" rx="35" ry="12" fill="#7f391d" stroke="#672b15" stroke-width="2.5" />
@@ -649,8 +697,8 @@ function ampereCurrentDiagram() {
       marker-end="url(#ampere-i-arrow)" />
     ${particles}
     <text x="466" y="140" class="ampere-i-label">I<tspan baseline-shift="sub" font-size="14">导</tspan></text>
-    <ellipse cx="445" cy="220" rx="205" ry="82" class="ampere-path" />
-    ${state.step === 2 ? amperePathSegments(visibleCount) : ''}
+    <path d="M240 220 A205 82 0 0 0 650 220" class="ampere-path" />
+    ${state.step === 2 ? amperePathSegments(visibleCount, 'front') : ''}
     <path d="M675 167L626 183" class="ampere-callout" />
     <text x="684" y="164" class="small-label">虚拟积分路径 C</text>
     <text x="664" y="196" class="muted-label">虚线，不是真实线圈</text>
@@ -670,45 +718,100 @@ function capacitorPlate(y, front) {
     <ellipse cx="414" cy="${y - 9}" rx="69" ry="13" fill="#fff0d6" opacity=".28" />`;
 }
 
+function displacementMotion() {
+  const angle = state.displacementProgress * Math.PI * 2;
+  const chargeLevel = (1 - Math.cos(angle)) / 2;
+  const changeRate = Math.sin(angle);
+  const charging = state.displacementProgress < 0.5;
+  const halfProgress = charging
+    ? state.displacementProgress * 2
+    : (state.displacementProgress - 0.5) * 2;
+  return {
+    chargeLevel,
+    changeStrength: Math.abs(changeRate),
+    charging,
+    halfProgress,
+    loopDirection: charging ? -1 : 1,
+  };
+}
+
 function ampereDisplacementDiagram() {
-  const showDisplacement = state.step >= 1;
-  const visibleCount = state.step === 2 ? state.count : 0;
-  const pulse = 0.62 + 0.25 * Math.sin(state.frame * 0.55);
-  const dArrows = [-58, -28, 0, 28, 58]
+  const motion = displacementMotion();
+  const fieldOpacity = Math.pow(motion.chargeLevel, 0.72);
+  const visibleCount =
+    motion.changeStrength < 0.035
+      ? 0
+      : Math.min(
+          ampereSegmentCount,
+          Math.floor(motion.halfProgress * (ampereSegmentCount + 5)) + 1,
+        );
+  const dArrows = [-72, -48, -24, 0, 24, 48, 72]
     .map(
-      (offset, index) => `
+      (offset) => `
     <line x1="${445 + offset}" y1="164" x2="${445 + offset}" y2="266"
-      class="ampere-d-vector" opacity="${Math.max(0.38, pulse - Math.abs(index - 2) * 0.06)}"
+      class="ampere-d-vector" opacity="${fieldOpacity.toFixed(3)}"
+      stroke-width="${(2 + motion.chargeLevel * 3.8).toFixed(2)}"
       marker-end="url(#ampere-d-arrow)" />`,
     )
     .join('');
+  const currentArrows =
+    motion.changeStrength < 0.035
+      ? ''
+      : `<line x1="445" y1="${motion.charging ? 69 : 104}" x2="445" y2="${motion.charging ? 104 : 69}" class="ampere-lead-current" opacity="${motion.changeStrength.toFixed(3)}" marker-end="url(#ampere-i-arrow)" />
+    <line x1="445" y1="${motion.charging ? 338 : 374}" x2="445" y2="${motion.charging ? 374 : 338}" class="ampere-lead-current" opacity="${motion.changeStrength.toFixed(3)}" marker-end="url(#ampere-i-arrow)" />`;
+  const rearField = ampereFieldLoops(
+    motion.changeStrength,
+    motion.loopDirection,
+    'rear',
+    'displacement-h',
+    'displacement-h-arrow',
+  );
+  const frontField = ampereFieldLoops(
+    motion.changeStrength,
+    motion.loopDirection,
+    'front',
+    'displacement-h',
+    'displacement-h-arrow',
+  );
+  const rearSegments = amperePathSegments(
+    visibleCount,
+    'rear',
+    motion.loopDirection,
+    'displacement-h-arrow',
+    'displacement-integral',
+  );
+  const frontSegments = amperePathSegments(
+    visibleCount,
+    'front',
+    motion.loopDirection,
+    'displacement-h-arrow',
+    'displacement-integral',
+  );
+  const actionText = motion.charging ? '充电' : '放电';
+  const directionText = motion.charging ? '顺时针' : '逆时针';
   return `${defs}${ampereDefs()}
-    <text x="48" y="48" class="label">充电电容器中的位移电流 I<tspan baseline-shift="sub" font-size="14">d</tspan> = dΦ<tspan baseline-shift="sub" font-size="14">D</tspan>/dt</text>
+    <text x="48" y="48" class="label">电容器连续充放电：I<tspan baseline-shift="sub" font-size="14">d</tspan> = dΦ<tspan baseline-shift="sub" font-size="14">D</tspan>/dt</text>
     <path d="M445 61V108 M445 330V382" class="ampere-wire" />
-    <line x1="445" y1="69" x2="445" y2="104" class="ampere-lead-current" marker-end="url(#ampere-i-arrow)" />
-    <line x1="445" y1="338" x2="445" y2="374" class="ampere-lead-current" marker-end="url(#ampere-i-arrow)" />
+    ${currentArrows}
     <path d="M240 220 A205 82 0 0 1 650 220 A205 82 0 0 1 240 220Z"
-      fill="url(#ampere-surface)" opacity="${state.step === 2 ? 0.78 : 0.28}" />
-    ${showDisplacement ? ampereFieldLoops(state.step === 1 ? 0.85 : 0.48) : ''}
+      fill="url(#ampere-surface)" opacity="${(0.22 + motion.changeStrength * 0.42).toFixed(3)}" />
+    ${rearField}
+    <path d="M650 220 A205 82 0 0 0 240 220" class="ampere-path" />
+    <g opacity="${(0.22 + motion.changeStrength * 0.78).toFixed(3)}">${rearSegments}</g>
     ${capacitorPlate(132, true)}
-    ${showDisplacement ? dArrows : ''}
+    ${dArrows}
     ${capacitorPlate(298, false)}
-    <text x="579" y="139" class="ampere-charge-label plus">+ + + +</text>
-    <text x="579" y="307" class="ampere-charge-label minus">− − − −</text>
-    <ellipse cx="445" cy="220" rx="205" ry="82" class="ampere-path" />
-    ${state.step === 2 ? amperePathSegments(visibleCount) : ''}
+    <text x="579" y="139" class="ampere-charge-label plus" opacity="${fieldOpacity.toFixed(3)}">+ + + +</text>
+    <text x="579" y="307" class="ampere-charge-label minus" opacity="${fieldOpacity.toFixed(3)}">− − − −</text>
+    ${frontField}
+    <path d="M240 220 A205 82 0 0 0 650 220" class="ampere-path" />
+    <g opacity="${(0.22 + motion.changeStrength * 0.78).toFixed(3)}">${frontSegments}</g>
     <path d="M674 168L625 184" class="ampere-callout" />
     <text x="683" y="165" class="small-label">虚拟积分路径 C</text>
     <text x="92" y="185" class="small-label">极板间没有</text>
     <text x="92" y="209" class="small-label">自由电荷穿越</text>
     <path d="M205 201L316 211" class="ampere-callout" />
-    <text x="445" y="423" text-anchor="middle" class="label">${
-      [
-        '导线电流给极板充电，但自由电荷不会穿过绝缘间隙',
-        '极板间 D 正在增强：穿过环面的 ΦD 随时间变化',
-        '沿 C 依次累加 H·dl：位移电流维持同方向的环绕磁场',
-      ][state.step]
-    }</text>`;
+    <text x="445" y="423" text-anchor="middle" class="label">${actionText}：绿色电场${motion.charging ? '增强' : '减弱'}，从上方看 H ${directionText}环绕</text>`;
 }
 
 function setContent() {
@@ -832,28 +935,21 @@ function setContent() {
     ];
     diagram = ampereCurrentDiagram();
   } else {
-    totalSteps = 3;
-    sceneTitle = [
-      '① 电容器正在充电',
-      '② 电位移通量正在变化',
-      '③ 间隙外仍有环绕磁场',
-    ][state.step];
-    meaning = [
-      '真实电流到达极板后停止：自由电荷<strong>没有穿过绝缘间隙</strong>，却让两极板的电荷不断积累。',
-      '极板间电位移 <strong>D</strong> 随充电增强，因此穿过环面的电位移通量 <strong>ΦD</strong> 正在变化。',
-      '变化率 <strong>dΦD/dt</strong> 等效为位移电流。沿同一虚拟路径 C 逐段积分，H 的环绕方向与导线电流保持连续。',
-    ][state.step];
-    metric = [
-      '间隙中：I导 = 0<small>没有自由电荷穿过电介质</small>',
-      '位移电流：Id = dΦD/dt ≠ 0',
-      state.count < ampereSegmentCount
-        ? `路径积分：${state.count}/${ampereSegmentCount} 个线元 dl<small>绿色短弧沿积分正方向依次点亮</small>`
-        : '完整一圈：∮C H·dl = dΦD/dt<small>位移电流保证安培环路定律在电容间隙中连续</small>',
-    ][state.step];
+    const motion = displacementMotion();
+    totalSteps = 1;
+    sceneTitle = `连续动画 · 电容器正在${motion.charging ? '充电' : '放电'}`;
+    meaning =
+      '绿色电场线随极板电荷连续增强或减弱；<strong>dΦD/dt</strong> 的正负决定蓝色磁场 <strong>H</strong> 的环绕方向。虚线 C 是积分路径，不是真实线圈。';
+    metric = motion.charging
+      ? '充电：dΦD/dt > 0 → H 顺时针<small>从上方看；极板电荷与电场强度正在增大</small>'
+      : '放电：dΦD/dt < 0 → H 逆时针<small>从上方看；极板电荷与电场强度正在减小</small>';
     controls = [
-      ['充电过程', 'ampere-0', state.step === 0],
-      ['D 的变化', 'ampere-1', state.step === 1],
-      ['逐段积分', 'ampere-2', state.step === 2],
+      [
+        state.displacementPaused ? '继续动画' : '暂停动画',
+        'displacement-toggle',
+        true,
+      ],
+      ['从头播放', 'displacement-replay', false],
     ];
     diagram = ampereDisplacementDiagram();
   }
@@ -867,11 +963,13 @@ function setContent() {
     )
     .join('');
   $('step-dots').innerHTML =
-    `<span>${state.step + 1} / ${totalSteps}</span>` +
-    Array.from(
-      { length: totalSteps },
-      (_, i) => `<b class="${i === state.step ? 'active' : ''}"></b>`,
-    ).join('');
+    law === 'ampere-displacement'
+      ? '<span>充电 ↔ 放电 · 连续循环</span><b class="active"></b>'
+      : `<span>${state.step + 1} / ${totalSteps}</span>` +
+        Array.from(
+          { length: totalSteps },
+          (_, i) => `<b class="${i === state.step ? 'active' : ''}"></b>`,
+        ).join('');
   svg.innerHTML = diagram;
   updateDiagramDescription();
 }
@@ -897,6 +995,12 @@ $('controls').addEventListener('click', (event) => {
     state.irregularInside = true;
   }
   if (action === 'toggle-step') state.step = 1 - state.step;
+  if (action === 'displacement-toggle')
+    state.displacementPaused = !state.displacementPaused;
+  if (action === 'displacement-replay') {
+    state.displacementProgress = 0;
+    state.displacementPaused = false;
+  }
   if (action?.startsWith('faraday-') || action?.startsWith('ampere-'))
     state.step = Number(action.slice(-1));
   state.frame = 0;
@@ -913,6 +1017,8 @@ function selectLaw(nextLaw) {
   state.count = 0;
   state.frame = 0;
   state.faradayProgress = 0;
+  state.displacementProgress = 0;
+  state.displacementPaused = false;
   state.irregularInside = true;
   document.title = page.title + ' · 麦克斯韦方程图解';
   for (const id of [
@@ -978,8 +1084,6 @@ setInterval(() => {
   if (law === 'electric' && state.step === 1) svg.innerHTML = electricOutside();
   if (law === 'ampere-current' && state.step < 2)
     svg.innerHTML = ampereCurrentDiagram();
-  if (law === 'ampere-displacement' && state.step < 2)
-    svg.innerHTML = ampereDisplacementDiagram();
   updateDiagramDescription();
 }, 430);
 
@@ -1004,6 +1108,19 @@ function animateFaraday(timestamp) {
     $('metric').firstChild.textContent =
       `路径求和：${state.count}/${faradaySegmentCount} 个短弧元`;
     updateDiagramDescription();
+  }
+  if (
+    !document.hidden &&
+    law === 'ampere-displacement' &&
+    !state.displacementPaused &&
+    dt > 0
+  ) {
+    const wasCharging = state.displacementProgress < 0.5;
+    state.displacementProgress =
+      (state.displacementProgress + dt / displacementCycleSeconds) % 1;
+    const isCharging = state.displacementProgress < 0.5;
+    svg.innerHTML = ampereDisplacementDiagram();
+    if (wasCharging !== isCharging) setContent();
   }
   requestAnimationFrame(animateFaraday);
 }

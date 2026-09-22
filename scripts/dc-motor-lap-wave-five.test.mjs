@@ -83,7 +83,10 @@ for (const mode of ['lap', 'wave']) {
     });
   }
   signs.forEach((values) =>
-    assert.deepEqual([...values].sort(), ['negative', 'positive']),
+    assert.deepEqual(
+      [...values].sort((a, b) => a.localeCompare(b)),
+      ['negative', 'positive'],
+    ),
   );
 }
 

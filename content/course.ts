@@ -771,6 +771,27 @@ export const slides: Slide[] = [
           chapterId: chapter.id,
           embedUrl: '/dc-machine-rated-data.html',
         },
+        {
+          id: 'dc-motor-nameplate-example',
+          kind: 'embed',
+          title: '例 7-1：从铭牌找已知量与待求量',
+          chapterId: chapter.id,
+          embedUrl: '/dc-motor-nameplate-example.html?page=problem',
+        },
+        {
+          id: 'dc-motor-nameplate-example-solution',
+          kind: 'embed',
+          title: '例 7-1：额定输入、电流与转矩',
+          chapterId: chapter.id,
+          embedUrl: '/dc-motor-nameplate-example.html?page=solution',
+        },
+        {
+          id: 'dc-generator-nameplate-example',
+          kind: 'embed',
+          title: '例 7-2：直流发电机额定运行计算',
+          chapterId: chapter.id,
+          embedUrl: '/dc-generator-nameplate-example.html',
+        },
       );
     }
 
