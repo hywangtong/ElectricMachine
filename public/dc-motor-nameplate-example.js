@@ -1,11 +1,16 @@
-const page = new URLSearchParams(window.location.search).get('page');
-const activeView = page === 'solution' ? 'solution' : 'problem';
+const page = document.querySelector('.exercise-page');
+const button = document.querySelector('.reveal-button');
+const label = button?.querySelector('.button-label');
+const solutionId = button?.getAttribute('aria-controls');
+const solution = solutionId ? document.getElementById(solutionId) : null;
 
-for (const element of document.querySelectorAll('[data-view]')) {
-  element.hidden = element.dataset.view !== activeView;
+if (page && button && label && solution) {
+  button.addEventListener('click', () => {
+    const revealed = button.getAttribute('aria-expanded') !== 'true';
+
+    button.setAttribute('aria-expanded', String(revealed));
+    label.textContent = revealed ? '收起计算过程与答案' : '显示计算过程与答案';
+    solution.hidden = !revealed;
+    page.classList.toggle('is-revealed', revealed);
+  });
 }
-
-document.title =
-  activeView === 'solution'
-    ? '例 7-1：额定输入、电流与转矩'
-    : '例 7-1：从铭牌找已知量与待求量';

@@ -11,26 +11,17 @@ const js = await readFile(
 );
 
 for (const value of ['10', '220', '1500', '88.6']) {
-  const escaped = value.replace('.', '\\.');
-  assert.match(
-    html,
-    new RegExp(` ${escaped}</b\\s*>`),
-    `nameplate includes ${value}`,
-  );
-}
-
-for (const symbol of ['P₁ = ?', 'Iₙ = ?', 'Tₙ = ?']) {
-  assert.ok(html.includes(symbol), `motor diagram includes unknown ${symbol}`);
+  assert.match(html, new RegExp(`= <b>${value.replace('.', '\\.')}</b>`));
 }
 
 for (const result of ['11.29 kW', '51.3 A', '63.66 N·m']) {
   assert.ok(html.includes(result), `solution includes ${result}`);
 }
 
-assert.match(html, /known-tag/);
-assert.match(html, /unknown-tag/);
-assert.match(js, /page === 'solution'/);
+assert.match(html, /class="solution-panel"[\s\S]*hidden/);
+assert.match(html, /aria-expanded="false"/);
+assert.match(html, /显示计算过程与答案/);
+assert.match(js, /addEventListener\('click'/);
+assert.match(js, /solution\.hidden = !revealed/);
 
-console.log(
-  'Nameplate example: plate values, colored mappings and results verified.',
-);
+console.log('Motor exercise: hidden solution and reveal interaction verified.');

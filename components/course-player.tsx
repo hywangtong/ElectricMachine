@@ -77,7 +77,11 @@ const findIntroTab = (id: string): EvPage | undefined => {
 };
 
 const findCourseIndex = (id: string) => {
-  const directIndex = courseSlides.findIndex((item) => item.id === id);
+  const stableId =
+    id === 'dc-motor-nameplate-example-solution'
+      ? 'dc-motor-nameplate-example'
+      : id;
+  const directIndex = courseSlides.findIndex((item) => item.id === stableId);
   if (directIndex >= 0) return directIndex;
   return findIntroTab(id)
     ? courseSlides.findIndex((item) => item.id === introTabAnchorId)
