@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>一根电枢导体怎样产生电磁转矩</title>
+    <link rel="stylesheet" href="/dc-motor-torque.css" />
+    <script src="/dc-machine-basics.js" defer></script>
+  </head>
+  <body>
+    <main class="lesson single-lesson">
+      <header class="page-head">
+        <div class="eyebrow">直流电机 / 25 · 电磁转矩</div>
+        <div class="title-row">
+          <div>
+            <h1>一根电枢导体，怎样产生转矩？</h1>
+            <p>先看一对极：每极磁通 → 平均磁密 → 安培力 → 单根导体转矩。</p>
+          </div>
+          <span class="case-badge">以 p = 1 为例</span>
+        </div>
+      </header>
+
+      <div class="single-layout">
+        <section class="derivation-card" aria-labelledby="derive-title">
+          <div class="card-heading">
+            <span class="section-index">01 · 三步推导</span>
+            <h2 id="derive-title">沿着“磁通 → 力 → 转矩”走</h2>
+          </div>
+
+          <ol class="derivation-steps">
+            <li>
+              <span class="step-number">1</span>
+              <div>
+                <strong>每极磁通决定平均磁感应强度</strong>
+                <p>一个磁极覆盖的气隙面积为 <i>τl</i>。</p>
+              </div>
+              <div class="formula">
+                <i>B</i><sub>δ,av</sub> =
+                <span class="fraction"><span>Φ</span><span>τl</span></span>
+              </div>
+            </li>
+            <li>
+              <span class="step-number">2</span>
+              <div>
+                <strong>安培力定则给出单根导体受力</strong>
+                <p>导体有效长度 <i>l</i>，其中电流为 <i>i</i>。</p>
+              </div>
+              <div class="formula">
+                <i>F</i><sub>c</sub> = <i>B</i><sub>δ,av</sub><i>li</i> =
+                <span class="fraction"><span>Φi</span><span>τ</span></span>
+              </div>
+            </li>
+            <li>
+              <span class="step-number">3</span>
+              <div>
+                <strong>乘以电枢半径，得到单根导体转矩</strong>
+                <p>
+                  一对极时 2π<i>R</i> = 2<i>τ</i>，所以 <i>R</i> = <i>τ</i>/π。
+                </p>
+              </div>
+              <div class="formula final-formula">
+                <i>T</i><sub>c</sub> = <i>F</i><sub>c</sub><i>R</i> =
+                <span class="fraction"><span>Φi</span><span>π</span></span>
+              </div>
+            </li>
+          </ol>
+
+          <div class="logic-strip" aria-label="推导逻辑">
+            <span>每极磁通 Φ</span><b>→</b><span>平均磁密 B<sub>δ,av</sub></span
+            ><b>→</b><span>导体力 F<sub>c</sub></span
+            ><b>→</b><span>导体转矩 T<sub>c</sub></span>
+          </div>
+        </section>
+
+        <section class="diagram-card" aria-labelledby="diagram-title">
+          <div class="card-heading">
+            <span class="section-index">02 · 空间关系</span>
+            <h2 id="diagram-title">磁极覆盖一个极距 τ</h2>
+          </div>
+          <svg
+            class="single-diagram"
+            viewBox="0 0 620 470"
+            role="img"
+            aria-labelledby="single-svg-title single-svg-desc"
+          >
+            <title id="single-svg-title">一对极直流电机单根导体受力示意</title>
+            <desc id="single-svg-desc">
+              磁极覆盖一个极距，气隙磁密作用于一根载流导体，导体受到切向力并对轴产生转矩。
+            </desc>
+            <defs>
+              <linearGradient id="flux-fill" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#3b82c4" stop-opacity="0.2" />
+                <stop offset="1" stop-color="#3b82c4" stop-opacity="0.04" />
+              </linearGradient>
+              <marker
+                id="force-arrow"
+                viewBox="0 0 10 10"
+                refX="8"
+                refY="5"
+                markerWidth="7"
+                markerHeight="7"
+                orient="auto-start-reverse"
+              >
+                <path d="M0 0L10 5L0 10Z" fill="#c85f2d" />
+              </marker>
+              <marker
+                id="dim-arrow"
+                viewBox="0 0 10 10"
+                refX="5"
+                refY="5"
+                markerWidth="6"
+                markerHeight="6"
+                orient="auto-start-reverse"
+              >
+                <path d="M10 0L0 5L10 10Z" fill="#55736d" />
+              </marker>
+            </defs>
+
+            <path
+              class="pole-shoe"
+              d="M115 92Q310 18 505 92L488 154Q310 106 132 154Z"
+            />
+            <text x="310" y="92" class="pole-label">N</text>
+            <path
+              class="armature"
+              d="M86 338A236 236 0 0 1 534 338L500 356A198 198 0 0 0 120 356Z"
+            />
+            <circle cx="310" cy="338" r="22" class="shaft" />
+            <line x1="310" y1="338" x2="420" y2="250" class="radius-line" />
+            <text x="369" y="311" class="math-label">R</text>
+
+            <path
+              d="M132 164Q310 118 488 164L496 292Q310 250 124 292Z"
+              fill="url(#flux-fill)"
+            />
+            <path
+              class="flux-profile"
+              d="M124 268C154 268 155 202 194 202H426C465 202 466 268 496 268"
+            />
+            <line x1="124" y1="292" x2="496" y2="292" class="axis-line" />
+            <text x="92" y="214" class="math-label blue">
+              B
+              <tspan baseline-shift="sub" font-size="16">δ,av</tspan>
+            </text>
+
+            <g class="conductor">
+              <circle cx="420" cy="250" r="21" />
+              <line x1="409" y1="239" x2="431" y2="261" />
+              <line x1="431" y1="239" x2="409" y2="261" />
+            </g>
+            <text x="444" y="246" class="body-label">电流 i（流入纸面）</text>
+            <line
+              x1="420"
+              y1="250"
+              x2="500"
+              y2="206"
+              class="force-line"
+              marker-end="url(#force-arrow)"
+            />
+            <text x="495" y="194" class="force-label">
+              F
+              <tspan baseline-shift="sub" font-size="16">c</tspan>
+              = B
+              <tspan baseline-shift="sub" font-size="16">δ,av</tspan>
+              li
+            </text>
+
+            <line x1="132" y1="178" x2="132" y2="322" class="dimension-tick" />
+            <line x1="488" y1="178" x2="488" y2="322" class="dimension-tick" />
+            <line
+              x1="142"
+              y1="312"
+              x2="478"
+              y2="312"
+              class="dimension-line"
+              marker-start="url(#dim-arrow)"
+              marker-end="url(#dim-arrow)"
+            />
+            <text x="303" y="306" class="math-label">τ</text>
+
+            <g class="area-note">
+              <rect x="110" y="387" width="400" height="54" rx="14" />
+              <text x="310" y="410">每极气隙面积 = 极距 × 有效长度</text>
+              <text x="310" y="432" class="area-formula">
+                A
+                <tspan baseline-shift="sub" font-size="14">pole</tspan>
+                = τl
+              </text>
+            </g>
+          </svg>
+          <div class="symbol-row">
+            <span><b>Φ</b> 每极磁通</span>
+            <span><b>τ</b> 极距</span>
+            <span><b>l</b> 有效长度</span>
+            <span><b>R</b> 电枢半径</span>
+          </div>
+        </section>
+      </div>
+
+      <footer class="takeaway">
+        <b>本页结论</b>
+        单根导体的转矩来自“磁场中的安培力 ×
+        电枢半径”；下一页把所有有效导体的转矩相加。
+      </footer>
+    </main>
+  </body>
+</html>

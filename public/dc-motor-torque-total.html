@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>从单根导体到整台直流电机的电磁转矩</title>
+    <link rel="stylesheet" href="/dc-motor-torque.css" />
+    <script src="/dc-machine-basics.js" defer></script>
+    <script type="module" src="/dc-motor-torque-total.js"></script>
+  </head>
+  <body>
+    <main class="lesson total-lesson">
+      <header class="page-head total-head">
+        <div>
+          <div class="eyebrow">直流电机 / 26 · 电磁转矩</div>
+          <h1>从一根导体，到整台电机</h1>
+          <p>数清有效导体，再把每根导体产生的转矩相加。</p>
+        </div>
+        <div class="top-identity">
+          <span>总导体数 Z = 4aN</span>
+          <b>电枢电流 I<sub>a</sub> = 2ai</b>
+        </div>
+      </header>
+
+      <div class="total-layout">
+        <section class="equation-card" aria-labelledby="total-derive-title">
+          <div class="card-heading">
+            <span class="section-index">01 · 合成全部导体转矩</span>
+            <h2 id="total-derive-title">并联支路把匝数与电流连接起来</h2>
+          </div>
+
+          <div class="count-grid">
+            <div><span>每条支路总匝数</span><b>N</b></div>
+            <div><span>并联支路数</span><b>2a</b></div>
+            <div><span>总导体数</span><b>Z = 2N · 2a = 4aN</b></div>
+            <div>
+              <span>每根导体电流</span><b>i = I<sub>a</sub> / 2a</b>
+            </div>
+          </div>
+
+          <div class="equation-stack" aria-label="电磁转矩公式推导">
+            <div><i>T</i><sub>e</sub> = <i>ZF</i><sub>c</sub><i>R</i></div>
+            <div>
+              = 4<i>aN</i> · (<i>B</i><sub>δ,av</sub><i>li</i>) · <i>R</i>
+            </div>
+            <div class="substitution">
+              = 4<i>aN</i> ·
+              <span class="fraction"><span>Φ</span><span>τl</span></span
+              ><i>li</i> ·
+              <span class="fraction"><span>pτ</span><span>π</span></span>
+            </div>
+            <div>
+              = <span class="fraction"><span>2pN</span><span>π</span></span> Φ ·
+              (2<i>ai</i>)
+            </div>
+          </div>
+
+          <div class="result-box">
+            <span>直流电机电磁转矩</span>
+            <strong
+              ><i>T</i><sub>e</sub> =
+              <span class="fraction"><span>2pN</span><span>π</span></span> Φ<i
+                >I</i
+              ><sub>a</sub></strong
+            >
+            <small>其中 Φ 始终表示<strong>每极磁通</strong></small>
+          </div>
+          <p class="geometry-note">几何关系：2πR = 2pτ，因此 R = pτ / π。</p>
+        </section>
+
+        <section class="interactive-card" aria-labelledby="flux-title">
+          <div class="interactive-head">
+            <div>
+              <span class="section-index">02 · 极对数交互</span>
+              <h2 id="flux-title">总磁通如何分到各个磁极？</h2>
+            </div>
+            <label class="pole-select">
+              <span>极对数 p</span>
+              <select id="pole-pairs">
+                <option value="1">1 对极（2 极）</option>
+                <option value="2" selected>2 对极（4 极）</option>
+                <option value="3">3 对极（6 极）</option>
+                <option value="4">4 对极（8 极）</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="flux-metrics" aria-live="polite">
+            <div>
+              <span>固定总磁通</span><b>Φ<sub>Σ</sub> = 80 mWb</b>
+            </div>
+            <div><span>磁极数</span><b id="pole-count">2p = 4</b></div>
+            <div>
+              <span>每极磁通</span><b id="per-pole-flux">Φ = 20.0 mWb</b>
+            </div>
+          </div>
+
+          <div class="machine-wrap">
+            <svg
+              id="pole-machine"
+              viewBox="0 0 620 390"
+              role="img"
+              aria-labelledby="pole-svg-title pole-svg-desc"
+            >
+              <title id="pole-svg-title">
+                可选择极对数的直流电机磁通分配动画
+              </title>
+              <desc id="pole-svg-desc">
+                总磁通固定时，极对数越多，磁极数越多，每个磁极分得的每极磁通越小。
+              </desc>
+            </svg>
+            <div class="center-label" aria-hidden="true">
+              <span>总磁通</span>
+              <strong>Φ<sub>Σ</sub></strong>
+              <small>分到 2p 个极</small>
+            </div>
+          </div>
+
+          <div class="flux-explanation">
+            <div>
+              <span>动画中的分配关系</span>
+              <b>Φ = Φ<sub>Σ</sub> / (2p)</b>
+            </div>
+            <p>
+              公式中的 Φ
+              是<strong>每极磁通</strong>，不是总磁通；因此标准式中仍保留极对数
+              p。
+            </p>
+          </div>
+          <div class="torque-reading">
+            <span>取 N = 240，I<sub>a</sub> = 12 A</span>
+            <b id="torque-reading">T<sub>e</sub> = 73.3 N·m</b>
+            <small
+              >本动画固定 Φ<sub>Σ</sub>，所以 pΦ =
+              Φ<sub>Σ</sub>/2，计算转矩保持不变。</small
+            >
+          </div>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>
