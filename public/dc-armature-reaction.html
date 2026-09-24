@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>直流电机的电枢反应</title>
+    <link rel="stylesheet" href="/dc-armature-reaction.css" />
+    <script src="/dc-machine-basics.js" defer></script>
+    <script type="module" src="/dc-armature-reaction.js"></script>
+  </head>
+  <body>
+    <main class="lesson">
+      <header class="page-head">
+        <div class="eyebrow">直流电机 / 24 · 电枢反应</div>
+        <h1>负载以后，气隙磁场为什么会“歪”？</h1>
+        <p>励磁磁场与电枢磁场叠加，合成磁场发生畸变，物理中性线随之偏移。</p>
+      </header>
+
+      <div class="layout">
+        <section class="machine-card" aria-labelledby="machine-title">
+          <div class="card-head">
+            <div>
+              <span class="section-index">01 · 磁场叠加</span>
+              <h2 id="machine-title">电机轴向剖面 · 逆时针恒速旋转</h2>
+            </div>
+            <div class="speed-badge">恒速 n = 5 r/min</div>
+          </div>
+          <svg
+            id="machine"
+            viewBox="0 0 820 470"
+            role="img"
+            aria-label="两极直流电机剖面，转子和换向片同步旋转，蓝色带箭头曲线表示磁场"
+          ></svg>
+          <div class="diagram-legend" aria-label="图例">
+            <span><i class="solid-line"></i>合成磁场 B<sub>δ</sub></span>
+            <span><i class="dash-line"></i>电枢磁场 B<sub>a</sub></span>
+            <span><i class="neutral-line"></i>物理中性线</span>
+            <span><i class="tracked-line"></i>跟踪线圈 A–B / C1·C2</span>
+            <span
+              ><i class="dot-symbol">•</i> /
+              <i class="cross-symbol">×</i> 电枢导体电流</span
+            >
+          </div>
+        </section>
+
+        <aside class="right-column">
+          <section class="control-card" aria-labelledby="control-title">
+            <div class="card-head compact">
+              <div>
+                <span class="section-index">02 · 改变负载</span>
+                <h2 id="control-title">控制台</h2>
+              </div>
+              <button
+                id="pause"
+                class="pause-button"
+                type="button"
+                aria-pressed="false"
+              >
+                暂停动画 P
+              </button>
+            </div>
+
+            <div class="switch-row">
+              <div>
+                <strong>励磁绕组电流</strong>
+                <span id="field-state">已接通 · I<sub>f</sub> = 额定值</span>
+              </div>
+              <label class="switch">
+                <input id="field-switch" type="checkbox" checked />
+                <span class="switch-track" aria-hidden="true"></span>
+                <span class="sr-only">接通或断开励磁绕组电流</span>
+              </label>
+            </div>
+
+            <div class="slider-block">
+              <div class="slider-label">
+                <label for="armature-current">电枢电流 I<sub>a</sub></label>
+                <output id="current-reading" for="armature-current"
+                  >55 A</output
+                >
+              </div>
+              <input
+                id="armature-current"
+                type="range"
+                min="0"
+                max="100"
+                step="1"
+                value="55"
+              />
+              <div class="range-scale">
+                <span>空载 0 A</span><span>负载增大</span><span>100 A</span>
+              </div>
+            </div>
+
+            <div class="result-strip">
+              <div>
+                <span>交轴磁势</span>
+                <strong id="armature-field-reading">0.30 p.u.</strong>
+              </div>
+              <div>
+                <span>中性线偏移</span>
+                <strong id="neutral-reading">16.8°</strong>
+              </div>
+              <div>
+                <span>当前状态</span>
+                <strong id="animation-state">运行中</strong>
+              </div>
+            </div>
+            <p id="pause-note" class="control-note">
+              按 P
+              或按钮暂停。暂停冻结转子、换向片、读数与波形；它不是把电机转速降为
+              0。
+            </p>
+          </section>
+
+          <section class="scope-card" aria-labelledby="scope-title">
+            <div class="card-head compact">
+              <div>
+                <span class="section-index">03 · 跟踪线圈 A–B</span>
+                <h2 id="scope-title">特定线圈 A–B 的内部反电势</h2>
+              </div>
+              <output id="emf-reading" class="emf-reading">+0.0 V</output>
+            </div>
+            <svg
+              id="scope"
+              viewBox="0 0 510 185"
+              role="img"
+              aria-label="被跟踪线圈 A–B 最近十二秒的内部反电势，以及其换向片 C1 和 C2 同时被电刷短接时的标志波形"
+            ></svg>
+            <div class="scope-meta">
+              <span class="scope-keys">
+                <i class="emf-key"></i>e<sub>AB</sub> / V
+                <i class="short-key"></i>q<sub>AB</sub>：C1/C2 短接 = 1
+              </span>
+              <span id="scope-clock">最近 12 s · t = 0.0 s</span>
+            </div>
+          </section>
+
+          <section class="takeaway-card" aria-labelledby="takeaway-title">
+            <span class="section-index">04 · 看懂现象</span>
+            <h2 id="takeaway-title">电枢反应 = 电枢磁势对主磁场的影响</h2>
+            <div class="formula-line">
+              <span>B<sub>δ</sub></span
+              ><b>=</b><span>B<sub>f</sub></span
+              ><b>+</b><span>B<sub>a</sub></span>
+            </div>
+            <p id="explanation">
+              I<sub>a</sub> 增大 → 交轴磁场增强 → 一侧极尖增磁、另一侧去磁 →
+              物理中性线偏移。
+            </p>
+          </section>
+        </aside>
+      </div>
+
+      <footer>
+        <strong>观察重点</strong>
+        <span>转子导体和换向片同相位；固定电刷在换向区交换导体电流方向。</span>
+        <span>教学模型忽略饱和、漏磁、电枢电感与换向火花。</span>
+      </footer>
+    </main>
+  </body>
+</html>

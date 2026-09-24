@@ -785,6 +785,13 @@ export const slides: Slide[] = [
           chapterId: chapter.id,
           embedUrl: '/dc-generator-nameplate-example.html',
         },
+        {
+          id: 'dc-armature-reaction',
+          kind: 'embed',
+          title: '直流电机的电枢反应',
+          chapterId: chapter.id,
+          embedUrl: '/dc-armature-reaction.html',
+        },
       );
     }
 
