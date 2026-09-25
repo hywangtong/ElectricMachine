@@ -37,6 +37,15 @@ function element(name, attributes = {}) {
   return node;
 }
 
+function fieldLinePath(cx, cy, poleRadius, rotorRadius, lineAngle, isNorth) {
+  const polePoint = polar(cx, cy, poleRadius, lineAngle);
+  const rotorPoint = polar(cx, cy, rotorRadius, lineAngle);
+  const start = isNorth ? polePoint : rotorPoint;
+  const end = isNorth ? rotorPoint : polePoint;
+
+  return `M ${start.x} ${start.y} L ${end.x} ${end.y}`;
+}
+
 function render(polePairs) {
   const state = torqueState(polePairs);
   const cx = 310;
@@ -48,6 +57,25 @@ function render(polePairs) {
   const gap = Math.min(0.08, poleAngle * 0.08);
 
   svg.replaceChildren();
+
+  const definitions = element('defs');
+  const fieldArrow = element('marker', {
+    id: 'pole-field-arrow',
+    viewBox: '0 0 10 10',
+    refX: 8.5,
+    refY: 5,
+    markerWidth: 6,
+    markerHeight: 6,
+    orient: 'auto-start-reverse',
+  });
+  fieldArrow.append(
+    element('path', {
+      d: 'M 0 0 L 10 5 L 0 10 Z',
+      class: 'flux-arrowhead',
+    }),
+  );
+  definitions.append(fieldArrow);
+  svg.append(definitions);
 
   const stator = element('circle', {
     cx,
@@ -61,7 +89,19 @@ function render(polePairs) {
     r: outerPoleRadius - 3,
     fill: '#fff',
   });
-  svg.append(stator, statorOpening);
+  const rotor = element('circle', {
+    cx,
+    cy,
+    r: rotorRadius,
+    class: 'machine-rotor',
+  });
+  const shaft = element('circle', {
+    cx,
+    cy,
+    r: 40,
+    class: 'machine-shaft',
+  });
+  svg.append(stator, statorOpening, rotor, shaft);
 
   for (let index = 0; index < state.poleCount; index += 1) {
     const centerAngle = -Math.PI / 2 + index * poleAngle;
@@ -85,16 +125,36 @@ function render(polePairs) {
     label.textContent = isNorth ? 'N' : 'S';
     svg.append(label);
 
-    const fluxStart = polar(cx, cy, innerPoleRadius - 6, centerAngle);
-    const fluxEnd = polar(cx, cy, 61, centerAngle);
-    const line = element('path', {
-      d: `M ${fluxStart.x} ${fluxStart.y} Q ${
-        cx + (fluxStart.x - cx) * 0.45
-      } ${cy + (fluxStart.y - cy) * 0.45} ${fluxEnd.x} ${fluxEnd.y}`,
-      class: `flux-path ${isNorth ? 'inward' : 'outward'}`,
-    });
-    line.style.animationDelay = `${-index * 0.13}s`;
-    svg.append(line);
+    const fieldSpan = (end - start) * 0.82;
+    const estimatedLineCount = Math.max(
+      5,
+      Math.round((fieldSpan * innerPoleRadius) / 18),
+    );
+    const lineCount =
+      estimatedLineCount % 2 === 0
+        ? estimatedLineCount + 1
+        : estimatedLineCount;
+    const lineAngles = Array.from(
+      { length: lineCount },
+      (_, lineIndex) =>
+        centerAngle - fieldSpan / 2 + (fieldSpan * lineIndex) / (lineCount - 1),
+    );
+    for (const lineAngle of lineAngles) {
+      svg.append(
+        element('path', {
+          d: fieldLinePath(
+            cx,
+            cy,
+            innerPoleRadius + 5,
+            rotorRadius - 6,
+            lineAngle,
+            isNorth,
+          ),
+          class: 'flux-path',
+          'marker-end': 'url(#pole-field-arrow)',
+        }),
+      );
+    }
 
     const chipPoint = polar(cx, cy, 214, centerAngle);
     const chip = element('g', { class: 'flux-chip' });
@@ -115,21 +175,6 @@ function render(polePairs) {
     chip.append(chipText);
     svg.append(chip);
   }
-
-  svg.append(
-    element('circle', {
-      cx,
-      cy,
-      r: rotorRadius,
-      class: 'machine-rotor',
-    }),
-    element('circle', {
-      cx,
-      cy,
-      r: 40,
-      class: 'machine-shaft',
-    }),
-  );
 
   poleCountOutput.textContent = `2p = ${state.poleCount}`;
   perPoleOutput.textContent = `Φ = ${(state.perPoleFlux * 1000).toFixed(1)} mWb`;

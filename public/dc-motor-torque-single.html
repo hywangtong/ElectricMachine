@@ -6,6 +6,7 @@
     <title>一根电枢导体怎样产生电磁转矩</title>
     <link rel="stylesheet" href="/dc-motor-torque.css" />
     <script src="/dc-machine-basics.js" defer></script>
+    <script src="/dc-motor-torque-single.js" defer></script>
   </head>
   <body>
     <main class="lesson single-lesson">
@@ -75,7 +76,20 @@
         <section class="diagram-card" aria-labelledby="diagram-title">
           <div class="card-heading">
             <span class="section-index">02 · 空间关系</span>
-            <h2 id="diagram-title">磁极覆盖一个极距 τ</h2>
+            <div class="diagram-heading-actions">
+              <button
+                id="branch-toggle"
+                class="branch-switch"
+                type="button"
+                role="switch"
+                aria-checked="false"
+                aria-controls="branch-two circuit-branch-two"
+              >
+                <span>并联支路</span>
+                <b id="branch-value">1</b>
+              </button>
+              <h2 id="diagram-title">磁极覆盖一个极距 τ</h2>
+            </div>
           </div>
           <svg
             class="single-diagram"
@@ -83,15 +97,14 @@
             role="img"
             aria-labelledby="single-svg-title single-svg-desc"
           >
-            <title id="single-svg-title">一对极直流电机单根导体受力示意</title>
+            <title id="single-svg-title">
+              一对极直流电机气隙导体受力与外接电源示意
+            </title>
             <desc id="single-svg-desc">
-              磁极覆盖一个极距，气隙磁密作用于一根载流导体，导体受到切向力并对轴产生转矩。
+              N
+              极与转子采用二维同心弧面，蓝色磁感线垂直穿出磁极并垂直进入转子。开关可在一条和两条并联支路之间切换；两支路时气隙内显示两根与磁感线错开的载流导体，两根导体的出端并联到同一个外接电源。图下方另用尺寸示意标出轴向有效长度。气隙内的虚线路径与独立曲线共同说明磁感应强度沿气隙位置的分布，并保留每极气隙面积公式。
             </desc>
             <defs>
-              <linearGradient id="flux-fill" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="#3b82c4" stop-opacity="0.2" />
-                <stop offset="1" stop-color="#3b82c4" stop-opacity="0.04" />
-              </linearGradient>
               <marker
                 id="force-arrow"
                 viewBox="0 0 10 10"
@@ -104,87 +117,239 @@
                 <path d="M0 0L10 5L0 10Z" fill="#c85f2d" />
               </marker>
               <marker
-                id="dim-arrow"
+                id="field-arrow"
+                viewBox="0 0 10 10"
+                refX="8"
+                refY="5"
+                markerWidth="5"
+                markerHeight="5"
+                orient="auto"
+              >
+                <path d="M0 0L10 5L0 10Z" fill="#2f78b7" />
+              </marker>
+              <marker
+                id="path-arrow"
+                viewBox="0 0 10 10"
+                refX="8"
+                refY="5"
+                markerWidth="5"
+                markerHeight="5"
+                orient="auto"
+              >
+                <path d="M0 0L10 5L0 10Z" fill="#55736d" />
+              </marker>
+              <marker
+                id="length-arrow"
                 viewBox="0 0 10 10"
                 refX="5"
                 refY="5"
-                markerWidth="6"
-                markerHeight="6"
+                markerWidth="5"
+                markerHeight="5"
                 orient="auto-start-reverse"
               >
-                <path d="M10 0L0 5L10 10Z" fill="#55736d" />
+                <path d="M10 0L0 5L10 10Z" fill="#39796f" />
               </marker>
             </defs>
 
             <path
               class="pole-shoe"
-              d="M115 92Q310 18 505 92L488 154Q310 106 132 154Z"
+              d="M250 18Q242 18 242 27L240 92C240 104 233 110 220 111C174 112 139 132 123 164C115 180 108 201 102 224A330 330 0 0 1 518 224C512 201 505 180 497 164C481 132 446 112 400 111C387 110 380 104 380 92L378 27Q378 18 370 18Z"
             />
-            <text x="310" y="92" class="pole-label">N</text>
+            <text x="310" y="82" class="pole-label">N</text>
             <path
               class="armature"
-              d="M86 338A236 236 0 0 1 534 338L500 356A198 198 0 0 0 120 356Z"
+              d="M83 300A290 290 0 0 1 537 300L507 310A260 260 0 0 0 113 310Z"
             />
-            <circle cx="310" cy="338" r="22" class="shaft" />
-            <line x1="310" y1="338" x2="420" y2="250" class="radius-line" />
-            <text x="369" y="311" class="math-label">R</text>
 
-            <path
-              d="M132 164Q310 118 488 164L496 292Q310 250 124 292Z"
-              fill="url(#flux-fill)"
-            />
-            <path
-              class="flux-profile"
-              d="M124 268C154 268 155 202 194 202H426C465 202 466 268 496 268"
-            />
-            <line x1="124" y1="292" x2="496" y2="292" class="axis-line" />
-            <text x="92" y="214" class="math-label blue">
-              B
-              <tspan baseline-shift="sub" font-size="16">δ,av</tspan>
-            </text>
-
-            <g class="conductor">
-              <circle cx="420" cy="250" r="21" />
-              <line x1="409" y1="239" x2="431" y2="261" />
-              <line x1="431" y1="239" x2="409" y2="261" />
+            <g class="field-lines" aria-label="N 极指向转子的气隙磁感线">
+              <line
+                x1="310"
+                y1="150"
+                x2="310"
+                y2="190"
+                transform="rotate(-34 310 480)"
+              />
+              <line
+                x1="310"
+                y1="150"
+                x2="310"
+                y2="190"
+                transform="rotate(-25 310 480)"
+              />
+              <line
+                x1="310"
+                y1="150"
+                x2="310"
+                y2="190"
+                transform="rotate(-17 310 480)"
+              />
+              <line
+                x1="310"
+                y1="150"
+                x2="310"
+                y2="190"
+                transform="rotate(-9 310 480)"
+              />
+              <line x1="310" y1="150" x2="310" y2="190" />
+              <line
+                x1="310"
+                y1="150"
+                x2="310"
+                y2="190"
+                transform="rotate(9 310 480)"
+              />
+              <line
+                x1="310"
+                y1="150"
+                x2="310"
+                y2="190"
+                transform="rotate(17 310 480)"
+              />
             </g>
-            <text x="444" y="246" class="body-label">电流 i（流入纸面）</text>
-            <line
-              x1="420"
-              y1="250"
-              x2="500"
-              y2="206"
-              class="force-line"
-              marker-end="url(#force-arrow)"
-            />
-            <text x="495" y="194" class="force-label">
-              F
-              <tspan baseline-shift="sub" font-size="16">c</tspan>
-              = B
-              <tspan baseline-shift="sub" font-size="16">δ,av</tspan>
-              li
-            </text>
 
-            <line x1="132" y1="178" x2="132" y2="322" class="dimension-tick" />
-            <line x1="488" y1="178" x2="488" y2="322" class="dimension-tick" />
-            <line
-              x1="142"
-              y1="312"
-              x2="478"
-              y2="312"
-              class="dimension-line"
-              marker-start="url(#dim-arrow)"
-              marker-end="url(#dim-arrow)"
+            <path
+              id="gap-path"
+              class="gap-path"
+              d="M123.5 232.2A310 310 0 0 1 496.5 232.2"
+              marker-end="url(#path-arrow)"
             />
-            <text x="303" y="306" class="math-label">τ</text>
 
-            <g class="area-note">
-              <rect x="110" y="387" width="400" height="54" rx="14" />
-              <text x="310" y="410">每极气隙面积 = 极距 × 有效长度</text>
-              <text x="310" y="432" class="area-formula">
+            <g class="conductor" aria-label="气隙中的载流导体 D1">
+              <circle cx="441" cy="199" r="10" />
+              <line x1="436" y1="194" x2="446" y2="204" />
+              <line x1="446" y1="194" x2="436" y2="204" />
+              <text x="448" y="183" class="conductor-tag">D1 · i₁×</text>
+              <line
+                x1="441"
+                y1="199"
+                x2="474"
+                y2="215"
+                class="force-line"
+                marker-end="url(#force-arrow)"
+              />
+              <text x="478" y="220" class="force-label">
+                F
+                <tspan baseline-shift="sub" font-size="12">c1</tspan>
+              </text>
+            </g>
+            <g
+              id="branch-two"
+              class="conductor branch-two"
+              aria-label="气隙中的载流导体 D2"
+              hidden
+            >
+              <circle cx="488" cy="226" r="10" />
+              <line x1="483" y1="221" x2="493" y2="231" />
+              <line x1="493" y1="221" x2="483" y2="231" />
+              <text x="499" y="211" class="conductor-tag">D2 · i₂×</text>
+              <line
+                x1="488"
+                y1="226"
+                x2="518"
+                y2="247"
+                class="force-line"
+                marker-end="url(#force-arrow)"
+              />
+              <text x="522" y="254" class="force-label">
+                F
+                <tspan baseline-shift="sub" font-size="12">c2</tspan>
+              </text>
+            </g>
+            <line x1="435" y1="211" x2="386" y2="301" class="radius-line" />
+            <text x="395" y="267" class="math-label">R</text>
+
+            <g class="path-key">
+              <line x1="48" y1="320" x2="108" y2="320" />
+              <text x="118" y="325">沿气隙路径 s（极距 τ）</text>
+            </g>
+            <g class="depth-key" aria-label="轴向有效长度示意">
+              <line
+                x1="323"
+                y1="323"
+                x2="405"
+                y2="323"
+                class="depth-conductor"
+              />
+              <line
+                x1="323"
+                y1="309"
+                x2="405"
+                y2="309"
+                class="length-line"
+                marker-start="url(#length-arrow)"
+                marker-end="url(#length-arrow)"
+              />
+              <text x="364" y="303">轴向有效长度 l</text>
+            </g>
+            <g class="area-formula-badge">
+              <rect x="445" y="307" width="130" height="29" rx="9" />
+              <text x="510" y="327">
                 A
-                <tspan baseline-shift="sub" font-size="14">pole</tspan>
-                = τl
+                <tspan baseline-shift="sub" font-size="11">pole</tspan>
+                = τ × l
+              </text>
+            </g>
+
+            <g
+              class="profile-chart"
+              aria-label="磁感应强度沿气隙路径的分布曲线"
+            >
+              <rect x="38" y="338" width="310" height="120" rx="12" />
+              <text x="54" y="360" class="profile-title">
+                B
+                <tspan baseline-shift="sub" font-size="12">δ</tspan>
+                (s)：沿虚线路径分布
+              </text>
+              <line x1="72" y1="430" x2="329" y2="430" class="chart-axis" />
+              <line x1="72" y1="430" x2="72" y2="370" class="chart-axis" />
+              <path
+                d="M82 426C94 425 99 409 111 391C121 377 135 373 154 373H252C271 373 285 377 295 391C307 409 312 425 324 426"
+                class="profile-curve"
+              />
+              <line x1="111" y1="397" x2="295" y2="397" class="average-line" />
+              <text x="297" y="393" class="average-label">
+                B
+                <tspan baseline-shift="sub" font-size="10">δ,av</tspan>
+              </text>
+              <text x="53" y="378" class="chart-label">
+                B
+                <tspan baseline-shift="sub" font-size="10">δ</tspan>
+              </text>
+              <text x="323" y="448" class="chart-label">s</text>
+            </g>
+
+            <g class="supply-chart" aria-label="气隙导体由外接电源供电的接线图">
+              <rect x="360" y="338" width="222" height="120" rx="12" />
+              <text id="supply-title" x="374" y="360" class="supply-title">
+                外接电源供电 · 1 支路
+              </text>
+              <line x1="382" y1="382" x2="540" y2="382" class="supply-bus" />
+              <line x1="382" y1="430" x2="540" y2="430" class="supply-bus" />
+              <g class="circuit-branch" aria-label="导体 D1 支路">
+                <line x1="414" y1="382" x2="414" y2="394" />
+                <rect x="402" y="394" width="24" height="24" rx="5" />
+                <text x="414" y="410">D1</text>
+                <line x1="414" y1="418" x2="414" y2="430" />
+              </g>
+              <g
+                id="circuit-branch-two"
+                class="circuit-branch branch-two"
+                aria-label="导体 D2 支路，与 D1 并联"
+                hidden
+              >
+                <line x1="466" y1="382" x2="466" y2="394" />
+                <rect x="454" y="394" width="24" height="24" rx="5" />
+                <text x="466" y="410">D2</text>
+                <line x1="466" y1="418" x2="466" y2="430" />
+              </g>
+              <g class="external-source" aria-label="外接直流电源">
+                <rect x="536" y="374" width="34" height="64" rx="8" />
+                <text x="553" y="390" class="source-sign">+</text>
+                <text x="553" y="413" class="source-label">U</text>
+                <text x="553" y="432" class="source-sign">−</text>
+              </g>
+              <text id="branch-current" x="374" y="449" class="branch-current">
+                每支路电流：I
               </text>
             </g>
           </svg>
@@ -193,6 +358,7 @@
             <span><b>τ</b> 极距</span>
             <span><b>l</b> 有效长度</span>
             <span><b>R</b> 电枢半径</span>
+            <span><b>s</b> 沿气隙位置</span>
           </div>
         </section>
       </div>

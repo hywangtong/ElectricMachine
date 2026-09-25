@@ -113,6 +113,56 @@ h1 {
   gap: 16px;
 }
 
+.diagram-heading-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.branch-switch {
+  min-width: 106px;
+  height: 31px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  border: 1px solid #9ebbb3;
+  border-radius: 999px;
+  padding: 3px 5px 3px 10px;
+  color: #315f5b;
+  background: #f3f8f5;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.branch-switch b {
+  width: 23px;
+  height: 23px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: white;
+  background: #39796f;
+  font-size: 13px;
+}
+
+.branch-switch[aria-checked='true'] {
+  border-color: #cf7441;
+  color: #8d421f;
+  background: #fff4e9;
+}
+
+.branch-switch[aria-checked='true'] b {
+  background: #c85f2d;
+}
+
+.branch-switch:focus-visible {
+  outline: 3px solid #79a9cf;
+  outline-offset: 2px;
+}
+
 .card-heading h2,
 .interactive-head h2 {
   margin: 3px 0 0;
@@ -251,32 +301,24 @@ h1 {
   stroke-width: 3;
 }
 
-.shaft {
-  fill: white;
-  stroke: #526f6a;
-  stroke-width: 3;
-}
-
 .radius-line {
   stroke: #315f5b;
-  stroke-width: 3;
-}
-
-.flux-profile {
-  fill: none;
-  stroke: #3b82c4;
-  stroke-width: 5;
-}
-
-.axis-line,
-.dimension-tick {
-  stroke: #879b97;
-  stroke-width: 1.5;
-}
-
-.dimension-line {
-  stroke: #55736d;
   stroke-width: 2;
+  stroke-dasharray: 5 4;
+}
+
+.field-lines line {
+  stroke: #2f78b7;
+  stroke-width: 2;
+  stroke-linecap: round;
+  marker-end: url('#field-arrow');
+}
+
+.gap-path {
+  fill: none;
+  stroke: #55736d;
+  stroke-width: 1.8;
+  stroke-dasharray: 7 6;
 }
 
 .math-label {
@@ -286,24 +328,30 @@ h1 {
   font-style: italic;
 }
 
-.math-label.blue {
-  fill: #2e6da8;
-}
-
 .conductor circle {
   fill: #fff3e8;
   stroke: #be4f2f;
-  stroke-width: 3;
+  stroke-width: 2.5;
 }
 
 .conductor line {
   stroke: #be4f2f;
-  stroke-width: 3;
+  stroke-width: 2.3;
 }
 
-.body-label {
-  fill: #5a706c;
-  font-size: 15px;
+.conductor-tag {
+  fill: #9c4b28;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.branch-two[hidden] {
+  display: none;
+}
+
+.length-line {
+  stroke: #39796f;
+  stroke-width: 1.5;
 }
 
 .force-line {
@@ -314,26 +362,145 @@ h1 {
 .force-label {
   fill: #a94e25;
   font-family: Georgia, 'Times New Roman', serif;
-  font-size: 22px;
+  font-size: 18px;
   font-style: italic;
   font-weight: 700;
 }
 
-.area-note rect {
-  fill: #f3f8f5;
-  stroke: #b9d0c9;
+.path-key line {
+  stroke: #55736d;
+  stroke-width: 1.8;
+  stroke-dasharray: 7 6;
 }
 
-.area-note text {
+.path-key text {
   fill: #526f6a;
-  font-size: 15px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.depth-key text {
+  fill: #315f5b;
+  font-size: 11px;
+  font-weight: 800;
   text-anchor: middle;
 }
 
-.area-note .area-formula {
-  fill: #174f55;
+.depth-conductor {
+  stroke: #d87948;
+  stroke-width: 8;
+  stroke-linecap: round;
+}
+
+.area-formula-badge rect {
+  fill: #fff8e9;
+  stroke: #d9c59f;
+}
+
+.area-formula-badge text {
+  fill: #885322;
   font-family: Georgia, 'Times New Roman', serif;
-  font-size: 18px;
+  font-size: 16px;
+  font-weight: 700;
+  text-anchor: middle;
+}
+
+.profile-chart rect {
+  fill: #f6fafc;
+  stroke: #c4d8e6;
+}
+
+.profile-title {
+  fill: #174f55;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.chart-axis {
+  stroke: #879b97;
+  stroke-width: 1.4;
+}
+
+.profile-curve {
+  fill: none;
+  stroke: #2f78b7;
+  stroke-width: 3.5;
+  stroke-linecap: round;
+}
+
+.average-line {
+  stroke: #6f9fc6;
+  stroke-width: 1.4;
+  stroke-dasharray: 6 5;
+}
+
+.average-label,
+.chart-label {
+  fill: #2e6da8;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 13px;
+  font-style: italic;
+}
+
+.supply-chart > rect {
+  fill: #fffaf1;
+  stroke: #dfc9a4;
+}
+
+.supply-title {
+  fill: #805126;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.supply-bus {
+  stroke: #b65a2f;
+  stroke-width: 2.5;
+}
+
+.circuit-branch line {
+  stroke: #b65a2f;
+  stroke-width: 2.5;
+}
+
+.circuit-branch rect {
+  fill: #fff3e8;
+  stroke: #b65a2f;
+  stroke-width: 1.6;
+}
+
+.circuit-branch text {
+  fill: #984520;
+  font-size: 10px;
+  font-weight: 800;
+  text-anchor: middle;
+}
+
+.external-source rect {
+  fill: white;
+  stroke: #885322;
+  stroke-width: 1.8;
+}
+
+.external-source text {
+  fill: #885322;
+  font-weight: 800;
+  text-anchor: middle;
+}
+
+.source-sign {
+  font-size: 16px;
+}
+
+.source-label {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 13px;
+  font-style: italic;
+}
+
+.branch-current {
+  fill: #765d45;
+  font-size: 11px;
   font-weight: 700;
 }
 
@@ -637,19 +804,14 @@ h1 {
 
 .flux-path {
   fill: none;
-  stroke-width: 7;
+  stroke: #2f78b7;
+  stroke-width: 1.6;
   stroke-linecap: round;
-  stroke-dasharray: 12 10;
-  animation: flux-flow 1.5s linear infinite;
+  opacity: 0.82;
 }
 
-.flux-path.inward {
-  stroke: #d76a42;
-}
-
-.flux-path.outward {
-  stroke: #4c83b8;
-  animation-direction: reverse;
+.flux-arrowhead {
+  fill: #2f78b7;
 }
 
 .flux-chip rect {
@@ -723,16 +885,4 @@ h1 {
   grid-column: 1 / -1;
   color: #765d45;
   text-align: center;
-}
-
-@keyframes flux-flow {
-  to {
-    stroke-dashoffset: -44;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .flux-path {
-    animation: none;
-  }
 }
