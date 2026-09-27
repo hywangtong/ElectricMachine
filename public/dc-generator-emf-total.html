@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>从单根导体到整台直流电机的电动势</title>
+    <link rel="stylesheet" href="/dc-motor-torque.css" />
+    <script src="/dc-machine-basics.js" defer></script>
+    <link rel="stylesheet" href="/dc-generator-emf.css" />
+    <script type="module" src="/dc-generator-emf-total.js"></script>
+  </head>
+  <body>
+    <main class="lesson total-lesson">
+      <header class="page-head total-head">
+        <div>
+          <div class="eyebrow">直流电机 / 29 · 电动势</div>
+          <h1>从一根导体，到整台电机</h1>
+          <p>沿每条支路串联相加，再由换向器在电刷间得到直流电动势。</p>
+        </div>
+        <div class="top-identity">
+          <span>每条支路总匝数 N</span>
+          <b>每支路串联导体数 = 2N</b>
+        </div>
+      </header>
+
+      <div class="total-layout">
+        <section class="equation-card" aria-labelledby="total-derive-title">
+          <div class="card-heading">
+            <span class="section-index">01 · 合成一条支路电动势</span>
+            <h2 id="total-derive-title">串联电动势相加，并联电压相同</h2>
+          </div>
+
+          <div class="count-grid">
+            <div><span>每条支路总匝数</span><b>N</b></div>
+            <div><span>每匝有效导体数</span><b>2</b></div>
+            <div><span>每支路串联导体数</span><b>2N</b></div>
+            <div><span>单根导体平均电动势</span><b>ē</b></div>
+          </div>
+
+          <div class="equation-stack" aria-label="直流电机电动势公式推导">
+            <div><i>E</i> = 2<i>N</i>ē</div>
+            <div>= 2<i>N</i> · (<i>B</i><sub>δ,av</sub><i>lv</i>)</div>
+            <div class="substitution">
+              = 2<i>N</i> ·
+              <span class="fraction"><span>Φ</span><span>τl</span></span>
+              <i>l</i> ·
+              <span class="fraction"><span>2pτ</span><span>60</span></span>
+              <i>n</i>
+            </div>
+            <div>
+              =
+              <span class="fraction"><span>4pN</span><span>60</span></span> Φ<i
+                >n</i
+              >
+            </div>
+          </div>
+          <div class="result-box emf-result-box">
+            <span>电刷间平均电动势</span
+            ><strong><i>E</i> = <i>C</i><sub>E</sub>Φ<i>n</i></strong>
+            <div class="emf-constant">
+              <span>电动势常数</span>
+              <strong>
+                <i>C</i><sub>E</sub> =
+                <span class="fraction"
+                  ><span>4<i>pN</i></span
+                  ><span>60</span></span
+                >
+              </strong>
+            </div>
+            <small>Φ：Wb，n：r/min，E：V</small>
+          </div>
+          <p class="geometry-note">
+            2πR = 2pτ → v = 2pτn/60；对称支路、理想换向，忽略脉动。
+          </p>
+        </section>
+
+        <section class="interactive-card" aria-labelledby="flux-title">
+          <div class="interactive-head">
+            <div>
+              <span class="section-index">02 · 极对数交互</span>
+              <h2 id="flux-title">每极磁通与转速怎样决定 E？</h2>
+            </div>
+            <label class="pole-select">
+              <span>极对数 p</span>
+              <select id="pole-pairs">
+                <option value="1">1 对极（2 极）</option>
+                <option value="2" selected>2 对极（4 极）</option>
+                <option value="3">3 对极（6 极）</option>
+                <option value="4">4 对极（8 极）</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="flux-metrics" aria-live="polite">
+            <div>
+              <span>各极磁通大小之和（固定）</span><b>Φ<sub>Σ</sub> = 80 mWb</b>
+            </div>
+            <div><span>磁极数</span><b id="pole-count">2p = 4</b></div>
+            <div>
+              <span>每极磁通</span><b id="per-pole-flux">Φ = 20.0 mWb</b>
+            </div>
+          </div>
+
+          <div class="machine-wrap">
+            <svg
+              id="pole-machine"
+              viewBox="0 -38 620 466"
+              role="img"
+              aria-label="多极直流电机的磁通与导体感生电动势方向"
+            >
+              <title id="pole-svg-title">
+                可选择极对数的直流电机磁通分配动画
+              </title>
+              <desc id="pole-svg-desc">
+                总磁通固定时，极对数越多，磁极数越多，每个磁极分得的每极磁通越小。
+              </desc>
+            </svg>
+            <div class="center-label" aria-hidden="true">
+              <span>磁通大小之和</span>
+              <strong>Φ<sub>Σ</sub></strong>
+              <small>分到 2p 个极</small>
+            </div>
+          </div>
+
+          <div class="flux-explanation">
+            <div>
+              <span>ΦΣ 为各极磁通大小之和</span><b>Φ = Φ<sub>Σ</sub> / (2p)</b>
+            </div>
+            <p>
+              固定 ΦΣ、N、n 时，pΦ 不变，E 不变。<strong
+                >串联相加，并联不倍增。</strong
+              >
+            </p>
+          </div>
+          <div class="torque-reading emf-reading">
+            <label for="speed"
+              >转速 n
+              <input
+                id="speed"
+                type="range"
+                min="0"
+                max="1200"
+                step="60"
+                value="600"
+              /><output id="speed-value">600 r/min</output></label
+            ><b id="emf-reading">E = 384.0 V</b
+            ><small
+              >N = 240；图中 × / · 表示感生电动势方向，n = 0
+              时电动势为零。</small
+            >
+          </div>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>

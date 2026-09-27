@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>一根电枢导体怎样感生电动势</title>
+    <link rel="stylesheet" href="/dc-motor-torque.css" />
+    <script src="/dc-machine-basics.js" defer></script>
+    <link rel="stylesheet" href="/dc-generator-emf.css" />
+    <script type="module" src="/dc-generator-emf-single.js"></script>
+  </head>
+  <body>
+    <main class="lesson single-lesson">
+      <header class="page-head">
+        <div class="eyebrow">直流电机 / 28 · 电动势</div>
+        <div class="title-row">
+          <div>
+            <h1>一根电枢导体，怎样感生电动势？</h1>
+            <p>
+              先看一对极：每极磁通 → 平均磁密；电枢旋转 → 切向速度 →
+              感生电动势。
+            </p>
+          </div>
+          <span class="case-badge">以 p = 1 为例</span>
+        </div>
+      </header>
+
+      <div class="single-layout">
+        <section class="derivation-card" aria-labelledby="derive-title">
+          <div class="card-heading">
+            <span class="section-index">01 · 三步推导</span>
+            <h2 id="derive-title">把“磁场”与“运动”联系起来</h2>
+          </div>
+
+          <ol class="derivation-steps">
+            <li>
+              <span class="step-number">1</span>
+              <div>
+                <strong>每极磁通决定平均磁感应强度</strong>
+                <p>一个极距覆盖的气隙面积为 <i>τl</i>，Φ 为每极磁通。</p>
+              </div>
+              <div class="formula">
+                <i>B</i><sub>δ,av</sub> =
+                <span class="fraction"><span>Φ</span><span>τl</span></span>
+              </div>
+            </li>
+            <li>
+              <span class="step-number">2</span>
+              <div>
+                <strong>电枢旋转，导体沿圆周切割磁场</strong>
+                <p>转速 n 的单位为 r/min；一对极时 2πR = 2τ。</p>
+              </div>
+              <div class="formula">
+                <i>v</i> = Ω<i>R</i> =
+                <span class="fraction"><span>2πR</span><span>60</span></span>
+                <i>n</i> =
+                <span class="fraction"><span>2τ</span><span>60</span></span>
+                <i>n</i>
+              </div>
+            </li>
+            <li>
+              <span class="step-number">3</span>
+              <div>
+                <strong>运动感生电动势：瞬时 e(s) = Bδ(s)lv</strong>
+                <p>导体、磁场与速度两两垂直；取一个极距内的平均大小。</p>
+              </div>
+              <div class="formula final-formula">
+                ē = <i>B</i><sub>δ,av</sub><i>lv</i> =
+                <span class="fraction"><span>Φ</span><span>τl</span></span>
+                <i>l</i> ·
+                <span class="fraction"><span>2τn</span><span>60</span></span> =
+                <span class="fraction"><span>Φn</span><span>30</span></span>
+              </div>
+            </li>
+          </ol>
+
+          <div class="logic-strip" aria-label="推导逻辑">
+            <span>Φ → B<sub>δ,av</sub></span
+            ><b>＋</b><span>n → v</span><b>→</b
+            ><span>ē = B<sub>δ,av</sub>lv</span>
+          </div>
+        </section>
+
+        <section class="diagram-card" aria-labelledby="diagram-title">
+          <div class="card-heading">
+            <span class="section-index">02 · 空间关系</span>
+            <div class="diagram-heading-actions">
+              <button id="reverse-motion" class="motion-button" type="button">
+                反转运动</button
+              ><button
+                id="pause-motion"
+                class="motion-button"
+                type="button"
+                aria-pressed="false"
+              >
+                暂停动画
+              </button>
+              <h2 id="diagram-title">v × B 决定电动势方向</h2>
+            </div>
+          </div>
+          <svg
+            class="single-diagram"
+            viewBox="0 0 620 470"
+            role="img"
+            aria-labelledby="single-svg-title single-svg-desc"
+          >
+            <title id="single-svg-title">N 极下运动导体的电动势方向</title>
+            <desc id="single-svg-desc">
+              蓝色磁场由 N
+              极径向进入转子，橙色箭头为切向速度，点叉表示电动势出入纸面。运动反向时电动势反向。
+            </desc>
+            <defs>
+              <marker
+                id="force-arrow"
+                viewBox="0 0 10 10"
+                refX="8"
+                refY="5"
+                markerWidth="7"
+                markerHeight="7"
+                orient="auto-start-reverse"
+              >
+                <path d="M0 0L10 5L0 10Z" fill="#c85f2d" />
+              </marker>
+              <marker
+                id="field-arrow"
+                viewBox="0 0 10 10"
+                refX="8"
+                refY="5"
+                markerWidth="5"
+                markerHeight="5"
+                orient="auto"
+              >
+                <path d="M0 0L10 5L0 10Z" fill="#2f78b7" />
+              </marker>
+              <marker
+                id="path-arrow"
+                viewBox="0 0 10 10"
+                refX="8"
+                refY="5"
+                markerWidth="5"
+                markerHeight="5"
+                orient="auto"
+              >
+                <path d="M0 0L10 5L0 10Z" fill="#55736d" />
+              </marker>
+              <marker
+                id="length-arrow"
+                viewBox="0 0 10 10"
+                refX="5"
+                refY="5"
+                markerWidth="5"
+                markerHeight="5"
+                orient="auto-start-reverse"
+              >
+                <path d="M10 0L0 5L10 10Z" fill="#39796f" />
+              </marker>
+            </defs>
+
+            <path
+              class="pole-shoe"
+              d="M250 18Q242 18 242 27L240 92C240 104 233 110 220 111C174 112 139 132 123 164C115 180 108 201 102 224A330 330 0 0 1 518 224C512 201 505 180 497 164C481 132 446 112 400 111C387 110 380 104 380 92L378 27Q378 18 370 18Z"
+            />
+            <text x="310" y="82" class="pole-label">N</text>
+            <path
+              class="armature"
+              d="M83 300A290 290 0 0 1 537 300L507 310A260 260 0 0 0 113 310Z"
+            />
+
+            <g class="field-lines" aria-label="N 极指向转子的气隙磁感线">
+              <line
+                x1="310"
+                y1="150"
+                x2="310"
+                y2="190"
+                transform="rotate(-34 310 480)"
+              />
+              <line
+                x1="310"
+                y1="150"
+                x2="310"
+                y2="190"
+                transform="rotate(-25 310 480)"
+              />
+              <line
+                x1="310"
+                y1="150"
+                x2="310"
+                y2="190"
+                transform="rotate(-17 310 480)"
+              />
+              <line
+                x1="310"
+                y1="150"
+                x2="310"
+                y2="190"
+                transform="rotate(-9 310 480)"
+              />
+              <line x1="310" y1="150" x2="310" y2="190" />
+              <line
+                x1="310"
+                y1="150"
+                x2="310"
+                y2="190"
+                transform="rotate(9 310 480)"
+              />
+              <line
+                x1="310"
+                y1="150"
+                x2="310"
+                y2="190"
+                transform="rotate(17 310 480)"
+              />
+            </g>
+
+            <path
+              id="gap-path"
+              class="gap-path"
+              d="M123.5 232.2A310 310 0 0 1 496.5 232.2"
+              marker-end="url(#path-arrow)"
+            />
+
+            <g
+              id="moving-conductor"
+              class="conductor"
+              aria-label="运动导体及其感生电动势"
+            >
+              <circle cx="441" cy="199" r="10" />
+              <g id="emf-cross">
+                <line x1="436" y1="194" x2="446" y2="204" />
+                <line x1="446" y1="194" x2="436" y2="204" />
+              </g>
+              <circle id="emf-dot" cx="441" cy="199" r="3" hidden />
+              <text x="444" y="179" class="conductor-tag" id="emf-tag">
+                e ×
+              </text>
+              <line
+                id="velocity-arrow"
+                x1="453"
+                y1="205"
+                x2="485"
+                y2="220"
+                class="force-line"
+                marker-end="url(#force-arrow)"
+              />
+              <text id="velocity-label" x="495" y="226" class="force-label">
+                v
+              </text>
+            </g>
+            <line x1="435" y1="211" x2="386" y2="301" class="radius-line" />
+            <text x="395" y="267" class="math-label">R</text>
+
+            <g class="path-key">
+              <line x1="48" y1="320" x2="108" y2="320" />
+              <text x="118" y="325">沿气隙路径 s（极距 τ）</text>
+            </g>
+            <g class="depth-key" aria-label="轴向有效长度示意">
+              <line
+                x1="323"
+                y1="323"
+                x2="405"
+                y2="323"
+                class="depth-conductor"
+              />
+              <line
+                x1="323"
+                y1="309"
+                x2="405"
+                y2="309"
+                class="length-line"
+                marker-start="url(#length-arrow)"
+                marker-end="url(#length-arrow)"
+              />
+              <text x="364" y="303">轴向有效长度 l</text>
+            </g>
+            <g class="area-formula-badge">
+              <rect x="445" y="307" width="130" height="29" rx="9" />
+              <text x="510" y="327">
+                A
+                <tspan baseline-shift="sub" font-size="11">pole</tspan>
+                = τ × l
+              </text>
+            </g>
+
+            <g
+              class="profile-chart"
+              aria-label="磁感应强度沿气隙路径的分布曲线"
+            >
+              <rect x="38" y="338" width="310" height="120" rx="12" />
+              <text x="54" y="360" class="profile-title">
+                B
+                <tspan baseline-shift="sub" font-size="12">δ</tspan>
+                (s)：沿虚线路径分布
+              </text>
+              <line x1="72" y1="430" x2="329" y2="430" class="chart-axis" />
+              <line x1="72" y1="430" x2="72" y2="370" class="chart-axis" />
+              <path
+                d="M82 426C94 425 99 409 111 391C121 377 135 373 154 373H252C271 373 285 377 295 391C307 409 312 425 324 426"
+                class="profile-curve"
+              />
+              <line x1="111" y1="397" x2="295" y2="397" class="average-line" />
+              <text x="297" y="393" class="average-label">
+                B
+                <tspan baseline-shift="sub" font-size="10">δ,av</tspan>
+              </text>
+              <text x="53" y="378" class="chart-label">
+                B
+                <tspan baseline-shift="sub" font-size="10">δ</tspan>
+              </text>
+              <text x="323" y="448" class="chart-label">s</text>
+            </g>
+
+            <g class="supply-chart" aria-label="电动势方向与单位">
+              <rect x="360" y="338" width="242" height="120" rx="12" />
+              <text x="374" y="360" class="supply-title">右手定则 · v × B</text>
+              <text
+                id="direction-reading"
+                x="374"
+                y="389"
+                class="emf-direction"
+              >
+                向右运动 → e 入纸面 ×
+              </text>
+              <text x="374" y="415" class="branch-current">
+                反转 v 或 B，电动势反向
+              </text>
+              <text x="374" y="441" class="branch-current">
+                Ω = 2πn/60（rad/s）；v：m/s
+              </text>
+            </g>
+          </svg>
+          <div class="symbol-row">
+            <span><b>Φ</b> 每极磁通</span>
+            <span><b>τ</b> 极距</span>
+            <span><b>l</b> 有效长度</span>
+            <span><b>R</b> 电枢半径</span>
+            <span><b>s</b> 沿气隙位置</span>
+          </div>
+        </section>
+      </div>
+
+      <footer class="takeaway">
+        <b>本页结论</b>运动导体即使开路也能产生电动势；ē
+        表示平均大小。动画为慢速方向示意，暂停只冻结画面。
+      </footer>
+    </main>
+  </body>
+</html>

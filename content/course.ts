@@ -806,6 +806,27 @@ export const slides: Slide[] = [
           chapterId: chapter.id,
           embedUrl: '/dc-motor-torque-total.html',
         },
+        {
+          id: 'dc-motor-torque-summary',
+          kind: 'embed',
+          title: '电磁转矩：大小、方向与性质',
+          chapterId: chapter.id,
+          embedUrl: '/dc-motor-torque-summary.html',
+        },
+        {
+          id: 'dc-generator-emf-single-conductor',
+          kind: 'embed',
+          title: '电动势：从每极磁通到单根导体电动势',
+          chapterId: chapter.id,
+          embedUrl: '/dc-generator-emf-single.html',
+        },
+        {
+          id: 'dc-generator-emf-total',
+          kind: 'embed',
+          title: '电动势：从单根导体到整台电机',
+          chapterId: chapter.id,
+          embedUrl: '/dc-generator-emf-total.html',
+        },
       );
     }
 

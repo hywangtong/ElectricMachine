@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>直流电机电磁转矩：大小、方向与性质</title>
+    <link rel="stylesheet" href="/dc-motor-torque-summary.css" />
+    <script src="/dc-machine-basics.js" defer></script>
+    <script src="/dc-motor-torque-summary.js" defer></script>
+  </head>
+  <body>
+    <main class="lesson">
+      <header class="page-head">
+        <div>
+          <div class="eyebrow">直流电机 / 27 · 电磁转矩</div>
+          <h1>电磁转矩：大小、方向与性质</h1>
+          <p>同一个电磁关系，在电动与发电运行中扮演不同角色。</p>
+        </div>
+        <div class="summary-badge">章末公式总结</div>
+      </header>
+
+      <div class="summary-grid">
+        <section class="overview-card" aria-labelledby="overview-title">
+          <header class="section-head">
+            <div>
+              <div class="section-label">01 · 大小与方向</div>
+              <h2 id="overview-title">磁通与电枢电流共同决定电磁转矩</h2>
+            </div>
+            <p>数值相乘得到大小；任一有向量反转，转矩随之反转。</p>
+          </header>
+
+          <div class="overview-layout">
+            <div class="formula-panel">
+              <div class="main-formula">
+                <math
+                  xmlns="http://www.w3.org/1998/Math/MathML"
+                  display="block"
+                  aria-label="电磁转矩 T 下标 e 等于转矩常数 C 下标 T 乘以磁通 Phi 乘以电枢电流 I 下标 a"
+                >
+                  <semantics>
+                    <mrow>
+                      <msub><mi>T</mi><mi mathvariant="normal">e</mi></msub>
+                      <mo>=</mo>
+                      <msub><mi>C</mi><mi mathvariant="normal">T</mi></msub>
+                      <mo>&InvisibleTimes;</mo>
+                      <mi mathvariant="normal">Φ</mi>
+                      <mo>&InvisibleTimes;</mo>
+                      <msub><mi>I</mi><mi mathvariant="normal">a</mi></msub>
+                    </mrow>
+                    <annotation encoding="application/x-tex"
+                      >T_e = C_T \Phi I_a</annotation
+                    >
+                  </semantics>
+                </math>
+              </div>
+              <div class="formula-detail">
+                <div class="constant-row">
+                  <span>转矩常数</span>
+                  <strong>
+                    <i>C</i><sub>T</sub> =
+                    <span class="fraction"
+                      ><span>2<i>pN</i></span
+                      ><span>π</span></span
+                    >
+                  </strong>
+                </div>
+                <div class="unit-row" aria-label="公式变量单位">
+                  <span><b>Φ</b> 每极磁通 <strong>Wb</strong></span>
+                  <span
+                    ><b><i>I</i><sub>a</sub></b> 电枢电流
+                    <strong>A</strong></span
+                  >
+                  <span
+                    ><b><i>T</i><sub>e</sub></b> 电磁转矩
+                    <strong>N·m</strong></span
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div class="direction-panel">
+              <div class="direction-rule">
+                <div class="direction-input">
+                  <span>磁通方向</span>
+                  <b>Φ</b>
+                </div>
+                <span class="operator">×</span>
+                <div class="direction-input">
+                  <span>电枢电流方向</span>
+                  <b><i>I</i><sub>a</sub></b>
+                </div>
+                <span class="operator">→</span>
+                <div class="direction-output">
+                  <span>转矩方向</span>
+                  <b><i>T</i><sub>e</sub></b>
+                </div>
+              </div>
+              <div class="reverse-note">
+                <span class="reverse-symbol" aria-hidden="true">↺</span>
+                <p>
+                  <strong>只反转 Φ 或 <i>I</i><sub>a</sub> 中的一个</strong
+                  >，转矩方向反转；两者同时反转，转矩方向不变。
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          class="mode-card"
+          id="mode-card"
+          data-mode="motor"
+          aria-labelledby="mode-title"
+        >
+          <header class="mode-head">
+            <div>
+              <div class="section-label">02 · 性质动画</div>
+              <h2 id="mode-title">
+                看机械端口：电机带动负载，还是原动机带动电机？
+              </h2>
+            </div>
+            <button
+              class="mode-switch"
+              id="mode-switch"
+              type="button"
+              role="switch"
+              aria-checked="false"
+              aria-label="发电机模式"
+            >
+              <span class="switch-label generator-label">发电机</span>
+              <span class="switch-track" aria-hidden="true"><i></i></span>
+              <span class="switch-label motor-label">电动机</span>
+            </button>
+          </header>
+
+          <div class="mode-stage" aria-live="polite">
+            <div
+              class="machine-animation"
+              id="machine-animation"
+              role="img"
+              aria-label="工业电动机通过轴端向机械负载输出机械功率"
+            >
+              <svg viewBox="0 0 940 250" aria-hidden="true">
+                <defs>
+                  <linearGradient id="housing-metal" x2="0" y2="1">
+                    <stop stop-color="#88a9b7" />
+                    <stop offset=".35" stop-color="#426778" />
+                    <stop offset="1" stop-color="#203e4d" />
+                  </linearGradient>
+                  <linearGradient id="shaft-metal" x2="0" y2="1">
+                    <stop stop-color="#f5fafc" />
+                    <stop offset=".48" stop-color="#9daeb8" />
+                    <stop offset="1" stop-color="#4b626d" />
+                  </linearGradient>
+                  <marker
+                    id="speed-arrow"
+                    viewBox="0 0 10 10"
+                    refX="8"
+                    refY="5"
+                    markerWidth="7"
+                    markerHeight="7"
+                    orient="auto-start-reverse"
+                  >
+                    <path d="M0 0 10 5 0 10Z" />
+                  </marker>
+                  <marker
+                    id="torque-arrow"
+                    viewBox="0 0 10 10"
+                    refX="8"
+                    refY="5"
+                    markerWidth="7"
+                    markerHeight="7"
+                    orient="auto-start-reverse"
+                  >
+                    <path d="M0 0 10 5 0 10Z" />
+                  </marker>
+                </defs>
+
+                <ellipse cx="285" cy="214" rx="209" ry="16" fill="#dce6e5" />
+                <g class="industrial-housing">
+                  <path
+                    d="M168 182v25h64v-25M324 182v25h64v-25"
+                    fill="#294654"
+                    stroke="#173b4a"
+                    stroke-width="3"
+                  />
+                  <ellipse
+                    cx="149"
+                    cy="134"
+                    rx="47"
+                    ry="68"
+                    fill="#344f5f"
+                    stroke="#213e4b"
+                    stroke-width="3"
+                  />
+                  <path
+                    d="M149 66H365V202H149Q107 134 149 66"
+                    fill="url(#housing-metal)"
+                    stroke="#2f4d5b"
+                    stroke-width="3"
+                  />
+                  <g stroke="#8ca5af" stroke-width="4" opacity=".65">
+                    <path
+                      d="M157 79h203M146 93h214M141 108h219M139 123h221M140 139h220M144 155h216M150 171h210M160 185h200"
+                    />
+                  </g>
+                  <path
+                    d="M204 67V42l61-10 49 12v25"
+                    fill="#426b7c"
+                    stroke="#213e4b"
+                    stroke-width="3"
+                  />
+                  <path
+                    d="M204 42l48 13 62-11M252 55v14"
+                    fill="none"
+                    stroke="#9bb2ba"
+                    stroke-width="2"
+                  />
+                  <ellipse
+                    cx="365"
+                    cy="134"
+                    rx="48"
+                    ry="68"
+                    fill="#567786"
+                    stroke="#263f4d"
+                    stroke-width="4"
+                  />
+                  <ellipse
+                    cx="370"
+                    cy="134"
+                    rx="34"
+                    ry="51"
+                    fill="#304f5e"
+                    stroke="#839da7"
+                    stroke-width="3"
+                  />
+                  <g fill="#d1dcdf" stroke="#233f4d" stroke-width="2">
+                    <circle cx="354" cy="78" r="5" />
+                    <circle cx="394" cy="106" r="5" />
+                    <circle cx="354" cy="189" r="5" />
+                    <circle cx="394" cy="163" r="5" />
+                  </g>
+                  <rect
+                    x="197"
+                    y="113"
+                    width="86"
+                    height="37"
+                    rx="4"
+                    fill="#dbe4e3"
+                    stroke="#233f4d"
+                  />
+                  <text x="240" y="129" class="nameplate">DC MACHINE</text>
+                  <text x="240" y="143" class="nameplate">工业直流电机</text>
+                </g>
+                <ellipse
+                  cx="374"
+                  cy="134"
+                  rx="19"
+                  ry="28"
+                  fill="#a2b2b9"
+                  stroke="#2e4a58"
+                  stroke-width="3"
+                />
+                <path
+                  d="M377 119H738V149H377Q391 134 377 119"
+                  fill="url(#shaft-metal)"
+                  stroke="#59717d"
+                  stroke-width="2"
+                />
+                <g transform="translate(485 134) scale(.44 1)">
+                  <circle
+                    r="28"
+                    fill="#728c98"
+                    stroke="#dce7eb"
+                    stroke-width="4"
+                  />
+                  <g class="shaft-rotation">
+                    <path
+                      d="M-25 0H25M0-25V25"
+                      stroke="#eef5f6"
+                      stroke-width="4"
+                    />
+                    <circle cy="-20" r="4" fill="#f4c478" />
+                  </g>
+                </g>
+                <path d="M582 91v88" class="port-boundary" />
+                <text x="582" y="201" class="port-label">机械端口 · 轴端</text>
+                <g transform="translate(494 134) scale(.48 1)">
+                  <path
+                    class="motion-path speed-path"
+                    d="M0-53A53 53 0 1 1-53 0"
+                    marker-end="url(#speed-arrow)"
+                  />
+                </g>
+                <text x="454" y="68" class="speed-text">n · 转速</text>
+                <g transform="translate(662 134) scale(.48 1)">
+                  <path
+                    class="motion-path torque-path"
+                    id="torque-direction"
+                    d="M0-49A49 49 0 1 1-49 0"
+                    marker-end="url(#torque-arrow)"
+                  />
+                </g>
+                <text
+                  x="669"
+                  y="222"
+                  class="torque-text"
+                  id="shaft-torque-label"
+                >
+                  Tₑ · 同向拖动
+                </text>
+                <g class="mechanical-peer">
+                  <rect x="747" y="92" width="163" height="85" rx="12" />
+                  <text x="829" y="127" id="peer-title">机械负载</text>
+                  <text x="829" y="153" id="peer-action">被电机带动</text>
+                </g>
+                <text x="691" y="27" class="power-text" id="port-power-label">
+                  机械功率 P₂：轴端输出 → 负载
+                </text>
+                <path
+                  class="power-path power-out"
+                  d="M546 50H846"
+                  marker-end="url(#torque-arrow)"
+                />
+                <path
+                  class="power-path power-in"
+                  d="M846 50H546"
+                  marker-end="url(#torque-arrow)"
+                />
+                <text x="255" y="242" class="exterior-caption">
+                  外壳固定 · 轴端持续旋转
+                </text>
+              </svg>
+            </div>
+
+            <div class="property-panel">
+              <span id="mode-name">电动机 · 机械端口输出</span>
+              <h3 id="property-title">拖动转矩</h3>
+              <div class="relation-equation" id="relation-equation">
+                <i>T</i><sub>e</sub> 与 <i>n</i> 同向
+              </div>
+              <p id="property-description">
+                电机通过轴端向负载施加输出转矩 T₂，带动负载旋转。
+              </p>
+              <div class="property-result" id="property-result">
+                橙色弧形箭头：电磁转矩 Tₑ 的方向。
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <footer class="takeaway">
+        <b>记忆</b>
+        <span
+          >电动机：<i>T</i><sub>e</sub> 与 <i>n</i> 同向；发电机：<i>T</i
+          ><sub>e</sub> 与 <i>n</i> 反向。</span
+        >
+      </footer>
+    </main>
+  </body>
+</html>
