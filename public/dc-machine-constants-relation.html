@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>转矩系数与电动势系数的关系</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/dc-machine-constants-relation.css" />
+    <script src="/dc-machine-basics.js" defer></script>
+  </head>
+  <body>
+    <main class="lesson constants-page">
+      <header class="page-head">
+        <div class="eyebrow">直流电机 / 系数关系</div>
+        <h1>转矩系数与电动势系数的关系</h1>
+        <p>同一台电机，两个系数由相同的结构参数决定。</p>
+      </header>
+
+      <section
+        class="relation-panel"
+        aria-label="转矩系数与电动势系数的比值推导"
+      >
+        <div class="definitions">
+          <div>
+            <h2>
+              转矩系数 <span>T = C<sub>T</sub>ΦI<sub>a</sub></span>
+            </h2>
+            <div class="formula">
+              <i>C</i><sub>T</sub> =
+              <span class="fraction"
+                ><span>2<i>pN</i></span
+                ><span>π</span></span
+              >
+            </div>
+          </div>
+          <div>
+            <h2>电动势系数 <span>E = C<sub>E</sub>Φn</span></h2>
+            <div class="formula">
+              <i>C</i><sub>E</sub> =
+              <span class="fraction"
+                ><span>4<i>pN</i></span
+                ><span>60</span></span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="brace" aria-hidden="true">}</div>
+        <div class="derivation">
+          <p>两式相除，约去相同的 pN</p>
+          <div class="formula">
+            <span class="fraction"
+              ><span><i>C</i><sub>T</sub></span
+              ><span><i>C</i><sub>E</sub></span></span
+            >
+            = <span class="fraction"><span>60</span><span>2π</span></span>
+            ≈ 9.55
+          </div>
+          <div class="conclusion formula">
+            <i>C</i><sub>T</sub> ≈ 9.55<i>C</i><sub>E</sub>
+          </div>
+        </div>
+      </section>
+
+      <section class="power-panel" aria-labelledby="power-title">
+        <div>
+          <h2 id="power-title">公式关系的根源：功率平衡</h2>
+          <p>反电势与电磁转矩对应同一份电磁转换功率。</p>
+          <p>此处 T 为电磁转矩；端口与轴端功率还需计入损耗。</p>
+        </div>
+        <div class="power-derivation">
+          <div class="formula">EI<sub>a</sub> = TΩ</div>
+          <p class="si-note">
+            反电势公式的转速由 rpm 改用 rad/s（国际单位制）：E = C<sub>E</sub>ΦΩ
+          </p>
+          <div class="power-substitution">
+            C<sub>E</sub>ΦΩI<sub>a</sub> = C<sub>T</sub>ΦI<sub>a</sub>Ω
+            <span
+              >⇒ <strong>C<sub>T</sub> = C<sub>E</sub></strong></span
+            >
+          </div>
+        </div>
+      </section>
+
+      <footer class="notes">
+        <div>
+          <h2>9.55 来自转速单位换算</h2>
+          <p class="speed-formula">Ω = 2πn / 60</p>
+          <p>
+            n 用 rpm（r/min），Ω 用 rad/s；T 用 N·m，E 用 V，Φ 用 Wb，I<sub
+              >a</sub
+            >
+            用 A。
+          </p>
+        </div>
+        <div>
+          <h2>符号与电动势性质</h2>
+          <p>p：极对数；N：每条支路总匝数。</p>
+          <p>发电机中为电源电动势；电动机中为反电动势。</p>
+        </div>
+      </footer>
+    </main>
+  </body>
+</html>

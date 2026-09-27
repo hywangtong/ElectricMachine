@@ -827,6 +827,20 @@ export const slides: Slide[] = [
           chapterId: chapter.id,
           embedUrl: '/dc-generator-emf-total.html',
         },
+        {
+          id: 'dc-machine-constants-relation',
+          kind: 'embed',
+          title: '转矩系数与电动势系数的关系',
+          chapterId: chapter.id,
+          embedUrl: '/dc-machine-constants-relation.html',
+        },
+        {
+          id: 'dc-motor-voltage-balance',
+          kind: 'embed',
+          title: '他励直流电动机的电压平衡方程',
+          chapterId: chapter.id,
+          embedUrl: '/dc-motor-voltage-balance.html',
+        },
       );
     }
 

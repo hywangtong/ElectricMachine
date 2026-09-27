@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>他励直流电动机的电压平衡方程</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/dc-motor-voltage-balance.css" />
+    <script src="/dc-machine-basics.js" defer></script>
+  </head>
+  <body>
+    <main class="lesson voltage-page">
+      <header class="page-head">
+        <div class="eyebrow">直流电机 / 他励电动机 · 稳态运行</div>
+        <h1>他励直流电动机的电压平衡方程</h1>
+        <p>
+          励磁绕组由独立直流电源供电；分别对励磁回路和电枢回路列写电压平衡。
+        </p>
+      </header>
+
+      <div class="voltage-layout">
+        <div class="equations">
+          <section
+            class="equation-card field-card"
+            aria-labelledby="field-title"
+          >
+            <h2 id="field-title"><span>01</span> 励磁回路</h2>
+            <div class="formula">
+              <i>U</i><sub>f</sub> = <i>R</i><sub>f</sub><i>I</i><sub>f</sub>
+            </div>
+            <p>励磁电压 = 励磁绕组电阻压降</p>
+            <div class="symbols">
+              U<sub>f</sub>：励磁电压　R<sub>f</sub>：励磁绕组电阻　I<sub>f</sub>：励磁电流
+            </div>
+          </section>
+          <section
+            class="equation-card armature-card"
+            aria-labelledby="armature-title"
+          >
+            <h2 id="armature-title"><span>02</span> 电枢回路</h2>
+            <div class="formula">
+              <i>U</i><sub>a</sub> = <i>E</i> + <i>R</i><sub>a</sub><i>I</i
+              ><sub>a</sub>
+            </div>
+            <p>电枢电压 = 反电动势 + 电枢电阻压降</p>
+            <div class="symbols">
+              U<sub>a</sub>：电枢电压　R<sub>a</sub>：电枢电阻　I<sub>a</sub>：电枢电流
+            </div>
+          </section>
+        </div>
+
+        <section class="circuit-panel" aria-labelledby="circuit-title">
+          <h2 id="circuit-title">两个电路独立供电，磁场将它们联系起来</h2>
+          <svg viewBox="0 0 640 330" role="img" aria-labelledby="circuit-desc">
+            <title id="circuit-desc">
+              他励直流电动机等效电路：左侧励磁电压 Uf 上正下负，电流 If
+              流经励磁绕组 Rf；右侧电枢电压 Ua 上正下负，电流 Ia 流经电枢电阻 Ra
+              和反电动势 E，E 的正端朝向电流流入端。两回路无电气连接。
+            </title>
+            <defs>
+              <marker
+                id="field-arrow"
+                markerWidth="8"
+                markerHeight="8"
+                refX="7"
+                refY="4"
+                orient="auto"
+              >
+                <path d="M0 0 8 4 0 8Z" fill="#a54b2b" />
+              </marker>
+              <marker
+                id="armature-arrow"
+                markerWidth="8"
+                markerHeight="8"
+                refX="7"
+                refY="4"
+                orient="auto"
+              >
+                <path d="M0 0 8 4 0 8Z" fill="#26786b" />
+              </marker>
+            </defs>
+            <g
+              fill="none"
+              stroke="#173b3b"
+              stroke-width="3"
+              stroke-linejoin="round"
+            >
+              <path d="M68 60H228V105 M228 225V280H68" />
+              <path
+                d="M228 105 C196 105 196 135 228 135 C196 135 196 165 228 165 C196 165 196 195 228 195 C196 195 196 225 228 225"
+              />
+              <path d="M390 60H552V90 M552 150V177 M552 253V280H390" />
+              <rect x="539" y="90" width="26" height="60" fill="#eff7f3" />
+              <circle cx="552" cy="215" r="38" fill="#fff" />
+              <g fill="#fff">
+                <circle cx="68" cy="60" r="5" />
+                <circle cx="68" cy="280" r="5" />
+                <circle cx="390" cy="60" r="5" />
+                <circle cx="390" cy="280" r="5" />
+              </g>
+            </g>
+            <path
+              d="M110 60H168"
+              stroke="#a54b2b"
+              stroke-width="3"
+              marker-end="url(#field-arrow)"
+            />
+            <path
+              d="M429 60H487"
+              stroke="#26786b"
+              stroke-width="3"
+              marker-end="url(#armature-arrow)"
+            />
+            <g class="diagram-math field-ink">
+              <text x="130" y="43">
+                I
+                <tspan baseline-shift="sub" font-size="18">f</tspan>
+              </text>
+              <text x="27" y="180">
+                U
+                <tspan baseline-shift="sub" font-size="18">f</tspan>
+              </text>
+              <text x="56" y="101">+</text>
+              <text x="56" y="264">−</text>
+              <text x="245" y="172">
+                R
+                <tspan baseline-shift="sub" font-size="18">f</tspan>
+              </text>
+            </g>
+            <g class="diagram-math armature-ink">
+              <text x="449" y="43">
+                I
+                <tspan baseline-shift="sub" font-size="18">a</tspan>
+              </text>
+              <text x="346" y="180">
+                U
+                <tspan baseline-shift="sub" font-size="18">a</tspan>
+              </text>
+              <text x="378" y="101">+</text>
+              <text x="378" y="264">−</text>
+              <text x="579" y="130">
+                R
+                <tspan baseline-shift="sub" font-size="18">a</tspan>
+              </text>
+              <text x="475" y="225">E</text>
+              <text x="504" y="181">+</text>
+              <text x="504" y="268">−</text>
+            </g>
+            <text x="552" y="226" text-anchor="middle" class="diagram-math">
+              M
+            </text>
+            <g class="circuit-caption" text-anchor="middle">
+              <text x="157" y="322">励磁绕组 → 主磁通 Φ</text>
+              <text x="477" y="322">电枢 → 电磁转矩 T</text>
+            </g>
+          </svg>
+          <p class="back-emf">
+            <strong>E 是反电动势</strong>：电动运行时，外加电压克服 E
+            后，余下的电压产生电枢电流。
+          </p>
+        </section>
+      </div>
+
+      <section class="connection-strip" aria-label="电磁关系与电枢电流">
+        <div>
+          <h2>从励磁到机电转换</h2>
+          <p>U<sub>f</sub> → I<sub>f</sub> → Φ <span>决定磁场</span></p>
+        </div>
+        <div class="conversion">
+          <p>T = C<sub>T</sub>ΦI<sub>a</sub></p>
+          <p>E = C<sub>E</sub>Φn</p>
+        </div>
+        <div>
+          <h2>电枢电流由电压差决定</h2>
+          <p>I<sub>a</sub> = (U<sub>a</sub> − E) / R<sub>a</sub></p>
+        </div>
+      </section>
+      <footer class="assumption">
+        适用条件：稳态直流运行（电流不随时间变化），忽略电刷接触压降。电压单位
+        V，电流单位 A，电阻单位 Ω。
+      </footer>
+    </main>
+  </body>
+</html>
