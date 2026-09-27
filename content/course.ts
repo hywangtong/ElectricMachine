@@ -841,6 +841,13 @@ export const slides: Slide[] = [
           chapterId: chapter.id,
           embedUrl: '/dc-motor-voltage-balance.html',
         },
+        {
+          id: 'dc-motor-load-current',
+          kind: 'embed',
+          title: '稳态电枢电流由谁决定？',
+          chapterId: chapter.id,
+          embedUrl: '/dc-motor-load-current.html',
+        },
       );
     }
 

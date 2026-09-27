@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>稳态电枢电流由谁决定？</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/dc-motor-load-current.css" />
+    <script type="module" src="/dc-motor-load-current.js"></script>
+  </head>
+  <body>
+    <main class="lesson load-page">
+      <header class="page-head">
+        <div class="eyebrow">直流电机 / 恒磁通 · 动态实验</div>
+        <h1>稳态电枢电流由谁决定？</h1>
+        <p>
+          保持负载转矩不变，试着降低端电压或增大串联电阻，观察电流最终回到哪里。
+        </p>
+      </header>
+      <div class="experiment">
+        <section class="lab-machine" aria-label="工业直流电机与控制">
+          <div class="panel-title">
+            <h2>他励直流电动机</h2>
+            <span class="flux">Φ 恒定</span>
+          </div>
+          <svg
+            class="motor"
+            viewBox="0 0 640 270"
+            role="img"
+            aria-labelledby="motor-title"
+          >
+            <title id="motor-title">
+              有封闭外壳、散热筋、接线盒和底座的工业直流电机，输出轴通过联轴器连接负载
+            </title>
+            <defs>
+              <linearGradient id="case" x2="0" y2="1">
+                <stop stop-color="#698c90" />
+                <stop offset=".4" stop-color="#345d65" />
+                <stop offset="1" stop-color="#17343d" />
+              </linearGradient>
+              <linearGradient id="metal" x2="0" y2="1">
+                <stop stop-color="#e5eeef" />
+                <stop offset=".5" stop-color="#7d949c" />
+                <stop offset="1" stop-color="#d1dee0" />
+              </linearGradient>
+              <linearGradient id="end">
+                <stop stop-color="#416c74" />
+                <stop offset="1" stop-color="#203e49" />
+              </linearGradient>
+              <pattern
+                id="vents"
+                width="10"
+                height="12"
+                patternUnits="userSpaceOnUse"
+              >
+                <rect x="2" y="2" width="4" height="7" rx="2" fill="#112e36" />
+              </pattern>
+            </defs>
+            <ellipse
+              cx="316"
+              cy="239"
+              rx="274"
+              ry="14"
+              fill="#173b3b"
+              opacity=".09"
+            />
+            <path
+              d="M122 195v35h54l12-35m89 0 10 35h62v-40"
+              fill="#365861"
+              stroke="#17343d"
+              stroke-width="4"
+            />
+            <path d="M103 232h87m81 0h95" stroke="#7a9097" stroke-width="10" />
+            <rect
+              x="61"
+              y="75"
+              width="94"
+              height="130"
+              rx="40"
+              fill="url(#end)"
+            />
+            <rect
+              x="73"
+              y="86"
+              width="49"
+              height="107"
+              rx="20"
+              fill="url(#vents)"
+            />
+            <path
+              d="M126 66h182c57 0 76 155 0 155H126c-37 0-39-155 0-155Z"
+              fill="url(#case)"
+              stroke="#294b53"
+              stroke-width="3"
+            />
+            <g stroke="#86a4a7" stroke-width="5" opacity=".55">
+              <path
+                d="M138 78h163M128 96h185M125 116h195M124 138h198M125 160h195M129 183h184M139 205h163"
+              />
+            </g>
+            <ellipse
+              cx="316"
+              cy="143"
+              rx="47"
+              ry="77"
+              fill="url(#end)"
+              stroke="#96afb1"
+              stroke-width="4"
+            />
+            <ellipse
+              cx="324"
+              cy="143"
+              rx="29"
+              ry="52"
+              fill="#294b56"
+              stroke="#102e38"
+              stroke-width="3"
+            />
+            <g fill="#bdcbcc">
+              <circle cx="308" cy="80" r="5" />
+              <circle cx="346" cy="115" r="5" />
+              <circle cx="341" cy="186" r="5" />
+              <circle cx="300" cy="207" r="5" />
+            </g>
+            <path
+              d="M173 66V34h89l17 17v26"
+              fill="#365d64"
+              stroke="#193d46"
+              stroke-width="3"
+            />
+            <path
+              d="M173 34l17-10h87l-15 10m15-10 17 18-15 9"
+              fill="#749195"
+              stroke="#294b53"
+              stroke-width="2"
+            />
+            <circle cx="190" cy="53" r="7" fill="#152f36" />
+            <path
+              d="M190 53C142 42 147 15 120 15"
+              stroke="#314b54"
+              stroke-width="7"
+              fill="none"
+            />
+            <rect
+              x="165"
+              y="116"
+              width="92"
+              height="46"
+              rx="3"
+              fill="#d5dfd8"
+              stroke="#a2b5b1"
+            />
+            <text
+              x="211"
+              y="134"
+              text-anchor="middle"
+              font-size="12"
+              fill="#27474e"
+              font-weight="700"
+            >
+              DC MOTOR
+            </text>
+            <text
+              x="211"
+              y="151"
+              text-anchor="middle"
+              font-size="11"
+              fill="#42616a"
+            >
+              恒磁通 · 他励
+            </text>
+            <rect
+              x="328"
+              y="133"
+              width="145"
+              height="22"
+              rx="5"
+              fill="url(#metal)"
+            />
+            <rect
+              x="390"
+              y="120"
+              width="51"
+              height="48"
+              rx="7"
+              fill="#ad8139"
+              stroke="#6f522d"
+              stroke-width="3"
+            />
+            <svg x="390" y="120" width="51" height="48" viewBox="-25 -24 50 48">
+              <g id="shaft-marker">
+                <path d="M0-22V22M-23 0H23" stroke="#f8e3a3" stroke-width="4" />
+                <circle r="8" fill="#7e5c2c" />
+              </g>
+            </svg>
+            <rect
+              x="467"
+              y="92"
+              width="115"
+              height="105"
+              rx="18"
+              fill="#e5dcc6"
+              stroke="#b9a888"
+              stroke-width="3"
+            />
+            <path d="M482 197v32h87v-32" fill="#af9e7c" />
+            <text
+              x="524"
+              y="126"
+              text-anchor="middle"
+              font-size="17"
+              fill="#6e5833"
+            >
+              恒转矩负载
+            </text>
+            <text
+              id="load-label"
+              x="524"
+              y="157"
+              text-anchor="middle"
+              font-size="23"
+              font-weight="700"
+              fill="#886127"
+            >
+              18 N·m
+            </text>
+            <text
+              x="524"
+              y="180"
+              text-anchor="middle"
+              font-size="13"
+              fill="#6e5833"
+            >
+              T
+              <tspan baseline-shift="sub">L</tspan>
+              可调
+            </text>
+            <text
+              x="317"
+              y="265"
+              text-anchor="middle"
+              font-size="14"
+              fill="#55736d"
+            >
+              外壳固定 · 联轴器随轴转动（视觉慢放 1/30）
+            </text>
+          </svg>
+          <div class="controls">
+            <label for="voltage"
+              ><span>端电压 U<sub>a</sub></span
+              ><output id="voltage-value">220 V</output></label
+            >
+            <input
+              id="voltage"
+              type="range"
+              min="160"
+              max="260"
+              step="1"
+              value="220"
+            />
+            <label for="resistance"
+              ><span>电枢串联电阻 R<sub>s</sub></span
+              ><output id="resistance-value">0.5 Ω</output></label
+            >
+            <input
+              id="resistance"
+              type="range"
+              min="0"
+              max="2"
+              step="0.05"
+              value="0.5"
+            />
+            <label for="load"
+              ><span>负载转矩 T<sub>L</sub></span
+              ><output id="load-value">18 N·m</output></label
+            >
+            <input
+              id="load"
+              type="range"
+              min="6"
+              max="30"
+              step="1"
+              value="18"
+            />
+          </div>
+          <div class="presets" aria-label="对照实验">
+            <span>试一试</span><button data-preset="voltage">降压</button
+            ><button data-preset="resistance">增阻</button
+            ><button data-preset="load">增载</button>
+          </div>
+          <p class="model-note">
+            R<sub>a</sub> = 0.8 Ω（固定）；总电阻 = R<sub>a</sub> + R<sub
+              >s</sub
+            >
+          </p>
+        </section>
+        <section class="scope-panel" aria-label="四通道实时示波器">
+          <div class="scope-head">
+            <h2><span class="live-dot"></span>实时示波器</h2>
+            <div>
+              <button id="pause" aria-pressed="false">暂停</button
+              ><button id="reset">复位</button>
+            </div>
+          </div>
+          <div class="scope-legend">
+            <span>实线：瞬时值　虚线：当前设定的稳态值</span
+            ><span id="time">0.00 s</span>
+          </div>
+          <canvas
+            id="scope"
+            width="1440"
+            height="760"
+            role="img"
+            aria-label="最近12秒的电枢电流、反电势、转速、电磁转矩波形；纵轴独立自动缩放，读数见下方"
+          ></canvas>
+          <div class="meters" aria-label="实时读数">
+            <div>
+              电枢电流 I<sub>a</sub><strong id="current-meter"></strong>
+            </div>
+            <div>反电势 E<strong id="emf-meter"></strong></div>
+            <div>转速 n<strong id="speed-meter"></strong></div>
+            <div>电磁转矩 T<strong id="torque-meter"></strong></div>
+          </div>
+        </section>
+      </div>
+      <section class="takeaway">
+        <div>
+          <span class="small-title">稳态：T = T<sub>L</sub></span>
+          <p>
+            I<sub>a</sub> = T<sub>L</sub> / (C<sub>T</sub>Φ) =
+            <strong id="target-current">15.0 A</strong>
+          </p>
+          <span>磁通、负载不变 → 稳态电流不变</span>
+        </div>
+        <div class="response">
+          <span id="status">已达稳态</span>
+          <p id="explanation">调节电压或电阻，观察电流先变化、再恢复。</p>
+          <small id="target-speed"></small>
+        </div>
+      </section>
+      <footer>
+        模型：L<sub>a</sub>dI<sub>a</sub>/dt = U<sub>a</sub> − E −
+        (R<sub>a</sub>+R<sub>s</sub>)I<sub>a</sub>；Jdω/dt = T −
+        T<sub>L</sub>；E = kω，T =
+        kI<sub>a</sub>。恒磁通，忽略机械损耗与电刷压降；理想电源可回馈。
+      </footer>
+    </main>
+  </body>
+</html>
