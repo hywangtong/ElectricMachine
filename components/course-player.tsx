@@ -654,7 +654,8 @@ export default function CoursePlayer() {
                           <iframe
                             key={
                               slide.id.startsWith('dc-motor-structure-') ||
-                              slide.id.startsWith('dc-generator-emf-')
+                              slide.id.startsWith('dc-generator-emf-') ||
+                              slide.id === 'dc-motor-field-loss'
                                 ? slide.id
                                 : undefined
                             }

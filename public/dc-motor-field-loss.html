@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>励磁突然断电：飞车还是堵转？</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/dc-motor-field-loss.css" />
+    <script type="module" src="/dc-motor-field-loss.js"></script>
+  </head>
+  <body>
+    <main class="lesson field-loss-page">
+      <header class="page-head">
+        <div>
+          <div class="eyebrow">直流电机 / 他励电动机 · 失磁实验</div>
+          <h1>同样是励磁断电，为什么一种飞车，一种堵转？</h1>
+          <p>接着上一页的 n–T 曲线，观察磁通衰减后的转矩与运动。</p>
+        </div>
+        <div class="assumption">
+          电枢仍接 220 V<br />演示未切断电枢的故障后果
+        </div>
+      </header>
+      <section class="formula-strip" aria-label="机械特性与运动方程">
+        <div>
+          n = <span>U<sub>a</sub> / (C<sub>E</sub>Φ)</span> −
+          <span>R<sub>a</sub>T / (C<sub>E</sub>C<sub>T</sub>Φ²)</span>
+        </div>
+        <div class="curve-rule">Φ ↓ → 空载截距 ↑ · 曲线更陡 · 堵转转矩 ↓</div>
+        <div>
+          J dω/dt = <strong>T<sub>e</sub> − T<sub>L</sub></strong>
+        </div>
+      </section>
+      <div class="experiment-layout">
+        <section class="chart-panel" aria-label="机械特性与稳态工作点">
+          <div class="panel-heading">
+            <h2>曲线改变，运行点走向哪里？</h2>
+            <div class="scenario-controls" role="group" aria-label="选择负载">
+              <button id="light" type="button" aria-pressed="true">
+                轻载演示 · 4 N·m
+              </button>
+              <button id="heavy" type="button" aria-pressed="false">
+                重载演示 · 50 N·m
+              </button>
+            </div>
+          </div>
+          <svg
+            id="chart"
+            viewBox="0 0 840 300"
+            role="img"
+            aria-labelledby="chart-title chart-description"
+          >
+            <title id="chart-title">失磁过程中的 n–T 曲线</title>
+            <desc id="chart-description">
+              灰色为正常励磁曲线，绿色为当前磁通的准稳态曲线，金色为剩磁曲线；红点是绿色曲线与蓝色
+              TL 线的交点，即当前磁通下的稳态工作点。
+            </desc>
+            <defs>
+              <clipPath id="plot-clip">
+                <rect x="65" y="20" width="740" height="234" />
+              </clipPath>
+            </defs>
+            <g id="grid"></g>
+            <path
+              d="M65 16V254H810"
+              fill="none"
+              stroke="#31534d"
+              stroke-width="2"
+            />
+            <text x="6" y="14">n / r·min⁻¹</text>
+            <text x="731" y="292">T / N·m</text>
+            <g clip-path="url(#plot-clip)">
+              <path id="danger-line" stroke="#c97563" stroke-dasharray="4 5" />
+              <path
+                id="reference-curve"
+                fill="none"
+                stroke="#95a5a0"
+                stroke-width="3"
+                stroke-dasharray="9 6"
+              />
+              <path
+                id="residual-curve"
+                fill="none"
+                stroke="#bd9145"
+                stroke-width="3"
+                stroke-dasharray="5 5"
+              />
+              <path
+                id="current-curve"
+                fill="none"
+                stroke="#26786b"
+                stroke-width="4"
+              />
+              <path
+                id="load-line"
+                stroke="#5670a5"
+                stroke-width="2.5"
+                stroke-dasharray="7 5"
+              />
+              <circle id="initial-point" r="5" fill="#95a5a0" />
+              <circle
+                id="point"
+                r="7"
+                fill="#bd5c47"
+                stroke="white"
+                stroke-width="2"
+              />
+            </g>
+            <text id="danger-label" x="290" y="225" class="danger-label">
+              3300 · 示意危险线
+            </text>
+            <text id="load-label" y="284" fill="#5670a5"></text>
+            <text
+              id="offscreen"
+              x="795"
+              y="15"
+              text-anchor="end"
+              fill="#a27b37"
+            ></text>
+            <text id="point-label" fill="#a04735"></text>
+          </svg>
+          <div class="legend">
+            <span class="normal">┄ 正常励磁</span
+            ><span class="current">━ 当前磁通</span>
+            <span class="residual">┄ 剩磁</span
+            ><span class="actual">● 工作点：当前曲线 × TL</span>
+          </div>
+          <p class="chart-note">
+            红点始终位于绿色机械特性与蓝色 TL
+            线的交点；无正转速交点时隐藏。右侧转轴与读数显示受电感、惯性影响的暂态过程。
+          </p>
+          <div class="time-control">
+            <label for="time">回看过程</label>
+            <input
+              id="time"
+              type="range"
+              min="0"
+              max="12"
+              step="0.01"
+              value="0"
+            />
+            <output id="time-value" for="time">可直接拖动</output>
+          </div>
+        </section>
+        <section class="motor-panel" aria-label="电机状态与操作">
+          <div class="panel-heading">
+            <h2>两个电源，只有励磁断开</h2>
+            <span id="status" role="status">正常运行</span>
+          </div>
+          <svg
+            class="motor"
+            viewBox="0 0 520 134"
+            role="img"
+            aria-labelledby="motor-title"
+          >
+            <title id="motor-title">励磁开关、电枢电源与慢放转轴</title>
+            <path
+              d="M45 30H96M141 30H202V52"
+              fill="none"
+              stroke="#aa8241"
+              stroke-width="3"
+            />
+            <path
+              id="field-switch"
+              d="M96 30L141 30"
+              stroke="#aa8241"
+              stroke-width="4"
+            />
+            <circle cx="96" cy="30" r="4" fill="#aa8241" />
+            <circle cx="141" cy="30" r="4" fill="#aa8241" />
+            <text x="14" y="17" class="small-label">
+              励磁 U
+              <tspan baseline-shift="sub">f</tspan>
+            </text>
+            <text id="field-state" x="92" y="16" class="small-label">接通</text>
+            <path d="M45 105H151" stroke="#26786b" stroke-width="3" />
+            <text x="10" y="95" class="small-label">电枢 220 V</text>
+            <rect
+              x="147"
+              y="48"
+              width="156"
+              height="73"
+              rx="14"
+              fill="#dce8e2"
+              stroke="#456e64"
+              stroke-width="2"
+            />
+            <path
+              d="M166 59V109M183 59V109M200 59V109M217 59V109M234 59V109M251 59V109M268 59V109"
+              stroke="#a7beb3"
+              stroke-width="4"
+            />
+            <rect x="188" y="42" width="39" height="16" rx="4" fill="#91aba0" />
+            <path
+              d="M158 121V128H290V121"
+              stroke="#456e64"
+              stroke-width="5"
+              fill="none"
+            />
+            <path d="M303 85H397" stroke="#778a83" stroke-width="10" />
+            <g id="shaft" transform="translate(339 85)">
+              <circle r="22" fill="#edf1ea" stroke="#667f73" stroke-width="3" />
+              <path d="M-18 0H18M0-18V18" stroke="#aa8241" stroke-width="5" />
+              <circle r="5" fill="#667f73" />
+            </g>
+            <rect
+              x="397"
+              y="55"
+              width="106"
+              height="63"
+              rx="10"
+              fill="#f4ecd9"
+              stroke="#aa8241"
+              stroke-width="2"
+            />
+            <text id="load-name" x="450" y="81" text-anchor="middle">轻载</text>
+            <text id="load-number" x="450" y="104" text-anchor="middle">
+              4 N·m
+            </text>
+            <path
+              id="field-glow"
+              d="M160 66H287M160 100H287"
+              stroke="#c29a4c"
+              stroke-width="6"
+              opacity="1"
+            />
+            <text x="315" y="128" class="small-label">转轴按 1/60 慢放</text>
+          </svg>
+          <div class="readings">
+            <div>
+              <span>磁通 Φ / Φ正常</span><strong id="flux-value">100%</strong>
+            </div>
+            <div><span>反电势 E</span><strong id="emf-value">—</strong></div>
+            <div>
+              <span>电枢电流 I<sub>a</sub></span
+              ><strong id="current-value">—</strong>
+            </div>
+            <div>
+              <span>暂态 n / r·min⁻¹</span><strong id="speed-value">—</strong>
+            </div>
+          </div>
+          <div class="torque-comparison">
+            <span id="torque-value"></span><strong id="motion"></strong>
+          </div>
+          <div class="causal-step">
+            <b id="stage-title">① 点击一种负载，播放励磁断电</b>
+            <p id="stage-copy">
+              正常励磁时，电磁转矩与负载转矩平衡；电机稳定旋转。
+            </p>
+          </div>
+          <div class="actions">
+            <button id="fault" type="button">断开励磁</button>
+            <button id="pause" type="button" disabled>暂停</button>
+            <button id="reset" type="button">复位</button>
+            <label><input id="slow" type="checkbox" checked />慢放 ×0.25</label>
+          </div>
+        </section>
+      </div>
+      <section class="conclusions" aria-label="两种后果的条件与原因">
+        <article id="light-conclusion" class="selected">
+          <h2>轻载 → 飞车风险</h2>
+          <p>
+            剩磁下仍有 T<sub>e</sub> &gt;
+            T<sub>L</sub>，转子持续加速；要重新建立足够的反电势，需要很高的转速。
+          </p>
+        </article>
+        <article id="heavy-conclusion">
+          <h2>持续重载 → 减速、堵转、大电流</h2>
+          <p>
+            T<sub>L</sub> &gt;
+            C<sub>T</sub>Φ<sub>r</sub>U<sub>a</sub>/R<sub>a</sub>：连零速转矩也带不动。停转后
+            E = 0，I<sub>a</sub> → U<sub>a</sub>/R<sub>a</sub>。
+          </p>
+        </article>
+      </section>
+      <footer>
+        <label for="residual"
+          >剩磁 Φ<sub>r</sub>：<input
+            id="residual"
+            type="range"
+            min="2"
+            max="8"
+            step="1"
+            value="5"
+          /><output id="residual-value" for="residual">5%</output></label
+        >
+        <span id="capacity"></span
+        ><span
+          >点击负载即播放；拖动时间轴回看。不是所有失磁都必然飞车或堵转。</span
+        >
+        <button id="sources" type="button">模型与资料 ↗</button>
+      </footer>
+    </main>
+    <dialog id="source-dialog" aria-labelledby="source-title">
+      <h2 id="source-title">为什么会有两种结果？</h2>
+      <p>
+        共同前提：他励电机的电枢继续供电。并励电机在电枢供电保留、仅励磁支路断开时也有相同机理。
+      </p>
+      <p>
+        失磁使 E = C<sub>E</sub>Φn 减小，电流随后增大；但转矩 T<sub>e</sub> =
+        C<sub>T</sub>ΦI<sub>a</sub>
+        同时受磁通与电流影响，必须与负载比较，不能只凭 n ∝ 1/Φ 判断。
+      </p>
+      <p>
+        演示沿用上一页参数：U<sub>a</sub> = 220 V，R<sub>a</sub> = 1 Ω，C<sub
+          >E</sub
+        >
+        = 10，C<sub>T</sub> = 60C<sub>E</sub>/(2π)，Φ正常 = 20 mWb。L<sub
+          >a</sub
+        >
+        = 0.18 H，J = 0.25 kg·m²；励磁按 0.28 s
+        时间常数衰减到剩磁。电感、惯性使磁通、电流与转速连续变化。
+      </p>
+      <p>
+        积分方程：L<sub>a</sub>dI<sub>a</sub>/dt = U<sub>a</sub> − E −
+        R<sub>a</sub>I<sub>a</sub>；Jdω/dt = T<sub>e</sub> −
+        T<sub>L</sub>。负载为被动恒阻转矩，零速由静阻力保持，不模拟提升重物的反向倒转。红点将
+        T = TL
+        代入当前机械特性方程，表示曲线与负载线交点；不把右侧暂态转速当作交点转速。绿色曲线在每一时刻将磁通冻结、忽略
+        L<sub>a</sub>dI<sub>a</sub>/dt，表示准稳态特性。
+      </p>
+      <p>
+        忽略电枢反应、饱和、电刷压降和机械损耗；不模拟开断过电压及保护跳闸。3300
+        r/min
+        是教学观察界限，达到后冻结动画，不代表真实保护已动作。剩磁不等于零；Φ
+        严格为零时 T<sub>e</sub> = 0，不能由 1/Φ
+        推断无限转速。中间负载、风机负载或保护动作可能产生其他结果。
+      </p>
+      <ul>
+        <li>
+          <a
+            href="https://staffsites.sohag-univ.edu.eg/uploads/3492/1542386514%20-%20control%20of%20machines.pdf#page=195"
+            target="_blank"
+            rel="noreferrer"
+            >Control of Machines · §8.4.1，印刷页 178—179</a
+          >：分别讨论有载堵转与空载超速，以及失磁继电器切断电枢。
+        </li>
+        <li>
+          <a
+            href="https://engineering.louisville.edu/raise/ECE252/L19.htm"
+            target="_blank"
+            rel="noreferrer"
+            >University of Louisville · ECE252 Lesson 19</a
+          >：反电势、转矩、堵转电流与剩磁下的危险转速。
+        </li>
+        <li>
+          <a
+            href="https://products.safdrives.com/wp-content/uploads/sites/2/2021/07/FS2-Manual-Ver1.0.pdf#page=8"
+            target="_blank"
+            rel="noreferrer"
+            >SAF Drives · FS2/FS4 励磁调节器手册，§1.3</a
+          >：失磁检测用于避免超速。查阅：2026-09-28。
+        </li>
+      </ul>
+      <p class="protection-note">
+        实际应用：失磁检测应联锁切断电枢，并配置过流 /
+        超速保护。正常停机先断电枢，再断励磁。
+      </p>
+      <form method="dialog"><button autofocus>返回动画</button></form>
+    </dialog>
+  </body>
+</html>

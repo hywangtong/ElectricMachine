@@ -855,6 +855,13 @@ export const slides: Slide[] = [
           chapterId: chapter.id,
           embedUrl: '/dc-motor-mechanical-characteristic.html',
         },
+        {
+          id: 'dc-motor-field-loss',
+          kind: 'embed',
+          title: '励磁突然断电：飞车还是堵转？',
+          chapterId: chapter.id,
+          embedUrl: '/dc-motor-field-loss.html',
+        },
       );
     }
 
