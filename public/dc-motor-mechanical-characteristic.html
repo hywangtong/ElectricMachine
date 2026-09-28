@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>直流电动机的机械特性</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/dc-motor-mechanical-characteristic.css" />
+    <script type="module" src="/dc-motor-mechanical-characteristic.js"></script>
+  </head>
+  <body>
+    <main class="lesson mechanical-page">
+      <header class="page-head">
+        <div class="eyebrow">直流电机 / 他励电动机 · 机械特性</div>
+        <h1>转矩增加时，转速会下降多少？</h1>
+        <p>调节电压、电阻与磁通，观察 n–T 曲线的截距与斜率。</p>
+      </header>
+      <section class="equation" aria-label="直流电动机机械特性方程">
+        <math display="block">
+          <mi>n</mi><mo>=</mo>
+          <mfrac
+            ><mi>E</mi
+            ><mrow
+              ><msub><mi>C</mi><mi>E</mi></msub
+              ><mi>Φ</mi></mrow
+            ></mfrac
+          >
+          <mo>=</mo>
+          <mfrac
+            ><mrow
+              ><msub><mi>U</mi><mi>a</mi></msub
+              ><mo>−</mo><msub><mi>R</mi><mi>a</mi></msub
+              ><msub><mi>I</mi><mi>a</mi></msub></mrow
+            ><mrow
+              ><msub><mi>C</mi><mi>E</mi></msub
+              ><mi>Φ</mi></mrow
+            ></mfrac
+          >
+          <mo>=</mo>
+          <mfrac
+            ><msub><mi>U</mi><mi>a</mi></msub
+            ><mrow
+              ><msub><mi>C</mi><mi>E</mi></msub
+              ><mi>Φ</mi></mrow
+            ></mfrac
+          >
+          <mo>−</mo>
+          <mfrac
+            ><msub><mi>R</mi><mi>a</mi></msub
+            ><mrow
+              ><msub><mi>C</mi><mi>E</mi></msub
+              ><msub><mi>C</mi><mi>T</mi></msub
+              ><msup><mi>Φ</mi><mn>2</mn></msup></mrow
+            ></mfrac
+          >
+          <mi>T</mi><mo>=</mo><msub><mi>n</mi><mn>0</mn></msub
+          ><mo>−</mo><mi>k</mi><mi>T</mi>
+        </math>
+        <p>
+          由 E = C<sub>E</sub>Φn、T = C<sub>T</sub>ΦI<sub>a</sub> 消去
+          I<sub>a</sub>；n₀ 为理想空载转速，k = |dn/dT| 为转速降落系数。
+        </p>
+      </section>
+      <div class="mechanical-layout">
+        <section class="chart-panel" aria-label="转速与电磁转矩曲线">
+          <div class="panel-heading">
+            <h2>机械特性 n = f(T)</h2>
+            <span>固定坐标尺度 · 正向电动区</span>
+          </div>
+          <svg
+            id="chart"
+            viewBox="0 0 900 360"
+            role="img"
+            aria-labelledby="chart-title chart-description"
+          >
+            <title id="chart-title">直流电动机机械特性曲线</title>
+            <desc id="chart-description">
+              绿色实线为当前参数，灰色虚线为默认参数；横轴为电磁转矩，纵轴为转速。
+            </desc>
+            <defs>
+              <marker
+                id="axis-arrow"
+                markerWidth="7"
+                markerHeight="7"
+                refX="6"
+                refY="3.5"
+                orient="auto"
+              >
+                <path d="M0 0 7 3.5 0 7" fill="#31534d" />
+              </marker>
+            </defs>
+            <g id="grid"></g>
+            <path
+              d="M80 22V308H854"
+              fill="none"
+              stroke="#31534d"
+              stroke-width="2"
+              marker-end="url(#axis-arrow)"
+            />
+            <path
+              d="M80 308V18"
+              stroke="#31534d"
+              stroke-width="2"
+              marker-end="url(#axis-arrow)"
+            />
+            <text x="14" y="17">n / r·min⁻¹</text>
+            <text x="748" y="350">T / N·m</text>
+            <path
+              id="reference-curve"
+              fill="none"
+              stroke="#95a5a0"
+              stroke-width="3"
+              stroke-dasharray="10 7"
+            />
+            <path
+              id="current-curve"
+              fill="none"
+              stroke="#26786b"
+              stroke-width="5"
+              stroke-linecap="round"
+            />
+            <circle id="intercept" cx="80" r="6" fill="#26786b" />
+            <text id="intercept-label" x="94" class="intercept-label"></text>
+          </svg>
+          <div class="legend">
+            <span><i class="current-key"></i>当前参数</span
+            ><span
+              ><i class="reference-key"></i>默认：220 V · 1.0 Ω · 20 mWb</span
+            >
+          </div>
+          <div class="readings">
+            <span>理想空载转速 n₀ <strong id="no-load"></strong></span
+            ><span>斜率绝对值 k <strong id="slope"></strong></span>
+          </div>
+        </section>
+        <aside class="control-panel" aria-label="参数调节与软硬判别">
+          <div class="panel-heading">
+            <h2>试着改变一个参数</h2>
+            <button id="reset" type="button">恢复默认</button>
+          </div>
+          <div class="control">
+            <label for="voltage"
+              ><span>电枢电压 U<sub>a</sub></span
+              ><output id="voltage-value" for="voltage"></output
+            ></label>
+            <input
+              id="voltage"
+              type="range"
+              min="80"
+              max="260"
+              step="5"
+              value="220"
+            />
+            <p>只调电压：平行移动，软硬不变。</p>
+          </div>
+          <div class="control">
+            <label for="resistance"
+              ><span>电枢电阻 R<sub>a</sub></span
+              ><output id="resistance-value" for="resistance"></output
+            ></label>
+            <input
+              id="resistance"
+              type="range"
+              min="0.2"
+              max="5"
+              step="0.1"
+              value="1"
+            />
+            <p>只增电阻：n₀ 不变，曲线变陡、变软。</p>
+          </div>
+          <div class="control">
+            <label for="flux"
+              ><span>每极磁通 Φ</span
+              ><output id="flux-value" for="flux"></output
+            ></label>
+            <input
+              id="flux"
+              type="range"
+              min="10"
+              max="30"
+              step="1"
+              value="20"
+            />
+            <p>只减磁通：n₀ 升高，曲线变陡、变软。</p>
+          </div>
+          <section
+            class="hardness"
+            id="hardness"
+            aria-live="polite"
+            aria-atomic="true"
+          >
+            <div>
+              <strong id="hardness-label"></strong
+              ><span id="slope-ratio"></span>
+            </div>
+            <p id="hardness-description"></p>
+            <small>相对默认曲线判断；k 越小越硬，k 越大越软。</small>
+          </section>
+        </aside>
+      </div>
+      <footer>
+        教学参数：C<sub>E</sub> = 10，C<sub>T</sub> = 60C<sub>E</sub>/(2π) ≈
+        95.49；Φ 以 Wb
+        代入。稳态、每条曲线上磁通恒定；忽略电枢反应、电刷压降与机械损耗。
+      </footer>
+    </main>
+  </body>
+</html>

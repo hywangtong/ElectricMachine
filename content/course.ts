@@ -848,6 +848,13 @@ export const slides: Slide[] = [
           chapterId: chapter.id,
           embedUrl: '/dc-motor-load-current.html',
         },
+        {
+          id: 'dc-motor-mechanical-characteristic',
+          kind: 'embed',
+          title: '直流电动机的机械特性',
+          chapterId: chapter.id,
+          embedUrl: '/dc-motor-mechanical-characteristic.html',
+        },
       );
     }
 
