@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>串励电动机：电压、电流与转矩特性</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/dc-motor-series.css" />
+    <script src="/dc-machine-basics.js" defer></script>
+  </head>
+  <body>
+    <main class="lesson series-page">
+      <header class="page-head">
+        <div class="eyebrow">
+          直流电机 / 39 · 7.7 运行分析 · 串励电动机（自学）
+        </div>
+        <h1>串励电动机：电压、电流与转矩特性</h1>
+        <p>励磁绕组与电枢串联：同一电流既产生主磁通，也流过电枢。</p>
+      </header>
+
+      <div class="series-layout">
+        <section class="series-card electrical-card">
+          <h2><span class="section-number">01 / 02</span> 电压与电流</h2>
+          <p class="math">
+            <i>U</i> = <i>U</i><sub>a</sub> + <i>U</i><sub>f</sub>
+          </p>
+          <p class="math">
+            &nbsp;&nbsp; = <i>E</i> + (<i>R</i><sub>a</sub> + <i>R</i
+            ><sub>f</sub>)<i>I</i>
+          </p>
+          <p class="math current-equation">
+            <i>I</i> = <i>I</i><sub>a</sub> = <i>I</i><sub>f</sub> =
+            <span class="fraction"
+              ><span><i>U</i> − <i>E</i></span
+              ><span><i>R</i><sub>a</sub> + <i>R</i><sub>f</sub></span></span
+            >
+            =
+            <span class="fraction"
+              ><span><i>T</i></span
+              ><span><i>C</i><sub>T</sub>Φ</span></span
+            >
+          </p>
+          <svg
+            class="series-circuit"
+            viewBox="0 0 510 220"
+            role="img"
+            aria-labelledby="series-circuit-title"
+          >
+            <title id="series-circuit-title">
+              串励电动机等效电路。上正下负的端电压 U 加在励磁绕组 Rf
+              和电枢串联支路上。励磁电压 Uf 左正右负，电枢电压 Ua 上正下负；电流
+              I、If、Ia 相等。电枢含电阻 Ra 和反电动势 E。
+            </title>
+            <defs>
+              <marker
+                id="series-arrow"
+                markerWidth="9"
+                markerHeight="9"
+                refX="8"
+                refY="4.5"
+                orient="auto"
+                markerUnits="userSpaceOnUse"
+              >
+                <path d="M0 0 9 4.5 0 9Z" fill="#26786b" />
+              </marker>
+            </defs>
+            <g
+              fill="none"
+              stroke="#173b3b"
+              stroke-width="3"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M95 45H215 M285 45H375V80 M375 118V133 M375 189V207H95"
+              />
+              <path
+                d="M215 45 C215 18 232 18 232 45 C232 18 250 18 250 45 C250 18 267 18 267 45 C267 18 285 18 285 45"
+              />
+              <rect x="365" y="80" width="20" height="38" fill="#edf5ef" />
+              <circle cx="375" cy="161" r="28" fill="#fff" />
+              <circle cx="95" cy="45" r="4" fill="#fff" />
+              <circle cx="95" cy="207" r="4" fill="#fff" />
+              <path
+                d="M128 45H174 M315 45H349 M375 54V73"
+                stroke="#26786b"
+                marker-end="url(#series-arrow)"
+              />
+            </g>
+            <g>
+              <text x="46" y="58">+</text>
+              <text x="46" y="205">−</text>
+              <text x="43" y="133">U</text>
+              <text x="139" y="29">I</text>
+              <text x="319" y="29">
+                I
+                <tspan baseline-shift="sub" font-size="15">f</tspan>
+              </text>
+              <text x="407" y="65">
+                I
+                <tspan baseline-shift="sub" font-size="15">a</tspan>
+              </text>
+              <text x="226" y="83">
+                + U
+                <tspan baseline-shift="sub" font-size="15">f</tspan>
+                −
+              </text>
+              <text x="237" y="20">
+                R
+                <tspan baseline-shift="sub" font-size="15">f</tspan>
+              </text>
+              <text x="395" y="108">
+                R
+                <tspan baseline-shift="sub" font-size="15">a</tspan>
+              </text>
+              <text x="375" y="169" text-anchor="middle">M</text>
+              <text x="324" y="169">E</text>
+              <text x="445" y="137">
+                + U
+                <tspan baseline-shift="sub" font-size="15">a</tspan>
+              </text>
+              <text x="445" y="195">−</text>
+              <text x="340" y="134" font-size="18">+</text>
+              <text x="340" y="197" font-size="18">−</text>
+            </g>
+          </svg>
+          <p class="winding-note">
+            <strong>励磁电流大 → 导线粗、匝数少。</strong
+            ><br />串励励磁绕组的电阻，比并励（他励）励磁绕组小得多。
+          </p>
+        </section>
+
+        <section class="series-card torque-card">
+          <h2><span class="section-number">03</span> 转矩特性</h2>
+          <p class="math">
+            <i>T</i> = <i>C</i><sub>T</sub>Φ<i>I</i><sub>a</sub>
+          </p>
+          <div class="regimes">
+            <article class="regime">
+              <h3>电流较小 · 磁路未饱和</h3>
+              <p>磁通随电枢电流增大</p>
+              <p class="math">
+                Φ ∝ <i>I</i><sub>a</sub> →
+                <b><i>T</i> ∝ <i>I</i><sub>a</sub><sup>2</sup></b>
+              </p>
+              <p>转矩特性为<strong>抛物线</strong>。</p>
+            </article>
+            <article class="regime">
+              <h3>电流较大 · 磁路已饱和</h3>
+              <p>磁通基本不再增大</p>
+              <p class="math">
+                Φ ≈ 常数 → <b><i>T</i> ∝ <i>I</i><sub>a</sub></b>
+              </p>
+              <p>转矩近似随电流<strong>线性增长</strong>。</p>
+            </article>
+          </div>
+          <p class="transition">
+            两种状态之间可概括为：<span class="math"
+              ><i>T</i> ∝ <i>I</i><sub>a</sub><sup>m</sup></span
+            >，<strong>1 &lt; m &lt; 2</strong>。
+          </p>
+          <div class="comparison">
+            <h3>与并励电动机比较</h3>
+            <p>
+              ① 对应相同的 <b>ΔT</b>，<b>ΔI<sub>a</sub> 较小</b>，电流波动小。
+            </p>
+            <p>
+              ② 对应允许的 <b>I<sub>a max</sub></b
+              >，能产生的 <b>T 较大</b>；<br />&nbsp;&nbsp;&nbsp;起动转矩
+              <b>T<sub>st</sub></b> 和最大转矩 <b>T<sub>max</sub></b> 较大。
+            </p>
+          </div>
+        </section>
+      </div>
+      <footer class="series-note">
+        稳态电动运行，忽略电刷接触压降；T 为电磁转矩。资料：用户附件第 1—2 页 ·
+        7.7 直流电动机的运行分析。
+      </footer>
+    </main>
+  </body>
+</html>

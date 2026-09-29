@@ -862,6 +862,48 @@ export const slides: Slide[] = [
           chapterId: chapter.id,
           embedUrl: '/dc-motor-field-loss.html',
         },
+        {
+          id: 'dc-motor-torque-direction',
+          kind: 'embed',
+          title: '电磁转矩方向：磁场与电枢电流共同决定',
+          chapterId: chapter.id,
+          embedUrl: '/dc-motor-torque-direction.html',
+        },
+        {
+          id: 'dc-motor-shunt-formulas',
+          kind: 'embed',
+          title: '并励直流电动机的基本公式',
+          chapterId: chapter.id,
+          embedUrl: '/dc-motor-shunt-formulas.html',
+        },
+        {
+          id: 'dc-motor-shunt-example',
+          kind: 'embed',
+          title: '例题 3：并励直流电动机运行计算',
+          chapterId: chapter.id,
+          embedUrl: '/dc-motor-shunt-example.html',
+        },
+        {
+          id: 'dc-motor-series-electrical-torque',
+          kind: 'embed',
+          title: '串励电动机：电压、电流与转矩特性',
+          chapterId: chapter.id,
+          embedUrl: '/dc-motor-series-electrical-torque.html',
+        },
+        {
+          id: 'dc-motor-series-speed',
+          kind: 'embed',
+          title: '串励电动机：转速与软机械特性',
+          chapterId: chapter.id,
+          embedUrl: '/dc-motor-series-speed.html',
+        },
+        {
+          id: 'dc-motor-series-applications',
+          kind: 'embed',
+          title: '串励电动机：应用与运行限制',
+          chapterId: chapter.id,
+          embedUrl: '/dc-motor-series-applications.html',
+        },
       );
     }
 

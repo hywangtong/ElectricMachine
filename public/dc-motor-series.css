@@ -1,0 +1,347 @@
+.series-page {
+  grid-template-rows: 82px minmax(0, 1fr) 48px;
+  gap: 16px;
+}
+
+.series-layout {
+  display: grid;
+  grid-template-columns: 0.95fr 1.35fr;
+  gap: 20px;
+  min-height: 0;
+}
+
+.series-card {
+  min-height: 0;
+  padding: 22px 26px;
+  border: 1px solid #c8d9d4;
+  border-radius: 16px;
+  background: #fff;
+}
+
+.series-card h2 {
+  margin-bottom: 12px;
+  font-size: 24px;
+}
+
+.section-number {
+  margin-right: 10px;
+  color: #39796f;
+  font-size: 16px;
+}
+
+.series-page p {
+  line-height: 1.5;
+}
+
+.series-page .page-head p {
+  line-height: 1.35;
+}
+
+.math {
+  font-family: 'Cambria', 'Times New Roman', 'Microsoft YaHei', serif;
+  font-size: 30px;
+  line-height: 1.4;
+}
+
+.math sub,
+.math sup {
+  font-size: 65%;
+  line-height: 0;
+}
+
+.fraction {
+  display: inline-flex;
+  vertical-align: middle;
+  flex-direction: column;
+  text-align: center;
+  line-height: 1.2;
+  margin: 0 5px;
+}
+
+.fraction > :first-child {
+  border-bottom: 1.5px solid currentColor;
+  padding: 0 5px 4px;
+}
+
+.fraction > :last-child {
+  padding: 4px 5px 0;
+}
+
+.series-note {
+  padding: 10px 18px;
+  border-radius: 9px;
+  background: #edf5ef;
+  color: #45665b;
+  font-size: 17px;
+  align-self: end;
+}
+
+.electrical-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.electrical-card .math {
+  font-size: 28px;
+}
+
+.electrical-card .current-equation {
+  margin-top: 12px;
+  padding-bottom: 6px;
+  font-size: 26px;
+}
+
+.series-circuit {
+  width: 100%;
+  height: 215px;
+  flex: 1;
+  min-height: 180px;
+  margin: 8px 0;
+}
+
+.series-circuit text {
+  fill: #173b3b;
+  font-size: 23px;
+  font-family: 'Cambria', 'Microsoft YaHei', serif;
+}
+
+.winding-note {
+  padding-top: 12px;
+  border-top: 1px solid #dce6df;
+  font-size: 20px;
+}
+
+.torque-card {
+  padding: 18px 24px;
+}
+
+.torque-card > .math {
+  color: #26786b;
+  font-size: 36px;
+}
+
+.regimes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin: 12px 0 10px;
+}
+
+.regime {
+  padding: 14px 18px;
+  border-radius: 12px;
+  background: #edf5ef;
+}
+
+.regime + .regime {
+  background: #fff5e4;
+}
+
+.regime h3 {
+  margin: 0 0 9px;
+  font-size: 21px;
+}
+
+.regime p {
+  font-size: 19px;
+}
+
+.regime .math {
+  margin: 7px 0;
+  font-size: 29px;
+}
+
+.transition {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #dce6df;
+  font-size: 19px;
+}
+
+.transition .math {
+  margin: 0 8px;
+  font-size: 27px;
+}
+
+.comparison {
+  margin-top: 12px;
+}
+
+.comparison h3 {
+  margin: 0 0 8px;
+  font-size: 21px;
+}
+
+.comparison p {
+  margin-top: 6px;
+  font-size: 20px;
+  line-height: 1.4;
+}
+
+.series-speed-page {
+  grid-template-rows: 82px 126px minmax(0, 1fr) 48px;
+}
+
+.speed-equations {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding: 16px 22px;
+  background: #edf5ef;
+}
+
+.speed-equations .math {
+  font-size: 28px;
+}
+
+.speed-equations p + p {
+  border-left: 1px solid #b9d1c4;
+  padding-left: 22px;
+}
+
+.speed-layout {
+  grid-template-columns: 0.78fr 1.5fr;
+}
+
+.speed-graph {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  padding: 20px;
+}
+
+.speed-graph svg {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+
+.speed-graph p {
+  font-size: 19px;
+  text-align: center;
+  color: #55736d;
+}
+
+.speed-states {
+  display: grid;
+  min-height: 0;
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.speed-state {
+  padding: 12px 22px;
+  border-left: 5px solid #39796f;
+}
+
+.speed-state:first-child {
+  border-left-color: #ad542e;
+  background: #fff7ee;
+}
+
+.speed-state h2 {
+  font-size: 20px;
+  margin-bottom: 4px;
+}
+
+.speed-state p {
+  font-size: 19px;
+}
+
+.speed-state .state-flow {
+  color: #26786b;
+  font-size: 21px;
+  font-weight: 700;
+}
+
+.series-applications-page .series-layout {
+  grid-template-columns: 1.1fr 1fr;
+}
+
+.application-card {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.application-card h2 {
+  margin-bottom: 0;
+}
+
+.application-card > p {
+  font-size: 24px;
+}
+
+.application-examples {
+  display: flex;
+  gap: 12px;
+}
+
+.application-examples span {
+  padding: 12px 24px;
+  border: 1px solid #c8d9d4;
+  border-radius: 10px;
+  background: #edf5ef;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.load-response {
+  padding: 18px 22px;
+  border-radius: 12px;
+  background: #edf5ef;
+}
+
+.load-response h3 {
+  margin: 0 0 8px;
+  font-size: 22px;
+}
+
+.load-response p {
+  font-size: 21px;
+}
+
+.load-response small {
+  display: block;
+  margin-top: 8px;
+  font-size: 17px;
+  color: #55736d;
+}
+
+.limits-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: #fff8ee;
+  border-color: #dbc6a9;
+}
+
+.limits-card h2 {
+  color: #984b2d;
+  margin-bottom: 0;
+}
+
+.operating-limit {
+  padding: 18px 20px;
+  border: 1px solid #e3c6af;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.operating-limit h3 {
+  margin: 0 0 9px;
+  font-size: 25px;
+  color: #984b2d;
+}
+
+.operating-limit p {
+  font-size: 22px;
+}
+
+.cause-chain {
+  margin-top: auto;
+  padding: 16px 20px;
+  border-radius: 12px;
+  background: #f4e7d7;
+  font-size: 22px;
+  line-height: 1.8;
+  font-weight: 700;
+}

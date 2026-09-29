@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>并励直流电动机的基本公式</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/dc-motor-voltage-balance.css" />
+    <link rel="stylesheet" href="/dc-motor-shunt.css" />
+    <script src="/dc-machine-basics.js" defer></script>
+  </head>
+  <body>
+    <main class="lesson voltage-page shunt-formulas-page">
+      <header class="page-head">
+        <div class="eyebrow">直流电机 / 37 · 并励电动机</div>
+        <h1>并励直流电动机的基本公式</h1>
+        <p>励磁绕组与电枢并联在同一电源两端：端电压相同，输入电流分成两路。</p>
+      </header>
+
+      <div class="voltage-layout">
+        <div class="equations">
+          <section
+            class="equation-card field-card"
+            aria-labelledby="voltage-title"
+          >
+            <h2 id="voltage-title"><span>01</span> 输入电压</h2>
+            <div class="formula">
+              <i>U</i> = <i>U</i><sub>a</sub> = <i>U</i><sub>f</sub>
+            </div>
+            <p>电枢与励磁绕组共用端电压 U</p>
+          </section>
+          <section
+            class="equation-card armature-card"
+            aria-labelledby="current-title"
+          >
+            <h2 id="current-title"><span>02</span> 输入电流</h2>
+            <div class="formula">
+              <i>I</i> = <i>I</i><sub>a</sub> + <i>I</i><sub>f</sub>
+            </div>
+            <p>电源电流 = 电枢电流 + 励磁电流</p>
+          </section>
+          <section
+            class="equation-card power-card"
+            aria-labelledby="power-title"
+          >
+            <h2 id="power-title"><span>03</span> 输入功率</h2>
+            <div class="formula">
+              <i>P</i><sub>1</sub> = <i>UI</i> = <i>UI</i><sub>a</sub> +
+              <i>UI</i><sub>f</sub>
+            </div>
+            <p>电源同时向电枢和励磁绕组供电</p>
+          </section>
+        </div>
+
+        <section class="circuit-panel" aria-labelledby="circuit-title">
+          <h2 id="circuit-title">同一电源 · 两条并联支路</h2>
+          <svg viewBox="0 0 640 360" role="img" aria-labelledby="circuit-desc">
+            <title id="circuit-desc">
+              并励直流电动机等效电路：输入电流 I 在节点分为电枢电流 Ia
+              和励磁电流 If；电枢支路含电阻 Ra 与反电动势 E，励磁支路含励磁绕组
+              Rf，两条支路共用上正下负的电压 U。
+            </title>
+            <defs>
+              <marker
+                id="current-arrow"
+                markerWidth="9"
+                markerHeight="9"
+                refX="8"
+                refY="4.5"
+                orient="auto"
+                markerUnits="userSpaceOnUse"
+              >
+                <path d="M0 0 9 4.5 0 9Z" fill="#26786b" />
+              </marker>
+              <marker
+                id="field-arrow"
+                markerWidth="9"
+                markerHeight="9"
+                refX="8"
+                refY="4.5"
+                orient="auto"
+                markerUnits="userSpaceOnUse"
+              >
+                <path d="M0 0 9 4.5 0 9Z" fill="#a54b2b" />
+              </marker>
+            </defs>
+            <g
+              fill="none"
+              stroke="#173b3b"
+              stroke-width="3"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M100 55H540V110 M100 305H540V230 M310 55V105 M310 155V190 M310 266V305"
+              />
+              <rect x="296" y="105" width="28" height="50" fill="#eff7f3" />
+              <circle cx="310" cy="228" r="38" fill="#fff" />
+              <path
+                d="M540 110 C575 110 575 140 540 140 C575 140 575 170 540 170 C575 170 575 200 540 200 C575 200 575 230 540 230"
+              />
+              <g fill="#fff">
+                <circle cx="100" cy="55" r="5" />
+                <circle cx="100" cy="305" r="5" />
+              </g>
+            </g>
+            <g fill="#173b3b">
+              <circle cx="310" cy="55" r="5" />
+              <circle cx="310" cy="305" r="5" />
+            </g>
+            <g fill="none" stroke-width="3">
+              <path
+                d="M150 55H215 M310 70V96"
+                stroke="#26786b"
+                marker-end="url(#current-arrow)"
+              />
+              <path
+                d="M410 55H475"
+                stroke="#a54b2b"
+                marker-end="url(#field-arrow)"
+              />
+            </g>
+            <g class="diagram-math">
+              <text x="60" y="91">+</text>
+              <text x="60" y="291">−</text>
+              <text x="47" y="191">U</text>
+              <text x="178" y="37" class="armature-ink">I</text>
+              <text x="266" y="89" class="armature-ink">
+                I
+                <tspan baseline-shift="sub" font-size="18">a</tspan>
+              </text>
+              <text x="431" y="37" class="field-ink">
+                I
+                <tspan baseline-shift="sub" font-size="18">f</tspan>
+              </text>
+              <text x="343" y="142">
+                R
+                <tspan baseline-shift="sub" font-size="18">a</tspan>
+              </text>
+              <text x="585" y="185" class="field-ink">
+                R
+                <tspan baseline-shift="sub" font-size="18">f</tspan>
+              </text>
+              <text x="246" y="239">E</text>
+              <text x="310" y="239" text-anchor="middle">M</text>
+              <text x="353" y="207">+</text>
+              <text x="353" y="264">−</text>
+            </g>
+            <g class="circuit-caption" text-anchor="middle">
+              <text x="310" y="346">电枢支路</text>
+              <text x="540" y="346">励磁支路</text>
+            </g>
+          </svg>
+          <p class="back-emf">
+            <strong>列式顺序：</strong>先由 U 求 I<sub>f</sub>，再从输入电流 I
+            中扣除 I<sub>f</sub>，得到 I<sub>a</sub>。
+          </p>
+        </section>
+      </div>
+
+      <section class="connection-strip" aria-label="并励电动机计算关系">
+        <div>
+          <h2>励磁支路</h2>
+          <p>I<sub>f</sub> = U / R<sub>f</sub></p>
+        </div>
+        <div>
+          <h2>电枢支路</h2>
+          <p>E = U − R<sub>a</sub>I<sub>a</sub></p>
+        </div>
+        <div>
+          <h2>机电转换关系</h2>
+          <p>E = C<sub>E</sub>Φn</p>
+          <p>T = C<sub>T</sub>ΦI<sub>a</sub></p>
+        </div>
+      </section>
+      <footer class="assumption">
+        稳态电动运行，忽略电刷接触压降；U 用 V，I 用 A，R 用 Ω，n 用 r/min，T
+        为电磁转矩（N·m）。
+      </footer>
+    </main>
+  </body>
+</html>

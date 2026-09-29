@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>例题 3：并励直流电动机运行计算</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/dc-motor-nameplate-example.css" />
+    <link rel="stylesheet" href="/dc-motor-shunt.css" />
+    <script src="/dc-machine-basics.js" defer></script>
+    <script type="module" src="/dc-motor-nameplate-example.js"></script>
+  </head>
+  <body>
+    <main class="lesson exercise-page shunt-example-page">
+      <header class="page-head exercise-head">
+        <div class="eyebrow">直流电机 / 38 · 课堂例题</div>
+        <h1>例题 3 · 并励直流电动机运行计算</h1>
+        <p>先根据题意独立列式，再点击按钮核对计算过程。</p>
+      </header>
+
+      <section class="exercise-layout">
+        <article class="question-card" aria-labelledby="shunt-question-title">
+          <header class="card-label">
+            <span>题目 · 例 7.7.1</span><small>SHUNT DC MOTOR</small>
+          </header>
+          <h2 id="shunt-question-title">某并励直流电动机参数如下：</h2>
+          <dl class="given-grid" aria-label="已知条件">
+            <div>
+              <dt>额定电压</dt>
+              <dd>
+                <i>U<sub>N</sub></i> = <b>220</b> V
+              </dd>
+            </div>
+            <div>
+              <dt>额定输入电流</dt>
+              <dd>
+                <i>I<sub>N</sub></i> = <b>12.5</b> A
+              </dd>
+            </div>
+            <div>
+              <dt>额定转速</dt>
+              <dd>
+                <i>n<sub>N</sub></i> = <b>3000</b> r/min
+              </dd>
+            </div>
+            <div>
+              <dt>励磁绕组电阻</dt>
+              <dd>
+                <i>R<sub>f</sub></i> = <b>628</b> Ω
+              </dd>
+            </div>
+            <div>
+              <dt>电枢电阻</dt>
+              <dd>
+                <i>R<sub>a</sub></i> = <b>0.41</b> Ω
+              </dd>
+            </div>
+          </dl>
+          <div class="question-tasks">
+            <strong>求</strong>
+            <ol>
+              <li>
+                额定运行时的励磁电流 <i>I<sub>f</sub></i> 和电枢电流
+                <i>I<sub>a</sub></i
+                >；
+              </li>
+              <li>反电动势 <i>E</i> 和电磁转矩 <i>T</i>。</li>
+            </ol>
+          </div>
+          <button
+            class="reveal-button"
+            type="button"
+            aria-expanded="false"
+            aria-controls="shunt-solution"
+          >
+            <span class="button-label">显示计算过程与答案</span
+            ><span class="button-icon" aria-hidden="true">→</span>
+          </button>
+        </article>
+
+        <section
+          class="solution-panel"
+          id="shunt-solution"
+          aria-label="例题 3 计算过程与答案"
+          hidden
+        >
+          <header class="solution-head">
+            <span>计算过程与答案</span><small>先分流，再求机电转换</small>
+          </header>
+          <ol class="solution-steps">
+            <li>
+              <span class="step-index">01</span>
+              <div>
+                <h2>由端电压求励磁电流</h2>
+                <p>
+                  <i>I<sub>f</sub></i> = <i>U<sub>N</sub></i> /
+                  <i>R<sub>f</sub></i>
+                </p>
+                <p class="substitution">= 220 / 628 ≈ <b>0.350 A</b></p>
+              </div>
+            </li>
+            <li>
+              <span class="step-index">02</span>
+              <div>
+                <h2>从输入电流中扣除励磁电流</h2>
+                <p>
+                  <i>I<sub>a</sub></i> = <i>I<sub>N</sub></i> −
+                  <i>I<sub>f</sub></i>
+                </p>
+                <p class="substitution">= 12.5 − 220 / 628 ≈ <b>12.150 A</b></p>
+              </div>
+            </li>
+            <li>
+              <span class="step-index">03</span>
+              <div>
+                <h2>由电压平衡求反电动势</h2>
+                <p>
+                  <i>E</i> = <i>U<sub>N</sub></i> −
+                  <i>R<sub>a</sub>I<sub>a</sub></i>
+                </p>
+                <p class="substitution">
+                  ≈ 220 − 0.41 × 12.150 = <b>215.02 V</b>
+                </p>
+              </div>
+            </li>
+            <li>
+              <span class="step-index">04</span>
+              <div>
+                <h2>由电动势系数求电磁转矩</h2>
+                <p>
+                  <i>C<sub>E</sub>Φ</i> = <i>E</i> / <i>n<sub>N</sub></i> ≈
+                  0.07167
+                </p>
+                <p>
+                  <i>T</i> = (60 / 2π)<i>C<sub>E</sub>ΦI<sub>a</sub></i>
+                </p>
+                <p class="substitution">
+                  ≈ 9.5493 × 0.07167 × 12.150 = <b>8.32 N·m</b>
+                </p>
+              </div>
+            </li>
+          </ol>
+          <p class="solution-note">
+            稳态运行，忽略电刷压降。T 是电磁转矩；计算中保留未舍入值，且 I<sub
+              >N</sub
+            >
+            = I<sub>a</sub> + I<sub>f</sub>。
+          </p>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>

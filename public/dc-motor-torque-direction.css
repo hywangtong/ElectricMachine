@@ -1,0 +1,507 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  overflow: hidden;
+  color: #173b3b;
+  background:
+    radial-gradient(circle at 91% 3%, #f3e4c7 0 8%, transparent 27%),
+    linear-gradient(135deg, #f8fbf7 0%, #f2f7f3 64%, #edf5f1 100%);
+  font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+}
+
+button {
+  font: inherit;
+}
+
+.lesson {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 1444px;
+  height: 744px;
+  padding: 18px 24px;
+  display: grid;
+  grid-template-rows: 82px minmax(0, 1fr) 48px;
+  gap: 12px;
+  transform: translate(-50%, -50%) scale(var(--lesson-scale, 1));
+  transform-origin: center;
+}
+
+.page-head,
+.motor-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.eyebrow,
+.section-label {
+  color: #39796f;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+h1 {
+  margin: 5px 0 3px;
+  font-size: 32px;
+  line-height: 1.12;
+}
+
+h2 {
+  margin: 5px 0 14px;
+  font-size: 23px;
+  line-height: 1.2;
+}
+
+.page-head p {
+  margin: 0;
+  color: #55736d;
+  font-size: 17px;
+}
+
+.eli5-badge {
+  margin-top: 10px;
+  border: 1px solid #d9c59f;
+  border-radius: 999px;
+  padding: 9px 16px;
+  color: #885322;
+  background: #fff8e9;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.direction-layout {
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 290px minmax(0, 1fr) 282px;
+  gap: 16px;
+}
+
+.control-panel,
+.motor-card,
+.rule-panel {
+  min-height: 0;
+  border: 1px solid #c8d9d4;
+  border-radius: 16px;
+  padding: 18px;
+  background: rgb(255 255 255 / 94%);
+  box-shadow: 0 10px 28px rgb(23 59 59 / 6%);
+}
+
+.control-panel,
+.rule-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.direction-control {
+  width: 100%;
+  min-height: 112px;
+  display: grid;
+  grid-template-columns: 66px 1fr;
+  grid-template-rows: 1fr auto;
+  align-items: center;
+  gap: 0 10px;
+  margin-bottom: 12px;
+  border: 2px solid #b7d4cc;
+  border-radius: 14px;
+  padding: 12px;
+  color: #173b3b;
+  background: #f2f8f5;
+  text-align: left;
+  cursor: pointer;
+}
+
+.direction-control:hover {
+  transform: translateY(-1px);
+}
+
+.direction-control:focus-visible,
+.reset-button:focus-visible {
+  outline: 3px solid #6fa6c9;
+  outline-offset: 3px;
+}
+
+.direction-control[aria-pressed='true'] {
+  border-color: #c66a35;
+  background: #fff4e8;
+}
+
+.current-control {
+  border-color: #e0be8e;
+  background: #fff9ed;
+}
+
+.control-symbol {
+  grid-row: 1 / 3;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: white;
+  background: #39796f;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 31px;
+  font-weight: 700;
+}
+
+.current-control .control-symbol {
+  background: #b8622f;
+}
+
+.control-symbol sub {
+  align-self: center;
+  margin: 12px 0 0 2px;
+  font-size: 0.55em;
+}
+
+.direction-control b {
+  display: block;
+  font-size: 18px;
+}
+
+.direction-control small {
+  display: block;
+  margin-top: 6px;
+  color: #55736d;
+  font-size: 15px;
+}
+
+.direction-control em {
+  color: #8d5c32;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 800;
+}
+
+.reset-button {
+  align-self: flex-start;
+  border: 1px solid #b8cbc5;
+  border-radius: 999px;
+  padding: 8px 14px;
+  color: #39796f;
+  background: white;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.tiny-legend {
+  margin-top: auto;
+  border-top: 1px solid #d9e4e0;
+  padding-top: 12px;
+  display: grid;
+  gap: 6px;
+  color: #607772;
+  font-size: 13px;
+}
+
+.tiny-legend b {
+  display: inline-grid;
+  width: 24px;
+  height: 24px;
+  place-items: center;
+  margin-right: 6px;
+  border-radius: 50%;
+  color: #a14f29;
+  background: #fff0e3;
+  font-size: 19px;
+}
+
+.motor-card {
+  overflow: hidden;
+  padding-bottom: 8px;
+  background: linear-gradient(145deg, #fff 0%, #f5faf7 100%);
+}
+
+.motor-card-head {
+  height: 62px;
+}
+
+.motor-card h2 {
+  margin-bottom: 0;
+}
+
+.result-pill {
+  min-width: 136px;
+  border-radius: 999px;
+  padding: 10px 14px;
+  color: white;
+  background: #b85b2b;
+  font-size: 20px;
+  font-weight: 900;
+  text-align: center;
+}
+
+.motor-card svg {
+  display: block;
+  width: 100%;
+  height: calc(100% - 62px);
+}
+
+.pole {
+  stroke: #244b52;
+  stroke-width: 3;
+}
+
+.north-pole {
+  fill: #d76b4b;
+}
+
+.south-pole {
+  fill: #527fa0;
+}
+
+.pole-label {
+  fill: white;
+  font-size: 30px;
+  font-weight: 900;
+  text-anchor: middle;
+  dominant-baseline: central;
+}
+
+.field-lines path {
+  fill: none;
+  stroke: #39799f;
+  stroke-width: 3;
+  stroke-dasharray: 11 8;
+  animation: field-flow 1.2s linear infinite;
+}
+
+#field-arrow path {
+  fill: #39799f;
+}
+
+.rotor {
+  stroke: #315b5a;
+  stroke-width: 3;
+}
+
+.shaft {
+  fill: #738c8b;
+  stroke: #315b5a;
+  stroke-width: 3;
+}
+
+.conductor circle {
+  fill: #fff7e9;
+  stroke: #a9502a;
+  stroke-width: 3;
+}
+
+.conductor .current-dot {
+  fill: #a9502a;
+  stroke: none;
+}
+
+.current-cross {
+  display: none;
+  fill: none;
+  stroke: #a9502a;
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.current-in .current-cross {
+  display: inline;
+}
+
+.current-in .current-dot {
+  display: none;
+}
+
+.force-pair path {
+  fill: none;
+  stroke: #d18425;
+  stroke-width: 4;
+}
+
+#force-arrow path {
+  fill: #d18425;
+}
+
+.force-label {
+  fill: #b96d18;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 24px;
+  font-weight: 800;
+  text-anchor: middle;
+}
+
+.torque-path {
+  fill: none;
+  stroke: #b85b2b;
+  stroke-width: 5;
+  stroke-dasharray: 10 7;
+  animation: torque-flow 1s linear infinite;
+}
+
+#torque-arrow path {
+  fill: #b85b2b;
+}
+
+.torque-label,
+.field-label {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 24px;
+  font-weight: 800;
+  text-anchor: middle;
+}
+
+.torque-label {
+  fill: #a64d25;
+}
+
+.field-label {
+  fill: #39799f;
+}
+
+.diagram-divider {
+  stroke: #d5e2de;
+  stroke-width: 1.5;
+}
+
+.torque-stage {
+  fill: #fff5e9;
+  stroke: #e8cfaf;
+  stroke-width: 1.5;
+}
+
+.torque-symbol {
+  fill: #a64d25;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 34px;
+  text-anchor: middle;
+  dominant-baseline: central;
+}
+
+.diagram-heading {
+  fill: #173b3b;
+  font-size: 20px;
+  font-weight: 700;
+  text-anchor: middle;
+}
+
+.rotor-label,
+.diagram-caption {
+  fill: #607772;
+  font-size: 16px;
+  text-anchor: middle;
+}
+
+.case-grid {
+  display: grid;
+  gap: 8px;
+}
+
+.case-row {
+  min-height: 52px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 54px;
+  align-items: center;
+  border: 1px solid #d5e2de;
+  border-radius: 11px;
+  padding: 0 10px 0 14px;
+  color: #647b76;
+  background: #fbfdfc;
+  font-size: 15px;
+  transition: 180ms ease;
+}
+
+.case-row b {
+  color: #9a552b;
+  font-size: 31px;
+  text-align: center;
+}
+
+.case-row.is-active {
+  border: 2px solid #d06a31;
+  color: #173b3b;
+  background: #fff4e7;
+  box-shadow: 0 6px 18px rgb(184 91 43 / 12%);
+  font-weight: 800;
+  transform: translateX(-3px);
+}
+
+.plain-rule {
+  margin-top: auto;
+  display: grid;
+  gap: 9px;
+}
+
+.plain-rule div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-left: 5px solid #39796f;
+  border-radius: 8px;
+  padding: 10px 12px;
+  background: #edf6f2;
+}
+
+.plain-rule div:last-child {
+  border-left-color: #b85b2b;
+  background: #fff3e6;
+}
+
+.plain-rule span {
+  color: #607772;
+  font-size: 14px;
+}
+
+.plain-rule b {
+  font-size: 18px;
+}
+
+.takeaway {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  border-radius: 12px;
+  padding: 0 18px;
+  color: #45635e;
+  background: #e9f3ef;
+  font-size: 17px;
+}
+
+.takeaway > b {
+  border-radius: 999px;
+  padding: 5px 11px;
+  color: white;
+  background: #39796f;
+  font-size: 13px;
+}
+
+.takeaway strong {
+  color: #a34d28;
+}
+
+@keyframes field-flow {
+  to {
+    stroke-dashoffset: -19;
+  }
+}
+
+@keyframes torque-flow {
+  to {
+    stroke-dashoffset: -17;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .field-lines path,
+  .torque-path {
+    animation: none;
+  }
+}

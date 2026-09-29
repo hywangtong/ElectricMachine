@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>直流电机电磁转矩方向</title>
+    <link rel="stylesheet" href="/dc-motor-torque-direction.css" />
+    <script src="/dc-machine-basics.js" defer></script>
+    <script src="/dc-motor-torque-direction.js" defer></script>
+  </head>
+  <body>
+    <main class="lesson">
+      <header class="page-head">
+        <div>
+          <div class="eyebrow">直流电机 / 章末回顾 · ELI5</div>
+          <h1>转矩往哪边转？要同时看两个方向</h1>
+          <p>
+            磁场 Φ 和电枢电流 I<sub>a</sub> 像两只方向开关，一起决定电磁转矩
+            T<sub>e</sub>。
+          </p>
+        </div>
+        <div class="eli5-badge">先看方向，不算大小</div>
+      </header>
+
+      <div class="direction-layout">
+        <section class="control-panel" aria-labelledby="control-title">
+          <div class="section-label">动手试一试</div>
+          <h2 id="control-title">分别翻转两只“开关”</h2>
+
+          <button
+            class="direction-control field-control"
+            id="field-control"
+            type="button"
+            aria-pressed="false"
+          >
+            <span class="control-symbol">Φ</span>
+            <span>
+              <b>磁场方向</b>
+              <small id="field-state">N 在上，S 在下</small>
+            </span>
+            <em>点击反转</em>
+          </button>
+
+          <button
+            class="direction-control current-control"
+            id="current-control"
+            type="button"
+            aria-pressed="false"
+          >
+            <span class="control-symbol"><i>I</i><sub>a</sub></span>
+            <span>
+              <b>电枢电流方向</b>
+              <small id="current-state">上 ·　下 ×</small>
+            </span>
+            <em>点击反转</em>
+          </button>
+
+          <button class="reset-button" id="reset-button" type="button">
+            恢复原方向
+          </button>
+
+          <div class="tiny-legend">
+            <span><b>·</b> 电流从纸面出来</span>
+            <span><b>×</b> 电流钻进纸面</span>
+          </div>
+        </section>
+
+        <section class="motor-card" aria-labelledby="motor-title">
+          <div class="motor-card-head">
+            <div>
+              <div class="section-label">两者组合后的结果</div>
+              <h2 id="motor-title">磁场 × 电流 → 转矩</h2>
+            </div>
+            <div class="result-pill" id="result-pill" aria-live="polite">
+              顺时针 ↻
+            </div>
+          </div>
+
+          <svg
+            id="motor-diagram"
+            viewBox="0 0 740 450"
+            role="img"
+            aria-labelledby="motor-diagram-title motor-diagram-desc"
+          >
+            <title id="motor-diagram-title">
+              直流电机磁场、电枢电流、安培力与电磁转矩方向示意图
+            </title>
+            <desc id="motor-diagram-desc">
+              左侧剖面中，上下磁极形成主磁场，两根气隙导体受一对切向力；
+              右侧独立显示这对力合成的电磁转矩方向。
+            </desc>
+            <defs>
+              <marker
+                id="field-arrow"
+                viewBox="0 0 10 10"
+                refX="8"
+                refY="5"
+                markerUnits="userSpaceOnUse"
+                markerWidth="12"
+                markerHeight="12"
+                orient="auto"
+              >
+                <path d="M0 0 10 5 0 10Z" />
+              </marker>
+              <marker
+                id="force-arrow"
+                viewBox="0 0 10 10"
+                refX="8"
+                refY="5"
+                markerUnits="userSpaceOnUse"
+                markerWidth="17"
+                markerHeight="17"
+                orient="auto"
+              >
+                <path d="M0 0 10 5 0 10Z" />
+              </marker>
+              <marker
+                id="torque-arrow"
+                viewBox="0 0 10 10"
+                refX="8"
+                refY="5"
+                markerUnits="userSpaceOnUse"
+                markerWidth="20"
+                markerHeight="20"
+                orient="auto"
+              >
+                <path d="M0 0 10 5 0 10Z" />
+              </marker>
+              <radialGradient id="rotor-fill">
+                <stop stop-color="#f9fcfb" />
+                <stop offset="1" stop-color="#e3eee9" />
+              </radialGradient>
+            </defs>
+
+            <rect
+              id="top-pole-shape"
+              x="156"
+              y="28"
+              width="168"
+              height="48"
+              rx="12"
+              class="pole north-pole"
+            />
+            <text x="240" y="52" class="pole-label" id="top-pole">N</text>
+            <rect
+              id="bottom-pole-shape"
+              x="156"
+              y="374"
+              width="168"
+              height="48"
+              rx="12"
+              class="pole south-pole"
+            />
+            <text x="240" y="398" class="pole-label" id="bottom-pole">S</text>
+
+            <circle
+              cx="240"
+              cy="225"
+              r="92"
+              fill="url(#rotor-fill)"
+              class="rotor"
+            />
+            <g class="field-lines" id="field-lines" aria-hidden="true">
+              <path
+                data-x="204"
+                d="M204 177V277"
+                marker-end="url(#field-arrow)"
+              />
+              <path
+                data-x="276"
+                d="M276 177V277"
+                marker-end="url(#field-arrow)"
+              />
+            </g>
+            <text x="240" y="191" class="field-label" id="field-label">
+              Φ ↓
+            </text>
+            <circle cx="240" cy="232" r="9" class="shaft" />
+            <text x="240" y="301" class="rotor-label">电枢</text>
+
+            <g
+              class="conductor"
+              id="top-current"
+              transform="translate(240 112)"
+            >
+              <circle r="16" />
+              <circle r="4" class="current-dot" />
+              <path d="M-6-6 6 6M-6 6 6-6" class="current-cross" />
+            </g>
+            <g
+              class="conductor current-in"
+              id="bottom-current"
+              transform="translate(240 338)"
+            >
+              <circle r="16" />
+              <circle r="4" class="current-dot" />
+              <path d="M-6-6 6 6M-6 6 6-6" class="current-cross" />
+            </g>
+
+            <g class="force-pair" aria-hidden="true">
+              <path
+                id="top-force"
+                d="M266 112H394"
+                marker-end="url(#force-arrow)"
+              />
+              <path
+                id="bottom-force"
+                d="M214 338H86"
+                marker-end="url(#force-arrow)"
+              />
+            </g>
+            <text x="350" y="92" class="force-label" id="top-force-label">
+              F
+            </text>
+            <text x="130" y="366" class="force-label" id="bottom-force-label">
+              F
+            </text>
+
+            <path d="M474 82V386" class="diagram-divider" />
+            <text x="606" y="123" class="diagram-heading">合成电磁转矩</text>
+            <rect
+              x="510"
+              y="144"
+              width="192"
+              height="176"
+              rx="18"
+              class="torque-stage"
+            />
+            <path
+              id="torque-path"
+              class="torque-path"
+              d="M606 168A60 60 0 1 1 546 228"
+              marker-end="url(#torque-arrow)"
+            />
+            <text x="606" y="228" class="torque-symbol">Tₑ</text>
+            <text x="606" y="356" class="torque-label" id="torque-label">
+              顺时针 ↻
+            </text>
+            <text x="240" y="440" class="diagram-caption">
+              两根导体 → 一对切向力
+            </text>
+            <text x="606" y="392" class="diagram-caption">
+              看这对力“拧”向哪边
+            </text>
+          </svg>
+        </section>
+
+        <section class="rule-panel" aria-labelledby="rule-title">
+          <div class="section-label">四种组合</div>
+          <h2 id="rule-title">记住这张“小抄”</h2>
+          <div class="case-grid" id="case-grid">
+            <div class="case-row is-active" data-field="1" data-current="1">
+              <span>Φ 原</span><span>I<sub>a</sub> 原</span><b>↻</b>
+            </div>
+            <div class="case-row" data-field="1" data-current="-1">
+              <span>Φ 原</span><span>I<sub>a</sub> 反</span><b>↺</b>
+            </div>
+            <div class="case-row" data-field="-1" data-current="1">
+              <span>Φ 反</span><span>I<sub>a</sub> 原</span><b>↺</b>
+            </div>
+            <div class="case-row" data-field="-1" data-current="-1">
+              <span>Φ 反</span><span>I<sub>a</sub> 反</span><b>↻</b>
+            </div>
+          </div>
+
+          <div class="plain-rule">
+            <div><span>只翻一个</span><b>转矩反向</b></div>
+            <div><span>两个都翻</span><b>转矩不变</b></div>
+          </div>
+        </section>
+      </div>
+
+      <footer class="takeaway">
+        <b>一句话</b>
+        <span
+          >不是 Φ 单独决定，也不是 I<sub>a</sub>
+          单独决定：<strong>它们的方向组合</strong>决定 T<sub>e</sub>
+          往哪边转。</span
+        >
+      </footer>
+    </main>
+  </body>
+</html>

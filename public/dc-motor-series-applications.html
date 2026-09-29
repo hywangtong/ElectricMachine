@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>串励电动机：应用与运行限制</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/dc-motor-series.css" />
+    <script src="/dc-machine-basics.js" defer></script>
+  </head>
+  <body>
+    <main class="lesson series-page series-applications-page">
+      <header class="page-head">
+        <div class="eyebrow">
+          直流电机 / 41 · 7.7 运行分析 · 串励电动机（自学）
+        </div>
+        <h1>串励电动机：应用与运行限制</h1>
+        <p>
+          起动转矩大、过载能力强；软机械特性决定了它的适用场景，也决定了运行限制。
+        </p>
+      </header>
+      <div class="series-layout">
+        <section class="series-card application-card">
+          <h2><span class="section-number">05</span> 适用的生产与运输机械</h2>
+          <p>
+            负载转矩在<strong>较大范围内变化</strong>，并要求<strong>较大起动转矩和过载能力</strong>的机械。
+          </p>
+          <div class="application-examples" aria-label="课件中的应用举例">
+            <span>起重机</span><span>电气机车</span><span>运输机械</span>
+          </div>
+          <article class="load-response">
+            <h3>负载转矩很大 → 转速下降</h3>
+            <p>课件指出：重载时自动降速，有利于保证安全。</p>
+          </article>
+          <article class="load-response">
+            <h3>负载转矩很小 → 转速升高</h3>
+            <p>课件指出：负载减小时提速，可提高劳动生产率。</p>
+            <small
+              >上述应用描述须以满足运行限制为前提，不能据此允许轻载或空载运行。</small
+            >
+          </article>
+        </section>
+        <section class="series-card limits-card">
+          <h2>两项运行限制</h2>
+          <article class="operating-limit">
+            <h3>不能在轻载或空载下运行</h3>
+            <p>
+              转速过高，会超出<strong>转子机械强度允许范围</strong>，产生飞车风险。
+            </p>
+          </article>
+          <article class="operating-limit">
+            <h3>不能用皮带轮传动</h3>
+            <p>
+              防止<strong>皮带滑脱</strong>，使电动机突然失去负载，进入空载状态。
+            </p>
+          </article>
+          <p class="cause-chain">
+            皮带滑脱 → 负载消失 → 电流减小<br />→ 励磁减弱 → 转速过高
+          </p>
+        </section>
+      </div>
+      <footer class="series-note">
+        资料：用户附件第 4 页。记忆链：串联励磁 → 磁通随负载电流变化 →
+        转矩大、特性软 → 必须避免失去负载。
+      </footer>
+    </main>
+  </body>
+</html>

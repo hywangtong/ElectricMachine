@@ -1,0 +1,97 @@
+.shunt-formulas-page {
+  grid-template-rows: 80px minmax(0, 1fr) 110px 28px;
+}
+
+.shunt-formulas-page .equations {
+  min-height: 0;
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.shunt-formulas-page .equation-card {
+  min-height: 0;
+  padding: 14px 24px;
+}
+
+.shunt-formulas-page .circuit-panel,
+.shunt-formulas-page .circuit-panel svg {
+  min-height: 0;
+}
+
+.shunt-formulas-page .formula {
+  margin: 8px 0 5px;
+  font-size: 40px;
+}
+
+.shunt-formulas-page .equation-card p {
+  font-size: 18px;
+}
+
+.power-card {
+  border-left: 5px solid #b48d45;
+  background: #fff8e9;
+}
+
+.power-card h2,
+.power-card .formula {
+  color: #956e2f;
+}
+
+.shunt-formulas-page .connection-strip p {
+  font-size: 26px;
+}
+
+.shunt-example-page .given-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.shunt-example-page.is-revealed .given-grid {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.shunt-example-page.is-revealed .given-grid > div:last-child {
+  grid-column: 1 / -1;
+}
+
+.shunt-example-page.is-revealed .question-card {
+  gap: 12px;
+}
+
+.shunt-example-page.is-revealed .question-card h2 {
+  font-size: 22px;
+}
+
+.shunt-example-page.is-revealed .given-grid div {
+  padding: 9px 14px;
+}
+
+.shunt-example-page .solution-steps {
+  grid-template-rows: 1fr 1fr 1fr 1.4fr;
+  gap: 9px;
+}
+
+.shunt-example-page .solution-steps li {
+  padding: 8px 16px;
+}
+
+.shunt-example-page .solution-steps h2 {
+  margin-bottom: 4px;
+  font-size: 16px;
+}
+
+.shunt-example-page .solution-steps p {
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.shunt-example-page .solution-panel sub {
+  line-height: 0;
+}
+
+.shunt-example-page .solution-steps .substitution {
+  font-size: 17px;
+}
+
+.shunt-example-page .solution-steps .substitution b {
+  font-size: 21px;
+}

@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>串励电动机：转速与软机械特性</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/dc-motor-series.css" />
+    <script src="/dc-machine-basics.js" defer></script>
+  </head>
+  <body>
+    <main class="lesson series-page series-speed-page">
+      <header class="page-head">
+        <div class="eyebrow">
+          直流电机 / 40 · 7.7 运行分析 · 串励电动机（自学）
+        </div>
+        <h1>串励电动机：转速与软机械特性</h1>
+        <p>
+          由 U = E + (R<sub>a</sub> + R<sub>f</sub>)I、I = I<sub>a</sub> =
+          I<sub>f</sub>，以及 E = C<sub>E</sub>Φn、T = C<sub>T</sub>ΦI<sub
+            >a</sub
+          >
+          联立得到：
+        </p>
+      </header>
+      <section class="series-card speed-equations" aria-label="转速特性方程">
+        <p class="math">
+          <i>n</i> =
+          <span class="fraction"
+            ><span><i>E</i></span
+            ><span><i>C</i><sub>E</sub>Φ</span></span
+          >
+          =
+          <span class="fraction"
+            ><span
+              ><i>U</i> − (<i>R</i><sub>a</sub> + <i>R</i><sub>f</sub>)<i>I</i
+              ><sub>a</sub></span
+            ><span><i>C</i><sub>E</sub>Φ</span></span
+          >
+        </p>
+        <p class="math">
+          <i>n</i> =
+          <span class="fraction"
+            ><span><i>U</i></span
+            ><span><i>C</i><sub>E</sub>Φ</span></span
+          >
+          −
+          <span class="fraction"
+            ><span><i>R</i><sub>a</sub> + <i>R</i><sub>f</sub></span
+            ><span
+              ><i>C</i><sub>E</sub><i>C</i><sub>T</sub>Φ<sup>2</sup></span
+            ></span
+          ><i>T</i>
+        </p>
+      </section>
+      <div class="series-layout speed-layout">
+        <section class="series-card speed-graph">
+          <h2><span class="section-number">04</span> 软机械特性</h2>
+          <svg
+            viewBox="0 0 420 280"
+            role="img"
+            aria-labelledby="speed-curve-title"
+          >
+            <title id="speed-curve-title">
+              串励电动机的定性 n-T
+              机械特性曲线：轻载转速很高；转矩增大时转速先迅速下降，磁路饱和后下降较少，形成软特性。曲线无数值刻度。
+            </title>
+            <defs>
+              <marker
+                id="axis-arrow"
+                markerWidth="10"
+                markerHeight="10"
+                refX="8"
+                refY="5"
+                orient="auto"
+                markerUnits="userSpaceOnUse"
+              >
+                <path d="M0 0 10 5 0 10Z" fill="#173b3b" />
+              </marker>
+            </defs>
+            <path
+              d="M55 240V22 M55 240H397"
+              fill="none"
+              stroke="#173b3b"
+              stroke-width="2.5"
+              marker-end="url(#axis-arrow)"
+            />
+            <path
+              d="M84 34 C88 87 104 146 143 171 S259 210 379 223"
+              fill="none"
+              stroke="#26786b"
+              stroke-width="6"
+              stroke-linecap="round"
+            />
+            <g
+              fill="#173b3b"
+              font-family="Cambria, Microsoft YaHei, serif"
+              font-size="26"
+            >
+              <text x="25" y="26">n</text>
+              <text x="398" y="260">T</text>
+              <text x="28" y="264">O</text>
+            </g>
+            <g fill="#55736d" font-size="18">
+              <text x="122" y="64">轻载：转速很高</text>
+              <text x="218" y="184">饱和后：下降较少</text>
+            </g>
+            <path
+              d="M136 73L100 107 M262 190L288 211"
+              fill="none"
+              stroke="#9bb6a8"
+              stroke-width="1.5"
+            />
+          </svg>
+          <p>
+            串励电动机的机械特性<br /><strong
+              >转速随负载变化明显 · 定性示意</strong
+            >
+          </p>
+        </section>
+        <div class="speed-states">
+          <section class="series-card speed-state">
+            <h2>① 理想空载 · T = 0</h2>
+            <p>
+              I<sub>a</sub> = I<sub>f</sub> = 0，Φ =
+              Φ<sub>r</sub>，只剩微小剩磁。
+            </p>
+            <p class="state-flow">
+              n<sub>0</sub> 很大；课件给出 n<sub>0</sub> = (5～6)n<sub>N</sub>。
+            </p>
+          </section>
+          <section class="series-card speed-state">
+            <h2>② T 很小 · I<sub>a</sub> 很小 · 磁路未饱和</h2>
+            <p class="state-flow">T ↑ → I<sub>a</sub> ↑ → Φ ↑ → n 迅速下降</p>
+            <p>在此区间，转速近似与负载电流成反比：n ∝ 1/I<sub>a</sub>。</p>
+          </section>
+          <section class="series-card speed-state">
+            <h2>③ T 很大 · I<sub>a</sub> 很大 · 磁路已饱和</h2>
+            <p class="state-flow">
+              T ↑ → I<sub>a</sub> ↑ → Φ 基本不变 → n 下降较少
+            </p>
+            <p>类似他励电动机，转速随负载增大而略有下降。</p>
+          </section>
+        </div>
+      </div>
+      <footer class="series-note">
+        资料：用户附件第 3 页。Φ 随 I<sub>a</sub> 变化；(5～6)n<sub>N</sub>
+        为课件示例量级。实际空载仍有损耗转矩及小电流，不能按此倍数判断允许运行转速。
+      </footer>
+    </main>
+  </body>
+</html>

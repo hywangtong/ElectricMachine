@@ -655,6 +655,7 @@ export default function CoursePlayer() {
                             key={
                               slide.id.startsWith('dc-motor-structure-') ||
                               slide.id.startsWith('dc-generator-emf-') ||
+                              slide.id.startsWith('dc-motor-series-') ||
                               slide.id === 'dc-motor-field-loss'
                                 ? slide.id
                                 : undefined
