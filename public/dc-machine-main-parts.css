@@ -1,0 +1,106 @@
+.parts-page .parts-layout {
+  grid-template-columns: minmax(0, 2.35fr) minmax(0, 1fr);
+}
+
+.parts-page .cutaway {
+  padding: 17px 16px 10px;
+  grid-template-rows: 27px minmax(0, 1fr) 22px;
+}
+
+.parts-page .cutaway svg {
+  min-height: 0;
+}
+
+.parts-page .parts-side {
+  min-height: 0;
+  grid-template-rows: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.parts-page .part-card {
+  min-height: 0;
+  padding: 12px 18px;
+}
+
+.parts-page .part-card h2 {
+  font-size: 27px;
+}
+
+.parts-page .part-card h2 small {
+  font-size: 16px;
+}
+
+.parts-page .part-card p {
+  font-size: 16px;
+  line-height: 1.45;
+}
+
+.parts-page .part-card strong {
+  margin-top: 6px;
+  font-size: 16px;
+}
+
+.parts-page .commutator-card {
+  border-color: #e7c9ab;
+  background: #fff4e9;
+}
+
+.parts-page .commutator-card strong,
+.parts-page .commutator-card .number {
+  color: #a36a37;
+}
+
+.parts-page .view-heading {
+  fill: #34594c;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.parts-page .minor-label {
+  fill: #597468;
+  font-size: 16px;
+}
+
+.parts-page .armature-label {
+  fill: #4777a6;
+}
+
+.parts-page .copper-label {
+  fill: #a36a37;
+}
+
+.parts-page .section-pole {
+  fill: #2a665a;
+  font-size: 18px;
+  font-weight: 800;
+  text-anchor: middle;
+}
+
+.parts-page .shaft-end {
+  fill: #536a61;
+  font-size: 14px;
+  text-anchor: middle;
+}
+
+.parts-page .winding-guide,
+.parts-page .copper-guide,
+.parts-page .rotation-guide {
+  fill: none;
+  stroke: #4777a6;
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+}
+
+.parts-page .copper-guide {
+  stroke: #a36a37;
+}
+
+.parts-page .rotation-guide {
+  stroke: #b68a3e;
+}
+
+.parts-page .rotation-label {
+  fill: #a17a36;
+  font-size: 18px;
+  font-weight: 700;
+}

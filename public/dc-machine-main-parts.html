@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>直流电机：定子、转子、励磁与电枢</title>
     <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/dc-machine-main-parts.css" />
     <script src="/dc-machine-basics.js" defer></script>
   </head>
   <body>
@@ -18,60 +19,316 @@
       <div class="parts-layout">
         <section class="panel cutaway" aria-labelledby="cutaway-title">
           <h2 id="cutaway-title">一眼看懂有刷直流电机</h2>
-          <svg viewBox="0 0 760 410" role="img" aria-labelledby="machine-title machine-desc">
+          <svg
+            viewBox="0 0 980 480"
+            role="img"
+            aria-labelledby="machine-title machine-desc"
+          >
             <title id="machine-title">有刷直流电机定转子示意</title>
-            <desc id="machine-desc">外圈定子上有励磁磁极和励磁绕组，内圈转子上有电枢绕组。换向器随转子转动，电刷固定并与换向器接触。</desc>
+            <desc id="machine-desc">
+              左侧端面剖视：励磁绕组绕在固定的定子磁极上，电枢铁心和电枢绕组位于内侧转子，二者之间留有气隙。右侧轴向示意：电枢与由绝缘铜片组成的换向器安装在同一转轴上，绕组端头连接换向片，一起旋转。上下两只电刷由固定刷架支承，径向压在换向片的圆柱外表面，连接外电路。
+            </desc>
             <defs>
-              <marker id="parts-arrow" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
-                <path d="M1 1L8 4.5 1 8" fill="none" stroke="#b68a3e" stroke-width="2" />
+              <marker
+                id="parts-arrow"
+                markerWidth="9"
+                markerHeight="9"
+                refX="7"
+                refY="4.5"
+                orient="auto"
+              >
+                <path
+                  d="M1 1L8 4.5 1 8"
+                  fill="none"
+                  stroke="#b68a3e"
+                  stroke-width="2"
+                />
               </marker>
+              <linearGradient id="armature-core" x2="0" y2="1">
+                <stop stop-color="#f8e9c4" />
+                <stop offset="0.5" stop-color="#fff7e3" />
+                <stop offset="1" stop-color="#d7ba7f" />
+              </linearGradient>
+              <linearGradient id="commutator-copper" x2="0" y2="1">
+                <stop stop-color="#e6ac6d" />
+                <stop offset="0.5" stop-color="#f8d19b" />
+                <stop offset="1" stop-color="#bd783f" />
+              </linearGradient>
             </defs>
-            <circle cx="322" cy="210" r="177" fill="#eff5f0" stroke="#497366" stroke-width="13" />
-            <path d="M194 89A177 177 0 0 1 450 89M194 331A177 177 0 0 0 450 331" fill="none" stroke="#9fc8b5" stroke-width="12" />
-            <path d="M180 175H227V245H180M464 175H417V245H464" fill="#d3e8dd" stroke="#497366" stroke-width="5" />
-            <text x="200" y="218" class="pole-label">N</text>
-            <text x="439" y="218" class="pole-label">S</text>
-            <path d="M174 170q-24 12 0 24t0 24t0 24t0 24M470 170q24 12 0 24t0 24t0 24t0 24" fill="none" stroke="#328b7d" stroke-width="8" stroke-linecap="round" />
-            <circle cx="322" cy="210" r="100" fill="#fff8e8" stroke="#b68a3e" stroke-width="8" />
-            <circle cx="322" cy="210" r="76" fill="#fae9c6" stroke="#e8d4a9" stroke-width="2" />
-            <path d="M322 111V309M223 210H421M252 140l140 140M392 140L252 280" stroke="#bd9956" stroke-width="11" stroke-linecap="round" />
-            <path d="M264 132q58-27 116 0M398 153q28 57 0 114M380 287q-58 27-116 0M246 267q-28-57 0-114" fill="none" stroke="#4777a6" stroke-width="11" stroke-linecap="round" />
-            <circle cx="322" cy="210" r="20" fill="#fff" stroke="#956b2b" stroke-width="5" />
-            <path d="M322 210H591" stroke="#956b2b" stroke-width="12" stroke-linecap="round" />
-            <path d="M536 187A31 31 0 0 1 536 233M547 187A31 31 0 0 0 547 233" fill="none" stroke="#d4a74e" stroke-width="12" />
-            <path d="M520 165v22M563 233v22" stroke="#497366" stroke-width="14" stroke-linecap="round" />
-            <path d="M543 160h62M543 260h62" stroke="#497366" stroke-width="4" />
-            <text x="60" y="42" class="diagram-label fixed-label">定子：不动</text>
-            <path d="M177 50L225 77" class="guide" />
-            <text x="30" y="374" class="diagram-label field-label">励磁：建立磁场</text>
-            <path d="M188 346L173 272" class="guide" />
-            <text x="403" y="64" class="diagram-label rotor-label">转子 / 电枢：随轴转</text>
-            <path d="M449 72L394 137" class="guide" />
-            <text x="520" y="328" class="diagram-label brush-label">电刷固定</text>
-            <text x="520" y="357" class="diagram-label brush-label">换向器转动</text>
-            <path d="M541 306L541 254" class="guide" />
-            <path d="M300 357q35 16 68 0" fill="none" stroke="#b68a3e" stroke-width="4" marker-end="url(#parts-arrow)" />
+            <rect
+              x="4"
+              y="12"
+              width="444"
+              height="456"
+              rx="16"
+              fill="#f5faf6"
+            />
+            <rect
+              x="462"
+              y="12"
+              width="514"
+              height="456"
+              rx="16"
+              fill="#fffbf3"
+            />
+            <text x="24" y="44" class="view-heading">
+              端面剖视 · 外定子 / 内转子
+            </text>
+            <text x="482" y="44" class="view-heading">
+              轴向示意 · 同一转轴上的装配
+            </text>
+
+            <!-- End section through the armature; the commutator is beyond this section. -->
+            <circle
+              cx="226"
+              cy="252"
+              r="145"
+              fill="#fff"
+              stroke="#497366"
+              stroke-width="15"
+            />
+            <circle
+              cx="226"
+              cy="252"
+              r="128"
+              fill="none"
+              stroke="#c8ddd0"
+              stroke-width="1.5"
+            />
+            <g fill="#cde1d4" stroke="#497366" stroke-width="3">
+              <path d="M84 233H118V218Q142 252 118 286V271H84Z" />
+              <path d="M368 233H334V218Q310 252 334 286V271H368Z" />
+            </g>
+            <g fill="#e0f3e8" stroke="#328b7d" stroke-width="4">
+              <rect x="92" y="218" width="19" height="68" rx="5" />
+              <rect x="341" y="218" width="19" height="68" rx="5" />
+              <path
+                d="M92 229H111M92 241H111M92 253H111M92 265H111M92 277H111M341 229H360M341 241H360M341 253H360M341 265H360M341 277H360"
+              />
+            </g>
+            <text x="123" y="259" class="section-pole">N</text>
+            <text x="329" y="259" class="section-pole">S</text>
+            <circle
+              cx="226"
+              cy="252"
+              r="91"
+              fill="url(#armature-core)"
+              stroke="#b68a3e"
+              stroke-width="4"
+            />
+            <circle
+              cx="226"
+              cy="252"
+              r="66"
+              fill="none"
+              stroke="#d7be8e"
+              stroke-width="2"
+            />
+            <g id="armature-slot" fill="#4777a6" stroke="#fff" stroke-width="2">
+              <rect x="218" y="165" width="16" height="25" rx="6" />
+            </g>
+            <use href="#armature-slot" transform="rotate(30 226 252)" />
+            <use href="#armature-slot" transform="rotate(60 226 252)" />
+            <use href="#armature-slot" transform="rotate(90 226 252)" />
+            <use href="#armature-slot" transform="rotate(120 226 252)" />
+            <use href="#armature-slot" transform="rotate(150 226 252)" />
+            <use href="#armature-slot" transform="rotate(180 226 252)" />
+            <use href="#armature-slot" transform="rotate(210 226 252)" />
+            <use href="#armature-slot" transform="rotate(240 226 252)" />
+            <use href="#armature-slot" transform="rotate(270 226 252)" />
+            <use href="#armature-slot" transform="rotate(300 226 252)" />
+            <use href="#armature-slot" transform="rotate(330 226 252)" />
+            <circle
+              cx="226"
+              cy="252"
+              r="20"
+              fill="#e1e7e5"
+              stroke="#667b75"
+              stroke-width="3"
+            />
+            <text x="226" y="257" class="shaft-end">轴</text>
+            <path
+              d="M173 350A112 112 0 0 0 280 350"
+              class="rotation-guide"
+              marker-end="url(#parts-arrow)"
+            />
+            <text x="24" y="83" class="diagram-label field-label">
+              01 励磁绕组 · 固定
+            </text>
+            <path d="M100 91V193L102 216" class="guide" />
+            <text x="277" y="105" class="minor-label">定子机座</text>
+            <path d="M317 113L319 137" class="guide" />
+            <text x="24" y="329" class="minor-label">主磁极</text>
+            <path d="M97 324L124 281" class="guide" />
+            <text x="342" y="328" class="minor-label">气隙</text>
+            <path d="M353 306L320 274" class="guide" />
+            <text x="24" y="426" class="diagram-label armature-label">
+              02 电枢 · 随转子转动
+            </text>
+            <path d="M125 408L170 320" class="winding-guide" />
+            <text x="24" y="452" class="minor-label">
+              金色：电枢铁心　蓝色：槽内电枢绕组
+            </text>
+
+            <!-- Axial assembly: brushes bear on the cylindrical copper surface. -->
+            <rect
+              x="511"
+              y="258"
+              width="434"
+              height="18"
+              rx="8"
+              fill="#dbe2df"
+              stroke="#667b75"
+              stroke-width="2"
+            />
+            <path
+              d="M495 267H957"
+              stroke="#a6b3ae"
+              stroke-width="1.5"
+              stroke-dasharray="6 6"
+            />
+            <path
+              d="M572 201H725A20 66 0 0 1 725 333H572Z"
+              fill="url(#armature-core)"
+              stroke="#b68a3e"
+              stroke-width="3"
+            />
+            <ellipse
+              cx="572"
+              cy="267"
+              rx="20"
+              ry="66"
+              fill="#f4e3bf"
+              stroke="#b68a3e"
+              stroke-width="3"
+            />
+            <path
+              d="M582 210H718Q743 210 743 224V308Q743 322 718 322H582M579 229H727M579 249H729M579 286H729M579 306H727"
+              fill="none"
+              stroke="#4777a6"
+              stroke-width="7"
+              stroke-linecap="round"
+            />
+            <ellipse
+              cx="572"
+              cy="267"
+              rx="8"
+              ry="11"
+              fill="#dbe2df"
+              stroke="#667b75"
+              stroke-width="2"
+            />
+            <path
+              d="M743 229Q767 228 780 245H800M743 306Q768 306 780 289H800"
+              class="winding-guide"
+            />
+            <text x="524" y="151" class="diagram-label armature-label">
+              02 电枢
+            </text>
+            <text x="524" y="176" class="minor-label">绕组嵌在铁心槽内</text>
+            <path d="M614 182L632 208" class="winding-guide" />
+            <text x="738" y="203" class="minor-label">绕组端头</text>
+            <path d="M769 211V235" class="winding-guide" />
+
+            <path
+              d="M801 239H862A10 28 0 0 1 862 295H801Z"
+              fill="url(#commutator-copper)"
+              stroke="#a36a37"
+              stroke-width="3"
+            />
+            <ellipse
+              cx="801"
+              cy="267"
+              rx="10"
+              ry="28"
+              fill="#dba06a"
+              stroke="#a36a37"
+              stroke-width="2"
+            />
+            <g fill="none" stroke="#fff7e7" stroke-width="3">
+              <path
+                d="M801 243H866M792 254H871M791 268H872M793 282H870M801 293H865"
+              />
+            </g>
+            <text x="764" y="95" class="diagram-label copper-label">
+              03 换向片
+            </text>
+            <text x="764" y="120" class="minor-label">多片铜片组成换向器</text>
+            <text x="764" y="145" class="minor-label">片间绝缘 · 随轴转动</text>
+            <path d="M846 153V187L860 252" class="copper-guide" />
+
+            <g fill="#dce9e1" stroke="#497366" stroke-width="2">
+              <path d="M815 210H850V239H815Z" />
+              <path d="M815 295H850V324H815Z" />
+            </g>
+            <g fill="#374a45">
+              <rect x="820" y="217" width="25" height="22" rx="2" />
+              <rect x="820" y="295" width="25" height="22" rx="2" />
+            </g>
+            <path
+              d="M832 210V188H919M832 324V345H919"
+              fill="none"
+              stroke="#497366"
+              stroke-width="3"
+            />
+            <path
+              d="M850 217H891M850 317H891M891 208V326"
+              fill="none"
+              stroke="#789a87"
+              stroke-width="4"
+            />
+            <path
+              d="M882 218L900 208M882 242L900 232M882 266L900 256M882 290L900 280M882 314L900 304"
+              stroke="#b1c7b8"
+              stroke-width="2"
+            />
+            <text x="910" y="223" class="minor-label">固定</text>
+            <text x="910" y="245" class="minor-label">刷架</text>
+            <text x="912" y="294" class="minor-label">转轴</text>
+            <text x="756" y="393" class="diagram-label fixed-label">
+              04 电刷 · 固定
+            </text>
+            <path d="M940 371V337L847 317" class="guide" />
+            <text x="756" y="419" class="minor-label">
+              径向压在换向片外表面
+            </text>
+            <text x="756" y="445" class="minor-label">
+              接外电路 · 刷架不随轴转
+            </text>
+            <path d="M554 352V365H872V352" class="rotation-guide" />
+            <text x="524" y="393" class="rotation-label">电枢 + 换向器</text>
+            <text x="524" y="419" class="rotation-label">同轴、同步转动</text>
           </svg>
-          <p class="diagram-note">位置关系示意 · 不表示实际尺寸或绕组匝数</p>
+          <p class="diagram-note">
+            同一台电机的两种视图 · 电刷位于换向器段，左图剖面不经过电刷 ·
+            尺寸、槽数与片数仅示意
+          </p>
         </section>
 
         <div class="parts-side">
           <section class="part-card stator-card">
             <span class="number">01 / 不动</span>
-            <h2>定子 <small>外圈</small></h2>
+            <h2>励磁 <small>在定子上</small></h2>
             <p>磁极 + 励磁绕组</p>
             <strong>励磁 = 造磁场</strong>
           </section>
           <section class="part-card rotor-card">
             <span class="number">02 / 转动</span>
-            <h2>转子 <small>内圈</small></h2>
-            <p>电枢铁心 + 电枢绕组 + 换向器</p>
+            <h2>电枢 <small>在转子上</small></h2>
+            <p>电枢铁心 + 槽内电枢绕组</p>
             <strong>电枢 = 电能与机械能转换处</strong>
           </section>
+          <section class="part-card commutator-card">
+            <span class="number">03 / 转动</span>
+            <h2>换向片 <small>在转子上</small></h2>
+            <p>铜片间绝缘，组成换向器并接绕组端头。</p>
+            <strong>与电枢同轴、同步转动</strong>
+          </section>
           <section class="part-card contact-card">
-            <span class="number">03 / 接触</span>
-            <h2>电刷 <small>固定</small></h2>
-            <p>贴着旋转的换向器，连接外电路与电枢。</p>
+            <span class="number">04 / 固定接触</span>
+            <h2>电刷 <small>固定在静止侧</small></h2>
+            <p>由固定刷架支承，径向压住换向片。</p>
+            <strong>外电路 → 电刷 → 换向片 → 电枢</strong>
           </section>
         </div>
       </div>
