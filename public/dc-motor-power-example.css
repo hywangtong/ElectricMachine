@@ -1,0 +1,57 @@
+.power-example-page .given-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.power-example-page.is-revealed .given-grid {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.power-example-page.is-revealed .given-grid > div:last-child {
+  grid-column: 1 / -1;
+}
+
+.power-example-page.is-revealed .question-card {
+  gap: 12px;
+}
+
+.power-example-page.is-revealed .question-card h2 {
+  font-size: 22px;
+}
+
+.power-example-page.is-revealed .given-grid div {
+  padding: 9px 14px;
+}
+
+.power-example-page .solution-steps {
+  grid-template-rows: repeat(6, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.power-example-page .solution-steps li {
+  padding: 7px 14px;
+  grid-template-columns: 38px 1fr;
+  gap: 10px;
+}
+
+.power-example-page .step-index {
+  width: 34px;
+  height: 34px;
+}
+
+.power-example-page .solution-steps h2 {
+  margin-bottom: 4px;
+  font-size: 16px;
+}
+
+.power-example-page .solution-steps p {
+  font-size: 20px;
+  line-height: 1.3;
+}
+
+.power-example-page .solution-steps b {
+  color: #b25d3f;
+}
+
+.power-example-page .solution-panel sub {
+  line-height: 0;
+}

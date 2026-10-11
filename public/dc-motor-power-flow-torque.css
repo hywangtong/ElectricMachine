@@ -1,0 +1,163 @@
+.flow-torque-page {
+  grid-template-rows: 84px minmax(0, 1fr) 86px 28px;
+}
+
+.flow-diagram {
+  min-height: 0;
+  padding: 10px;
+  border: 1px solid #c8d9d4;
+  border-radius: 15px;
+  background: #fff;
+}
+
+.flow-diagram svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.flow-diagram text {
+  fill: #173b3b;
+  text-anchor: middle;
+}
+
+.mechanical-area {
+  fill: #f1f8f5;
+}
+
+.flow-diagram .region-label {
+  fill: #26786b;
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.flow-diagram .electrical-label {
+  fill: #55736d;
+}
+
+.mechanical-direction {
+  fill: none;
+  stroke: #26786b;
+  stroke-width: 3;
+}
+
+.power-area {
+  opacity: 0.65;
+}
+
+.input-area {
+  fill: #e0eee4;
+}
+
+.conversion-area {
+  fill: #d2eeea;
+}
+
+.output-area {
+  fill: #dce9fb;
+}
+
+.flow-rail {
+  fill: none;
+  stroke: #173b3b;
+  stroke-width: 3;
+}
+
+.conversion-boundary {
+  stroke: #26786b;
+  stroke-width: 3;
+  stroke-dasharray: 10 9;
+}
+
+.flow-diagram .conversion-label {
+  fill: #26786b;
+  stroke: #f1f8f5;
+  stroke-width: 12px;
+  paint-order: stroke;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.input-measure {
+  fill: #458657;
+}
+
+.conversion-measure {
+  fill: #278f85;
+}
+
+.output-measure {
+  fill: #477ec6;
+}
+
+.power-name,
+.loss-name,
+.equation,
+.balance-strip p {
+  font-family: 'Cambria Math', Cambria, 'Times New Roman', serif;
+  font-size: 36px;
+  font-weight: 700;
+}
+
+.subscript {
+  font-size: 65%;
+}
+
+.flow-diagram .conversion-equation {
+  fill: #26786b;
+}
+
+.flow-diagram .output-equation {
+  fill: #325f9d;
+}
+
+.flow-diagram .loss-equation,
+.flow-diagram .loss-name {
+  fill: #b45309;
+}
+
+.power-caption {
+  font-size: 21px;
+}
+
+.flow-loss {
+  fill: none;
+  stroke: #b45309;
+  stroke-width: 3;
+}
+
+.balance-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 60px;
+  border: 1px solid #c8d9d4;
+  border-radius: 14px;
+  background: #f1f8f5;
+  text-align: center;
+}
+
+.balance-strip span {
+  color: #55736d;
+  font-size: 17px;
+}
+
+.balance-strip p {
+  font-size: 31px;
+}
+
+.balance-strip sub {
+  font-size: 65%;
+}
+
+.balance-arrow {
+  color: #26786b;
+  font-size: 34px;
+}
+
+.flow-note {
+  align-self: center;
+  color: #55736d;
+  font-size: 14px;
+  line-height: 1.4;
+}

@@ -1,0 +1,165 @@
+.formulas-page {
+  grid-template-rows: 78px minmax(0, 1fr) 44px;
+}
+
+.formula-columns {
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 1.12fr 1fr;
+  gap: 16px;
+}
+
+.power-column,
+.torque-column {
+  min-height: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.power-column {
+  grid-template-rows: 228px minmax(0, 1fr);
+}
+
+.torque-column {
+  grid-template-rows: minmax(0, 1fr) 156px;
+}
+
+.formula-card {
+  min-height: 0;
+  padding: 12px 20px;
+  border: 1px solid #c8d9d4;
+  border-radius: 14px;
+  background: #fff;
+}
+
+.formula-card h2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+  font-size: 21px;
+}
+
+.formula-card h2 > span {
+  color: #7e9f91;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.equation {
+  font-family: 'Cambria Math', Cambria, 'Times New Roman', serif;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+sub,
+sup {
+  font-size: 65%;
+  line-height: 0;
+}
+
+.emphasis {
+  color: #26786b;
+}
+
+.input-card > .equation {
+  margin: 4px 0 6px;
+}
+
+.derivation {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
+  gap: 12px;
+  padding-top: 8px;
+  border-top: 1px solid #e0e9e4;
+}
+
+.label {
+  padding-top: 9px;
+  color: #a54b2b;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.derivation .equation {
+  font-size: 28px;
+  line-height: 1.3;
+}
+
+.continuation {
+  padding-left: 56px;
+}
+
+.formula-row {
+  display: grid;
+  grid-template-columns: 98px minmax(0, 1fr);
+  align-items: center;
+  gap: 14px;
+  padding: 9px 0;
+}
+
+.formula-row + .formula-row {
+  border-top: 1px solid #e0e9e4;
+}
+
+.formula-row h3 {
+  margin: 0;
+  color: #55736d;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.conversion-card .formula-row {
+  padding: 7px 0;
+}
+
+.fraction {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: stretch;
+  vertical-align: middle;
+  margin: 0 3px;
+  font-size: 26px;
+  line-height: 1;
+  text-align: center;
+}
+
+.fraction > span {
+  padding: 1px 5px;
+}
+
+.fraction > span:first-child {
+  border-bottom: 1.5px solid currentColor;
+}
+
+.torque-balance {
+  padding: 2px 0 10px 112px;
+  border-bottom: 1px solid #e0e9e4;
+}
+
+.torque-card .formula-row {
+  padding: 7px 0;
+}
+
+.steady-card {
+  border-color: #e1cfa4;
+  background: #fff8e9;
+}
+
+.steady-card .formula-row {
+  grid-template-columns: 162px minmax(0, 1fr);
+  padding: 5px 0;
+}
+
+.steady-card .equation {
+  color: #956e2f;
+}
+
+.formula-note {
+  align-self: center;
+  color: #607e74;
+  font-size: 15px;
+  line-height: 1.5;
+}

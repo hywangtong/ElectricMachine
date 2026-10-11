@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>直流电动机：功率与转矩公式汇总</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/dc-motor-power-torque-formulas.css" />
+    <script src="/dc-machine-basics.js" defer></script>
+  </head>
+  <body>
+    <main class="lesson formulas-page">
+      <header class="page-head">
+        <div class="eyebrow">直流电机 / 45 · 功率和转矩 · 公式汇总</div>
+        <h1>直流电动机：功率与转矩公式汇总</h1>
+        <p>从输入电功率到轴端输出功率，从电磁转矩到负载转矩。</p>
+      </header>
+
+      <div class="formula-columns">
+        <div class="power-column">
+          <section
+            class="formula-card input-card"
+            aria-labelledby="input-title"
+          >
+            <h2 id="input-title"><span>01</span> 电磁功率与输入功率推导</h2>
+            <p class="equation emphasis">
+              P<sub>e</sub> = P<sub>1</sub> − P<sub>Cu</sub> = EI<sub>a</sub>
+            </p>
+            <div class="derivation">
+              <span class="label">推导</span>
+              <div class="equation">
+                <p>
+                  UI = U(I<sub>a</sub> + I<sub>f</sub>) = UI<sub>a</sub> +
+                  UI<sub>f</sub>
+                </p>
+                <p class="continuation">
+                  = (E + R<sub>a</sub>I<sub>a</sub>) I<sub>a</sub> +
+                  R<sub>f</sub>I<sub>f</sub><sup>2</sup>
+                </p>
+                <p class="continuation">
+                  = EI<sub>a</sub> + R<sub>a</sub>I<sub>a</sub><sup>2</sup> +
+                  R<sub>f</sub>I<sub>f</sub><sup>2</sup>
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section
+            class="formula-card conversion-card"
+            aria-labelledby="conversion-title"
+          >
+            <h2 id="conversion-title"><span>02</span> 功率转换与输出</h2>
+            <div class="formula-row">
+              <h3>电磁功率</h3>
+              <div class="equation">
+                <p>
+                  P<sub>e</sub> = EI<sub>a</sub> = C<sub>E</sub>ΦnI<sub>a</sub>
+                </p>
+                <p class="continuation">
+                  =
+                  <span class="fraction"><span>2π</span><span>60</span></span>
+                  C<sub>T</sub>ΦnI<sub>a</sub> = T<sub>e</sub>Ω
+                </p>
+              </div>
+            </div>
+            <div class="formula-row">
+              <h3>空载损耗</h3>
+              <p class="equation">
+                P<sub>0</sub> = P<sub>Fe</sub> + P<sub>me</sub> + P<sub>ad</sub>
+              </p>
+            </div>
+            <div class="formula-row">
+              <h3>输出功率</h3>
+              <div class="equation">
+                <p>
+                  P<sub>2</sub> = P<sub>e</sub> − P<sub>0</sub> = T<sub>2</sub>Ω
+                </p>
+                <p class="continuation">
+                  =
+                  <span class="fraction"><span>2π</span><span>60</span></span>
+                  T<sub>2</sub>n
+                </p>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <div class="torque-column">
+          <section
+            class="formula-card torque-card"
+            aria-labelledby="torque-title"
+          >
+            <h2 id="torque-title"><span>03</span> 转矩平衡与计算</h2>
+            <div class="torque-balance equation emphasis">
+              <p>
+                P<sub>2</sub> = P<sub>e</sub> − P<sub>0</sub> = T<sub>2</sub>Ω
+              </p>
+              <p>T<sub>2</sub> = T<sub>e</sub> − T<sub>0</sub></p>
+            </div>
+            <div class="formula-row">
+              <h3>输出转矩</h3>
+              <p class="equation">
+                T<sub>2</sub> =
+                <span class="fraction"
+                  ><span>P<sub>2</sub></span
+                  ><span>Ω</span></span
+                >
+                = <span class="fraction"><span>60</span><span>2π</span></span>
+                <span class="fraction"
+                  ><span>P<sub>2</sub></span
+                  ><span>n</span></span
+                >
+              </p>
+            </div>
+            <div class="formula-row">
+              <h3>电磁转矩</h3>
+              <p class="equation">
+                T<sub>e</sub> =
+                <span class="fraction"
+                  ><span>P<sub>e</sub></span
+                  ><span>Ω</span></span
+                >
+                = <span class="fraction"><span>60</span><span>2π</span></span>
+                <span class="fraction"
+                  ><span>P<sub>e</sub></span
+                  ><span>n</span></span
+                >
+              </p>
+            </div>
+            <div class="formula-row">
+              <h3>空载转矩</h3>
+              <p class="equation">
+                T<sub>0</sub> =
+                <span class="fraction"
+                  ><span>P<sub>0</sub></span
+                  ><span>Ω</span></span
+                >
+                = <span class="fraction"><span>60</span><span>2π</span></span>
+                <span class="fraction"
+                  ><span>P<sub>0</sub></span
+                  ><span>n</span></span
+                >
+              </p>
+            </div>
+          </section>
+
+          <section
+            class="formula-card steady-card"
+            aria-labelledby="steady-title"
+          >
+            <h2 id="steady-title"><span>04</span> 稳态运行关系</h2>
+            <div class="formula-row">
+              <h3>在稳定运行时</h3>
+              <p class="equation">T<sub>2</sub> = T<sub>L</sub></p>
+            </div>
+            <div class="formula-row">
+              <h3>忽略空载转矩时</h3>
+              <p class="equation">
+                T<sub>e</sub> = T<sub>2</sub> = T<sub>L</sub>
+              </p>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <footer class="formula-note">
+        <p>
+          Ω = 2πn/60；n：r/min，Ω：rad/s，功率：W，转矩：N·m。T<sub>L</sub>
+          为负载转矩。
+        </p>
+        <p>
+          P<sub>e</sub> 即前页 P<sub>em</sub>，T<sub>e</sub>
+          为电磁转矩；输入功率推导适用于并励电动机，忽略电刷接触损耗。
+        </p>
+      </footer>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>例题 4：并励直流电动机功率与效率计算</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/dc-motor-nameplate-example.css" />
+    <link rel="stylesheet" href="/dc-motor-power-example.css" />
+    <script src="/dc-machine-basics.js" defer></script>
+    <script type="module" src="/dc-motor-nameplate-example.js"></script>
+  </head>
+  <body>
+    <main class="lesson exercise-page power-example-page">
+      <header class="page-head exercise-head">
+        <div class="eyebrow">直流电机 / 47 · 课堂例题</div>
+        <h1>例题 4 · 并励直流电动机功率与效率计算</h1>
+        <p>先根据题意独立列式，再点击按钮核对计算过程。</p>
+      </header>
+
+      <section class="exercise-layout">
+        <article class="question-card" aria-labelledby="power-question-title">
+          <header class="card-label">
+            <span>题目 · 例 7.8.1</span><small>SHUNT DC MOTOR</small>
+          </header>
+          <h2 id="power-question-title">一并励电动机，已知参数如下：</h2>
+          <dl class="given-grid" aria-label="已知条件">
+            <div>
+              <dt>额定电压</dt>
+              <dd>
+                <i>U<sub>N</sub></i> = <b>110</b> V
+              </dd>
+            </div>
+            <div>
+              <dt>额定输入电流</dt>
+              <dd>
+                <i>I<sub>N</sub></i> = <b>12.5</b> A
+              </dd>
+            </div>
+            <div>
+              <dt>额定转速</dt>
+              <dd>
+                <i>n<sub>N</sub></i> = <b>1500</b> r/min
+              </dd>
+            </div>
+            <div>
+              <dt>负载转矩</dt>
+              <dd>
+                <i>T<sub>L</sub></i> = <b>6.8</b> N·m
+              </dd>
+            </div>
+            <div>
+              <dt>空载转矩</dt>
+              <dd>
+                <i>T<sub>0</sub></i> = <b>0.9</b> N·m
+              </dd>
+            </div>
+          </dl>
+          <div class="question-tasks">
+            <strong>求</strong>
+            <ol>
+              <li>
+                输出功率 <i>P<sub>2</sub></i> 与电磁功率 <i>P<sub>e</sub></i
+                >；
+              </li>
+              <li>
+                输入功率 <i>P<sub>1</sub></i> 与总损耗 <i>P<sub>al</sub></i
+                >；
+              </li>
+              <li>电动机效率 <i>η</i>。</li>
+            </ol>
+          </div>
+          <button
+            class="reveal-button"
+            type="button"
+            aria-expanded="false"
+            aria-controls="power-solution"
+          >
+            <span class="button-label">显示计算过程与答案</span>
+            <span class="button-icon" aria-hidden="true">→</span>
+          </button>
+        </article>
+
+        <section
+          class="solution-panel"
+          id="power-solution"
+          aria-label="例题 4 计算过程与答案"
+          hidden
+        >
+          <header class="solution-head">
+            <span>计算过程与答案</span><small>由转矩求功率，再求效率</small>
+          </header>
+          <ol class="solution-steps">
+            <li>
+              <span class="step-index">01</span>
+              <div>
+                <h2>由负载转矩求轴端输出功率</h2>
+                <p>
+                  <i>P<sub>2</sub></i> = (2π / 60)<i
+                    >T<sub>L</sub>n<sub>N</sub></i
+                  >
+                  ≈ (6.28 / 60) × 6.8 × 1500 = <b>1067.6 W</b>
+                </p>
+              </div>
+            </li>
+            <li>
+              <span class="step-index">02</span>
+              <div>
+                <h2>由空载转矩求空载损耗功率</h2>
+                <p>
+                  <i>P<sub>0</sub></i> = (2π / 60)<i
+                    >T<sub>0</sub>n<sub>N</sub></i
+                  >
+                  ≈ (6.28 / 60) × 0.9 × 1500 = <b>141.3 W</b>
+                </p>
+              </div>
+            </li>
+            <li>
+              <span class="step-index">03</span>
+              <div>
+                <h2>由机械功率平衡求电磁功率</h2>
+                <p>
+                  <i>P<sub>e</sub></i> = <i>P<sub>2</sub></i> +
+                  <i>P<sub>0</sub></i> = 1067.6 + 141.3 = <b>1208.9 W</b>
+                </p>
+              </div>
+            </li>
+            <li>
+              <span class="step-index">04</span>
+              <div>
+                <h2>由额定电压、电流求输入功率</h2>
+                <p>
+                  <i>P<sub>1</sub></i> = <i>U<sub>N</sub>I<sub>N</sub></i> = 110
+                  × 12.5 = <b>1375 W</b>
+                </p>
+              </div>
+            </li>
+            <li>
+              <span class="step-index">05</span>
+              <div>
+                <h2>由整机功率平衡求总损耗</h2>
+                <p>
+                  <i>P<sub>al</sub></i> = <i>P<sub>1</sub></i> −
+                  <i>P<sub>2</sub></i> = 1375 − 1067.6 = <b>307.4 W</b>
+                </p>
+              </div>
+            </li>
+            <li>
+              <span class="step-index">06</span>
+              <div>
+                <h2>由输出与输入功率之比求效率</h2>
+                <p>
+                  <i>η</i> = (<i>P<sub>2</sub></i> / <i>P<sub>1</sub></i
+                  >) × 100% = (1067.6 / 1375) × 100% ≈ <b>77.64%</b>
+                </p>
+              </div>
+            </li>
+          </ol>
+          <p class="solution-note">
+            按题图取 2π ≈ 6.28，稳态转速 n = n<sub>N</sub>。 P<sub>0</sub> 为
+            141.3 W（题图 143.3 W 为笔误）；P<sub>e</sub> 即前页的
+            P<sub>em</sub>。
+          </p>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>

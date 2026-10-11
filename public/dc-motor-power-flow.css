@@ -1,0 +1,149 @@
+.flow-page {
+  grid-template-rows: 78px minmax(0, 1fr) 28px;
+}
+.flow-page .anatomy-layout {
+  grid-template-columns: 440px minmax(0, 1fr);
+}
+.flow-page .left-panel {
+  grid-template-rows: 305px 129px minmax(0, 1fr);
+}
+.flow-card {
+  padding: 12px;
+  border: 1px solid #c8d9d4;
+  border-radius: 13px;
+  background: #fff;
+}
+.flow-card h2 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 21px;
+}
+.flow-card h2 span {
+  color: #607e74;
+  font-size: 14px;
+  font-weight: 400;
+}
+.flow-options {
+  position: relative;
+  display: block;
+  height: 230px;
+}
+.flow-options svg {
+  width: 100%;
+  height: 100%;
+}
+.flow-rail {
+  stroke: #173b3b;
+  stroke-width: 3;
+  fill: none;
+}
+.flow-loss {
+  stroke: #b45309;
+  stroke-width: 3;
+  fill: none;
+}
+.flow-loss-head {
+  fill: #b45309;
+}
+.flow-options button {
+  position: absolute;
+  border: 0;
+  border-radius: 0;
+  color: #173b3b;
+  gap: 6px;
+}
+.flow-options b {
+  font-size: 30px;
+}
+.flow-options span {
+  font-size: 14px;
+}
+.flow-options .flow-power {
+  width: 84px;
+  top: 20px;
+  background: #dcece5;
+  clip-path: polygon(
+    50% 0,
+    100% 21%,
+    85% 21%,
+    85% 79%,
+    100% 79%,
+    50% 100%,
+    0 79%,
+    15% 79%,
+    15% 21%,
+    0 21%
+  );
+}
+.flow-input {
+  left: 7%;
+  height: 145px;
+}
+.flow-conversion {
+  left: 41%;
+  height: 131px;
+}
+.flow-output {
+  left: 75%;
+  height: 117px;
+}
+.flow-options .flow-loss-option {
+  width: 108px;
+  height: 52px;
+  border: 1px solid #e6ce75;
+  border-radius: 9px;
+  flex-direction: row;
+  background: #fff9df;
+}
+.flow-options .flow-loss-option span {
+  font-size: 13px;
+}
+.flow-copper {
+  left: 29%;
+  top: 178px;
+}
+.flow-idle {
+  left: 63%;
+  top: 164px;
+}
+.flow-options button[aria-pressed='true'] {
+  background: color-mix(in srgb, var(--highlight) 45%, white);
+  box-shadow: inset 0 0 0 3px var(--highlight);
+}
+.flow-options button:focus-visible {
+  background: #c5dafa;
+  filter: drop-shadow(0 0 4px #2563eb);
+}
+.flow-balance {
+  margin-top: 0;
+  text-align: center;
+  font:
+    700 22px Cambria,
+    'Times New Roman',
+    serif;
+}
+.flow-page .selection-detail h2 {
+  font-size: 18px;
+}
+.flow-page .selection-detail .math {
+  font-size: 24px;
+}
+.flow-page #detail-copy {
+  font-size: 16px;
+}
+.flow-page .inset-placeholder {
+  gap: 4px;
+}
+.flow-page .inset-placeholder h2 {
+  font-size: 16px;
+}
+.flow-page .inset-placeholder .math {
+  font-size: 21px;
+}
+.flow-page .inset-placeholder p:not(.math) {
+  font-size: 20px;
+}
+.flow-page .stray-note {
+  width: 228px;
+}

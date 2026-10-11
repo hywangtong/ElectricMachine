@@ -1,0 +1,282 @@
+.anatomy-page {
+  grid-template-rows: 78px 68px minmax(0, 1fr) 28px;
+  --highlight: #16a34a;
+}
+
+sub {
+  font-size: 65%;
+  line-height: 0;
+}
+button {
+  font: inherit;
+  cursor: pointer;
+}
+button:focus-visible,
+input:focus-visible,
+canvas:focus-visible {
+  outline: 3px solid #2563eb;
+  outline-offset: 3px;
+}
+.power-options {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+}
+.power-options button {
+  border: 1px solid #c8d9d4;
+  border-radius: 12px;
+  background: #fff;
+  color: #55736d;
+  display: flex;
+  gap: 5px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.power-options b {
+  font:
+    700 28px Cambria,
+    'Times New Roman',
+    serif;
+}
+.power-options span {
+  font-size: 15px;
+}
+.power-options button[aria-pressed='true'] {
+  border: 2px solid var(--highlight);
+  background: color-mix(in srgb, var(--highlight) 16%, white);
+  color: #173b3b;
+  box-shadow: inset 0 -4px var(--highlight);
+}
+.anatomy-layout {
+  display: grid;
+  grid-template-columns: 338px minmax(0, 1fr);
+  gap: 16px;
+  min-height: 0;
+}
+.left-panel {
+  display: grid;
+  grid-template-rows: 193px 130px minmax(0, 1fr);
+  gap: 10px;
+  min-height: 0;
+}
+.circuit-card,
+.selection-detail,
+.rotor-inset,
+.inset-placeholder,
+.machine-card {
+  border: 1px solid #c8d9d4;
+  border-radius: 13px;
+  background: #fff;
+}
+.circuit-card {
+  display: grid;
+  grid-template-rows: 22px minmax(0, 1fr) 22px;
+  padding: 12px;
+  min-height: 0;
+}
+h2 {
+  font-size: 18px;
+}
+.circuit-card svg {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+.circuit-wire {
+  stroke: #55736d;
+}
+.circuit-wire rect,
+.circuit-wire circle {
+  fill: #fff;
+}
+.circuit-text,
+.port-ink {
+  fill: currentColor;
+  color: #55736d;
+  font:
+    italic 24px Cambria,
+    serif;
+}
+.branch-label {
+  fill: #55736d;
+  font-size: 15px;
+}
+.circuit-equation {
+  text-align: center;
+  font:
+    700 22px Cambria,
+    serif;
+}
+[data-part].is-highlighted {
+  color: var(--highlight);
+  fill: currentColor;
+  stroke: currentColor;
+  stroke-width: 3.5;
+}
+.circuit-wire [data-part].is-highlighted {
+  fill: #fff1a6;
+  stroke: #d49a00;
+}
+.selection-detail {
+  padding: 11px 14px;
+  border-left: 5px solid var(--highlight);
+  background: color-mix(in srgb, var(--highlight) 7%, white);
+}
+.selection-detail h2 {
+  font-size: 17px;
+}
+.math {
+  font:
+    700 25px Cambria,
+    'Times New Roman',
+    serif;
+}
+.selection-detail .math {
+  margin: 5px 0;
+  font-size: 22px;
+}
+#detail-copy {
+  font-size: 14px;
+  line-height: 1.45;
+  color: #55736d;
+}
+.rotor-inset,
+.inset-placeholder {
+  padding: 10px 12px;
+  min-height: 0;
+  background: #fff9df;
+  border-color: #e6ce75;
+}
+.rotor-inset {
+  display: grid;
+  grid-template-rows: 22px minmax(0, 1fr) 20px;
+}
+.rotor-inset canvas {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  object-fit: contain;
+}
+.rotor-inset p {
+  font-size: 13px;
+  color: #83631c;
+}
+.inset-placeholder {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 9px;
+  background: #f3f8f4;
+  border-color: #c8d9d4;
+}
+.inset-placeholder p:not(.math) {
+  font:
+    700 20px Cambria,
+    serif;
+}
+.inset-placeholder small {
+  font-size: 14px;
+  color: #55736d;
+}
+.machine-card {
+  display: grid;
+  grid-template-rows: 27px minmax(0, 1fr) 27px 36px;
+  gap: 8px;
+  padding: 12px 16px;
+  min-height: 0;
+}
+.machine-heading,
+.animation-status,
+.animation-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.machine-heading h2 {
+  font-size: 21px;
+}
+.machine-heading span {
+  font-size: 14px;
+  color: #607e74;
+}
+.machine-viewport {
+  position: relative;
+  min-height: 0;
+  background: radial-gradient(ellipse at 50% 50%, #e7eeea, #fbfcfa 70%);
+  border-radius: 10px;
+}
+#machine {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  touch-action: none;
+  cursor: grab;
+}
+#machine:active {
+  cursor: grabbing;
+}
+.stray-note {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: 255px;
+  padding: 12px 14px;
+  border: 2px solid #facc15;
+  border-radius: 12px;
+  background: #fff7c9ed;
+  box-shadow: 0 4px 15px #b69a3b20;
+}
+.stray-note h3 {
+  font-size: 17px;
+  margin: 0 0 8px;
+}
+.stray-note p {
+  color: #83631c;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.animation-status {
+  font-size: 14px;
+  color: #55736d;
+}
+#current-state {
+  font-weight: 700;
+  color: #7b4aac;
+  min-width: 205px;
+}
+.animation-controls {
+  justify-content: flex-start;
+}
+.animation-controls button {
+  padding: 7px 12px;
+  border: 1px solid #c8d9d4;
+  border-radius: 8px;
+  background: #f3f8f4;
+  color: #173b3b;
+  font-size: 14px;
+}
+.animation-controls label,
+.animation-controls output {
+  font-size: 15px;
+}
+.animation-controls input {
+  flex: 1;
+  min-width: 0;
+  accent-color: #39796f;
+}
+.animation-controls output {
+  width: 45px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.anatomy-note {
+  color: #607e74;
+  font-size: 14px;
+  align-self: center;
+}
+[hidden] {
+  display: none !important;
+}

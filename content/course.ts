@@ -904,6 +904,48 @@ export const slides: Slide[] = [
           chapterId: chapter.id,
           embedUrl: '/dc-motor-series-applications.html',
         },
+        {
+          id: 'dc-motor-shunt-power',
+          kind: 'embed',
+          title: '并励直流电动机的功率与损耗',
+          chapterId: chapter.id,
+          embedUrl: '/dc-motor-shunt-power.html',
+        },
+        {
+          id: 'dc-motor-power-anatomy',
+          kind: 'embed',
+          title: '功率与损耗：对应电机的真实部件',
+          chapterId: chapter.id,
+          embedUrl: '/dc-motor-power-anatomy.html',
+        },
+        {
+          id: 'dc-motor-power-flow',
+          kind: 'embed',
+          title: '功率传递：从功率流图到电机部件',
+          chapterId: chapter.id,
+          embedUrl: '/dc-motor-power-flow.html',
+        },
+        {
+          id: 'dc-motor-power-torque-formulas',
+          kind: 'embed',
+          title: '直流电动机：功率与转矩公式汇总',
+          chapterId: chapter.id,
+          embedUrl: '/dc-motor-power-torque-formulas.html',
+        },
+        {
+          id: 'dc-motor-power-flow-torque',
+          kind: 'embed',
+          title: '直流电动机：功率流图与机械转矩',
+          chapterId: chapter.id,
+          embedUrl: '/dc-motor-power-flow-torque.html',
+        },
+        {
+          id: 'dc-motor-power-example',
+          kind: 'embed',
+          title: '例题 4：并励直流电动机功率与效率计算',
+          chapterId: chapter.id,
+          embedUrl: '/dc-motor-power-example.html',
+        },
       );
     }
 

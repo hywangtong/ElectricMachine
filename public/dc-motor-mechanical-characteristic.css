@@ -164,6 +164,10 @@ input:focus-visible {
 .hardness p {
   margin: 5px 0;
 }
+.hardness math {
+  color: #c62828;
+  font-size: 32px;
+}
 .hardness small {
   font-size: 13px;
 }
