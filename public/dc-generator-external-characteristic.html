@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>直流发电机：外特性、电压调整率与调整特性</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/dc-generator-external-characteristic.css" />
+    <script src="/dc-machine-basics.js" defer></script>
+  </head>
+  <body>
+    <main class="lesson characteristic-page">
+      <header class="page-head">
+        <div class="eyebrow">直流电机 / 50 · 发电机运行特性</div>
+        <h1>直流发电机：外特性、电压调整率与调整特性</h1>
+        <p>先看固定励磁时的电压跌落，再看怎样调节励磁，让端电压保持恒定。</p>
+      </header>
+
+      <div class="characteristic-columns">
+        <section class="curve-card" aria-labelledby="curve-title">
+          <h2 id="curve-title"><span>01</span> 外特性 · U = f(I)</h2>
+          <p class="conditions equation">
+            n = n<sub>N</sub>，I<sub>f</sub> = I<sub>fN</sub>
+          </p>
+          <svg
+            viewBox="0 0 680 430"
+            role="img"
+            aria-labelledby="curve-label curve-description"
+          >
+            <title id="curve-label">直流发电机的 U–I 外特性曲线</title>
+            <desc id="curve-description">
+              横轴为负载电流 I，纵轴为端电压 U。恒定额定转速与励磁电流下，
+              曲线从空载电压 U0 随电流增大逐渐下降；额定电流 IN 对应额定电压
+              UN。 虚线标出 U0、UN 和 IN，电压差为 ΔU = U0 − UN。
+            </desc>
+            <defs>
+              <marker
+                id="axis-arrow"
+                viewBox="0 0 10 10"
+                refX="8"
+                refY="5"
+                markerWidth="7"
+                markerHeight="7"
+                orient="auto-start-reverse"
+              >
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#173b3b" />
+              </marker>
+            </defs>
+            <path
+              class="axis"
+              d="M 90 385 V 35 M 90 385 H 630"
+              marker-end="url(#axis-arrow)"
+            />
+            <path
+              class="axis"
+              d="M 90 385 V 35"
+              marker-end="url(#axis-arrow)"
+            />
+            <path class="no-load-guide" d="M 90 105 H 455" />
+            <path class="rated-guide" d="M 90 145 H 455 V 385" />
+            <path
+              class="characteristic"
+              d="M 90 105 C 220 108 345 119 455 145 S 560 170 595 189"
+            />
+            <circle class="no-load-point" cx="90" cy="105" r="6" />
+            <circle class="rated-point" cx="455" cy="145" r="7" />
+            <path
+              class="voltage-gap"
+              d="M 490 105 H 510 M 500 105 V 145 M 490 145 H 510"
+            />
+            <g class="math-label">
+              <text x="101" y="45">U</text>
+              <text x="618" y="372">I</text>
+              <text x="62" y="412">O</text>
+              <text class="green-label" x="40" y="113">
+                U
+                <tspan baseline-shift="sub" font-size="21">0</tspan>
+              </text>
+              <text class="red-label" x="35" y="153">
+                U
+                <tspan baseline-shift="sub" font-size="21">N</tspan>
+              </text>
+              <text class="red-label" x="441" y="417">
+                I
+                <tspan baseline-shift="sub" font-size="21">N</tspan>
+              </text>
+              <text class="gap-label" x="522" y="135">ΔU</text>
+            </g>
+            <text class="point-label" x="370" y="190">额定工作点</text>
+            <text class="curve-caption" x="235" y="288">I ↑ → U ↓</text>
+            <text class="diagram-note" x="235" y="322">
+              负载越重，端电压越低
+            </text>
+          </svg>
+          <p class="curve-note">定性示意曲线 · 不代表某台电机的实测数据</p>
+        </section>
+
+        <div class="explanation-column">
+          <section class="regulation-card" aria-labelledby="regulation-title">
+            <h2 id="regulation-title"><span>02</span> 电压调整率</h2>
+            <p class="card-lead">
+              用空载与额定负载的电压差，衡量端电压的变化。
+            </p>
+            <div
+              class="regulation-formula equation"
+              aria-label="VR 等于 U0 减 UN，除以 UN，再乘以百分之百"
+            >
+              <span>V<sub>R</sub> =</span>
+              <span class="fraction"
+                ><span>U<sub>0</sub> − U<sub>N</sub></span
+                ><span>U<sub>N</sub></span></span
+              >
+              <span>× 100%</span>
+            </div>
+            <dl class="symbols">
+              <div>
+                <dt class="equation">U<sub>0</sub></dt>
+                <dd>外特性上的空载端电压（固定励磁）</dd>
+              </div>
+              <div>
+                <dt class="equation">U<sub>N</sub></dt>
+                <dd>额定负载时的端电压</dd>
+              </div>
+              <div>
+                <dt class="equation">I<sub>N</sub></dt>
+                <dd>额定负载电流（两图横轴为输出电流）</dd>
+              </div>
+            </dl>
+            <p class="range-note">
+              典型参考：<strong>5%～10%</strong
+              ><span>实际数值取决于机型与励磁方式。</span>
+            </p>
+          </section>
+          <section class="meaning-card" aria-labelledby="meaning-title">
+            <h2 id="meaning-title">怎样读懂调整率？</h2>
+            <p>
+              <strong>分母是 U<sub>N</sub></strong
+              >：电压变化量以额定电压为基准。
+            </p>
+            <p>
+              <strong>V<sub>R</sub> 越小</strong
+              >：空载到额定负载的端电压变化越小。
+            </p>
+          </section>
+        </div>
+
+        <section
+          class="curve-card adjustment-card"
+          aria-labelledby="adjustment-title"
+        >
+          <h2 id="adjustment-title">
+            <span>03</span> 调整特性 · I<sub>f</sub> = f(I)
+          </h2>
+          <p class="conditions equation">
+            n = n<sub>N</sub>，U = U<sub>N</sub>
+          </p>
+          <svg
+            viewBox="0 0 680 430"
+            role="img"
+            aria-labelledby="adjustment-label adjustment-description"
+          >
+            <title id="adjustment-label">
+              保持端电压恒定的励磁电流–负载电流调整特性
+            </title>
+            <desc id="adjustment-description">
+              横轴为负载电流 I，纵轴为励磁电流 If。转速 n = nN、端电压 U = UN
+              时， 负载电流增大，需要增大励磁电流。上升曲线上额定负载电流 IN
+              对应励磁电流 IfN， 由水平和竖直虚线标出。
+            </desc>
+            <defs>
+              <marker
+                id="adjustment-axis-arrow"
+                viewBox="0 0 10 10"
+                refX="8"
+                refY="5"
+                markerWidth="7"
+                markerHeight="7"
+                orient="auto-start-reverse"
+              >
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#173b3b" />
+              </marker>
+            </defs>
+            <path
+              class="axis"
+              d="M 90 385 V 35"
+              marker-end="url(#adjustment-axis-arrow)"
+            />
+            <path
+              class="axis"
+              d="M 90 385 H 630"
+              marker-end="url(#adjustment-axis-arrow)"
+            />
+            <path class="adjustment-guide" d="M 90 150 H 455 V 385" />
+            <path
+              class="adjustment-curve"
+              d="M 90 195 C 220 196 315 189 455 150 S 555 122 595 111"
+            />
+            <circle class="adjustment-point" cx="455" cy="150" r="7" />
+            <g class="math-label">
+              <text x="103" y="45">
+                I
+                <tspan baseline-shift="sub" font-size="21">f</tspan>
+              </text>
+              <text x="618" y="372">I</text>
+              <text x="62" y="412">O</text>
+              <text class="red-label" x="17" y="158">
+                I
+                <tspan baseline-shift="sub" font-size="21">fN</tspan>
+              </text>
+              <text class="green-label" x="441" y="417">
+                I
+                <tspan baseline-shift="sub" font-size="21">N</tspan>
+              </text>
+            </g>
+            <text class="adjustment-point-label" x="370" y="202">
+              额定工作点
+            </text>
+            <text class="adjustment-caption" x="190" y="288">
+              I ↑ → I
+              <tspan baseline-shift="sub" font-size="25">f</tspan>
+              ↑
+            </text>
+            <text class="diagram-note" x="170" y="329">
+              增加励磁，保持 U = U
+              <tspan baseline-shift="sub" font-size="14">N</tspan>
+            </text>
+          </svg>
+          <p class="curve-note">定性示意曲线 · 励磁随负载调节</p>
+        </section>
+      </div>
+
+      <footer class="characteristic-note">
+        <strong>调节方法</strong>
+        <div>
+          <p>
+            负载增大时，电枢电阻压降与电枢反应使 U 跌落 → 增大 I<sub>f</sub> → Φ
+            ↑ → E ↑ → 恢复 U<sub>N</sub>。
+          </p>
+          <p>
+            做法：励磁电源电压不变时，减小励磁调节电阻；随负载调整
+            I<sub>f</sub>，使端电压 U 保持恒定。
+          </p>
+        </div>
+      </footer>
+    </main>
+  </body>
+</html>

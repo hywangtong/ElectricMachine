@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>直流发电机：功率流图与机械转矩</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/dc-motor-power-flow-torque.css" />
+    <script src="/dc-machine-basics.js" defer></script>
+  </head>
+  <body>
+    <main class="lesson flow-torque-page">
+      <header class="page-head">
+        <div class="eyebrow">直流电机 / 57 · 7.10 功率和转矩 · 机械部分</div>
+        <h1>直流发电机：功率流图与机械转矩</h1>
+        <p>
+          以电磁转换为界，向左看机械输入如何分配；原动机要克服电磁制动转矩与空载转矩。
+        </p>
+      </header>
+
+      <section class="flow-diagram" aria-label="直流发电机功率流图">
+        <svg
+          viewBox="0 0 1380 500"
+          role="img"
+          aria-labelledby="flow-title flow-desc"
+        >
+          <title id="flow-title">发电机机械输入、损耗与电磁转换</title>
+          <desc id="flow-desc">
+            从左向右，机械输入 P₁ = T₁Ω 扣除空载损耗 P₀ = T₀Ω，得到电磁功率 Pₑ =
+            TₑΩ = EIₐ，再扣除铜耗 P_Cu 得到电输出 P₂ =
+            UI。电磁转换左侧为机械部分，T₁ = T₀ + Tₑ。
+          </desc>
+          <defs>
+            <marker
+              id="mechanical-arrow"
+              viewBox="0 0 10 10"
+              refX="9"
+              refY="5"
+              markerWidth="8"
+              markerHeight="8"
+              orient="auto"
+            >
+              <path d="M0 0L10 5L0 10Z" fill="#26786b" />
+            </marker>
+            <marker
+              id="loss-arrow"
+              viewBox="0 0 10 10"
+              refX="9"
+              refY="5"
+              markerWidth="7"
+              markerHeight="7"
+              orient="auto"
+            >
+              <path d="M0 0L10 5L0 10Z" fill="#b45309" />
+            </marker>
+          </defs>
+          <rect
+            class="mechanical-area"
+            x="30"
+            y="82"
+            width="845"
+            height="395"
+            rx="18"
+          />
+          <text class="region-label" x="440" y="36">
+            电磁转换以前，都是机械部分
+          </text>
+          <text class="region-label electrical-label" x="1180" y="40">
+            电气部分
+          </text>
+          <path
+            class="mechanical-direction"
+            d="M875 64H65"
+            marker-end="url(#mechanical-arrow)"
+          />
+          <path class="power-area input-area" d="M55 150H430V335H55Z" />
+          <path class="power-area conversion-area" d="M485 150H980V295H485Z" />
+          <path class="power-area output-area" d="M1035 150H1345V255H1035Z" />
+          <path
+            class="flow-rail"
+            d="M55 150H1345 M55 335H430L485 295H980L1035 255H1345"
+          />
+          <path class="conversion-boundary" d="M875 92V345" />
+          <text class="conversion-label" x="875" y="110">电磁转换</text>
+          <path
+            class="input-measure"
+            d="M120 150L144 174H133V311H144L120 335L96 311H107V174H96Z"
+          />
+          <text class="equation" x="280" y="221">
+            P
+            <tspan class="subscript" dy="10">1</tspan>
+            <tspan dy="-10">= T</tspan>
+            <tspan class="subscript" dy="10">1</tspan>
+            <tspan dy="-10">· Ω</tspan>
+          </text>
+          <text class="power-caption" x="280" y="266">
+            机械输入 · 原动机驱动转矩
+          </text>
+          <path
+            class="conversion-measure"
+            d="M550 150L574 174H563V271H574L550 295L526 271H537V174H526Z"
+          />
+          <text class="equation conversion-equation" x="735" y="215">
+            P
+            <tspan class="subscript" dy="10">e</tspan>
+            <tspan dy="-10">= T</tspan>
+            <tspan class="subscript" dy="10">e</tspan>
+            <tspan dy="-10">· Ω</tspan>
+          </text>
+          <text class="power-caption" x="735" y="259">电磁功率 · 制动转矩</text>
+          <path
+            class="output-measure"
+            d="M1080 150L1104 174H1093V231H1104L1080 255L1056 231H1067V174H1056Z"
+          />
+          <text class="equation output-equation" x="1210" y="201">
+            P
+            <tspan class="subscript" dy="10">2</tspan>
+            <tspan dy="-10">= UI</tspan>
+          </text>
+          <text class="power-caption" x="1210" y="238">负载电输出</text>
+          <path
+            class="flow-loss"
+            d="M442 341Q470 355 470 386"
+            marker-end="url(#loss-arrow)"
+          />
+          <text class="equation loss-equation" x="410" y="423">
+            P
+            <tspan class="subscript" dy="10">0</tspan>
+            <tspan dy="-10">= T</tspan>
+            <tspan class="subscript" dy="10">0</tspan>
+            <tspan dy="-10">· Ω</tspan>
+          </text>
+          <text class="power-caption" x="410" y="457">
+            铁耗 + 机械耗 + 附加耗
+          </text>
+          <path
+            class="flow-loss"
+            d="M992 301Q1020 315 1020 376"
+            marker-end="url(#loss-arrow)"
+          />
+          <text class="loss-name" x="1040" y="419">
+            P
+            <tspan class="subscript" dy="10">Cu</tspan>
+          </text>
+          <text class="power-caption" x="1040" y="457">
+            电枢铜耗 + 励磁铜耗
+          </text>
+        </svg>
+      </section>
+
+      <section class="balance-strip" aria-label="机械部分的功率与转矩平衡">
+        <div>
+          <span>功率平衡</span>
+          <p>P<sub>1</sub> = P<sub>0</sub> + P<sub>e</sub></p>
+        </div>
+        <b class="balance-arrow" aria-hidden="true">→</b>
+        <div>
+          <span>同一角速度 Ω · 稳态运行</span>
+          <p>T<sub>1</sub> = T<sub>0</sub> + T<sub>e</sub></p>
+        </div>
+      </section>
+
+      <footer class="flow-note">
+        Ω = 2πn/60（rad/s）；功率：W，转矩：N·m。沿用本节 P₀ = PFe + Pme + Pad
+        的损耗分组，以 T₀ 表示等效空载转矩；图示不按功率比例绘制。
+      </footer>
+    </main>
+  </body>
+</html>

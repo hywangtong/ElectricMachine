@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>发电机功率与损耗：对应真实部件</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/dc-motor-power-anatomy.css" />
+    <script src="/dc-generator-emf-controls.js" defer></script>
+    <script src="/dc-machine-basics.js" defer></script>
+    <script type="module" src="/dc-motor-power-anatomy.js"></script>
+  </head>
+  <body>
+    <main class="lesson anatomy-page" data-power="P1" data-machine="generator">
+      <header class="page-head">
+        <div class="eyebrow">直流电机 / 54 · 7.10 功率和转矩 · 部件对应</div>
+        <h1>功率与损耗，分别发生在电机的哪里？</h1>
+        <p>点击上方功率项：轴输入用绿色，电输出用蓝色，所有损耗用黄色高亮。</p>
+      </header>
+      <nav class="power-options" aria-label="选择功率或损耗">
+        <button type="button" data-power="P1" aria-pressed="true">
+          <b>P<sub>1</sub></b
+          ><span>输入功率</span>
+        </button>
+        <button type="button" data-power="P2" aria-pressed="false">
+          <b>P<sub>2</sub></b
+          ><span>输出功率</span>
+        </button>
+        <button type="button" data-power="Pal" aria-pressed="false">
+          <b>P<sub>al</sub></b
+          ><span>总损耗</span>
+        </button>
+        <button type="button" data-power="PFe" aria-pressed="false">
+          <b>P<sub>Fe</sub></b
+          ><span>铁损耗</span>
+        </button>
+        <button type="button" data-power="PCu" aria-pressed="false">
+          <b>P<sub>Cu</sub></b
+          ><span>铜损耗</span>
+        </button>
+        <button type="button" data-power="Pme" aria-pressed="false">
+          <b>P<sub>me</sub></b
+          ><span>机械损耗</span>
+        </button>
+        <button type="button" data-power="Pad" aria-pressed="false">
+          <b>P<sub>ad</sub></b
+          ><span>附加损耗</span>
+        </button>
+      </nav>
+      <div class="anatomy-layout">
+        <aside class="left-panel">
+          <section class="circuit-card">
+            <h2>并励电路 · 左入右出</h2>
+            <svg
+              viewBox="0 0 370 190"
+              role="img"
+              aria-label="左侧原动机向发电机输入机械功率，右侧端子向负载输出电功率。电枢与励磁绕组并联，Ia 向上供电，分为向右输出的 I 和向下励磁的 If；端电压 U 上正下负。"
+            >
+              <defs>
+                <marker
+                  id="circuit-arrow"
+                  markerWidth="7"
+                  markerHeight="7"
+                  refX="6"
+                  refY="3.5"
+                  orient="auto"
+                >
+                  <path d="M0 0 7 3.5 0 7Z" fill="context-stroke" />
+                </marker>
+              </defs>
+              <g class="circuit-wire" fill="none" stroke-width="2.5">
+                <path
+                  d="M115 30H315 M115 154H315 M225 30V65 M225 125V154 M115 30V56 M115 85V99 M115 139V154"
+                />
+                <g data-part="armature">
+                  <rect x="107" y="56" width="16" height="29" />
+                  <circle cx="115" cy="119" r="20" />
+                </g>
+                <path
+                  data-part="field"
+                  d="M225 65 C250 65 250 80 225 80 C250 80 250 95 225 95 C250 95 250 110 225 110 C250 110 250 125 225 125"
+                />
+                <circle cx="315" cy="30" r="4" />
+                <circle cx="315" cy="154" r="4" />
+              </g>
+              <g data-part="output" class="port-ink">
+                <path
+                  d="M10 119H93"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="3"
+                  marker-end="url(#circuit-arrow)"
+                />
+                <text x="24" y="104" font-size="18">
+                  T
+                  <tspan baseline-shift="sub" font-size="12">1</tspan>
+                  <tspan>，Ω</tspan>
+                </text>
+              </g>
+              <g data-part="input" class="port-ink">
+                <path
+                  d="M265 30H303"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="3"
+                  marker-end="url(#circuit-arrow)"
+                />
+                <text x="280" y="20">I</text>
+                <text x="340" y="101">U</text>
+                <text x="340" y="40">+</text>
+                <text x="340" y="158">−</text>
+              </g>
+              <g
+                fill="none"
+                stroke="#55736d"
+                stroke-width="2"
+                marker-end="url(#circuit-arrow)"
+              >
+                <path d="M115 51V34" />
+                <path d="M225 34V55" />
+              </g>
+              <g class="circuit-text">
+                <text x="84" y="52">
+                  I
+                  <tspan baseline-shift="sub" font-size="13">a</tspan>
+                </text>
+                <text x="187" y="52">
+                  I
+                  <tspan baseline-shift="sub" font-size="13">f</tspan>
+                </text>
+                <text x="136" y="79">
+                  R
+                  <tspan baseline-shift="sub" font-size="13">a</tspan>
+                </text>
+                <text x="258" y="103">
+                  R
+                  <tspan baseline-shift="sub" font-size="13">f</tspan>
+                </text>
+                <text x="115" y="126" text-anchor="middle">G</text>
+              </g>
+              <g class="branch-label" text-anchor="middle">
+                <text x="50" y="144">机械输入</text>
+                <text x="115" y="182">电枢</text>
+                <text x="225" y="182">励磁</text>
+                <text x="315" y="182">电输出</text>
+              </g>
+            </svg>
+            <p class="circuit-equation">
+              I<sub>a</sub> = I + I<sub>f</sub>；U<sub>a</sub> = U<sub>f</sub> =
+              U
+            </p>
+          </section>
+          <section
+            class="selection-detail"
+            aria-live="polite"
+            aria-atomic="true"
+          >
+            <h2 id="detail-title">输入机械功率 · 原动机驱动轴</h2>
+            <p id="detail-formula" class="math">P₁ = T₁Ω</p>
+            <p id="detail-copy">
+              原动机以转矩 T₁ 驱动转轴，机械功率从轴端进入发电机。
+            </p>
+          </section>
+          <section
+            class="rotor-inset"
+            id="rotor-inset"
+            hidden
+            aria-labelledby="inset-title"
+          >
+            <h2 id="inset-title">随转子看磁场 · 铁芯坐标系</h2>
+            <canvas
+              id="field-inset"
+              width="640"
+              height="180"
+              role="img"
+              aria-label="转子坐标系下，铁芯与材料点固定，磁场 B 相对转子反向旋转；右侧曲线显示材料点的磁通密度分量随转角交替变化。"
+            ></canvas>
+            <p>铁芯材料点固定；B 相对它不断改变方向。</p>
+          </section>
+          <section class="inset-placeholder" id="inset-placeholder">
+            <h2>功率账本</h2>
+            <p class="math">P₁ − P₂ = P<sub>al</sub></p>
+            <p>
+              P<sub>al</sub> = P<sub>Fe</sub> + P<sub>Cu</sub> + P<sub>me</sub>
+              + P<sub>ad</sub>
+            </p>
+            <small>选择铁耗，可从转子视角观察交变磁场。</small>
+          </section>
+        </aside>
+        <section class="machine-card" aria-labelledby="machine-title">
+          <div class="machine-heading">
+            <h2 id="machine-title">单电枢线圈 · 三维部件动画</h2>
+            <span>拖动改变观察视角</span>
+          </div>
+          <div class="machine-viewport">
+            <canvas
+              id="machine"
+              width="2000"
+              height="760"
+              tabindex="0"
+              role="img"
+              aria-label="三维直流发电机：左侧原动机驱动轴输入机械功率，右侧电刷端口输出电功率；励磁绕组与磁极固定，单电枢线圈绕在旋转铁芯上；两端轴承、同轴风扇、两片换向片和固定电刷完整显示。负载电流流出正电刷，线圈电流每半圈换向，所选功率对应部件以指定颜色高亮。"
+            ></canvas>
+            <aside id="stray-note" class="stray-note" hidden>
+              <h3>附加损耗 P<sub>ad</sub> · 杂散损耗</h3>
+              <p>
+                负载下磁场畸变、漏磁等引起的额外损耗，分散于电机内部，不能归于一个独立零件。
+              </p>
+            </aside>
+          </div>
+          <div class="animation-status">
+            <span id="current-state">线圈电流：A → B</span
+            ><span>电刷固定；换向片、铁芯、线圈与风扇同轴旋转</span>
+          </div>
+          <div class="animation-controls">
+            <button type="button" id="play" aria-pressed="true">
+              暂停旋转
+            </button>
+            <button type="button" id="step">步进 90°</button>
+            <button type="button" id="reset-view">复位视角</button>
+            <label for="angle">转角 θ</label
+            ><input
+              id="angle"
+              type="range"
+              min="0"
+              max="360"
+              step="1"
+              value="25"
+            /><output id="angle-value">25°</output>
+          </div>
+        </section>
+      </div>
+      <footer class="anatomy-note">
+        结构与高亮为教学简化；演示原动机匀速驱动，电磁转矩与旋转方向相反。铁耗来自铁芯所经历的磁场变化；电流换向是另一现象。忽略电刷接触电损耗，保留电刷摩擦损耗。
+      </footer>
+    </main>
+  </body>
+</html>

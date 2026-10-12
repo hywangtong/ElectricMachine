@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>并励直流发电机 · 交互实验</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/dc-generator-shunt.css" />
+    <script type="module" src="/dc-generator-shunt.js"></script>
+  </head>
+  <body>
+    <main class="lesson shunt-page">
+      <header class="page-head">
+        <h1 id="heading">并励直流发电机：自励与运行实验</h1>
+        <p id="lead"></p>
+      </header>
+      <nav class="lesson-tabs" role="tablist" aria-label="并励发电机实验主题">
+        <button
+          id="shunt-tab-principle"
+          role="tab"
+          data-page="principle"
+          aria-controls="shunt-panel"
+          aria-selected="true"
+        >
+          01 自励原理
+        </button>
+        <button
+          id="shunt-tab-buildup"
+          role="tab"
+          data-page="buildup"
+          aria-controls="shunt-panel"
+          aria-selected="false"
+          tabindex="-1"
+        >
+          02 建压工作点
+        </button>
+        <button
+          id="shunt-tab-critical"
+          role="tab"
+          data-page="critical"
+          aria-controls="shunt-panel"
+          aria-selected="false"
+          tabindex="-1"
+        >
+          03 临界条件
+        </button>
+        <button
+          id="shunt-tab-load"
+          role="tab"
+          data-page="load"
+          aria-controls="shunt-panel"
+          aria-selected="false"
+          tabindex="-1"
+        >
+          04 负载特性
+        </button>
+      </nav>
+      <div
+        class="lab"
+        id="shunt-panel"
+        role="tabpanel"
+        aria-labelledby="shunt-tab-principle"
+      >
+        <section class="circuit-panel" aria-label="并励发电机电路与参数">
+          <div class="panel-heading">
+            <h2>端电压同时供给励磁与负载</h2>
+            <span id="mode"></span>
+          </div>
+          <svg
+            class="circuit"
+            viewBox="0 0 500 230"
+            role="img"
+            aria-labelledby="circuit-title"
+          >
+            <title id="circuit-title">
+              并励发电机G经Ra连接端子，励磁电阻Rf与励磁绕组串联后并接端子，负载RL与励磁支路并联；箭头表示正电压时的参考方向，流动点表示实际电流方向。
+            </title>
+            <defs>
+              <marker
+                id="arrow"
+                viewBox="0 0 10 10"
+                refX="8"
+                refY="5"
+                markerWidth="5"
+                markerHeight="5"
+                orient="auto-start-reverse"
+              >
+                <path d="M0 0L10 5L0 10Z" fill="#be6047" />
+              </marker>
+            </defs>
+            <path
+              class="wire"
+              d="M85 87V35H140M194 35H420V80M420 154V195H85V151M280 35V70M280 94V110M280 162V195"
+            />
+            <circle class="symbol" cx="85" cy="119" r="32" />
+            <g id="rotor"><path d="M64 119H106M85 98V140" /></g>
+            <text x="85" y="128" class="g-label">G</text>
+            <rect class="symbol" x="140" y="26" width="54" height="18" />
+            <text x="155" y="18">Rₐ</text>
+            <rect class="symbol" x="269" y="70" width="22" height="24" />
+            <path class="wire" d="M254 99L302 65" />
+            <text x="306" y="90">Rᶠ</text>
+            <path
+              class="wire"
+              d="M280 110c23 0 23 13 0 13c23 0 23 13 0 13c23 0 23 13 0 13c23 0 23 13 0 13"
+            />
+            <text x="307" y="138">励磁绕组</text>
+            <text x="306" y="159" id="field-sign">助磁 Φᶠ</text>
+            <path class="flow" id="armature-flow" d="M85 185V35H255" />
+            <path
+              class="flow field-flow"
+              id="field-flow"
+              d="M255 35H280V195H85"
+            />
+            <path
+              class="flow load-flow"
+              id="load-flow"
+              d="M300 35H420V195H280"
+            />
+            <path class="reference" d="M214 35H247M280 42V61M351 35H389" />
+            <text x="218" y="22">Iₐ</text>
+            <text x="249" y="59">Iᶠ</text>
+            <text x="362" y="22">I</text>
+            <g id="load-symbol">
+              <path class="wire" d="M420 80V91M420 144V154" />
+              <rect class="symbol" x="408" y="91" width="24" height="53" />
+              <text x="446" y="123">RＬ</text>
+            </g>
+            <g id="load-open">
+              <path class="symbol" d="M420 80V98M420 134V154M420 134L438 102" />
+              <text x="440" y="125">空载</text>
+            </g>
+            <g id="load-short">
+              <path class="symbol" d="M420 80V154" />
+              <text x="440" y="125">短路</text>
+            </g>
+            <circle class="junction" cx="280" cy="35" r="4" />
+            <circle class="junction" cx="280" cy="195" r="4" />
+            <text x="124" y="107" id="emf-plus">+</text>
+            <text x="125" y="144" id="emf-minus">−</text>
+            <text x="145" y="131">E</text>
+            <text x="370" y="79" id="terminal-plus">+</text>
+            <text x="370" y="157" id="terminal-minus">−</text>
+            <text x="365" y="121">U</text>
+            <text x="25" y="218" id="speed-note"></text>
+            <text x="240" y="218">Iₐ = I + Iᶠ</text>
+          </svg>
+          <div class="controls">
+            <div>
+              <label for="residual"
+                >剩磁 Φᵣ · 大小与方向<output
+                  id="residual-value"
+                ></output></label
+              ><input
+                id="residual"
+                type="range"
+                min="-2"
+                max="2"
+                step="0.1"
+                value="1.2"
+              />
+              <div class="range-note">
+                <span>负向 −2 mWb</span><span>0：无剩磁</span
+                ><span>正向 +2 mWb</span>
+              </div>
+            </div>
+            <div>
+              <label for="speed">转速 n<output id="speed-value"></output></label
+              ><input
+                id="speed"
+                type="range"
+                min="0"
+                max="1800"
+                step="10"
+                value="1500"
+              />
+            </div>
+            <div class="resistances">
+              <div>
+                <label for="rf"
+                  >励磁总电阻 Rᶠ<output id="rf-value"></output></label
+                ><input
+                  id="rf"
+                  type="range"
+                  min="20"
+                  max="300"
+                  step="1"
+                  value="90"
+                />
+              </div>
+              <div>
+                <label for="ra"
+                  >电枢电阻 Rₐ<output id="ra-value"></output></label
+                ><input
+                  id="ra"
+                  type="range"
+                  min="0.1"
+                  max="20"
+                  step="0.1"
+                  value="0.8"
+                />
+              </div>
+            </div>
+            <div id="load-control" hidden>
+              <label for="load"
+                >负载电阻 RＬ · 最右端空载<output
+                  id="load-value"
+                ></output></label
+              ><input
+                id="load"
+                type="range"
+                min="0"
+                max="101"
+                step="1"
+                value="101"
+              />
+              <div class="range-note">
+                <span>0：理想短路</span><span>向左拖动：加重负载</span
+                ><span>∞：空载</span>
+              </div>
+            </div>
+          </div>
+          <div class="actions">
+            <button id="connection" aria-pressed="false">接线：助磁 ✓</button
+            ><button id="restart">重新起励</button
+            ><button id="pause" aria-pressed="false">暂停</button
+            ><button id="reset">复位</button>
+          </div>
+          <p class="control-note">
+            改变剩磁／接线会从 Iᶠ = 0
+            重新起励；其余滑块连续改变工作点。暂停时锁定参数。
+          </p>
+        </section>
+        <section class="graphs" aria-label="动画曲线与工作点">
+          <div class="panel-heading">
+            <h2 id="chart-heading"></h2>
+            <span id="time">0.0 s</span>
+          </div>
+          <div class="legend">
+            <span class="green" id="curve-legend">空载磁化曲线 E(Iᶠ)</span
+            ><span class="purple" id="line-legend">场阻线 (Rᶠ + Rₐ)Iᶠ</span
+            ><span class="orange">● 实际点 P　○ 稳态点 Q</span>
+          </div>
+          <svg
+            id="chart"
+            viewBox="0 0 810 245"
+            role="img"
+            aria-label="工作点随参数变化的曲线，实际值见下方读数"
+          ></svg>
+          <div class="scope-title">
+            <span>端电压 U(t) · 最近 18 秒</span
+            ><span>虚线：当前设定的稳态端电压</span>
+          </div>
+          <svg
+            id="scope"
+            viewBox="0 0 810 108"
+            role="img"
+            aria-label="端电压随时间变化的动画曲线"
+          ></svg>
+          <div class="meters">
+            <div>感生电动势 E<strong id="e-meter"></strong></div>
+            <div>端电压 U<strong id="u-meter"></strong></div>
+            <div>励磁电流 Iᶠ<strong id="if-meter"></strong></div>
+            <div>负载电流 I<strong id="i-meter"></strong></div>
+          </div>
+          <p class="balance" id="balance"></p>
+        </section>
+      </div>
+      <section class="explanation">
+        <div>
+          <span class="small-title" id="concept-heading"></span>
+          <p id="concept"></p>
+        </div>
+        <div class="feedback">
+          <strong id="status" role="status"></strong>
+          <p id="detail"></p>
+          <div class="presets" id="presets"></div>
+        </div>
+      </section>
+      <footer id="model-note"></footer>
+    </main>
+  </body>
+</html>

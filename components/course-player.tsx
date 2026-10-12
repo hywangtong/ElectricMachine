@@ -32,6 +32,55 @@ import { MotorAdvantagesLesson } from '@/components/motor-advantages-lesson';
 import { MotorHistoryLesson } from '@/components/motor-history-lesson';
 const number = (n: number) => String(n).padStart(2, '0');
 
+const shuntPages = ['principle', 'buildup', 'critical', 'load'] as const;
+type ShuntPage = (typeof shuntPages)[number];
+const shuntAnchorId = 'dc-generator-shunt-principle';
+const isShuntPage = (value: unknown): value is ShuntPage =>
+  shuntPages.some((page) => page === value);
+const findShuntTab = (id: string): ShuntPage | undefined =>
+  shuntPages.find((page) => id === `dc-generator-shunt-${page}`);
+
+function ShuntGeneratorFrame({
+  page,
+  title,
+  onSelect,
+}: {
+  page: ShuntPage;
+  title: string;
+  onSelect: (page: ShuntPage) => void;
+}) {
+  const frame = useRef<HTMLIFrameElement>(null);
+  const showPage = useCallback(() => {
+    frame.current?.contentWindow?.postMessage(
+      { type: 'dc-shunt-page', page },
+      window.location.origin,
+    );
+  }, [page]);
+  useEffect(showPage, [showPage]);
+  useEffect(() => {
+    const select = (event: MessageEvent) => {
+      if (
+        event.origin === window.location.origin &&
+        event.source === frame.current?.contentWindow &&
+        event.data?.type === 'dc-shunt-select' &&
+        isShuntPage(event.data.page)
+      )
+        onSelect(event.data.page);
+    };
+    window.addEventListener('message', select);
+    return () => window.removeEventListener('message', select);
+  }, [onSelect]);
+  return (
+    <iframe
+      ref={frame}
+      src="/dc-generator-shunt.html"
+      onLoad={showPage}
+      title={title}
+      className="embed-frame"
+    />
+  );
+}
+
 function MaxwellDetailFrame({ url, title }: { url: string; title: string }) {
   const frame = useRef<HTMLIFrameElement>(null);
   const law = new URL(url, 'http://localhost').searchParams.get('law');
@@ -64,10 +113,16 @@ const courseSlides = slides
     (candidate) =>
       !isIntroTabbedSlide(candidate) || candidate.id === introTabAnchorId,
   )
+  .filter(
+    (candidate) =>
+      !findShuntTab(candidate.id) || candidate.id === shuntAnchorId,
+  )
   .map((candidate) =>
     candidate.id === introTabAnchorId
       ? { ...candidate, title: '新能源汽车技术路线' }
-      : candidate,
+      : candidate.id === shuntAnchorId
+        ? { ...candidate, title: '并励直流发电机：自励与运行实验' }
+        : candidate,
   );
 
 const findIntroTab = (id: string): EvPage | undefined => {
@@ -83,6 +138,8 @@ const findCourseIndex = (id: string) => {
       : id;
   const directIndex = courseSlides.findIndex((item) => item.id === stableId);
   if (directIndex >= 0) return directIndex;
+  if (findShuntTab(id))
+    return courseSlides.findIndex((item) => item.id === shuntAnchorId);
   return findIntroTab(id)
     ? courseSlides.findIndex((item) => item.id === introTabAnchorId)
     : -1;
@@ -91,6 +148,7 @@ const findCourseIndex = (id: string) => {
 export default function CoursePlayer() {
   const [index, setIndex] = useState(0);
   const [introPage, setIntroPage] = useState<EvPage>('principle');
+  const [shuntPage, setShuntPage] = useState<ShuntPage>('principle');
   const [presenting, setPresenting] = useState(false);
   const [catalog, setCatalog] = useState(false);
   const [notice, setNotice] = useState('');
@@ -105,7 +163,13 @@ export default function CoursePlayer() {
             isIntroTabbedSlide(candidate) && candidate.page === introPage,
         )
       : undefined;
-  const slide = activeIntroTab ?? containerSlide;
+  const activeShuntTab =
+    containerSlide.id === shuntAnchorId
+      ? slides.find(
+          (candidate) => candidate.id === `dc-generator-shunt-${shuntPage}`,
+        )
+      : undefined;
+  const slide = activeIntroTab ?? activeShuntTab ?? containerSlide;
   const activeTitle = slide.title;
   const chapter =
     slide.kind === 'home'
@@ -122,15 +186,26 @@ export default function CoursePlayer() {
     const clamped = Math.max(0, Math.min(courseSlides.length - 1, next));
     if (courseSlides[clamped].id === introTabAnchorId)
       setIntroPage('principle');
+    if (courseSlides[clamped].id === shuntAnchorId) setShuntPage('principle');
     setIndex(clamped);
     window.location.hash = courseSlides[clamped].id;
   }, []);
+  const selectShuntTab = useCallback((page: ShuntPage) => {
+    setShuntPage(page);
+    const hash = `#dc-generator-shunt-${page}`;
+    if (window.location.hash !== hash) window.history.pushState(null, '', hash);
+  }, []);
   const jump = (id: string) => {
     const introTab = findIntroTab(id);
+    const shuntTab = findShuntTab(id);
     const next = findCourseIndex(id);
     if (next < 0) return;
     if (introTab) {
       setIntroPage(introTab);
+      setIndex(next);
+      window.location.hash = id;
+    } else if (shuntTab) {
+      setShuntPage(shuntTab);
       setIndex(next);
       window.location.hash = id;
     } else {
@@ -160,17 +235,21 @@ export default function CoursePlayer() {
       const hash = window.location.hash.slice(1);
       const introTab = findIntroTab(hash);
       if (introTab) setIntroPage(introTab);
+      const shuntTab = findShuntTab(hash);
+      if (shuntTab) setShuntPage(shuntTab);
       const next = findCourseIndex(hash);
       setIndex(next < 0 ? 0 : next);
     };
     sync();
     window.addEventListener('hashchange', sync);
+    window.addEventListener('popstate', sync);
     const fullscreen = () => {
       if (!document.fullscreenElement) setPresenting(false);
     };
     document.addEventListener('fullscreenchange', fullscreen);
     return () => {
       window.removeEventListener('hashchange', sync);
+      window.removeEventListener('popstate', sync);
       document.removeEventListener('fullscreenchange', fullscreen);
     };
   }, []);
@@ -643,9 +722,15 @@ export default function CoursePlayer() {
                       <div
                         className={`embed-body${slide.embedUrl.startsWith('/magnetic-') || slide.embedUrl === '/dc-machine-uses-types.html' || slide.embedUrl === '/dc-machine-constants-relation.html' || slide.embedUrl.startsWith('/dc-motor-') || slide.embedUrl.startsWith('/dc-generator-') ? ' embed-maxwell' : ''}${slide.embedUrl === '/ship-power-eli5.html' ? ' embed-ship-power' : ''}`}
                       >
-                        {slide.embedUrl.startsWith(
-                          '/magnetic-maxwell-detail.html',
-                        ) ? (
+                        {findShuntTab(slide.id) ? (
+                          <ShuntGeneratorFrame
+                            page={shuntPage}
+                            title={slide.title}
+                            onSelect={selectShuntTab}
+                          />
+                        ) : slide.embedUrl.startsWith(
+                            '/magnetic-maxwell-detail.html',
+                          ) ? (
                           <MaxwellDetailFrame
                             url={slide.embedUrl}
                             title={slide.title}

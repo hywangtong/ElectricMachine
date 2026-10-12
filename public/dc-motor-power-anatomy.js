@@ -4,6 +4,12 @@ import {
   powerParts as anatomyPowerParts,
   rotorFrameField,
 } from './dc-motor-power-anatomy-model.mjs';
+import {
+  generatorCommutationState,
+  generatorDescriptions,
+  generatorFlowPowerParts,
+  generatorPowerParts,
+} from './dc-generator-power-model.mjs';
 
 const $ = (id) => document.getElementById(id);
 const canvas = $('machine');
@@ -11,8 +17,15 @@ const ctx = canvas.getContext('2d');
 const inset = $('field-inset');
 const fieldCtx = inset.getContext('2d');
 const lesson = document.querySelector('.lesson');
-const powerParts =
-  lesson.dataset.mode === 'flow' ? flowPowerParts : anatomyPowerParts;
+const isGenerator = lesson.dataset.machine === 'generator';
+const screenDirection = isGenerator ? -1 : 1;
+const powerParts = isGenerator
+  ? lesson.dataset.mode === 'flow'
+    ? generatorFlowPowerParts
+    : generatorPowerParts
+  : lesson.dataset.mode === 'flow'
+    ? flowPowerParts
+    : anatomyPowerParts;
 const tau = Math.PI * 2;
 const descriptions = {
   P1: [
@@ -60,6 +73,7 @@ const descriptions = {
     'P₀ = PFe + Pme + Pad = Pₑ − P₂',
     '铁芯、轴承、风扇、电刷摩擦处与杂散区域同时高亮；两类绕组的铜耗已在前一级扣除。',
   ],
+  ...(isGenerator ? generatorDescriptions : {}),
 };
 let selected = 'P1';
 let angle = (25 * Math.PI) / 180;
@@ -103,7 +117,11 @@ function project([x, y, z]) {
   const y1 = y * Math.cos(pitch) - z1 * Math.sin(pitch);
   const depth = y * Math.sin(pitch) + z1 * Math.cos(pitch);
   const scale = 930 / (1050 - depth);
-  return { x: 495 + x1 * scale, y: 195 - y1 * scale, z: depth };
+  return {
+    x: 495 + screenDirection * x1 * scale,
+    y: 195 - y1 * scale,
+    z: depth,
+  };
 }
 
 function polygon(points, fill, stroke = '#566a6945') {
@@ -175,7 +193,7 @@ function arrow(a, b, color, width = 2.5) {
 function label(point, text, color = '#55736d', offset = [0, 0], size = 16) {
   labels.push(() => {
     const p = project(point);
-    const x = p.x + offset[0],
+    const x = p.x + screenDirection * offset[0],
       y = p.y + offset[1];
     if (Math.hypot(...offset) > 18) {
       ctx.strokeStyle = '#8fa29a';
@@ -328,7 +346,7 @@ function renderBearings() {
     }
     label(
       [x, -53, 30],
-      x < 0 ? '左端轴承' : '右端轴承',
+      x < 0 !== isGenerator ? '左端轴承' : '右端轴承',
       highlightInk('bearings'),
       [0, 42],
     );
@@ -445,11 +463,16 @@ function renderRotor(state) {
         );
       }
     }
-    const rotorTerminal = state.current > 0 ? 0 : Math.PI;
+    const rotorTerminal =
+      (isGenerator ? -state.current : state.current) > 0 ? 0 : Math.PI;
     const contact = radial(-178, 34, 0);
     arrow(
-      contact,
-      radial(-157, 34, rotorTerminal === 0 ? angle : angle + Math.PI),
+      isGenerator
+        ? radial(-157, 34, rotorTerminal === 0 ? angle : angle + Math.PI)
+        : contact,
+      isGenerator
+        ? contact
+        : radial(-157, 34, rotorTerminal === 0 ? angle : angle + Math.PI),
       '#8b46ad',
       2,
     );
@@ -460,8 +483,9 @@ function renderRotor(state) {
     angle + (Math.sin(angle) < 0 ? Math.PI : 0),
   );
   const coilProjection = project(coilAnchor);
+  const coilLabelX = isGenerator ? 415 : 575;
   label(coilAnchor, '电枢线圈', highlightInk('armature'), [
-    575 - coilProjection.x,
+    screenDirection * (coilLabelX - coilProjection.x),
     275 - coilProjection.y,
   ]);
   // The fan is keyed to the rotating shaft, ahead of the right bearing.
@@ -545,7 +569,11 @@ function renderPorts() {
       draw() {
         ctx.beginPath();
         ctx.arc(p.x, p.y, 5, 0, tau);
-        ctx.fillStyle = active('input') ? '#bbf7d0' : '#fff';
+        ctx.fillStyle = active('input')
+          ? isGenerator
+            ? '#bfdbfe'
+            : '#bbf7d0'
+          : '#fff';
         ctx.fill();
         ctx.strokeStyle = input;
         ctx.lineWidth = 3;
@@ -554,8 +582,19 @@ function renderPorts() {
     });
     label([-348, y, 0], y > 0 ? '+' : '−', highlightInk('input'), [0, 0], 20);
   }
-  arrow([-323, 93, 0], [-267, 93, 0], input, active('input') ? 4 : 2);
-  label([-296, 113, 0], 'I 输入', highlightInk('input'), [0, -10], 17);
+  arrow(
+    [isGenerator ? -267 : -323, 93, 0],
+    [isGenerator ? -323 : -267, 93, 0],
+    input,
+    active('input') ? 4 : 2,
+  );
+  label(
+    [-296, 113, 0],
+    isGenerator ? 'I 输出' : 'I 输入',
+    highlightInk('input'),
+    [0, -10],
+    17,
+  );
   line(
     [
       [-369, 76, 0],
@@ -576,12 +615,26 @@ function renderPorts() {
   );
   arrow(rotation.at(-2), rotation.at(-1), output, 3);
   label([320, 65, 0], '转速 n / Ω', highlightInk('output'), [0, -24], 17);
-  label([335, -50, 0], '轴端转矩 T₂', highlightInk('output'), [5, 33], 17);
-  label([285, 0, 0], '输出轴', highlightInk('output'), [0, 28], 14);
+  label(
+    [335, -50, 0],
+    isGenerator ? '输入转矩 T₁' : '轴端转矩 T₂',
+    highlightInk('output'),
+    [5, 33],
+    17,
+  );
+  label(
+    [285, 0, 0],
+    isGenerator ? '原动机驱动轴' : '输出轴',
+    highlightInk('output'),
+    [0, 28],
+    14,
+  );
 }
 
 function renderMachine() {
-  const state = commutationState(angle);
+  const state = isGenerator
+    ? generatorCommutationState(angle)
+    : commutationState(angle);
   ctx.setTransform(2, 0, 0, 2, 0, 0);
   ctx.clearRect(0, 0, 1000, 380);
   shapes = [];
@@ -759,7 +812,10 @@ canvas.addEventListener('pointermove', (event) => {
   const scale = canvas.getBoundingClientRect().width / 1000;
   yaw = Math.max(
     -0.8,
-    Math.min(0.65, yaw + ((event.clientX - pointer.x) * 0.003) / scale),
+    Math.min(
+      0.65,
+      yaw + (screenDirection * (event.clientX - pointer.x) * 0.003) / scale,
+    ),
   );
   pitch = Math.max(
     -0.35,

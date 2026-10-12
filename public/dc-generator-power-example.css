@@ -1,0 +1,133 @@
+.generator-power-example-page .given-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.generator-power-example-page:not(.is-revealed) .question-card {
+  width: min(1100px, 100%);
+  padding: 26px 32px;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  grid-template-rows: 34px auto minmax(0, 1fr) 58px;
+}
+
+.generator-power-example-page:not(.is-revealed) .card-label,
+.generator-power-example-page:not(.is-revealed) .question-card > h2,
+.generator-power-example-page:not(.is-revealed) .reveal-button {
+  grid-column: 1 / -1;
+}
+
+.generator-power-example-page:not(.is-revealed) .given-grid {
+  grid-column: 1;
+  grid-row: 3;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.generator-power-example-page:not(.is-revealed) .given-grid > div {
+  display: grid;
+  align-content: center;
+}
+
+.generator-power-example-page:not(.is-revealed) .question-tasks {
+  grid-column: 2;
+  grid-row: 3;
+  align-content: center;
+  gap: 18px;
+}
+
+.generator-power-example-page.is-revealed .given-grid {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.generator-power-example-page.is-revealed .question-card {
+  gap: 10px;
+  padding: 20px 24px;
+}
+
+.generator-power-example-page .card-label small {
+  font-size: 10px;
+  letter-spacing: 0.04em;
+}
+
+.generator-power-example-page.is-revealed .question-card h2 {
+  font-size: 22px;
+}
+
+.generator-power-example-page.is-revealed .given-grid div {
+  padding: 8px 12px;
+}
+
+.generator-power-example-page .question-tasks {
+  padding: 12px 18px;
+  gap: 6px;
+}
+
+.generator-power-example-page .question-tasks svg {
+  grid-column: 1 / -1;
+  justify-self: center;
+  width: 310px;
+  height: 118px;
+}
+
+.generator-power-example-page.is-revealed .question-tasks {
+  padding: 9px 12px;
+}
+
+.generator-power-example-page.is-revealed .question-tasks svg {
+  width: 260px;
+  height: 99px;
+}
+
+.generator-power-example-page .solution-panel {
+  gap: 10px;
+  padding: 20px 24px;
+}
+
+.generator-power-example-page .solution-steps {
+  grid-template-rows: repeat(5, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.generator-power-example-page .solution-steps li {
+  padding: 7px 14px;
+  grid-template-columns: 38px 1fr;
+  gap: 10px;
+}
+
+.generator-power-example-page .step-index {
+  width: 34px;
+  height: 34px;
+}
+
+.generator-power-example-page .solution-steps h2 {
+  margin-bottom: 4px;
+  font-size: 16px;
+}
+
+.generator-power-example-page .solution-steps p {
+  font-size: 21px;
+  line-height: 1.3;
+}
+
+.generator-power-example-page .solution-steps b {
+  color: #b25d3f;
+}
+
+.generator-power-example-page .solution-panel sub {
+  line-height: 0;
+}
+
+.generator-efficiency-page .solution-steps {
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+}
+
+.generator-efficiency-page .solution-steps p {
+  font-size: 26px;
+  line-height: 1.5;
+}
+
+.generator-efficiency-page .solution-steps .substitution {
+  font-size: 24px;
+}
+
+.generator-efficiency-page .solution-steps .substitution b {
+  font-size: inherit;
+}

@@ -1,0 +1,273 @@
+.shunt-page {
+  grid-template-rows: 56px 34px 1fr 96px 35px;
+  gap: 8px;
+}
+.shunt-page .page-head h1 {
+  margin: 0;
+  font-size: 30px;
+  line-height: 36px;
+}
+.shunt-page .page-head p {
+  font-size: 16px;
+  line-height: 20px;
+}
+.lesson-tabs {
+  display: flex;
+  gap: 8px;
+  align-items: stretch;
+}
+.lesson-tabs button {
+  padding: 4px 20px;
+  font-size: 16px;
+}
+.lesson-tabs [aria-selected='true'] {
+  background: #26786b;
+  border-color: #26786b;
+  color: white;
+}
+.lab {
+  display: grid;
+  grid-template-columns: 510px 1fr;
+  gap: 14px;
+  min-height: 0;
+}
+.circuit-panel,
+.graphs {
+  border: 1px solid #c8d9d4;
+  border-radius: 15px;
+  background: #fffefa;
+  padding: 13px 17px;
+  min-height: 0;
+}
+.panel-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+.panel-heading h2 {
+  font-size: 18px;
+}
+.panel-heading > span {
+  color: #53766e;
+  font-size: 14px;
+}
+.circuit {
+  width: 100%;
+  height: 170px;
+  display: block;
+}
+.circuit text {
+  font-size: 17px;
+  fill: #315a5c;
+}
+.wire,
+.symbol {
+  fill: #fffefa;
+  stroke: #315a5c;
+  stroke-width: 2.4;
+}
+.wire {
+  fill: none;
+}
+.junction {
+  fill: #315a5c;
+}
+.reference {
+  stroke: #be6047;
+  stroke-width: 2;
+  fill: none;
+  marker-end: url(#arrow);
+}
+.circuit .g-label {
+  text-anchor: middle;
+  font-weight: 800;
+  font-size: 25px;
+}
+#rotor path {
+  stroke: #d8be77;
+  stroke-width: 3;
+}
+.flow {
+  stroke: #be6047;
+  stroke-width: 4;
+  stroke-dasharray: 2 17;
+  stroke-linecap: round;
+  fill: none;
+}
+.field-flow {
+  stroke: #26786b;
+}
+.load-flow {
+  stroke: #77649d;
+}
+.controls {
+  display: grid;
+  gap: 9px;
+}
+.controls label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  font-weight: 600;
+}
+output {
+  color: #26786b;
+  font-variant-numeric: tabular-nums;
+}
+input[type='range'] {
+  display: block;
+  width: 100%;
+  height: 19px;
+  margin: 3px 0 0;
+  accent-color: #26786b;
+  cursor: pointer;
+  touch-action: none;
+}
+.range-note {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: #71847c;
+}
+.resistances {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.actions {
+  display: flex;
+  gap: 7px;
+  margin-top: 9px;
+}
+button {
+  border: 1px solid #c2d4cb;
+  border-radius: 7px;
+  padding: 6px 11px;
+  background: #f3f8f2;
+  color: #245950;
+  font-family: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+button:hover {
+  background: #e5f0e8;
+}
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid #c4923d;
+  outline-offset: 2px;
+}
+button:disabled,
+input:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.control-note {
+  font-size: 11px;
+  line-height: 1.5;
+  color: #71847c;
+  margin-top: 6px;
+}
+.graphs {
+  display: grid;
+  grid-template-rows: 23px 22px 1fr 19px 70px 54px 22px;
+  gap: 3px;
+}
+.legend {
+  display: flex;
+  gap: 15px;
+  font-size: 13px;
+  align-items: center;
+}
+.green {
+  color: #26786b;
+}
+.purple {
+  color: #77649d;
+}
+.orange {
+  color: #be6047;
+}
+#chart,
+#scope {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+.scope-title {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #60776f;
+}
+.meters {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 7px;
+}
+.meters > div {
+  border-top: 1px solid #d5e2d9;
+  padding-top: 5px;
+  font-size: 13px;
+  color: #60776f;
+}
+.meters strong {
+  display: block;
+  font-size: 23px;
+  color: #173b3b;
+  font-variant-numeric: tabular-nums;
+}
+.balance {
+  color: #53766e;
+  font-size: 13px;
+}
+.explanation {
+  display: grid;
+  grid-template-columns: 0.95fr 1.3fr;
+  gap: 24px;
+  padding: 12px 17px;
+  border-radius: 12px;
+  background: #eaf2ea;
+}
+.small-title {
+  color: #26786b;
+  font-size: 14px;
+  font-weight: 700;
+}
+.explanation p {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-top: 3px;
+}
+.feedback strong {
+  color: #ac593e;
+  font-size: 17px;
+}
+.feedback p {
+  font-size: 14px;
+}
+.presets {
+  display: flex;
+  gap: 7px;
+  margin-top: 5px;
+}
+.presets button {
+  font-size: 12px;
+  padding: 3px 9px;
+  background: #fffefa;
+}
+footer {
+  color: #71847c;
+  font-size: 11px;
+  line-height: 1.55;
+}
+.shunt-page[data-page='load'] .circuit {
+  height: 122px;
+}
+.shunt-page[data-page='load'] .controls {
+  gap: 6px;
+}
+[hidden] {
+  display: none !important;
+}

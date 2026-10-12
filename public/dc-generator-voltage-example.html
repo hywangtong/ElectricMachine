@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>例题 5：他励直流发电机空载与满载电压</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/dc-motor-nameplate-example.css" />
+    <link rel="stylesheet" href="/dc-generator-voltage-example.css" />
+    <script src="/dc-machine-basics.js" defer></script>
+    <script type="module" src="/dc-motor-nameplate-example.js"></script>
+  </head>
+  <body>
+    <main class="lesson exercise-page voltage-example-page">
+      <header class="page-head exercise-head">
+        <div class="eyebrow">直流电机 / 51 · 课堂例题</div>
+        <h1>例题 5 · 他励直流发电机空载与满载电压</h1>
+        <p>磁通不变时，先由额定工况求电动势，再分析转速与负载的影响。</p>
+      </header>
+      <section class="exercise-layout">
+        <article class="question-card" aria-labelledby="voltage-question-title">
+          <header class="card-label">
+            <span>题目 · 例 7.9.1</span
+            ><small>SEPARATELY EXCITED GENERATOR</small>
+          </header>
+          <h2 id="voltage-question-title">
+            一他励直流发电机，磁通 Φ 保持不变。
+          </h2>
+          <dl class="given-grid" aria-label="已知条件">
+            <div>
+              <dt>额定输出功率</dt>
+              <dd>
+                <i>P<sub>N</sub></i> = <b>10</b> kW
+              </dd>
+            </div>
+            <div>
+              <dt>额定端电压</dt>
+              <dd>
+                <i>U<sub>N</sub></i> = <b>230</b> V
+              </dd>
+            </div>
+            <div>
+              <dt>额定转速</dt>
+              <dd>
+                <i>n<sub>N</sub></i> = <b>1000</b> r/min
+              </dd>
+            </div>
+            <div>
+              <dt>电枢电阻</dt>
+              <dd>
+                <i>R<sub>a</sub></i> = <b>0.4</b> Ω
+              </dd>
+            </div>
+          </dl>
+          <div class="question-tasks">
+            <strong>求</strong>
+            <ol>
+              <li>
+                1000 r/min 时的空载电压 <i>U<sub>0</sub></i
+                >；
+              </li>
+              <li>900 r/min 时的满载电压 <i>U</i>。</li>
+            </ol>
+            <svg
+              viewBox="0 0 440 150"
+              role="img"
+              aria-labelledby="circuit-title circuit-desc"
+            >
+              <title id="circuit-title">
+                他励直流发电机：独立励磁与电枢回路
+              </title>
+              <desc id="circuit-desc">
+                左侧励磁电源 Uf 经调节电阻与励磁绕组，电流 If
+                向右。右侧发电机电动势 E 经电枢电阻 Ra 输出端电压 U，电流 Ia
+                从正端流出。
+              </desc>
+              <defs>
+                <marker
+                  id="current-arrow"
+                  markerWidth="7"
+                  markerHeight="7"
+                  refX="6"
+                  refY="3.5"
+                  orient="auto"
+                >
+                  <path d="M0 0 7 3.5 0 7Z" fill="#b25d3f" />
+                </marker>
+              </defs>
+              <g fill="none" stroke="#38594f" stroke-width="2.5">
+                <path d="M36 30H80M110 30H148V50M148 106V130H36" />
+                <rect x="80" y="23" width="30" height="14" />
+                <path
+                  d="M91 16V8H103V23M148 50c18 0 18 14 0 14c18 0 18 14 0 14c18 0 18 14 0 14c18 0 18 14 0 14"
+                />
+                <path d="M246 60V30H286M316 30H404M246 104V130H404" />
+                <rect x="286" y="23" width="30" height="14" />
+                <circle cx="246" cy="82" r="22" />
+                <circle cx="36" cy="30" r="3" />
+                <circle cx="36" cy="130" r="3" />
+                <circle cx="404" cy="30" r="3" />
+                <circle cx="404" cy="130" r="3" />
+              </g>
+              <g
+                fill="none"
+                stroke="#b25d3f"
+                stroke-width="2"
+                marker-end="url(#current-arrow)"
+              >
+                <path d="M43 30H70" />
+                <path d="M342 30H380" />
+              </g>
+              <g fill="#38594f" font-family="Georgia, serif" font-size="19">
+                <text x="239" y="89">G</text>
+                <text x="289" y="17">Rₐ</text>
+                <text x="52" y="54">
+                  I
+                  <tspan baseline-shift="sub" font-size="12">f</tspan>
+                </text>
+                <text x="346" y="54">
+                  I
+                  <tspan baseline-shift="sub" font-size="12">a</tspan>
+                </text>
+                <text x="21" y="85">
+                  U
+                  <tspan baseline-shift="sub" font-size="12">f</tspan>
+                </text>
+                <text x="397" y="85">U</text>
+                <text x="281" y="87">E</text>
+                <text x="17" y="48">+</text>
+                <text x="17" y="126">−</text>
+                <text x="416" y="48">+</text>
+                <text x="416" y="126">−</text>
+                <text x="269" y="69">+</text>
+                <text x="269" y="106">−</text>
+              </g>
+            </svg>
+          </div>
+          <button
+            class="reveal-button"
+            type="button"
+            aria-expanded="false"
+            aria-controls="voltage-solution"
+          >
+            <span class="button-label">显示计算过程与答案</span>
+            <span class="button-icon" aria-hidden="true">→</span>
+          </button>
+        </article>
+        <section
+          class="solution-panel"
+          id="voltage-solution"
+          aria-label="例题 5 计算过程与答案"
+          hidden
+        >
+          <header class="solution-head">
+            <span>计算过程与答案</span><small>电动势 → 转速 → 端电压</small>
+          </header>
+          <ol class="solution-steps">
+            <li>
+              <span class="step-index">01</span>
+              <div>
+                <h2>由额定输出功率求额定电枢电流</h2>
+                <p>
+                  <i>I<sub>aN</sub></i> = <i>P<sub>N</sub></i> /
+                  <i>U<sub>N</sub></i>
+                </p>
+                <p class="substitution">= 10 × 10³ / 230 ≈ <b>43.48 A</b></p>
+              </div>
+            </li>
+            <li>
+              <span class="step-index">02</span>
+              <div>
+                <h2>1000 r/min：空载时电枢压降为零</h2>
+                <p>
+                  <i>U<sub>0</sub></i> = <i>E<sub>N</sub></i> =
+                  <i>U<sub>N</sub></i> + <i>R<sub>a</sub>I<sub>aN</sub></i>
+                </p>
+                <p class="substitution">
+                  ≈ 230 + 0.4 × 43.48 = 247.39 V ≈ <b>247 V</b>
+                </p>
+              </div>
+            </li>
+            <li>
+              <span class="step-index">03</span>
+              <div>
+                <h2>磁通 Φ 不变：E ∝ n</h2>
+                <p>
+                  <i>E′</i> = (900 / 1000)<i>E<sub>N</sub></i>
+                </p>
+                <p class="substitution">≈ 0.9 × 247.39 = <b>222.65 V</b></p>
+              </div>
+            </li>
+            <li>
+              <span class="step-index">04</span>
+              <div>
+                <h2>900 r/min：减去满载电枢电阻压降</h2>
+                <p>
+                  <i>U</i> = <i>E′</i> − <i>R<sub>a</sub>I<sub>aN</sub></i>
+                </p>
+                <p class="substitution">
+                  ≈ 222.65 − 0.4 × 43.48 = 205.26 V ≈ <b>205 V</b>
+                </p>
+              </div>
+            </li>
+          </ol>
+          <p class="solution-note">
+            按题图，“满载”取额定电枢电流 I<sub>aN</sub>，忽略电刷压降；Φ
+            保持不变，不计电枢反应引起的磁通变化。中间计算保留精度，最后取整。
+          </p>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>

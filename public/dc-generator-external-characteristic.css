@@ -1,0 +1,283 @@
+.characteristic-page {
+  grid-template-rows: 78px minmax(0, 1fr) 94px;
+}
+
+.characteristic-columns {
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 1fr 1.16fr 1fr;
+  gap: 14px;
+}
+
+.curve-card,
+.regulation-card,
+.meaning-card {
+  min-height: 0;
+  padding: 16px 18px;
+  border: 1px solid #c8d9d4;
+  border-radius: 15px;
+  background: #fff;
+}
+
+h2 {
+  font-size: 21px;
+}
+
+h2 > span {
+  margin-right: 10px;
+  color: #7e9f91;
+  font-size: 16px;
+}
+
+.equation,
+.math-label,
+.curve-caption {
+  font-family: 'Cambria Math', Cambria, 'Times New Roman', serif;
+}
+
+sub {
+  font-size: 65%;
+  line-height: 0;
+}
+
+.curve-card {
+  display: grid;
+  grid-template-rows: 32px 38px minmax(0, 1fr) 36px;
+}
+
+.conditions {
+  align-self: center;
+  color: #39796f;
+  font-size: 23px;
+}
+
+.curve-card svg {
+  width: 100%;
+  height: 100%;
+}
+
+.axis {
+  fill: none;
+  stroke: #173b3b;
+  stroke-width: 2.5;
+}
+
+.no-load-guide,
+.rated-guide {
+  fill: none;
+  stroke-width: 2;
+  stroke-dasharray: 8 7;
+}
+
+.no-load-guide {
+  stroke: #81968d;
+}
+
+.rated-guide,
+.voltage-gap {
+  stroke: #b54c42;
+}
+
+.characteristic {
+  fill: none;
+  stroke: #26786b;
+  stroke-width: 4.5;
+}
+
+.no-load-point {
+  fill: #26786b;
+}
+
+.rated-point {
+  fill: #b54c42;
+}
+
+.adjustment-guide {
+  fill: none;
+  stroke: #ba8737;
+  stroke-width: 2;
+  stroke-dasharray: 8 7;
+}
+
+.adjustment-curve {
+  fill: none;
+  stroke: #a63861;
+  stroke-width: 4.5;
+}
+
+.adjustment-point {
+  fill: #a63861;
+}
+
+.adjustment-point-label {
+  fill: #a63861;
+  font-size: 19px;
+}
+
+.adjustment-caption {
+  fill: #a63861;
+  font-family: 'Cambria Math', Cambria, 'Times New Roman', serif;
+  font-size: 39px;
+}
+
+.voltage-gap {
+  fill: none;
+  stroke-width: 2;
+}
+
+.math-label {
+  fill: #173b3b;
+  font-size: 32px;
+  font-style: italic;
+}
+
+.green-label {
+  fill: #26786b;
+}
+
+.red-label,
+.gap-label {
+  fill: #b54c42;
+}
+
+.point-label {
+  fill: #b54c42;
+  font-size: 19px;
+}
+
+.curve-caption {
+  fill: #26786b;
+  font-size: 39px;
+}
+
+.diagram-note {
+  fill: #55736d;
+  font-size: 20px;
+  text-anchor: start;
+}
+
+.curve-note {
+  align-self: end;
+  color: #77877f;
+  font-size: 14px;
+  text-align: center;
+}
+
+.explanation-column {
+  min-height: 0;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) 112px;
+  gap: 14px;
+}
+
+.card-lead {
+  margin-top: 10px;
+  color: #55736d;
+  font-size: 16px;
+}
+
+.regulation-formula {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 8px 0;
+  color: #26786b;
+  font-size: 34px;
+  font-weight: 700;
+}
+
+.fraction {
+  display: inline-flex;
+  flex-direction: column;
+  text-align: center;
+  line-height: 1.1;
+}
+
+.fraction > span {
+  padding: 3px 10px;
+}
+
+.fraction > span:first-child {
+  border-bottom: 2px solid currentColor;
+}
+
+.symbols {
+  margin: 0;
+  padding-top: 6px;
+  border-top: 1px solid #e0e9e4;
+}
+
+.symbols > div {
+  display: grid;
+  grid-template-columns: 53px 1fr;
+  align-items: center;
+  gap: 12px;
+  margin-top: 9px;
+}
+
+.symbols dt {
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.symbols dd {
+  margin: 0;
+  color: #55736d;
+  font-size: 16px;
+}
+
+.range-note {
+  margin-top: 12px;
+  color: #956e2f;
+  font-size: 18px;
+}
+
+.range-note strong {
+  font-size: 25px;
+}
+
+.range-note span {
+  display: block;
+  margin-top: 3px;
+  color: #77877f;
+  font-size: 15px;
+}
+
+.meaning-card {
+  padding: 12px 18px;
+  border-color: #e1cfa4;
+  background: #fff8e9;
+}
+
+.meaning-card p {
+  margin-top: 9px;
+  color: #55736d;
+  font-size: 16px;
+}
+
+.meaning-card strong {
+  color: #956e2f;
+}
+
+.characteristic-note {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 0 22px;
+  border: 1px solid #c8d9d4;
+  border-radius: 12px;
+  background: #f3faf5;
+  font-size: 19px;
+}
+
+.characteristic-note strong {
+  flex-shrink: 0;
+  color: #26786b;
+}
+
+.characteristic-note p + p {
+  margin-top: 8px;
+  color: #55736d;
+  font-size: 18px;
+}

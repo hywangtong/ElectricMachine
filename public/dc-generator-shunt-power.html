@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>并励直流发电机的功率与损耗</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/dc-motor-shunt-power.css" />
+    <script src="/dc-machine-basics.js" defer></script>
+  </head>
+  <body>
+    <main class="lesson power-page">
+      <header class="page-head">
+        <div class="eyebrow">直流电机 / 53 · 7.10 功率和转矩 · 并励发电机</div>
+        <h1>并励直流发电机的功率与损耗</h1>
+        <p>
+          原动机输入的机械功率，一部分转化为负载电功率，其余消耗在发电机内部。
+        </p>
+      </header>
+
+      <section class="balance" aria-label="功率平衡方程与效率">
+        <div>
+          <span>功率平衡</span>
+          <p class="formula">
+            P<sub>1</sub> − P<sub>2</sub> = P<sub>al</sub> = P<sub>Fe</sub> +
+            P<sub>Cu</sub> + P<sub>me</sub> + P<sub>ad</sub>
+          </p>
+        </div>
+        <div class="efficiency">
+          <span>效率</span>
+          <p class="formula">η = (P<sub>2</sub> / P<sub>1</sub>) × 100%</p>
+        </div>
+      </section>
+
+      <div class="power-layout">
+        <section class="circuit-card" aria-labelledby="circuit-title">
+          <h2 id="circuit-title">并励电路：左侧轴输入，右侧电输出</h2>
+          <svg viewBox="0 0 580 285" role="img" aria-labelledby="circuit-desc">
+            <title id="circuit-desc">
+              左侧原动机以转矩 T₁ 和角速度 Ω 向发电机 G
+              输入机械功率，右侧端子以电压 U 和负载电流 I 输出电功率。电枢电流
+              Ia 向上，经节点分为向右的负载电流 I 和向下的励磁电流
+              If；电枢与励磁支路并联。
+            </title>
+            <defs>
+              <marker
+                id="armature-arrow"
+                markerWidth="9"
+                markerHeight="9"
+                refX="8"
+                refY="4.5"
+                orient="auto"
+                markerUnits="userSpaceOnUse"
+              >
+                <path d="M0 0 9 4.5 0 9Z" fill="#26786b" />
+              </marker>
+              <marker
+                id="field-arrow"
+                markerWidth="9"
+                markerHeight="9"
+                refX="8"
+                refY="4.5"
+                orient="auto"
+                markerUnits="userSpaceOnUse"
+              >
+                <path d="M0 0 9 4.5 0 9Z" fill="#a54b2b" />
+              </marker>
+            </defs>
+            <g
+              fill="none"
+              stroke="#173b3b"
+              stroke-width="3"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M190 35H515 M190 235H515 M355 35V95 M355 195V235 M190 35V87 M190 129V151 M190 213V235"
+              />
+              <rect x="178" y="87" width="24" height="42" fill="#eff7f3" />
+              <circle cx="190" cy="182" r="31" fill="#fff" />
+              <path
+                d="M355 95 C389 95 389 120 355 120 C389 120 389 145 355 145 C389 145 389 170 355 170 C389 170 389 195 355 195"
+              />
+              <circle cx="515" cy="35" r="5" fill="#fff" />
+              <circle cx="515" cy="235" r="5" fill="#fff" />
+            </g>
+            <g fill="#173b3b">
+              <circle cx="355" cy="35" r="5" />
+              <circle cx="355" cy="235" r="5" />
+            </g>
+            <g fill="none" stroke-width="3">
+              <path
+                d="M25 182H156 M190 76V48 M440 35H500"
+                stroke="#26786b"
+                marker-end="url(#armature-arrow)"
+              />
+              <path
+                d="M355 49V82"
+                stroke="#a54b2b"
+                marker-end="url(#field-arrow)"
+              />
+            </g>
+            <g class="circuit-math">
+              <text x="40" y="156" fill="#26786b">
+                T
+                <tspan baseline-shift="sub" font-size="17">1</tspan>
+                <tspan>，Ω</tspan>
+              </text>
+              <text x="543" y="47">+</text>
+              <text x="543" y="242">−</text>
+              <text x="535" y="147">U</text>
+              <text x="460" y="24" fill="#26786b">I</text>
+              <text x="140" y="74" fill="#26786b">
+                I
+                <tspan baseline-shift="sub" font-size="17">a</tspan>
+              </text>
+              <text x="380" y="73" fill="#a54b2b">
+                I
+                <tspan baseline-shift="sub" font-size="17">f</tspan>
+              </text>
+              <text x="218" y="116">
+                R
+                <tspan baseline-shift="sub" font-size="17">a</tspan>
+              </text>
+              <text x="396" y="155" fill="#a54b2b">
+                R
+                <tspan baseline-shift="sub" font-size="17">f</tspan>
+              </text>
+              <text x="190" y="191" text-anchor="middle">G</text>
+              <text x="231" y="191">E</text>
+            </g>
+            <g class="circuit-label" text-anchor="middle">
+              <text x="80" y="215" fill="#26786b">机械输入</text>
+              <text x="190" y="272">电枢支路</text>
+              <text x="355" y="272">励磁支路</text>
+              <text x="515" y="272">电输出</text>
+            </g>
+          </svg>
+          <p class="formula circuit-relation">
+            I<sub>a</sub> = I + I<sub>f</sub> <span>·</span> U<sub>a</sub> =
+            U<sub>f</sub> = U
+          </p>
+        </section>
+
+        <section class="loss-panel" aria-labelledby="loss-title">
+          <h2 id="loss-title">总损耗 P<sub>al</sub>：四部分相加</h2>
+          <div class="loss-grid">
+            <article class="loss-card copper">
+              <h3>
+                铜损耗 <span>P<sub>Cu</sub></span>
+              </h3>
+              <p class="formula">
+                P<sub>Cu</sub> = R<sub>a</sub>I<sub>a</sub><sup>2</sup> +
+                R<sub>f</sub>I<sub>f</sub><sup>2</sup>
+              </p>
+              <p>电枢铜耗 + 励磁铜耗</p>
+            </article>
+            <article class="loss-card">
+              <h3>
+                铁损耗 <span>P<sub>Fe</sub></span>
+              </h3>
+              <p class="loss-key">电枢铁心中的损耗</p>
+              <p>磁滞损耗与涡流损耗</p>
+            </article>
+            <article class="loss-card">
+              <h3>
+                机械损耗 <span>P<sub>me</sub></span>
+              </h3>
+              <p class="loss-key">摩擦与通风损耗</p>
+              <p>轴承、电刷摩擦及风阻等</p>
+            </article>
+            <article class="loss-card">
+              <h3>
+                附加损耗 <span>P<sub>ad</sub></span>
+              </h3>
+              <p class="loss-key">杂散负载损耗</p>
+              <p>负载下磁场畸变等引起的额外损耗</p>
+            </article>
+          </div>
+        </section>
+      </div>
+
+      <section class="power-flow" aria-labelledby="flow-title">
+        <h2 id="flow-title">从轴端到负载：功率逐级扣除损耗</h2>
+        <div class="flow-chain">
+          <div class="power-node input">
+            <h3>输入机械功率</h3>
+            <p class="formula">P<sub>1</sub> = T<sub>1</sub>Ω</p>
+          </div>
+          <div class="flow-step">
+            <p>− P<sub>Fe</sub> − P<sub>me</sub> − P<sub>ad</sub></p>
+            <span aria-hidden="true">⟶</span>
+            <small>扣除铁耗、机械与附加损耗</small>
+          </div>
+          <div class="power-node converted">
+            <h3>电磁转换功率</h3>
+            <p class="formula">
+              P<sub>e</sub> = T<sub>e</sub>Ω = EI<sub>a</sub>
+            </p>
+          </div>
+          <div class="flow-step">
+            <p>
+              − R<sub>a</sub>I<sub>a</sub><sup>2</sup> − R<sub>f</sub>I<sub
+                >f</sub
+              ><sup>2</sup>
+            </p>
+            <span aria-hidden="true">⟶</span>
+            <small>扣除电枢与励磁铜耗</small>
+          </div>
+          <div class="power-node output">
+            <h3>输出电功率</h3>
+            <p class="formula">P<sub>2</sub> = UI</p>
+          </div>
+        </div>
+      </section>
+      <footer class="power-note">
+        稳态并励发电，忽略电刷接触电损耗；T<sub>1</sub> 为输入转矩，T<sub
+          >e</sub
+        >
+        为电磁制动转矩的大小；Ω = 2πn/60（rad/s），功率单位 W。
+      </footer>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>发电机功率传递：从流图到部件</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/dc-motor-power-anatomy.css" />
+    <link rel="stylesheet" href="/dc-motor-power-flow.css" />
+    <script src="/dc-generator-emf-controls.js" defer></script>
+    <script src="/dc-machine-basics.js" defer></script>
+    <script type="module" src="/dc-motor-power-anatomy.js"></script>
+  </head>
+  <body>
+    <main
+      class="lesson anatomy-page flow-page"
+      data-mode="flow"
+      data-power="P1"
+      data-machine="generator"
+    >
+      <header class="page-head">
+        <div class="eyebrow">直流电机 / 55 · 7.10 功率和转矩 · 功率传递</div>
+        <h1>沿功率流图，找到能量经过的部件</h1>
+        <p>
+          直接点击流图中的功率：轴输入绿色 · 电磁转换青色 · 电输出蓝色 ·
+          损耗黄色。
+        </p>
+      </header>
+      <div class="anatomy-layout">
+        <aside class="left-panel">
+          <section class="flow-card" aria-labelledby="flow-title">
+            <h2 id="flow-title">功率流图 <span>点选箭头或损耗分支</span></h2>
+            <nav
+              class="power-options flow-options"
+              aria-label="功率流图：选择功率以高亮电机部件"
+            >
+              <svg viewBox="0 0 420 230" aria-hidden="true">
+                <path
+                  class="flow-rail"
+                  d="M25 20H395 M25 165H121L145 187 M145 151H259L283 173 M283 137H395"
+                />
+                <path
+                  class="flow-loss"
+                  d="M132 167Q144 173 145 190 M270 153Q282 159 283 176"
+                />
+                <path
+                  class="flow-loss-head"
+                  d="m140 183 5 10 3-11 M278 169l5 10 3-11"
+                />
+              </svg>
+              <button
+                type="button"
+                class="flow-power flow-input"
+                data-power="P1"
+                aria-pressed="true"
+                aria-label="P₁ 输入机械功率"
+              >
+                <b>P<sub>1</sub></b
+                ><span>轴输入</span>
+              </button>
+              <button
+                type="button"
+                class="flow-power flow-conversion"
+                data-power="Pe"
+                aria-pressed="false"
+                aria-label="Pₑ 电磁功率"
+              >
+                <b>P<sub>e</sub></b
+                ><span>电磁转换</span>
+              </button>
+              <button
+                type="button"
+                class="flow-power flow-output"
+                data-power="P2"
+                aria-pressed="false"
+                aria-label="P₂ 输出电功率"
+              >
+                <b>P<sub>2</sub></b
+                ><span>电输出</span>
+              </button>
+              <button
+                type="button"
+                class="flow-loss-option flow-idle"
+                data-power="PCu"
+                aria-pressed="false"
+                aria-label="P_Cu 铜损耗"
+              >
+                <b>P<sub>Cu</sub></b
+                ><span>铜损耗</span>
+              </button>
+              <button
+                type="button"
+                class="flow-loss-option flow-copper"
+                data-power="P0"
+                aria-pressed="false"
+                aria-label="P₀ 空载损耗"
+              >
+                <b>P<sub>0</sub></b
+                ><span>空载损耗</span>
+              </button>
+            </nav>
+            <p class="flow-balance">
+              P<sub>1</sub> − P<sub>0</sub> = P<sub>e</sub>；P<sub>e</sub> −
+              P<sub>Cu</sub> = P<sub>2</sub>
+            </p>
+          </section>
+          <section
+            class="selection-detail"
+            aria-live="polite"
+            aria-atomic="true"
+          >
+            <h2 id="detail-title">输入机械功率 · 原动机驱动轴</h2>
+            <p id="detail-formula" class="math">P₁ = T₁Ω</p>
+            <p id="detail-copy">
+              原动机以转矩 T₁ 驱动转轴，机械功率从轴端进入发电机。
+            </p>
+          </section>
+          <section
+            class="rotor-inset"
+            id="rotor-inset"
+            hidden
+            aria-labelledby="inset-title"
+          >
+            <h2 id="inset-title">随转子看磁场 · 铁芯坐标系</h2>
+            <canvas
+              id="field-inset"
+              width="640"
+              height="180"
+              role="img"
+              aria-label="转子坐标系下，铁芯与材料点固定，磁场 B 相对转子反向旋转；右侧曲线显示材料点的磁通密度分量随转角交替变化。"
+            ></canvas>
+            <p>铁芯材料点固定；B 相对它不断改变方向。</p>
+          </section>
+          <section class="inset-placeholder" id="inset-placeholder">
+            <h2>并励发电机 · 功率账本</h2>
+            <p class="math">P₁ = T₁Ω；Pₑ = EI<sub>a</sub> = T<sub>e</sub>Ω</p>
+            <p>
+              P<sub>Cu</sub> = R<sub>a</sub>I<sub>a</sub>² +
+              R<sub>f</sub>I<sub>f</sub>²
+            </p>
+            <p>
+              P<sub>0</sub> = P<sub>Fe</sub> + P<sub>me</sub> + P<sub>ad</sub>
+            </p>
+          </section>
+        </aside>
+        <section class="machine-card" aria-labelledby="machine-title">
+          <div class="machine-heading">
+            <h2 id="machine-title">单电枢线圈 · 三维部件动画</h2>
+            <span>拖动改变观察视角</span>
+          </div>
+          <div class="machine-viewport">
+            <canvas
+              id="machine"
+              width="2000"
+              height="760"
+              tabindex="0"
+              role="img"
+              aria-label="三维直流发电机：左侧原动机驱动轴输入机械功率，右侧电刷端口输出电功率；励磁绕组与磁极固定，单电枢线圈绕在旋转铁芯上；两端轴承、同轴风扇、两片换向片和固定电刷完整显示。负载电流流出正电刷，线圈电流每半圈换向，所选功率对应部件以指定颜色高亮。"
+            ></canvas>
+            <aside id="stray-note" class="stray-note" hidden>
+              <h3>附加损耗 P<sub>ad</sub> · 杂散损耗</h3>
+              <p>
+                负载下磁场畸变、漏磁等引起的额外损耗，分散于电机内部，不能归于一个独立零件。
+              </p>
+            </aside>
+          </div>
+          <div class="animation-status">
+            <span id="current-state">线圈电流：A → B</span
+            ><span>电刷固定；换向片、铁芯、线圈与风扇同轴旋转</span>
+          </div>
+          <div class="animation-controls">
+            <button type="button" id="play" aria-pressed="true">
+              暂停旋转
+            </button>
+            <button type="button" id="step">步进 90°</button>
+            <button type="button" id="reset-view">复位视角</button>
+            <label for="angle">转角 θ</label
+            ><input
+              id="angle"
+              type="range"
+              min="0"
+              max="360"
+              step="1"
+              value="25"
+            /><output id="angle-value">25°</output>
+          </div>
+        </section>
+      </div>
+      <footer class="anatomy-note">
+        沿用本节功率分组：P₀ = PFe + Pme +
+        Pad；附加耗按此并入空载损耗。忽略电刷接触电损耗。流图宽度不表示功率数值；动画为教学简化。
+      </footer>
+    </main>
+  </body>
+</html>

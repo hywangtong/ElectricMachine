@@ -1,0 +1,60 @@
+.voltage-example-page .question-tasks svg {
+  grid-column: 1 / -1;
+  justify-self: center;
+  width: 360px;
+  height: 123px;
+}
+
+.voltage-example-page .question-tasks {
+  padding: 14px 22px;
+  gap: 8px;
+}
+
+.voltage-example-page .card-label small {
+  font-size: 10px;
+  letter-spacing: 0.04em;
+}
+
+.voltage-example-page.is-revealed .question-card {
+  gap: 12px;
+}
+
+.voltage-example-page.is-revealed .question-card h2 {
+  font-size: 23px;
+}
+
+.voltage-example-page.is-revealed .question-tasks {
+  padding: 12px 16px;
+}
+
+.voltage-example-page.is-revealed .question-tasks svg {
+  width: 310px;
+  height: 106px;
+}
+
+.voltage-example-page .solution-steps {
+  grid-template-rows: repeat(4, minmax(0, 1fr));
+  gap: 9px;
+}
+
+.voltage-example-page .solution-steps li {
+  padding: 8px 16px;
+}
+
+.voltage-example-page .solution-steps h2 {
+  margin-bottom: 4px;
+  font-size: 16px;
+}
+
+.voltage-example-page .solution-steps p {
+  font-size: 22px;
+  line-height: 1.2;
+}
+
+.voltage-example-page .solution-steps .substitution {
+  font-size: 20px;
+}
+
+.voltage-example-page .solution-panel sub {
+  line-height: 0;
+}

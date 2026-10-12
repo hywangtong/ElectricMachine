@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>直流发电机：功率与转矩公式汇总</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/dc-motor-power-torque-formulas.css" />
+    <script src="/dc-machine-basics.js" defer></script>
+  </head>
+  <body>
+    <main class="lesson formulas-page">
+      <header class="page-head">
+        <div class="eyebrow">直流电机 / 56 · 7.10 功率和转矩 · 公式汇总</div>
+        <h1>直流发电机：功率与转矩公式汇总</h1>
+        <p>从轴端机械输入到负载电输出，用功率平衡求原动机必须提供的转矩。</p>
+      </header>
+
+      <div class="formula-columns">
+        <div class="power-column">
+          <section
+            class="formula-card input-card"
+            aria-labelledby="input-title"
+          >
+            <h2 id="input-title"><span>01</span> 输出功率与铜耗推导</h2>
+            <p class="equation emphasis">
+              P<sub>2</sub> = P<sub>e</sub> − P<sub>Cu</sub> = UI
+            </p>
+            <div class="derivation">
+              <span class="label">推导</span>
+              <div class="equation">
+                <p>
+                  EI<sub>a</sub> = (U + R<sub>a</sub>I<sub>a</sub>) I<sub
+                    >a</sub
+                  >
+                </p>
+                <p class="continuation">
+                  = U(I + I<sub>f</sub>) + R<sub>a</sub>I<sub>a</sub
+                  ><sup>2</sup>
+                </p>
+                <p class="continuation">
+                  = UI + R<sub>f</sub>I<sub>f</sub><sup>2</sup> +
+                  R<sub>a</sub>I<sub>a</sub><sup>2</sup>
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section
+            class="formula-card conversion-card"
+            aria-labelledby="conversion-title"
+          >
+            <h2 id="conversion-title"><span>02</span> 功率转换与输入</h2>
+            <div class="formula-row">
+              <h3>机械输入</h3>
+              <div class="equation">
+                <p>
+                  P<sub>1</sub> = T<sub>1</sub>Ω =
+                  <span class="fraction"><span>2π</span><span>60</span></span>
+                  T<sub>1</sub>n
+                </p>
+              </div>
+            </div>
+            <div class="formula-row">
+              <h3>空载损耗</h3>
+              <p class="equation">
+                P<sub>0</sub> = P<sub>Fe</sub> + P<sub>me</sub> + P<sub>ad</sub>
+              </p>
+            </div>
+            <div class="formula-row">
+              <h3>电磁功率</h3>
+              <div class="equation">
+                <p>P<sub>e</sub> = P<sub>1</sub> − P<sub>0</sub></p>
+                <p class="continuation">= EI<sub>a</sub> = T<sub>e</sub>Ω</p>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <div class="torque-column">
+          <section
+            class="formula-card torque-card"
+            aria-labelledby="torque-title"
+          >
+            <h2 id="torque-title"><span>03</span> 转矩平衡与计算</h2>
+            <div class="torque-balance equation emphasis">
+              <p>P<sub>1</sub> = P<sub>0</sub> + P<sub>e</sub></p>
+              <p>T<sub>1</sub> = T<sub>0</sub> + T<sub>e</sub></p>
+            </div>
+            <div class="formula-row">
+              <h3>输入转矩</h3>
+              <p class="equation">
+                T<sub>1</sub> =
+                <span class="fraction"
+                  ><span>P<sub>1</sub></span
+                  ><span>Ω</span></span
+                >
+                = <span class="fraction"><span>60</span><span>2π</span></span>
+                <span class="fraction"
+                  ><span>P<sub>1</sub></span
+                  ><span>n</span></span
+                >
+              </p>
+            </div>
+            <div class="formula-row">
+              <h3>电磁转矩</h3>
+              <p class="equation">
+                T<sub>e</sub> =
+                <span class="fraction"
+                  ><span>P<sub>e</sub></span
+                  ><span>Ω</span></span
+                >
+                = <span class="fraction"><span>60</span><span>2π</span></span>
+                <span class="fraction"
+                  ><span>P<sub>e</sub></span
+                  ><span>n</span></span
+                >
+              </p>
+            </div>
+            <div class="formula-row">
+              <h3>空载转矩</h3>
+              <p class="equation">
+                T<sub>0</sub> =
+                <span class="fraction"
+                  ><span>P<sub>0</sub></span
+                  ><span>Ω</span></span
+                >
+                = <span class="fraction"><span>60</span><span>2π</span></span>
+                <span class="fraction"
+                  ><span>P<sub>0</sub></span
+                  ><span>n</span></span
+                >
+              </p>
+            </div>
+          </section>
+
+          <section
+            class="formula-card steady-card"
+            aria-labelledby="steady-title"
+          >
+            <h2 id="steady-title"><span>04</span> 稳态运行关系</h2>
+            <div class="formula-row">
+              <h3>转矩方向</h3>
+              <p class="equation">
+                T<sub>1</sub> 驱动；T<sub>e</sub>、T<sub>0</sub> 阻转
+              </p>
+            </div>
+            <div class="formula-row">
+              <h3>忽略空载转矩时</h3>
+              <p class="equation">T<sub>1</sub> = T<sub>e</sub></p>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <footer class="formula-note">
+        <p>
+          Ω = 2πn/60；n：r/min，Ω：rad/s，功率：W，转矩：N·m。转矩公式取大小，Ω
+          &gt; 0。
+        </p>
+        <p>
+          PDF 中 T 对应本页 T<sub>e</sub>；沿用 P<sub>0</sub> = PFe + Pme +
+          Pad。铜耗推导适用于稳态并励发电机，忽略电刷接触电损耗。
+        </p>
+      </footer>
+    </main>
+  </body>
+</html>

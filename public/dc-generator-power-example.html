@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>例题 6：并励直流发电机电输出与电磁转矩</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/dc-motor-nameplate-example.css" />
+    <link rel="stylesheet" href="/dc-generator-power-example.css" />
+    <script src="/dc-machine-basics.js" defer></script>
+    <script type="module" src="/dc-motor-nameplate-example.js"></script>
+  </head>
+  <body>
+    <main class="lesson exercise-page generator-power-example-page">
+      <header class="page-head exercise-head">
+        <div class="eyebrow">直流电机 / 58 · 课堂例题 · 1 / 2</div>
+        <h1>例题 6 · 并励直流发电机电输出与电磁转矩</h1>
+        <p>先求输出与支路电流，再沿功率流反推电磁功率与转矩。</p>
+      </header>
+      <section class="exercise-layout">
+        <article class="question-card" aria-labelledby="power-question-title">
+          <header class="card-label">
+            <span>题目 · 例 7.10.1</span><small>SHUNT DC GENERATOR</small>
+          </header>
+          <h2 id="power-question-title">一并励直流发电机，已知：</h2>
+          <dl class="given-grid" aria-label="已知条件">
+            <div>
+              <dt>输出电压</dt>
+              <dd><i>U</i> = <b>230</b> V</dd>
+            </div>
+            <div>
+              <dt>输出电流</dt>
+              <dd><i>I</i> = <b>100</b> A</dd>
+            </div>
+            <div>
+              <dt>电枢电阻</dt>
+              <dd>
+                <i>R<sub>a</sub></i> = <b>0.2</b> Ω
+              </dd>
+            </div>
+            <div>
+              <dt>励磁电阻</dt>
+              <dd>
+                <i>R<sub>f</sub></i> = <b>115</b> Ω
+              </dd>
+            </div>
+            <div>
+              <dt>转速</dt>
+              <dd><i>n</i> = <b>1500</b> r/min</dd>
+            </div>
+            <div>
+              <dt>空载转矩</dt>
+              <dd>
+                <i>T<sub>0</sub></i> = <b>17.32</b> N·m
+              </dd>
+            </div>
+          </dl>
+          <div class="question-tasks">
+            <strong>求</strong>
+            <ol>
+              <li>
+                输出功率 <i>P<sub>2</sub></i
+                >、电磁转矩 <i>T</i>；
+              </li>
+              <li>
+                输入功率 <i>P<sub>1</sub></i
+                >、效率 <i>η</i>（下一页）。
+              </li>
+            </ol>
+            <svg
+              viewBox="0 0 420 160"
+              role="img"
+              aria-labelledby="circuit-title circuit-desc"
+            >
+              <title id="circuit-title">并励直流发电机电路</title>
+              <desc id="circuit-desc">
+                励磁支路并接输出端，励磁电流向下；电枢电流向上，在节点分为输出电流与励磁电流，Ia
+                = I + If。
+              </desc>
+              <defs>
+                <marker
+                  id="current-arrow"
+                  viewBox="0 0 10 10"
+                  refX="8"
+                  refY="5"
+                  markerWidth="5"
+                  markerHeight="5"
+                  orient="auto-start-reverse"
+                >
+                  <path d="M0 0 10 5 0 10Z" fill="#b25d3f" />
+                </marker>
+              </defs>
+              <g
+                fill="none"
+                stroke="#38594f"
+                stroke-width="2.5"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M50 58V30H88M126 30H340M50 122V145H340M200 30V67M200 115V145"
+                />
+                <rect x="88" y="22" width="38" height="16" />
+                <path
+                  d="M104 15V7H122V22M50 58c18 0 18 16 0 16c18 0 18 16 0 16c18 0 18 16 0 16c18 0 18 12 0 12"
+                />
+                <circle cx="200" cy="91" r="24" />
+                <circle cx="340" cy="30" r="3" />
+                <circle cx="340" cy="145" r="3" />
+              </g>
+              <g
+                fill="none"
+                stroke="#b25d3f"
+                stroke-width="2"
+                marker-end="url(#current-arrow)"
+              >
+                <path d="M50 34V53" />
+                <path d="M200 62V37" />
+                <path d="M278 30H310" />
+              </g>
+              <g fill="#38594f" font-family="Georgia, serif" font-size="20">
+                <text x="191" y="98">G</text>
+                <text x="70" y="19">
+                  R
+                  <tspan baseline-shift="sub" font-size="12">f</tspan>
+                </text>
+                <text x="65" y="58">
+                  I
+                  <tspan baseline-shift="sub" font-size="12">f</tspan>
+                </text>
+                <text x="212" y="58">
+                  I
+                  <tspan baseline-shift="sub" font-size="12">a</tspan>
+                </text>
+                <text x="281" y="19">I</text>
+                <text x="239" y="99">E</text>
+                <text x="226" y="77">+</text>
+                <text x="226" y="115">−</text>
+                <text x="358" y="43">+</text>
+                <text x="358" y="142">−</text>
+                <text x="357" y="98">U</text>
+              </g>
+            </svg>
+          </div>
+          <button
+            class="reveal-button"
+            type="button"
+            aria-expanded="false"
+            aria-controls="power-solution"
+          >
+            <span class="button-label">显示计算过程与答案</span
+            ><span class="button-icon" aria-hidden="true">→</span>
+          </button>
+        </article>
+        <section
+          class="solution-panel"
+          id="power-solution"
+          aria-label="例题 6 电输出与电磁转矩解答"
+          hidden
+        >
+          <header class="solution-head">
+            <span>计算过程与答案</span><small>电输出 → 铜耗 → 电磁转换</small>
+          </header>
+          <ol class="solution-steps">
+            <li>
+              <span class="step-index">01</span>
+              <div>
+                <h2>输出端：电功率由输出电流计算</h2>
+                <p>
+                  <i>P<sub>2</sub></i> = <i>UI</i> = 230 × 100 = <b>23 000 W</b>
+                </p>
+              </div>
+            </li>
+            <li>
+              <span class="step-index">02</span>
+              <div>
+                <h2>并励支路：电枢电流为两支路电流之和</h2>
+                <p>
+                  <i>I<sub>f</sub></i> = <i>U</i> / <i>R<sub>f</sub></i> = 230 /
+                  115 = <b>2 A</b>
+                </p>
+                <p>
+                  <i>I<sub>a</sub></i> = <i>I</i> + <i>I<sub>f</sub></i> = 100 +
+                  2 = <b>102 A</b>
+                </p>
+              </div>
+            </li>
+            <li>
+              <span class="step-index">03</span>
+              <div>
+                <h2>铜耗：分别使用电枢电流与励磁电流</h2>
+                <p>
+                  <i>P<sub>Cu</sub></i> = <i>R<sub>a</sub>I<sub>a</sub></i
+                  >² + <i>R<sub>f</sub>I<sub>f</sub></i
+                  >²
+                </p>
+                <p class="substitution">
+                  = 0.2 × 102² + 115 × 2² = <b>2540.8 W</b>
+                </p>
+              </div>
+            </li>
+            <li>
+              <span class="step-index">04</span>
+              <div>
+                <h2>电磁功率：电输出加铜耗</h2>
+                <p>
+                  <i>P<sub>e</sub></i> = <i>P<sub>2</sub></i> +
+                  <i>P<sub>Cu</sub></i> = 23 000 + 2540.8
+                </p>
+                <p class="substitution">= <b>25 540.8 W</b></p>
+              </div>
+            </li>
+            <li>
+              <span class="step-index">05</span>
+              <div>
+                <h2>电磁转矩：电磁功率除以角速度</h2>
+                <p><i>Ω</i> = 2π<i>n</i> / 60 ≈ 6.28 × 1500 / 60 = 157 rad/s</p>
+                <p>
+                  <i>T</i> = <i>P<sub>e</sub></i> / <i>Ω</i> = 25 540.8 / 157 ≈
+                  <b>162.68 N·m</b>
+                </p>
+              </div>
+            </li>
+          </ol>
+          <p class="solution-note">
+            按题图取 2π ≈ 6.28，忽略电刷压降。T
+            为电磁制动转矩的大小，方向与转速相反；P<sub>e</sub> 即前页的
+            P<sub>em</sub>。
+          </p>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>
