@@ -1,0 +1,120 @@
+.right-column {
+  grid-template-rows: 202px 187px 1fr;
+}
+
+.control-card,
+.scope-card,
+.takeaway-card {
+  padding: 10px 16px;
+}
+
+.comparison,
+.result-strip {
+  margin-top: 5px;
+}
+
+#scope {
+  height: 112px;
+}
+
+.card-head .section-index {
+  display: block;
+  line-height: 1.1;
+}
+
+.card-head.compact h2 {
+  line-height: 1.15;
+}
+
+.slider-block {
+  margin-top: 5px;
+}
+
+.slider-label label,
+.slider-label output {
+  line-height: 1.15;
+}
+
+input[type='range'] {
+  display: block;
+  height: 16px;
+}
+
+.range-scale {
+  line-height: 1.15;
+}
+
+.result-strip > div {
+  padding: 4px 7px;
+}
+
+.result-strip span,
+.result-strip strong {
+  line-height: 1.15;
+}
+
+.control-note {
+  margin-top: 3px;
+  line-height: 1.15;
+}
+
+.comparison {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 5px;
+  color: #496961;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.comparison input {
+  accent-color: #39796f;
+}
+
+.gain-line,
+.loss-line {
+  width: 18px;
+  height: 8px;
+  border-radius: 3px;
+  background: #4c9980;
+}
+
+.loss-line {
+  background: #b96b8e;
+}
+
+.takeaway-card {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.takeaway-card p {
+  font-size: 13px;
+  line-height: 1.3;
+}
+
+.takeaway-card h2 {
+  font-size: 16px;
+  line-height: 1.25;
+}
+
+.formula-line {
+  display: block;
+  font-size: 22px;
+  line-height: 1.2;
+}
+
+.formula-line span {
+  margin-left: 15px;
+  color: #607870;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.takeaway-card .causal-chain {
+  color: #285f57;
+  font-weight: 700;
+  font-size: 16px;
+}

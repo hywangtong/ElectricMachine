@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>电枢反应：饱和、磁通与反电势</title>
+    <link rel="stylesheet" href="/dc-armature-reaction.css" />
+    <link rel="stylesheet" href="/dc-armature-saturation.css" />
+    <script src="/dc-machine-basics.js" defer></script>
+    <script type="module" src="/dc-armature-reaction.js"></script>
+  </head>
+  <body data-lesson="saturation">
+    <main class="lesson">
+      <header class="page-head">
+        <div class="eyebrow">直流电机 / 章末 · 电枢反应的去磁效应</div>
+        <h1>增磁少，去磁多：每极磁通为什么下降？</h1>
+        <p>
+          励磁电流与转速保持不变；增大电枢电流，观察铁芯饱和如何削弱磁通与反电势。
+        </p>
+      </header>
+      <div class="layout">
+        <section class="machine-card" aria-labelledby="machine-title">
+          <div class="card-head">
+            <div>
+              <span class="section-index">01 · 磁场畸变 → 磁通净减少</span>
+              <h2 id="machine-title">一半叠加，一半抵消</h2>
+            </div>
+            <div class="speed-badge">恒速 n = 5 r/min · 励磁固定</div>
+          </div>
+          <svg
+            id="machine"
+            viewBox="0 0 820 470"
+            role="img"
+            aria-label="电机剖面与非线性磁化曲线"
+          ></svg>
+          <div class="diagram-legend">
+            <span><i class="solid-line"></i>合成磁场</span>
+            <span><i class="dash-line"></i>电枢磁场</span>
+            <span><i class="tracked-line"></i>跟踪线圈 A–B</span>
+            <span><i class="gain-line"></i>增磁区</span>
+            <span><i class="loss-line"></i>去磁区</span>
+          </div>
+        </section>
+        <aside class="right-column">
+          <section class="control-card" aria-labelledby="control-title">
+            <div class="card-head compact">
+              <div>
+                <span class="section-index">02 · 电枢反应随 Iₐ 增强</span>
+                <h2 id="control-title">改变电枢电流</h2>
+              </div>
+              <button
+                id="pause"
+                class="pause-button"
+                type="button"
+                aria-pressed="false"
+              >
+                暂停动画 P
+              </button>
+            </div>
+            <div class="slider-block">
+              <div class="slider-label">
+                <label for="armature-current">电枢电流 I<sub>a</sub></label
+                ><output id="current-reading" for="armature-current"
+                  >55 A</output
+                >
+              </div>
+              <input
+                id="armature-current"
+                type="range"
+                min="0"
+                max="100"
+                step="1"
+                value="55"
+              />
+              <div class="range-scale">
+                <span>0 A · 无电枢反应</span><span>电枢反应增强 →</span
+                ><span>100 A</span>
+              </div>
+            </div>
+            <label class="comparison"
+              ><input
+                id="linear-comparison"
+                type="checkbox"
+              />对照：假设铁芯线性（增磁 = 去磁）</label
+            >
+            <div class="result-strip">
+              <div>
+                <span>每极磁通 Φ / Φ₀</span><strong id="flux-reading">—</strong>
+              </div>
+              <div>
+                <span>反电势基波峰值</span><strong id="peak-reading">—</strong>
+              </div>
+              <div>
+                <span>磁通净减少</span><strong id="flux-loss-reading">—</strong>
+              </div>
+            </div>
+            <p id="pause-note" class="control-note">
+              按 P 暂停，冻结转子、读数和波形。
+            </p>
+          </section>
+          <section class="scope-card" aria-labelledby="scope-title">
+            <div class="card-head compact">
+              <div>
+                <span class="section-index">03 · 同一线圈、同一转速</span>
+                <h2 id="scope-title">线圈 A–B 的反电势基波</h2>
+              </div>
+              <output id="emf-reading" class="emf-reading">—</output>
+            </div>
+            <svg
+              id="scope"
+              viewBox="0 0 510 185"
+              role="img"
+              aria-label="反电势基波波形"
+            ></svg>
+            <div class="scope-meta">
+              <span class="scope-keys"
+                ><i class="emf-key"></i>e<sub>AB,1</sub> / V · 虚线：0 A
+                时峰值</span
+              ><span id="scope-clock">最近 12 s</span>
+            </div>
+          </section>
+          <section class="takeaway-card" aria-labelledby="takeaway-title">
+            <span class="section-index">04 · 铁芯非线性决定净去磁</span>
+            <h2 id="takeaway-title">磁势能相加，磁密不能线性相加</h2>
+            <p id="explanation"></p>
+            <div class="formula-line">
+              E = C<sub>E</sub>Φn <span>n 固定 → E ∝ Φ</span>
+            </div>
+            <p class="causal-chain">Iₐ ↑ → 电枢反应 ↑ → Φ ↓ → E ↓</p>
+          </section>
+        </aside>
+      </div>
+      <footer>
+        <strong>观察重点</strong
+        ><span
+          >增磁侧趋于饱和，增加量小于另一侧减少量；每极磁通看整个极面的积分。</span
+        ><span>归一化磁化模型；波形仅示基波，忽略漏磁与补偿绕组。</span>
+      </footer>
+    </main>
+  </body>
+</html>

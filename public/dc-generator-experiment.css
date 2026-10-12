@@ -1,0 +1,84 @@
+.generator-page {
+  grid-template-rows: 74px 1fr 94px 40px;
+}
+.generator-page .lab-machine {
+  grid-template-rows: 26px 268px 92px 32px;
+  gap: 3px;
+}
+.generator-page .controls {
+  grid-template-rows: repeat(2, 22px 22px);
+}
+.generator-page .controls input {
+  margin-bottom: 0;
+}
+.generator-diagrams {
+  display: grid;
+  grid-template-columns: 310px 1fr;
+  gap: 8px;
+  border-block: 1px solid #dce6df;
+  padding-block: 4px;
+}
+.generator-diagrams svg {
+  width: 100%;
+  height: 258px;
+  overflow: visible;
+}
+.circuit {
+  font-size: 17px;
+  fill: #245c53;
+}
+.wire {
+  fill: none;
+  stroke: #315a5c;
+  stroke-width: 2.5;
+}
+.current-flow {
+  fill: none;
+  stroke: #cb5e42;
+  stroke-width: 3;
+  stroke-dasharray: 5 9;
+}
+.circuit .symbol {
+  fill: #fffef9;
+  stroke: #315a5c;
+  stroke-width: 2.5;
+}
+.generator-page .takeaway {
+  grid-template-columns: 570px 1fr;
+  padding-block: 8px;
+}
+.generator-page .takeaway p {
+  font-size: 23px;
+}
+.generator-page .response p {
+  font-size: 19px;
+}
+.generator-page .flux {
+  font-size: 14px;
+}
+.bh-chart {
+  font-size: 13px;
+  fill: #55736d;
+}
+.remanence-highlight {
+  fill: #a75913;
+  font-size: 12px;
+  font-weight: 700;
+}
+.remanence-halo {
+  fill: #e7a83e;
+  fill-opacity: 0.22;
+}
+.remanence-dot {
+  fill: #ce7c20;
+  stroke: #fffef9;
+  stroke-width: 1.5;
+}
+.remanence-leader {
+  fill: none;
+  stroke: #ce7c20;
+  stroke-width: 2;
+}
+.generator-page footer {
+  font-size: 12px;
+}

@@ -946,6 +946,20 @@ export const slides: Slide[] = [
           chapterId: chapter.id,
           embedUrl: '/dc-motor-power-example.html',
         },
+        {
+          id: 'dc-generator-experiment',
+          kind: 'embed',
+          title: '他励直流发电机：励磁与负载实验',
+          chapterId: chapter.id,
+          embedUrl: '/dc-generator-experiment.html',
+        },
+        {
+          id: 'dc-armature-saturation',
+          kind: 'embed',
+          title: '电枢反应：饱和、磁通与反电势',
+          chapterId: chapter.id,
+          embedUrl: '/dc-armature-saturation.html',
+        },
       );
     }
 

@@ -2,8 +2,55 @@ import {
   ArmatureReactionSimulation,
   armatureReactionParameters,
 } from './dc-armature-reaction-model.js';
+import {
+  ArmatureSaturationSimulation,
+  magnetization,
+  saturationParameters,
+} from './dc-armature-saturation-model.js';
+import {
+  renderSaturationDiagram,
+  renderSaturationScope,
+  renderSaturationReadings,
+} from './dc-armature-saturation.js';
 
-const simulation = new ArmatureReactionSimulation();
+const saturationLesson = document.body.dataset.lesson === 'saturation';
+const simulation = saturationLesson
+  ? new ArmatureSaturationSimulation()
+  : new ArmatureReactionSimulation();
+if (saturationLesson) {
+  // Keep native slider keys and control taps from reaching course navigation.
+  document.addEventListener(
+    'keydown',
+    (event) => {
+      if (
+        event.target.closest('input, button, select, a') &&
+        [
+          'ArrowRight',
+          'ArrowLeft',
+          'ArrowUp',
+          'ArrowDown',
+          'Home',
+          'End',
+          'PageUp',
+          'PageDown',
+          ' ',
+        ].includes(event.key)
+      )
+        event.stopPropagation();
+    },
+    true,
+  );
+  for (const type of ['touchstart', 'touchend']) {
+    document.addEventListener(
+      type,
+      (event) => {
+        if (event.target.closest('input, button, select, a'))
+          event.stopPropagation();
+      },
+      { capture: true, passive: true },
+    );
+  }
+}
 const $ = (id) => document.getElementById(id);
 const blue = '#2d72c4';
 const blueSoft = '#74a6df';
@@ -57,37 +104,50 @@ function renderFieldLines(state, cx, cy) {
   if (state.mainField > 0) {
     const bow = state.armatureField * 82;
     for (let index = -3; index <= 3; index++) {
-      const x = cx + index * 29;
+      const poleX = cx + index * 38;
+      const rotorX = cx + index * 26;
+      const poleY = 168 - ((index * 38) / 126) ** 2 * 23;
       const edgeBias = index * state.armatureField * 4.5;
-      svg += `<path d="M${x - bow * 0.25} ${cy - 173}C${x + bow + edgeBias} ${cy - 94},${x - bow + edgeBias} ${cy + 94},${x + bow * 0.25} ${cy + 173}" fill="none" stroke="${blue}" stroke-width="${(1.7 + weight + (index < 0 ? state.armatureField : -state.armatureField) * 0.8).toFixed(2)}" opacity="${0.64 + (3 - Math.abs(index)) * 0.055}" marker-end="url(#field-arrow)"/>`;
+      // Reference (a), rotated to match the existing N-top / S-bottom poles:
+      // spread along the pole shoes, bend into the rotor, then enter S.
+      if (saturationLesson) {
+        const localB = (sign) =>
+          magnetization(
+            saturationParameters.fieldMmf +
+              (sign * state.armatureMmf * index) / 3,
+            state.nonlinear,
+          );
+        // Upper and lower pole edges have opposite aiding/opposing regions.
+        // Stroke weight follows the same local magnetization as the area plot.
+        svg += `<path d="M${poleX - bow * 0.25} ${cy - poleY}C${poleX + bow + edgeBias} ${cy - 125},${rotorX + bow + edgeBias} ${cy - 85},${rotorX + edgeBias} ${cy}" fill="none" stroke="${blue}" stroke-width="${1 + 2 * localB(-1)}" opacity="0.8" marker-end="url(#field-arrow)"/>`;
+        svg += `<path d="M${rotorX + edgeBias} ${cy}C${rotorX - bow + edgeBias} ${cy + 65},${poleX - bow + edgeBias} ${cy + 125},${poleX + bow * 0.25} ${cy + poleY}" fill="none" stroke="${blue}" stroke-width="${1 + 2 * localB(1)}" opacity="0.8" marker-end="url(#field-arrow)"/>`;
+      } else {
+        svg += `<path d="M${poleX - bow * 0.25} ${cy - poleY}C${poleX + bow + edgeBias} ${cy - 125},${rotorX + bow + edgeBias} ${cy - 85},${rotorX + edgeBias} ${cy - 35}C${rotorX - bow + edgeBias} ${cy + 65},${poleX - bow + edgeBias} ${cy + 125},${poleX + bow * 0.25} ${cy + poleY}" fill="none" stroke="${blue}" stroke-width="${(1.7 + weight + (index < 0 ? state.armatureField : -state.armatureField) * 0.8).toFixed(2)}" opacity="${0.64 + (3 - Math.abs(index)) * 0.055}" marker-mid="url(#field-arrow)" marker-end="url(#field-arrow)"/>`;
+      }
     }
   }
 
   if (state.armatureField > 0.001) {
     const opacity = 0.25 + state.armatureField * 0.65;
     for (let index = 0; index < 3; index++) {
-      const halfWidth = 137 + index * 13;
-      const innerReach = 72 - index * 20;
-      const poleReach = 158 + index * 19;
+      const halfWidth = 142 + index * 19;
+      const innerReach = 54 - index * 15;
+      const poleReach = 158 + index * 20;
       const left = cx - halfWidth;
       const right = cx + halfWidth;
-      const upperOuter = cy - poleReach;
-      const upperInner = cy - innerReach;
-      const upperMiddle = (upperOuter + upperInner) / 2;
-      const lowerOuter = cy + poleReach;
-      const lowerInner = cy + innerReach;
-      const lowerMiddle = (lowerOuter + lowerInner) / 2;
-      const horizontalControl = halfWidth * 0.62;
-      const upperTangent = (upperInner - upperOuter) * 0.28;
-      const lowerTangent = (lowerOuter - lowerInner) * 0.28;
+      const horizontalControl = halfWidth * 0.55;
 
-      // Each armature-field line is a four-quadrant closed loop. Increasing
-      // index expands every boundary outwards, so the loops remain nested
-      // without self-intersection or crossing one another.
-      svg += `<path d="M${right} ${upperMiddle}C${right} ${upperMiddle - upperTangent},${cx + horizontalControl} ${upperOuter},${cx} ${upperOuter}C${cx - horizontalControl} ${upperOuter},${left} ${upperMiddle - upperTangent},${left} ${upperMiddle}C${left} ${upperMiddle + upperTangent},${cx - horizontalControl} ${upperInner},${cx} ${upperInner}C${cx + horizontalControl} ${upperInner},${right} ${upperMiddle + upperTangent},${right} ${upperMiddle}Z" fill="none" stroke="${blueSoft}" stroke-width="2" stroke-dasharray="7 6" stroke-linecap="round" stroke-linejoin="round" opacity="${opacity}" marker-end="url(#armature-arrow)"/>`;
-
-      // The lower family mirrors the geometry and reverses circulation.
-      svg += `<path d="M${left} ${lowerMiddle}C${left} ${lowerMiddle + lowerTangent},${cx - horizontalControl} ${lowerOuter},${cx} ${lowerOuter}C${cx + horizontalControl} ${lowerOuter},${right} ${lowerMiddle + lowerTangent},${right} ${lowerMiddle}C${right} ${lowerMiddle - lowerTangent},${cx + horizontalControl} ${lowerInner},${cx} ${lowerInner}C${cx - horizontalControl} ${lowerInner},${left} ${lowerMiddle - lowerTangent},${left} ${lowerMiddle}Z" fill="none" stroke="${blueSoft}" stroke-width="2" stroke-dasharray="7 6" stroke-linecap="round" stroke-linejoin="round" opacity="${opacity}" marker-end="url(#armature-arrow)"/>`;
+      // Reference (b), rotated by 90 degrees: each nested loop crosses the
+      // rotor on its inner branch and returns through a pole and the yoke.
+      // Mirroring only y keeps both inner branches directed left-to-right,
+      // consistent with dots above and crosses below the fixed brush axis.
+      for (const side of [-1, 1]) {
+        const outer = cy + side * poleReach;
+        const inner = cy + side * innerReach;
+        const middle = (outer + inner) / 2;
+        const tangent = ((poleReach - innerReach) / 2) * 0.55;
+        svg += `<path d="M${left} ${middle}C${left} ${middle - side * tangent},${cx - horizontalControl} ${inner},${cx} ${inner}C${cx + horizontalControl} ${inner},${right} ${middle - side * tangent},${right} ${middle}C${right} ${middle + side * tangent},${cx + horizontalControl} ${outer},${cx} ${outer}C${cx - horizontalControl} ${outer},${left} ${middle + side * tangent},${left} ${middle}Z" fill="none" stroke="${blueSoft}" stroke-width="2" stroke-dasharray="7 6" stroke-linecap="round" stroke-linejoin="round" opacity="${opacity}" marker-mid="url(#armature-arrow)"/>`;
+      }
     }
   }
   return svg;
@@ -169,7 +229,7 @@ function renderCommutator(angle, currentActive, commutation) {
 
 function renderMachine() {
   const state = simulation.state;
-  const cx = 326;
+  const cx = saturationLesson ? 235 : 326;
   const cy = 236;
   const currentActive = state.current > 0.5;
   let svg = `<defs>
@@ -211,20 +271,22 @@ function renderMachine() {
   svg += `<circle cx="${cx}" cy="${cy}" r="127" fill="url(#rotor-metal)" stroke="#55736d" stroke-width="3"/>`;
   svg += renderFieldLines(state, cx, cy);
 
-  const neutralAngle = state.neutralAngle ?? 90;
-  const neutralA = point(cx, cy, 190, neutralAngle);
-  const neutralB = point(cx, cy, 190, neutralAngle + 180);
-  svg += `<path d="M${neutralA[0]} ${neutralA[1]}L${neutralB[0]} ${neutralB[1]}" stroke="${orange}" stroke-width="2.5" stroke-dasharray="8 6"/>`;
-  svg += label(
-    neutralA[0] - 8,
-    neutralA[1] - 8,
-    state.neutralShift === null
-      ? '仅示交轴'
-      : `物理中性线 ${state.neutralShift.toFixed(1)}°`,
-    'text-anchor="end" fill="#a35d27" font-size="13" font-weight="700"',
-  );
+  if (!saturationLesson) {
+    const neutralAngle = state.neutralAngle ?? 90;
+    const neutralA = point(cx, cy, 190, neutralAngle);
+    const neutralB = point(cx, cy, 190, neutralAngle + 180);
+    svg += `<path d="M${neutralA[0]} ${neutralA[1]}L${neutralB[0]} ${neutralB[1]}" stroke="${orange}" stroke-width="2.5" stroke-dasharray="8 6"/>`;
+    svg += label(
+      neutralA[0] - 8,
+      neutralA[1] - 8,
+      state.neutralShift === null
+        ? '仅示交轴'
+        : `物理中性线 ${state.neutralShift.toFixed(1)}°`,
+      'text-anchor="end" fill="#a35d27" font-size="13" font-weight="700"',
+    );
+  }
 
-  svg += `<g transform="rotate(${-simulation.angle} ${cx} ${cy})">`;
+  svg += `<g transform="rotate(${-Number(simulation.angle)} ${cx} ${cy})">`;
   const trackedSidePoints = armatureReactionParameters.trackedCoilSides.map(
     (slot) => point(cx, cy, 108, slot * 30),
   );
@@ -264,27 +326,36 @@ function renderMachine() {
     '恒速 ↺',
     'fill="#b75b32" font-size="15" font-weight="700"',
   );
-  svg += label(
-    cx - 110,
-    cy + 12,
-    '几何中性线',
-    'fill="#71867f" font-size="12"',
-  );
-  svg += `<path d="M${cx - 170} ${cy}H${cx + 170}" stroke="#9badb6" stroke-width="1.5" stroke-dasharray="4 5"/>`;
+  if (!saturationLesson) {
+    svg += label(
+      cx - 110,
+      cy + 12,
+      '几何中性线',
+      'fill="#71867f" font-size="12"',
+    );
+    svg += `<path d="M${cx - 170} ${cy}H${cx + 170}" stroke="#9badb6" stroke-width="1.5" stroke-dasharray="4 5"/>`;
 
-  svg += renderCommutator(simulation.angle, currentActive, state.commutation);
-  svg += `<path d="M452 306C512 319 548 326 615 332" fill="none" stroke="#9aadad" stroke-dasharray="4 5"/>`;
-  svg += label(
-    578,
-    286,
-    `θ = ${simulation.angle.toFixed(0)}°`,
-    'fill="#55736d" font-size="13"',
-  );
-  $('machine').innerHTML = svg;
-  $('machine').setAttribute(
-    'aria-label',
-    `两极直流电机剖面，金色高亮线圈 A-B 及其换向片 C1、C2；转子相位 ${simulation.angle.toFixed(0)} 度，${state.trackedCoilShorted ? 'C1 和 C2 正在被同一电刷短接' : 'C1 和 C2 当前未被同一电刷短接'}`,
-  );
+    svg += renderCommutator(simulation.angle, currentActive, state.commutation);
+    svg += `<path d="M452 306C512 319 548 326 615 332" fill="none" stroke="#9aadad" stroke-dasharray="4 5"/>`;
+    svg += label(
+      578,
+      286,
+      `θ = ${simulation.angle.toFixed(0)}°`,
+      'fill="#55736d" font-size="13"',
+    );
+    $('machine').innerHTML = svg;
+    $('machine').setAttribute(
+      'aria-label',
+      `两极直流电机剖面，金色高亮线圈 A-B 及其换向片 C1、C2；转子相位 ${simulation.angle.toFixed(0)} 度，${state.trackedCoilShorted ? 'C1 和 C2 正在被同一电刷短接' : 'C1 和 C2 当前未被同一电刷短接'}`,
+    );
+  } else {
+    svg += renderSaturationDiagram(state);
+    $('machine').innerHTML = svg;
+    $('machine').setAttribute(
+      'aria-label',
+      `电机剖面：一侧增磁、另一侧去磁；${state.nonlinear ? '铁芯饱和，增磁少于去磁' : '线性对照，增磁等于去磁'}；每极磁通为零电枢电流时的 ${(state.fluxRatio * 100).toFixed(1)}%`,
+    );
+  }
 }
 
 function renderScope() {
@@ -397,8 +468,13 @@ function renderReadings() {
 
 function renderAll() {
   renderMachine();
-  renderScope();
-  renderReadings();
+  if (saturationLesson) {
+    renderSaturationScope(simulation);
+    renderSaturationReadings(simulation);
+  } else {
+    renderScope();
+    renderReadings();
+  }
 }
 
 function togglePause() {
@@ -407,10 +483,17 @@ function togglePause() {
 }
 
 $('pause').addEventListener('click', togglePause);
-$('field-switch').addEventListener('change', () => {
-  simulation.setFieldEnabled($('field-switch').checked);
-  renderAll();
-});
+if (saturationLesson) {
+  $('linear-comparison').addEventListener('change', () => {
+    simulation.setNonlinear(!$('linear-comparison').checked);
+    renderAll();
+  });
+} else {
+  $('field-switch').addEventListener('change', () => {
+    simulation.setFieldEnabled($('field-switch').checked);
+    renderAll();
+  });
+}
 $('armature-current').addEventListener('input', () => {
   simulation.setArmatureCurrent(Number($('armature-current').value));
   renderAll();

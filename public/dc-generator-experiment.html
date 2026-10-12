@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>他励直流发电机：励磁与负载实验</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/dc-motor-load-current.css" />
+    <link rel="stylesheet" href="/dc-generator-experiment.css" />
+    <script type="module" src="/dc-generator-experiment.js"></script>
+  </head>
+  <body>
+    <main class="lesson load-page generator-page">
+      <header class="page-head">
+        <div class="eyebrow">直流电机 / 他励发电机 · 动态实验</div>
+        <h1>励磁决定 E，负载决定电压降</h1>
+        <p>原动机保持恒速。调节励磁与负载，观察磁通、电流、电动势和端电压。</p>
+      </header>
+      <div class="experiment">
+        <section class="lab-machine" aria-label="他励发电机、电路与磁化曲线">
+          <div class="panel-title">
+            <h2>他励直流发电机</h2>
+            <span class="flux">n = 1500 r/min · 恒定</span>
+          </div>
+          <div class="generator-diagrams">
+            <svg
+              class="circuit"
+              viewBox="0 0 310 178"
+              role="img"
+              aria-labelledby="circuit-title"
+            >
+              <title id="circuit-title">
+                独立励磁电源Uf经可调电阻和励磁绕组供电；发电机G经电枢内阻Ra向可断开的负载RL供电，Ia由正端流出
+              </title>
+              <defs>
+                <marker
+                  id="arrow"
+                  viewBox="0 0 10 10"
+                  refX="8"
+                  refY="5"
+                  markerWidth="5"
+                  markerHeight="5"
+                  orient="auto-start-reverse"
+                >
+                  <path d="M0 0L10 5L0 10Z" fill="#cb5e42" />
+                </marker>
+              </defs>
+              <path class="wire" d="M20 34H54M93 34H108V67M108 127V152H20" />
+              <rect
+                id="field-resistor"
+                class="symbol"
+                x="54"
+                y="28"
+                width="39"
+                height="12"
+              />
+              <path
+                id="field-break"
+                class="wire"
+                d="M54 34H60M85 34H93M60 34L84 17"
+                visibility="hidden"
+              />
+              <path
+                d="M74 4V27"
+                stroke="#315a5c"
+                stroke-width="2"
+                marker-end="url(#arrow)"
+              />
+              <text x="83" y="17" font-size="13">Rᶠ调</text>
+              <path
+                class="wire"
+                d="M108 67c18 0 18 15 0 15c18 0 18 15 0 15c18 0 18 15 0 15c18 0 18 15 0 15"
+              />
+              <g fill="#fffef9" stroke="#315a5c" stroke-width="2">
+                <circle cx="20" cy="34" r="4" />
+                <circle cx="20" cy="152" r="4" />
+              </g>
+              <text x="5" y="57" fill="#cb5e42">+</text>
+              <text x="5" y="144" fill="#cb5e42">−</text>
+              <text x="0" y="103">
+                U
+                <tspan baseline-shift="sub" font-size="12">f</tspan>
+              </text>
+              <text x="37" y="62" fill="#cb5e42">
+                I
+                <tspan baseline-shift="sub" font-size="12">f</tspan>
+              </text>
+              <path
+                id="field-arrow"
+                d="M25 34H47"
+                stroke="#cb5e42"
+                stroke-width="2"
+                marker-end="url(#arrow)"
+              />
+              <path
+                id="field-flow"
+                class="current-flow"
+                d="M25 34H54M93 34H108V67M108 127V152H25"
+              />
+              <text x="66" y="175" font-size="12" text-anchor="middle">
+                独立励磁 Uᶠ = 120 V
+              </text>
+              <path
+                class="wire"
+                d="M165 76V34H201M228 34H272V66M272 127V152H165V122"
+              />
+              <circle class="symbol" cx="165" cy="99" r="23" />
+              <text
+                x="165"
+                y="103"
+                text-anchor="middle"
+                font-size="25"
+                font-weight="700"
+              >
+                G
+              </text>
+              <path class="wire" d="M155 109H175M159 115H171" />
+              <text x="189" y="90">+</text>
+              <text x="189" y="114">−</text>
+              <text x="202" y="107" font-style="italic">E</text>
+              <rect class="symbol" x="201" y="28" width="27" height="12" />
+              <text x="202" y="20" font-size="12">Rₐ</text>
+              <rect
+                id="load-resistor"
+                class="symbol"
+                x="266"
+                y="66"
+                width="12"
+                height="61"
+              />
+              <path
+                id="load-break"
+                class="wire"
+                d="M272 66V82M272 112V127M272 112L285 84"
+                visibility="hidden"
+              />
+              <text x="283" y="104" font-size="15">
+                R
+                <tspan baseline-shift="sub" font-size="11">L</tspan>
+              </text>
+              <g fill="#fffef9" stroke="#315a5c" stroke-width="2">
+                <circle cx="246" cy="34" r="4" />
+                <circle cx="246" cy="152" r="4" />
+              </g>
+              <text x="234" y="78" fill="#cb5e42">U</text>
+              <text x="244" y="55" fill="#cb5e42">+</text>
+              <text x="244" y="144" fill="#cb5e42">−</text>
+              <text x="232" y="20" fill="#cb5e42" font-size="15">Iₐ</text>
+              <path
+                id="armature-arrow"
+                d="M233 34H259"
+                stroke="#cb5e42"
+                stroke-width="2"
+                marker-end="url(#arrow)"
+              />
+              <path
+                id="armature-flow"
+                class="current-flow"
+                d="M165 76V34H201M228 34H272V66M272 127V152H165V122"
+              />
+              <text
+                id="circuit-state"
+                x="224"
+                y="175"
+                font-size="12"
+                text-anchor="middle"
+              >
+                向负载送电
+              </text>
+            </svg>
+            <svg
+              class="bh-chart"
+              viewBox="0 0 240 178"
+              role="img"
+              aria-labelledby="bh-title bh-description"
+            >
+              <title id="bh-title">
+                含剩磁与饱和的B–H磁化曲线，工作点跟随实际励磁电流
+              </title>
+              <desc id="bh-description">
+                H等于Nf
+                If除以磁路长度。零励磁时工作点落在正的剩磁Br上。图为已有剩磁的正向磁化支路教学近似，不表示完整磁滞回线。
+              </desc>
+              <text x="2" y="14" font-size="14" font-weight="700">
+                B–H 磁化曲线
+              </text>
+              <path
+                d="M34 27V133H223"
+                fill="none"
+                stroke="#88a89c"
+                stroke-width="1.5"
+              />
+              <g stroke="#dce6df">
+                <path d="M34 84H223M34 35H223M122 27V133M210 27V133" />
+              </g>
+              <text x="3" y="35">B / T</text>
+              <text x="7" y="88">0.6</text>
+              <text x="7" y="48">1.2</text>
+              <text x="20" y="138">0</text>
+              <text x="116" y="149">600</text>
+              <text x="190" y="149">1200</text>
+              <text x="145" y="164">H / (A/m)</text>
+              <path
+                id="bh-curve"
+                fill="none"
+                stroke="#26786b"
+                stroke-width="3"
+              />
+              <path
+                id="bh-guides"
+                fill="none"
+                stroke="#bd8735"
+                stroke-dasharray="4 3"
+              />
+              <g class="remanence-highlight">
+                <circle cx="34" cy="128.1" r="10" class="remanence-halo" />
+                <circle cx="34" cy="128.1" r="5" class="remanence-dot" />
+                <path d="M39 124L69 118" class="remanence-leader" />
+                <text x="76" y="114">剩磁 Bᵣ</text>
+                <text x="76" y="128">0.06 T</text>
+              </g>
+              <circle
+                id="bh-point"
+                r="5"
+                fill="#cb5e42"
+                stroke="#fff"
+                stroke-width="2"
+              />
+              <text id="bh-reading" x="2" y="177" font-size="12">
+                Iᶠ = 1.00 A
+              </text>
+            </svg>
+          </div>
+          <div class="controls">
+            <label for="field"
+              ><span>励磁调节电阻 R<sub>f调</sub></span
+              ><output id="field-value"></output
+            ></label>
+            <input
+              id="field"
+              type="range"
+              min="0"
+              max="410"
+              step="10"
+              value="60"
+              aria-label="励磁调节电阻，最右端断励"
+            />
+            <label for="load"
+              ><span>负载电阻 R<sub>L</sub></span
+              ><output id="load-value"></output
+            ></label>
+            <input
+              id="load"
+              type="range"
+              min="5"
+              max="105"
+              step="5"
+              value="20"
+              aria-label="负载电阻，最右端断路空载"
+            />
+          </div>
+          <div class="presets" aria-label="对照实验">
+            <span>试一试</span><button data-preset="load">空载 U = E</button
+            ><button data-preset="field">断励看剩磁</button
+            ><span id="field-current"></span>
+          </div>
+        </section>
+        <section class="scope-panel" aria-label="四通道实时示波器">
+          <div class="scope-head">
+            <h2><span class="live-dot"></span>实时示波器</h2>
+            <div>
+              <button id="pause" aria-pressed="false">暂停</button
+              ><button id="reset">复位</button>
+            </div>
+          </div>
+          <div class="scope-legend">
+            <span>实线：瞬时值　虚线：当前设定的稳态值</span
+            ><span id="time">0.00 s</span>
+          </div>
+          <canvas
+            id="scope"
+            width="1440"
+            height="760"
+            role="img"
+            aria-label="最近12秒的每极磁通、电枢电流、感生电动势E、端电压U波形；纵轴独立自动缩放，读数见下方"
+          ></canvas>
+          <div class="meters" aria-label="实时读数">
+            <div>每极磁通 Φ<strong id="flux-meter"></strong></div>
+            <div>
+              电枢电流 I<sub>a</sub><strong id="current-meter"></strong>
+            </div>
+            <div>感生电动势 E<strong id="emf-meter"></strong></div>
+            <div>端电压 U<strong id="voltage-meter"></strong></div>
+          </div>
+        </section>
+      </div>
+
+      <section class="takeaway">
+        <div>
+          <span class="small-title">发电机：电流由正端流出</span>
+          <p>
+            U = E − I<sub>a</sub>R<sub>a</sub> = <strong id="balance"></strong>
+          </p>
+          <span id="no-load-note">断开负载 → Iₐ = 0 → U = E</span>
+        </div>
+        <div class="response">
+          <span id="status"></span>
+          <p id="explanation"></p>
+          <small id="residual-note"
+            >已有剩磁：Iᶠ = 0 时，Φᵣ ≠ 0，恒速下 Eᵣ ≠ 0。</small
+          >
+        </div>
+      </section>
+      <footer>
+        模型：H = NᶠIᶠ / ℓ，Φ = BS，E = C<sub>E</sub>Φn；Iₐ = E / (Rₐ +
+        R<sub>L</sub>)。Rₐ = 0.8 Ω，励磁绕组 Rᶠ = 60 Ω（调节电阻另加）。<br />含剩磁的正向
+        B–H
+        支路为教学近似，非完整磁滞回线；励磁有一阶响应（断励经放电回路衰减），电枢按准稳态处理；忽略电枢反应、电刷压降与开关尖峰。
+      </footer>
+    </main>
+  </body>
+</html>
