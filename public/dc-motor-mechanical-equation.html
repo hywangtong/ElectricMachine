@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>机械特性方程与硬度</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/dc-motor-mechanical-equation.css" />
+    <script src="/dc-machine-basics.js" defer></script>
+  </head>
+  <body>
+    <main class="lesson equation-page">
+      <header class="page-head">
+        <div class="eyebrow">直流拖动 / 他励电动机 · 机械特性</div>
+        <h1>机械特性方程与硬度</h1>
+        <p>用理想空载转速与转速降落，描述转速和电磁转矩的关系。</p>
+      </header>
+
+      <section class="condition" aria-label="机械特性的条件与定义">
+        <p>当 U<sub>a</sub>、R<sub>a</sub>、I<sub>f</sub> 为常数时：</p>
+        <math
+          ><mi>n</mi><mo>=</mo><mi>f</mi><mo>(</mo><mi>T</mi><mo>)</mo></math
+        >
+        <strong>—— 机械特性</strong>
+      </section>
+
+      <div class="equation-layout">
+        <section class="equation-panel" aria-label="机械特性方程">
+          <math display="block">
+            <mtable columnalign="right left" rowspacing="0.25em">
+              <mtr>
+                <mtd><mi>n</mi></mtd>
+                <mtd>
+                  <mo>=</mo>
+                  <mfrac>
+                    <msub><mi>U</mi><mi>a</mi></msub>
+                    <mrow
+                      ><msub><mi>C</mi><mi>E</mi></msub
+                      ><mi>Φ</mi></mrow
+                    >
+                  </mfrac>
+                  <mo>−</mo>
+                  <mfrac>
+                    <msub><mi>R</mi><mi>a</mi></msub>
+                    <mrow>
+                      <msub><mi>C</mi><mi>E</mi></msub>
+                      <msub><mi>C</mi><mi>T</mi></msub>
+                      <msup><mi>Φ</mi><mn>2</mn></msup>
+                    </mrow>
+                  </mfrac>
+                  <mi>T</mi>
+                </mtd>
+              </mtr>
+              <mtr>
+                <mtd></mtd>
+                <mtd
+                  ><mo>=</mo><msub><mi>n</mi><mn>0</mn></msub
+                  ><mo>−</mo><mi>γ</mi><mi>T</mi></mtd
+                >
+              </mtr>
+              <mtr>
+                <mtd></mtd>
+                <mtd
+                  ><mo>=</mo><msub><mi>n</mi><mn>0</mn></msub
+                  ><mo>−</mo><mi>Δn</mi></mtd
+                >
+              </mtr>
+            </mtable>
+          </math>
+        </section>
+
+        <aside class="definitions" aria-label="转速的组成">
+          <section class="no-load">
+            <h2>n<sub>0</sub> · 理想空载转速</h2>
+            <math display="block">
+              <msub><mi>n</mi><mn>0</mn></msub
+              ><mo>=</mo>
+              <mfrac>
+                <msub><mi>U</mi><mi>a</mi></msub>
+                <mrow
+                  ><msub><mi>C</mi><mi>E</mi></msub
+                  ><mi>Φ</mi></mrow
+                >
+              </mfrac>
+            </math>
+            <p>机械特性直线在 T = 0 时的转速截距。</p>
+          </section>
+          <section class="speed-drop">
+            <h2>Δn · 转速降落</h2>
+            <math display="block"
+              ><mi>Δn</mi><mo>=</mo><mi>γ</mi><mi>T</mi></math
+            >
+            <p>电磁转矩增加时，转速相对 n<sub>0</sub> 的下降量。</p>
+          </section>
+        </aside>
+      </div>
+
+      <div class="property-layout">
+        <section class="property" aria-label="转速降落系数">
+          <h2>γ · 转速降落系数</h2>
+          <math display="block">
+            <mi>γ</mi><mo>=</mo><mo>|</mo>
+            <mfrac
+              ><mrow><mi mathvariant="normal">d</mi><mi>n</mi></mrow
+              ><mrow><mi mathvariant="normal">d</mi><mi>T</mi></mrow></mfrac
+            >
+            <mo>|</mo><mo>=</mo>
+            <mfrac>
+              <msub><mi>R</mi><mi>a</mi></msub>
+              <mrow
+                ><msub><mi>C</mi><mi>E</mi></msub
+                ><msub><mi>C</mi><mi>T</mi></msub
+                ><msup><mi>Φ</mi><mn>2</mn></msup></mrow
+              >
+            </mfrac>
+          </math>
+          <p>γ 越大，相同转矩增量引起的转速降落越大。</p>
+        </section>
+        <section class="property hardness" aria-label="机械特性的硬度">
+          <h2>α · 机械特性的硬度</h2>
+          <math display="block"
+            ><mi>α</mi><mo>=</mo><mfrac><mn>1</mn><mi>γ</mi></mfrac></math
+          >
+          <p><strong>α 越大，特性越硬；α 越小，特性越软。</strong></p>
+        </section>
+      </div>
+
+      <footer class="notes">
+        <span>条件：稳态、忽略电枢反应，I<sub>f</sub> 恒定时 Φ 视为常数。</span>
+        <span>本章以 γ 表示转速降落系数，α = 1/γ 表示硬度。</span>
+      </footer>
+    </main>
+  </body>
+</html>

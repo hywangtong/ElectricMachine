@@ -1,0 +1,122 @@
+.equation-page {
+  grid-template-rows: 76px 58px 1fr 198px 28px;
+}
+
+.condition {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  border: 1px solid #c8d9d4;
+  border-radius: 14px;
+  background: #edf5ee;
+  font-size: 24px;
+}
+
+.condition math {
+  color: #a33a25;
+  font-size: 32px;
+}
+
+.equation-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 450px;
+  gap: 16px;
+  min-height: 0;
+}
+
+.equation-panel,
+.definitions section,
+.property {
+  border: 1px solid #c8d9d4;
+  border-radius: 16px;
+  background: #fffef9;
+}
+
+.equation-panel {
+  display: grid;
+  place-items: center;
+  padding: 18px;
+}
+
+math {
+  margin: 0;
+  font-family: 'Cambria Math', 'Times New Roman', serif;
+}
+
+.equation-panel math {
+  font-size: 43px;
+}
+
+.definitions {
+  display: grid;
+  grid-template-rows: 1.2fr 1fr;
+  gap: 12px;
+}
+
+.definitions section {
+  display: grid;
+  align-content: center;
+  gap: 8px;
+  padding: 12px 20px;
+}
+
+.definitions .no-load {
+  border-left: 5px solid #39796f;
+  background: #edf5ee;
+}
+
+h2 {
+  font-size: 21px;
+}
+
+.definitions math {
+  font-size: 30px;
+}
+
+.definitions p,
+.property p {
+  color: #55736d;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.property-layout {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 16px;
+}
+
+.property {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 24px;
+}
+
+.property math {
+  font-size: 36px;
+}
+
+.hardness {
+  background: #fff4df;
+  border-color: #e3c999;
+}
+
+.hardness math,
+.hardness strong {
+  color: #943618;
+}
+
+.hardness math {
+  font-size: 44px;
+}
+
+.notes {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #55736d;
+  font-size: 16px;
+}

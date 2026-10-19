@@ -1,0 +1,107 @@
+.natural-example-page {
+  grid-template-rows: 80px minmax(0, 1fr);
+  gap: 14px;
+}
+
+.natural-example-page.is-revealed .exercise-layout {
+  grid-template-columns: 500px minmax(0, 1fr);
+}
+.natural-example-page .card-label small {
+  font-size: 10px;
+  letter-spacing: 0.04em;
+}
+.natural-example-page .question-tasks {
+  padding: 14px 18px;
+  align-content: start;
+  gap: 10px;
+}
+.natural-example-page .question-tasks svg {
+  grid-column: 1 / -1;
+  justify-self: center;
+  width: 330px;
+  height: 155px;
+}
+.natural-example-page.is-revealed .question-tasks svg {
+  width: 290px;
+  height: 136px;
+}
+.natural-example-page .solution-panel {
+  grid-template-rows: 32px minmax(0, 1fr);
+  gap: 8px;
+  padding: 12px 22px;
+}
+.natural-example-page .solution-steps {
+  grid-template-rows: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+.natural-example-page .solution-steps li {
+  padding: 6px 12px;
+  grid-template-columns: 34px minmax(0, 1fr);
+  gap: 12px;
+}
+.natural-example-page .step-index {
+  width: 34px;
+  height: 34px;
+}
+.natural-example-page math {
+  margin: 2px 0 0;
+  font-family: 'Cambria Math', 'Times New Roman', serif;
+  font-size: 22px;
+}
+.natural-example-page .solution-steps .substitution {
+  margin-top: 2px;
+  font-size: 16px;
+  line-height: 1.2;
+}
+.natural-example-page .solution-steps b {
+  color: #b25d3f;
+}
+.natural-example-page .solution-note {
+  font-size: 14px;
+}
+.natural-example-page .solution-note strong {
+  display: block;
+  margin-bottom: 4px;
+  color: #8d492f;
+  font-size: 21px;
+}
+
+.natural-example-page .solution-steps h2 {
+  margin-bottom: 2px;
+  font-size: 15px;
+}
+
+.natural-example-page .solution-steps .substitution b {
+  font-size: inherit;
+}
+
+.natural-example-page .solution-tabs {
+  display: flex;
+  gap: 8px;
+}
+.natural-example-page .solution-tabs button {
+  flex: 1;
+  border: 1px solid #bad5ca;
+  border-radius: 8px;
+  background: #fff;
+  color: #38594f;
+  font: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.natural-example-page .solution-tabs button[aria-selected='true'] {
+  border-color: #287f70;
+  background: #287f70;
+  color: #fff;
+}
+.natural-example-page .solution-tabs button:focus-visible {
+  outline: 3px solid #d7b45f;
+  outline-offset: 2px;
+}
+.natural-example-page .solution-tabpanel {
+  min-height: 0;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: 8px;
+}

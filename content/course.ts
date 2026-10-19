@@ -505,6 +505,44 @@ export const slides: Slide[] = [
       );
     }
 
+    if (chapter.id === 'dc-drives') {
+      chapterSlides.push({
+        id: 'dc-drives-mechanical-equation',
+        kind: 'embed',
+        title: '机械特性方程与硬度',
+        chapterId: chapter.id,
+        embedUrl: '/dc-motor-mechanical-equation.html',
+      });
+      chapterSlides.push({
+        id: 'dc-drives-natural-artificial-characteristics',
+        kind: 'embed',
+        title: '固有特性与人为特性',
+        chapterId: chapter.id,
+        embedUrl: '/dc-motor-natural-artificial-characteristics.html',
+      });
+      chapterSlides.push({
+        id: 'dc-drives-mechanical-characteristic',
+        kind: 'embed',
+        title: '人为机械特性：调压、串电阻与弱磁',
+        chapterId: chapter.id,
+        embedUrl: '/dc-motor-drive-mechanical-characteristic.html',
+      });
+      chapterSlides.push({
+        id: 'dc-drives-natural-characteristic-example',
+        kind: 'embed',
+        title: '例 8.1.1：固有机械特性、斜率与硬度',
+        chapterId: chapter.id,
+        embedUrl: '/dc-motor-natural-characteristic-example.html',
+      });
+      chapterSlides.push({
+        id: 'dc-drives-starting',
+        kind: 'embed',
+        title: '他励直流电动机的启动',
+        chapterId: chapter.id,
+        embedUrl: '/dc-motor-starting.html',
+      });
+    }
+
     if (chapter.id !== 'introduction') {
       chapterSlides.push({
         id: `${chapter.id}-outline`,

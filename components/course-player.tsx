@@ -135,7 +135,9 @@ const findCourseIndex = (id: string) => {
   const stableId =
     id === 'dc-motor-nameplate-example-solution'
       ? 'dc-motor-nameplate-example'
-      : id;
+      : id === 'dc-drives-natural-characteristic-example-hardness'
+        ? 'dc-drives-natural-characteristic-example'
+        : id;
   const directIndex = courseSlides.findIndex((item) => item.id === stableId);
   if (directIndex >= 0) return directIndex;
   if (findShuntTab(id))
@@ -550,7 +552,11 @@ export default function CoursePlayer() {
                             className="slide-primary"
                             onClick={() => navigate(index + 1)}
                           >
-                            {chapter.teachers ? '认识授课教师' : '本章内容'}
+                            {chapter.teachers
+                              ? '认识授课教师'
+                              : chapter.id === 'dc-drives'
+                                ? '机械特性'
+                                : '本章内容'}
                             <ArrowRight />
                           </Button>
                         </div>
@@ -741,6 +747,7 @@ export default function CoursePlayer() {
                               slide.id.startsWith('dc-motor-structure-') ||
                               slide.id.startsWith('dc-generator-emf-') ||
                               slide.id.startsWith('dc-motor-series-') ||
+                              slide.id.startsWith('dc-drives-') ||
                               slide.id === 'dc-motor-field-loss'
                                 ? slide.id
                                 : undefined

@@ -1,0 +1,213 @@
+.characteristics-page {
+  grid-template-rows: 76px 318px 1fr 28px;
+}
+.definitions {
+  display: grid;
+  grid-template-columns: 1.48fr 1fr;
+  gap: 16px;
+  min-height: 0;
+}
+.panel,
+.method {
+  padding: 14px 20px;
+  border: 1px solid #c8d9d4;
+  border-radius: 16px;
+  background: #fffef9;
+}
+h2 {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 23px;
+  line-height: 1.15;
+}
+h2 span {
+  color: #39796f;
+  font-size: 18px;
+}
+h2 small {
+  margin-left: auto;
+  color: #55736d;
+  font-size: 15px;
+  font-weight: 400;
+}
+.natural-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 288px;
+  gap: 12px;
+  align-items: center;
+  margin-top: 10px;
+}
+.natural-copy,
+.artificial {
+  font-size: 19px;
+  line-height: 1.35;
+}
+math {
+  margin: 8px 0;
+  line-height: normal;
+  font-family: 'Cambria Math', 'Times New Roman', serif;
+  font-size: 28px;
+}
+.meaning {
+  color: #55736d;
+  font-size: 17px;
+  line-height: 1.5;
+}
+.point-note {
+  margin-top: 10px;
+  font-size: 17px;
+}
+.point-note b {
+  color: #39796f;
+}
+.natural svg {
+  width: 100%;
+}
+.plot-text {
+  fill: #173b3b;
+  font-family: 'Cambria Math', 'Times New Roman', serif;
+  font-size: 22px;
+}
+.artificial {
+  background: #edf5ee;
+}
+.artificial h2 {
+  margin-bottom: 12px;
+}
+.purpose {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid #c8d9d4;
+  font-size: 18px;
+  font-weight: 600;
+}
+.methods {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  min-height: 0;
+}
+.method {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 10px 18px;
+}
+.method h2 {
+  font-size: 23px;
+}
+.condition {
+  color: #55736d;
+  font-size: 17px;
+  line-height: 1.2;
+}
+.method math {
+  margin: 0 auto;
+  font-size: 27px;
+}
+.change {
+  color: #943618;
+  font-size: 20px;
+  line-height: 1.2;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.result {
+  font-size: 17px;
+  line-height: 1.4;
+}
+.result strong {
+  font-size: 19px;
+}
+.resistance {
+  border-top: 4px solid #b78a43;
+}
+.voltage {
+  border-top: 4px solid #39796f;
+}
+.field {
+  border-top: 4px solid #9b6473;
+}
+.notes {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #55736d;
+  font-size: 14px;
+}
+
+.method-choices {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+}
+.method-choices button {
+  padding: 9px 5px;
+  border: 1px solid #a9c6b8;
+  border-radius: 9px;
+  background: #fffef9;
+  color: #245c53;
+  font: inherit;
+  font-size: 16px;
+  line-height: 1.4;
+  cursor: pointer;
+}
+.method-choices b,
+.method-choices span {
+  display: block;
+}
+.method-choices span {
+  font-size: 15px;
+}
+.method-choices button:is(:hover, :focus-visible) {
+  border-color: #a33a25;
+  background: #fff0c6;
+}
+.method-choices button:focus-visible {
+  outline: 3px solid #a33a25;
+  outline-offset: 2px;
+}
+.hover-hint {
+  margin-top: 5px;
+  color: #55736d;
+  font-size: 14px;
+}
+.artificial .meaning {
+  font-size: 15px;
+  line-height: 1.35;
+}
+.artificial .purpose {
+  margin-top: 8px;
+  padding-top: 8px;
+  font-size: 16px;
+}
+.variable-term,
+.artificial:has(button[data-parameter='resistance']:hover)
+  math
+  [data-parameter='resistance'],
+.artificial:not(:has(.method-choices button:hover)):has(
+    button[data-parameter='resistance']:focus-visible
+  )
+  math
+  [data-parameter='resistance'],
+.artificial:has(button[data-parameter='voltage']:hover)
+  math
+  [data-parameter='voltage'],
+.artificial:not(:has(.method-choices button:hover)):has(
+    button[data-parameter='voltage']:focus-visible
+  )
+  math
+  [data-parameter='voltage'],
+.artificial:has(button[data-parameter='field']:hover)
+  math
+  [data-parameter='field'],
+.artificial:not(:has(.method-choices button:hover)):has(
+    button[data-parameter='field']:focus-visible
+  )
+  math
+  [data-parameter='field'] {
+  color: #a32919;
+  background: #ffe08a;
+  text-shadow: 0.4px 0 currentColor;
+}

@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>固有特性与人为特性</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link
+      rel="stylesheet"
+      href="/dc-motor-natural-artificial-characteristics.css"
+    />
+    <script type="module" src="/dc-generator-emf-controls.js"></script>
+    <script src="/dc-machine-basics.js" defer></script>
+  </head>
+  <body>
+    <main class="lesson characteristics-page">
+      <header class="page-head">
+        <div class="eyebrow">直流拖动 / 他励电动机 · 机械特性</div>
+        <h1>固有特性与人为特性</h1>
+        <p>
+          固有特性是额定条件下的基准；人为特性由改变电枢回路电阻、电压或励磁得到。
+        </p>
+      </header>
+      <div class="definitions">
+        <section class="natural panel">
+          <h2>
+            <span>01</span> 固有特性 <small>额定条件 · 原有电枢电阻</small>
+          </h2>
+          <div class="natural-body">
+            <div class="natural-copy">
+              <p>
+                U<sub>a</sub> = U<sub>N</sub>，I<sub>f</sub> = I<sub>fN</sub>（Φ
+                = Φ<sub>N</sub>），<br />电枢回路不外串电阻，仅有
+                R<sub>a</sub>。
+              </p>
+              <math display="block"
+                ><mi>n</mi><mo>=</mo
+                ><mfrac
+                  ><mrow
+                    ><msub><mi>U</mi><mi>N</mi></msub></mrow
+                  ><mrow
+                    ><msub><mi>C</mi><mi>E</mi></msub
+                    ><msub><mi>Φ</mi><mi>N</mi></msub></mrow
+                  ></mfrac
+                ><mo>−</mo
+                ><mfrac
+                  ><mrow
+                    ><msub><mi>R</mi><mi>a</mi></msub></mrow
+                  ><mrow
+                    ><msub><mi>C</mi><mi>E</mi></msub
+                    ><msub><mi>C</mi><mi>T</mi></msub
+                    ><msup
+                      ><msub><mi>Φ</mi><mi>N</mi></msub
+                      ><mn>2</mn></msup
+                    ></mrow
+                  ></mfrac
+                ><mi>T</mi></math
+              >
+              <p class="meaning">
+                这些条件下的 n =
+                f(T)，反映电机本身的机械性能，是比较人为特性的基准。
+              </p>
+              <p class="point-note">
+                <b>N 点</b>：额定状态，长期运行能力。<br /><b>M 点</b
+                >：临界状态，短时过载能力。
+              </p>
+            </div>
+            <svg
+              viewBox="0 0 310 218"
+              role="img"
+              aria-label="固有机械特性示意：N 为额定点，M 为短时过载临界点，转矩增加时转速略降"
+            >
+              <defs>
+                <marker
+                  id="axis-arrow"
+                  markerWidth="7"
+                  markerHeight="7"
+                  refX="6"
+                  refY="3"
+                  orient="auto"
+                >
+                  <path d="M0 0 L6 3 L0 6" fill="none" stroke="#55736d" />
+                </marker>
+              </defs>
+              <g
+                fill="none"
+                stroke="#55736d"
+                stroke-width="2"
+                marker-end="url(#axis-arrow)"
+              >
+                <path d="M38 181 V18" />
+                <path d="M38 181 H296" />
+              </g>
+              <path
+                d="M38 64 L280 103"
+                fill="none"
+                stroke="#a33a25"
+                stroke-width="4"
+              />
+              <g fill="none" stroke-dasharray="6 5" stroke-width="1.5">
+                <path d="M38 80 H139 V181" stroke="#39796f" />
+                <path d="M38 97 H244 V181" stroke="#b76a18" />
+              </g>
+              <circle cx="139" cy="80" r="5" fill="#39796f" />
+              <circle cx="244" cy="97" r="5" fill="#b76a18" />
+              <g class="plot-text">
+                <text x="17" y="21">n</text>
+                <text x="293" y="205">T</text>
+                <text x="19" y="202">O</text>
+                <text x="3" y="65">n₀</text>
+                <text x="3" y="86" fill="#39796f">
+                  n
+                  <tspan baseline-shift="sub" font-size="13">N</tspan>
+                </text>
+                <text x="3" y="108" fill="#b76a18">
+                  n
+                  <tspan baseline-shift="sub" font-size="13">M</tspan>
+                </text>
+                <text x="132" y="69" fill="#39796f">N</text>
+                <text x="237" y="85" fill="#b76a18">M</text>
+                <text x="127" y="205" fill="#39796f">
+                  T
+                  <tspan baseline-shift="sub" font-size="13">N</tspan>
+                </text>
+                <text x="231" y="205" fill="#b76a18">
+                  T
+                  <tspan baseline-shift="sub" font-size="13">M</tspan>
+                </text>
+              </g>
+            </svg>
+          </div>
+        </section>
+        <section class="artificial panel">
+          <h2><span>02</span> 人为特性 <small>改变外部运行条件</small></h2>
+          <div
+            class="method-choices"
+            aria-label="三种人为调节手段，悬停或聚焦以高亮公式参数"
+          >
+            <button type="button" data-parameter="resistance">
+              <b>1 · 电枢回路串电阻</b><span>增大 R<sub>r</sub></span>
+            </button>
+            <button type="button" data-parameter="voltage">
+              <b>2 · 降低电枢电压</b><span>减小 U<sub>a</sub></span>
+            </button>
+            <button type="button" data-parameter="field">
+              <b>3 · 减小励磁电流</b><span>弱磁：I<sub>f</sub> ↓ → Φ ↓</span>
+            </button>
+          </div>
+          <p class="hover-hint">悬停或键盘聚焦任一项，高亮对应的可变参数。</p>
+          <math display="block"
+            ><mi>n</mi><mo>=</mo
+            ><mfrac
+              ><mrow
+                ><msub data-parameter="voltage"
+                  ><mi>U</mi><mi>a</mi></msub
+                ></mrow
+              ><mrow
+                ><msub><mi>C</mi><mi>E</mi></msub
+                ><mi data-parameter="field">Φ</mi></mrow
+              ></mfrac
+            ><mo>−</mo
+            ><mfrac
+              ><mrow
+                ><msub><mi>R</mi><mi>a</mi></msub
+                ><mo>+</mo
+                ><msub data-parameter="resistance"
+                  ><mi>R</mi><mi>r</mi></msub
+                ></mrow
+              ><mrow
+                ><msub><mi>C</mi><mi>E</mi></msub
+                ><msub><mi>C</mi><mi>T</mi></msub
+                ><msup><mi data-parameter="field">Φ</mi><mn>2</mn></msup></mrow
+              ></mfrac
+            ><mi>T</mi></math
+          >
+          <p class="meaning">
+            R<sub>r</sub> 为外串电阻，R<sub>a</sub>
+            为电机自身电枢电阻；每条曲线内参数恒定。
+          </p>
+          <div class="purpose">
+            意义：按拖动要求改变转速与软硬程度，服务于起动、调速等运行控制。
+          </div>
+        </section>
+      </div>
+      <div class="methods" aria-label="获得人为特性的三种手段">
+        <section class="method resistance">
+          <h2><span>1</span> 电枢回路串电阻</h2>
+          <p class="condition">
+            保持 U<sub>a</sub> = U<sub>N</sub>、Φ = Φ<sub>N</sub>
+          </p>
+          <math display="block"
+            ><mi>n</mi><mo>=</mo
+            ><mfrac
+              ><mrow
+                ><msub><mi>U</mi><mi>N</mi></msub></mrow
+              ><mrow
+                ><msub><mi>C</mi><mi>E</mi></msub
+                ><msub><mi>Φ</mi><mi>N</mi></msub></mrow
+              ></mfrac
+            ><mo>−</mo
+            ><mfrac
+              ><mrow
+                ><msub><mi>R</mi><mi>a</mi></msub
+                ><mo>+</mo
+                ><msub class="variable-term"><mi>R</mi><mi>r</mi></msub></mrow
+              ><mrow
+                ><msub><mi>C</mi><mi>E</mi></msub
+                ><msub><mi>C</mi><mi>T</mi></msub
+                ><msup
+                  ><msub><mi>Φ</mi><mi>N</mi></msub
+                  ><mn>2</mn></msup
+                ></mrow
+              ></mfrac
+            ><mi>T</mi></math
+          >
+          <p class="change">R<sub>r</sub> ↑ → γ ↑ → α ↓</p>
+          <p class="result">
+            <strong>n<sub>0</sub> 不变，机械特性变软。</strong
+            ><br />同一转矩下，转速降落增大。
+          </p>
+        </section>
+        <section class="method voltage">
+          <h2><span>2</span> 降低电枢电压</h2>
+          <p class="condition">保持 Φ = Φ<sub>N</sub>，不外串电阻</p>
+          <math display="block"
+            ><mi>n</mi><mo>=</mo
+            ><mfrac
+              ><mrow
+                ><msub class="variable-term"><mi>U</mi><mi>a</mi></msub></mrow
+              ><mrow
+                ><msub><mi>C</mi><mi>E</mi></msub
+                ><msub><mi>Φ</mi><mi>N</mi></msub></mrow
+              ></mfrac
+            ><mo>−</mo
+            ><mfrac
+              ><mrow
+                ><msub><mi>R</mi><mi>a</mi></msub></mrow
+              ><mrow
+                ><msub><mi>C</mi><mi>E</mi></msub
+                ><msub><mi>C</mi><mi>T</mi></msub
+                ><msup
+                  ><msub><mi>Φ</mi><mi>N</mi></msub
+                  ><mn>2</mn></msup
+                ></mrow
+              ></mfrac
+            ><mi>T</mi></math
+          >
+          <p class="change">U<sub>a</sub> ↓ → n<sub>0</sub> ↓；γ、α 不变</p>
+          <p class="result">
+            <strong>特性线平行下移，硬度不变。</strong
+            ><br />同一转矩下，运行转速降低。
+          </p>
+        </section>
+        <section class="method field">
+          <h2><span>3</span> 减小励磁电流（弱磁）</h2>
+          <p class="condition">
+            保持 U<sub>a</sub> = U<sub>N</sub>，不外串电阻
+          </p>
+          <math display="block"
+            ><mi>n</mi><mo>=</mo
+            ><mfrac
+              ><mrow
+                ><msub><mi>U</mi><mi>N</mi></msub></mrow
+              ><mrow
+                ><msub><mi>C</mi><mi>E</mi></msub
+                ><mi class="variable-term">Φ</mi></mrow
+              ></mfrac
+            ><mo>−</mo
+            ><mfrac
+              ><mrow
+                ><msub><mi>R</mi><mi>a</mi></msub></mrow
+              ><mrow
+                ><msub><mi>C</mi><mi>E</mi></msub
+                ><msub><mi>C</mi><mi>T</mi></msub
+                ><msup><mi class="variable-term">Φ</mi><mn>2</mn></msup></mrow
+              ></mfrac
+            ><mi>T</mi></math
+          >
+          <p class="change">
+            I<sub>f</sub> ↓ → Φ ↓ → n<sub>0</sub> ↑、γ ↑、α ↓
+          </p>
+          <p class="result">
+            <strong>理想空载转速升高，机械特性变软。</strong
+            ><br />截距升高，特性线斜率绝对值增大。
+          </p>
+        </section>
+      </div>
+      <footer class="notes">
+        <span
+          >条件：稳态、忽略电枢反应；n<sub>0</sub> =
+          U<sub>a</sub>/(C<sub>E</sub>Φ)，γ = (R<sub>a</sub> +
+          R<sub>r</sub>)/(C<sub>E</sub>C<sub>T</sub>Φ²)，α = 1/γ。</span
+        ><span>曲线为定性示意；过载能力受允许电流与持续时间限制。</span>
+      </footer>
+    </main>
+  </body>
+</html>

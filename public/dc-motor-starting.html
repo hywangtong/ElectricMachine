@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>他励直流电动机的启动</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/dc-motor-starting.css" />
+    <script type="module" src="/dc-generator-emf-controls.js"></script>
+    <script src="/dc-machine-basics.js" defer></script>
+    <script type="module" src="/dc-motor-starting.js"></script>
+  </head>
+  <body>
+    <main class="lesson starting-page">
+      <header class="page-head">
+        <div class="eyebrow">直流拖动 / 8.2 · 启动性能与启动方法</div>
+        <h1>他励直流电动机的启动</h1>
+        <p>
+          转子还没转起来，反电势还未建立：很小的电枢电阻，要承担多大的电流？
+        </p>
+      </header>
+      <nav class="mode-bar" aria-label="启动方式">
+        <div class="mode-buttons">
+          <button type="button" data-mode="direct" aria-pressed="true">
+            直接启动
+          </button>
+          <button type="button" data-mode="voltage" aria-pressed="false">
+            降低电枢电压
+          </button>
+          <button type="button" data-mode="resistance" aria-pressed="false">
+            电枢串电阻
+          </button>
+        </div>
+        <span>先建立额定励磁 · Φ 恒定</span>
+      </nav>
+      <section class="demo-layout">
+        <article class="circuit-panel panel">
+          <div class="panel-heading">
+            <h2>电枢等效电路</h2>
+            <span id="phase-label" role="status"
+              >电枢待接通 · n = 0，E = 0</span
+            >
+          </div>
+          <svg
+            class="circuit"
+            viewBox="0 0 760 202"
+            role="img"
+            aria-labelledby="circuit-title circuit-description"
+          >
+            <title id="circuit-title">他励直流电动机启动时的电压分配</title>
+            <desc id="circuit-description">
+              励磁由独立电源维持恒定。电枢回路含电源、开关、可选外串电阻、电枢电阻和反电势，电流从电源正端流入。
+            </desc>
+            <defs>
+              <marker
+                id="arrow"
+                viewBox="0 0 10 10"
+                refX="8"
+                refY="5"
+                markerWidth="5"
+                markerHeight="5"
+                orient="auto-start-reverse"
+              >
+                <path d="M0 0 10 5 0 10Z" fill="context-stroke" />
+              </marker>
+            </defs>
+            <g class="wire">
+              <path
+                d="M65 67V35H134M178 35H226M304 35H372M450 35H552V76M552 130V166H65V111"
+              />
+              <circle cx="65" cy="89" r="22" />
+              <circle cx="552" cy="103" r="27" />
+            </g>
+            <path id="switch" class="wire" d="M134 35 178 14" />
+            <g class="extra-resistor">
+              <rect x="226" y="22" width="78" height="26" rx="3" />
+              <text x="265" y="15">Rr</text>
+            </g>
+            <path id="resistor-bypass" class="wire" d="M226 35H304" />
+            <g class="armature-resistor">
+              <rect x="372" y="20" width="78" height="30" rx="3" />
+              <text x="411" y="13">Ra = 1 Ω</text>
+            </g>
+            <path class="current-flow" id="flow" d="M65 35H552V166H65Z" />
+            <g class="svg-label">
+              <text x="65" y="84">+</text>
+              <text x="65" y="104">−</text>
+              <text id="source-value" x="102" y="143" text-anchor="start">
+                Ua = 220.0 V
+              </text>
+              <text x="552" y="98">+</text>
+              <text x="552" y="118">−</text>
+              <text x="615" y="100" text-anchor="start">E = CEΦn</text>
+              <text id="emf-value" x="615" y="123" text-anchor="start">
+                0 V
+              </text>
+            </g>
+            <path class="emf-arrow" d="M592 136V69" marker-end="url(#arrow)" />
+            <path
+              class="current-arrow"
+              d="M329 71H398"
+              marker-end="url(#arrow)"
+            />
+            <text class="current-label" x="344" y="98">Ia</text>
+            <text id="resistor-value" class="drop-label" x="411" y="131">
+              IaRa = 0 V
+            </text>
+            <text
+              id="external-value"
+              class="external-label"
+              x="265"
+              y="88"
+            ></text>
+            <text
+              id="external-drop"
+              class="external-label"
+              x="265"
+              y="119"
+            ></text>
+            <text class="field-note" x="65" y="196">
+              独立励磁电源 → 励磁绕组 → 恒定磁通 Φ（先励磁，再接通电枢）
+            </text>
+          </svg>
+          <div class="voltage-heading">
+            <strong>电压分配 · 满长 220 V</strong
+            ><span id="balance">待接通：开关承担电源电压</span>
+          </div>
+          <div
+            id="voltage-bar"
+            class="voltage-bar"
+            aria-label="反电势、电枢电阻及外串电阻的电压分配"
+          >
+            <span id="emf-bar"></span><span id="armature-bar"></span
+            ><span id="external-bar"></span><span id="open-bar"></span>
+          </div>
+          <div class="bar-legend">
+            <span class="emf-key">反电势 E</span
+            ><span class="armature-key">电枢压降 IaRa</span
+            ><span class="external-key">外串压降 IaRr</span>
+          </div>
+          <p id="circuit-note" class="circuit-note">
+            选择启动方式，再接通电枢，观察电压如何分配。
+          </p>
+        </article>
+        <article class="commutator-panel panel">
+          <div class="panel-heading">
+            <h2>换向片与电刷 · 局部放大</h2>
+            <span class="slow-label">转动按教学慢放</span>
+          </div>
+          <div class="commutator-layout">
+            <svg
+              class="commutator"
+              viewBox="0 0 340 245"
+              role="img"
+              aria-labelledby="commutator-title commutator-desc"
+            >
+              <title id="commutator-title">十二片换向器及固定电刷</title>
+              <desc id="commutator-desc">
+                铜制换向片旋转，灰色电刷静止。电刷跨接相邻两片时线圈换向，大电流情况下在脱离接触处出现火花示意；静止未跨片时没有换向或火花。
+              </desc>
+              <circle
+                cx="160"
+                cy="120"
+                r="86"
+                fill="#edf1eb"
+                stroke="#bdcec4"
+              />
+              <g id="segments"></g>
+              <circle
+                cx="160"
+                cy="120"
+                r="47"
+                fill="#f8f5e9"
+                stroke="#d8c69d"
+              />
+              <path
+                id="shorted-coil"
+                fill="none"
+                stroke="#b7883e"
+                stroke-width="4"
+              />
+              <path
+                id="rotor-mark"
+                d="M160 87V108M160 132V153M127 120H148M172 120H193"
+                stroke="#a9b7ac"
+                stroke-width="3"
+              />
+              <g class="brush">
+                <rect x="48" y="108" width="40" height="24" rx="3" />
+                <rect x="232" y="108" width="40" height="24" rx="3" />
+              </g>
+              <path d="M272 120H318M48 120H20" class="wire" />
+              <text x="298" y="105" class="brush-text">+</text>
+              <text x="23" y="105" class="brush-text">−</text>
+              <g
+                id="sparks"
+                fill="none"
+                stroke="#e55a2a"
+                stroke-width="3"
+                stroke-linecap="round"
+                opacity="0"
+              >
+                <path
+                  d="M233 137 247 147 240 151 255 164M238 134 261 141M229 141 233 165M86 103 71 90 77 86 64 74M85 106 60 101"
+                />
+              </g>
+              <path
+                d="M185 25A101 101 0 0 1 247 63"
+                fill="none"
+                stroke="#699188"
+                stroke-width="2"
+                marker-end="url(#arrow)"
+              />
+              <text x="160" y="225" text-anchor="middle" class="brush-text">
+                铜色：换向片　深灰：固定电刷
+              </text>
+            </svg>
+            <div class="commutator-copy">
+              <strong id="contact-label">静止 · 未跨片</strong>
+              <p id="contact-note">电刷停在单片中部，线圈此时没有发生换向。</p>
+              <div class="coil-current">
+                换向时线圈电流<br /><b>+i → 0 → −i</b>
+              </div>
+              <p class="danger-note">
+                电流越大，换向越困难；脱离接触时可能产生强烈火花。
+              </p>
+            </div>
+          </div>
+          <div class="readouts">
+            <div>
+              <span>转速 n</span
+              ><strong id="speed">0 <small>r/min</small></strong>
+            </div>
+            <div>
+              <span>电枢电流 Ia</span
+              ><strong id="current">0 <small>A</small></strong>
+            </div>
+            <div>
+              <span>相对额定电流</span
+              ><strong id="ratio">0.0 <small>IN</small></strong>
+            </div>
+          </div>
+          <p class="commutation-note">
+            “换向不允许”指过大电流造成的换向恶化不可接受，并非禁止正常换向。
+          </p>
+        </article>
+      </section>
+      <section class="takeaways">
+        <article class="formula-card">
+          <h2>启动性能：电流与转矩</h2>
+          <p class="formula">
+            n = 0 → E = 0 → I<sub>ST</sub> =
+            <span class="fraction"
+              ><span>U<sub>a</sub></span
+              ><span>R<sub>a</sub></span></span
+            >
+            ≈ (10～20) I<sub>N</sub>
+          </p>
+          <p class="torque">
+            T<sub>ST</sub> = C<sub>T</sub>ΦI<sub>ST</sub> ≈ (10～20) T<sub
+              >N</sub
+            >
+          </p>
+          <p class="muted">
+            额定磁通下的典型直接启动估计；大转矩伴随大电流冲击。
+          </p>
+        </article>
+        <article class="methods-card">
+          <h2>把启动电流限制在允许范围内</h2>
+          <p><b>① 降压启动</b>　Ua ↓ → IST ↓；随转速上升逐步提高电压。</p>
+          <p><b>② 电枢串电阻</b>　IST = Ua / (Ra + Rr)；加速后逐步切除。</p>
+          <p class="muted">
+            串电阻：无级启动（串变阻器）／有级启动（分段切除）。
+          </p>
+          <p id="method-note" class="method-note">
+            示例：UN = 220 V，Ra = 1 Ω，IN = 15 A → 直接启动电流约 14.7 IN。
+          </p>
+        </article>
+      </section>
+      <div class="playback">
+        <button id="play" type="button">接通并慢放</button
+        ><button id="reset" type="button">复位</button
+        ><button type="button" data-stage="0">① 启动瞬间</button
+        ><button type="button" data-stage="8">② 加速途中</button
+        ><button type="button" data-stage="14">③ 正常运行</button
+        ><label for="progress">演示进度</label
+        ><input
+          id="progress"
+          type="range"
+          min="0"
+          max="14"
+          step="0.05"
+          value="0"
+          aria-label="启动演示进度"
+        />
+      </div>
+      <footer>
+        电压分配按准稳态示意，忽略电枢电感、电刷压降及电枢反应；真实接通瞬间电流不能突变；火花仅为定性示意，慢放进度不代表实际启动时间。
+      </footer>
+    </main>
+  </body>
+</html>

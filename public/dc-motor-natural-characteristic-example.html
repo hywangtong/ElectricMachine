@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>例 8.1.1 · 固有机械特性、斜率与硬度</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/dc-motor-nameplate-example.css" />
+    <link
+      rel="stylesheet"
+      href="/dc-motor-natural-characteristic-example.css"
+    />
+    <script type="module" src="/dc-generator-emf-controls.js"></script>
+    <script src="/dc-machine-basics.js" defer></script>
+    <script type="module" src="/dc-motor-nameplate-example.js"></script>
+    <script
+      type="module"
+      src="/dc-motor-natural-characteristic-example.js"
+    ></script>
+  </head>
+  <body>
+    <main class="lesson exercise-page natural-example-page">
+      <header class="page-head exercise-head">
+        <div class="eyebrow">直流拖动 / 他励电动机 · 课堂例题</div>
+        <h1>例 8.1.1 · 固有机械特性、斜率与硬度</h1>
+        <p>额定励磁、电枢不外串电阻；忽略空载转矩 T₀、电枢反应与电刷压降。</p>
+      </header>
+      <section class="exercise-layout">
+        <article class="question-card" aria-labelledby="question-title">
+          <header class="card-label">
+            <span>题目 · 例 8.1.1</span
+            ><small>SEPARATELY EXCITED DC MOTOR</small>
+          </header>
+          <h2 id="question-title">一台他励直流电动机，已知：</h2>
+          <dl class="given-grid" aria-label="已知额定参数">
+            <div>
+              <dt>额定输出功率</dt>
+              <dd>
+                <i>P<sub>N</sub></i> = <b>40</b> kW
+              </dd>
+            </div>
+            <div>
+              <dt>额定电枢电压</dt>
+              <dd>
+                <i>U<sub>aN</sub></i> = <b>220</b> V
+              </dd>
+            </div>
+            <div>
+              <dt>额定电枢电流</dt>
+              <dd>
+                <i>I<sub>aN</sub></i> = <b>210</b> A
+              </dd>
+            </div>
+            <div>
+              <dt>额定转速</dt>
+              <dd>
+                <i>n<sub>N</sub></i> = <b>750</b> r/min
+              </dd>
+            </div>
+          </dl>
+          <div class="question-tasks">
+            <strong>求</strong>
+            <ol>
+              <li>固有机械特性；</li>
+              <li>固有特性的斜率和硬度。</li>
+            </ol>
+            <svg
+              viewBox="0 0 420 195"
+              role="img"
+              aria-labelledby="circuit-title circuit-desc"
+            >
+              <title id="circuit-title">他励直流电动机电路</title>
+              <desc id="circuit-desc">
+                电枢与励磁由独立电源供电，电枢电流 Ia 和励磁电流 If
+                分别从各自正端流入。电枢回路不外串电阻。
+              </desc>
+              <defs>
+                <marker
+                  id="current-arrow"
+                  viewBox="0 0 10 10"
+                  refX="8"
+                  refY="5"
+                  markerWidth="5"
+                  markerHeight="5"
+                  orient="auto"
+                >
+                  <path d="M0 0 10 5 0 10Z" fill="#b25d3f" />
+                </marker>
+              </defs>
+              <g
+                fill="none"
+                stroke="#38594f"
+                stroke-width="2.5"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M42 30H174V79M174 125V175H42M360 30H252V66M252 138V175H360"
+                />
+                <circle cx="174" cy="102" r="23" />
+                <path
+                  d="M252 66c-19 0-19 18 0 18c-19 0-19 18 0 18c-19 0-19 18 0 18c-19 0-19 18 0 18"
+                />
+                <path d="M159 111H189M163 117H185" />
+              </g>
+              <g fill="#fff" stroke="#38594f" stroke-width="2.5">
+                <circle cx="42" cy="30" r="4" />
+                <circle cx="42" cy="175" r="4" />
+                <circle cx="360" cy="30" r="4" />
+                <circle cx="360" cy="175" r="4" />
+              </g>
+              <g
+                fill="none"
+                stroke="#b25d3f"
+                stroke-width="2"
+                marker-end="url(#current-arrow)"
+              >
+                <path d="M75 30H113" />
+                <path d="M329 30H290" />
+              </g>
+              <g fill="#38594f" font-family="Georgia, serif" font-size="23">
+                <text x="163" y="105">M</text>
+                <text x="87" y="58">Iₐ</text>
+                <text x="301" y="58">
+                  I
+                  <tspan baseline-shift="sub" font-size="15">f</tspan>
+                </text>
+              </g>
+              <g fill="#b25d3f" font-family="Georgia, serif" font-size="24">
+                <text x="28" y="62">+</text>
+                <text x="28" y="161">−</text>
+                <text x="13" y="108">Uₐ</text>
+                <text x="366" y="62">+</text>
+                <text x="366" y="161">−</text>
+                <text x="371" y="108">
+                  U
+                  <tspan baseline-shift="sub" font-size="15">f</tspan>
+                </text>
+              </g>
+            </svg>
+          </div>
+          <button
+            class="reveal-button"
+            type="button"
+            aria-expanded="false"
+            aria-controls="example-solution"
+          >
+            <span class="button-label">显示计算过程与答案</span
+            ><span class="button-icon" aria-hidden="true">→</span>
+          </button>
+        </article>
+        <section
+          class="solution-panel"
+          id="example-solution"
+          aria-label="例 8.1.1 计算过程与答案"
+          hidden
+        >
+          <div class="solution-tabs" role="tablist" aria-label="例题计算子页">
+            <button
+              type="button"
+              role="tab"
+              id="natural-tab"
+              aria-controls="natural-panel"
+              aria-selected="true"
+              tabindex="0"
+              data-example-page="natural"
+            >
+              01 · 固有机械特性
+            </button>
+            <button
+              type="button"
+              role="tab"
+              id="hardness-tab"
+              aria-controls="hardness-panel"
+              aria-selected="false"
+              tabindex="-1"
+              data-example-page="hardness"
+            >
+              02 · 斜率与硬度
+            </button>
+          </div>
+          <section
+            class="solution-tabpanel"
+            id="natural-panel"
+            role="tabpanel"
+            aria-labelledby="natural-tab"
+            tabindex="0"
+          >
+            <ol class="solution-steps">
+              <li>
+                <span class="step-index">01</span>
+                <div>
+                  <h2>忽略空载转矩 T₀：额定电磁转矩近似为轴上转矩</h2>
+                  <math display="block"
+                    ><msub><mi>T</mi><mi>N</mi></msub
+                    ><mo>=</mo
+                    ><mfrac
+                      ><mrow><mn>60</mn></mrow
+                      ><mrow><mn>2</mn><mi>π</mi></mrow></mfrac
+                    ><mfrac
+                      ><mrow
+                        ><msub><mi>P</mi><mi>N</mi></msub></mrow
+                      ><mrow
+                        ><msub><mi>n</mi><mi>N</mi></msub></mrow
+                      ></mfrac
+                    ></math
+                  >
+                  <p class="substitution">
+                    ≈ (60 / 6.28) × (40 × 10³ / 750) = <b>509.55 N·m</b>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <span class="step-index">02</span>
+                <div>
+                  <h2>由额定转矩与电枢电流求 CₜΦ</h2>
+                  <math display="block"
+                    ><msub><mi>C</mi><mi>T</mi></msub
+                    ><mi>Φ</mi><mo>=</mo
+                    ><mfrac
+                      ><mrow
+                        ><msub><mi>T</mi><mi>N</mi></msub></mrow
+                      ><mrow
+                        ><msub><mi>I</mi><mi>aN</mi></msub></mrow
+                      ></mfrac
+                    ><mo>≈</mo
+                    ><mfrac
+                      ><mrow><mn>509.55</mn></mrow
+                      ><mrow><mn>210</mn></mrow></mfrac
+                    ><mo>≈</mo><mn>2.426</mn></math
+                  >
+                  <p class="substitution">
+                    由 T = C<sub>T</sub>ΦI<sub>a</sub>，确定转矩与电流的比例。
+                  </p>
+                </div>
+              </li>
+              <li>
+                <span class="step-index">03</span>
+                <div>
+                  <h2>由两个系数的关系求 CₑΦ</h2>
+                  <math display="block"
+                    ><msub><mi>C</mi><mi>E</mi></msub
+                    ><mi>Φ</mi><mo>=</mo
+                    ><mfrac
+                      ><mrow><mn>2</mn><mi>π</mi></mrow
+                      ><mrow><mn>60</mn></mrow></mfrac
+                    ><msub><mi>C</mi><mi>T</mi></msub
+                    ><mi>Φ</mi><mo>≈</mo
+                    ><mfrac
+                      ><mrow><mn>6.28</mn></mrow
+                      ><mrow><mn>60</mn></mrow></mfrac
+                    ><mo>×</mo><mn>2.426</mn><mo>≈</mo><mn>0.254</mn></math
+                  >
+                  <p class="substitution">
+                    转速 n 以 r/min 为单位，C<sub>E</sub>Φ 的单位为 V/(r/min)。
+                  </p>
+                </div>
+              </li>
+              <li>
+                <span class="step-index">04</span>
+                <div>
+                  <h2>计算理想空载转速</h2>
+                  <math display="block"
+                    ><msub><mi>n</mi><mn>0</mn></msub
+                    ><mo>=</mo
+                    ><mfrac
+                      ><mrow
+                        ><msub><mi>U</mi><mi>aN</mi></msub></mrow
+                      ><mrow
+                        ><msub><mi>C</mi><mi>E</mi></msub
+                        ><mi>Φ</mi></mrow
+                      ></mfrac
+                    ><mo>≈</mo><mn>866.25</mn><mtext> r/min</mtext></math
+                  >
+                  <p class="substitution">
+                    固有特性经过 (0, 866.25) 与额定点 N(509.55, 750)。
+                  </p>
+                </div>
+              </li>
+            </ol>
+            <div class="solution-note">
+              连接理想空载点与额定点
+              N，即得固有机械特性。切换至“斜率与硬度”继续计算。<br />按题图取 2π
+              ≈ 6.28；中间量保留精度，显示结果取近似值。
+            </div>
+          </section>
+          <section
+            class="solution-tabpanel"
+            id="hardness-panel"
+            role="tabpanel"
+            aria-labelledby="hardness-tab"
+            tabindex="0"
+            hidden
+          >
+            <ol class="solution-steps">
+              <li>
+                <span class="step-index">01</span>
+                <div>
+                  <h2>额定状态：反电动势</h2>
+                  <math display="block"
+                    ><mi>E</mi><mo>=</mo><msub><mi>C</mi><mi>E</mi></msub
+                    ><mi>Φ</mi><msub><mi>n</mi><mi>N</mi></msub
+                    ><mo>≈</mo><mn>0.254</mn><mo>×</mo><mn>750</mn><mo>=</mo
+                    ><mn>190.5</mn><mtext> V</mtext></math
+                  >
+                  <p class="substitution">
+                    电动机电压平衡：U<sub>aN</sub> = E +
+                    R<sub>a</sub>I<sub>aN</sub>。
+                  </p>
+                </div>
+              </li>
+              <li>
+                <span class="step-index">02</span>
+                <div>
+                  <h2>由电枢压降求电枢电阻</h2>
+                  <math display="block"
+                    ><msub><mi>R</mi><mi>a</mi></msub
+                    ><mo>=</mo
+                    ><mfrac
+                      ><mrow
+                        ><msub><mi>U</mi><mi>aN</mi></msub
+                        ><mo>−</mo><mi>E</mi></mrow
+                      ><mrow
+                        ><msub><mi>I</mi><mi>aN</mi></msub></mrow
+                      ></mfrac
+                    ><mo>≈</mo><mn>0.14</mn><mtext> Ω</mtext></math
+                  >
+                  <p class="substitution">
+                    (220 − E) / 210 ≈ 0.1406 Ω，后续计算保留中间精度。
+                  </p>
+                </div>
+              </li>
+              <li>
+                <span class="step-index">03</span>
+                <div>
+                  <h2>斜率绝对值 γ：每增加单位转矩的转速降落</h2>
+                  <math display="block"
+                    ><mi>γ</mi><mo>=</mo
+                    ><mfrac
+                      ><mrow
+                        ><msub><mi>R</mi><mi>a</mi></msub></mrow
+                      ><mrow
+                        ><msub><mi>C</mi><mi>E</mi></msub
+                        ><msub><mi>C</mi><mi>T</mi></msub
+                        ><msup><mi>Φ</mi><mn>2</mn></msup></mrow
+                      ></mfrac
+                    ><mo>≈</mo><mn>0.228</mn></math
+                  >
+                  <p class="substitution">
+                    γ = (866.25 − 750) / 509.55 ≈ <b>0.228 (r/min)/(N·m)</b>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <span class="step-index">04</span>
+                <div>
+                  <h2>机械特性的硬度</h2>
+                  <math display="block"
+                    ><mi>α</mi><mo>=</mo
+                    ><mfrac
+                      ><mrow><mn>1</mn></mrow
+                      ><mrow><mi>γ</mi></mrow></mfrac
+                    ><mo>≈</mo
+                    ><mfrac
+                      ><mrow><mn>1</mn></mrow
+                      ><mrow><mn>0.228</mn></mrow></mfrac
+                    ><mo>≈</mo><mn>4.39</mn></math
+                  >
+                  <p class="substitution">
+                    α ≈ <b>4.39 (N·m)/(r/min)</b>；有符号斜率 dn/dT = −γ。
+                  </p>
+                </div>
+              </li>
+            </ol>
+            <div class="solution-note">
+              <strong>固有机械特性：n ≈ 866.25 − 0.228T</strong>n 的单位为
+              r/min，T 的单位为 N·m；截距是 n₀，随转矩变化的是 n。<br />按题图取
+              2π ≈ 6.28；中间量保留精度，显示结果取近似值。
+            </div>
+          </section>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,363 @@
+.starting-page {
+  grid-template-rows: 82px 38px 345px 148px 36px 16px;
+  gap: 7px;
+}
+.mode-bar,
+.mode-buttons,
+.panel-heading,
+.voltage-heading,
+.playback {
+  display: flex;
+  align-items: center;
+}
+.mode-bar,
+.panel-heading,
+.voltage-heading {
+  justify-content: space-between;
+}
+.mode-buttons {
+  gap: 8px;
+}
+button {
+  font: inherit;
+  cursor: pointer;
+}
+.mode-bar button,
+.playback button {
+  border: 1px solid #c5d6cd;
+  border-radius: 7px;
+  padding: 8px 18px;
+  color: #38594f;
+  background: #fff;
+  font-size: 16px;
+}
+.mode-bar button[aria-pressed='true'],
+#play {
+  color: #fff;
+  background: #287f70;
+  border-color: #287f70;
+}
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid #ce9b40;
+  outline-offset: 3px;
+}
+.mode-bar > span {
+  color: #58766b;
+  font-size: 16px;
+}
+.demo-layout {
+  display: grid;
+  grid-template-columns: 1.32fr 1fr;
+  gap: 14px;
+  min-height: 0;
+}
+.circuit-panel,
+.commutator-panel {
+  padding: 14px 17px;
+  min-width: 0;
+  min-height: 0;
+}
+.panel-heading h2 {
+  font-size: 20px;
+}
+.panel-heading span {
+  font-size: 13px;
+  color: #6a8076;
+}
+#phase-label {
+  color: #ab5439;
+  font-weight: 700;
+}
+.circuit {
+  width: 100%;
+  height: 185px;
+  display: block;
+  overflow: visible;
+}
+.wire {
+  fill: none;
+  stroke: #38594f;
+  stroke-width: 3;
+  stroke-linejoin: round;
+}
+.extra-resistor rect {
+  fill: #eee5fb;
+  stroke: #8c6ba4;
+  stroke-width: 2;
+}
+.extra-resistor text,
+.armature-resistor text {
+  font-size: 18px;
+  text-anchor: middle;
+  fill: #38594f;
+}
+.armature-resistor rect {
+  fill: #f9e1d0;
+  stroke: #b65a37;
+  stroke-width: 3;
+}
+.current-flow {
+  fill: none;
+  stroke: #d35c35;
+  stroke-linecap: round;
+  stroke-dasharray: 2 16;
+  opacity: 0;
+}
+.svg-label {
+  text-anchor: middle;
+  fill: #38594f;
+  font-size: 19px;
+  font-weight: 600;
+}
+.svg-label #emf-value {
+  fill: #287f70;
+}
+.emf-arrow {
+  fill: none;
+  stroke: #287f70;
+  stroke-width: 3;
+}
+.current-arrow {
+  fill: none;
+  stroke: #b65a37;
+  stroke-width: 3;
+}
+.current-label,
+.drop-label {
+  fill: #b65a37;
+  font-size: 20px;
+  font-weight: 700;
+}
+.drop-label,
+.external-label {
+  text-anchor: middle;
+}
+.external-label {
+  font-size: 17px;
+  fill: #795498;
+}
+.field-note {
+  font-size: 15px;
+  fill: #6a8076;
+}
+.voltage-heading {
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+.voltage-heading span {
+  color: #607c71;
+}
+.voltage-bar {
+  height: 16px;
+  display: flex;
+  overflow: hidden;
+  border-radius: 5px;
+  background: #edf1ed;
+}
+.voltage-bar span {
+  display: block;
+  height: 100%;
+}
+#emf-bar {
+  background: #368a76;
+}
+#armature-bar {
+  background: #d36d44;
+}
+#external-bar {
+  background: #a48ab8;
+}
+#open-bar {
+  background: repeating-linear-gradient(
+    135deg,
+    #e8ede8,
+    #e8ede8 7px,
+    #d9e1da 7px,
+    #d9e1da 9px
+  );
+}
+.bar-legend {
+  display: flex;
+  gap: 20px;
+  font-size: 12px;
+  margin-top: 4px;
+}
+.bar-legend span::before {
+  content: '';
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 2px;
+  margin-right: 5px;
+  background: #368a76;
+}
+.bar-legend .armature-key::before {
+  background: #d36d44;
+}
+.bar-legend .external-key::before {
+  background: #a48ab8;
+}
+.circuit-note {
+  font-size: 16px;
+  color: #a44b32;
+  font-weight: 600;
+  margin-top: 8px;
+}
+.commutator-layout {
+  height: 219px;
+  display: grid;
+  grid-template-columns: 1.32fr 1fr;
+  align-items: center;
+  gap: 4px;
+}
+.commutator {
+  width: 100%;
+  height: 219px;
+}
+.brush rect {
+  fill: #4a5754;
+  stroke: #243f36;
+  stroke-width: 2;
+}
+.brush-text {
+  fill: #5e786d;
+  font-size: 14px;
+}
+.commutator-copy strong {
+  color: #287f70;
+  font-size: 18px;
+}
+.commutator-copy p {
+  font-size: 14px;
+  line-height: 1.5;
+  margin-top: 5px;
+}
+.coil-current {
+  font-size: 13px;
+  color: #5f7a70;
+  margin-top: 9px;
+}
+.coil-current b {
+  font-size: 20px;
+  color: #b27932;
+}
+.commutator-copy .danger-note {
+  color: #a44b32;
+  font-size: 13px;
+}
+.readouts {
+  display: grid;
+  grid-template-columns: 1fr 1.12fr 1fr;
+  gap: 8px;
+}
+.readouts > div {
+  background: #f3f7f2;
+  border-radius: 7px;
+  padding: 5px 10px;
+}
+.readouts span {
+  font-size: 12px;
+  color: #688275;
+  display: block;
+}
+.readouts strong {
+  font-size: 23px;
+  font-variant-numeric: tabular-nums;
+}
+.readouts small {
+  font-size: 12px;
+  font-weight: 400;
+}
+.readouts .high-current {
+  color: #bd4b2a;
+}
+.commutation-note {
+  margin-top: 7px;
+  font-size: 11px;
+  color: #6a7e72;
+}
+.takeaways {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.formula-card,
+.methods-card {
+  border: 1px solid #d4ded0;
+  border-radius: 12px;
+  padding: 10px 17px;
+  min-height: 0;
+  background: #f0f6ed;
+}
+.formula-card h2,
+.methods-card h2 {
+  font-size: 18px;
+  margin-bottom: 4px;
+  line-height: 1.2;
+}
+.formula {
+  font-family: 'Cambria Math', 'Times New Roman', serif;
+  font-size: 25px;
+  line-height: 1.2;
+}
+.fraction {
+  display: inline-flex;
+  vertical-align: middle;
+  flex-direction: column;
+  text-align: center;
+  line-height: 1.05;
+  margin: 0 4px;
+  font-size: 23px;
+}
+.fraction > span:first-child {
+  border-bottom: 1px solid currentColor;
+}
+sub {
+  line-height: 0;
+  font-size: 65%;
+}
+.torque {
+  font-family: 'Cambria Math', 'Times New Roman', serif;
+  font-size: 25px;
+  margin-top: 3px;
+  line-height: 1.1;
+}
+.muted {
+  font-size: 12px;
+  color: #748472;
+  margin-top: 5px;
+}
+.methods-card {
+  background: #fcf6e9;
+  border-color: #e2d8bc;
+}
+.methods-card > p:not(.muted) {
+  font-size: 15px;
+  line-height: 1.6;
+}
+.methods-card .method-note {
+  font-size: 12px !important;
+  color: #986532;
+  margin-top: 4px;
+}
+.playback {
+  gap: 8px;
+}
+.playback button {
+  padding: 7px 12px;
+  font-size: 14px;
+}
+.playback label {
+  margin-left: auto;
+  font-size: 13px;
+  color: #718174;
+}
+#progress {
+  width: 205px;
+  accent-color: #287f70;
+}
+.starting-page footer {
+  font-size: 11px;
+  color: #7b8779;
+}

@@ -2,11 +2,16 @@ import './dc-generator-emf-controls.js';
 import './dc-machine-basics.js';
 
 const $ = (id) => document.getElementById(id);
-const defaults = { voltage: 220, resistance: 1, flux: 20 };
+const isDrive =
+  document.querySelector('main').dataset.characteristic === 'drive';
+const armatureResistance = isDrive ? 1 : 0;
+const referenceName = isDrive ? '固有' : '默认';
+const defaults = { voltage: 220, resistance: isDrive ? 0 : 1, flux: 20 };
 const ce = 10;
 const ct = (60 * ce) / (2 * Math.PI);
 const baselineSlope =
-  defaults.resistance / (ce * ct * (defaults.flux / 1000) ** 2);
+  (armatureResistance + defaults.resistance) /
+  (ce * ct * (defaults.flux / 1000) ** 2);
 // Fixed axes preserve visual slope comparisons across all slider settings.
 const x = (torque) => 80 + (torque / 80) * 750;
 const y = (speed) => 308 - (speed / 2800) * 280;
@@ -35,7 +40,7 @@ function render() {
   const fluxMilli = Number($('flux').value);
   const flux = fluxMilli / 1000;
   const noLoad = voltage / (ce * flux);
-  const slope = resistance / (ce * ct * flux ** 2);
+  const slope = (armatureResistance + resistance) / (ce * ct * flux ** 2);
   const ratio = slope / baselineSlope;
   const kind =
     Math.abs(ratio - 1) < 1e-9 ? 'same' : ratio > 1 ? 'soft' : 'hard';
@@ -51,14 +56,15 @@ function render() {
   $('intercept-label').textContent = `n₀ = ${noLoad.toFixed(0)}`;
   $('hardness').dataset.kind = kind;
   $('hardness-label').textContent = label;
-  $('slope-ratio').textContent = `k / k默认 = ${ratio.toFixed(2)}`;
+  $('slope-ratio').textContent =
+    `${isDrive ? 'γ / γ' : 'k / k'}${referenceName} = ${ratio.toFixed(2)}`;
   $('hardness-description').textContent = {
-    same: '相同转矩增量下，转速下降量与默认相同。',
+    same: `相同转矩增量下，转速下降量与${referenceName}相同。`,
     soft: '相同转矩增量下，转速下降更多。',
     hard: '相同转矩增量下，转速下降更少。',
   }[kind];
   $('chart-description').textContent =
-    `当前电压 ${voltage} V，电阻 ${resistance.toFixed(1)} Ω，磁通 ${fluxMilli} mWb；理想空载转速 ${noLoad.toFixed(0)} r/min，斜率绝对值 ${slope.toFixed(2)} (r/min)/(N·m)，相对默认曲线${label}。灰色虚线为默认曲线。`;
+    `当前电压 ${voltage} V，${isDrive ? '外串电阻' : '电阻'} ${resistance.toFixed(1)} Ω，磁通 ${fluxMilli} mWb；理想空载转速 ${noLoad.toFixed(0)} r/min，斜率绝对值 ${slope.toFixed(2)} (r/min)/(N·m)，相对${referenceName}曲线${label}。${isDrive ? '红色' : '灰色'}虚线为${referenceName}曲线。`;
 }
 for (const key of Object.keys(defaults)) {
   $(key).addEventListener('input', render);

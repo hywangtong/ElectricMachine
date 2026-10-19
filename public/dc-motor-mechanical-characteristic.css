@@ -176,3 +176,14 @@ input:focus-visible {
   color: #607b72;
   font-size: 14px;
 }
+
+.mechanical-page[data-characteristic='drive'] .equation math {
+  font-size: 28px;
+}
+.mechanical-page[data-characteristic='drive'] .reference-key {
+  border-top-color: #c62828;
+}
+.mechanical-page[data-characteristic='drive'] .control-panel {
+  grid-template-rows: 28px repeat(3, 73px) 1fr;
+  gap: 8px;
+}
