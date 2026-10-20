@@ -1,0 +1,195 @@
+.starting-exercise .given-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.starting-exercise.is-revealed .exercise-layout {
+  grid-template-columns: 480px minmax(0, 1fr);
+}
+
+.starting-exercise.is-revealed .given-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.starting-exercise.is-revealed .question-card {
+  gap: 12px;
+  padding: 22px 24px;
+}
+
+.starting-exercise .card-label small {
+  font-size: 9px;
+  letter-spacing: 0;
+}
+
+.starting-exercise .given-grid dd {
+  font-size: 21px;
+}
+
+.starting-exercise .solution-panel {
+  grid-template-rows: 42px minmax(0, 1fr);
+  padding: 18px 20px;
+  gap: 12px;
+}
+
+.solution-tabs {
+  display: flex;
+  gap: 8px;
+}
+
+.solution-tabs button {
+  flex: 1;
+  border: 1px solid #bad5ca;
+  border-radius: 8px;
+  background: #fff;
+  color: #38594f;
+  font: inherit;
+  font-size: 19px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.solution-tabs button[aria-selected='true'] {
+  border-color: #287f70;
+  background: #287f70;
+  color: #fff;
+}
+
+.solution-tabs button:focus-visible {
+  outline: 3px solid #d7b45f;
+  outline-offset: 2px;
+}
+
+.solution-tabpanel {
+  min-height: 0;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: 10px;
+}
+
+.starting-exercise .solution-steps li {
+  padding: 10px 16px;
+  grid-template-columns: 38px minmax(0, 1fr);
+  gap: 12px;
+}
+
+.starting-exercise .step-index {
+  width: 36px;
+  height: 36px;
+}
+
+.starting-exercise .solution-steps p {
+  font-family: 'Cambria Math', 'Times New Roman', 'Microsoft YaHei', serif;
+  font-size: 28px;
+  line-height: 1.45;
+}
+
+.starting-exercise .solution-steps .substitution {
+  font-size: 23px;
+}
+
+.starting-exercise .solution-steps b {
+  color: #b25d3f;
+  font-size: inherit;
+}
+
+.starting-exercise .solution-steps sub,
+.starting-exercise .solution-steps sup {
+  line-height: 0;
+}
+
+.starting-exercise .stage-steps {
+  grid-template-rows: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.starting-exercise .stage-steps p {
+  font-size: 25px;
+  line-height: 1.25;
+}
+
+.starting-exercise .stage-steps .substitution {
+  font-size: 21px;
+}
+
+.starting-exercise .stage-steps li {
+  padding: 6px 14px;
+}
+
+.starting-exercise .stage-steps h2 {
+  margin-bottom: 4px;
+}
+
+.starting-exercise .solution-note {
+  font-size: 17px;
+  line-height: 1.45;
+}
+
+.resistor-panel {
+  grid-template-rows: auto minmax(0, 1fr) auto auto;
+  gap: 10px;
+}
+
+.resistor-formula h2 {
+  font-size: 20px;
+  margin-bottom: 6px;
+}
+
+.resistor-formula p {
+  font:
+    22px / 1.25 'Cambria Math',
+    'Times New Roman',
+    serif;
+}
+
+.resistor-panel table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  font-size: 20px;
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+}
+
+.resistor-panel caption {
+  caption-side: bottom;
+  text-align: left;
+  font-size: 16px;
+  color: #687d70;
+  padding-top: 8px;
+}
+
+.resistor-panel th,
+.resistor-panel td {
+  border-bottom: 1px solid #dce7df;
+  padding: 5px;
+}
+
+.resistor-panel thead th {
+  background: #eff6f1;
+  color: #3a7264;
+  font-size: 17px;
+}
+
+.resistor-panel td:last-child {
+  color: #af6540;
+  font-weight: 700;
+  background: #fffaf0;
+}
+
+.resistor-order {
+  padding: 8px 12px;
+  border-radius: 9px;
+  background: #eff6f1;
+  color: #39796f;
+  font-size: 20px;
+  line-height: 1.3;
+}
+
+.resistor-order p {
+  font-size: 17px;
+  margin-top: 3px;
+}
+
+.starting-exercise .resistor-panel .solution-note {
+  font-size: 16px;
+  line-height: 1.4;
+}

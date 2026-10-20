@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>例 8.2.1：电枢串电阻起动计算</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/dc-motor-nameplate-example.css" />
+    <link rel="stylesheet" href="/dc-motor-starting-example.css" />
+    <script src="/dc-machine-basics.js" defer></script>
+    <script type="module" src="/dc-motor-nameplate-example.js"></script>
+    <script type="module" src="/dc-motor-starting-example.js"></script>
+    <script type="module" src="/dc-generator-emf-controls.js"></script>
+  </head>
+  <body>
+    <main class="lesson exercise-page starting-exercise">
+      <header class="page-head exercise-head">
+        <div class="eyebrow">直流拖动 / 8.2 · 例 8.2.1 · 课堂例题</div>
+        <h1>例 8.2.1 · 电枢串电阻起动计算</h1>
+        <p>从允许的起动电流范围出发，求起动级数和各级起动电阻。</p>
+      </header>
+      <section class="exercise-layout">
+        <article class="question-card" aria-labelledby="question-title">
+          <header class="card-label">
+            <span>题目 · 例 8.2.1</span
+            ><small>SEPARATELY EXCITED DC MOTOR</small>
+          </header>
+          <h2 id="question-title">一台 Z₄ 系列他励直流电动机</h2>
+          <dl class="given-grid" aria-label="已知条件">
+            <div>
+              <dt>额定功率</dt>
+              <dd>P<sub>N</sub> = <b>200</b> kW</dd>
+            </div>
+            <div>
+              <dt>额定电枢电压</dt>
+              <dd>U<sub>aN</sub> = <b>440</b> V</dd>
+            </div>
+            <div>
+              <dt>额定电枢电流</dt>
+              <dd>I<sub>aN</sub> = <b>497</b> A</dd>
+            </div>
+            <div>
+              <dt>额定转速</dt>
+              <dd>n<sub>N</sub> = <b>1500</b> r/min</dd>
+            </div>
+            <div>
+              <dt>电枢电阻</dt>
+              <dd>R<sub>a</sub> = <b>0.076</b> Ω</dd>
+            </div>
+          </dl>
+          <div class="question-tasks">
+            <strong>求</strong>
+            <ol>
+              <li>采用电枢串电阻起动，求起动级数 m。</li>
+              <li>求各级总电阻及各段起动电阻。</li>
+            </ol>
+          </div>
+          <button
+            class="reveal-button"
+            type="button"
+            aria-expanded="false"
+            aria-controls="current-solution"
+          >
+            <span class="button-label">显示计算过程与答案</span
+            ><span class="button-icon" aria-hidden="true">→</span>
+          </button>
+        </article>
+        <section
+          class="solution-panel"
+          id="current-solution"
+          aria-label="例 8.2.1 计算过程与答案"
+          hidden
+        >
+          <div class="solution-tabs" role="tablist" aria-label="例题计算子页">
+            <button
+              type="button"
+              role="tab"
+              id="current-tab"
+              aria-controls="current-panel"
+              aria-selected="true"
+              tabindex="0"
+              data-starting-page="current"
+            >
+              01 · 电流选择
+            </button>
+            <button
+              type="button"
+              role="tab"
+              id="stages-tab"
+              aria-controls="stages-panel"
+              aria-selected="false"
+              tabindex="-1"
+              data-starting-page="stages"
+            >
+              02 · 级数校验
+            </button>
+            <button
+              type="button"
+              role="tab"
+              id="resistors-tab"
+              aria-controls="resistors-panel"
+              aria-selected="false"
+              tabindex="-1"
+              data-starting-page="resistors"
+            >
+              03 · 电阻计算
+            </button>
+          </div>
+          <section
+            class="solution-tabpanel"
+            id="current-panel"
+            role="tabpanel"
+            aria-labelledby="current-tab"
+          >
+            <ol class="solution-steps">
+              <li>
+                <span class="step-index">01</span>
+                <div>
+                  <h2>选择起动电流上限 I₁</h2>
+                  <p>I₁ = (1.5～2.0) I<sub>aN</sub></p>
+                  <p class="substitution">
+                    = (745.5～994) A，取 <b>I₁ = 840 A</b>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <span class="step-index">02</span>
+                <div>
+                  <h2>选择切换电流 I₂</h2>
+                  <p>I₂ = (1.1～1.2) I<sub>aN</sub></p>
+                  <p class="substitution">
+                    = (546.7～596.4) A，取 <b>I₂ = 560 A</b>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <span class="step-index">β</span>
+                <div>
+                  <h2>求起动电流比（初选值）</h2>
+                  <p>β = I₁ / I₂ = 840 / 560 = <b>1.5</b></p>
+                  <p class="substitution">
+                    取整数级数后，需要重新计算 β 和 I₂。
+                  </p>
+                </div>
+              </li>
+            </ol>
+            <p class="solution-note">
+              I₁ 为每级起动的电流上限，I₂
+              为切除下一段电阻前的电流；本例电流范围按题图选取。
+            </p>
+          </section>
+          <section
+            class="solution-tabpanel"
+            id="stages-panel"
+            role="tabpanel"
+            aria-labelledby="stages-tab"
+            hidden
+          >
+            <ol class="solution-steps stage-steps">
+              <li>
+                <span class="step-index">03</span>
+                <div>
+                  <h2>求最大电枢回路总电阻（含 R<sub>a</sub>）</h2>
+                  <p>
+                    R<sub>am</sub> = U<sub>aN</sub> / I₁ = 440 / 840 ≈
+                    <b>0.524 Ω</b>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <span class="step-index">m</span>
+                <div>
+                  <h2>由 R<sub>am</sub> = β<sup>m</sup>R<sub>a</sub> 求级数</h2>
+                  <p>m* = lg(R<sub>am</sub> / R<sub>a</sub>) / lg β</p>
+                  <p class="substitution">
+                    = lg(0.524 / 0.076) / lg 1.5 ≈ 4.76，取 <b>m = 5 级</b>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <span class="step-index">04</span>
+                <div>
+                  <h2>固定 I₁ 和最大总电阻，重新计算 β</h2>
+                  <p>β = (R<sub>am</sub> / R<sub>a</sub>)<sup>1/m</sup></p>
+                  <p class="substitution">
+                    = (0.524 / 0.076)<sup>1/5</sup> ≈ <b>1.47</b>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <span class="step-index">I₂</span>
+                <div>
+                  <h2>修正切换电流并校验范围</h2>
+                  <p>I₂ = I₁ / β = 840 / 1.47 ≈ <b>571 A</b></p>
+                  <p class="substitution">
+                    546.7 A ≤ 571 A ≤ 596.4 A，五级方案可用。
+                  </p>
+                </div>
+              </li>
+            </ol>
+            <p class="solution-note">
+              取整数级数后应修正电流比，不能沿用初选 β = 1.5。
+            </p>
+          </section>
+          <section
+            class="solution-tabpanel resistor-panel"
+            id="resistors-panel"
+            role="tabpanel"
+            aria-labelledby="resistors-tab"
+            hidden
+          >
+            <div class="resistor-formula">
+              <h2>⑤ 各级总电阻与各段外接电阻</h2>
+              <p>
+                R<sub>ai</sub> = β<sup>i</sup>R<sub>a</sub>；R<sub>a0</sub> =
+                R<sub>a</sub> = 0.076 Ω
+              </p>
+              <p>
+                R<sub>STi</sub> = R<sub>ai</sub> − R<sub>a,i−1</sub> = (β<sup
+                  >i</sup
+                >
+                − β<sup>i−1</sup>) R<sub>a</sub>
+              </p>
+            </div>
+            <table>
+              <caption>
+                编号从固有机械特性向外递增；电阻单位均为 Ω。
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col">段号</th>
+                  <th scope="col">各级总电阻 R<sub>ai</sub></th>
+                  <th scope="col">各段外接电阻的计算</th>
+                  <th scope="col">R<sub>STi</sub></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>1.47 × 0.076 ≈ 0.1117</td>
+                  <td>(1.47 − 1) × 0.076</td>
+                  <td>0.0357</td>
+                </tr>
+                <tr>
+                  <th scope="row">2</th>
+                  <td>1.47² × 0.076 ≈ 0.1642</td>
+                  <td>(1.47² − 1.47) × 0.076</td>
+                  <td>0.0525</td>
+                </tr>
+                <tr>
+                  <th scope="row">3</th>
+                  <td>1.47³ × 0.076 ≈ 0.2414</td>
+                  <td>(1.47³ − 1.47²) × 0.076</td>
+                  <td>0.0772</td>
+                </tr>
+                <tr>
+                  <th scope="row">4</th>
+                  <td>1.47⁴ × 0.076 ≈ 0.3549</td>
+                  <td>(1.47⁴ − 1.47³) × 0.076</td>
+                  <td>0.1135</td>
+                </tr>
+                <tr>
+                  <th scope="row">5</th>
+                  <td>1.47⁵ × 0.076 ≈ 0.5217</td>
+                  <td>(1.47⁵ − 1.47⁴) × 0.076</td>
+                  <td>0.1668</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="resistor-order">
+              <strong
+                >切除顺序：R<sub>ST5</sub> → R<sub>ST4</sub> → R<sub>ST3</sub> →
+                R<sub>ST2</sub> → R<sub>ST1</sub></strong
+              >
+              <p>全部切除后，仅剩电枢电阻 R<sub>a</sub>。</p>
+            </div>
+            <p class="solution-note">
+              按题图取 β = 1.47，各段之和约 0.4457 Ω，加 R<sub>a</sub> 后约
+              0.5217 Ω；与 0.524 Ω 的小差异来自 β 的舍入。保留未舍入 β≈1.47120
+              时，总电阻为 440 / 840≈0.52381 Ω。
+            </p>
+          </section>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>

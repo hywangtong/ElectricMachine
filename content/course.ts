@@ -557,6 +557,34 @@ export const slides: Slide[] = [
         chapterId: chapter.id,
         embedUrl: '/dc-motor-resistance-starting.html',
       });
+      chapterSlides.push({
+        id: 'dc-drives-stepped-starting',
+        kind: 'embed',
+        title: '有级启动的原理：电路与机械特性联动',
+        chapterId: chapter.id,
+        embedUrl: '/dc-motor-stepped-starting.html',
+      });
+      chapterSlides.push({
+        id: 'dc-drives-starting-resistance-method',
+        kind: 'embed',
+        title: '分级启动电阻：计算流程与公式依据',
+        chapterId: chapter.id,
+        embedUrl: '/dc-motor-starting-resistance-method.html',
+      });
+      chapterSlides.push({
+        id: 'dc-drives-starting-resistance-example',
+        kind: 'embed',
+        title: '分级启动电阻：四级计算示例',
+        chapterId: chapter.id,
+        embedUrl: '/dc-motor-starting-resistance-example.html',
+      });
+      chapterSlides.push({
+        id: 'dc-drives-starting-example-current',
+        kind: 'embed',
+        title: '例 8.2.1：电枢串电阻起动计算',
+        chapterId: chapter.id,
+        embedUrl: '/dc-motor-starting-example-current.html',
+      });
     }
 
     if (chapter.id === 'introduction') {

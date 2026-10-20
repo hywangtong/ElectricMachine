@@ -1,0 +1,382 @@
+.calculation-page {
+  grid-template-rows: 70px minmax(0, 1fr) 40px;
+  gap: 10px;
+  padding: 18px 24px;
+}
+.calculation-page h2 {
+  font-size: 22px;
+}
+.calculation-page h2 span {
+  font-size: 17px;
+  font-weight: 400;
+  color: #6d837b;
+  margin-left: 12px;
+}
+.calculation-page .panel {
+  padding: 13px 16px;
+  min-width: 0;
+  min-height: 0;
+}
+.method-layout {
+  display: grid;
+  grid-template-columns: 1.06fr 1fr;
+  gap: 14px;
+  min-height: 0;
+}
+.flow-panel {
+  display: grid;
+  grid-template-rows: 29px 1fr;
+}
+.flowchart {
+  position: relative;
+  min-height: 0;
+}
+.flow-wires {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.flow-wires > path {
+  fill: none;
+  stroke: #39796f;
+  stroke-width: 2;
+  marker-end: url(#flow-arrow);
+}
+.flow-wires .return-line {
+  stroke-dasharray: 5 4;
+}
+.flow-wires text {
+  fill: #39796f;
+  font-size: 20px;
+}
+.flow-node {
+  position: absolute;
+  left: 1%;
+  width: 88%;
+  border: 1px solid #c2d6cc;
+  background: #f3f8f3;
+  border-radius: 9px;
+  padding: 4px 13px;
+}
+.flow-node h3 {
+  font-size: 19px;
+  line-height: 1;
+  margin: 0 0 3px;
+  font-weight: 600;
+}
+.flow-node h3 b {
+  display: inline-grid;
+  place-items: center;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  background: #39796f;
+  color: #fff;
+  margin-right: 8px;
+  font-size: 16px;
+}
+.equation {
+  font-size: 23px;
+  font-family: 'Cambria Math', 'Times New Roman', 'Microsoft YaHei', serif;
+  line-height: 1.35;
+}
+.flow-node p {
+  font-size: 16px;
+  line-height: 1.2;
+  color: #5b776c;
+  margin-top: 2px;
+}
+.flow-node .equation {
+  font-size: 23px;
+  line-height: 1.15;
+}
+.calculation-page sub,
+.calculation-page sup {
+  line-height: 0;
+}
+.node-one {
+  top: 0;
+  height: 16.8%;
+}
+.node-two {
+  top: 19.8%;
+  height: 11.9%;
+}
+.node-three {
+  top: 34.7%;
+  height: 15.8%;
+}
+.node-four {
+  top: 52.2%;
+  height: 16.2%;
+}
+.node-five {
+  top: 83.7%;
+  height: 16.3%;
+  background: #fff8e8;
+  border-color: #dcc597;
+}
+.flow-decision {
+  position: absolute;
+  top: 69.8%;
+  left: 20.3%;
+  width: 53%;
+  height: 10.8%;
+  display: grid;
+  place-items: center;
+  text-align: center;
+}
+.flow-decision::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #edf3e6;
+  border: 1px solid #a2bc92;
+  clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+}
+.flow-decision span {
+  position: relative;
+  font-size: 20px;
+  font-weight: 600;
+}
+.flow-decision small {
+  display: block;
+  font-size: 16px;
+  margin-top: 2px;
+  font-weight: 400;
+}
+.return-note {
+  position: absolute;
+  right: -1%;
+  top: 26%;
+  color: #67806d;
+  font-size: 16px;
+  line-height: 1.55;
+  text-align: center;
+}
+.method-right {
+  display: grid;
+  grid-template-rows: 1.13fr 1fr;
+  gap: 12px;
+  min-height: 0;
+}
+.curve-panel {
+  display: grid;
+  grid-template-rows: 28px minmax(0, 1fr) 44px;
+}
+.resistance-chart {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+.resistance-chart text {
+  font:
+    23px 'Segoe UI',
+    'Microsoft YaHei',
+    sans-serif;
+  fill: #385b4e;
+}
+.resistance-chart .curve-label {
+  font-size: 25px;
+  font-weight: 600;
+}
+.resistance-chart .axis-label {
+  font:
+    italic 25px 'Cambria Math',
+    serif;
+  fill: #244f43;
+}
+.resistance-chart .grid-line {
+  stroke: #e8eee7;
+  stroke-width: 1;
+}
+.resistance-chart .limit-line {
+  stroke: #a6b4a7;
+  stroke-width: 1.2;
+  stroke-dasharray: 5 5;
+}
+.resistance-chart .characteristic {
+  fill: none;
+  stroke-width: 2.3;
+}
+.resistance-chart .trajectory {
+  fill: none;
+  stroke: #b0863e;
+  stroke-width: 2;
+}
+.resistance-chart .switch-arrow {
+  stroke: #87948c;
+  stroke-width: 2;
+  fill: none;
+}
+.resistance-chart .switch-arrow.selected {
+  stroke: #c37927;
+  stroke-width: 4;
+}
+.resistance-chart .switch-point {
+  fill: #fff;
+  stroke: #c37927;
+  stroke-width: 2;
+}
+.chart-caption {
+  color: #647e70;
+  font-size: 18px;
+  line-height: 1.4;
+}
+.derivation-panel {
+  display: grid;
+  align-content: space-between;
+  gap: 4px;
+}
+.derivation-panel p {
+  font-size: 19px;
+  line-height: 1.5;
+  color: #587266;
+}
+.accent {
+  color: #a35b30;
+  font-weight: 600;
+}
+.definition {
+  background: #f7f2e6;
+  border-radius: 8px;
+  padding: 10px 13px;
+  font-size: 18px;
+  line-height: 1.45;
+}
+.definition b,
+.definition span {
+  display: block;
+}
+.definition span {
+  color: #776e58;
+  font-size: 18px;
+  margin-top: 3px;
+}
+.calculation-page footer {
+  font-size: 16px;
+  color: #708376;
+  line-height: 1.5;
+  align-self: center;
+}
+.example-page {
+  grid-template-rows: 78px 116px minmax(0, 1fr) 40px;
+}
+.example-flow {
+  display: grid;
+  grid-template-columns: 1fr 25px 1fr 25px 1fr 25px 1.08fr;
+  align-items: center;
+  padding: 13px 17px;
+  border-radius: 12px;
+  background: #edf4ed;
+  border: 1px solid #c4d8ca;
+}
+.example-flow b,
+.example-flow span {
+  display: block;
+}
+.example-flow b {
+  color: #2d6c5f;
+  font-size: 19px;
+  margin-bottom: 6px;
+}
+.example-flow span {
+  font-size: 19px;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+.example-flow i {
+  font-size: 24px;
+  font-style: normal;
+  color: #678674;
+}
+.example-layout {
+  display: grid;
+  grid-template-columns: 1.04fr 1fr;
+  gap: 14px;
+  min-height: 0;
+}
+.example-result {
+  display: grid;
+  align-content: space-between;
+  gap: 4px;
+}
+.example-result .definition {
+  padding: 8px 13px;
+}
+.example-result .equation {
+  font-size: 22px;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-variant-numeric: tabular-nums;
+  font-size: 19px;
+  text-align: center;
+}
+caption {
+  caption-side: bottom;
+  text-align: left;
+  font-size: 17px;
+  padding-top: 8px;
+  color: #748275;
+}
+th {
+  color: #557467;
+  font-size: 19px;
+  font-weight: 600;
+  border-bottom: 1px solid #cbd8cd;
+  padding: 8px 3px;
+}
+td {
+  padding: 3px 4px;
+  border-bottom: 1px solid #e8eee7;
+}
+tr.selected {
+  background: #fff5de;
+}
+td button {
+  color: #356f60;
+  background: #f1f6f0;
+  border: 1px solid #c7d6c6;
+  padding: 3px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 19px;
+  min-width: 136px;
+}
+td button[aria-pressed='true'] {
+  color: #925c21;
+  background: #ffebbc;
+  border-color: #ca9d57;
+}
+td button:focus-visible {
+  outline: 3px solid #b77e35;
+  outline-offset: 2px;
+}
+td:last-child {
+  color: #a76929;
+  font-weight: 600;
+}
+.sum-check {
+  font-size: 17px;
+  color: #34715c;
+  padding: 7px 0;
+}
+.example-curve {
+  display: grid;
+  grid-template-rows: 30px minmax(0, 1fr) 76px 52px;
+  gap: 5px;
+}
+.switch-detail {
+  padding: 8px 12px;
+  background: #fff5e2;
+  border-radius: 8px;
+  color: #95632d;
+  font-size: 20px;
+  line-height: 1.5;
+}

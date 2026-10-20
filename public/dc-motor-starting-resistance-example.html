@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>分级启动电阻：四级计算示例</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/dc-motor-starting-resistance.css" />
+    <script type="module" src="/dc-motor-starting-resistance.js"></script>
+    <script type="module" src="/dc-generator-emf-controls.js"></script>
+    <script src="/dc-machine-basics.js" defer></script>
+  </head>
+  <body>
+    <main class="lesson calculation-page example-page">
+      <header class="page-head">
+        <div class="eyebrow">直流拖动 / 8.2 · 分级启动电阻的计算 · 02</div>
+        <h1>四级启动：从电流范围算到每一段电阻</h1>
+        <p>
+          沿用前页电机：U<sub>aN</sub> = 220 V，Rₐ = 1 Ω，I<sub>aN</sub> = I<sub
+            >L</sub
+          >
+          = 15 A，n<sub>N</sub> = 1500 r/min；本例 I<sub>M</sub> = 33 A。
+        </p>
+      </header>
+      <section class="example-flow" aria-label="四级启动计算步骤一至四">
+        <div>
+          <b>① 选择电流</b><span>I₁ = 1.9 × 15 = 28.5 A</span
+          ><span>初选 I₂ = 1.1 × 15 = 16.5 A</span>
+        </div>
+        <i aria-hidden="true">→</i>
+        <div>
+          <b>② 电流比与总电阻</b><span id="initial-ratio"></span
+          ><span id="initial-total"></span>
+        </div>
+        <i aria-hidden="true">→</i>
+        <div>
+          <b>③ 确定整数级数</b><span id="stage-calculation"></span
+          ><span>向上取整，选 m = 4 级</span>
+        </div>
+        <i aria-hidden="true">→</i>
+        <div>
+          <b>④ 修正并校验</b><span id="corrected-ratio"></span
+          ><span id="corrected-current"></span>
+        </div>
+      </section>
+      <div class="example-layout">
+        <section class="panel example-result">
+          <h2>⑤ 各段电阻与切除顺序 <span>点击行，查看该次切换</span></h2>
+          <div class="equation">
+            R<sub>STi</sub> = R<sub>ai</sub> − R<sub>a,i−1</sub> = (β<sup
+              >i</sup
+            >
+            − β<sup>i−1</sup>) Rₐ
+          </div>
+          <table>
+            <caption>
+              由大编号向小编号切除；总电阻包含 Rₐ，单位均为 Ω。
+            </caption>
+            <thead>
+              <tr>
+                <th>切除顺序</th>
+                <th>切前 R<sub>ai</sub></th>
+                <th>切后 R<sub>a,i−1</sub></th>
+                <th>本段 R<sub>STi</sub></th>
+              </tr>
+            </thead>
+            <tbody id="resistance-rows"></tbody>
+          </table>
+          <div id="resistance-check" class="sum-check"></div>
+          <div class="definition">
+            <b>编号从固有特性向外递增：R<sub>a0</sub> = Rₐ</b
+            ><span
+              >启动时先切 R<sub>ST4</sub>，最后切
+              R<sub>ST1</sub>，回到固有特性。</span
+            >
+          </div>
+        </section>
+        <section class="panel example-curve">
+          <h2>把每段电阻放回机械特性曲线</h2>
+          <svg
+            class="resistance-chart"
+            viewBox="0 0 640 320"
+            role="img"
+            aria-label="四级启动机械特性，点击表格行高亮对应等转速切阻箭头"
+          ></svg>
+          <p id="switch-detail" class="switch-detail" role="status"></p>
+          <p class="chart-caption">
+            每次切阻：I₂ → I₁；全部切除后沿固有特性到达负载平衡点 p。
+          </p>
+        </section>
+      </div>
+      <footer>
+        计算值由未舍入数据得到；表中显示三位小数。本例为恒磁通、恒转矩负载的准稳态计算，I₂
+        应在 16.5～18.0 A 内；电阻功率与短时热容量需另行选型。
+      </footer>
+    </main>
+  </body>
+</html>

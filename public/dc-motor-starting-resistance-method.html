@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>分级启动电阻：计算流程与公式依据</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/dc-motor-starting-resistance.css" />
+    <script type="module" src="/dc-motor-starting-resistance.js"></script>
+    <script src="/dc-machine-basics.js" defer></script>
+  </head>
+  <body>
+    <main class="lesson calculation-page">
+      <header class="page-head">
+        <div class="eyebrow">直流拖动 / 8.2 · 分级启动电阻的计算 · 01</div>
+        <h1>先定电流范围，再求每一段启动电阻</h1>
+        <p>
+          他励电动机 · Uₐ = U<sub>aN</sub>、Φ = Φ<sub>N</sub> 恒定 · 恒转矩负载
+          · 已知 U<sub>aN</sub>、Rₐ、I<sub>aN</sub>、I<sub>L</sub>
+        </p>
+      </header>
+      <div class="method-layout">
+        <section
+          class="panel flow-panel"
+          aria-label="启动电阻计算五步流程图，校验不通过则返回调整"
+        >
+          <h2>计算流程 <span>箭头表示计算顺序</span></h2>
+          <div class="flowchart">
+            <svg
+              class="flow-wires"
+              viewBox="0 0 706 536"
+              preserveAspectRatio="none"
+              aria-hidden="true"
+            >
+              <defs>
+                <marker
+                  id="flow-arrow"
+                  viewBox="0 0 10 10"
+                  refX="8"
+                  refY="5"
+                  markerWidth="6"
+                  markerHeight="6"
+                  orient="auto"
+                >
+                  <path d="M0 0 10 5 0 10Z" fill="#39796f" />
+                </marker>
+              </defs>
+              <path d="M329 90V106" />
+              <path d="M329 170V186" />
+              <path d="M329 264V280" />
+              <path d="M329 358V374" />
+              <path d="M329 432V449" />
+              <path class="return-line" d="M515 403H675V232H610" />
+              <text x="649" y="325" text-anchor="middle">否</text>
+              <text x="351" y="448">是</text>
+            </svg>
+            <div class="flow-node node-one">
+              <h3><b>1</b>选择启动电流 I₁ 与切换电流 I₂</h3>
+              <div class="equation">
+                I₁ = (1.5～2.0) I<sub>aN</sub>；I₂ = (1.1～1.2) I<sub>L</sub>
+              </div>
+              <p>
+                恒磁通下 T ∝ Iₐ；还须满足 I<sub>L</sub> &lt; I₂ &lt; I₁ &lt;
+                I<sub>M</sub>。
+              </p>
+            </div>
+            <div class="flow-node node-two">
+              <h3><b>2</b>初算电流比与最大总电阻</h3>
+              <div class="equation">
+                β₀ = I₁ / I₂；R<sub>am</sub> = U<sub>aN</sub> / I₁
+              </div>
+            </div>
+            <div class="flow-node node-three">
+              <h3><b>3</b>确定启动级数 m（正整数）</h3>
+              <div class="equation">m* = lg(R<sub>am</sub> / Rₐ) / lg β₀</div>
+              <p>先取 m = ⌈m*⌉；若校验失败，调整 m 或重选电流。</p>
+            </div>
+            <div class="flow-node node-four">
+              <h3><b>4</b>按整数级数修正 β，重新求 I₂</h3>
+              <div class="equation">
+                β = (R<sub>am</sub> / Rₐ)<sup>1/m</sup>；I₂ = I₁ / β
+              </div>
+              <p>保持选定的 I₁ 与 R<sub>am</sub> 不变，不能沿用初选 β₀。</p>
+            </div>
+            <div class="flow-decision">
+              <span
+                >I₂ 是否在规定范围内？<small
+                  >且 I<sub>L</sub> &lt; I₂ &lt; I₁ &lt; I<sub>M</sub></small
+                ></span
+              >
+            </div>
+            <div class="flow-node node-five">
+              <h3><b>5</b>求各段外接电阻，校核总和</h3>
+              <div class="equation">
+                R<sub>STi</sub> = (β<sup>i</sup> − β<sup>i−1</sup>) Rₐ，i =
+                1,…,m
+              </div>
+              <p>
+                ΣR<sub>STi</sub> = R<sub>am</sub> − Rₐ；启动时按 m → 1 切除。
+              </p>
+            </div>
+            <div class="return-note">调整 m<br />或返回①<br />重选电流</div>
+          </div>
+        </section>
+        <div class="method-right">
+          <section class="panel curve-panel">
+            <h2>机械特性：等转速切阻</h2>
+            <svg
+              class="resistance-chart"
+              viewBox="0 0 640 320"
+              role="img"
+              aria-label="恒磁通下的分级启动机械特性曲线，电流降至I2后等转速切换到I1"
+            ></svg>
+            <p class="chart-caption">
+              示例参数见下一页。斜线：加速；水平箭头：等转速切阻。
+            </p>
+          </section>
+          <section class="panel derivation-panel">
+            <h2>公式从哪里来？</h2>
+            <p>切除第 i 段前后，转速相同，因此反电动势相同：</p>
+            <div class="equation">
+              U<sub>aN</sub> − R<sub>ai</sub>I₂ = U<sub>aN</sub> −
+              R<sub>a,i−1</sub>I₁
+            </div>
+            <div class="equation accent">
+              R<sub>ai</sub> = βR<sub>a,i−1</sub> = β<sup>i</sup>Rₐ
+            </div>
+            <p>
+              令 R<sub>a0</sub> = Rₐ；全部 m 段串入时 R<sub>am</sub> =
+              β<sup>m</sup>Rₐ。
+            </p>
+            <div class="definition">
+              <b>总电阻 R<sub>ai</sub> ≠ 分段电阻 R<sub>STi</sub></b
+              ><span
+                >R<sub>ai</sub> 含 Rₐ；R<sub>STi</sub> = R<sub>ai</sub> −
+                R<sub>a,i−1</sub>。</span
+              >
+            </div>
+          </section>
+        </div>
+      </div>
+      <footer>
+        m：外接电阻段数，也是切除次数；I<sub>L</sub>：负载转矩对应的电枢电流；I<sub>M</sub>：允许短时过载电流。忽略电感、电刷压降与电枢反应；切换电流表示准稳态值，真实电感电流连续。
+      </footer>
+    </main>
+  </body>
+</html>

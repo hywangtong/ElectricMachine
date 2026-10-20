@@ -137,7 +137,10 @@ const findCourseIndex = (id: string) => {
       ? 'dc-motor-nameplate-example'
       : id === 'dc-drives-natural-characteristic-example-hardness'
         ? 'dc-drives-natural-characteristic-example'
-        : id;
+        : id === 'dc-drives-starting-example-stages' ||
+            id === 'dc-drives-starting-example-resistors'
+          ? 'dc-drives-starting-example-current'
+          : id;
   const directIndex = courseSlides.findIndex((item) => item.id === stableId);
   if (directIndex >= 0) return directIndex;
   if (findShuntTab(id))

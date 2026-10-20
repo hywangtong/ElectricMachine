@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>有级启动的原理：电路与机械特性联动</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/dc-motor-stepped-starting.css" />
+    <script type="module" src="/dc-motor-stepped-starting.js"></script>
+    <script type="module" src="/dc-generator-emf-controls.js"></script>
+    <script src="/dc-machine-basics.js" defer></script>
+  </head>
+  <body>
+    <main class="lesson stepped-page">
+      <header class="page-head">
+        <div class="eyebrow">直流拖动 / 8.2 · 有级启动</div>
+        <h1>有级启动的原理</h1>
+        <p>
+          沿人为特性加速 → 电流降至切换值 → 短接一段电阻 → 转入更硬的机械特性
+        </p>
+      </header>
+      <section class="formula-strip" aria-label="电枢串电阻的人为机械特性公式">
+        <div class="formula">
+          <math display="block"
+            ><mi>n</mi><mo>=</mo
+            ><mfrac
+              ><msub><mi>U</mi><mi>N</mi></msub
+              ><mrow
+                ><msub><mi>C</mi><mi>E</mi></msub
+                ><msub><mi>Φ</mi><mi>N</mi></msub></mrow
+              ></mfrac
+            ><mo>−</mo
+            ><mfrac
+              ><mrow
+                ><msub><mi>R</mi><mi>a</mi></msub
+                ><mo>+</mo><msub><mi>R</mi><mi>r</mi></msub></mrow
+              ><mrow
+                ><msub><mi>C</mi><mi>E</mi></msub
+                ><msub><mi>C</mi><mi>T</mi></msub
+                ><msubsup><mi>Φ</mi><mi>N</mi><mn>2</mn></msubsup></mrow
+              ></mfrac
+            ><mi>T</mi></math
+          >
+        </div>
+        <div>
+          <b>Uₐ = Uₙ，Φ = Φₙ 恒定</b><span>Rᵣ = 未被短接的各段电阻之和</span>
+        </div>
+        <div>
+          <b>Rᵣ ↓ → 斜率绝对值 ↓</b><span>理想空载转速 n₀ 不变，特性变硬</span>
+        </div>
+      </section>
+      <div class="linked-layout">
+        <section class="panel graph-panel">
+          <div class="panel-heading">
+            <h2>机械特性与启动轨迹</h2>
+            <span>实线：当前开关组合</span>
+          </div>
+          <svg
+            id="graph"
+            viewBox="0 0 750 434"
+            role="img"
+            aria-label="有级启动机械特性、TL(IL)、T2(I2)、T1(I1)、短时过载临界值 TM(IM) 与动态工作点"
+          ></svg>
+          <div id="curve-legend" class="curve-legend"></div>
+        </section>
+        <aside
+          class="starting-relations"
+          aria-label="启动转矩与切换转矩的取值关系"
+        >
+          <h3>启动与切换的取值</h3>
+          <div class="relation-group">
+            <span>I<sub>1</sub> = (1.5～2.0) I<sub>aN</sub></span>
+            <span>T<sub>1</sub> = (1.5～2.0) T<sub>N</sub></span>
+          </div>
+          <div class="relation-group">
+            <span>I<sub>2</sub> = (1.1～1.2) I<sub>L</sub></span>
+            <span>T<sub>2</sub> = (1.1～1.2) T<sub>L</sub></span>
+          </div>
+          <div class="relation-bound">
+            <b
+              >T<sub>L</sub> &lt; T<sub>2</sub> &lt; T<sub>1</sub> &lt; T<sub
+                >M</sub
+              ></b
+            >
+            <small
+              >I<sub>L</sub> &lt; I<sub>2</sub> &lt; I<sub>1</sub> &lt; I<sub
+                >M</sub
+              ></small
+            >
+          </div>
+          <p class="relation-note">
+            T<sub>M</sub>：短时过载转矩<br />启动上限须满足
+            <strong>T<sub>1</sub> &lt; T<sub>M</sub></strong>
+          </p>
+        </aside>
+        <section class="panel circuit-panel">
+          <div class="panel-heading">
+            <h2>他励直流电动机等效电路</h2>
+            <span>点击 Q₁～Q₄ 切换</span>
+          </div>
+          <svg
+            id="circuit"
+            viewBox="0 0 600 303"
+            aria-label="四段电阻与四个可点击旁路开关的电枢电路及独立励磁电路"
+          >
+            <defs>
+              <marker
+                id="current-arrow"
+                viewBox="0 0 10 10"
+                refX="8"
+                refY="5"
+                markerWidth="5"
+                markerHeight="5"
+                orient="auto"
+              >
+                <path d="M0 0 10 5 0 10Z" fill="#287f70" />
+              </marker>
+            </defs>
+            <path
+              class="wire"
+              d="M30 116H60 M444 116H464V151 M464 184V205 M464 255V279H30 M30 116V146 M30 249V279"
+            />
+            <circle cx="30" cy="116" r="4" class="terminal" />
+            <circle cx="30" cy="279" r="4" class="terminal" />
+            <text x="12" y="137" class="polarity">+</text>
+            <text x="12" y="273" class="polarity">−</text>
+            <text x="27" y="197" class="source-label">Uₐ</text>
+            <text x="29" y="219" class="small">220 V</text>
+            <path d="M36 102H60" class="arrow" />
+            <text x="47" y="87">Iₐ</text>
+            <g id="sections"></g>
+            <rect
+              x="454"
+              y="151"
+              width="20"
+              height="33"
+              class="armature-resistor"
+            />
+            <text x="493" y="173">Rₐ</text>
+            <circle cx="464" cy="230" r="25" class="motor" />
+            <text x="464" y="233" class="motor-letter">M</text>
+            <path d="M453 241H475 M457 246H471" class="motor-mark" />
+            <text x="496" y="237" class="small">E</text>
+            <path class="field-wire" d="M574 116H534V158 M534 230V279H574" />
+            <path
+              class="field-coil"
+              d="M534 158c-20 0-20 18 0 18c-20 0-20 18 0 18c-20 0-20 18 0 18c-20 0-20 18 0 18"
+            />
+            <circle cx="574" cy="116" r="4" class="field-terminal" />
+            <circle cx="574" cy="279" r="4" class="field-terminal" />
+            <text x="587" y="139" class="polarity">+</text>
+            <text x="587" y="276" class="polarity">−</text>
+            <text x="575" y="202">U𝒻</text>
+            <path d="M570 102H543" class="arrow" />
+            <text x="552" y="87">I𝒻</text>
+            <text x="549" y="301" class="small">先建立额定励磁</text>
+            <path id="current-flow" class="current-flow" />
+          </svg>
+          <div id="readouts" class="readouts" aria-label="实时运行数据"></div>
+          <p id="combination" class="combination"></p>
+        </section>
+        <section class="control-strip" aria-label="启动演示控制">
+          <button id="play" type="button">自动分级启动</button>
+          <button id="power" type="button" aria-pressed="false">
+            手动接通电枢
+          </button>
+          <button id="reset" type="button">复位</button>
+          <label for="progress">慢放进度</label
+          ><input
+            id="progress"
+            type="range"
+            min="0"
+            max="1"
+            step="0.001"
+            value="0"
+          />
+          <output id="percent">0%</output>
+        </section>
+        <section class="process-strip">
+          <div>
+            <b id="phase-title">① 全部电阻串入，准备启动</b>
+            <p id="phase-detail" role="status">
+              点击自动分级启动，观察曲线上的工作点与电路同步变化。
+            </p>
+          </div>
+        </section>
+      </div>
+      <footer>
+        示例：Uₙ = 220 V，Rₐ = 1 Ω，Iₙ = Iᴸ = 15 A，nₙ = 1500
+        r/min；恒转矩负载，T =
+        CₜΦₙIₐ。准稳态慢放，忽略电枢电感、电刷压降与电枢反应；切阻时 n
+        连续，真实电感电流连续。
+      </footer>
+    </main>
+  </body>
+</html>
