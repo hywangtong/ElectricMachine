@@ -30,6 +30,7 @@ import { ShipPodExplainer } from '@/components/ship-pod-explainer';
 import { DistributedPropulsion } from '@/components/distributed-propulsion';
 import { MotorAdvantagesLesson } from '@/components/motor-advantages-lesson';
 import { MotorHistoryLesson } from '@/components/motor-history-lesson';
+import { LoadCharacteristicLesson } from '@/components/load-characteristic-lesson';
 const number = (n: number) => String(n).padStart(2, '0');
 
 const shuntPages = ['principle', 'buildup', 'critical', 'load'] as const;
@@ -440,11 +441,13 @@ export default function CoursePlayer() {
                             ? '课堂思考'
                             : slide.kind === 'trend'
                               ? '趋势示意'
-                              : slide.kind === 'motor-advantage'
+                              : slide.kind === 'load-characteristic'
                                 ? '互动图解'
-                                : slide.kind === 'outline'
-                                  ? '内容提纲'
-                                  : '课堂讲义'}
+                                : slide.kind === 'motor-advantage'
+                                  ? '互动图解'
+                                  : slide.kind === 'outline'
+                                    ? '内容提纲'
+                                    : '课堂讲义'}
             </span>
           </div>
           <div
@@ -811,6 +814,8 @@ export default function CoursePlayer() {
                       </div>
                     ) : slide.kind === 'trend' ? (
                       <ElectrificationTrend />
+                    ) : slide.kind === 'load-characteristic' ? (
+                      <LoadCharacteristicLesson load={slide.load} />
                     ) : slide.kind === 'motor-advantage' ? (
                       <MotorAdvantagesLesson advantage={slide.advantage} />
                     ) : (

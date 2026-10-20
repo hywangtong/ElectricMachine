@@ -5,6 +5,11 @@ import {
 } from '@/content/motor-history';
 
 export type Topic = { title: string; description: string };
+export type LoadCharacteristicKind =
+  | 'resistive-constant-torque'
+  | 'potential-constant-torque'
+  | 'fan'
+  | 'constant-power';
 export type TeacherProfile = {
   name: string;
   role: string;
@@ -313,6 +318,13 @@ export type Slide =
     }
   | {
       id: string;
+      kind: 'load-characteristic';
+      title: string;
+      chapterId: string;
+      load: LoadCharacteristicKind;
+    }
+  | {
+      id: string;
       kind: 'assessment';
       title: string;
       chapterId: string;
@@ -585,6 +597,23 @@ export const slides: Slide[] = [
         chapterId: chapter.id,
         embedUrl: '/dc-motor-starting-example-current.html',
       });
+      const loadSlides: Array<[LoadCharacteristicKind, string]> = [
+        ['resistive-constant-torque', '实际生产负载：反抗性恒转矩'],
+        ['potential-constant-torque', '实际生产负载：位能性恒转矩'],
+        ['fan', '实际生产负载：通风机类'],
+        ['constant-power', '实际生产负载：恒功率'],
+      ];
+      chapterSlides.push(
+        ...loadSlides.map(
+          ([load, title]): Slide => ({
+            id: `dc-drives-load-${load}`,
+            kind: 'load-characteristic',
+            title,
+            chapterId: chapter.id,
+            load,
+          }),
+        ),
+      );
     }
 
     if (chapter.id === 'introduction') {

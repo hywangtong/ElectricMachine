@@ -924,6 +924,277 @@ a:focus-visible {
   background: #bc8a5f;
 }
 
+.slide-load-characteristic {
+  padding: 37px 68px 0;
+}
+.slide-load-characteristic .slide-footer {
+  left: 68px;
+  right: 68px;
+  bottom: 17px;
+}
+.load-characteristic-body {
+  padding-top: 19px;
+}
+.load-characteristic-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+  margin-top: 11px;
+}
+.load-characteristic-heading h1 {
+  margin: 0;
+  color: #23493f;
+  font-size: 49px;
+  font-weight: 650;
+  letter-spacing: 1px;
+  line-height: 1.2;
+}
+.load-characteristic-heading p {
+  margin: 8px 0 0;
+  color: #60776d;
+  font-size: 23px;
+  line-height: 1.45;
+}
+.load-characteristic-heading > span {
+  flex-shrink: 0;
+  padding: 9px 16px;
+  border: 1px solid #d5e2db;
+  border-radius: 20px;
+  color: #7e8d84;
+  font-size: 17px;
+  letter-spacing: 1px;
+}
+.load-characteristic-layout {
+  display: grid;
+  grid-template-columns: 0.91fr 1.09fr;
+  gap: 27px;
+  margin-top: 24px;
+}
+.load-characteristic-copy,
+.load-characteristic-chart {
+  min-width: 0;
+  border: 1px solid #d6e3dc;
+  border-radius: 15px;
+  background: #fbfdfc;
+}
+.load-characteristic-copy {
+  padding: 24px 27px 20px;
+}
+.load-formula {
+  padding: 15px 19px;
+  border-left: 5px solid #b86d37;
+  background: #f7eee7;
+  color: #713f25;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 30px;
+  letter-spacing: 0.5px;
+}
+.load-copy-block {
+  margin-top: 21px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid #e0e9e3;
+}
+.load-copy-block strong {
+  color: #2b6656;
+  font-size: 21px;
+  font-weight: 650;
+}
+.load-copy-block p {
+  margin: 7px 0 0;
+  color: #63796f;
+  font-size: 22px;
+  line-height: 1.45;
+}
+.load-characteristic-copy ul {
+  display: grid;
+  gap: 14px;
+  margin: 18px 0 20px;
+  padding: 0;
+  list-style: none;
+}
+.load-characteristic-copy li {
+  position: relative;
+  padding-left: 26px;
+  color: #4f6a5f;
+  font-size: 20px;
+  line-height: 1.45;
+}
+.load-characteristic-copy li::before {
+  position: absolute;
+  top: 0.5em;
+  left: 2px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #c17843;
+  content: '';
+}
+.load-animation-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+  padding: 14px 15px;
+  border-radius: 10px;
+  background: #eaf4ef;
+  color: #2f6554;
+}
+.load-animation-note strong {
+  display: block;
+  font-size: 18px;
+}
+.load-animation-note p {
+  margin: 3px 0 0;
+  color: #5f786d;
+  font-size: 18px;
+  line-height: 1.4;
+}
+.load-pulse {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  margin-top: 4px;
+  border-radius: 50%;
+  background: #2c7667;
+  box-shadow: 0 0 0 7px #2c76671c;
+  animation: load-pulse 1.7s ease-in-out infinite;
+}
+.load-characteristic-chart {
+  padding: 20px 22px 12px;
+}
+.chart-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 0 8px 7px;
+  color: #2f6554;
+  font-size: 23px;
+  font-weight: 650;
+}
+.chart-heading small {
+  color: #8a9a91;
+  font-size: 15px;
+  font-weight: 400;
+}
+.load-curve-svg {
+  display: block;
+  width: 100%;
+  height: 477px;
+  overflow: visible;
+}
+.load-chart-grid path {
+  fill: none;
+  stroke: #e5eee9;
+  stroke-width: 1.5;
+  stroke-dasharray: 4 8;
+}
+.load-chart-axis path {
+  fill: none;
+  stroke: #315a50;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.load-curve-shadow {
+  fill: none;
+  stroke: url('#load-curve-glow');
+  stroke-linecap: round;
+  stroke-width: 17;
+  opacity: 0.3;
+}
+.load-curve,
+.load-curve-sweep {
+  fill: none;
+  stroke: #2c7667;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 6;
+}
+.load-curve-sweep {
+  stroke: #c17843;
+  stroke-dasharray: 0.13 0.87;
+  stroke-dashoffset: 0;
+  stroke-width: 10;
+  opacity: 0.9;
+  animation: load-curve-sweep 4.8s linear infinite;
+}
+.load-work-point {
+  fill: #c17843;
+  stroke: #fff;
+  stroke-width: 5;
+  filter: drop-shadow(0 3px 4px #8b4f2928);
+}
+.load-axis-label {
+  fill: #274c43;
+  font:
+    700 28px Georgia,
+    'Times New Roman',
+    serif;
+}
+.load-curve-label {
+  fill: #b35f2d;
+  font: 600 22px var(--font-sans);
+}
+.load-origin-label,
+.load-direction-label {
+  fill: #789087;
+  font: 17px var(--font-sans);
+}
+.load-curve-legend {
+  display: flex;
+  justify-content: center;
+  gap: 34px;
+  color: #6f837a;
+  font-size: 16px;
+}
+.load-curve-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.legend-line {
+  display: inline-block;
+  width: 30px;
+  height: 4px;
+  border-radius: 3px;
+  background: #2c7667;
+}
+.legend-point {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: #c17843;
+  box-shadow: 0 0 0 1px #c17843;
+}
+@keyframes load-curve-sweep {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: -1;
+  }
+}
+@keyframes load-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 5px #2c76671c;
+    transform: scale(0.9);
+  }
+  50% {
+    box-shadow: 0 0 0 10px #2c766710;
+    transform: scale(1.08);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .load-curve-sweep,
+  .load-pulse {
+    animation: none;
+  }
+}
+
 /* Four ELI5 pages at the end of the introduction chapter. */
 .slide-motor-advantage {
   padding: 28px 56px 0;
