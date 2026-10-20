@@ -554,9 +554,7 @@ export default function CoursePlayer() {
                           >
                             {chapter.teachers
                               ? '认识授课教师'
-                              : chapter.id === 'dc-drives'
-                                ? '机械特性'
-                                : '本章内容'}
+                              : '本章内容'}
                             <ArrowRight />
                           </Button>
                         </div>

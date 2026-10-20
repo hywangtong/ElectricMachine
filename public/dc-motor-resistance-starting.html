@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>串电阻启动：无级启动与有级启动</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/dc-motor-resistance-starting.css" />
+    <script type="module" src="/dc-generator-emf-controls.js"></script>
+    <script src="/dc-machine-basics.js" defer></script>
+    <script type="module" src="/dc-motor-resistance-starting.js"></script>
+  </head>
+  <body>
+    <main class="lesson resistance-starting-page">
+      <header class="page-head">
+        <div class="eyebrow">直流拖动 / 8.2 · 启动性能与启动方法</div>
+        <h1>串电阻启动：无级启动与有级启动</h1>
+        <p>
+          启动先串入电阻限流；转速上升、反电势建立后，逐渐减小或分段切除启动电阻。
+        </p>
+      </header>
+      <div class="conditions">
+        <span>他励 · 先建立额定励磁，Φ 恒定</span>
+        <span>Ua = 220 V　Ra = 1 Ω　IN = 15 A</span>
+        <button id="play-both" type="button">同时演示</button>
+      </div>
+      <section class="comparison" aria-label="两种串电阻启动动画">
+        <article class="panel" id="continuous">
+          <header class="panel-head">
+            <h2>① 无级启动</h2>
+            <span>滑动变阻器 · 连续减阻</span>
+          </header>
+          <div class="circuit-host"></div>
+          <div class="readouts">
+            <div>
+              <span>启动电阻 Rr</span
+              ><strong data-value="resistance">6.33 Ω</strong>
+            </div>
+            <div>
+              <span>电枢电流 Ia</span
+              ><strong data-value="current">0.0 A</strong>
+            </div>
+            <div>
+              <span>转速 n</span><strong data-value="speed">0 r/min</strong>
+            </div>
+          </div>
+          <div class="voltage-bar" aria-label="电压分配">
+            <span data-bar="emf"></span><span data-bar="armature"></span
+            ><span data-bar="external"></span><span data-bar="open"></span>
+          </div>
+          <p class="balance" data-value="balance">待接通：主开关承担 220 V</p>
+          <div class="controls">
+            <button type="button" data-action="play">接通并慢放</button
+            ><button type="button" data-action="reset">复位</button
+            ><input
+              type="range"
+              min="0"
+              max="1"
+              step="0.001"
+              value="0"
+              aria-label="无级启动演示进度"
+            />
+          </div>
+          <p class="phase" data-value="phase" role="status">
+            待接通 · 滑动触点位于最大电阻端
+          </p>
+        </article>
+        <article class="panel" id="stepped">
+          <header class="panel-head">
+            <h2>② 有级启动</h2>
+            <span>分段电阻 · 逐级短接切除</span>
+          </header>
+          <div class="circuit-host"></div>
+          <div class="readouts">
+            <div>
+              <span>剩余启动电阻 Rr</span
+              ><strong data-value="resistance">6.33 Ω</strong>
+            </div>
+            <div>
+              <span>电枢电流 Ia</span
+              ><strong data-value="current">0.0 A</strong>
+            </div>
+            <div>
+              <span>转速 n</span><strong data-value="speed">0 r/min</strong>
+            </div>
+          </div>
+          <div class="voltage-bar" aria-label="电压分配">
+            <span data-bar="emf"></span><span data-bar="armature"></span
+            ><span data-bar="external"></span><span data-bar="open"></span>
+          </div>
+          <p class="balance" data-value="balance">待接通：主开关承担 220 V</p>
+          <div class="controls">
+            <button type="button" data-action="play">接通并慢放</button
+            ><button type="button" data-action="reset">复位</button
+            ><input
+              type="range"
+              min="0"
+              max="1"
+              step="0.001"
+              value="0"
+              aria-label="有级启动演示进度"
+            />
+          </div>
+          <p class="phase" data-value="phase" role="status">
+            待接通 · K1～K4 均断开，全部电阻串入
+          </p>
+        </article>
+      </section>
+      <section class="explanation">
+        <div>
+          <b>电压平衡</b>
+          <p>
+            Ua = <em>E</em> + <i>IaRa</i> + <span>IaRr</span>　　Ia = (Ua − E) /
+            (Ra + Rr)
+          </p>
+        </div>
+        <div>
+          <b>观察电流的区别</b>
+          <p>
+            无级：减阻阶段维持 30 A；有级：约 18.2～30 A
+            间变化。全部切除后均降至 15 A。
+          </p>
+        </div>
+      </section>
+      <footer>
+        准稳态教学慢放，进度不代表实际时间；忽略电感、电刷压降与电枢反应。切换处显示准稳态电流变化，真实电感电流连续。
+      </footer>
+    </main>
+  </body>
+</html>

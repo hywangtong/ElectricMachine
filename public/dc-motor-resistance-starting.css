@@ -1,0 +1,223 @@
+.resistance-starting-page {
+  grid-template-rows: 79px 32px 1fr 56px 16px;
+  gap: 8px;
+  padding: 16px 24px;
+}
+.conditions,
+.panel-head,
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.conditions {
+  color: #55736d;
+  font-size: 16px;
+}
+button {
+  font: inherit;
+  cursor: pointer;
+  border: 1px solid #bbd0c8;
+  border-radius: 7px;
+  padding: 7px 14px;
+  background: #fff;
+  color: #285d50;
+}
+#play-both,
+[data-action='play'] {
+  background: #287f70;
+  color: #fff;
+  border-color: #287f70;
+}
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid #ce9b40;
+  outline-offset: 2px;
+}
+.comparison {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  min-height: 0;
+}
+.comparison .panel {
+  display: grid;
+  grid-template-rows: 36px 253px 52px 13px 23px 34px 24px;
+  gap: 6px;
+  padding: 10px 14px;
+  min-width: 0;
+}
+.panel-head h2 {
+  font-size: 23px;
+}
+.panel-head > span {
+  color: #688278;
+  font-size: 15px;
+}
+.circuit {
+  display: block;
+  width: 100%;
+  height: 253px;
+}
+.wire,
+.main-switch,
+.bypass {
+  fill: none;
+  stroke: #526e65;
+  stroke-width: 2.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.external rect {
+  fill: #f5eefa;
+  stroke: #9471ad;
+  stroke-width: 2;
+}
+.armature {
+  fill: #fff2df;
+  stroke: #c38c3c;
+  stroke-width: 2;
+}
+.circuit text {
+  font:
+    15px 'Segoe UI',
+    'Microsoft YaHei',
+    sans-serif;
+  text-anchor: middle;
+  fill: #335a50;
+}
+.circuit .external-text {
+  fill: #82549e;
+}
+.circuit .armature-text {
+  fill: #ab7228;
+}
+.circuit .emf-text {
+  fill: #287f70;
+}
+.circuit .current-text {
+  fill: #287f70;
+  font-size: 18px;
+  font-weight: 700;
+}
+.circuit .small {
+  font-size: 13px;
+}
+.current-flow {
+  fill: none;
+  stroke: #3c9a89;
+  stroke-width: 3;
+  stroke-dasharray: 2 13;
+  stroke-linecap: round;
+  pointer-events: none;
+}
+.slider-contact {
+  fill: none;
+  stroke: #82549e;
+  stroke-width: 3;
+}
+.bypass {
+  transition: stroke 0.2s;
+}
+.bypass.closed {
+  stroke: #287f70;
+  stroke-width: 4;
+}
+.external.cut rect {
+  fill: #f1f3f1;
+  stroke: #bdc9c3;
+}
+.external.cut .external-text {
+  fill: #83958c;
+}
+.readouts {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  background: #f2f6f2;
+  border-radius: 8px;
+  padding: 5px 12px;
+  gap: 8px;
+}
+.readouts span {
+  display: block;
+  font-size: 13px;
+  color: #698077;
+}
+.readouts strong {
+  font-size: 23px;
+  font-weight: 600;
+}
+[data-value='current'] {
+  color: #287f70;
+}
+.voltage-bar {
+  display: flex;
+  border-radius: 4px;
+  overflow: hidden;
+  background: #e4e9e4;
+}
+[data-bar='emf'] {
+  background: #3c9a89;
+}
+[data-bar='armature'] {
+  background: #d6a250;
+}
+[data-bar='external'] {
+  background: #a17ab9;
+}
+[data-bar='open'] {
+  background: #dce4de;
+}
+.balance {
+  font-size: 14px;
+  color: #55736d;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+.controls {
+  gap: 10px;
+  font-size: 15px;
+}
+.controls input {
+  flex: 1;
+  min-width: 0;
+  accent-color: #287f70;
+}
+.phase {
+  font-size: 14px;
+  color: #55736d;
+  padding-top: 3px;
+}
+.explanation {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.explanation > div {
+  border-left: 3px solid #89afa2;
+  padding: 5px 10px;
+  background: #f0f4ed;
+  border-radius: 4px;
+}
+.explanation b {
+  font-size: 16px;
+}
+.explanation p {
+  font-size: 15px;
+  line-height: 1.7;
+}
+.explanation em {
+  color: #287f70;
+  font-style: normal;
+}
+.explanation i {
+  color: #ab7228;
+  font-style: normal;
+}
+.explanation p span {
+  color: #82549e;
+}
+footer {
+  font-size: 12px;
+  color: #7b8d82;
+}

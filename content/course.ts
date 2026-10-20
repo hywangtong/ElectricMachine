@@ -505,6 +505,15 @@ export const slides: Slide[] = [
       );
     }
 
+    if (chapter.id !== 'introduction') {
+      chapterSlides.push({
+        id: `${chapter.id}-outline`,
+        kind: 'outline',
+        title: '本章内容',
+        chapterId: chapter.id,
+      });
+    }
+
     if (chapter.id === 'dc-drives') {
       chapterSlides.push({
         id: 'dc-drives-mechanical-equation',
@@ -541,14 +550,12 @@ export const slides: Slide[] = [
         chapterId: chapter.id,
         embedUrl: '/dc-motor-starting.html',
       });
-    }
-
-    if (chapter.id !== 'introduction') {
       chapterSlides.push({
-        id: `${chapter.id}-outline`,
-        kind: 'outline',
-        title: '本章内容',
+        id: 'dc-drives-resistance-starting',
+        kind: 'embed',
+        title: '串电阻启动：无级启动与有级启动',
         chapterId: chapter.id,
+        embedUrl: '/dc-motor-resistance-starting.html',
       });
     }
 
