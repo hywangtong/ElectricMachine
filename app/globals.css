@@ -1188,6 +1188,436 @@ a:focus-visible {
     transform: scale(1.08);
   }
 }
+
+.slide-speed-control,
+.slide-speed-control-summary {
+  padding: 31px 58px 0;
+}
+.slide-speed-control .slide-footer,
+.slide-speed-control-summary .slide-footer {
+  left: 58px;
+  right: 58px;
+  bottom: 15px;
+}
+.speed-control-body,
+.speed-summary-body {
+  padding-top: 12px;
+}
+.speed-control-heading,
+.speed-summary-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+  margin-top: 10px;
+}
+.speed-control-heading h1,
+.speed-summary-heading h1 {
+  margin: 0;
+  color: #23493f;
+  font-size: 43px;
+  font-weight: 650;
+  letter-spacing: 0.6px;
+  line-height: 1.2;
+}
+.speed-control-heading p,
+.speed-summary-heading p {
+  margin: 7px 0 0;
+  color: #60776d;
+  font-size: 21px;
+  line-height: 1.4;
+}
+.speed-control-heading > span,
+.speed-summary-heading > span {
+  flex-shrink: 0;
+  padding: 8px 15px;
+  border: 1px solid #d5e2db;
+  border-radius: 20px;
+  color: #7e8d84;
+  font-size: 16px;
+  letter-spacing: 0.8px;
+}
+.speed-control-layout {
+  display: grid;
+  grid-template-columns: 0.77fr 1.23fr;
+  gap: 20px;
+  margin-top: 20px;
+}
+.speed-control-panel {
+  min-width: 0;
+  border: 1px solid #d6e3dc;
+  border-radius: 15px;
+  background: #fbfdfc;
+  padding: 19px 22px 16px;
+}
+.speed-control-circuit-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #2d6657;
+  font-size: 19px;
+  font-weight: 650;
+}
+.speed-control-circuit-title span {
+  color: #b56a3a;
+  font:
+    600 15px ui-monospace,
+    monospace;
+}
+.speed-control-circuit {
+  display: block;
+  width: 100%;
+  height: 129px;
+  margin: 11px 0 1px;
+}
+.speed-control-circuit path,
+.speed-control-circuit rect,
+.speed-control-circuit circle {
+  fill: none;
+  stroke: #3c685d;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.speed-control-circuit circle {
+  fill: #eff7f2;
+}
+.speed-control-circuit text {
+  fill: #54766b;
+  font: 17px var(--font-sans);
+}
+.speed-control-circuit .speed-circuit-arrow {
+  stroke: #b86d37;
+  stroke-width: 4;
+}
+.speed-resistance-control {
+  padding: 11px 13px 10px;
+  border-radius: 10px;
+  background: #f5eee7;
+}
+.speed-control-label-row {
+  display: flex;
+  justify-content: space-between;
+  color: #714126;
+  font-size: 19px;
+}
+.speed-control-label-row strong {
+  color: #ad5c2d;
+  font:
+    700 22px ui-monospace,
+    monospace;
+}
+.speed-resistance-control input {
+  display: block;
+  width: 100%;
+  margin: 13px 0 7px;
+  accent-color: #b86d37;
+}
+.speed-slider-scale {
+  display: flex;
+  justify-content: space-between;
+  color: #9b765f;
+  font-size: 13px;
+}
+.speed-control-formula {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  margin: 15px 0 12px;
+  color: #315d50;
+  font:
+    23px Georgia,
+    'Times New Roman',
+    serif;
+}
+.speed-control-formula b {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  border-bottom: 1px solid #6f8e82;
+  font-size: 18px;
+  line-height: 1.05;
+}
+.speed-control-formula small {
+  align-self: flex-end;
+  margin-left: -13px;
+  font-size: 13px;
+}
+.speed-control-tip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 9px;
+  background: #eaf4ef;
+  color: #356d5b;
+  font-size: 16px;
+  line-height: 1.35;
+}
+.speed-tip-dot {
+  width: 9px;
+  height: 9px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #c17843;
+}
+.speed-control-plot-panel {
+  padding: 13px 16px 12px;
+}
+.speed-load-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+.speed-load-tabs button {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  column-gap: 7px;
+  border: 1px solid #dfe9e3;
+  border-radius: 9px;
+  padding: 8px 9px;
+  background: #fff;
+  color: #628074;
+  font-size: 16px;
+  text-align: left;
+}
+.speed-load-tabs button:hover,
+.speed-load-tabs button.active {
+  border-color: #a8cabc;
+  background: #eff8f2;
+  color: #2b6555;
+}
+.speed-load-tabs button > span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+.speed-load-tabs button small {
+  grid-column: 2;
+  color: #8c9d94;
+  font-size: 12px;
+}
+.speed-control-chart-wrap {
+  margin-top: 6px;
+}
+.speed-control-chart-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0 6px;
+  color: #2f6554;
+  font-size: 18px;
+  font-weight: 650;
+}
+.speed-control-chart-heading small {
+  color: #8c9c93;
+  font-size: 13px;
+  font-weight: 400;
+}
+.speed-control-chart {
+  display: block;
+  width: 100%;
+  height: 302px;
+  overflow: visible;
+}
+.speed-control-grid path {
+  fill: none;
+  stroke: #e4eee8;
+  stroke-dasharray: 4 7;
+}
+.speed-control-axis path {
+  fill: none;
+  stroke: #315a50;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.speed-control-motor-shadow,
+.speed-control-motor,
+.speed-control-load,
+.speed-control-guide {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: d 300ms ease;
+}
+.speed-control-motor-shadow {
+  stroke: #2c766740;
+  stroke-width: 14;
+}
+.speed-control-motor {
+  stroke: #2c7667;
+  stroke-width: 5;
+}
+.speed-control-load {
+  stroke-width: 5;
+}
+.speed-control-guide {
+  stroke: #bd8a66;
+  stroke-width: 1.5;
+  stroke-dasharray: 4 5;
+}
+.speed-control-point {
+  fill: #c17843;
+  stroke: #fff;
+  stroke-width: 4;
+  filter: drop-shadow(0 2px 3px #8b4f2930);
+  transition:
+    cx 300ms ease,
+    cy 300ms ease;
+}
+.speed-control-axis-label {
+  fill: #274c43;
+  font:
+    700 23px Georgia,
+    'Times New Roman',
+    serif;
+}
+.speed-control-small-label {
+  fill: #80948b;
+  font: 14px var(--font-sans);
+}
+.speed-control-motor-label,
+.speed-control-load-label,
+.speed-control-point-label {
+  font: 600 16px var(--font-sans);
+}
+.speed-control-motor-label {
+  fill: #2c7667;
+}
+.speed-control-load-label {
+  transition: fill 300ms ease;
+}
+.speed-control-point-label {
+  fill: #b35f2d;
+}
+.speed-control-legend,
+.speed-control-readout {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  color: #71857b;
+  font-size: 13px;
+}
+.speed-control-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.speed-legend-motor,
+.speed-legend-load {
+  width: 23px;
+  height: 4px;
+  border-radius: 3px;
+  background: #2c7667;
+}
+.speed-legend-load {
+  transition: background 300ms ease;
+}
+.speed-legend-point {
+  width: 9px;
+  height: 9px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: #c17843;
+  box-shadow: 0 0 0 1px #c17843;
+}
+.speed-control-readout {
+  gap: 24px;
+  margin-top: 8px;
+  color: #758c82;
+}
+.speed-control-readout b {
+  color: #2f6857;
+}
+.speed-control-caption {
+  margin: 5px 3px 0;
+  color: #748980;
+  font-size: 14px;
+  line-height: 1.35;
+}
+.speed-control-caption b {
+  color: #2e6e5c;
+}
+
+.speed-summary-heading {
+  margin-top: 12px;
+}
+.speed-summary-heading h1 {
+  font-size: 46px;
+}
+.speed-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-top: 24px;
+}
+.speed-summary-card {
+  min-height: 188px;
+  padding: 17px 19px 15px;
+  border: 1px solid #d6e3dc;
+  border-radius: 13px;
+  background: #fbfdfc;
+}
+.speed-summary-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.speed-summary-card-top > span {
+  color: #b86d37;
+  font:
+    600 16px ui-monospace,
+    monospace;
+  letter-spacing: 1px;
+}
+.speed-summary-card-top b {
+  padding: 4px 9px;
+  border-radius: 12px;
+  background: #eaf4ef;
+  color: #2c705b;
+  font-size: 14px;
+  font-weight: 600;
+}
+.speed-summary-card h2 {
+  margin: 13px 0 7px;
+  color: #2b5f50;
+  font-size: 25px;
+  font-weight: 650;
+}
+.speed-summary-card p {
+  margin: 0;
+  color: #637a70;
+  font-size: 17px;
+  line-height: 1.45;
+}
+.speed-summary-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 21px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  background: #f7eee7;
+  color: #875033;
+  font-size: 17px;
+}
+.speed-summary-footer span {
+  color: #a76b45;
+  font-size: 15px;
+}
+.speed-summary-footer strong {
+  color: #714126;
+  font-weight: 650;
+}
+.speed-summary-footer i {
+  color: #c17843;
+  font-style: normal;
+  font-size: 22px;
+}
 @media (prefers-reduced-motion: reduce) {
   .load-curve-sweep,
   .load-pulse {

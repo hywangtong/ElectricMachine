@@ -325,6 +325,18 @@ export type Slide =
     }
   | {
       id: string;
+      kind: 'speed-control';
+      title: string;
+      chapterId: string;
+    }
+  | {
+      id: string;
+      kind: 'speed-control-summary';
+      title: string;
+      chapterId: string;
+    }
+  | {
+      id: string;
       kind: 'assessment';
       title: string;
       chapterId: string;
@@ -613,6 +625,20 @@ export const slides: Slide[] = [
             load,
           }),
         ),
+      );
+      chapterSlides.push(
+        {
+          id: 'dc-drives-resistance-speed-control',
+          kind: 'speed-control',
+          title: '调节电阻：三种负载下的调速原理',
+          chapterId: chapter.id,
+        },
+        {
+          id: 'dc-drives-speed-control-summary',
+          kind: 'speed-control-summary',
+          title: '调速特性六项指标',
+          chapterId: chapter.id,
+        },
       );
     }
 
