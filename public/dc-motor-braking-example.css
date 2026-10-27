@@ -1,0 +1,429 @@
+.braking-exercise:not(.is-revealed) .question-card {
+  width: min(1000px, 100%);
+  padding: 24px 30px;
+  grid-template-rows: 28px auto auto minmax(0, 1fr) 58px;
+  gap: 14px;
+}
+
+.braking-exercise:not(.is-revealed) .question-card h2 {
+  font-size: 26px;
+}
+
+.braking-exercise:not(.is-revealed) .given-grid div {
+  padding: 10px 16px;
+}
+
+.braking-exercise:not(.is-revealed) .given-grid dt {
+  margin-bottom: 5px;
+}
+
+.braking-exercise:not(.is-revealed) .question-tasks {
+  padding: 14px 18px;
+}
+
+.braking-exercise:not(.is-revealed) .question-tasks ol {
+  font-size: 20px;
+}
+
+.braking-exercise.is-revealed .exercise-layout {
+  grid-template-columns: 500px minmax(0, 1fr);
+}
+
+.braking-exercise .given-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.braking-exercise .card-label small {
+  font-size: 9px;
+  letter-spacing: 0;
+}
+
+.braking-exercise.is-revealed .question-card {
+  grid-template-rows: 24px auto auto minmax(0, 1fr) 50px;
+  padding: 18px;
+  gap: 8px;
+}
+
+.braking-exercise.is-revealed .question-card h2 {
+  font-size: 22px;
+}
+
+.braking-exercise.is-revealed .given-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.braking-exercise.is-revealed .given-grid div {
+  padding: 6px 12px;
+}
+
+.braking-exercise.is-revealed .given-grid dt {
+  margin-bottom: 3px;
+  font-size: 12px;
+}
+
+.braking-exercise.is-revealed .given-grid dd {
+  font-size: 19px;
+  line-height: 1.15;
+}
+
+.braking-exercise.is-revealed .given-grid b {
+  font-size: 23px;
+}
+
+.braking-exercise.is-revealed .question-tasks {
+  padding: 10px 12px;
+  grid-template-columns: 25px minmax(0, 1fr);
+  gap: 6px;
+}
+
+.braking-exercise.is-revealed .question-tasks ol {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.braking-exercise .solution-panel {
+  grid-template-rows: 42px minmax(0, 1fr);
+  padding: 18px 20px;
+  gap: 12px;
+}
+
+.braking-exercise .solution-tabs button {
+  font-size: 17px;
+}
+
+.braking-exercise .solution-steps li {
+  padding: 10px 14px;
+  grid-template-columns: 34px minmax(0, 1fr);
+  gap: 10px;
+}
+
+.braking-exercise .solution-steps {
+  grid-template-rows: repeat(3, auto);
+}
+
+.braking-exercise .step-index {
+  width: 32px;
+  height: 32px;
+}
+
+.braking-exercise .solution-steps p {
+  font-family: 'Cambria Math', 'Times New Roman', 'Microsoft YaHei', serif;
+  font-size: 24px;
+  line-height: 1.45;
+}
+
+.braking-exercise .solution-steps h2 {
+  margin-bottom: 8px;
+  font-size: 18px;
+}
+
+.braking-exercise .solution-steps b {
+  color: #b25d3f;
+}
+
+.braking-exercise sub {
+  line-height: 0;
+}
+
+.braking-exercise .solution-note {
+  font-size: 16px;
+}
+
+.characteristic-plots {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: minmax(0, 1fr);
+  gap: 12px;
+  min-height: 0;
+}
+
+.plot-card {
+  margin: 0;
+  border: 1px solid #c8d9d4;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.plot-card {
+  min-width: 0;
+  margin: 0;
+  padding: 22px 26px;
+  border: 1px solid #c8d9d4;
+  border-radius: 16px;
+  background: #fff;
+}
+
+.braking-example h2 {
+  margin: 0 0 14px;
+  color: #287869;
+  font-size: 23px;
+}
+
+.data-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 0;
+}
+
+.data-grid > div {
+  padding: 12px 18px;
+  border-radius: 10px;
+  background: #f1f8f4;
+}
+
+.data-grid dt {
+  margin-bottom: 5px;
+  color: #55736d;
+  font-size: 16px;
+}
+
+.data-grid dd {
+  margin: 0;
+  font-size: 27px;
+}
+
+.braking-example i,
+.equation,
+.data-grid dd {
+  font-family: Georgia, 'Times New Roman', serif;
+}
+
+.braking-example sub {
+  font-size: 0.65em;
+  line-height: 0;
+}
+
+.braking-example b {
+  color: #b25d3f;
+}
+
+.tasks {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.tasks article {
+  border-top: 4px solid #b48d45;
+}
+
+.task-index {
+  display: block;
+  margin-bottom: 10px;
+  color: #956e2f;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.tasks p {
+  font-size: 24px;
+  line-height: 1.65;
+}
+
+.tasks .task-question {
+  margin-top: 10px;
+  color: #287869;
+  font-weight: 700;
+}
+
+.parameter-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr auto;
+  gap: 14px;
+  min-height: 0;
+}
+
+.parameter-grid .calculation:last-child {
+  grid-column: 1 / -1;
+}
+
+.parameter-grid .calculation {
+  padding: 14px 20px;
+}
+
+.parameter-grid h2 {
+  margin-bottom: 10px;
+  font-size: 21px;
+}
+
+.parameter-grid .equation {
+  font-size: 25px;
+}
+
+.equation {
+  font-size: 26px;
+  line-height: 1.3;
+}
+
+.equation + .equation {
+  margin-top: 5px;
+}
+
+.fraction {
+  display: inline-flex;
+  vertical-align: middle;
+  flex-direction: column;
+  align-items: stretch;
+  margin: 0 5px;
+  text-align: center;
+  line-height: 1.12;
+}
+
+.fraction > span {
+  padding: 2px 7px;
+}
+
+.fraction > span:first-child {
+  border-bottom: 1.5px solid currentColor;
+}
+
+.note {
+  margin-top: 9px;
+  color: #55736d;
+  font-size: 18px;
+  line-height: 1.45;
+}
+
+.lesson-note {
+  display: flex;
+  align-items: center;
+  padding: 9px 18px;
+  border-left: 4px solid #b48d45;
+  border-radius: 0 10px 10px 0;
+  background: #fff5df;
+  color: #715b37;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.solution-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+  gap: 16px;
+  min-height: 0;
+}
+
+.calculation-stack {
+  grid-template-rows: auto auto 1fr;
+  gap: 12px;
+}
+
+.calculation-stack .calculation {
+  padding: 11px 18px;
+}
+
+.calculation-stack h2 {
+  margin-bottom: 6px;
+  font-size: 20px;
+}
+
+.calculation-stack .equation {
+  font-size: 24px;
+}
+
+.calculation-stack .note {
+  margin-top: 6px;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.plot-card {
+  display: grid;
+  min-height: 0;
+  grid-template-rows: auto minmax(0, 1fr) auto auto;
+  gap: 12px;
+  padding: 20px;
+}
+
+.plot-card figcaption {
+  color: #287869;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.plot-card svg {
+  width: 100%;
+  height: 100%;
+}
+
+.plot-card p {
+  font-size: 20px;
+  line-height: 1.6;
+}
+
+.plot-card small {
+  color: #789087;
+  font-size: 14px;
+}
+
+.axis,
+.natural,
+.load,
+.braking,
+.guide,
+.motion {
+  fill: none;
+  stroke-width: 2;
+}
+
+.axis {
+  stroke: #38594f;
+}
+
+.natural {
+  stroke: #b25d3f;
+  stroke-width: 3;
+}
+
+.load {
+  stroke: #8582b6;
+}
+
+.braking {
+  stroke: #287869;
+  stroke-width: 3;
+}
+
+.secondary {
+  stroke: #b48d45;
+}
+
+.guide {
+  stroke: #98aba5;
+  stroke-dasharray: 6 5;
+}
+
+.motion {
+  stroke: #b25d3f;
+}
+
+.plot-label,
+.point-label,
+.curve-label {
+  fill: #38594f;
+  font-size: 20px;
+}
+
+.point-label {
+  fill: #b25d3f;
+  font-style: italic;
+}
+
+.curve-label {
+  fill: #287869;
+  font-size: 17px;
+}
+
+.work {
+  fill: #fff;
+  stroke: #b25d3f;
+  stroke-width: 2.5;
+}
+
+.stopping-motion {
+  marker-end: url(#stopping-arrow);
+}

@@ -1,0 +1,136 @@
+.speed-exercise.is-revealed .exercise-layout {
+  grid-template-columns: 470px minmax(0, 1fr);
+}
+
+.speed-exercise .card-label small {
+  font-size: 9px;
+  letter-spacing: 0;
+}
+
+.speed-exercise .question-card h2 {
+  text-wrap: balance;
+}
+
+.speed-exercise .question-tasks p {
+  font-size: 23px;
+  line-height: 1.7;
+}
+
+.speed-exercise .question-tasks .question-assumption {
+  margin-top: 16px;
+  color: #775d2d;
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+.speed-exercise.is-revealed .question-tasks p {
+  font-size: 21px;
+  line-height: 1.6;
+}
+
+.speed-exercise.is-revealed .question-tasks .question-assumption {
+  font-size: 16px;
+}
+
+.speed-exercise .solution-panel {
+  grid-template-rows: 42px minmax(0, 1fr);
+  padding: 18px 20px;
+  gap: 12px;
+}
+
+.speed-exercise .solution-tabs {
+  display: flex;
+  gap: 8px;
+}
+
+.speed-exercise .solution-tabs button {
+  flex: 1;
+  border: 1px solid #bad5ca;
+  border-radius: 8px;
+  background: #fff;
+  color: #38594f;
+  font: inherit;
+  font-size: 19px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.speed-exercise .solution-tabs button[aria-selected='true'] {
+  border-color: #287f70;
+  background: #287f70;
+  color: #fff;
+}
+
+.speed-exercise .solution-tabs button:focus-visible {
+  outline: 3px solid #d7b45f;
+  outline-offset: 2px;
+}
+
+.speed-exercise .solution-tabpanel {
+  min-height: 0;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: 10px;
+}
+
+.speed-exercise .parameter-steps {
+  grid-template-rows: 1.5fr repeat(3, 1fr);
+  gap: 8px;
+}
+
+.speed-exercise .solution-steps li {
+  padding: 9px 14px;
+  grid-template-columns: 36px minmax(0, 1fr);
+  gap: 12px;
+}
+
+.speed-exercise .step-index {
+  width: 36px;
+  height: 36px;
+}
+
+.speed-exercise .solution-steps p,
+.speed-exercise math {
+  font-family: 'Cambria Math', 'Times New Roman', 'Microsoft YaHei', serif;
+  font-size: 27px;
+  line-height: 1.4;
+}
+
+.speed-exercise math {
+  text-align: left;
+}
+
+.speed-exercise .solution-steps .substitution {
+  font-size: 21px;
+}
+
+.speed-exercise .parameter-steps p,
+.speed-exercise .parameter-steps math {
+  font-size: 24px;
+  line-height: 1.25;
+}
+
+.speed-exercise .parameter-steps .substitution {
+  font-size: 20px;
+}
+
+.speed-exercise .solution-steps b {
+  color: #b25d3f;
+  font-size: inherit;
+}
+
+.speed-exercise .solution-note {
+  font-size: 16px;
+  line-height: 1.45;
+}
+
+.speed-exercise .answer-step {
+  border-color: #cba45b;
+  background: #fff8e9;
+}
+
+.speed-exercise .solution-steps .final-answer {
+  color: #b25d3f;
+  font-size: 38px;
+  font-weight: 700;
+}

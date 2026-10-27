@@ -35,6 +35,14 @@ import {
   SpeedControlLesson,
   SpeedControlSummary,
 } from '@/components/speed-control-lesson';
+import {
+  VoltageSpeedControlLesson,
+  VoltageSpeedControlSummary,
+} from '@/components/voltage-speed-control-lesson';
+import {
+  FieldSpeedControlLesson,
+  FieldSpeedControlSummary,
+} from '@/components/field-speed-control-lesson';
 const number = (n: number) => String(n).padStart(2, '0');
 
 const shuntPages = ['principle', 'buildup', 'critical', 'load'] as const;
@@ -145,7 +153,19 @@ const findCourseIndex = (id: string) => {
         : id === 'dc-drives-starting-example-stages' ||
             id === 'dc-drives-starting-example-resistors'
           ? 'dc-drives-starting-example-current'
-          : id;
+          : id === 'dc-drives-speed-control-example-load' ||
+              id === 'dc-drives-speed-control-example-resistance'
+            ? 'dc-drives-speed-control-example'
+            : id === 'dc-drives-field-speed-example-roots'
+              ? 'dc-drives-field-speed-example'
+              : [
+                    'dc-drives-braking-example-parameters',
+                    'dc-drives-braking-example-stopping',
+                    'dc-drives-braking-example-lowering',
+                    'dc-drives-braking-example-characteristics',
+                  ].includes(id)
+                ? 'dc-drives-braking-example-question'
+                : id;
   const directIndex = courseSlides.findIndex((item) => item.id === stableId);
   if (directIndex >= 0) return directIndex;
   if (findShuntTab(id))
@@ -448,7 +468,12 @@ export default function CoursePlayer() {
                               : slide.kind === 'load-characteristic'
                                 ? '互动图解'
                                 : slide.kind === 'speed-control' ||
-                                    slide.kind === 'speed-control-summary'
+                                    slide.kind === 'speed-control-summary' ||
+                                    slide.kind === 'voltage-speed-control' ||
+                                    slide.kind ===
+                                      'voltage-speed-control-summary' ||
+                                    slide.kind === 'field-speed-control' ||
+                                    slide.kind === 'field-speed-control-summary'
                                   ? '互动图解'
                                   : slide.kind === 'motor-advantage'
                                     ? '互动图解'
@@ -825,6 +850,14 @@ export default function CoursePlayer() {
                       <SpeedControlLesson />
                     ) : slide.kind === 'speed-control-summary' ? (
                       <SpeedControlSummary />
+                    ) : slide.kind === 'voltage-speed-control' ? (
+                      <VoltageSpeedControlLesson />
+                    ) : slide.kind === 'voltage-speed-control-summary' ? (
+                      <VoltageSpeedControlSummary />
+                    ) : slide.kind === 'field-speed-control' ? (
+                      <FieldSpeedControlLesson />
+                    ) : slide.kind === 'field-speed-control-summary' ? (
+                      <FieldSpeedControlSummary />
                     ) : slide.kind === 'motor-advantage' ? (
                       <MotorAdvantagesLesson advantage={slide.advantage} />
                     ) : (

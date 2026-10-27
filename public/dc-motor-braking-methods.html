@@ -1,0 +1,655 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; base-uri 'none'; form-action 'none'; img-src data:; font-src data:; media-src data:; style-src 'unsafe-inline'; script-src 'unsafe-inline'"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>直流电机制动方法分类与示意</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        overflow: hidden;
+        background: #fbfaf5;
+        color: #173b3b;
+        font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        color-scheme: light;
+      }
+      main {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 1444px;
+        height: 744px;
+        padding: 20px 24px;
+        transform: translate(-50%, -50%) scale(var(--lesson-scale, 1));
+        transform-origin: center;
+        display: grid;
+        grid-template-rows: 84px 370px 180px 34px;
+        gap: 10px;
+      }
+      h1,
+      h2,
+      h3,
+      p,
+      figure {
+        margin: 0;
+      }
+      header {
+        position: relative;
+      }
+      .eyebrow {
+        font-size: 13px;
+        color: #39796f;
+        letter-spacing: 0.12em;
+      }
+      h1 {
+        font-size: 34px;
+        line-height: 1.4;
+      }
+      header p {
+        color: #55736d;
+        font-size: 19px;
+      }
+      .scope {
+        position: absolute;
+        right: 0;
+        bottom: 12px;
+        font-size: 15px;
+        color: #55736d;
+      }
+      .methods {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+      .method {
+        background: #fff;
+        border: 1px solid #c8d9d4;
+        border-radius: 15px;
+        padding: 18px 20px;
+        display: grid;
+        grid-template-rows: 40px 29px 212px 36px;
+      }
+      .method h2 {
+        font-size: 29px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .number {
+        font-size: 21px;
+        color: #39796f;
+        font-weight: 500;
+      }
+      .method > p {
+        font-size: 19px;
+        color: #55736d;
+      }
+      .method > strong {
+        border-top: 1px solid #e0e8e3;
+        padding-top: 10px;
+        font-size: 19px;
+        font-weight: 600;
+      }
+      svg {
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+      }
+      svg text {
+        font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        fill: #173b3b;
+        font-size: 18px;
+        text-anchor: middle;
+      }
+      .wire {
+        fill: none;
+        stroke: #647d78;
+        stroke-width: 3;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .energy {
+        fill: none;
+        stroke: #bc742a;
+        stroke-width: 4;
+        stroke-linecap: round;
+      }
+      .flow {
+        fill: none;
+        stroke: #bc742a;
+        stroke-width: 4;
+        stroke-dasharray: 2 17;
+        animation: flow 2.4s linear infinite;
+      }
+      .heat {
+        fill: none;
+        stroke: #bd5944;
+        stroke-width: 3;
+        stroke-linecap: round;
+      }
+      .purposes {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      .purpose {
+        border: 1px solid #c8d9d4;
+        background: #edf4ef;
+        border-radius: 14px;
+        display: grid;
+        grid-template-columns: 200px 1fr;
+        align-items: center;
+        padding: 10px 18px;
+        gap: 14px;
+      }
+      .purpose h3 {
+        font-size: 25px;
+        margin-bottom: 8px;
+      }
+      .purpose p {
+        font-size: 19px;
+        line-height: 1.7;
+      }
+      .purpose small {
+        display: block;
+        color: #55736d;
+        font-size: 16px;
+        margin-top: 5px;
+      }
+      footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: #55736d;
+        font-size: 16px;
+      }
+      footer b {
+        color: #173b3b;
+      }
+      :focus-visible {
+        outline: 3px solid #bc742a;
+        outline-offset: 4px;
+      }
+      @keyframes flow {
+        to {
+          stroke-dashoffset: -38;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .flow {
+          animation: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main aria-labelledby="page-title">
+      <header>
+        <div class="eyebrow">直流拖动 / 8.4 · ELI5</div>
+        <h1 id="page-title">直流电机制动方法分类与示意</h1>
+        <p>电磁转矩与转向相反。</p>
+        <span class="scope">他励电机 · 励磁保持</span>
+      </header>
+      <section class="methods" aria-label="三种制动方法，按能量去向分类">
+        <article class="method">
+          <h2><span class="number">01</span>能耗制动</h2>
+          <p>电枢断电，接电阻。</p>
+          <svg
+            viewBox="0 0 400 212"
+            role="img"
+            aria-label="负载带动电机发电，机械能转为电能，在制动电阻中变成热；电枢与电源断开"
+          >
+            <defs>
+              <marker
+                id="energy-arrow"
+                viewBox="0 0 10 10"
+                refX="8"
+                refY="5"
+                markerWidth="6"
+                markerHeight="6"
+                orient="auto"
+              >
+                <path d="M0 0 10 5 0 10Z" fill="#bc742a" stroke="none" />
+              </marker>
+            </defs>
+            <circle
+              cx="56"
+              cy="111"
+              r="29"
+              fill="#eef3f0"
+              stroke="#647d78"
+              stroke-width="3"
+            />
+            <path
+              d="M56 82V140M27 111H85M35 90 77 132M35 132 77 90"
+              class="wire"
+            />
+            <text x="56" y="173">负载</text>
+            <path
+              d="M91 111H136"
+              class="energy"
+              marker-end="url(#energy-arrow)"
+            />
+            <circle
+              cx="179"
+              cy="111"
+              r="35"
+              fill="#e8f2ed"
+              stroke="#39796f"
+              stroke-width="3"
+            />
+            <text x="179" y="119" style="font-size: 27px">G</text>
+            <text x="179" y="173">发电</text>
+            <path
+              d="M220 111H289"
+              class="energy"
+              marker-end="url(#energy-arrow)"
+            />
+            <path d="M220 111H277" class="flow" />
+            <rect
+              x="299"
+              y="87"
+              width="71"
+              height="48"
+              rx="5"
+              fill="#fff0e6"
+              stroke="#bd5944"
+              stroke-width="3"
+            />
+            <path
+              d="M309 111H317L323 98 335 124 347 98 353 111H360M314 73Q305 63 315 51M335 73Q326 63 336 51M356 73Q347 63 357 51"
+              class="heat"
+            />
+            <text x="335" y="173">电阻发热</text>
+          </svg>
+          <strong>机械能 → 热</strong>
+        </article>
+        <article class="method">
+          <h2><span class="number">02</span>反接制动</h2>
+          <p>反接电枢电压，串阻限流。</p>
+          <svg
+            viewBox="0 0 400 212"
+            role="img"
+            aria-label="以电源反接制动为例，反接电枢电压产生反向转矩；机械能和电源送入的电能一起变成电阻热"
+          >
+            <defs>
+              <marker
+                id="plug-arrow"
+                viewBox="0 0 10 10"
+                refX="8"
+                refY="5"
+                markerWidth="6"
+                markerHeight="6"
+                orient="auto"
+              >
+                <path d="M0 0 10 5 0 10Z" fill="#bc742a" stroke="none" />
+              </marker>
+            </defs>
+            <circle
+              cx="45"
+              cy="137"
+              r="25"
+              fill="#eef3f0"
+              stroke="#647d78"
+              stroke-width="3"
+            />
+            <path
+              d="M45 112V162M20 137H70M27 119 63 155M27 155 63 119"
+              class="wire"
+            />
+            <text x="45" y="186">负载</text>
+            <path
+              d="M78 137H143"
+              class="energy"
+              marker-end="url(#plug-arrow)"
+            />
+            <circle
+              cx="184"
+              cy="137"
+              r="31"
+              fill="#e8f2ed"
+              stroke="#39796f"
+              stroke-width="3"
+            />
+            <text x="184" y="145" style="font-size: 27px">M</text>
+            <rect
+              x="30"
+              y="20"
+              width="78"
+              height="48"
+              rx="8"
+              fill="#eff2f8"
+              stroke="#647d78"
+              stroke-width="3"
+            />
+            <text x="69" y="51">−　＋</text>
+            <text x="159" y="51">电源</text>
+            <path
+              d="M108 43H245V119H285M220 137H285"
+              class="energy"
+              marker-end="url(#plug-arrow)"
+            />
+            <path d="M116 43H245V119H271" class="flow" />
+            <rect
+              x="296"
+              y="104"
+              width="71"
+              height="48"
+              rx="5"
+              fill="#fff0e6"
+              stroke="#bd5944"
+              stroke-width="3"
+            />
+            <path
+              d="M306 128H314L320 115 332 141 344 115 350 128H357M311 91Q302 81 312 69M332 91Q323 81 333 69M353 91Q344 81 354 69"
+              class="heat"
+            />
+            <text x="331" y="186">电阻发热</text>
+          </svg>
+          <strong>机械能 ＋ 电源电能 → 热</strong>
+        </article>
+        <article class="method">
+          <h2><span class="number">03</span>回馈制动</h2>
+          <p>电机发电，送回电源。</p>
+          <svg
+            viewBox="0 0 400 212"
+            role="img"
+            aria-label="负载带动电机发电，将机械能转化为电能，送回能够吸收能量的电源"
+          >
+            <defs>
+              <marker
+                id="regen-arrow"
+                viewBox="0 0 10 10"
+                refX="8"
+                refY="5"
+                markerWidth="6"
+                markerHeight="6"
+                orient="auto"
+              >
+                <path d="M0 0 10 5 0 10Z" fill="#bc742a" stroke="none" />
+              </marker>
+            </defs>
+            <circle
+              cx="56"
+              cy="111"
+              r="29"
+              fill="#eef3f0"
+              stroke="#647d78"
+              stroke-width="3"
+            />
+            <path
+              d="M56 82V140M27 111H85M35 90 77 132M35 132 77 90"
+              class="wire"
+            />
+            <text x="56" y="173">负载</text>
+            <path
+              d="M91 111H136"
+              class="energy"
+              marker-end="url(#regen-arrow)"
+            />
+            <circle
+              cx="179"
+              cy="111"
+              r="35"
+              fill="#e8f2ed"
+              stroke="#39796f"
+              stroke-width="3"
+            />
+            <text x="179" y="119" style="font-size: 27px">G</text>
+            <text x="179" y="173">发电</text>
+            <path
+              d="M220 111H289"
+              class="energy"
+              marker-end="url(#regen-arrow)"
+            />
+            <path d="M220 111H277" class="flow" />
+            <rect
+              x="299"
+              y="78"
+              width="71"
+              height="66"
+              rx="8"
+              fill="#eff2f8"
+              stroke="#647d78"
+              stroke-width="3"
+            />
+            <path
+              d="M326 91 315 114H333L326 131 351 105H334L340 91Z"
+              fill="#39796f"
+              stroke="none"
+            />
+            <text x="335" y="173">可吸能电源</text>
+          </svg>
+          <strong>机械能 → 回收的电能</strong>
+        </article>
+      </section>
+      <section class="purposes" aria-label="制动的两种用途">
+        <article class="purpose">
+          <svg
+            viewBox="0 0 200 150"
+            role="img"
+            aria-label="快速停车：转子仍顺时针转动，逆时针制动转矩使转速降低至零"
+          >
+            <defs>
+              <marker
+                id="motion-arrow"
+                viewBox="0 0 10 10"
+                refX="8"
+                refY="5"
+                markerWidth="5"
+                markerHeight="5"
+                orient="auto"
+              >
+                <path d="M0 0 10 5 0 10Z" fill="#39796f" stroke="none" />
+              </marker>
+              <marker
+                id="torque-arrow"
+                viewBox="0 0 10 10"
+                refX="8"
+                refY="5"
+                markerWidth="5"
+                markerHeight="5"
+                orient="auto"
+              >
+                <path d="M0 0 10 5 0 10Z" fill="#bd5944" stroke="none" />
+              </marker>
+            </defs>
+            <circle
+              cx="100"
+              cy="77"
+              r="31"
+              fill="#fff"
+              stroke="#647d78"
+              stroke-width="3"
+            />
+            <path
+              d="M100 46V108M69 77H131M78 55 122 99M78 99 122 55"
+              class="wire"
+            />
+            <path
+              d="M59 47A49 49 0 0 1 146 62"
+              fill="none"
+              stroke="#39796f"
+              stroke-width="4"
+              marker-end="url(#motion-arrow)"
+            />
+            <path
+              d="M150 105A57 57 0 0 1 47 98"
+              fill="none"
+              stroke="#bd5944"
+              stroke-width="4"
+              marker-end="url(#torque-arrow)"
+            />
+            <text x="100" y="18">转向</text>
+            <text x="100" y="148" style="fill: #bd5944">制动转矩</text>
+          </svg>
+          <div>
+            <h3>快速停车</h3>
+            <p>转速下降 → 停车</p>
+            <small>反接停车须及时断电，防反转。</small>
+          </div>
+        </article>
+        <article class="purpose">
+          <svg
+            viewBox="0 0 200 150"
+            role="img"
+            aria-label="匀速下放：重物向下运动，制动力向上与重力平衡，速度保持不变"
+          >
+            <defs>
+              <marker
+                id="down-arrow"
+                viewBox="0 0 10 10"
+                refX="8"
+                refY="5"
+                markerWidth="5"
+                markerHeight="5"
+                orient="auto"
+              >
+                <path d="M0 0 10 5 0 10Z" fill="#39796f" stroke="none" />
+              </marker>
+              <marker
+                id="up-arrow"
+                viewBox="0 0 10 10"
+                refX="8"
+                refY="5"
+                markerWidth="5"
+                markerHeight="5"
+                orient="auto"
+              >
+                <path d="M0 0 10 5 0 10Z" fill="#bd5944" stroke="none" />
+              </marker>
+            </defs>
+            <path d="M74 17H126M100 17V55" class="wire" />
+            <rect
+              x="71"
+              y="55"
+              width="58"
+              height="48"
+              rx="5"
+              fill="#fff"
+              stroke="#647d78"
+              stroke-width="3"
+            />
+            <path
+              d="M100 57V22"
+              fill="none"
+              stroke="#bd5944"
+              stroke-width="4"
+              marker-end="url(#up-arrow)"
+            />
+            <path
+              d="M100 103V138"
+              fill="none"
+              stroke="#39796f"
+              stroke-width="4"
+              marker-end="url(#down-arrow)"
+            />
+            <path
+              d="M157 61V103"
+              fill="none"
+              stroke="#39796f"
+              stroke-width="3"
+              marker-end="url(#down-arrow)"
+            />
+            <text x="155" y="36" style="font-size: 16px; fill: #bd5944">
+              制动力
+            </text>
+            <text x="48" y="137" style="font-size: 16px">重力</text>
+          </svg>
+          <div>
+            <h3>匀速下放重物</h3>
+            <p>制动转矩平衡重物驱动转矩</p>
+            <small>能耗或回馈带走重力势能。</small>
+          </div>
+        </article>
+      </section>
+      <footer>
+        <span
+          ><b>看能量去向，分清制动。</b>　橙箭头＝能量流（忽略其他损耗）</span
+        >
+        <span>零速保载需抱闸</span>
+      </footer>
+    </main>
+    <script>
+      function resize() {
+        document.documentElement.style.setProperty(
+          '--lesson-scale',
+          Math.min(innerWidth / 1444, innerHeight / 744),
+        );
+      }
+      addEventListener('resize', resize);
+      resize();
+      // Keep course navigation available when the embedded slide has focus.
+      const keys = [
+        'ArrowRight',
+        'ArrowLeft',
+        'ArrowUp',
+        'ArrowDown',
+        'PageDown',
+        'PageUp',
+        'Home',
+        'End',
+        ' ',
+        'f',
+        'F',
+        'm',
+        'M',
+        'Escape',
+      ];
+      document.addEventListener('keydown', (event) => {
+        if (
+          parent === window ||
+          event.altKey ||
+          event.ctrlKey ||
+          event.metaKey ||
+          !keys.includes(event.key)
+        )
+          return;
+        event.preventDefault();
+        parent.document.body.dispatchEvent(
+          new KeyboardEvent('keydown', { key: event.key, bubbles: true }),
+        );
+      });
+      let touchStart = null;
+      document.addEventListener(
+        'touchstart',
+        (event) => {
+          const touch = event.touches[0];
+          touchStart = { x: touch.clientX, y: touch.clientY };
+        },
+        { passive: true },
+      );
+      document.addEventListener(
+        'touchend',
+        (event) => {
+          const start = touchStart;
+          touchStart = null;
+          if (!start || parent === window) return;
+          const touch = event.changedTouches[0];
+          const dx = touch.clientX - start.x;
+          const dy = touch.clientY - start.y;
+          if (Math.abs(dx) <= 60 || Math.abs(dx) <= Math.abs(dy) * 1.5) return;
+          parent.document.body.dispatchEvent(
+            new KeyboardEvent('keydown', {
+              key: dx < 0 ? 'ArrowRight' : 'ArrowLeft',
+              bubbles: true,
+            }),
+          );
+        },
+        { passive: true },
+      );
+    </script>
+  </body>
+</html>

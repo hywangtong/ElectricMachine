@@ -1,0 +1,281 @@
+.braking-page {
+  grid-template-rows: 76px 66px 1fr 146px;
+}
+
+.braking-page .page-head {
+  position: relative;
+}
+
+.braking-page .page-head h1 {
+  font-size: 34px;
+  margin: 4px 0 5px;
+}
+
+.scope-tag {
+  position: absolute;
+  right: 0;
+  top: 12px;
+  border: 1px solid #c8d9d4;
+  border-radius: 20px;
+  padding: 9px 16px;
+  color: #39796f;
+  font-size: 17px;
+}
+
+.scope-tag small {
+  display: block;
+  margin-top: 3px;
+  font-size: 12px;
+}
+
+.braking-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border: 1px solid #c8d9d4;
+  background: #edf4ef;
+  border-radius: 12px;
+}
+
+.braking-page button {
+  font: inherit;
+  font-size: 18px;
+  padding: 9px 17px;
+  background: white;
+  color: #173b3b;
+  border: 1px solid #adc5bc;
+  border-radius: 8px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.braking-page button[aria-pressed='true'] {
+  background: #173b3b;
+  color: #fff;
+  border-color: #173b3b;
+}
+
+.braking-page button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.braking-page :focus-visible {
+  outline: 3px solid #bc742a;
+  outline-offset: 3px;
+}
+
+.resistance-control {
+  margin-left: auto;
+  display: grid;
+  grid-template-columns: 130px 235px 80px;
+  align-items: center;
+  gap: 13px;
+  font-size: 21px;
+}
+
+.resistance-control input {
+  width: 235px;
+  accent-color: #39796f;
+  cursor: pointer;
+}
+
+.resistance-control output {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.braking-layout {
+  display: grid;
+  grid-template-columns: 474px 1fr;
+  gap: 14px;
+  min-height: 0;
+}
+
+.braking-panel {
+  min-height: 0;
+  border: 1px solid #c8d9d4;
+  border-radius: 14px;
+  background: #fff;
+  padding: 14px 18px 10px;
+  display: grid;
+  grid-template-rows: 29px 1fr 46px;
+}
+
+.panel-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.panel-heading h2 {
+  font-size: 23px;
+}
+
+.panel-heading span {
+  font-size: 16px;
+  color: #55736d;
+}
+
+.braking-panel svg {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  overflow: visible;
+}
+
+.braking-panel svg text {
+  font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+  fill: #173b3b;
+  font-size: 20px;
+}
+
+.braking-panel svg .small {
+  font-size: 16px;
+  fill: #55736d;
+}
+
+.braking-panel svg .math {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-style: italic;
+  font-size: 25px;
+}
+
+.wire {
+  fill: none;
+  stroke: #47635f;
+  stroke-width: 3;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.current-flow {
+  fill: none;
+  stroke: #bc742a;
+  stroke-width: 4;
+  stroke-dasharray: 2 21;
+  stroke-linecap: round;
+}
+
+.braking-panel svg .motor-color {
+  fill: #ac4c54;
+}
+
+.braking-panel svg .brake-color {
+  fill: #39796f;
+}
+
+.curve {
+  fill: none;
+  stroke-width: 3.5;
+}
+
+.curve.motor {
+  stroke: #ac4c54;
+}
+
+.curve.brake {
+  stroke: #39796f;
+}
+
+.curve.reference {
+  stroke: #39796f;
+  stroke-dasharray: 7 7;
+  opacity: 0.25;
+  stroke-width: 2;
+}
+
+.trace {
+  stroke: #bc742a;
+  stroke-width: 5;
+  fill: none;
+  stroke-linecap: round;
+}
+
+.guide {
+  stroke: #9cae9c;
+  stroke-width: 1.5;
+  stroke-dasharray: 6 6;
+}
+
+.readings {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  border-top: 1px solid #e0e8e3;
+  padding-top: 7px;
+  font-size: 15px;
+  color: #55736d;
+}
+
+.readings b {
+  display: block;
+  font-size: 19px;
+  font-variant-numeric: tabular-nums;
+  color: #173b3b;
+}
+
+.circuit-caption {
+  font-size: 18px;
+  line-height: 1.4;
+  border-top: 1px solid #e0e8e3;
+  padding-top: 6px;
+}
+
+.braking-notes {
+  display: grid;
+  grid-template-columns: 1.05fr 1.25fr 0.9fr;
+  gap: 14px;
+}
+
+.braking-notes article {
+  padding: 8px 14px;
+  border-radius: 12px;
+  border: 1px solid #c8d9d4;
+  background: #edf4ef;
+  font-size: 18px;
+  line-height: 1.3;
+}
+
+.braking-notes h2 {
+  font-size: 20px;
+  margin-bottom: 4px;
+}
+
+.braking-notes .formula {
+  font-family: Georgia, 'Microsoft YaHei', serif;
+  font-size: 21px;
+}
+
+.braking-notes .minor {
+  font-size: 14px;
+  color: #55736d;
+}
+
+.braking-notes .energy-note {
+  display: grid;
+  grid-template-columns: 104px 1fr;
+  align-items: center;
+  gap: 8px;
+  background: #fcf3e5;
+  border-color: #e5cfaa;
+}
+
+.energy-note svg {
+  width: 104px;
+  height: 88px;
+}
+
+.energy-note p {
+  font-size: 17px;
+}
+
+.braking-notes .lowering-note {
+  grid-template-columns: 142px minmax(0, 1fr);
+}
+
+.lowering-note svg {
+  width: 142px;
+  height: 120px;
+}

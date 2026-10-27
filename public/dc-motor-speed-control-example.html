@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>例 8.3.1：通风机负载串电阻调速</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/dc-motor-nameplate-example.css" />
+    <link rel="stylesheet" href="/dc-motor-speed-control-example.css" />
+    <script src="/dc-machine-basics.js" defer></script>
+    <script type="module" src="/dc-motor-nameplate-example.js"></script>
+    <script type="module" src="/dc-motor-speed-control-example.js"></script>
+    <script type="module" src="/dc-generator-emf-controls.js"></script>
+  </head>
+  <body>
+    <main class="lesson exercise-page speed-exercise">
+      <header class="page-head exercise-head">
+        <div class="eyebrow">直流拖动 / 8.3 · 例 8.3.1 · 课堂例题</div>
+        <h1>例 8.3.1 · 通风机负载串电阻调速</h1>
+        <p>先由额定数据求电机参数，再按风机负载规律确定新工作点。</p>
+      </header>
+      <section class="exercise-layout">
+        <article class="question-card" aria-labelledby="question-title">
+          <header class="card-label">
+            <span>题目 · 例 8.3.1</span
+            ><small>SEPARATELY EXCITED DC MOTOR</small>
+          </header>
+          <h2 id="question-title">一台他励直流电动机拖动通风机负载运行</h2>
+          <dl class="given-grid" aria-label="已知条件">
+            <div>
+              <dt>额定功率</dt>
+              <dd>P<sub>N</sub> = <b>4</b> kW</dd>
+            </div>
+            <div>
+              <dt>额定电枢电压</dt>
+              <dd>U<sub>aN</sub> = <b>160</b> V</dd>
+            </div>
+            <div>
+              <dt>额定电枢电流</dt>
+              <dd>I<sub>aN</sub> = <b>34.4</b> A</dd>
+            </div>
+            <div>
+              <dt>额定转速</dt>
+              <dd>n<sub>N</sub> = <b>1450</b> r/min</dd>
+            </div>
+          </dl>
+          <div class="question-tasks">
+            <strong>求</strong>
+            <div>
+              <p>
+                采用改变电枢电路电阻调速，要使转速降低至
+                <b>1200 r/min</b>，需串联多大的电阻 R<sub>r</sub>？
+              </p>
+              <p class="question-assumption">
+                按题图解法：电枢电压、磁通不变，忽略空载损耗（T ≈
+                T<sub>L</sub>）。
+              </p>
+            </div>
+          </div>
+          <button
+            class="reveal-button"
+            type="button"
+            aria-expanded="false"
+            aria-controls="speed-solution"
+          >
+            <span class="button-label">显示计算过程与答案</span
+            ><span class="button-icon" aria-hidden="true">→</span>
+          </button>
+        </article>
+        <section
+          class="solution-panel"
+          id="speed-solution"
+          aria-label="例 8.3.1 计算过程与答案"
+          hidden
+        >
+          <div class="solution-tabs" role="tablist" aria-label="例题计算子页">
+            <button
+              type="button"
+              role="tab"
+              id="parameters-tab"
+              aria-controls="parameters-panel"
+              aria-selected="true"
+              tabindex="0"
+              data-speed-page="parameters"
+            >
+              01 · 电机参数
+            </button>
+            <button
+              type="button"
+              role="tab"
+              id="load-tab"
+              aria-controls="load-panel"
+              aria-selected="false"
+              tabindex="-1"
+              data-speed-page="load"
+            >
+              02 · 风机负载
+            </button>
+            <button
+              type="button"
+              role="tab"
+              id="resistance-tab"
+              aria-controls="resistance-panel"
+              aria-selected="false"
+              tabindex="-1"
+              data-speed-page="resistance"
+            >
+              03 · 电阻求解
+            </button>
+          </div>
+          <section
+            class="solution-tabpanel"
+            id="parameters-panel"
+            role="tabpanel"
+            aria-labelledby="parameters-tab"
+            tabindex="0"
+          >
+            <ol class="solution-steps parameter-steps">
+              <li>
+                <span class="step-index">01</span>
+                <div>
+                  <h2>由额定功率估算电枢电阻</h2>
+                  <math display="block"
+                    ><msub><mi>R</mi><mi>a</mi></msub
+                    ><mo>=</mo
+                    ><mfrac
+                      ><mrow
+                        ><msub><mi>U</mi><mi>aN</mi></msub
+                        ><mo>−</mo
+                        ><mfrac
+                          ><msub><mi>P</mi><mi>N</mi></msub
+                          ><msub><mi>I</mi><mi>aN</mi></msub></mfrac
+                        ></mrow
+                      ><msub><mi>I</mi><mi>aN</mi></msub></mfrac
+                    ><mo>≈</mo><mn>1.27</mn><mtext> Ω</mtext></math
+                  >
+                  <p class="substitution">= (160 − 4000 / 34.4) / 34.4</p>
+                </div>
+              </li>
+              <li>
+                <span class="step-index">02</span>
+                <div>
+                  <h2>额定运行时的反电动势</h2>
+                  <p>E = U<sub>aN</sub> − R<sub>a</sub>I<sub>aN</sub></p>
+                  <p class="substitution">
+                    = 160 − 1.27 × 34.4 ≈ <b>116.31 V</b>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <span class="step-index">03</span>
+                <div>
+                  <h2>电动势系数与磁通的乘积</h2>
+                  <p>C<sub>E</sub>Φ = E / n<sub>N</sub></p>
+                  <p class="substitution">
+                    = 116.31 / 1450 ≈ <b>0.0802 V/(r/min)</b>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <span class="step-index">04</span>
+                <div>
+                  <h2>转矩系数与磁通的乘积</h2>
+                  <p>C<sub>T</sub>Φ = 9.55 C<sub>E</sub>Φ</p>
+                  <p class="substitution">
+                    = 9.55 × 0.0802 ≈ <b>0.766 N·m/A</b>
+                  </p>
+                </div>
+              </li>
+            </ol>
+            <p class="solution-note">
+              忽略空载损耗时，P<sub>N</sub> ≈
+              EI<sub>aN</sub>，才能由额定输出功率估算 R<sub>a</sub>。转速单位为
+              r/min。
+            </p>
+          </section>
+          <section
+            class="solution-tabpanel"
+            id="load-panel"
+            role="tabpanel"
+            aria-labelledby="load-tab"
+            tabindex="0"
+            hidden
+          >
+            <ol class="solution-steps">
+              <li>
+                <span class="step-index">05</span>
+                <div>
+                  <h2>额定转矩</h2>
+                  <math display="block"
+                    ><msub><mi>T</mi><mi>N</mi></msub
+                    ><mo>=</mo
+                    ><mfrac
+                      ><mn>60</mn><mrow><mn>2</mn><mi>π</mi></mrow></mfrac
+                    ><mfrac
+                      ><msub><mi>P</mi><mi>N</mi></msub
+                      ><msub><mi>n</mi><mi>N</mi></msub></mfrac
+                    ><mo>≈</mo><mn>26.36</mn><mtext> N·m</mtext></math
+                  >
+                  <p class="substitution">≈ (60 / 6.28) × (4000 / 1450)</p>
+                </div>
+              </li>
+              <li>
+                <span class="step-index">06</span>
+                <div>
+                  <h2>通风机负载 T ∝ n²：降速后转矩随之减小</h2>
+                  <p>T = (n / n<sub>N</sub>)² T<sub>N</sub></p>
+                  <p class="substitution">
+                    = (1200 / 1450)² × 26.36 ≈ <b>18.05 N·m</b>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <span class="step-index">07</span>
+                <div>
+                  <h2>求理想空载转速与转速降落</h2>
+                  <p>
+                    n₀ = U<sub>aN</sub> / (C<sub>E</sub>Φ) ≈ <b>1995 r/min</b>
+                  </p>
+                  <p class="substitution">
+                    Δn = n₀ − n = 1995 − 1200 = <b>795 r/min</b>
+                  </p>
+                </div>
+              </li>
+            </ol>
+            <p class="solution-note">
+              电压与磁通不变，串电阻前后的 n₀
+              相同；风机负载的转矩应按新转速计算，不能沿用额定转矩。
+            </p>
+          </section>
+          <section
+            class="solution-tabpanel"
+            id="resistance-panel"
+            role="tabpanel"
+            aria-labelledby="resistance-tab"
+            tabindex="0"
+            hidden
+          >
+            <ol class="solution-steps">
+              <li>
+                <span class="step-index">08</span>
+                <div>
+                  <h2>由串电阻后的人为机械特性出发</h2>
+                  <math display="block"
+                    ><mi>Δn</mi><mo>=</mo
+                    ><mfrac
+                      ><mrow
+                        ><msub><mi>R</mi><mi>a</mi></msub
+                        ><mo>+</mo><msub><mi>R</mi><mi>r</mi></msub></mrow
+                      ><mrow
+                        ><msub><mi>C</mi><mi>E</mi></msub
+                        ><msub><mi>C</mi><mi>T</mi></msub
+                        ><msup><mi>Φ</mi><mn>2</mn></msup></mrow
+                      ></mfrac
+                    ><mi>T</mi></math
+                  >
+                  <p class="substitution">
+                    回路总电阻为 R<sub>a</sub> + R<sub>r</sub>。
+                  </p>
+                </div>
+              </li>
+              <li>
+                <span class="step-index">09</span>
+                <div>
+                  <h2>移项求外串电阻</h2>
+                  <math display="block"
+                    ><msub><mi>R</mi><mi>r</mi></msub
+                    ><mo>=</mo><mfrac><mi>Δn</mi><mi>T</mi></mfrac
+                    ><msub><mi>C</mi><mi>E</mi></msub
+                    ><msub><mi>C</mi><mi>T</mi></msub
+                    ><msup><mi>Φ</mi><mn>2</mn></msup
+                    ><mo>−</mo><msub><mi>R</mi><mi>a</mi></msub></math
+                  >
+                  <p class="substitution">
+                    = (795 / 18.05) × 0.0802 × 0.766 − 1.27
+                  </p>
+                </div>
+              </li>
+              <li class="answer-step">
+                <span class="step-index">答</span>
+                <div>
+                  <h2>电枢电路需串联的电阻</h2>
+                  <p class="final-answer">R<sub>r</sub> ≈ 1.436 Ω</p>
+                  <p class="substitution">
+                    即约 1.44 Ω；已扣除电枢自身电阻 R<sub>a</sub>。
+                  </p>
+                </div>
+              </li>
+            </ol>
+            <p class="solution-note">
+              按题图取 2π ≈ 6.28，并沿用各步舍入值；C<sub>E</sub>C<sub>T</sub>Φ²
+              = (C<sub>E</sub>Φ)(C<sub>T</sub>Φ)，结果取近似值。
+            </p>
+          </section>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>

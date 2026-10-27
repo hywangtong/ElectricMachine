@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>例 8.4.1：能耗制动电阻计算</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/dc-motor-nameplate-example.css" />
+    <link rel="stylesheet" href="/dc-motor-starting-example.css" />
+    <link rel="stylesheet" href="/dc-motor-braking-example.css" />
+    <script src="/dc-machine-basics.js" defer></script>
+    <script type="module" src="/dc-motor-nameplate-example.js"></script>
+    <script type="module" src="/dc-motor-braking-example.js"></script>
+    <script type="module" src="/dc-generator-emf-controls.js"></script>
+  </head>
+  <body>
+    <main class="lesson exercise-page braking-exercise">
+      <header class="page-head exercise-head">
+        <div class="eyebrow">直流拖动 / 8.4 · 例 8.4.1 · 课堂例题</div>
+        <h1>例 8.4.1 · 能耗制动电阻计算</h1>
+        <p>根据额定数据，求迅速停机与稳态下放重物所需的制动电阻。</p>
+      </header>
+      <section class="exercise-layout">
+        <article class="question-card" aria-labelledby="question-title">
+          <header class="card-label">
+            <span>题目 · 例 8.4.1</span
+            ><small>SEPARATELY EXCITED DC MOTOR</small>
+          </header>
+          <h2 id="question-title">一台他励直流电动机，已知：</h2>
+          <dl class="given-grid" aria-label="已知条件">
+            <div>
+              <dt>额定功率</dt>
+              <dd>
+                <i>P<sub>N</sub></i> = <b>22</b> kW
+              </dd>
+            </div>
+            <div>
+              <dt>额定电枢电压</dt>
+              <dd>
+                <i>U<sub>aN</sub></i> = <b>440</b> V
+              </dd>
+            </div>
+            <div>
+              <dt>额定电枢电流</dt>
+              <dd>
+                <i>I<sub>aN</sub></i> = <b>65.3</b> A
+              </dd>
+            </div>
+            <div>
+              <dt>额定转速</dt>
+              <dd>
+                <i>n<sub>N</sub></i> = <b>600</b> r/min
+              </dd>
+            </div>
+            <div>
+              <dt>最大允许电流</dt>
+              <dd>
+                <i>I<sub>amax</sub></i> = 2<i>I<sub>aN</sub></i>
+              </dd>
+            </div>
+            <div>
+              <dt>空载转矩</dt>
+              <dd>
+                <i>T<sub>0</sub></i> ≈ 0
+              </dd>
+            </div>
+          </dl>
+          <div class="question-tasks">
+            <strong>求</strong>
+            <ol>
+              <li>
+                拖动 T<sub>L</sub> = 0.8 T<sub>N</sub>
+                的反抗性恒转矩负载，采用能耗制动迅速停机，求最小制动电阻
+                R<sub>b</sub>。
+              </li>
+              <li>
+                拖动 T<sub>L</sub> = 0.8 T<sub>N</sub> 的位能性恒转矩负载，以
+                300 r/min 能耗制动下放重物，求制动电阻 R<sub>b</sub>。
+              </li>
+            </ol>
+          </div>
+          <button
+            class="reveal-button"
+            type="button"
+            aria-expanded="false"
+            aria-controls="braking-solution"
+          >
+            <span class="button-label">显示计算过程与答案</span
+            ><span class="button-icon" aria-hidden="true">→</span>
+          </button>
+        </article>
+        <section
+          class="solution-panel"
+          id="braking-solution"
+          aria-label="例 8.4.1 计算过程与答案"
+          hidden
+        >
+          <div class="solution-tabs" role="tablist" aria-label="例题计算子页">
+            <button
+              type="button"
+              role="tab"
+              id="parameters-tab"
+              aria-controls="parameters-panel"
+              aria-selected="true"
+              tabindex="0"
+              data-braking-page="parameters"
+            >
+              01 · 参数计算</button
+            ><button
+              type="button"
+              role="tab"
+              id="stopping-tab"
+              aria-controls="stopping-panel"
+              aria-selected="false"
+              tabindex="-1"
+              data-braking-page="stopping"
+            >
+              02 · 迅速停机</button
+            ><button
+              type="button"
+              role="tab"
+              id="lowering-tab"
+              aria-controls="lowering-panel"
+              aria-selected="false"
+              tabindex="-1"
+              data-braking-page="lowering"
+            >
+              03 · 下放重物</button
+            ><button
+              type="button"
+              role="tab"
+              id="characteristics-tab"
+              aria-controls="characteristics-panel"
+              aria-selected="false"
+              tabindex="-1"
+              data-braking-page="characteristics"
+            >
+              04 · 机械特性
+            </button>
+          </div>
+          <section
+            class="solution-tabpanel"
+            id="parameters-panel"
+            role="tabpanel"
+            aria-labelledby="parameters-tab"
+          >
+            <ol class="solution-steps">
+              <li>
+                <span class="step-index">01</span>
+                <div>
+                  <h2>额定反电动势与电枢电阻</h2>
+                  <p>
+                    E<sub>N</sub> = P<sub>N</sub> / I<sub>aN</sub> = 22 × 10³ /
+                    65.3 ≈ <b>336.91 V</b>
+                  </p>
+                  <p>
+                    R<sub>a</sub> = (U<sub>aN</sub> − E<sub>N</sub>) / I<sub
+                      >aN</sub
+                    >
+                  </p>
+                  <p>= (440 − 336.91) / 65.3 ≈ <b>1.58 Ω</b></p>
+                </div>
+              </li>
+              <li>
+                <span class="step-index">02</span>
+                <div>
+                  <h2>电动势系数与转矩系数</h2>
+                  <p>
+                    C<sub>E</sub>Φ = E<sub>N</sub> / n<sub>N</sub> = 336.91 /
+                    600 ≈ <b>0.562</b>
+                  </p>
+                  <p>
+                    C<sub>T</sub>Φ = 9.55 C<sub>E</sub>Φ ≈ <b>5.365 N·m/A</b>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <span class="step-index">03</span>
+                <div>
+                  <h2>额定转矩</h2>
+                  <p>T<sub>N</sub> = 60 P<sub>N</sub> / (2π n<sub>N</sub>)</p>
+                  <p>≈ (60 × 22 × 10³) / (6.28 × 600) ≈ <b>350.32 N·m</b></p>
+                </div>
+              </li>
+            </ol>
+            <p class="solution-note">
+              保持额定励磁，忽略电刷压降。按题图取 2π ≈
+              6.28，并沿用中间近似值；C<sub>E</sub>Φ 的单位为 V/(r/min)。R<sub
+                >a</sub
+              >
+              的代入分母为 65.3 A。
+            </p>
+          </section>
+          <section
+            class="solution-tabpanel"
+            id="stopping-panel"
+            role="tabpanel"
+            aria-labelledby="stopping-tab"
+            hidden
+          >
+            <ol class="solution-steps">
+              <li>
+                <span class="step-index">01</span>
+                <div>
+                  <h2>停机前的负载转矩与电枢电流</h2>
+                  <p>
+                    T<sub>L</sub> = 0.8 T<sub>N</sub> = 0.8 × 350.32 =
+                    <b>280.256 N·m</b>
+                  </p>
+                  <p>
+                    I<sub>a</sub> = T<sub>L</sub> / (C<sub>T</sub>Φ) = 280.256 /
+                    5.365 ≈ <b>52.24 A</b>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <span class="step-index">02</span>
+                <div>
+                  <h2>切换瞬间转速不变，反电动势不变</h2>
+                  <p>
+                    E<sub>b</sub> = U<sub>aN</sub> − R<sub>a</sub>I<sub>a</sub>
+                  </p>
+                  <p>= 440 − 1.58 × 52.24 ≈ <b>357.46 V</b></p>
+                </div>
+              </li>
+              <li>
+                <span class="step-index">03</span>
+                <div>
+                  <h2>用最大允许电流求制动电阻下限</h2>
+                  <p>
+                    |I<sub>b</sub>| = E<sub>b</sub> / (R<sub>a</sub> +
+                    R<sub>b</sub>) ≤ I<sub>amax</sub> = 130.6 A
+                  </p>
+                  <p>
+                    R<sub>b</sub> ≥ E<sub>b</sub> / I<sub>amax</sub> − R<sub
+                      >a</sub
+                    >
+                  </p>
+                  <p>= 357.46 / 130.6 − 1.58 ≈ <b>1.16 Ω</b></p>
+                </div>
+              </li>
+            </ol>
+            <p class="solution-note">
+              电枢脱离电源、励磁保持；初始制动电流最大。在允许电流内取较小电阻，可获得较大初始制动转矩。
+            </p>
+          </section>
+          <section
+            class="solution-tabpanel"
+            id="lowering-panel"
+            role="tabpanel"
+            aria-labelledby="lowering-tab"
+            hidden
+          >
+            <ol class="solution-steps">
+              <li>
+                <span class="step-index">01</span>
+                <div>
+                  <h2>稳态下放：重力转矩与制动转矩平衡</h2>
+                  <p>
+                    |n<sub>L</sub>| = 300 r/min，T<sub>L</sub> = 280.256 N·m
+                  </p>
+                  <p>
+                    |I<sub>ac</sub>| = T<sub>L</sub> / (C<sub>T</sub>Φ) ≈
+                    <b>52.24 A</b>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <span class="step-index">02</span>
+                <div>
+                  <h2>由制动回路求电阻</h2>
+                  <p>
+                    R<sub>a</sub> + R<sub>b</sub> = |E<sub>c</sub>| /
+                    |I<sub>ac</sub>|
+                  </p>
+                  <p>
+                    R<sub>b</sub> = C<sub>E</sub>C<sub>T</sub>Φ² |n<sub>L</sub>|
+                    / T<sub>L</sub> − R<sub>a</sub>
+                  </p>
+                  <p>
+                    = (0.562 × 5.365 × 300) / 280.256 − 1.58 ≈ <b>1.65 Ω</b>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <span class="step-index">03</span>
+                <div>
+                  <h2>校验限流要求</h2>
+                  <p>1.65 Ω &gt; 1.16 Ω，<b>满足最大允许电流要求</b>。</p>
+                  <p>
+                    |I<sub>b</sub>| ≈ 357.46 / (1.58 + 1.65) ≈ 110.67 A &lt;
+                    130.6 A
+                  </p>
+                </div>
+              </li>
+            </ol>
+            <p class="solution-note">
+              下放时 n<sub>L</sub> = −300
+              r/min，电磁制动转矩为正；上式电动势、电流及转速均取大小。
+            </p>
+          </section>
+          <section
+            class="solution-tabpanel characteristics-panel"
+            id="characteristics-panel"
+            role="tabpanel"
+            aria-labelledby="characteristics-tab"
+            hidden
+          >
+            <div class="characteristic-plots">
+              <figure class="plot-card">
+                <figcaption>n — T 机械特性：切换与减速</figcaption>
+                <svg
+                  viewBox="0 0 560 430"
+                  role="img"
+                  aria-labelledby="stopping-plot-title stopping-plot-desc"
+                >
+                  <title id="stopping-plot-title">
+                    反抗性恒转矩负载的能耗制动停机
+                  </title>
+                  <desc id="stopping-plot-desc">
+                    原电动工作点 a
+                    位于第一象限，断开电枢电源并接入电阻后，转速不突变，工作点跳到第二象限
+                    b，再沿过原点的能耗制动特性减速至零。
+                  </desc>
+                  <defs>
+                    <marker
+                      id="stopping-arrow"
+                      viewBox="0 0 10 10"
+                      refX="9"
+                      refY="5"
+                      markerWidth="6"
+                      markerHeight="6"
+                      orient="auto-start-reverse"
+                    >
+                      <path d="M0 0 10 5 0 10Z" fill="#b25d3f" />
+                    </marker>
+                  </defs>
+                  <g class="axis">
+                    <path d="M32 260H535M355 400V20" />
+                    <path d="m525 254 10 6-10 6M349 30l6-10 6 10" />
+                  </g>
+                  <g class="plot-label">
+                    <text x="533" y="246">T</text>
+                    <text x="369" y="30">n</text>
+                    <text x="331" y="281">O</text>
+                  </g>
+                  <path class="natural" d="M38 -76 508 95" />
+                  <path class="load" d="M470 46V395" />
+                  <path class="braking" d="M67 80 490 344" />
+                  <path class="load" d="M240 260V395" />
+                  <path class="guide" d="M67 80H470" />
+                  <g class="plot-label">
+                    <text x="436" y="124">固有特性</text>
+                    <text x="478" y="285">
+                      T
+                      <tspan baseline-shift="sub" font-size="14">L</tspan>
+                    </text>
+                    <text x="368" y="75">
+                      n
+                      <tspan baseline-shift="sub" font-size="14">a</tspan>
+                    </text>
+                  </g>
+                  <circle class="work" cx="470" cy="80" r="5" />
+                  <text class="point-label" x="480" y="75">a</text>
+                  <circle class="work" cx="67" cy="80" r="5" />
+                  <text class="point-label" x="49" y="65">b</text>
+                  <path
+                    class="motion stopping-motion"
+                    d="M437 80H96M100 101 325 241"
+                  />
+                  <g class="plot-label">
+                    <text x="168" y="61">切换：转速不突变</text>
+                    <text x="92" y="179">沿制动特性减速</text>
+                    <text x="214" y="416">
+                      −T
+                      <tspan baseline-shift="sub" font-size="14">L</tspan>
+                    </text>
+                  </g>
+                </svg>
+                <p>
+                  a → b：电枢断电、接入制动电阻；b →
+                  O：转速下降，制动转矩逐渐减小。
+                </p>
+                <small>机械特性示意 · 图中负载转矩沿用课程的正值约定</small>
+              </figure>
+              <figure class="plot-card">
+                <figcaption>n — T 机械特性：稳态下放</figcaption>
+                <svg
+                  viewBox="0 0 560 430"
+                  role="img"
+                  aria-labelledby="lowering-plot-title lowering-plot-desc"
+                >
+                  <title id="lowering-plot-title">
+                    位能性恒转矩负载的能耗制动下放
+                  </title>
+                  <desc id="lowering-plot-desc">
+                    正转矩负转速的第四象限为下放工作区。制动特性通过原点，电阻越大特性越陡，负载线上下放速度的大小越大。
+                  </desc>
+                  <defs>
+                    <marker
+                      id="lowering-arrow"
+                      viewBox="0 0 10 10"
+                      refX="9"
+                      refY="5"
+                      markerWidth="6"
+                      markerHeight="6"
+                      orient="auto-start-reverse"
+                    >
+                      <path d="M0 0 10 5 0 10Z" fill="#b25d3f" />
+                    </marker>
+                  </defs>
+                  <g class="axis">
+                    <path d="M32 260H535M355 400V20" />
+                    <path d="m525 254 10 6-10 6M349 30l6-10 6 10" />
+                  </g>
+                  <g class="plot-label">
+                    <text x="533" y="246">T</text>
+                    <text x="369" y="30">n</text>
+                    <text x="331" y="281">O</text>
+                  </g>
+                  <path class="natural" d="M38 -76 508 95" />
+                  <path class="load" d="M470 46V395" />
+                  <path class="braking" d="M67 80 490 344" />
+                  <path class="braking secondary" d="M111 80 490 360" />
+                  <path class="guide" d="M67 80H470" />
+                  <g class="plot-label">
+                    <text x="436" y="124">固有特性</text>
+                    <text x="478" y="285">
+                      T
+                      <tspan baseline-shift="sub" font-size="14">L</tspan>
+                    </text>
+                    <text x="368" y="75">
+                      n
+                      <tspan baseline-shift="sub" font-size="14">a</tspan>
+                    </text>
+                  </g>
+                  <circle class="work" cx="470" cy="80" r="5" />
+                  <text class="point-label" x="480" y="75">a</text>
+                  <path class="guide" d="M355 332H470M355 345H470" />
+                  <circle class="work" cx="470" cy="332" r="5" />
+                  <circle class="work" cx="470" cy="345" r="5" />
+                  <g class="plot-label">
+                    <text x="482" y="324">c′</text>
+                    <text x="482" y="369">c</text>
+                    <text x="220" y="384">−300 r/min</text>
+                    <text x="70" y="349">下放区</text>
+                  </g>
+                  <text class="curve-label" x="56" y="119">
+                    R
+                    <tspan baseline-shift="sub" font-size="13">b</tspan>
+                    = 1.16 Ω
+                  </text>
+                  <text class="curve-label" x="119" y="64">
+                    R
+                    <tspan baseline-shift="sub" font-size="13">b</tspan>
+                    = 1.65 Ω
+                  </text>
+                </svg>
+                <p>电阻增大 → 特性变陡 → 同一负载下，下放速度的大小增大。</p>
+                <small>机械特性示意 · 图中负载转矩沿用课程的正值约定</small>
+              </figure>
+            </div>
+            <p class="solution-note">
+              反抗性负载：切换后沿制动特性减速至零；位能性负载：下放时在第四象限形成稳态工作点。
+            </p>
+          </section>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>

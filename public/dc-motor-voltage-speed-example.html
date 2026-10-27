@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>例 8.3.2：改变电枢电压调速</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/dc-motor-nameplate-example.css" />
+    <link rel="stylesheet" href="/dc-motor-voltage-speed-example.css" />
+    <script src="/dc-machine-basics.js" defer></script>
+    <script type="module" src="/dc-motor-nameplate-example.js"></script>
+    <script type="module" src="/dc-generator-emf-controls.js"></script>
+  </head>
+  <body>
+    <main class="lesson exercise-page voltage-speed-example">
+      <header class="page-head exercise-head">
+        <div class="eyebrow">直流拖动 / 8.3 · 例 8.3.2 · 课堂例题</div>
+        <h1>例 8.3.2 · 改变电枢电压调速</h1>
+        <p>恒转矩、恒磁通：由转速降落求理想空载转速，再求电枢电压。</p>
+      </header>
+      <section class="exercise-layout">
+        <article class="question-card" aria-labelledby="question-title">
+          <header class="card-label">
+            <span>题目 · 例 8.3.2</span><small>ARMATURE VOLTAGE CONTROL</small>
+          </header>
+          <h2 id="question-title">
+            例 8.3.1 中的他励电动机，拖动恒转矩负载运行，
+            <i>T<sub>L</sub> = T<sub>N</sub></i
+            >。
+          </h2>
+          <dl class="given-grid" aria-label="沿用例 8.3.1 的已知参数">
+            <div>
+              <dt>电枢电阻</dt>
+              <dd>
+                <i>R<sub>a</sub></i> = <b>1.27</b> Ω
+              </dd>
+            </div>
+            <div>
+              <dt>电动势系数与磁通之积</dt>
+              <dd><i>C<sub>E</sub>Φ</i> = <b>0.0802</b></dd>
+            </div>
+            <div>
+              <dt>转矩系数与磁通之积</dt>
+              <dd><i>C<sub>T</sub>Φ</i> = <b>0.766</b></dd>
+            </div>
+            <div>
+              <dt>额定转矩</dt>
+              <dd>
+                <i>T<sub>N</sub></i> = <b>26.36</b> N·m
+              </dd>
+            </div>
+          </dl>
+          <div class="question-tasks">
+            <strong>求</strong>
+            <p>
+              现采用改变电枢电压调速。试问要使转速降低至
+              <b>1000 r/min</b>，电枢电压应降低到多少？
+            </p>
+          </div>
+          <button
+            class="reveal-button"
+            type="button"
+            aria-expanded="false"
+            aria-controls="voltage-speed-solution"
+          >
+            <span class="button-label">显示计算过程与答案</span>
+            <span class="button-icon" aria-hidden="true">→</span>
+          </button>
+        </article>
+        <section
+          class="solution-panel"
+          id="voltage-speed-solution"
+          aria-label="例 8.3.2 计算过程与答案"
+          hidden
+        >
+          <header class="solution-head">
+            <span>计算过程与答案</span><small>Δn → n₀ → Uₐ</small>
+          </header>
+          <ol class="solution-steps">
+            <li>
+              <span class="step-index">01</span>
+              <div>
+                <h2>恒转矩负载：电磁转矩取额定转矩，求转速降落</h2>
+                <p>
+                  Δ<i>n</i> =
+                  <span class="fraction">
+                    <span
+                      ><i>R<sub>a</sub></i></span
+                    >
+                    <span><i>C<sub>E</sub>C<sub>T</sub>Φ</i>²</span>
+                  </span>
+                  <i>T</i> =
+                  <span class="fraction">
+                    <span>1.27</span><span>0.0802 × 0.766</span>
+                  </span>
+                  × 26.36
+                </p>
+                <p class="substitution">≈ <b>544.94 r/min</b></p>
+              </div>
+            </li>
+            <li>
+              <span class="step-index">02</span>
+              <div>
+                <h2>由目标转速求该电压下的理想空载转速</h2>
+                <p>
+                  <i>n<sub>0</sub></i> = <i>n</i> + Δ<i>n</i>
+                </p>
+                <p class="substitution">
+                  ≈ 1000 + 544.94 = <b>1544.94 r/min</b>
+                </p>
+              </div>
+            </li>
+            <li>
+              <span class="step-index">03</span>
+              <div>
+                <h2>磁通保持不变，求所需电枢电压</h2>
+                <p>
+                  <i>U<sub>a</sub></i> = <i>C<sub>E</sub>Φ n<sub>0</sub></i>
+                </p>
+                <p class="substitution">≈ 0.0802 × 1544.94 = <b>123.9 V</b></p>
+              </div>
+            </li>
+          </ol>
+          <p class="solution-note">
+            按题图取 T = T<sub>L</sub> =
+            T<sub>N</sub>，忽略空载转矩与电刷压降；励磁不变，电枢不外串电阻。
+            恒转矩时 Δn 不变，降低 U<sub>a</sub> 使机械特性平行下移。
+          </p>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>

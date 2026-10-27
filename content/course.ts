@@ -325,13 +325,16 @@ export type Slide =
     }
   | {
       id: string;
-      kind: 'speed-control';
+      kind: 'speed-control' | 'voltage-speed-control' | 'field-speed-control';
       title: string;
       chapterId: string;
     }
   | {
       id: string;
-      kind: 'speed-control-summary';
+      kind:
+        | 'speed-control-summary'
+        | 'voltage-speed-control-summary'
+        | 'field-speed-control-summary';
       title: string;
       chapterId: string;
     }
@@ -638,6 +641,86 @@ export const slides: Slide[] = [
           kind: 'speed-control-summary',
           title: '调速特性六项指标',
           chapterId: chapter.id,
+        },
+        {
+          id: 'dc-drives-speed-control-example',
+          kind: 'embed',
+          title: '例 8.3.1：通风机负载串电阻调速',
+          chapterId: chapter.id,
+          embedUrl: '/dc-motor-speed-control-example.html',
+        },
+        {
+          id: 'dc-drives-voltage-speed-control',
+          kind: 'voltage-speed-control',
+          title: '改变电枢电压：三种负载下的调速原理',
+          chapterId: chapter.id,
+        },
+        {
+          id: 'dc-drives-voltage-speed-control-summary',
+          kind: 'voltage-speed-control-summary',
+          title: '电枢电压调速：六项性能指标',
+          chapterId: chapter.id,
+        },
+        {
+          id: 'dc-drives-voltage-speed-example',
+          kind: 'embed',
+          title: '例 8.3.2：改变电枢电压调速',
+          chapterId: chapter.id,
+          embedUrl: '/dc-motor-voltage-speed-example.html',
+        },
+        {
+          id: 'dc-drives-field-speed-control',
+          kind: 'field-speed-control',
+          title: '改变励磁电流：三种负载下的调速原理',
+          chapterId: chapter.id,
+        },
+        {
+          id: 'dc-drives-field-speed-control-summary',
+          kind: 'field-speed-control-summary',
+          title: '励磁电流调速：六项性能指标',
+          chapterId: chapter.id,
+        },
+        {
+          id: 'dc-drives-field-speed-example',
+          kind: 'embed',
+          title: '例 8.3.3：恒功率负载弱磁调速',
+          chapterId: chapter.id,
+          embedUrl: '/dc-motor-field-speed-example.html',
+        },
+        {
+          id: 'dc-drives-braking-methods',
+          kind: 'embed',
+          title: '直流电机制动方法分类与示意',
+          chapterId: chapter.id,
+          embedUrl: '/dc-motor-braking-methods.html',
+        },
+        {
+          id: 'dc-drives-dynamic-braking-principle',
+          kind: 'embed',
+          title: '能耗制动：电路与机械特性切换',
+          chapterId: chapter.id,
+          embedUrl: '/dc-motor-dynamic-braking.html?mode=principle',
+        },
+        {
+          id: 'dc-drives-dynamic-braking-stop',
+          kind: 'embed',
+          title: '能耗制动：迅速停机',
+          chapterId: chapter.id,
+          embedUrl: '/dc-motor-dynamic-braking.html?mode=stop',
+        },
+        {
+          id: 'dc-drives-dynamic-braking-lowering',
+          kind: 'embed',
+          title: '能耗制动：下放重物',
+          chapterId: chapter.id,
+          embedUrl: '/dc-motor-dynamic-braking.html?mode=lowering',
+        },
+        {
+          id: 'dc-drives-braking-example-question',
+          kind: 'embed',
+          title: '例 8.4.1：能耗制动电阻计算',
+          chapterId: chapter.id,
+          embedUrl: '/dc-motor-braking-example-question.html',
         },
       );
     }

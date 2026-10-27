@@ -1,0 +1,63 @@
+.voltage-speed-example .card-label small {
+  font-size: 10px;
+  letter-spacing: 0.04em;
+}
+
+.voltage-speed-example .question-tasks p {
+  color: #3b514b;
+  font-size: 24px;
+  line-height: 1.65;
+}
+
+.voltage-speed-example.is-revealed .question-card {
+  gap: 12px;
+}
+
+.voltage-speed-example.is-revealed .question-card h2 {
+  font-size: 23px;
+  line-height: 1.45;
+}
+
+.voltage-speed-example.is-revealed .question-tasks p {
+  font-size: 20px;
+}
+
+.voltage-speed-example .solution-steps {
+  grid-template-rows: 1.35fr 1fr 1fr;
+}
+
+.voltage-speed-example .solution-steps li {
+  padding: 12px 18px;
+}
+
+.voltage-speed-example .solution-steps p {
+  font-size: 24px;
+}
+
+.voltage-speed-example .solution-steps .substitution {
+  margin-top: 8px;
+  font-size: 21px;
+}
+
+.voltage-speed-example .fraction {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: stretch;
+  vertical-align: middle;
+  margin: 0 5px;
+  text-align: center;
+  line-height: 1.25;
+}
+
+.voltage-speed-example .fraction > span:first-child {
+  border-bottom: 1px solid currentColor;
+  padding: 0 5px 3px;
+}
+
+.voltage-speed-example .fraction > span:last-child {
+  padding-top: 3px;
+}
+
+.voltage-speed-example .solution-panel sub {
+  line-height: 0;
+}

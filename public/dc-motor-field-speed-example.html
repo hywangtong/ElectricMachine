@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>例 8.3.3：恒功率负载弱磁调速</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/dc-motor-nameplate-example.css" />
+    <link rel="stylesheet" href="/dc-motor-speed-control-example.css" />
+    <link rel="stylesheet" href="/dc-motor-field-speed-example.css" />
+    <script src="/dc-machine-basics.js" defer></script>
+    <script type="module" src="/dc-motor-nameplate-example.js"></script>
+    <script type="module" src="/dc-motor-field-speed-example.js"></script>
+    <script type="module" src="/dc-generator-emf-controls.js"></script>
+  </head>
+  <body>
+    <main class="lesson exercise-page speed-exercise field-speed-example">
+      <header class="page-head exercise-head">
+        <div class="eyebrow">直流拖动 / 8.3 · 例 8.3.3 · 课堂例题</div>
+        <h1>例 8.3.3 · 恒功率负载弱磁调速</h1>
+        <p>先由恒功率条件确定转矩，再求磁通，并用理想空载转速限制选根。</p>
+      </header>
+      <section class="exercise-layout">
+        <article class="question-card" aria-labelledby="question-title">
+          <header class="card-label">
+            <span>题目 · 例 8.3.3</span><small>FIELD WEAKENING</small>
+          </header>
+          <h2 id="question-title">
+            例 8.3.1
+            中的他励电动机，拖动恒功率负载运行，现采用改变励磁电流调速。
+          </h2>
+          <dl class="given-grid" aria-label="沿用例 8.3.1 的已知参数">
+            <div>
+              <dt>电枢电压</dt>
+              <dd>U<sub>a</sub> = <b>160</b> V</dd>
+            </div>
+            <div>
+              <dt>电枢电阻</dt>
+              <dd>R<sub>a</sub> = <b>1.27</b> Ω</dd>
+            </div>
+            <div>
+              <dt>额定转速</dt>
+              <dd>n<sub>N</sub> = <b>1450</b> r/min</dd>
+            </div>
+            <div>
+              <dt>额定转矩</dt>
+              <dd>T<sub>N</sub> = <b>26.36</b> N·m</dd>
+            </div>
+          </dl>
+          <div class="question-tasks">
+            <strong>求</strong>
+            <div>
+              <p>
+                要使转速增加至 <b>1800 r/min</b>，并希望理想空载转速 n<sub
+                  >0</sub
+                >
+                不超过 <b>3000 r/min</b>，C<sub>E</sub>Φ 应等于多少？
+              </p>
+              <p class="question-assumption">
+                电枢电压保持不变，不外串电阻；忽略空载转矩 T<sub>0</sub>，按 T ≈
+                T<sub>L</sub> 计算。
+              </p>
+            </div>
+          </div>
+          <button
+            class="reveal-button"
+            type="button"
+            aria-expanded="false"
+            aria-controls="field-speed-solution"
+          >
+            <span class="button-label">显示计算过程与答案</span
+            ><span class="button-icon" aria-hidden="true">→</span>
+          </button>
+        </article>
+        <section
+          class="solution-panel"
+          id="field-speed-solution"
+          aria-label="例 8.3.3 计算过程与答案"
+          hidden
+        >
+          <div class="solution-tabs" role="tablist" aria-label="例题计算子页">
+            <button
+              type="button"
+              role="tab"
+              id="equation-tab"
+              aria-controls="equation-panel"
+              aria-selected="true"
+              tabindex="0"
+              data-field-page="equation"
+            >
+              01 · 建立方程
+            </button>
+            <button
+              type="button"
+              role="tab"
+              id="roots-tab"
+              aria-controls="roots-panel"
+              aria-selected="false"
+              tabindex="-1"
+              data-field-page="roots"
+            >
+              02 · 选根校核
+            </button>
+          </div>
+          <section
+            class="solution-tabpanel"
+            id="equation-panel"
+            role="tabpanel"
+            aria-labelledby="equation-tab"
+            tabindex="0"
+          >
+            <ol class="solution-steps">
+              <li>
+                <span class="step-index">01</span>
+                <div>
+                  <h2>恒功率负载：T ∝ 1/n，先求目标转速下的转矩</h2>
+                  <math display="block"
+                    ><mi>T</mi><mo>=</mo
+                    ><mfrac
+                      ><msub><mi>n</mi><mi>N</mi></msub
+                      ><mi>n</mi></mfrac
+                    ><msub><mi>T</mi><mi>N</mi></msub
+                    ><mo>=</mo><mfrac><mn>1450</mn><mn>1800</mn></mfrac
+                    ><mo>×</mo><mn>26.36</mn><mo>≈</mo><mn>21.23</mn
+                    ><mtext> N·m</mtext></math
+                  >
+                </div>
+              </li>
+              <li>
+                <span class="step-index">02</span>
+                <div>
+                  <h2>代入机械特性方程</h2>
+                  <math display="block"
+                    ><mi>n</mi><mo>=</mo
+                    ><mfrac
+                      ><msub><mi>U</mi><mi>a</mi></msub
+                      ><mrow
+                        ><msub><mi>C</mi><mi>E</mi></msub
+                        ><mi>Φ</mi></mrow
+                      ></mfrac
+                    ><mo>−</mo
+                    ><mfrac
+                      ><msub><mi>R</mi><mi>a</mi></msub
+                      ><mrow
+                        ><msub><mi>C</mi><mi>E</mi></msub
+                        ><msub><mi>C</mi><mi>T</mi></msub
+                        ><msup><mi>Φ</mi><mn>2</mn></msup></mrow
+                      ></mfrac
+                    ><mi>T</mi></math
+                  >
+                  <p class="substitution">
+                    n 用 r/min，C<sub>T</sub> = 9.55 C<sub>E</sub>。令 x =
+                    C<sub>E</sub>Φ，得
+                  </p>
+                  <math display="block"
+                    ><mn>1800</mn><mo>=</mo><mfrac><mn>160</mn><mi>x</mi></mfrac
+                    ><mo>−</mo
+                    ><mfrac
+                      ><mrow><mn>1.27</mn><mo>×</mo><mn>21.23</mn></mrow
+                      ><mrow
+                        ><mn>9.55</mn><msup><mi>x</mi><mn>2</mn></msup></mrow
+                      ></mfrac
+                    ></math
+                  >
+                </div>
+              </li>
+              <li>
+                <span class="step-index">03</span>
+                <div>
+                  <h2>两边乘 x²，整理成一元二次方程</h2>
+                  <p>1800 x² − 160 x + 2.82 ≈ 0</p>
+                  <p class="substitution">其中 1.27 × 21.23 / 9.55 ≈ 2.82。</p>
+                </div>
+              </li>
+            </ol>
+            <p class="solution-note">
+              恒功率满足 Tn =
+              T<sub>N</sub>n<sub>N</sub>；升速后负载转矩减小，不能直接沿用额定转矩。各步沿用题图舍入值。
+            </p>
+          </section>
+          <section
+            class="solution-tabpanel"
+            id="roots-panel"
+            role="tabpanel"
+            aria-labelledby="roots-tab"
+            tabindex="0"
+            hidden
+          >
+            <ol class="solution-steps roots-steps">
+              <li>
+                <span class="step-index">04</span>
+                <div>
+                  <h2>解二次方程，得到两个候选值</h2>
+                  <math display="block"
+                    ><mi>x</mi><mo>=</mo
+                    ><mfrac
+                      ><mrow
+                        ><mn>160</mn><mo>±</mo
+                        ><msqrt
+                          ><mrow
+                            ><msup><mn>160</mn><mn>2</mn></msup
+                            ><mo>−</mo><mn>4</mn><mo>×</mo><mn>1800</mn
+                            ><mo>×</mo><mn>2.82</mn></mrow
+                          ></msqrt
+                        ></mrow
+                      ><mrow><mn>2</mn><mo>×</mo><mn>1800</mn></mrow></mfrac
+                    ></math
+                  >
+                  <p class="substitution">
+                    C<sub>E</sub>Φ ≈ <b>0.0647</b> 或 <b>0.0242</b>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <span class="step-index">05</span>
+                <div>
+                  <h2>分别校核理想空载转速 n₀ = Uₐ / (C<sub>E</sub>Φ)</h2>
+                  <p>取 0.0647：n₀ ≈ 160 / 0.0647 ≈ <b>2473 r/min</b></p>
+                  <p class="substitution">2473 &lt; 3000，满足限制。</p>
+                  <p>取 0.0242：n₀ ≈ 160 / 0.0242 ≈ <b>6612 r/min</b></p>
+                  <p class="substitution">6612 &gt; 3000，不满足限制，舍去。</p>
+                </div>
+              </li>
+              <li class="answer-step">
+                <span class="step-index">答</span>
+                <div>
+                  <h2>应选择的电动势系数与磁通之积</h2>
+                  <p class="final-answer">C<sub>E</sub>Φ ≈ 0.0647 V/(r/min)</p>
+                </div>
+              </li>
+            </ol>
+            <p class="solution-note">
+              两个代数根都需用题设约束筛选；这里限制的是理想空载转速
+              n₀，而目标负载转速为 n = 1800 r/min。
+            </p>
+          </section>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>

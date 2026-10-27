@@ -1,0 +1,30 @@
+.field-speed-example.is-revealed .question-card h2 {
+  font-size: 23px;
+  line-height: 1.4;
+}
+
+.field-speed-example.is-revealed .question-tasks p {
+  font-size: 20px;
+}
+
+.field-speed-example .solution-steps {
+  grid-template-rows: 1fr 1.6fr 1fr;
+}
+
+.field-speed-example .roots-steps {
+  grid-template-rows: 1.3fr 1.6fr 1fr;
+}
+
+.field-speed-example .solution-steps p,
+.field-speed-example math {
+  font-size: 26px;
+}
+
+.field-speed-example .solution-steps .substitution {
+  margin-top: 8px;
+  font-size: 20px;
+}
+
+.field-speed-example .solution-steps .final-answer {
+  font-size: 32px;
+}
