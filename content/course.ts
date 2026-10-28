@@ -722,6 +722,41 @@ export const slides: Slide[] = [
           chapterId: chapter.id,
           embedUrl: '/dc-motor-braking-example-question.html',
         },
+        {
+          id: 'dc-drives-plugging-braking-stop',
+          kind: 'embed',
+          title: '反接制动：迅速停机',
+          chapterId: chapter.id,
+          embedUrl: '/dc-motor-plugging-braking.html?mode=stop',
+        },
+        {
+          id: 'dc-drives-plugging-braking-stop-resistance',
+          kind: 'embed',
+          title: '反接制动：停机制动效果与电阻选择',
+          chapterId: chapter.id,
+          embedUrl: '/dc-motor-plugging-braking.html?mode=stop-resistance',
+        },
+        {
+          id: 'dc-drives-plugging-braking-lowering',
+          kind: 'embed',
+          title: '反接制动：下放重物',
+          chapterId: chapter.id,
+          embedUrl: '/dc-motor-plugging-braking.html?mode=lowering',
+        },
+        {
+          id: 'dc-drives-plugging-braking-lowering-resistance',
+          kind: 'embed',
+          title: '反接制动：下放速度与电阻选择',
+          chapterId: chapter.id,
+          embedUrl: '/dc-motor-plugging-braking.html?mode=lowering-resistance',
+        },
+        {
+          id: 'dc-drives-plugging-braking-example',
+          kind: 'embed',
+          title: '例 8.4.2：反接制动电阻计算',
+          chapterId: chapter.id,
+          embedUrl: '/dc-motor-plugging-braking-example.html',
+        },
       );
     }
 

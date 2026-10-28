@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>例 8.4.2：反接制动电阻计算</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/dc-motor-nameplate-example.css" />
+    <link rel="stylesheet" href="/dc-motor-plugging-braking-example.css" />
+    <script src="/dc-machine-basics.js" defer></script>
+    <script type="module" src="/dc-motor-nameplate-example.js"></script>
+    <script type="module" src="/dc-generator-emf-controls.js"></script>
+  </head>
+  <body>
+    <main class="lesson exercise-page plugging-exercise">
+      <header class="page-head exercise-head">
+        <div class="eyebrow">直流拖动 / 8.4 · 例 8.4.2 · 课堂例题</div>
+        <h1>例 8.4.2 · 反接制动电阻计算</h1>
+        <p>沿用例 8.4.1 的电动机与任务要求，改用反接制动。</p>
+      </header>
+      <section class="exercise-layout">
+        <article class="question-card" aria-labelledby="question-title">
+          <header class="card-label">
+            <span>题目 · 例 8.4.2</span><small>反接制动</small>
+          </header>
+          <h2 id="question-title">
+            迅速停机和下放重物的要求不变，求电枢电路应串联的制动电阻。
+          </h2>
+          <dl class="given-grid" aria-label="沿用例 8.4.1 的已知量与计算参数">
+            <div>
+              <dt>电枢电压</dt>
+              <dd>
+                <i>U<sub>a</sub></i> = <b>440</b> V
+              </dd>
+            </div>
+            <div>
+              <dt>最大允许电流 · 2 × 65.3 A</dt>
+              <dd>
+                <i>I<sub>amax</sub></i> = <b>130.6</b> A
+              </dd>
+            </div>
+            <div>
+              <dt>电枢电阻</dt>
+              <dd>
+                <i>R<sub>a</sub></i> = <b>1.58</b> Ω
+              </dd>
+            </div>
+            <div>
+              <dt>负载转矩 · 0.8 T<sub>N</sub></dt>
+              <dd>
+                <i>T<sub>L</sub></i> = <b>280.256</b> N·m
+              </dd>
+            </div>
+            <div>
+              <dt>电动势系数 · V/(r/min)</dt>
+              <dd><i>C<sub>E</sub>Φ</i> = <b>0.562</b></dd>
+            </div>
+            <div>
+              <dt>转矩系数 · N·m/A</dt>
+              <dd><i>C<sub>T</sub>Φ</i> = <b>5.365</b></dd>
+            </div>
+          </dl>
+          <div class="question-tasks">
+            <strong>求</strong>
+            <ol>
+              <li>
+                反抗性恒转矩负载：反接制动迅速停机，求 R<sub>b</sub> 的下限。
+              </li>
+              <li>
+                位能性恒转矩负载：以 300 r/min 反接制动下放重物，求
+                R<sub>b</sub>（忽略 T<sub>0</sub>）。
+              </li>
+            </ol>
+          </div>
+          <button
+            class="reveal-button"
+            type="button"
+            aria-expanded="false"
+            aria-controls="plugging-solution"
+          >
+            <span class="button-label">显示计算过程与答案</span>
+            <span class="button-icon" aria-hidden="true">→</span>
+          </button>
+        </article>
+        <section
+          class="solution-panel"
+          id="plugging-solution"
+          aria-label="例 8.4.2 计算过程与答案"
+          hidden
+        >
+          <header class="solution-head">
+            <span>解 · 两种制动任务</span><small>保持额定励磁</small>
+          </header>
+          <ol class="solution-steps">
+            <li>
+              <span class="step-index">01</span>
+              <div>
+                <h2>迅速停机 · 切换瞬间限流</h2>
+                <p class="explanation">
+                  由例 8.4.1，切换点电动势 E<sub>b</sub> = 357.46 V。
+                </p>
+                <p class="equation">
+                  R<sub>b</sub> ≥
+                  <span class="fraction"
+                    ><span>U<sub>a</sub> + E<sub>b</sub></span
+                    ><span>I<sub>amax</sub></span></span
+                  >
+                  − R<sub>a</sub>
+                </p>
+                <p class="equation">
+                  =
+                  <span class="fraction"
+                    ><span>440 + 357.46</span><span>2 × 65.3</span></span
+                  >
+                  − 1.58 ≈ <b>4.526 Ω</b>
+                </p>
+              </div>
+            </li>
+            <li>
+              <span class="step-index">02</span>
+              <div>
+                <h2>下放重物 · 稳态转矩平衡（忽略 T<sub>0</sub>）</h2>
+                <p class="explanation">n 取下放转速的大小：n = 300 r/min。</p>
+                <p class="equation">
+                  R<sub>b</sub> =
+                  <span class="fraction"
+                    ><span>C<sub>T</sub>Φ</span><span>T<sub>L</sub></span></span
+                  >
+                  (U<sub>a</sub> + C<sub>E</sub>Φ n) − R<sub>a</sub>
+                </p>
+                <p class="equation">
+                  =
+                  <span class="fraction"
+                    ><span>5.365</span><span>280.256</span></span
+                  >
+                  (440 + 0.562 × 300) − 1.58 ≈ <b>10.07 Ω</b>
+                </p>
+              </div>
+            </li>
+          </ol>
+          <p class="solution-note">
+            两问分别选取外串电阻，均需扣除
+            R<sub>a</sub>；沿用题图近似值。迅速停机时，转速降至零应及时切断电枢电源。
+          </p>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>

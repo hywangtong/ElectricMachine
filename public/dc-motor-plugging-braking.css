@@ -1,0 +1,93 @@
+.plugging-page {
+  grid-template-rows: 76px 66px 1fr 171px;
+}
+
+.plugging-page .braking-layout {
+  grid-template-columns: 444px 1fr;
+}
+
+.plugging-page .braking-notes {
+  grid-template-columns: 1fr 1.38fr 0.9fr;
+}
+
+.plugging-page .braking-notes article {
+  font-size: 17px;
+}
+
+.plugging-page .braking-notes .formula {
+  font-size: 20px;
+  line-height: 1.4;
+}
+
+.plugging-page .braking-notes .minor {
+  margin-top: 5px;
+  font-size: 14px;
+}
+
+.plugging-page .scope-tag {
+  font-size: 15px;
+  padding: 7px 12px;
+}
+
+.plugging-page .resistance-control {
+  grid-template-columns: 90px 150px 76px;
+  gap: 8px;
+  font-size: 19px;
+}
+
+.plugging-page .resistance-control input {
+  width: 150px;
+}
+
+.cut-control {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 17px;
+  white-space: nowrap;
+}
+
+.cut-control input {
+  accent-color: #39796f;
+  width: 18px;
+  height: 18px;
+}
+
+.plugging-page .braking-panel {
+  grid-template-rows: 29px 1fr 50px;
+}
+
+.plugging-page .circuit-caption {
+  font-size: 16px;
+}
+
+.plugging-page .braking-notes .energy-note {
+  grid-template-columns: 92px 1fr;
+}
+
+.plugging-page .energy-note svg {
+  width: 92px;
+  height: 110px;
+}
+
+.plugging-page .energy-note p {
+  font-size: 16px;
+}
+
+.plugging-page .fraction {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  vertical-align: middle;
+  line-height: 1.15;
+  margin: 2px 3px;
+}
+
+.plugging-page .fraction > :first-child {
+  border-bottom: 1px solid currentColor;
+  padding: 0 5px 3px;
+}
+
+.plugging-page .fraction > :last-child {
+  padding-top: 3px;
+}
