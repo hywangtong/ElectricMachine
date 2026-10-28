@@ -1,0 +1,153 @@
+.regenerative-page {
+  grid-template-rows: 76px 64px minmax(0, 1fr) 200px;
+}
+
+.regenerative-page .page-head h1 {
+  font-size: 33px;
+}
+
+.regenerative-page .scope-tag {
+  font-size: 15px;
+  top: 5px;
+}
+
+.regenerative-page .braking-layout {
+  grid-template-columns: 428px minmax(0, 1fr);
+}
+
+.regenerative-page .braking-panel {
+  grid-template-rows: 28px minmax(0, 1fr) 56px;
+}
+
+.regenerative-page .braking-panel > div {
+  min-height: 0;
+}
+
+.regenerative-page .circuit-caption {
+  font-size: 16px;
+}
+
+.regenerative-page .resistance-control {
+  grid-template-columns: 80px 130px 70px;
+  gap: 8px;
+  font-size: 18px;
+}
+
+.regenerative-page input[type='range'] {
+  accent-color: #39796f;
+  width: 130px;
+}
+
+.regenerative-page .braking-controls button {
+  padding: 8px 13px;
+  font-size: 17px;
+}
+
+.regenerative-page .progress-control {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-left: auto;
+  font-size: 16px;
+}
+
+.regenerative-page .progress-control input {
+  width: 120px;
+}
+
+.regenerative-page .braking-notes {
+  grid-template-columns: 1fr 1.4fr 0.95fr;
+}
+
+.regenerative-page .braking-notes article {
+  font-size: 17px;
+  line-height: 1.35;
+}
+
+.regenerative-page .braking-notes h2 {
+  font-size: 20px;
+}
+
+.regenerative-page .braking-notes .formula {
+  font-size: 21px;
+  line-height: 1.55;
+}
+
+.regenerative-page .braking-notes .minor {
+  margin-top: 5px;
+}
+
+.fraction {
+  display: inline-flex;
+  vertical-align: middle;
+  align-items: center;
+  flex-direction: column;
+  line-height: 1.2;
+  margin: 2px 4px;
+}
+
+.fraction > :first-child {
+  border-bottom: 1px solid currentColor;
+  padding: 0 4px 3px;
+}
+
+.fraction > :last-child {
+  padding-top: 3px;
+}
+
+.regenerative-page .braking-notes .energy-note {
+  display: block;
+}
+
+.power-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 9px;
+  padding: 10px 12px;
+  border: 1px solid #e5cfaa;
+  border-radius: 8px;
+  color: #8f5a20;
+  background: #fffaf0;
+  font-size: 17px;
+}
+
+.power-strip strong {
+  font-size: 23px;
+  font-variant-numeric: tabular-nums;
+}
+
+.regenerative-page .stage-row {
+  display: flex;
+  gap: 7px;
+  margin-top: 8px;
+}
+
+.regenerative-page .stage-row button {
+  font-size: 15px;
+  padding: 5px 9px;
+}
+
+.regenerative-page .comparison-layout {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  min-height: 0;
+}
+
+.regenerative-page .comparison-layout .braking-panel {
+  grid-template-rows: 30px minmax(0, 1fr) 62px;
+}
+
+.comparison-layout h2 {
+  font-size: 23px;
+}
+
+.comparison-layout p {
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.regenerative-page .comparison-notes {
+  grid-template-columns: 1fr 1fr 1fr;
+}

@@ -31,6 +31,7 @@ import { DistributedPropulsion } from '@/components/distributed-propulsion';
 import { MotorAdvantagesLesson } from '@/components/motor-advantages-lesson';
 import { MotorHistoryLesson } from '@/components/motor-history-lesson';
 import { LoadCharacteristicLesson } from '@/components/load-characteristic-lesson';
+import { ConstantPowerStabilityLesson } from '@/components/constant-power-stability-lesson';
 import {
   SpeedControlLesson,
   SpeedControlSummary,
@@ -468,6 +469,7 @@ export default function CoursePlayer() {
                               : slide.kind === 'load-characteristic'
                                 ? '互动图解'
                                 : slide.kind === 'speed-control' ||
+                                    slide.kind === 'constant-power-stability' ||
                                     slide.kind === 'speed-control-summary' ||
                                     slide.kind === 'voltage-speed-control' ||
                                     slide.kind ===
@@ -848,6 +850,8 @@ export default function CoursePlayer() {
                       <LoadCharacteristicLesson load={slide.load} />
                     ) : slide.kind === 'speed-control' ? (
                       <SpeedControlLesson />
+                    ) : slide.kind === 'constant-power-stability' ? (
+                      <ConstantPowerStabilityLesson />
                     ) : slide.kind === 'speed-control-summary' ? (
                       <SpeedControlSummary />
                     ) : slide.kind === 'voltage-speed-control' ? (

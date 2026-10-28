@@ -325,7 +325,11 @@ export type Slide =
     }
   | {
       id: string;
-      kind: 'speed-control' | 'voltage-speed-control' | 'field-speed-control';
+      kind:
+        | 'speed-control'
+        | 'constant-power-stability'
+        | 'voltage-speed-control'
+        | 'field-speed-control';
       title: string;
       chapterId: string;
     }
@@ -637,6 +641,12 @@ export const slides: Slide[] = [
           chapterId: chapter.id,
         },
         {
+          id: 'dc-drives-constant-power-stability',
+          kind: 'constant-power-stability',
+          title: '恒功率负载：稳定与不稳定工作点',
+          chapterId: chapter.id,
+        },
+        {
           id: 'dc-drives-speed-control-summary',
           kind: 'speed-control-summary',
           title: '调速特性六项指标',
@@ -757,6 +767,24 @@ export const slides: Slide[] = [
           chapterId: chapter.id,
           embedUrl: '/dc-motor-plugging-braking-example.html',
         },
+        ...(
+          [
+            ['downhill', '回馈制动：电车下坡'],
+            ['voltage', '回馈制动：降低电枢电压调速'],
+            ['field', '回馈制动：增加励磁电流调速'],
+            ['lowering', '回馈制动：下放重物的电路切换'],
+            ['lowering-process', '回馈制动：下放重物的工作点轨迹'],
+            ['lowering-resistance', '回馈制动：下放速度与电阻选择'],
+            ['lowering-check', '回馈制动：制动瞬间的电流校验'],
+            ['comparison', '反接制动与反向回馈制动比较'],
+          ] as const
+        ).map(([mode, title]) => ({
+          id: `dc-drives-regenerative-braking-${mode}`,
+          kind: 'embed' as const,
+          title,
+          chapterId: chapter.id,
+          embedUrl: `/dc-motor-regenerative-braking.html?mode=${mode}`,
+        })),
       );
     }
 
