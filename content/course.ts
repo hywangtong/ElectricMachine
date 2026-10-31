@@ -785,6 +785,13 @@ export const slides: Slide[] = [
           chapterId: chapter.id,
           embedUrl: `/dc-motor-regenerative-braking.html?mode=${mode}`,
         })),
+        {
+          id: 'dc-drives-four-quadrant-motoring',
+          kind: 'embed',
+          title: '他励电动机在四象限中的运行状态',
+          chapterId: chapter.id,
+          embedUrl: '/dc-motor-four-quadrant-motoring.html',
+        },
       );
     }
 

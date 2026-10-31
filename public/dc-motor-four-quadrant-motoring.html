@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>8.5 他励电动机在四象限中的运行状态</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/dc-motor-four-quadrant-motoring.css" />
+    <script src="/dc-machine-basics.js" defer></script>
+    <script type="module" src="/dc-motor-four-quadrant-motoring.js"></script>
+  </head>
+  <body>
+    <main class="lesson four-quadrant-page" aria-labelledby="page-title">
+      <header class="page-head">
+        <div class="eyebrow">
+          直流拖动 / 8.5 · 他励电动机在四象限中的运行状态
+        </div>
+        <h1 id="page-title">
+          8.5 他励电动机在四象限中的运行状态
+        </h1>
+        <p id="page-desc">
+          比较固有特性与三种人为特性的两象限运行：第Ⅰ象限（正向电动）与第Ⅲ象限（反向电动）。
+        </p>
+        <span class="scope-tag" id="page-scope-tag"
+          >他励直流电动机 · 电动状态两象限运行 (T·n &gt; 0)<small
+            >基准：UₐN = 220 V · Rₐ = 1 Ω · ΦN = 20 mWb</small
+          ></span
+        >
+      </header>
+
+      <!-- 模式与子标签页切换 -->
+      <nav
+        class="tabs-bar"
+        role="tablist"
+        aria-label="机械特性运行状态与子标签页"
+      >
+        <!-- 一级模式切换：电动状态 vs 制动状态 vs 四象限全貌 -->
+        <div
+          class="mode-switch-group"
+          role="tablist"
+          aria-label="运行状态大类切换"
+        >
+          <button
+            type="button"
+            role="tab"
+            id="mode-tab-motoring"
+            aria-selected="false"
+            class="mode-pill"
+            data-mode="motoring"
+            title="切换到电动状态分项（第Ⅰ、Ⅲ象限）"
+          >
+            ⚡ 一、电动状态
+          </button>
+          <button
+            type="button"
+            role="tab"
+            id="mode-tab-braking"
+            aria-selected="true"
+            class="mode-pill active"
+            data-mode="braking"
+            title="切换到制动状态分项（第Ⅱ、Ⅳ象限）"
+          >
+            🛑 二、制动状态
+          </button>
+          <button
+            type="button"
+            role="tab"
+            id="mode-tab-four-quadrant"
+            aria-selected="false"
+            class="mode-pill"
+            data-mode="four-quadrant"
+            title="四象限全貌：将制动与电动的特性曲线全部显示出来"
+          >
+            🌐 四象限
+          </button>
+        </div>
+
+        <div class="tabs-divider" aria-hidden="true"></div>
+
+        <!-- 电动状态子标签页 -->
+        <div class="subtabs-group" id="motoring-subtabs" style="display: none">
+          <button
+            role="tab"
+            id="tab-natural"
+            aria-selected="true"
+            class="tab-btn active"
+            data-tab="natural"
+          >
+            <b>01</b> 固有特性
+          </button>
+          <button
+            role="tab"
+            id="tab-resistance"
+            aria-selected="false"
+            class="tab-btn"
+            data-tab="resistance"
+          >
+            <b>02</b> 增加 R<sub>a</sub> 的人为特性
+          </button>
+          <button
+            role="tab"
+            id="tab-voltage"
+            aria-selected="false"
+            class="tab-btn"
+            data-tab="voltage"
+          >
+            <b>03</b> 降低 U<sub>a</sub> 的人为特性
+          </button>
+          <button
+            role="tab"
+            id="tab-field"
+            aria-selected="false"
+            class="tab-btn"
+            data-tab="field"
+          >
+            <b>04</b> 减小 I<sub>f</sub> 的人为特性
+          </button>
+        </div>
+
+        <!-- 制动状态子标签页 (根据用户要求：附图全貌置于第四位，默认进入能耗制动) -->
+        <div class="subtabs-group" id="braking-subtabs">
+          <button
+            role="tab"
+            id="tab-braking-dynamic"
+            aria-selected="true"
+            class="tab-btn active"
+            data-tab="dynamic"
+          >
+            <b>01</b> 能耗制动
+          </button>
+          <button
+            role="tab"
+            id="tab-braking-plugging"
+            aria-selected="false"
+            class="tab-btn"
+            data-tab="plugging"
+          >
+            <b>02</b> 反接制动
+          </button>
+          <button
+            role="tab"
+            id="tab-braking-regenerative"
+            aria-selected="false"
+            class="tab-btn"
+            data-tab="regenerative"
+          >
+            <b>03</b> 回馈制动
+          </button>
+          <button
+            role="tab"
+            id="tab-braking-all"
+            aria-selected="false"
+            class="tab-btn"
+            data-tab="all"
+          >
+            <b>04</b> 附图全貌
+          </button>
+        </div>
+
+        <!-- 四象限全貌子标签页 -->
+        <div class="subtabs-group" id="four-quadrant-subtabs" style="display: none">
+          <button
+            role="tab"
+            id="tab-fq-all"
+            aria-selected="true"
+            class="tab-btn active"
+            data-tab="all"
+          >
+            <b>00</b> 四象限全景
+          </button>
+          <button
+            role="tab"
+            id="tab-fq-motoring"
+            aria-selected="false"
+            class="tab-btn"
+            data-tab="motoring"
+          >
+            <b>01</b> 电动特性（Ⅰ/Ⅲ）
+          </button>
+          <button
+            role="tab"
+            id="tab-fq-braking"
+            aria-selected="false"
+            class="tab-btn"
+            data-tab="braking"
+          >
+            <b>02</b> 制动特性（Ⅱ/Ⅳ）
+          </button>
+          <button
+            role="tab"
+            id="tab-fq-compare"
+            aria-selected="false"
+            class="tab-btn"
+            data-tab="compare"
+          >
+            <b>03</b> 四象限能量本质
+          </button>
+        </div>
+
+        <div class="tabs-actions">
+          <button
+            id="btn-show-all"
+            type="button"
+            class="view-btn"
+            aria-pressed="false"
+            title="在图上叠加显示全部特性曲线"
+          >
+            👁 叠加全部特性
+          </button>
+          <button
+            id="btn-toggle-play"
+            type="button"
+            class="action-btn"
+            aria-pressed="true"
+          >
+            ⏸ 暂停动画
+          </button>
+        </div>
+      </nav>
+
+      <!-- 主工作区：左侧曲线与坐标系，右侧电机运行图与参数 -->
+      <section class="motoring-workspace">
+        <!-- 左侧机械特性曲线面板 -->
+        <article class="chart-panel" aria-label="机械特性曲线与工作点">
+          <div class="chart-header">
+            <h2 id="chart-title">
+              机械特性曲线
+              <small id="chart-subtitle">n = f(T) · 第一与第三象限电动区</small>
+            </h2>
+            <div
+              class="direction-pills"
+              role="radiogroup"
+              aria-label="观察象限"
+            >
+              <button
+                type="button"
+                class="dir-pill active"
+                id="dir-pill-both"
+                data-direction="both"
+                role="radio"
+                aria-checked="true"
+              >
+                双向两象限联动
+              </button>
+              <button
+                type="button"
+                class="dir-pill"
+                id="dir-pill-pos"
+                data-direction="fwd"
+                role="radio"
+                aria-checked="false"
+              >
+                正向（第Ⅰ象限）
+              </button>
+              <button
+                type="button"
+                class="dir-pill"
+                id="dir-pill-neg"
+                data-direction="rev"
+                role="radio"
+                aria-checked="false"
+              >
+                反向（第Ⅲ象限）
+              </button>
+            </div>
+          </div>
+
+          <div class="svg-wrap">
+            <svg
+              id="chart-svg"
+              viewBox="0 0 820 450"
+              role="img"
+              aria-label="机械特性坐标系与两象限特性曲线"
+            >
+              <defs>
+                <!-- 坐标轴箭头 -->
+                <marker
+                  id="axis-arrow"
+                  markerWidth="8"
+                  markerHeight="8"
+                  refX="7"
+                  refY="3.5"
+                  orient="auto"
+                >
+                  <path d="M0 0 L7 3.5 L0 7 Z" fill="#21433f" />
+                </marker>
+
+                <!-- 正向徽章渐变 (附图风格：金属蓝质感) -->
+                <linearGradient
+                  id="fwd-gradient"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="100%"
+                >
+                  <stop offset="0%" stop-color="#d0e8fa" />
+                  <stop offset="50%" stop-color="#8ec2ea" />
+                  <stop offset="100%" stop-color="#4e88b8" />
+                </linearGradient>
+
+                <!-- 反向徽章渐变 (附图风格：淡紫玫红质感) -->
+                <linearGradient
+                  id="rev-gradient"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="100%"
+                >
+                  <stop offset="0%" stop-color="#f5e0ec" />
+                  <stop offset="50%" stop-color="#dfa4c7" />
+                  <stop offset="100%" stop-color="#b85f95" />
+                </linearGradient>
+
+                <!-- 制动停机徽章渐变 (第Ⅱ象限) -->
+                <linearGradient
+                  id="q2-gradient"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="100%"
+                >
+                  <stop offset="0%" stop-color="#fce4ec" />
+                  <stop offset="50%" stop-color="#f48fb1" />
+                  <stop offset="100%" stop-color="#c2185b" />
+                </linearGradient>
+
+                <!-- 制动下放徽章渐变 (第Ⅳ象限) -->
+                <linearGradient
+                  id="q4-gradient"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="100%"
+                >
+                  <stop offset="0%" stop-color="#e8f5e9" />
+                  <stop offset="50%" stop-color="#81c784" />
+                  <stop offset="100%" stop-color="#2e7d32" />
+                </linearGradient>
+              </defs>
+
+              <!-- 背景网格与象限浅色标注 -->
+              <g id="grid-group"></g>
+
+              <!-- 坐标轴与原点 -->
+              <g id="axes-group"></g>
+
+              <!-- 象限徽章：电动状态（正向与反向）与制动状态（停机与下放） -->
+              <g
+                class="quadrant-badge quadrant-badge-fwd"
+                id="badge-quad1"
+                transform="translate(710, 60)"
+              >
+                <rect x="0" y="0" width="46" height="96" rx="6" />
+                <text x="23" y="32">正</text>
+                <text x="23" y="68">向</text>
+              </g>
+
+              <g
+                class="quadrant-badge quadrant-badge-rev"
+                id="badge-quad3"
+                transform="translate(56, 316)"
+              >
+                <rect x="0" y="0" width="46" height="96" rx="6" />
+                <text x="23" y="32">反</text>
+                <text x="23" y="68">向</text>
+              </g>
+
+              <g
+                class="quadrant-badge quadrant-badge-q2"
+                id="badge-quad2"
+                transform="translate(56, 60)"
+                style="display: none"
+              >
+                <rect x="0" y="0" width="46" height="96" rx="6" />
+                <text x="23" y="32">停</text>
+                <text x="23" y="68">机</text>
+              </g>
+
+              <g
+                class="quadrant-badge quadrant-badge-q4"
+                id="badge-quad4"
+                transform="translate(710, 316)"
+                style="display: none"
+              >
+                <rect x="0" y="0" width="46" height="96" rx="6" />
+                <text x="23" y="32">下</text>
+                <text x="23" y="68">放</text>
+              </g>
+
+              <!-- 静态与叠加特性曲线 -->
+              <g id="curves-background-group"></g>
+
+              <!-- 当前高亮特性曲线 -->
+              <g id="curves-active-group"></g>
+
+              <!-- 反抗性恒转矩负载特性曲线 -->
+              <g id="curves-load-group"></g>
+
+              <!-- 曲线文字说明标签 -->
+              <g id="curve-labels-group"></g>
+
+              <!-- 动态工作点与投影线 -->
+              <g id="points-group"></g>
+            </svg>
+          </div>
+        </article>
+
+        <!-- 右侧电机运行动图、控制滑块与理论卡片 -->
+        <aside class="control-panel">
+          <!-- 电动机两象限运行示意图解 -->
+          <article
+            class="motor-visual-card"
+            aria-label="电动机两象限运行内部物理状态"
+          >
+            <div class="card-title-row">
+              <h3 id="motor-visual-card-title">电动机运行状态可视化</h3>
+              <span class="state-badge" id="motoring-status-badge"
+                >电动状态：电能 → 机械能</span
+              >
+            </div>
+
+            <div class="motor-diagrams-row">
+              <!-- 左侧/正向/第Ⅱ象限示意 -->
+              <div
+                class="motor-diag-box active"
+                id="fwd-diag-box"
+                aria-label="运行示意1"
+              >
+                <h4 id="fwd-diag-title">
+                  <span style="color: #1565c0">●</span> 第Ⅰ象限 · 正向电动
+                </h4>
+                <div class="motor-svg-wrap">
+                  <svg id="motor-fwd-svg" viewBox="0 0 140 94"></svg>
+                </div>
+                <div class="motor-stat-line" id="fwd-diag-stat">
+                  转向: <b>顺时针 CW</b> · 电压: <b>+U<sub>a</sub></b>
+                </div>
+              </div>
+
+              <!-- 右侧/反向/第Ⅳ象限示意 -->
+              <div
+                class="motor-diag-box active"
+                id="rev-diag-box"
+                aria-label="运行示意2"
+              >
+                <h4 id="rev-diag-title">
+                  <span style="color: #ad1457">●</span> 第Ⅲ象限 · 反向电动
+                </h4>
+                <div class="motor-svg-wrap">
+                  <svg id="motor-rev-svg" viewBox="0 0 140 94"></svg>
+                </div>
+                <div class="motor-stat-line" id="rev-diag-stat">
+                  转向: <b>逆时针 CCW</b> · 电压: <b>-U<sub>a</sub></b>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- 交互调节卡片 -->
+          <article class="param-control-card" aria-label="当前特性参数调节">
+            <div class="slider-group">
+              <div class="slider-header">
+                <label id="param-slider-label" for="param-slider"
+                  >负载转矩 T<sub>L</sub></label
+                >
+                <output id="param-slider-output" for="param-slider"
+                  >40.0 N·m</output
+                >
+              </div>
+              <div class="slider-control">
+                <input
+                  id="param-slider"
+                  type="range"
+                  min="10"
+                  max="60"
+                  step="1"
+                  value="40"
+                />
+              </div>
+            </div>
+
+            <!-- 实时运行数据仪表盘 -->
+            <div class="readings-grid">
+              <div class="reading-item">
+                <span>转速 n (r/min)</span>
+                <strong id="readout-speed">±995.3</strong>
+              </div>
+              <div class="reading-item">
+                <span>电磁转矩 T (N·m)</span>
+                <strong id="readout-torque">±40.0</strong>
+              </div>
+              <div class="reading-item">
+                <span>电枢电流 I<sub>a</sub> (A)</span>
+                <strong id="readout-current">±20.9</strong>
+              </div>
+              <div class="reading-item">
+                <span>感应反电动势 E (V)</span>
+                <strong id="readout-emf">±199.1</strong>
+              </div>
+              <div class="reading-item">
+                <span>机械功率 P<sub>mech</sub></span>
+                <strong id="readout-pmech">4.17 kW</strong>
+              </div>
+              <div class="reading-item">
+                <span>电网输入功率 P<sub>a</sub></span>
+                <strong id="readout-pa">4.61 kW</strong>
+              </div>
+            </div>
+          </article>
+
+          <!-- 理论规律与教学总结卡片 -->
+          <article class="theory-card" aria-label="物理规律与方程分析">
+            <div>
+              <h4 id="theory-title">机械特性方程与特征分析</h4>
+              <div class="theory-equation-box" id="theory-equation">
+                n = ± n₀ − β·T = ± Uₐ/(C<sub>E</sub>Φ) −
+                (R<sub>a</sub>+R<sub>ext</sub>)/(C<sub>E</sub>C<sub>T</sub>Φ²)·T
+              </div>
+              <p id="theory-analysis">
+                固有特性下，正向与反向特性在第Ⅰ与第Ⅲ象限关于原点严格中心对称。机械特性硬度高，负载变化时转速降落很小。
+              </p>
+            </div>
+            <div class="conclusion-pill" id="theory-conclusion">
+              ★ 核心结论：第Ⅰ象限（T>0, n>0）与第Ⅲ象限（T<0,
+              n<0）中，转矩与转速均同向，电磁转矩均为驱动转矩，P<sub>mech</sub>>0且P<sub>a</sub>>0，电机吸收电能输出机械能，均为<b>电动状态</b>！
+            </div>
+          </article>
+        </aside>
+      </section>
+
+      <footer>
+        <span id="footer-params"
+          >教学基准参数：U<sub>aN</sub> = 220 V，Φ<sub>N</sub> = 20 mWb，R<sub
+            >a</sub
+          >
+          = 1.0 Ω，C<sub>E</sub> = 10，C<sub>T</sub> ≈ 95.49 N·m/(Wb·A)。</span
+        >
+        <span id="footer-tips"
+          >提示：按上方标签页在“电动状态”与“制动状态（三种方法）”间切换；支持调节滑块与动画联动。</span
+        >
+      </footer>
+    </main>
+  </body>
+</html>
