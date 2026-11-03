@@ -1390,6 +1390,13 @@ export const slides: Slide[] = [
             embedUrl: `/transformer-classification.html?page=${page}`,
           }),
         ),
+        {
+          id: 'transformers-working-principle',
+          kind: 'embed',
+          title: '单相变压器：从施加电压到带载稳态',
+          chapterId: chapter.id,
+          embedUrl: '/transformer-working-principle.html',
+        },
       );
     }
 

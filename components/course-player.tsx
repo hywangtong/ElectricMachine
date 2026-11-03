@@ -777,7 +777,7 @@ export default function CoursePlayer() {
                       </div>
                     ) : slide.kind === 'embed' ? (
                       <div
-                        className={`embed-body${slide.embedUrl.startsWith('/magnetic-') || slide.embedUrl === '/dc-machine-uses-types.html' || slide.embedUrl === '/dc-machine-constants-relation.html' || slide.embedUrl.startsWith('/dc-motor-') || slide.embedUrl.startsWith('/dc-generator-') || slide.embedUrl.startsWith('/transformer-classification.html') ? ' embed-maxwell' : ''}${slide.embedUrl === '/ship-power-eli5.html' ? ' embed-ship-power' : ''}`}
+                        className={`embed-body${slide.embedUrl.startsWith('/magnetic-') || slide.embedUrl === '/dc-machine-uses-types.html' || slide.embedUrl === '/dc-machine-constants-relation.html' || slide.embedUrl.startsWith('/dc-motor-') || slide.embedUrl.startsWith('/dc-generator-') || slide.embedUrl.startsWith('/transformer-classification.html') || slide.embedUrl === '/transformer-working-principle.html' ? ' embed-maxwell' : ''}${slide.embedUrl === '/ship-power-eli5.html' ? ' embed-ship-power' : ''}`}
                       >
                         {findShuntTab(slide.id) ? (
                           <ShuntGeneratorFrame

@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>单相变压器：工作原理</title>
+    <link rel="stylesheet" href="/transformer-working-principle.css" />
+    <script src="/transformer-working-principle.js" type="module"></script>
+  </head>
+  <body>
+    <main class="lesson" data-stage="0">
+      <header>
+        <div class="eyebrow">TRANSFORMERS / 电磁感应与磁动势平衡</div>
+        <h1>单相变压器：从施加电压到带载稳态</h1>
+        <p class="lead">
+          电压决定磁通怎样变化，电流建立磁动势；负载通过磁场反作用于电源。
+        </p>
+      </header>
+      <nav class="stages" aria-label="工作原理讲解阶段">
+        <button type="button" data-stage="0" aria-pressed="true">
+          <b>01</b> 空载励磁
+        </button>
+        <button type="button" data-stage="1" aria-pressed="false">
+          <b>02</b> 二次侧感应
+        </button>
+        <button type="button" data-stage="2" aria-pressed="false">
+          <b>03</b> 带载与补偿
+        </button>
+        <button type="button" data-stage="3" aria-pressed="false">
+          <b>04</b> 主磁通与漏磁通
+        </button>
+      </nav>
+      <div class="body">
+        <figure class="diagram panel">
+          <div class="diagram-top">
+            <span id="circuit-state">二次侧开路 · i₂ = 0</span>
+            <div class="playback-buttons">
+              <button id="replay" type="button">重播本阶段</button
+              ><button id="pause" type="button" aria-pressed="false">
+                暂停动画
+              </button>
+            </div>
+          </div>
+          <svg
+            id="transformer"
+            viewBox="0 0 760 382"
+            role="img"
+            aria-labelledby="diagram-title diagram-description"
+          >
+            <title id="diagram-title">单相变压器原理图</title>
+            <desc id="diagram-description">
+              矩形闭合磁芯，左侧一次绕组接交流电源，右侧二次绕组接可断开的电阻负载；主磁通同时交链两绕组，漏磁通各自只交链一侧。
+            </desc>
+            <defs>
+              <pattern
+                id="laminations"
+                width="7"
+                height="7"
+                patternUnits="userSpaceOnUse"
+              >
+                <path d="M0 0H7" stroke="#c2cbc6" stroke-width="2" />
+              </pattern>
+              <marker
+                id="arrow-primary"
+                markerWidth="8"
+                markerHeight="8"
+                refX="6"
+                refY="3"
+                orient="auto-start-reverse"
+              >
+                <path
+                  d="M0 0 6 3 0 6"
+                  fill="none"
+                  stroke="#866043"
+                  stroke-width="1.5"
+                />
+              </marker>
+              <marker
+                id="arrow-secondary"
+                markerWidth="8"
+                markerHeight="8"
+                refX="6"
+                refY="3"
+                orient="auto-start-reverse"
+              >
+                <path
+                  d="M0 0 6 3 0 6"
+                  fill="none"
+                  stroke="#397d70"
+                  stroke-width="1.5"
+                />
+              </marker>
+              <marker
+                id="arrow-flux"
+                markerWidth="8"
+                markerHeight="8"
+                refX="6"
+                refY="3"
+                orient="auto-start-reverse"
+              >
+                <path
+                  d="M0 0 6 3 0 6"
+                  fill="none"
+                  stroke="#466f99"
+                  stroke-width="1.5"
+                />
+              </marker>
+            </defs>
+            <path
+              d="M217 52H514V315H217Z M255 90V277H476V90Z"
+              fill="#e1e6df"
+              fill-rule="evenodd"
+              stroke="#70827c"
+              stroke-width="2.5"
+            />
+            <path
+              d="M217 52H514V315H217Z M255 90V277H476V90Z"
+              fill="url(#laminations)"
+              fill-rule="evenodd"
+            />
+            <text x="365" y="35" class="core-label" text-anchor="middle">
+              闭合叠片磁芯
+            </text>
+            <path id="main-flux" d="M237 72H495V296H237Z" class="main-flux" />
+            <path
+              id="flux-direction"
+              d="M326 72H399"
+              fill="none"
+              stroke="#466f99"
+              stroke-width="3"
+              marker-end="url(#arrow-flux)"
+            />
+            <text x="365" y="133" text-anchor="middle" class="flux-label">
+              Φ 主磁通
+            </text>
+            <text x="365" y="157" text-anchor="middle" class="svg-note">
+              同时交链 N₁、N₂
+            </text>
+            <g id="leakage" class="leakage">
+              <path
+                id="primary-leak-path"
+                d="M228 262V118C228 94 172 94 172 118V262C172 280 228 280 228 262Z"
+                class="leak-primary"
+              />
+              <path
+                id="secondary-leak-path"
+                d="M504 262V118C504 94 560 94 560 118V262C560 280 504 280 504 262Z"
+                class="leak-secondary"
+              />
+              <g id="primary-leak-markers" aria-hidden="true"></g>
+              <g id="secondary-leak-markers" aria-hidden="true"></g>
+              <text x="151" y="298" class="leak-primary-label">Φσ₁</text>
+              <text x="548" y="298" class="leak-secondary-label">Φσ₂</text>
+            </g>
+            <g class="primary-circuit">
+              <path
+                d="M107 127H209 M209 253H107V210 M107 158V127"
+                class="wire primary"
+              />
+              <circle
+                id="source-symbol"
+                cx="107"
+                cy="184"
+                r="26"
+                fill="#fff"
+                stroke="currentColor"
+                stroke-width="2.5"
+              />
+              <path
+                d="M89 184Q98 164 107 184T125 184"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+              />
+              <text x="56" y="191" class="symbol">u₁</text>
+              <text x="83" y="143" class="sign">+</text>
+              <text x="83" y="250" class="sign">−</text>
+              <g id="primary-coil"></g>
+              <circle cx="196" cy="116" r="4" fill="currentColor" />
+              <path
+                id="primary-current"
+                d="M137 127H179"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                marker-end="url(#arrow-primary)"
+              />
+              <text id="primary-current-label" x="153" y="108" class="symbol">
+                i₀
+              </text>
+              <text id="primary-emf" x="140" y="209" class="symbol">e₁</text>
+              <circle id="primary-particle" r="4" fill="currentColor" />
+            </g>
+            <g class="secondary-circuit">
+              <g id="secondary-coil"></g>
+              <circle cx="533" cy="116" r="4" fill="currentColor" />
+              <path
+                d="M521 127H573 M606 127H656V165 M656 215V253H521"
+                class="wire secondary"
+              />
+              <path
+                id="load-switch"
+                d="M573 127 603 105"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"
+              />
+              <circle cx="573" cy="127" r="3" fill="currentColor" />
+              <circle cx="606" cy="127" r="3" fill="currentColor" />
+              <rect
+                id="load-resistor"
+                x="645"
+                y="165"
+                width="22"
+                height="50"
+                fill="#f7efdc"
+                stroke="#ac8540"
+                stroke-width="2.5"
+              />
+              <text x="680" y="197" class="symbol load-label">
+                R
+                <tspan baseline-shift="sub" font-size="16">L</tspan>
+              </text>
+              <text id="secondary-voltage" x="584" y="196" class="symbol">
+                u₂
+              </text>
+              <text x="579" y="149" class="sign">+</text>
+              <text x="579" y="248" class="sign">−</text>
+              <text id="secondary-emf" x="584" y="223" class="symbol">e₂</text>
+              <g id="secondary-current-group">
+                <path
+                  id="secondary-current"
+                  d="M615 127H644"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  marker-end="url(#arrow-secondary)"
+                />
+                <text x="626" y="108" class="symbol">i₂</text>
+                <circle id="secondary-particle" r="4" fill="currentColor" />
+              </g>
+            </g>
+            <g id="mmf" class="mmf">
+              <path
+                id="primary-mmf-arrow"
+                d="M302 191H429"
+                stroke="#866043"
+                stroke-width="3"
+                marker-end="url(#arrow-primary)"
+              />
+              <text
+                id="primary-mmf-label"
+                x="365"
+                y="184"
+                text-anchor="middle"
+                class="mmf-primary"
+              >
+                N₁ i₁
+              </text>
+              <path
+                id="secondary-mmf-arrow"
+                d="M429 233H302"
+                stroke="#397d70"
+                stroke-width="3"
+                marker-end="url(#arrow-secondary)"
+              />
+              <text
+                id="secondary-mmf-label"
+                x="365"
+                y="259"
+                text-anchor="middle"
+                class="mmf-secondary"
+              >
+                N₂ i₂
+              </text>
+            </g>
+            <g id="animation-overlay" aria-hidden="true">
+              <circle
+                id="source-highlight"
+                cx="107"
+                cy="184"
+                r="34"
+                class="source-highlight"
+              />
+              <path
+                id="flux-trace"
+                d="M237 190V72H495V296H237Z"
+                pathLength="1"
+                class="flux-trace"
+              />
+              <path
+                id="opposing-flux"
+                d="M246 190V287H486V81H246Z"
+                pathLength="1"
+                class="opposing-flux"
+              />
+              <g id="primary-flow"></g>
+              <g id="secondary-flow"></g>
+              <g id="flux-markers"></g>
+              <g id="sum-callout">
+                <rect x="277" y="177" width="184" height="67" rx="9" />
+                <text
+                  id="sum-label"
+                  x="369"
+                  y="202"
+                  text-anchor="middle"
+                ></text>
+                <text
+                  id="sum-value"
+                  x="369"
+                  y="228"
+                  text-anchor="middle"
+                ></text>
+              </g>
+            </g>
+            <text x="233" y="348" text-anchor="middle" class="winding-primary">
+              源边（一次侧）N₁
+            </text>
+            <text
+              x="499"
+              y="348"
+              text-anchor="middle"
+              class="winding-secondary"
+            >
+              副边（二次侧）N₂
+            </text>
+            <text
+              id="diagram-model-note"
+              x="365"
+              y="377"
+              text-anchor="middle"
+              class="svg-note"
+            >
+              分置绕组便于讲解 · 匝数与磁通线不按比例绘制
+            </text>
+          </svg>
+          <div class="diagram-caption">
+            <div id="diagram-caption" role="status"></div>
+            <label class="timeline"
+              ><span id="playback-step">1 / 4</span
+              ><input
+                id="timeline"
+                type="range"
+                min="0"
+                max="12000"
+                step="50"
+                value="0"
+                aria-label="本阶段动画进度"
+              /><output id="progress-label" for="timeline">0%</output></label
+            >
+          </div>
+          <div class="wave-strip">
+            <div>
+              <b>电压与磁通</b><span>稳态相位参照</span
+              ><span class="wave-key"><i></i>u₁ / Û₁ <i></i>Φ / Φ̂</span>
+            </div>
+            <svg
+              id="waveform"
+              viewBox="0 0 440 86"
+              role="img"
+              aria-label="正弦稳态下，主磁通滞后一次侧电压四分之一周期"
+            >
+              <path d="M12 43H426" stroke="#d7dfd9" />
+              <path id="voltage-wave" class="voltage-wave" />
+              <path id="flux-wave" class="flux-wave" />
+              <path id="wave-cursor" stroke="#a9b9ad" stroke-dasharray="3 3" />
+              <circle id="voltage-dot" r="4" fill="#866043" />
+              <circle id="flux-dot" r="4" fill="#466f99" />
+            </svg>
+          </div>
+        </figure>
+        <section
+          class="explanation panel"
+          aria-live="polite"
+          aria-atomic="true"
+        >
+          <div id="stage-kicker" class="eyebrow"></div>
+          <h2 id="stage-title"></h2>
+          <div id="stage-content"></div>
+          <div class="stage-bottom">
+            <span id="stage-count">01 / 04</span
+            ><button id="next-stage" type="button">下一阶段 →</button>
+          </div>
+        </section>
+      </div>
+      <footer>
+        <strong id="takeaway"></strong
+        ><span
+          >定性慢放、逐项强调，非真实暂态仿真；稳态公式按线性磁路、忽略绕组压降与铁耗，前
+          3 阶段忽略漏磁。</span
+        >
+      </footer>
+    </main>
+  </body>
+</html>

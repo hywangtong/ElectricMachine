@@ -1,0 +1,441 @@
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+body {
+  margin: 0;
+  overflow: hidden;
+  background: #fbfaf5;
+  color: #173b3b;
+  font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+}
+.lesson {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 1444px;
+  height: 744px;
+  padding: 18px 24px;
+  display: grid;
+  grid-template-rows: 92px 52px minmax(0, 1fr) 60px;
+  gap: 12px;
+  transform: translate(-50%, -50%) scale(var(--lesson-scale, 1));
+  transform-origin: center;
+  background:
+    radial-gradient(circle at 96% 0, #f7eacc, transparent 38%), #fbfaf5;
+}
+h1,
+h2,
+p,
+figure {
+  margin: 0;
+}
+.eyebrow {
+  color: #39796f;
+  font-size: 13px;
+  letter-spacing: 0.11em;
+}
+h1 {
+  font-size: 34px;
+  margin: 5px 0 7px;
+  line-height: 1.25;
+}
+.lead {
+  font-size: 20px;
+  color: #55736d;
+}
+button {
+  font: inherit;
+  cursor: pointer;
+  border: 1px solid #c8d9d4;
+  border-radius: 8px;
+  background: #fff;
+  color: #274b42;
+}
+button:hover {
+  background: #edf4ee;
+}
+button:focus-visible {
+  outline: 3px solid #aa8040;
+  outline-offset: 3px;
+}
+.stages {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+.stages button {
+  text-align: left;
+  padding: 8px 17px;
+  font-size: 21px;
+}
+.stages b {
+  margin-right: 14px;
+  font-size: 15px;
+  opacity: 0.65;
+}
+.stages [aria-pressed='true'] {
+  background: #274b42;
+  border-color: #274b42;
+  color: #fff;
+}
+.body {
+  display: grid;
+  grid-template-columns: 1.16fr 1fr;
+  gap: 16px;
+  min-height: 0;
+}
+.panel {
+  min-width: 0;
+  min-height: 0;
+  border: 1px solid #c8d9d4;
+  border-radius: 14px;
+  background: #fff;
+}
+.diagram {
+  padding: 12px 16px;
+  display: grid;
+  grid-template-rows: 32px minmax(0, 1fr) 52px 54px;
+  gap: 4px;
+}
+.diagram-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 17px;
+  color: #55736d;
+}
+.diagram-top button {
+  font-size: 15px;
+  padding: 5px 10px;
+}
+.playback-buttons {
+  display: flex;
+  gap: 6px;
+}
+button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.timeline {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 12px;
+  font-size: 13px;
+  color: #637a6e;
+}
+.timeline input {
+  flex: 1;
+  min-width: 0;
+  accent-color: #397d70;
+  cursor: pointer;
+}
+.timeline output {
+  width: 36px;
+  text-align: right;
+}
+.timeline input:focus-visible {
+  outline: 2px solid #aa8040;
+  outline-offset: 2px;
+}
+#transformer {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+.wire {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.primary-circuit,
+.winding-primary,
+.mmf-primary {
+  color: #866043;
+  fill: #866043;
+}
+.secondary-circuit,
+.winding-secondary,
+.mmf-secondary {
+  color: #397d70;
+  fill: #397d70;
+}
+.coil {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 4;
+}
+.coil-back {
+  opacity: 0.42;
+  stroke-dasharray: 4 3;
+}
+.coil.turn-active {
+  stroke: #d29b45;
+  stroke-width: 7;
+  filter: drop-shadow(0 0 5px #dfbd73);
+}
+.secondary-circuit .coil.turn-active {
+  stroke: #4fb795;
+  filter: drop-shadow(0 0 5px #84cbb3);
+}
+#animation-overlay {
+  pointer-events: none;
+}
+.source-highlight {
+  fill: #f9ecc9;
+  fill-opacity: 0.35;
+  stroke: #c68b46;
+  stroke-width: 4;
+}
+.flux-trace {
+  fill: none;
+  stroke: #466f99;
+  stroke-linecap: round;
+  stroke-dasharray: 1 1;
+}
+.opposing-flux {
+  fill: none;
+  stroke: #3e9b80;
+  stroke-width: 3;
+  stroke-dasharray: 0.025 0.015;
+}
+#sum-callout rect {
+  fill: #f3f7f0;
+  stroke: #dce6d9;
+}
+#sum-callout text {
+  fill: #39796f;
+  font-size: 18px;
+}
+#sum-value {
+  font-family: 'Cambria Math', 'Microsoft YaHei', serif;
+}
+.load-active {
+  fill: #f2d9a3;
+  filter: drop-shadow(0 0 5px #ebcc88);
+}
+.symbol,
+.flux-label {
+  font:
+    italic 25px Georgia,
+    serif;
+}
+.flux-label {
+  fill: #466f99;
+}
+.core-label,
+.winding-primary,
+.winding-secondary {
+  font-size: 20px;
+  font-weight: 600;
+}
+.svg-note {
+  font-size: 16px;
+  fill: #6b7d76;
+}
+.sign {
+  font-size: 20px;
+}
+.load-label {
+  fill: #ac8540;
+}
+.main-flux {
+  fill: none;
+  stroke: #466f99;
+  stroke-width: 3;
+  stroke-dasharray: 10 7;
+}
+.mmf text {
+  font:
+    italic 21px Georgia,
+    serif;
+}
+.leak-primary,
+.leak-secondary {
+  fill: none;
+  stroke-width: 2.5;
+  stroke-dasharray: 6 5;
+}
+.leak-primary {
+  stroke: #7c68a6;
+}
+.leak-secondary {
+  stroke: #bc8a32;
+}
+.leak-primary-label,
+.leak-secondary-label {
+  font:
+    italic 25px Georgia,
+    serif;
+  fill: #7c68a6;
+}
+.leak-secondary-label {
+  fill: #bc8a32;
+}
+[hidden] {
+  display: none !important;
+}
+.diagram-caption {
+  font-size: 17px;
+  text-align: center;
+  color: #55736d;
+  display: grid;
+  grid-template-rows: 28px 22px;
+  align-items: center;
+  background: #f2f6f1;
+  border-radius: 6px;
+}
+#stage-content .pending {
+  visibility: hidden;
+  opacity: 0;
+}
+#stage-content .current-explanation {
+  box-shadow: -4px 0 0 #b4cdb6;
+}
+.wave-strip {
+  border-top: 1px solid #e1e7df;
+  display: grid;
+  grid-template-columns: 192px 1fr;
+  align-items: center;
+  gap: 7px;
+}
+.wave-strip b,
+.wave-strip span {
+  display: block;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #687b72;
+}
+.wave-strip b {
+  display: inline;
+  margin-right: 8px;
+  color: #274b42;
+  font-size: 16px;
+}
+.wave-strip > div > span:nth-child(2) {
+  display: inline;
+}
+.wave-strip .wave-key {
+  font-size: 13px;
+}
+.wave-key i {
+  display: inline-block;
+  vertical-align: middle;
+  width: 16px;
+  margin: 0 4px;
+  border-top: 2px solid #866043;
+}
+.wave-key i + i {
+  border-color: #466f99;
+}
+#waveform {
+  width: 100%;
+  height: 54px;
+}
+.voltage-wave,
+.flux-wave {
+  fill: none;
+  stroke: #866043;
+  stroke-width: 2;
+}
+.flux-wave {
+  stroke: #466f99;
+}
+.explanation {
+  position: relative;
+  padding: 20px 25px 60px;
+}
+h2 {
+  font-size: 29px;
+  line-height: 1.3;
+  margin: 7px 0 15px;
+}
+.explanation p {
+  font-size: 20px;
+  line-height: 1.5;
+  margin: 9px 0;
+}
+.explanation strong {
+  color: #39796f;
+}
+.formula {
+  padding: 11px 15px;
+  background: #edf4ee;
+  border-radius: 8px;
+  font-size: 25px;
+  line-height: 1.55;
+  color: #274b42;
+  font-family: 'Cambria Math', 'Microsoft YaHei', serif;
+}
+.formula small {
+  display: block;
+  font-size: 16px;
+  color: #60756b;
+  font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+}
+.explanation .note {
+  font-size: 17px;
+  color: #6c796d;
+  line-height: 1.5;
+}
+.stage-bottom {
+  position: absolute;
+  bottom: 15px;
+  left: 25px;
+  right: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 15px;
+  color: #8d7753;
+}
+.stage-bottom button {
+  padding: 7px 15px;
+  font-size: 17px;
+  background: #f7f5ee;
+}
+.flux-row {
+  display: grid;
+  grid-template-columns: 70px 1fr;
+  align-items: center;
+  gap: 15px;
+  padding: 8px 0;
+  border-bottom: 1px solid #e4e9e1;
+  font-size: 20px;
+  line-height: 1.5;
+}
+.flux-row b {
+  font:
+    italic 25px Georgia,
+    serif;
+  color: #466f99;
+}
+.flux-row:nth-child(2) b {
+  color: #7c68a6;
+}
+.flux-row:nth-child(3) b {
+  color: #bc8a32;
+}
+footer {
+  border-left: 4px solid #368879;
+  background: #eaf2eb;
+  border-radius: 0 8px 8px 0;
+  padding: 7px 15px;
+}
+footer strong {
+  display: block;
+  font-size: 21px;
+  line-height: 1.3;
+}
+footer span {
+  font-size: 15px;
+  color: #6c796d;
+  line-height: 1.7;
+}

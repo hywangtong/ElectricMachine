@@ -22,6 +22,8 @@ npm start
 
 `npm start` 在 http://127.0.0.1:4173 预览构建后的静态文件。构建结果为 `dist/client/`，部署时只需上传该目录；`dist/server/` 是构建中间产物，不需要运行或部署。当前资源路径按域名根目录部署配置；若需要发布到 GitHub Pages 等子目录，请先配置对应的 basePath 并重新构建。不要用 file:// 双击打开构建文件，请使用 HTTP 静态服务器。
 
+预览使用独立的 `vite.preview.config.ts`，只提供静态文件，不加载 Vinext 服务端中间件，避免重新构建后预览服务引用旧服务端文件而返回 500。
+
 项目保留 Sites 生成的 React、TypeScript、Vite/Vinext 和 shadcn 组件结构。自定义构建入口使用同一构建与预渲染 API，让 Node 正常释放句柄，避免上游 CLI 在 Windows 上强制退出时的 libuv 崩溃。lint 检查课程源码及实际使用的组件，不包含其他未使用的脚手架组件。
 
 ## 课堂操作
