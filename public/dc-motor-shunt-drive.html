@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>8.6 并励直流电动机的电力拖动</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/dc-motor-shunt-drive.css" />
+    <script type="module" src="/dc-motor-shunt-drive.js"></script>
+    <script src="/dc-machine-basics.js" defer></script>
+  </head>
+  <body>
+    <main class="lesson shunt-drive" aria-labelledby="page-title">
+      <header class="page-head">
+        <div class="eyebrow">直流拖动 / 8.6 · 并励直流电动机的电力拖动</div>
+        <h1 id="page-title">并励电动机：接线与起动</h1>
+        <p id="page-description">
+          同一电源，两条支路。改变电枢供电时，要同时检查励磁是否改变。
+        </p>
+      </header>
+      <nav class="mode-bar" aria-label="选择拖动实验" id="mode-bar"></nav>
+      <div class="experiment-grid">
+        <section class="circuit-card" aria-labelledby="circuit-title">
+          <div class="card-heading">
+            <h2 id="circuit-title">并励接线 · 电枢串电阻</h2>
+            <span id="connection-badge">Uₐ = U_f = U</span>
+          </div>
+          <svg
+            class="circuit"
+            viewBox="0 0 650 320"
+            role="img"
+            aria-labelledby="circuit-description"
+          >
+            <title id="circuit-description">
+              电枢与励磁并联在电源两端，串联电阻只接入电枢支路。
+            </title>
+            <defs>
+              <marker
+                id="arrow-a"
+                viewBox="0 0 10 10"
+                refX="8"
+                refY="5"
+                markerWidth="7"
+                markerHeight="7"
+                orient="auto-start-reverse"
+              >
+                <path d="M0 0 10 5 0 10Z" fill="#287e74" />
+              </marker>
+              <marker
+                id="arrow-f"
+                viewBox="0 0 10 10"
+                refX="8"
+                refY="5"
+                markerWidth="7"
+                markerHeight="7"
+                orient="auto"
+              >
+                <path d="M0 0 10 5 0 10Z" fill="#b37933" />
+              </marker>
+            </defs>
+            <g class="wires">
+              <path
+                id="armature-wire"
+                d="M110 48H300V92M300 144V183M300 257V287H110"
+              />
+              <path id="shared-wire" d="M300 48H510M300 287H510" />
+              <path d="M510 48V89M510 135V158M510 254V287" />
+              <rect class="resistor" x="287" y="92" width="26" height="52" />
+              <rect
+                class="field-resistor"
+                x="497"
+                y="89"
+                width="26"
+                height="46"
+              />
+              <path
+                class="field-coil"
+                d="M510 158C550 158 550 182 510 182C550 182 550 206 510 206C550 206 550 230 510 230C550 230 550 254 510 254"
+              />
+              <path
+                class="field-adjust"
+                d="M553 78 516 114"
+                marker-end="url(#arrow-f)"
+              />
+              <circle cx="300" cy="220" r="37" class="motor-circle" />
+              <g id="separate-source">
+                <path d="M510 48H613V287H510" />
+                <circle cx="613" cy="168" r="25" />
+                <path d="M605 158H621M613 150V166M605 180H621" />
+              </g>
+              <g id="brake-loop">
+                <path d="M300 48H166V287H300" />
+                <rect x="153" y="140" width="26" height="60" />
+              </g>
+            </g>
+            <path
+              id="armature-flow"
+              class="current-flow"
+              d="M110 48H300V92M300 144V183M300 257V287H110"
+            />
+            <path
+              id="field-flow"
+              class="current-flow field-flow"
+              d="M300 48H510V89M510 135V158M510 254V287H300"
+            />
+            <g class="terminals">
+              <circle cx="110" cy="48" r="5" />
+              <circle cx="110" cy="287" r="5" />
+            </g>
+            <g class="diagram-text">
+              <text id="positive-terminal" x="63" y="62">+</text>
+              <text id="negative-terminal" x="63" y="281">−</text>
+              <text id="source-label" x="48" y="172">U</text>
+              <text x="250" y="119" id="resistance-label">Rₛₜ</text>
+              <text x="555" y="119">R_f</text>
+              <text x="560" y="220">励磁</text>
+              <text x="300" y="301" class="branch-label" text-anchor="middle">
+                电枢支路
+              </text>
+              <text x="510" y="310" class="branch-label" text-anchor="middle">
+                励磁支路
+              </text>
+              <text id="separate-label" x="613" y="36" text-anchor="middle">
+                U_f 恒定
+              </text>
+              <text id="brake-label" x="143" y="130">Rᵦ</text>
+              <text x="300" y="228" text-anchor="middle">M</text>
+            </g>
+            <path
+              id="current-arrow"
+              d="M300 153V176"
+              stroke="#287e74"
+              stroke-width="3"
+              marker-end="url(#arrow-a)"
+            />
+            <text class="current-label" x="328" y="172">Iₐ</text>
+          </svg>
+          <div class="motor-strip">
+            <svg viewBox="0 0 90 90" role="img" aria-label="转子运动示意">
+              <circle
+                cx="45"
+                cy="45"
+                r="38"
+                fill="#e9f3ee"
+                stroke="#9dbab0"
+                stroke-width="3"
+              />
+              <g id="rotor">
+                <path
+                  d="M45 15V75M15 45H75M24 24 66 66M24 66 66 24"
+                  stroke="#b6803a"
+                  stroke-width="7"
+                  stroke-linecap="round"
+                />
+                <circle cx="45" cy="45" r="10" fill="#287e74" />
+              </g>
+            </svg>
+            <div>
+              <span>电磁转矩 T</span><strong id="torque-value">0 N·m</strong>
+            </div>
+            <div>
+              <span>励磁电流 I_f</span><strong id="field-value">1.00 A</strong>
+            </div>
+            <div>
+              <span>转速 n</span><strong id="speed-value">0 r/min</strong>
+            </div>
+          </div>
+          <div class="energy-strip" id="energy-strip">
+            电源 → 电机 → 机械负载
+          </div>
+        </section>
+        <section class="explanation-card" aria-labelledby="experiment-title">
+          <h2 id="experiment-title">只给电枢串入起动电阻</h2>
+          <p id="experiment-copy"></p>
+          <div class="formula" id="formula"></div>
+          <div class="chart-heading">
+            <strong id="chart-title">起动过程 · n–t 曲线</strong
+            ><span id="status" role="status">准备起动</span>
+          </div>
+          <svg
+            class="chart"
+            viewBox="0 0 600 212"
+            role="img"
+            aria-labelledby="chart-description"
+          >
+            <title id="chart-description">
+              转速随时间变化，播放后显示当前工作点与轨迹。
+            </title>
+            <defs>
+              <clipPath id="plot-clip">
+                <rect x="64" y="12" width="514" height="162" />
+              </clipPath>
+            </defs>
+            <g id="chart-grid"></g>
+            <g clip-path="url(#plot-clip)">
+              <path id="reference-curve" />
+              <path id="main-curve" />
+              <path id="trace-curve" />
+              <circle id="workpoint" r="6" />
+            </g>
+          </svg>
+          <p class="chart-note" id="chart-note"></p>
+        </section>
+      </div>
+      <section class="controls-card" aria-label="实验控制">
+        <div class="slider-control">
+          <label for="setting" id="setting-label">起动电阻 Rₛₜ</label>
+          <div>
+            <input
+              id="setting"
+              type="range"
+              min="0"
+              max="10"
+              step="0.2"
+              value="5.2"
+            /><output for="setting" id="setting-value">5.2 Ω</output>
+          </div>
+        </div>
+        <div class="playback">
+          <button id="play" type="button">播放起动</button
+          ><button id="reset" type="button">重置</button>
+        </div>
+        <p class="takeaway" id="takeaway"></p>
+      </section>
+      <footer>
+        教材 8.6 · 教学简化模型：忽略电感、磁饱和与电枢反应，Φ ∝
+        I_f；数据用于比较原理。
+      </footer>
+    </main>
+  </body>
+</html>

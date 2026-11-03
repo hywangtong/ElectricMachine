@@ -228,6 +228,27 @@ export const chapters: Chapter[] = [
     ],
   },
 ];
+export const appendixChapter: Chapter = {
+  id: 'appendices',
+  title: '附页',
+  english: 'SUPPLEMENTARY READING',
+  category: '附页',
+  question: '通过交互图解，进一步认识变压器的结构、能量传递与电气隔离。',
+  objectives: [],
+  topics: [
+    {
+      title: '高频电源变压器的结构与工作原理',
+      description:
+        '拆解 Pulse P666 系列：从磁芯、绕组到反激与正激，读懂开关电源变压器。',
+    },
+    {
+      title: '隔离变压器：电是怎么过去的？',
+      description:
+        '用交互图解认识电气隔离、磁耦合、触电回路与寄生电容带来的隔离边界。',
+    },
+  ],
+};
+
 export type Slide =
   | { id: string; kind: 'home'; title: string }
   | {
@@ -792,6 +813,20 @@ export const slides: Slide[] = [
           chapterId: chapter.id,
           embedUrl: '/dc-motor-four-quadrant-motoring.html',
         },
+        {
+          id: 'dc-drives-shunt-starting',
+          kind: 'embed',
+          title: '并励直流电动机拖动：接线与起动',
+          chapterId: chapter.id,
+          embedUrl: '/dc-motor-shunt-drive.html?mode=starting',
+        },
+        {
+          id: 'dc-drives-shunt-control-braking',
+          kind: 'embed',
+          title: '并励直流电动机拖动：调速与制动',
+          chapterId: chapter.id,
+          embedUrl: '/dc-motor-shunt-drive.html?mode=control',
+        },
       );
     }
 
@@ -1335,6 +1370,50 @@ export const slides: Slide[] = [
       );
     }
 
+    if (chapter.id === 'transformers') {
+      const classificationPages = [
+        ['overview', '变压器分类：先分清分类依据'],
+        ['core', '按铁芯结构：心式变压器'],
+        ['shell', '按铁芯结构：单相壳式变压器'],
+        ['cooling', '按绝缘与冷却介质：油浸式与干式'],
+        ['applications', '按用途：电力、仪用与专用变压器'],
+        ['isolation', '隔离变压器与电源变压器'],
+        ['synthesis', '分类归纳：一台变压器的多个标签'],
+      ] as const;
+      chapterSlides.push(
+        ...classificationPages.map(
+          ([page, title]): Slide => ({
+            id: `transformers-classification-${page}`,
+            kind: 'embed',
+            title,
+            chapterId: chapter.id,
+            embedUrl: `/transformer-classification.html?page=${page}`,
+          }),
+        ),
+      );
+    }
+
     return chapterSlides;
   }),
+  {
+    id: appendixChapter.id,
+    kind: 'content',
+    title: '附页：变压器交互阅读',
+    chapterId: appendixChapter.id,
+    lead: appendixChapter.question,
+    points: appendixChapter.topics,
+    links: [
+      {
+        title: '阅读附页一 · 高频电源变压器 ↗',
+        url: '/transformer-eli5.html',
+        kind: 'reference',
+      },
+      {
+        title: '阅读附页二 · 隔离变压器 ↗',
+        url: '/isolation-transformer-eli5.html',
+        kind: 'reference',
+      },
+    ],
+    note: '点击后在新标签页打开完整网页，可滚动阅读并操作交互图解。',
+  },
 ];

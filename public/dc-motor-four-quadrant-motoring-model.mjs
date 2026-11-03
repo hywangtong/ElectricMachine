@@ -104,7 +104,7 @@ export const tabConfigs = {
     shortName: '固有特性',
     description:
       '保持额定电压 Ua = UN，额定励磁 If = IfN，电枢回路不外串电阻。',
-    color: '#b72828', // Crimson red (matching the slide)
+    color: '#ac4c54', // Crimson red (matching the slide)
     defaultParam: 0,
     paramLabel: '基准状态',
     paramUnit: '',
@@ -126,7 +126,7 @@ export const tabConfigs = {
     title: '增加 Ra 的人为特性',
     shortName: '增加 Ra（串电阻）',
     description: '保持 Ua = UN、If = IfN，电枢回路外串附加电阻 Rext。',
-    color: '#d46b08', // Ochre / orange (matching the slide)
+    color: '#bc742a', // Ochre / orange (matching the slide)
     minParam: 0.5,
     maxParam: 4.0,
     defaultParam: 2.0,
@@ -149,7 +149,7 @@ export const tabConfigs = {
     title: '降低 Ua 的人为特性',
     shortName: '降低 Ua（调压）',
     description: '保持 If = IfN、回路仅有 Ra，降低电枢端电压 Ua < UN。',
-    color: '#1d8348', // Forest green (matching the slide)
+    color: '#39796f', // Forest green (matching the slide)
     minParam: 100,
     maxParam: 200,
     defaultParam: 140,
@@ -174,7 +174,7 @@ export const tabConfigs = {
     shortName: '减小 If（弱磁）',
     description:
       '保持 Ua = UN、回路仅有 Ra，减小励磁电流 If < IfN（弱磁 Φ < ΦN）。',
-    color: '#1a5276', // Deep blue / cobalt (matching the slide)
+    color: '#52788d', // Deep blue / cobalt (matching the slide)
     minParam: 0.65,
     maxParam: 0.95,
     defaultParam: 0.8,
@@ -204,9 +204,9 @@ export const brakingConfigs = {
     title: '01 能耗制动（过程与运行）',
     shortName: '能耗制动',
     description: '电枢断开电源接到制动电阻 RB (Ua = 0)，机械特性必通过原点 O。',
-    color: '#d81b60',
-    colorQuad2: '#d81b60', // 能耗制动过程
-    colorQuad4: '#1b5e20', // 能耗制动运行
+    color: '#b2657d',
+    colorQuad2: '#b2657d', // 能耗制动过程
+    colorQuad4: '#39796f', // 能耗制动运行
     defaultParam: 4.0,
     paramLabel: '制动电阻 RB',
     paramUnit: 'Ω',
@@ -225,9 +225,9 @@ export const brakingConfigs = {
     shortName: '反接制动',
     description:
       '电压反向反接用于迅速减速停机；电动势反向反接用于位能负载低速稳定下放。',
-    color: '#1565c0',
-    colorQuad2: '#1565c0', // 电压反向反接制动
-    colorQuad4: '#1565c0', // 电动势反向反接制动
+    color: '#52788d',
+    colorQuad2: '#52788d', // 电压反向反接制动
+    colorQuad4: '#52788d', // 电动势反向反接制动
     defaultParam: 10.5,
     paramLabel: '反接制动电阻 RB',
     paramUnit: 'Ω',
@@ -246,9 +246,9 @@ export const brakingConfigs = {
     shortName: '回馈制动',
     description:
       '当电机转速超过理想空载转速 (|n| > |n0|) 时，反电动势超过电源电压，电能回馈电网。',
-    color: '#a01830',
-    colorQuad2: '#a01830', // 正向回馈制动
-    colorQuad4: '#a01830', // 反向回馈制动
+    color: '#ac4c54',
+    colorQuad2: '#ac4c54', // 正向回馈制动
+    colorQuad4: '#ac4c54', // 反向回馈制动
     defaultParam: 1250,
     paramLabel: '超速转速 |n|',
     paramUnit: 'r/min',
@@ -491,7 +491,7 @@ export function getBrakingCurveDefinitions(options = {}) {
       name: '正向回馈制动',
       method: 'regenerative',
       quadrant: 'II',
-      color: '#a01830',
+      color: '#ac4c54',
       minT: -80,
       maxT: 0,
       fn: (t) => p.n0N - betaNatural * t,
@@ -505,7 +505,7 @@ export function getBrakingCurveDefinitions(options = {}) {
       name: '能耗制动过程',
       method: 'dynamic',
       quadrant: 'II',
-      color: '#d81b60',
+      color: '#b2657d',
       minT: -84,
       maxT: 0,
       fn: (t) => -betaDynamic * t,
@@ -519,7 +519,7 @@ export function getBrakingCurveDefinitions(options = {}) {
       name: '电压反向反接制动',
       method: 'plugging',
       quadrant: 'II',
-      color: '#1565c0',
+      color: '#52788d',
       minT: -88.4,
       maxT: -p.n0N / betaPlugging,
       fn: (t) => -p.n0N - betaPlugging * t,
@@ -533,7 +533,7 @@ export function getBrakingCurveDefinitions(options = {}) {
       name: '反向回馈制动',
       method: 'regenerative',
       quadrant: 'IV',
-      color: '#a01830',
+      color: '#ac4c54',
       minT: 0,
       maxT: 80,
       fn: (t) => -p.n0N - betaNatural * t,
@@ -547,7 +547,7 @@ export function getBrakingCurveDefinitions(options = {}) {
       name: '能耗制动运行',
       method: 'dynamic',
       quadrant: 'IV',
-      color: '#1b5e20',
+      color: '#39796f',
       minT: 0,
       maxT: 84,
       fn: (t) => -betaDynamic * t,
@@ -561,7 +561,7 @@ export function getBrakingCurveDefinitions(options = {}) {
       name: '电动势反向反接制动',
       method: 'plugging',
       quadrant: 'IV',
-      color: '#1565c0',
+      color: '#52788d',
       minT: p.n0N / betaPlugging,
       maxT: 88.4,
       fn: (t) => p.n0N - betaPlugging * t,

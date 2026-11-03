@@ -1,8 +1,9 @@
-/* 他励电动机四象限电动状态样式 */
+/* 与直流拖动课程共用画布、字体与配色。 */
 .four-quadrant-page {
-  grid-template-rows: 66px 42px 1fr 28px;
+  grid-template-rows: 84px 46px minmax(0, 1fr) 28px;
   gap: 10px;
-  padding: 16px 20px;
+  padding: 20px 24px;
+  line-height: 1.35;
 }
 
 .four-quadrant-page .page-head {
@@ -10,364 +11,279 @@
 }
 
 .four-quadrant-page .page-head h1 {
-  font-size: 28px;
-  margin: 2px 0 3px;
-  color: #173b3b;
+  margin: 4px 0 5px;
+  font-size: 33px;
   font-weight: 700;
 }
 
 .four-quadrant-page .page-head p {
-  margin: 0;
-  font-size: 15px;
-  color: #55736d;
+  font-size: 16px;
 }
 
 .four-quadrant-page .scope-tag {
   position: absolute;
   right: 0;
-  top: 4px;
+  top: 5px;
+  max-width: 410px;
   border: 1px solid #c8d9d4;
-  border-radius: 16px;
-  padding: 6px 14px;
-  color: #265951;
-  font-size: 15px;
-  background: rgba(255, 255, 255, 0.7);
+  border-radius: 20px;
+  padding: 9px 16px;
+  color: #39796f;
+  font-size: 14px;
 }
 
 .four-quadrant-page .scope-tag small {
   display: block;
-  margin-top: 2px;
+  margin-top: 3px;
   font-size: 12px;
-  color: #65857f;
 }
 
-/* 子标签页导航栏 */
+/* 运行模式、特性标签与动画控制。 */
 .tabs-bar {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
+  padding: 5px 8px;
+  border: 1px solid #c8d9d4;
+  border-radius: 12px;
   background: #edf4ef;
-  border: 1px solid #cadcd5;
-  border-radius: 10px;
-  padding: 4px 8px;
 }
 
-/* 一级运行状态大类切换 (电动状态 vs 制动状态) */
-.mode-switch-group {
+.mode-switch-group,
+.subtabs-group,
+.tabs-actions {
   display: flex;
   align-items: center;
   gap: 4px;
-  background: #dbe7e2;
-  border-radius: 8px;
-  padding: 2px 4px;
 }
 
-.mode-pill {
+.mode-switch-group {
+  flex-shrink: 0;
+}
+
+.mode-pill,
+.tab-btn,
+.view-btn,
+.action-btn,
+.dir-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  padding: 6px 9px;
+  background: transparent;
+  color: #34594c;
   font: inherit;
   font-size: 14px;
-  font-weight: 700;
-  padding: 5px 12px;
-  border-radius: 6px;
-  border: 1px solid transparent;
-  background: transparent;
-  color: #3b5a54;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  transition: all 0.15s ease;
+  font-weight: 600;
   white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease;
 }
 
-.mode-pill:hover {
-  background: rgba(255, 255, 255, 0.45);
-  color: #173b3b;
+.mode-pill:hover,
+.tab-btn:hover,
+.dir-pill:hover {
+  background: #e1ece6;
 }
 
-.mode-pill.active[data-mode='four-quadrant'] {
-  background: #0d47a1;
-  color: #ffffff;
-  box-shadow: 0 2px 5px rgba(13, 71, 161, 0.28);
-}
-
-.mode-pill.active[data-mode='motoring'] {
+.mode-pill.active,
+.tab-btn.active,
+.dir-pill.active {
+  border-color: #173b3b;
   background: #173b3b;
-  color: #ffffff;
-  box-shadow: 0 2px 5px rgba(23, 59, 59, 0.22);
-}
-
-.mode-pill.active[data-mode='braking'] {
-  background: #8b1538;
-  color: #ffffff;
-  box-shadow: 0 2px 5px rgba(139, 21, 56, 0.25);
+  color: #fff;
 }
 
 .tabs-divider {
-  width: 2px;
-  height: 22px;
-  background: #b8cfc7;
+  flex-shrink: 0;
+  width: 1px;
+  height: 24px;
   margin: 0 3px;
-  border-radius: 1px;
-}
-
-.subtabs-group {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.tab-btn {
-  font: inherit;
-  font-size: 15px;
-  font-weight: 600;
-  padding: 6px 14px;
-  border-radius: 7px;
-  border: 1px solid transparent;
-  background: transparent;
-  color: #3b5a54;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  transition: all 0.15s ease;
-  white-space: nowrap;
+  background: #c8d9d4;
 }
 
 .tab-btn b {
-  display: inline-block;
-  font-size: 12px;
-  padding: 1px 5px;
   border-radius: 4px;
-  background: #dbe7e2;
-  color: #2d4f48;
-}
-
-.tab-btn:hover {
-  background: #e1ede7;
-  color: #173b3b;
-}
-
-.tab-btn.active {
-  background: #173b3b;
-  color: #ffffff;
-  box-shadow: 0 2px 6px rgba(23, 59, 59, 0.18);
+  padding: 1px 4px;
+  background: #e1ece6;
+  color: #55736d;
+  font-size: 11px;
 }
 
 .tab-btn.active b {
-  background: rgba(255, 255, 255, 0.22);
-  color: #ffffff;
+  background: #ffffff29;
+  color: #fff;
 }
 
-.tab-btn[data-tab='natural'].active {
-  background: #9b2020;
-}
-.tab-btn[data-tab='resistance'].active {
-  background: #c35c00;
-}
-.tab-btn[data-tab='voltage'].active {
-  background: #196f3d;
-}
-.tab-btn[data-tab='field'].active {
-  background: #154360;
-}
-
-/* 制动状态子标签页颜色 */
-.tab-btn[data-tab='all'].active {
-  background: #1a365d;
-}
-.tab-btn[data-tab='dynamic'].active {
-  background: #c2185b;
-}
-.tab-btn[data-tab='plugging'].active {
-  background: #1565c0;
-}
-.tab-btn[data-tab='regenerative'].active {
-  background: #8b1538;
+.tab-btn sub {
+  margin-left: -3px;
 }
 
 .tabs-actions {
   margin-left: auto;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  flex-shrink: 0;
 }
 
 .view-btn,
 .action-btn {
-  font: inherit;
-  font-size: 13px;
-  font-weight: 600;
-  padding: 5px 11px;
-  border-radius: 6px;
-  border: 1px solid #adc5bc;
-  background: #ffffff;
+  border-color: #adc5bc;
+  background: #fff;
   color: #173b3b;
-  cursor: pointer;
-  transition: all 0.15s ease;
-  display: flex;
-  align-items: center;
-  gap: 5px;
+  font-size: 13px;
 }
 
 .view-btn:hover,
 .action-btn:hover {
-  background: #f1f7f4;
   border-color: #7b9e95;
+  background: #f3f8f4;
 }
 
 .view-btn.active {
-  background: #e8f3ee;
-  border-color: #237804;
-  color: #196f3d;
-  font-weight: 700;
+  border-color: #39796f;
+  background: #eaf4eb;
+  color: #2e6d61;
 }
 
-/* 主工作区布局 */
+.four-quadrant-page :focus-visible {
+  outline: 3px solid #bc742a;
+  outline-offset: 3px;
+}
+
+/* 曲线与讲解并列，参数及读数使用通栏。 */
 .motoring-workspace {
   display: grid;
-  grid-template-columns: 830px 1fr;
-  gap: 14px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  grid-template-rows: minmax(0, 1fr) 70px;
+  gap: 10px 14px;
   min-height: 0;
 }
 
-/* 左侧曲线面板 */
+.chart-panel,
+.motor-visual-card,
+.param-control-card,
+.theory-card {
+  min-width: 0;
+  border: 1px solid #c8d9d4;
+  border-radius: 14px;
+  background: #fff;
+}
+
 .chart-panel {
   min-height: 0;
-  border: 1px solid #cadcd5;
-  border-radius: 12px;
-  background: #ffffff;
-  padding: 10px 14px 6px;
+  padding: 12px 16px 8px;
   display: flex;
   flex-direction: column;
 }
 
 .chart-header {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 4px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
 }
 
 .chart-header h2 {
-  font-size: 18px;
-  margin: 0;
-  color: #173b3b;
   display: flex;
-  align-items: center;
-  gap: 8px;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  margin: 0;
+  font-size: 21px;
 }
 
 .chart-header h2 small {
-  font-size: 13px;
   color: #55736d;
-  font-weight: normal;
+  font-size: 13px;
+  font-weight: 400;
 }
 
 .direction-pills {
   display: flex;
-  gap: 4px;
-  background: #edf4ef;
-  border-radius: 6px;
+  gap: 3px;
+  border-radius: 7px;
   padding: 2px;
+  background: #edf4ef;
 }
 
 .dir-pill {
-  font: inherit;
-  font-size: 12px;
-  font-weight: 600;
-  padding: 3px 8px;
-  border-radius: 4px;
-  border: none;
-  background: transparent;
-  color: #4a6a64;
-  cursor: pointer;
+  padding: 4px 10px;
+  font-size: 13px;
+  font-weight: 500;
 }
 
-.dir-pill.active {
-  background: #173b3b;
-  color: #ffffff;
-}
-
-/* SVG 曲线图 */
 .svg-wrap {
   flex: 1;
   min-height: 0;
   position: relative;
+  overflow: hidden;
 }
 
 .svg-wrap svg {
+  display: block;
   width: 100%;
   height: 100%;
-  overflow: visible;
+  overflow: hidden;
 }
 
-/* 象限标识徽章 - 完美还原附图风格 */
-.quadrant-badge-fwd rect {
-  fill: url(#fwd-gradient);
-  stroke: #2b547e;
-  stroke-width: 1.5;
-  filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.2));
+/* 象限使用与课程说明卡一致的浅色标牌。 */
+.quadrant-badge rect {
+  stroke-width: 1.2;
+}
+
+.quadrant-badge-fwd rect,
+.quadrant-badge-q4 rect {
+  fill: #edf4ef;
+  stroke: #bad3c6;
 }
 
 .quadrant-badge-rev rect {
-  fill: url(#rev-gradient);
-  stroke: #6a287e;
-  stroke-width: 1.5;
-  filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.2));
+  fill: #edf3f6;
+  stroke: #c2d3dc;
 }
 
 .quadrant-badge-q2 rect {
-  fill: url(#q2-gradient);
-  stroke: #ad1457;
-  stroke-width: 1.5;
-  filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.2));
-}
-
-.quadrant-badge-q4 rect {
-  fill: url(#q4-gradient);
-  stroke: #2e7d32;
-  stroke-width: 1.5;
-  filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.2));
+  fill: #f7ecee;
+  stroke: #dfc1c9;
 }
 
 .quadrant-badge text {
-  font-family: 'SimHei', 'Microsoft YaHei', sans-serif;
-  font-size: 26px;
-  font-weight: 900;
-  letter-spacing: 2px;
+  font-family: inherit;
+  font-size: 24px;
+  font-weight: 650;
   text-anchor: middle;
   dominant-baseline: central;
 }
 
-.quadrant-badge-fwd text {
-  fill: #0d233a;
+.quadrant-badge-fwd text,
+.quadrant-badge-q4 text {
+  fill: #2e6d61;
 }
 
 .quadrant-badge-rev text {
-  fill: #2e082e;
+  fill: #52788d;
 }
 
 .quadrant-badge-q2 text {
-  fill: #4a0028;
+  fill: #874758;
 }
 
-.quadrant-badge-q4 text {
-  fill: #052e0a;
-}
-
-/* 曲线与文字 */
 .axis-line {
   stroke: #21433f;
   stroke-width: 2.5;
 }
 
 .axis-tick {
-  stroke: #456c67;
+  stroke: #55736d;
   stroke-width: 1.5;
 }
 
 .grid-line {
-  stroke: #e3ede8;
+  stroke: #e1e9e4;
   stroke-width: 1;
   stroke-dasharray: 4 4;
 }
@@ -388,7 +304,7 @@
 .curve-path {
   fill: none;
   stroke-linecap: round;
-  transition: all 0.25s ease;
+  transition: opacity 0.25s ease;
 }
 
 .curve-path.faint {
@@ -396,29 +312,17 @@
   stroke-dasharray: 6 5;
 }
 
-/* 反抗性恒转矩负载特性曲线 */
-.load-curve-path {
-  filter: drop-shadow(0 1px 2px rgba(15, 118, 110, 0.25));
-}
-
-.load-curve-label {
-  font-family: 'Microsoft YaHei', sans-serif;
-  letter-spacing: 0.2px;
-}
-
 .curve-label {
-  font-family: 'Microsoft YaHei', sans-serif;
+  font-family: inherit;
   font-size: 15px;
-  font-weight: 700;
+  font-weight: 600;
   text-anchor: start;
   paint-order: stroke;
-  stroke: #ffffff;
+  stroke: #fff;
   stroke-width: 4px;
   stroke-linejoin: round;
-  cursor: default;
 }
 
-/* 动态运行工作点 */
 .work-point circle.halo {
   fill: none;
   stroke-width: 3;
@@ -437,230 +341,210 @@
 }
 
 .work-point circle.core {
-  stroke: #ffffff;
+  stroke: #fff;
   stroke-width: 2.5;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 }
 
 .point-tooltip {
   font-size: 12px;
-  font-weight: 700;
-  fill: #ffffff;
+  font-weight: 600;
+  fill: #fff;
 }
 
 .point-tooltip-bg {
   rx: 4px;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25));
 }
 
-/* 右侧控制与电机图解面板 */
 .control-panel {
-  min-height: 0;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
+  min-height: 0;
 }
 
-/* 电机运行示意卡片 */
 .motor-visual-card {
-  border: 1px solid #cadcd5;
-  border-radius: 12px;
-  background: #ffffff;
-  padding: 8px 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+  padding: 4px 10px;
 }
 
 .card-title-row {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  align-items: baseline;
+  gap: 10px;
 }
 
 .card-title-row h3 {
-  margin: 0;
-  font-size: 15px;
-  color: #173b3b;
-  font-weight: 700;
+  flex-shrink: 0;
+  margin: 0 0 3px;
+  font-size: 20px;
+  font-weight: 650;
+  line-height: 1.25;
 }
 
 .state-badge {
-  font-size: 12px;
-  font-weight: 700;
-  padding: 2px 8px;
-  border-radius: 12px;
-  background: #e8f5e9;
-  color: #1b5e20;
-  border: 1px solid #a5d6a7;
+  display: block;
+  color: #39796f;
+  font-size: 14px;
+  line-height: 1.3;
 }
 
 .motor-diagrams-row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 8px;
-  align-items: center;
+  margin-top: 4px;
 }
 
 .motor-diag-box {
-  border: 1px solid #e1ebe7;
-  border-radius: 8px;
-  background: #f8fbf9;
-  padding: 6px 8px;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr);
   align-items: center;
+  gap: 4px 6px;
+  border: 1px solid #dce6df;
+  border-radius: 8px;
+  padding: 5px 8px;
+  background: #f8faf8;
 }
 
 .motor-diag-box.active {
-  border-color: #2e7d32;
-  background: #f1f8f3;
-  box-shadow: 0 0 0 2px rgba(46, 125, 50, 0.15);
+  border-color: #bad3c6;
+  background: #f3f8f4;
 }
 
 .motor-diag-box h4 {
-  margin: 0 0 4px;
-  font-size: 13px;
-  font-weight: 700;
-  color: #173b3b;
-  display: flex;
-  align-items: center;
-  gap: 4px;
+  grid-column: 1 / -1;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.25;
 }
 
 .motor-svg-wrap {
-  width: 140px;
-  height: 94px;
+  width: 112px;
+  height: 76px;
 }
 
 .motor-svg-wrap svg {
+  display: block;
   width: 100%;
   height: 100%;
 }
 
 .motor-stat-line {
-  font-size: 12px;
-  color: #4a6a64;
-  margin-top: 2px;
+  color: #55736d;
+  font-size: 16px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
 }
 
 .motor-stat-line b {
-  color: #173b3b;
+  color: #34594c;
+  font-weight: 500;
 }
 
-/* 参数调节卡片 */
 .param-control-card {
-  border: 1px solid #cadcd5;
-  border-radius: 12px;
-  background: #ffffff;
-  padding: 8px 12px;
-}
-
-.slider-group {
-  margin-bottom: 6px;
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  align-items: center;
+  gap: 20px;
+  padding: 8px 14px;
+  background: #edf4ef;
 }
 
 .slider-header {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  font-size: 13px;
-  margin-bottom: 3px;
+  gap: 8px;
+  margin-bottom: 7px;
+  font-size: 15px;
 }
 
-.slider-header label {
+.slider-header label,
+.slider-header output {
   font-weight: 600;
-  color: #173b3b;
 }
 
 .slider-header output {
-  font-weight: 700;
-  color: #196f3d;
+  color: #39796f;
   font-variant-numeric: tabular-nums;
 }
 
 .slider-control input[type='range'] {
+  display: block;
   width: 100%;
-  height: 6px;
-  border-radius: 3px;
-  background: #d8e5df;
-  accent-color: #196f3d;
+  height: 16px;
+  margin: 0;
+  accent-color: #39796f;
   cursor: pointer;
 }
 
-/* 实时读数仪表 */
 .readings-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 6px;
-  margin-top: 6px;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 8px;
 }
 
 .reading-item {
-  background: #f4f8f6;
-  border: 1px solid #dbe7e2;
-  border-radius: 6px;
-  padding: 4px 6px;
   display: flex;
   flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  border: 1px solid #d8e5dc;
+  border-radius: 7px;
+  padding: 6px 8px;
+  background: #fff;
 }
 
 .reading-item span {
-  font-size: 11px;
-  color: #61827c;
+  color: #55736d;
+  font-size: 12px;
 }
 
 .reading-item strong {
-  font-size: 14px;
-  color: #173b3b;
+  font-size: 15px;
+  font-weight: 650;
   font-variant-numeric: tabular-nums;
-  font-weight: 700;
+  white-space: nowrap;
 }
 
-/* 理论分析卡片 */
 .theory-card {
-  border: 1px solid #cadcd5;
-  border-radius: 12px;
-  background: #fbfdfc;
-  padding: 8px 12px;
-  flex: 1;
   display: flex;
+  flex: 1;
   flex-direction: column;
   justify-content: space-between;
+  gap: 4px;
+  padding: 6px 12px;
+  background: #edf4ef;
 }
 
 .theory-card h4 {
   margin: 0 0 4px;
-  font-size: 14px;
-  color: #173b3b;
-  font-weight: 700;
-  display: flex;
-  justify-content: space-between;
+  font-size: 20px;
+  font-weight: 650;
 }
 
 .theory-card p {
-  margin: 0 0 4px;
-  font-size: 13px;
-  line-height: 1.45;
-  color: #2d4f48;
+  margin: 4px 0 0;
+  color: #34594c;
+  font-size: 17px;
+  line-height: 1.3;
 }
 
 .theory-equation-box {
-  background: #ffffff;
-  border: 1px solid #d8e6e0;
-  border-radius: 6px;
-  padding: 6px 10px;
-  text-align: center;
-  font-size: 13.5px;
-  color: #173b3b;
-  margin: 2px 0 4px;
-  font-family: Georgia, 'Times New Roman', serif;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
   gap: 2px 4px;
-  min-height: 40px;
+  min-height: 68px;
+  border: 1px solid #d8e5dc;
+  border-radius: 7px;
+  padding: 5px 10px;
+  background: #fff;
+  text-align: center;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 28px;
   line-height: 1.35;
 }
 
@@ -670,17 +554,17 @@
   vertical-align: middle;
   text-align: center;
   padding: 0 4px;
-  line-height: 1.1;
-  font-size: 0.9em;
+  line-height: 1;
+  font-size: 1em;
 }
 
 .theory-equation-box .fraction > span:first-child {
   border-bottom: 1.2px solid currentColor;
-  padding: 0 2px 1.5px;
+  padding: 0 2px 2px;
 }
 
 .theory-equation-box .fraction > span:last-child {
-  padding: 1.5px 2px 0;
+  padding: 2px 2px 0;
 }
 
 .theory-equation-box sub {
@@ -696,25 +580,30 @@
 }
 
 .theory-equation-box .eq-note {
-  font-size: 0.9em;
-  color: #486962;
+  color: #55736d;
+  font-size: 0.85em;
 }
 
 .conclusion-pill {
-  background: #e8f5e9;
-  border: 1px solid #b7dfb9;
-  border-radius: 6px;
-  padding: 4px 8px;
-  font-size: 12px;
-  color: #1b5e20;
-  font-weight: 600;
+  border: 1px solid #e5cfaa;
+  border-radius: 8px;
+  padding: 5px 10px;
+  background: #fbf3e4;
+  color: #8f5a20;
+  font-size: 16px;
+  line-height: 1.35;
 }
 
-/* 页脚说明 */
 .four-quadrant-page footer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+  gap: 20px;
+  color: #55736d;
   font-size: 12px;
-  color: #65857f;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  line-height: 1.4;
+}
+
+.four-quadrant-page footer > :last-child {
+  text-align: right;
 }

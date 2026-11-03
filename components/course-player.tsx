@@ -22,7 +22,12 @@ import {
   DialogDescription,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { chapters, slides, type Slide } from '@/content/course';
+import {
+  appendixChapter,
+  chapters,
+  slides,
+  type Slide,
+} from '@/content/course';
 import { ChapterGalaxy } from '@/components/chapter-galaxy';
 import { ElectrificationTrend } from '@/components/electrification-trend';
 import { EvLesson, type EvPage } from '@/components/ev-roadmap';
@@ -45,6 +50,7 @@ import {
   FieldSpeedControlSummary,
 } from '@/components/field-speed-control-lesson';
 const number = (n: number) => String(n).padStart(2, '0');
+const courseSections = [...chapters, appendixChapter];
 
 const shuntPages = ['principle', 'buildup', 'critical', 'load'] as const;
 type ShuntPage = (typeof shuntPages)[number];
@@ -205,8 +211,9 @@ export default function CoursePlayer() {
   const chapter =
     slide.kind === 'home'
       ? undefined
-      : chapters.find((c) => c.id === slide.chapterId);
+      : courseSections.find((c) => c.id === slide.chapterId);
   const chapterIndex = chapter ? chapters.indexOf(chapter) : -1;
+  const isAppendix = chapter?.id === appendixChapter.id;
   const chapterSlides = chapter
     ? courseSlides.filter(
         (s) => s.kind !== 'home' && s.chapterId === chapter.id,
@@ -371,9 +378,9 @@ export default function CoursePlayer() {
           <ChevronRight size={15} />
         </button>
         <nav className="chapter-nav" aria-label="课程章节">
-          {chapters.map((c, i) => (
+          {courseSections.map((c, i) => (
             <div key={c.id}>
-              {(i === 0 || chapters[i - 1].category !== c.category) && (
+              {(i === 0 || courseSections[i - 1].category !== c.category) && (
                 <div className="nav-group">{c.category}</div>
               )}
               <button
@@ -381,7 +388,9 @@ export default function CoursePlayer() {
                 onClick={() => jump(c.id)}
                 aria-current={chapter?.id === c.id ? 'location' : undefined}
               >
-                <span className="nav-number">{number(i + 1)}</span>
+                <span className="nav-number">
+                  {c.id === appendixChapter.id ? '附' : number(i + 1)}
+                </span>
                 <span>{c.title}</span>
                 {chapter?.id === c.id && <span className="active-dot" />}
               </button>
@@ -407,7 +416,7 @@ export default function CoursePlayer() {
         <div className="sidebar-bottom">
           <BookOpen size={18} />
           <div>
-            从原理到应用<small>7 个章节 · 课堂演示讲义</small>
+            从原理到应用<small>7 个章节 · 2 篇附页</small>
           </div>
         </div>
       </aside>
@@ -444,44 +453,50 @@ export default function CoursePlayer() {
             <span>
               <span className="status-dot" />
               课堂讲义 <span className="meta-divider">/</span>{' '}
-              {chapter
-                ? `CHAPTER ${number(chapterIndex + 1)}`
-                : 'COURSE OVERVIEW'}
+              {isAppendix
+                ? 'SUPPLEMENTARY READING'
+                : chapter
+                  ? `CHAPTER ${number(chapterIndex + 1)}`
+                  : 'COURSE OVERVIEW'}
             </span>
             <span>
               16:9 <span className="meta-divider">·</span>{' '}
-              {slide.kind === 'home'
-                ? '课程封面'
-                : slide.kind === 'chapter'
-                  ? '章节导入'
-                  : slide.kind === 'teachers'
-                    ? '教师简介'
-                    : slide.kind === 'video'
-                      ? '视频导入'
-                      : slide.kind === 'embed'
-                        ? '互动图解'
-                        : slide.kind === 'assessment'
-                          ? '考核方案'
-                          : slide.kind === 'question'
-                            ? '课堂思考'
-                            : slide.kind === 'trend'
-                              ? '趋势示意'
-                              : slide.kind === 'load-characteristic'
-                                ? '互动图解'
-                                : slide.kind === 'speed-control' ||
-                                    slide.kind === 'constant-power-stability' ||
-                                    slide.kind === 'speed-control-summary' ||
-                                    slide.kind === 'voltage-speed-control' ||
-                                    slide.kind ===
-                                      'voltage-speed-control-summary' ||
-                                    slide.kind === 'field-speed-control' ||
-                                    slide.kind === 'field-speed-control-summary'
+              {isAppendix
+                ? '附页入口'
+                : slide.kind === 'home'
+                  ? '课程封面'
+                  : slide.kind === 'chapter'
+                    ? '章节导入'
+                    : slide.kind === 'teachers'
+                      ? '教师简介'
+                      : slide.kind === 'video'
+                        ? '视频导入'
+                        : slide.kind === 'embed'
+                          ? '互动图解'
+                          : slide.kind === 'assessment'
+                            ? '考核方案'
+                            : slide.kind === 'question'
+                              ? '课堂思考'
+                              : slide.kind === 'trend'
+                                ? '趋势示意'
+                                : slide.kind === 'load-characteristic'
                                   ? '互动图解'
-                                  : slide.kind === 'motor-advantage'
+                                  : slide.kind === 'speed-control' ||
+                                      slide.kind ===
+                                        'constant-power-stability' ||
+                                      slide.kind === 'speed-control-summary' ||
+                                      slide.kind === 'voltage-speed-control' ||
+                                      slide.kind ===
+                                        'voltage-speed-control-summary' ||
+                                      slide.kind === 'field-speed-control' ||
+                                      slide.kind ===
+                                        'field-speed-control-summary'
                                     ? '互动图解'
-                                    : slide.kind === 'outline'
-                                      ? '内容提纲'
-                                      : '课堂讲义'}
+                                    : slide.kind === 'motor-advantage'
+                                      ? '互动图解'
+                                      : slide.kind === 'outline'
+                                        ? '内容提纲'
+                                        : '课堂讲义'}
             </span>
           </div>
           <div
@@ -762,7 +777,7 @@ export default function CoursePlayer() {
                       </div>
                     ) : slide.kind === 'embed' ? (
                       <div
-                        className={`embed-body${slide.embedUrl.startsWith('/magnetic-') || slide.embedUrl === '/dc-machine-uses-types.html' || slide.embedUrl === '/dc-machine-constants-relation.html' || slide.embedUrl.startsWith('/dc-motor-') || slide.embedUrl.startsWith('/dc-generator-') ? ' embed-maxwell' : ''}${slide.embedUrl === '/ship-power-eli5.html' ? ' embed-ship-power' : ''}`}
+                        className={`embed-body${slide.embedUrl.startsWith('/magnetic-') || slide.embedUrl === '/dc-machine-uses-types.html' || slide.embedUrl === '/dc-machine-constants-relation.html' || slide.embedUrl.startsWith('/dc-motor-') || slide.embedUrl.startsWith('/dc-generator-') || slide.embedUrl.startsWith('/transformer-classification.html') ? ' embed-maxwell' : ''}${slide.embedUrl === '/ship-power-eli5.html' ? ' embed-ship-power' : ''}`}
                       >
                         {findShuntTab(slide.id) ? (
                           <ShuntGeneratorFrame
@@ -784,6 +799,9 @@ export default function CoursePlayer() {
                               slide.id.startsWith('dc-generator-emf-') ||
                               slide.id.startsWith('dc-motor-series-') ||
                               slide.id.startsWith('dc-drives-') ||
+                              slide.id.startsWith(
+                                'transformers-classification-',
+                              ) ||
                               slide.id === 'dc-motor-field-loss'
                                 ? slide.id
                                 : undefined
@@ -870,7 +888,9 @@ export default function CoursePlayer() {
                       >
                         <div className="eyebrow">
                           <span />
-                          CHAPTER {number(chapterIndex + 1)}{' '}
+                          {isAppendix
+                            ? 'SUPPLEMENTARY READING'
+                            : `CHAPTER ${number(chapterIndex + 1)}`}{' '}
                           <b>{chapter.title}</b>
                         </div>
                         <h1>
@@ -942,9 +962,11 @@ export default function CoursePlayer() {
               )}
               <footer className="slide-footer">
                 <span>
-                  {chapter
-                    ? `${number(chapterIndex + 1)} / ${chapter.title}`
-                    : '课程讲义 / COURSE NOTES'}
+                  {isAppendix
+                    ? '附页 / 变压器交互阅读'
+                    : chapter
+                      ? `${number(chapterIndex + 1)} / ${chapter.title}`
+                      : '课程讲义 / COURSE NOTES'}
                 </span>
                 <span>
                   {slide.kind === 'home'
@@ -1069,9 +1091,11 @@ export default function CoursePlayer() {
             <ArrowRight size={18} />
           </button>
           <div className="catalog-list">
-            {chapters.map((c, i) => (
+            {courseSections.map((c, i) => (
               <button key={c.id} onClick={() => jump(c.id)}>
-                <span>{number(i + 1)}</span>
+                <span>
+                  {c.id === appendixChapter.id ? '附' : number(i + 1)}
+                </span>
                 <div>
                   <strong>{c.title}</strong>
                   <small>{c.english}</small>

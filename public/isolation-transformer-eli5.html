@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>隔离变压器：两边一根线都不连，电是怎么过去的？</title>
+<meta name="description" content="用大白话讲清电气隔离：什么叫隔离，隔离变压器靠什么把能量送过去，以及它在什么情况下会失效。">
+<style>
+  :root{
+    --paper:#f0f3f6;
+    --card:#ffffff;
+    --ink:#1a2c3d;
+    --ink2:#243646;
+    --muted:#677784;
+    --line:#dce3e7;
+    --live:#c27343;
+    --neutral:#436c89;
+    --safe:#39796f;
+    --flux:#7970a3;
+    --core:#c8d0d6;
+    --warm:#f6ebe2;
+    --warm-line:#e5c2aa;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Segoe UI','Microsoft YaHei','PingFang SC',sans-serif;
+    font-size:17px;
+    line-height:1.78;
+    letter-spacing:.008em;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:900px;margin:0 auto;padding:0 24px}
+  svg{display:block;width:100%;height:auto}
+  svg text{font-family:inherit}
+
+  /* ---------- 顶栏 ---------- */
+  .topbar{
+    position:sticky;top:0;z-index:20;
+    height:3px;background:transparent;
+  }
+  .topbar i{
+    display:block;height:3px;width:0%;
+    background:linear-gradient(90deg,var(--flux),var(--safe));
+    transition:width .1s linear;
+  }
+
+  /* ---------- 首屏 ---------- */
+  header.hero{padding:64px 0 8px}
+  .kicker{
+    margin:0 0 18px;
+    font-size:12px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--muted);font-weight:600;
+  }
+  h1{
+    margin:0 0 22px;
+    font-size:clamp(29px,4.6vw,46px);
+    line-height:1.26;
+    letter-spacing:-.02em;
+    font-weight:800;
+  }
+  h1 em{font-style:normal;color:var(--live)}
+  .lede{
+    margin:0 0 10px;
+    font-size:clamp(16px,1.5vw,18.5px);
+    color:var(--ink2);
+    max-width:44em;
+  }
+  .lede strong{color:var(--ink);font-weight:700}
+
+  /* ---------- 图 ---------- */
+  figure{margin:34px 0 0}
+  .fig{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:22px 20px 16px;
+    box-shadow:0 1px 2px rgba(26,34,48,.03),0 12px 32px -24px rgba(26,34,48,.35);
+  }
+  .fig--tight{padding:14px 12px 10px}
+  figcaption{
+    margin:12px 4px 0;
+    font-size:13.5px;line-height:1.7;color:var(--muted);
+  }
+  figcaption b{color:var(--ink2);font-weight:600}
+  .legend{
+    display:flex;flex-wrap:wrap;gap:8px 20px;
+    margin:14px 2px 2px;padding-top:12px;
+    border-top:1px dashed var(--line);
+    font-size:13px;color:var(--muted);
+  }
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:9px;height:9px;border-radius:50%;display:inline-block;flex:0 0 auto}
+  .dash{width:16px;height:0;border-top:2px dashed var(--flux);display:inline-block}
+
+  /* ---------- 章节 ---------- */
+  section{padding:76px 0 0}
+  .sec-head{
+    display:flex;align-items:baseline;gap:14px;
+    padding-top:26px;border-top:1px solid var(--line);
+    margin-bottom:8px;
+  }
+  .sec-num{
+    font-size:12px;font-weight:700;letter-spacing:.16em;
+    color:var(--muted);flex:0 0 auto;
+    font-variant-numeric:tabular-nums;
+  }
+  h2{
+    margin:0;
+    font-size:clamp(23px,3.2vw,31px);
+    line-height:1.34;letter-spacing:-.015em;font-weight:800;
+  }
+  .body{color:var(--ink2);max-width:42em}
+  .body p{margin:16px 0 0}
+  .body strong{color:var(--ink);font-weight:700}
+  .body em{font-style:normal;background:linear-gradient(transparent 62%,#ffe9b8 62%);padding:0 1px}
+
+  .quote{
+    margin:26px 0 0;
+    padding:20px 24px;
+    border-left:3px solid var(--flux);
+    background:#f0edf6;
+    border-radius:0 12px 12px 0;
+    font-size:clamp(17px,2vw,20px);
+    line-height:1.65;color:var(--ink);font-weight:600;
+  }
+  .quote small{display:block;margin-top:6px;font-size:14px;font-weight:400;color:var(--muted)}
+
+  /* ---------- 卡片 ---------- */
+  .cards{display:grid;gap:14px;margin:28px 0 0}
+  .cards.c3{grid-template-columns:repeat(3,1fr)}
+  .cards.c2{grid-template-columns:repeat(2,1fr)}
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:18px 18px 16px;
+  }
+  .card h4{margin:0 0 6px;font-size:15.5px;font-weight:700;letter-spacing:-.01em}
+  .card p{margin:0;font-size:14px;line-height:1.72;color:var(--muted)}
+  .card .glyph{margin-bottom:10px;height:34px}
+  .card .glyph svg{height:34px;width:auto}
+
+  /* ---------- 步骤器 ---------- */
+  .steps{margin:22px 0 0}
+  .step-btns{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+  .step-btns button{
+    font:inherit;font-size:13.5px;
+    padding:7px 14px;border-radius:999px;
+    border:1px solid var(--line);background:var(--card);color:var(--ink2);
+    cursor:pointer;transition:.18s;font-weight:600;
+  }
+  .step-btns button:hover{border-color:#c8d0d6;color:var(--ink)}
+  .step-btns button.on{background:var(--ink);border-color:var(--ink);color:#fff}
+  .step-panel{
+    border:1px solid var(--line);border-left:3px solid var(--flux);
+    border-radius:0 12px 12px 0;background:var(--card);
+    padding:16px 20px;
+  }
+  .step-panel p{margin:0;font-size:15px;line-height:1.75;color:var(--ink2)}
+  .step-panel p b{color:var(--ink)}
+
+  /* ---------- 交互按钮 ---------- */
+  .toggle-row{
+    display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:14px;
+  }
+  button.act{
+    font:inherit;font-size:14px;font-weight:700;
+    padding:9px 18px;border-radius:999px;
+    border:1px solid #e3c3bb;background:#fdf1ee;color:#a95838;
+    cursor:pointer;transition:.18s;
+  }
+  button.act:hover{background:#fbe6e1}
+  .hint{font-size:13px;color:var(--muted)}
+
+  /* ---------- 滑块 ---------- */
+  .slider-box{
+    display:flex;align-items:center;gap:14px;margin-top:16px;
+    padding:14px 16px;background:#e8edf0;border-radius:12px;
+  }
+  .slider-box input[type=range]{
+    flex:1;-webkit-appearance:none;appearance:none;height:4px;border-radius:2px;
+    background:linear-gradient(90deg,#dce3e7,#afbec7);outline:none;
+  }
+  .slider-box input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance:none;width:18px;height:18px;border-radius:50%;
+    background:#fff;border:2px solid var(--flux);cursor:pointer;
+    box-shadow:0 1px 4px rgba(0,0,0,.18);
+  }
+  .slider-box input[type=range]::-moz-range-thumb{
+    width:16px;height:16px;border-radius:50%;background:#fff;
+    border:2px solid var(--flux);cursor:pointer;
+  }
+  .readout{
+    display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;
+    margin-top:14px;font-variant-numeric:tabular-nums;
+  }
+  .readout .big{font-size:clamp(22px,3vw,28px);font-weight:800;letter-spacing:-.02em}
+  .readout .at{font-size:14px;color:var(--muted)}
+  .chip{
+    font-size:12.5px;font-weight:700;padding:3px 11px;border-radius:999px;
+    background:#eaf6f3;color:#285e56;border:1px solid #cfe9e3;
+  }
+  .chip.warn{background:#fdf3df;color:#8a6212;border-color:#eeddb6}
+  .chip.bad{background:#fdece8;color:#a95838;border-color:#f0cfc6}
+
+  /* ---------- 误区 ---------- */
+  .myths{margin:26px 0 0;display:grid;gap:0;border-top:1px solid var(--line)}
+  .myth{
+    display:grid;grid-template-columns:1fr 1.35fr;gap:24px;
+    padding:16px 4px;border-bottom:1px solid var(--line);
+  }
+  .myth dt{margin:0;font-weight:700;font-size:15px;color:var(--ink)}
+  .myth dt::before{content:"✕";color:#c26452;margin-right:8px;font-weight:400}
+  .myth dd{margin:0;font-size:14.5px;line-height:1.72;color:var(--ink2)}
+  .myth dd::before{content:"实际：";color:var(--safe);font-weight:700}
+
+  /* ---------- 提示块 ---------- */
+  .note{
+    margin:30px 0 0;padding:20px 22px;border-radius:14px;
+    background:var(--warm);border:1px solid var(--warm-line);
+  }
+  .note h4{margin:0 0 8px;font-size:14px;letter-spacing:.04em;color:#8a6212;font-weight:800}
+  .note p{margin:0;font-size:14.5px;line-height:1.75;color:#5d4a26}
+  .note p + p{margin-top:8px}
+  .note.safe{background:#eff7f5;border-color:#cfe6e1}
+  .note.safe h4{color:#285e56}
+  .note.safe p{color:#193c3b}
+
+  /* ---------- 收尾 ---------- */
+  .outro{padding:80px 0 40px}
+  .outro ol{margin:22px 0 0;padding:0;list-style:none;counter-reset:k}
+  .outro li{
+    counter-increment:k;position:relative;
+    padding:0 0 18px 46px;font-size:16.5px;line-height:1.7;color:var(--ink2);
+  }
+  .outro li::before{
+    content:counter(k);
+    position:absolute;left:0;top:2px;
+    width:28px;height:28px;border-radius:50%;
+    background:var(--ink);color:#fff;
+    font-size:13px;font-weight:700;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .outro li b{color:var(--ink)}
+
+  footer{
+    border-top:1px solid var(--line);
+    padding:28px 0 70px;margin-top:30px;
+    font-size:13px;color:var(--muted);line-height:1.9;
+  }
+  footer a{color:var(--ink2);text-decoration:none;border-bottom:1px solid #dce3e7}
+  footer a:hover{color:var(--flux);border-color:var(--flux)}
+  footer ul{margin:8px 0 0;padding-left:18px}
+
+  /* ---------- 图内动画 ---------- */
+  .flux-ring{stroke-dasharray:12 10;animation:fluxFlow 1.5s linear infinite}
+  @keyframes fluxFlow{to{stroke-dashoffset:-44}}
+  .pulse{animation:pulse 2.4s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:.35}50%{opacity:1}}
+
+  #mech [data-hl]{transition:opacity .4s ease}
+  #mech .dim{opacity:.14}
+
+  #second-touch{opacity:0;transition:opacity .38s ease;pointer-events:none}
+  #shockB.show-second #second-touch{opacity:1}
+  #shockB #no-current{transition:opacity .38s ease}
+  #shockB.show-second #no-current{opacity:0}
+
+  @media (prefers-reduced-motion:reduce){
+    .flux-ring,.pulse{animation:none}
+    html{scroll-behavior:auto}
+    *{transition:none!important}
+  }
+
+  /* ---------- 响应式 ---------- */
+  @media (max-width:760px){
+    .cards.c3{grid-template-columns:1fr}
+    .cards.c2{grid-template-columns:1fr}
+    .myth{grid-template-columns:1fr;gap:6px}
+  }
+  @media (max-width:640px){
+    body{font-size:16px;line-height:1.75}
+    h1 br{display:none}
+    .wrap{padding:0 15px}
+    header.hero{padding:44px 0 0}
+    section{padding:58px 0 0}
+    .fig{padding:12px 8px 10px;border-radius:14px}
+    .fig--tight{padding:10px 4px 6px}
+    figcaption{margin-top:10px}
+    figcaption .sm-hide{display:none}
+    .quote{padding:16px 18px}
+    .step-panel{padding:14px 16px}
+  }
+</style>
+</head>
+<body>
+<div class="topbar"><i id="bar"></i></div>
+
+<main>
+
+<!-- ============ 首屏 ============ -->
+<header class="hero">
+  <div class="wrap">
+    <p class="kicker">ELI5+ · 电学基础</p>
+    <h1>隔离变压器：两边一根线都不连，<br>电<em>到底是怎么过去的</em>？</h1>
+    <p class="lede">
+      墙上的插座，有一根线和大地是连着的 —— 这正是摸到火线会触电的原因。
+    </p>
+    <p class="lede">
+      隔离变压器做了一件很朴素的事：让输出那两根线，跟电网<strong>彻底断开</strong>。
+      它不是拿开关把电路切断，而是从结构上就没有一条导线通过去。
+      它的全部秘密，就是下面这张图：<strong>两个各自独立的线圈，绕在同一个铁芯上</strong>。
+    </p>
+
+    <figure>
+      <div class="fig">
+        <svg viewBox="0 0 760 365" role="img" aria-labelledby="heroT heroD">
+          <title id="heroT">隔离变压器结构示意</title>
+          <desc id="heroD">左侧一次线圈接 220 伏交流电源，右侧二次线圈接负载。两个线圈绕在同一个铁芯上，彼此之间没有任何导线相连，能量通过铁芯中的交变磁通传递。</desc>
+
+          <!-- 铁芯 -->
+          <rect x="250" y="70" width="260" height="230" fill="none" stroke="var(--core)" stroke-width="26"/>
+
+          <!-- 磁通环 -->
+          <rect x="250" y="70" width="260" height="230" fill="none" stroke="var(--flux)"
+                stroke-width="3" class="flux-ring" opacity=".8"/>
+          <path d="M300 63 L316 70 L300 77 Z" fill="var(--flux)"/>
+          <path d="M460 293 L444 300 L460 307 Z" fill="var(--flux)"/>
+
+          <!-- 一次线圈 -->
+          <g fill="#fff" stroke="var(--live)" stroke-width="3">
+            <ellipse cx="250" cy="108" rx="27" ry="8.5"/>
+            <ellipse cx="250" cy="130" rx="27" ry="8.5"/>
+            <ellipse cx="250" cy="152" rx="27" ry="8.5"/>
+            <ellipse cx="250" cy="174" rx="27" ry="8.5"/>
+            <ellipse cx="250" cy="196" rx="27" ry="8.5"/>
+            <ellipse cx="250" cy="218" rx="27" ry="8.5"/>
+            <ellipse cx="250" cy="240" rx="27" ry="8.5"/>
+            <ellipse cx="250" cy="262" rx="27" ry="8.5"/>
+          </g>
+          <path d="M223 108 H100 V149" fill="none" stroke="var(--live)" stroke-width="3"/>
+          <path d="M223 262 H100 V221" fill="none" stroke="var(--live)" stroke-width="3"/>
+          <circle cx="100" cy="185" r="36" fill="#fff" stroke="var(--live)" stroke-width="3"/>
+          <path d="M80 185 q10 -15 20 0 q10 15 20 0" fill="none" stroke="var(--live)" stroke-width="3" stroke-linecap="round"/>
+
+          <!-- 二次线圈 -->
+          <g fill="#fff" stroke="var(--safe)" stroke-width="3">
+            <ellipse cx="510" cy="108" rx="27" ry="8.5"/>
+            <ellipse cx="510" cy="130" rx="27" ry="8.5"/>
+            <ellipse cx="510" cy="152" rx="27" ry="8.5"/>
+            <ellipse cx="510" cy="174" rx="27" ry="8.5"/>
+            <ellipse cx="510" cy="196" rx="27" ry="8.5"/>
+            <ellipse cx="510" cy="218" rx="27" ry="8.5"/>
+            <ellipse cx="510" cy="240" rx="27" ry="8.5"/>
+            <ellipse cx="510" cy="262" rx="27" ry="8.5"/>
+          </g>
+          <path d="M537 108 H590" fill="none" stroke="var(--safe)" stroke-width="3"/>
+          <path d="M537 262 H590" fill="none" stroke="var(--safe)" stroke-width="3"/>
+          <rect x="590" y="85" width="110" height="200" rx="14" fill="#fff" stroke="var(--safe)" stroke-width="3"/>
+          <text x="645" y="192" font-size="24" fill="var(--safe)" text-anchor="middle" font-weight="700">负载</text>
+
+          <!-- 关键说明 -->
+          <text x="380" y="182" font-size="26" fill="var(--ink)" text-anchor="middle" font-weight="700">没有导线相连</text>
+          <text x="380" y="216" font-size="19" fill="var(--muted)" text-anchor="middle">能量靠磁通穿过去</text>
+
+          <!-- 标签 -->
+          <text x="250" y="45" font-size="19" fill="var(--live)" text-anchor="middle" font-weight="700">一次侧 · 接电网</text>
+          <text x="510" y="45" font-size="19" fill="var(--safe)" text-anchor="middle" font-weight="700">二次侧 · 接设备</text>
+          <text x="380" y="345" font-size="19" fill="var(--flux)" text-anchor="middle">铁芯里的交变磁通</text>
+        </svg>
+        <div class="legend">
+          <span><i class="dot" style="background:var(--live)"></i>一次侧（电网侧）</span>
+          <span><i class="dot" style="background:var(--safe)"></i>二次侧（设备侧）</span>
+          <span><i class="dash"></i>磁通路径</span>
+          <span><i class="dot" style="background:var(--core)"></i>铁芯</span>
+        </div>
+      </div>
+      <figcaption>
+        左右两个线圈各自卷成一个整体，中间<b>没有任何金属把它们连起来</b>。
+        唯一在两者之间来回走的东西，是铁芯里那股看不见的磁场。
+        <span class="sm-hide">（图中虚线是磁通的走向；实际它是每秒钟来回反转 50 次的交变磁场，这里只画了一个方向。）</span>
+      </figcaption>
+    </figure>
+  </div>
+</header>
+
+<!-- ============ 01 ============ -->
+<section id="s1">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">01</span>
+      <h2>先说清楚：什么叫"电气隔离"</h2>
+    </div>
+    <div class="body">
+      <p>
+        电气隔离（galvanic isolation）说的是一件很具体的事：
+        <strong>两个电路之间不存在任何直接的导电路径</strong>。
+        你拿万用表去量，两边之间的电阻是无穷大 —— 不是"电阻很大"，是根本没有一条路。
+      </p>
+      <p>
+        注意它隔离的是<em>路径</em>，不是<em>能量</em>。信息、功率照样可以过去，
+        但必须换一种载体，不能靠电荷沿着导线跑。
+      </p>
+    </div>
+
+    <figure>
+      <div class="fig fig--tight">
+        <svg viewBox="0 0 760 150" role="img" aria-labelledby="c1 c2">
+          <title id="c1">有导线连接的两个电路</title>
+          <desc id="c2">电路 A 与电路 B 之间有一根实线导线直接连接，电流可以从一侧流到另一侧。</desc>
+          <rect x="60" y="42" width="150" height="76" rx="12" fill="#fff" stroke="var(--ink2)" stroke-width="3"/>
+          <text x="135" y="90" font-size="22" fill="var(--ink2)" text-anchor="middle" font-weight="700">电路 A</text>
+          <rect x="550" y="42" width="150" height="76" rx="12" fill="#fff" stroke="var(--ink2)" stroke-width="3"/>
+          <text x="625" y="90" font-size="22" fill="var(--ink2)" text-anchor="middle" font-weight="700">电路 B</text>
+          <path d="M210 80 H550" fill="none" stroke="var(--live)" stroke-width="4"/>
+          <path d="M330 72 L344 80 L330 88 Z" fill="var(--live)"/>
+          <path d="M420 72 L434 80 L420 88 Z" fill="var(--live)"/>
+          <text x="380" y="62" font-size="18" fill="var(--live)" text-anchor="middle">导线直连</text>
+        </svg>
+      </div>
+      <figcaption><b>不隔离</b>：电流有一条现成的路，可以从这边直接流到那边。</figcaption>
+    </figure>
+
+    <figure>
+      <div class="fig fig--tight">
+        <svg viewBox="0 0 760 150" role="img" aria-labelledby="c3 c4">
+          <title id="c3">没有导线连接的两个电路</title>
+          <desc id="c4">电路 A 与电路 B 之间的导线被断开，中间没有任何导体，电流无法直接通过。</desc>
+          <rect x="60" y="42" width="150" height="76" rx="12" fill="#fff" stroke="var(--ink2)" stroke-width="3"/>
+          <text x="135" y="90" font-size="22" fill="var(--ink2)" text-anchor="middle" font-weight="700">电路 A</text>
+          <rect x="550" y="42" width="150" height="76" rx="12" fill="#fff" stroke="var(--ink2)" stroke-width="3"/>
+          <text x="625" y="90" font-size="22" fill="var(--ink2)" text-anchor="middle" font-weight="700">电路 B</text>
+          <path d="M210 80 H330" fill="none" stroke="var(--ink2)" stroke-width="4"/>
+          <path d="M430 80 H550" fill="none" stroke="var(--ink2)" stroke-width="4"/>
+          <path d="M330 66 V94" fill="none" stroke="var(--ink2)" stroke-width="4"/>
+          <path d="M430 66 V94" fill="none" stroke="var(--ink2)" stroke-width="4"/>
+          <text x="380" y="92" font-size="26" fill="#afbec7" text-anchor="middle" font-weight="700">✕</text>
+          <text x="380" y="62" font-size="18" fill="var(--safe)" text-anchor="middle" font-weight="700">断开</text>
+        </svg>
+      </div>
+      <figcaption><b>隔离</b>：中间没有导体，电荷过不去。想让能量过去，只能换载体。</figcaption>
+    </figure>
+
+    <div class="body">
+      <p>
+        工程上能"换载体"的办法只有三种，隔离变压器是其中的第一种：
+      </p>
+    </div>
+
+    <div class="cards c3">
+      <div class="card">
+        <div class="glyph">
+          <svg viewBox="0 0 90 34" aria-hidden="true">
+            <path d="M8 6 q9 5 0 11 q-9 6 0 11" fill="none" stroke="var(--live)" stroke-width="2.6" stroke-linecap="round"/>
+            <rect x="34" y="4" width="5" height="26" fill="var(--core)"/>
+            <rect x="51" y="4" width="5" height="26" fill="var(--core)"/>
+            <path d="M82 6 q-9 5 0 11 q9 6 0 11" fill="none" stroke="var(--safe)" stroke-width="2.6" stroke-linecap="round"/>
+            <path d="M24 17 H34 M56 17 H66" stroke="var(--core)" stroke-width="1.4" stroke-dasharray="3 3"/>
+          </svg>
+        </div>
+        <h4>磁耦合</h4>
+        <p>变压器、互感器。磁场本身不导电，天然就是一道绝缘屏障。</p>
+      </div>
+      <div class="card">
+        <div class="glyph">
+          <svg viewBox="0 0 90 34" aria-hidden="true">
+            <circle cx="12" cy="17" r="7" fill="none" stroke="var(--live)" stroke-width="2.6"/>
+            <path d="M26 12 l11 -5 M26 17 h13 M26 22 l11 5" stroke="#d9a441" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="70" cy="17" r="9" fill="none" stroke="var(--safe)" stroke-width="2.6"/>
+            <path d="M70 8 V26" stroke="var(--safe)" stroke-width="2.6"/>
+            <path d="M45 4 V30" stroke="var(--core)" stroke-width="1.4" stroke-dasharray="3 3"/>
+          </svg>
+        </div>
+        <h4>光耦合</h4>
+        <p>光耦、光纤。中间是一段光路，光子不带电，自然不会导电。</p>
+      </div>
+      <div class="card">
+        <div class="glyph">
+          <svg viewBox="0 0 90 34" aria-hidden="true">
+            <path d="M10 17 H33" stroke="var(--live)" stroke-width="2.6"/>
+            <path d="M33 6 V28" stroke="var(--live)" stroke-width="3.4"/>
+            <path d="M57 6 V28" stroke="var(--safe)" stroke-width="3.4"/>
+            <path d="M57 17 H80" stroke="var(--safe)" stroke-width="2.6"/>
+            <path d="M45 6 V28" stroke="var(--core)" stroke-width="1.4" stroke-dasharray="3 2"/>
+          </svg>
+        </div>
+        <h4>电容耦合</h4>
+        <p>数字隔离器。靠极板之间的电场传信号 —— 注意它是"直流隔开、高频才通"，本质是一颗很小的电容。</p>
+      </div>
+    </div>
+
+    <div class="note">
+      <h4>顺带说一句</h4>
+      <p>
+        这三种方式都叫"隔离"，但严格程度不一样。磁耦合和光耦合在直流下是彻底断开的；
+        电容耦合按设计就是让高频信号通过，所以它通常只用在信号线上，不会拿来给市电做安全隔离。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 ============ -->
+<section id="s2">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">02</span>
+      <h2>为什么非得隔开：一条看不见的路</h2>
+    </div>
+    <div class="body">
+      <p>
+        要理解隔离的价值，得先看清楚平常的电是怎么"回路"的。
+        小区变压器把高压降成 220 V 的时候，会把<strong>中性点直接接到大地上</strong>。
+        于是你家里的零线，本质上是和地球连在一起的；而火线对大地，有 220 V 的电压。
+      </p>
+      <p>
+        这意味着：<em>只要你同时碰到火线和大地，回路就闭合了</em> —— 而你的脚，通常就踩在大地上。
+      </p>
+    </div>
+
+    <figure>
+      <div class="fig">
+        <svg viewBox="0 0 760 318" role="img" aria-labelledby="s2aT s2aD">
+          <title id="s2aT">中性点接地时触摸火线会触电</title>
+          <desc id="s2aD">变压器二次侧中性点接地，人站在地上触摸火线，电流经人体流入大地，再回到变压器中性点，形成回路。</desc>
+          <defs>
+            <pattern id="hatchA" width="12" height="12" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+              <line x1="0" y1="0" x2="0" y2="12" stroke="#dce3e7" stroke-width="2"/>
+            </pattern>
+          </defs>
+
+          <!-- 大地 -->
+          <path d="M20 270 H740" stroke="#b7c7cd" stroke-width="2"/>
+          <rect x="20" y="270" width="720" height="14" fill="url(#hatchA)"/>
+
+          <!-- 变压器 -->
+          <rect x="126" y="86" width="94" height="148" fill="none" stroke="var(--core)" stroke-width="14"/>
+          <g fill="#fff" stroke="var(--live)" stroke-width="2.6">
+            <ellipse cx="126" cy="110" rx="17" ry="5.5"/>
+            <ellipse cx="126" cy="134" rx="17" ry="5.5"/>
+            <ellipse cx="126" cy="158" rx="17" ry="5.5"/>
+            <ellipse cx="126" cy="182" rx="17" ry="5.5"/>
+            <ellipse cx="126" cy="206" rx="17" ry="5.5"/>
+          </g>
+          <g fill="#fff" stroke="var(--safe)" stroke-width="2.6">
+            <ellipse cx="220" cy="110" rx="17" ry="5.5"/>
+            <ellipse cx="220" cy="134" rx="17" ry="5.5"/>
+            <ellipse cx="220" cy="158" rx="17" ry="5.5"/>
+            <ellipse cx="220" cy="182" rx="17" ry="5.5"/>
+            <ellipse cx="220" cy="206" rx="17" ry="5.5"/>
+          </g>
+          <path d="M109 110 H50 V132" fill="none" stroke="var(--live)" stroke-width="2.6"/>
+          <path d="M109 206 H50 V180" fill="none" stroke="var(--neutral)" stroke-width="2.6"/>
+          <circle cx="50" cy="156" r="24" fill="#fff" stroke="var(--ink2)" stroke-width="2.6"/>
+          <path d="M36 156 q7 -11 14 0 q7 11 14 0" fill="none" stroke="var(--ink2)" stroke-width="2.4" stroke-linecap="round"/>
+
+          <!-- 导线 -->
+          <path d="M237 110 H650" fill="none" stroke="var(--live)" stroke-width="3"/>
+          <path d="M237 206 H650" fill="none" stroke="var(--neutral)" stroke-width="3"/>
+          <path d="M330 206 V270" fill="none" stroke="var(--neutral)" stroke-width="3"/>
+          <circle cx="330" cy="270" r="4.5" fill="var(--neutral)"/>
+          <rect x="650" y="88" width="90" height="140" rx="12" fill="#fff" stroke="var(--ink2)" stroke-width="3"/>
+          <text x="695" y="172" font-size="22" fill="var(--ink2)" text-anchor="middle" font-weight="700">负载</text>
+
+          <!-- 人体 -->
+          <g stroke-linecap="round" fill="none">
+            <path d="M475 153 V205" stroke="var(--ink)" stroke-width="4.5"/>
+            <path d="M475 205 L462 270" stroke="var(--ink)" stroke-width="4.5"/>
+            <path d="M475 205 L488 270" stroke="var(--ink)" stroke-width="4.5"/>
+            <path d="M475 168 L450 186" stroke="var(--ink)" stroke-width="4.5"/>
+            <path d="M475 168 L530 110" stroke="var(--ink)" stroke-width="4.5"/>
+          </g>
+          <circle cx="475" cy="140" r="13" fill="#fff" stroke="var(--ink)" stroke-width="4.5"/>
+
+          <!-- 电流回路 -->
+          <path d="M237 110 H530 L475 168 L475 205 L462 270 H330 V206 H237"
+                fill="none" stroke="var(--live)" stroke-width="9" stroke-opacity=".28"
+                stroke-linejoin="round" stroke-linecap="round"/>
+          <path d="M380 102 L394 110 L380 118 Z" fill="var(--live)"/>
+          <path d="M396 262 L382 270 L396 278 Z" fill="var(--live)"/>
+          <path d="M300 198 L286 206 L300 214 Z" fill="var(--live)"/>
+
+          <!-- 标注 -->
+          <text x="50" y="240" font-size="17" fill="var(--muted)" text-anchor="middle">220 V</text>
+          <text x="330" y="302" font-size="17" fill="var(--neutral)" text-anchor="middle" font-weight="700">中性点接地</text>
+          <text x="548" y="302" font-size="17" fill="var(--live)" text-anchor="middle" font-weight="700">电流经人体入地</text>
+        </svg>
+      </div>
+      <figcaption>
+        <b>没有隔离时：</b>火线 → 人体 → 大地 → 变压器中性点，一条完整的回路。
+        这条"回大地的路"是电网故意做的，为的是让故障电流足够大、保护装置能动作。
+      </figcaption>
+    </figure>
+
+    <div class="body">
+      <p>现在把隔离变压器接进去，看同一件事会变成什么样。</p>
+    </div>
+
+    <figure>
+      <div class="fig">
+        <svg id="shockB" viewBox="0 0 760 318" role="img" aria-labelledby="s2bT s2bD">
+          <title id="s2bT">接入隔离变压器后触摸一根线不会形成回路</title>
+          <desc id="s2bD">隔离变压器二次侧不与大地相连，人站在地上触摸其中一根线时没有回到电源的路径，几乎没有电流；但同时触摸两根线时回路在人体内部闭合。</desc>
+          <defs>
+            <pattern id="hatchB" width="12" height="12" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+              <line x1="0" y1="0" x2="0" y2="12" stroke="#dce3e7" stroke-width="2"/>
+            </pattern>
+          </defs>
+
+          <path d="M20 270 H740" stroke="#b7c7cd" stroke-width="2"/>
+          <rect x="20" y="270" width="720" height="14" fill="url(#hatchB)"/>
+
+          <!-- 变压器 -->
+          <rect x="126" y="86" width="94" height="148" fill="none" stroke="var(--core)" stroke-width="14"/>
+          <g fill="#fff" stroke="var(--live)" stroke-width="2.6">
+            <ellipse cx="126" cy="110" rx="17" ry="5.5"/>
+            <ellipse cx="126" cy="134" rx="17" ry="5.5"/>
+            <ellipse cx="126" cy="158" rx="17" ry="5.5"/>
+            <ellipse cx="126" cy="182" rx="17" ry="5.5"/>
+            <ellipse cx="126" cy="206" rx="17" ry="5.5"/>
+          </g>
+          <g fill="#fff" stroke="var(--safe)" stroke-width="2.6">
+            <ellipse cx="220" cy="110" rx="17" ry="5.5"/>
+            <ellipse cx="220" cy="134" rx="17" ry="5.5"/>
+            <ellipse cx="220" cy="158" rx="17" ry="5.5"/>
+            <ellipse cx="220" cy="182" rx="17" ry="5.5"/>
+            <ellipse cx="220" cy="206" rx="17" ry="5.5"/>
+          </g>
+          <path d="M109 110 H50 V132" fill="none" stroke="var(--live)" stroke-width="2.6"/>
+          <path d="M109 206 H50 V180" fill="none" stroke="var(--neutral)" stroke-width="2.6"/>
+          <circle cx="50" cy="156" r="24" fill="#fff" stroke="var(--ink2)" stroke-width="2.6"/>
+          <path d="M36 156 q7 -11 14 0 q7 11 14 0" fill="none" stroke="var(--ink2)" stroke-width="2.4" stroke-linecap="round"/>
+
+          <path d="M237 110 H650" fill="none" stroke="var(--safe)" stroke-width="3"/>
+          <path d="M237 206 H650" fill="none" stroke="var(--safe)" stroke-width="3"/>
+          <rect x="650" y="88" width="90" height="140" rx="12" fill="#fff" stroke="var(--ink2)" stroke-width="3"/>
+          <text x="695" y="172" font-size="22" fill="var(--ink2)" text-anchor="middle" font-weight="700">负载</text>
+
+          <!-- 浮空：本该接地的地方是断的 -->
+          <path d="M330 206 V256" fill="none" stroke="#dce3e7" stroke-width="3" stroke-dasharray="7 8"/>
+          <path d="M322 232 L338 248 M338 232 L322 248" stroke="var(--live)" stroke-width="3.4" stroke-linecap="round"/>
+          <text x="350" y="245" font-size="17" fill="var(--live)" font-weight="700">没有接地</text>
+
+          <!-- 人体 -->
+          <g stroke-linecap="round" fill="none">
+            <path d="M475 153 V205" stroke="var(--ink)" stroke-width="4.5"/>
+            <path d="M475 205 L462 270" stroke="var(--ink)" stroke-width="4.5"/>
+            <path d="M475 205 L488 270" stroke="var(--ink)" stroke-width="4.5"/>
+            <path d="M475 168 L450 186" stroke="var(--ink)" stroke-width="4.5"/>
+            <path d="M475 168 L530 110" stroke="var(--ink)" stroke-width="4.5"/>
+          </g>
+          <circle cx="475" cy="140" r="13" fill="#fff" stroke="var(--ink)" stroke-width="4.5"/>
+
+          <!-- 走不通的路 -->
+          <path d="M530 110 L475 168 L475 205 L462 270"
+                fill="none" stroke="var(--live)" stroke-width="7" stroke-opacity=".34"
+                stroke-dasharray="10 9" stroke-linejoin="round" stroke-linecap="round"/>
+
+          <!-- 第二只手 -->
+          <g id="second-touch">
+            <path d="M475 195 L440 206" fill="none" stroke="var(--ink)" stroke-width="4.5" stroke-linecap="round"/>
+            <path d="M530 110 L475 168 L475 195 L440 206 H237"
+                  fill="none" stroke="var(--live)" stroke-width="9" stroke-opacity=".3"
+                  stroke-linejoin="round" stroke-linecap="round"/>
+            <path d="M420 198 L406 206 L420 214 Z" fill="var(--live)"/>
+            <path d="M300 198 L286 206 L300 214 Z" fill="var(--live)"/>
+            <text x="580" y="302" font-size="17" fill="var(--live)" text-anchor="middle" font-weight="700">回路在体内闭合</text>
+          </g>
+
+          <!-- 标注 -->
+          <text x="50" y="240" font-size="17" fill="var(--muted)" text-anchor="middle">220 V</text>
+          <text x="330" y="302" font-size="17" fill="var(--safe)" text-anchor="middle" font-weight="700">二次侧浮空 · 与大地不相连</text>
+          <text id="no-current" x="580" y="302" font-size="17" fill="var(--safe)" text-anchor="middle" font-weight="700">几乎没有电流</text>
+        </svg>
+        <div class="toggle-row">
+          <button class="act" id="secondTouchBtn" type="button" aria-pressed="false">再让另一只手碰到零线</button>
+          <span class="hint" id="secondTouchTip">只碰一根线时，二次侧悬空，没有回到电源的路径。</span>
+        </div>
+        <div class="legend">
+          <span><i class="dot" style="background:var(--safe)"></i>浮空的二次侧，两根线对大地都没有电压</span>
+        </div>
+      </div>
+      <figcaption>
+        <b>隔离之后：</b>人只碰一根线，电流找不到"回来的路"，也就没有电流 —— 这是隔离变压器最常见的用途。
+        但请你亲手点一下上面那颗按钮，看看<strong>隔离到底能保到什么程度</strong>。
+      </figcaption>
+    </figure>
+
+    <div class="body">
+      <p>
+        这就是浴室里剃须刀插座、手术室里的医疗 IT 系统、维修台上那台隔离变压器的全部道理。
+        它提供的不是"更低的电压"，而是<strong>一条断掉的回路</strong>。
+      </p>
+      <p>
+        第二个理由没那么救命，但同样常见：<strong>把两个"地"分开</strong>。
+        两台设备各自接在不同的插座上，它们的"地"其实并不完全等电位，中间会有一点点电压差，
+        于是地线上就流过一股莫名其妙的电流（地环路）。音频系统里那声"嗡嗡"，很多就是这么来的。
+        中间串一只 1:1 的隔离变压器，这条路就断了。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 03 ============ -->
+<section id="s3">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">03</span>
+      <h2>那它到底是怎么把电送过去的</h2>
+    </div>
+    <div class="body">
+      <p>
+        关键只有一句话：<strong>导线传的是电荷，磁场传的是"变化"</strong>。
+        变压器把电先变成磁，再把磁变回电 —— 中间那一小段，靠的是磁，而磁不需要导体。
+      </p>
+    </div>
+
+    <figure>
+      <div class="fig">
+        <svg id="mech" viewBox="0 0 760 350" role="img" aria-labelledby="mT mD">
+          <title id="mT">变压器的四步工作过程</title>
+          <desc id="mD">一次线圈通入交流电，铁芯中产生交变磁通，磁通穿过二次线圈并感应出电压，接上负载后二次侧出现电流，但电荷没有跨过两个线圈之间的间隙。</desc>
+
+          <!-- 波形 -->
+          <g data-hl="1">
+            <path d="M52 34 q16 -22 32 0 q16 22 32 0" fill="none" stroke="var(--live)" stroke-width="2.6" stroke-linecap="round"/>
+            <text x="52" y="66" font-size="16" fill="var(--live)" font-weight="700">电流一直在变</text>
+          </g>
+
+          <!-- 铁芯 + 磁通 -->
+          <g data-hl="2">
+            <rect x="270" y="96" width="220" height="190" fill="none" stroke="var(--core)" stroke-width="22"/>
+            <rect x="270" y="96" width="220" height="190" fill="none" stroke="var(--flux)" stroke-width="3"
+                  class="flux-ring" opacity=".85"/>
+            <path d="M318 89 L334 96 L318 103 Z" fill="var(--flux)"/>
+            <path d="M442 279 L426 286 L442 293 Z" fill="var(--flux)"/>
+            <text x="380" y="70" font-size="17" fill="var(--flux)" text-anchor="middle" font-weight="700">Φ 交变磁通</text>
+          </g>
+
+          <!-- 一次 -->
+          <g data-hl="1">
+            <g fill="#fff" stroke="var(--live)" stroke-width="2.8">
+              <ellipse cx="270" cy="121" rx="23" ry="7.5"/>
+              <ellipse cx="270" cy="141" rx="23" ry="7.5"/>
+              <ellipse cx="270" cy="161" rx="23" ry="7.5"/>
+              <ellipse cx="270" cy="181" rx="23" ry="7.5"/>
+              <ellipse cx="270" cy="201" rx="23" ry="7.5"/>
+              <ellipse cx="270" cy="221" rx="23" ry="7.5"/>
+              <ellipse cx="270" cy="241" rx="23" ry="7.5"/>
+              <ellipse cx="270" cy="261" rx="23" ry="7.5"/>
+            </g>
+            <path d="M247 121 H112 V151" fill="none" stroke="var(--live)" stroke-width="2.8"/>
+            <path d="M247 261 H112 V219" fill="none" stroke="var(--live)" stroke-width="2.8"/>
+            <circle cx="112" cy="185" r="34" fill="#fff" stroke="var(--live)" stroke-width="2.8"/>
+            <path d="M94 185 q9 -14 18 0 q9 14 18 0" fill="none" stroke="var(--live)" stroke-width="2.6" stroke-linecap="round"/>
+          </g>
+
+          <!-- 二次 -->
+          <g data-hl="3">
+            <g fill="#fff" stroke="var(--safe)" stroke-width="2.8">
+              <ellipse cx="490" cy="121" rx="23" ry="7.5"/>
+              <ellipse cx="490" cy="141" rx="23" ry="7.5"/>
+              <ellipse cx="490" cy="161" rx="23" ry="7.5"/>
+              <ellipse cx="490" cy="181" rx="23" ry="7.5"/>
+              <ellipse cx="490" cy="201" rx="23" ry="7.5"/>
+              <ellipse cx="490" cy="221" rx="23" ry="7.5"/>
+              <ellipse cx="490" cy="241" rx="23" ry="7.5"/>
+              <ellipse cx="490" cy="261" rx="23" ry="7.5"/>
+            </g>
+            <path d="M513 121 H560" fill="none" stroke="var(--safe)" stroke-width="2.8"/>
+            <path d="M513 261 H560" fill="none" stroke="var(--safe)" stroke-width="2.8"/>
+            <circle cx="560" cy="121" r="5.5" fill="#fff" stroke="var(--safe)" stroke-width="2.8"/>
+            <circle cx="560" cy="261" r="5.5" fill="#fff" stroke="var(--safe)" stroke-width="2.8"/>
+            <text x="500" y="328" font-size="17" fill="var(--safe)" font-weight="700">感应出电压</text>
+          </g>
+
+          <!-- 负载 -->
+          <g data-hl="4">
+            <path d="M560 121 H610" fill="none" stroke="var(--safe)" stroke-width="2.8" stroke-dasharray="7 6"/>
+            <path d="M560 261 H610" fill="none" stroke="var(--safe)" stroke-width="2.8" stroke-dasharray="7 6"/>
+            <rect x="610" y="106" width="90" height="170" rx="12" fill="#fff" stroke="var(--ink2)" stroke-width="2.8"/>
+            <text x="655" y="198" font-size="21" fill="var(--ink2)" text-anchor="middle" font-weight="700">负载</text>
+            <text x="655" y="328" font-size="15" fill="var(--muted)" text-anchor="middle">电子没过去</text>
+          </g>
+        </svg>
+
+        <div class="steps">
+          <div class="step-btns" role="tablist" aria-label="工作步骤">
+            <button type="button" data-step-btn="1" role="tab">① 通上交流电</button>
+            <button type="button" data-step-btn="2" role="tab">② 铁芯被磁化</button>
+            <button type="button" data-step-btn="3" role="tab">③ 磁通割过二次线圈</button>
+            <button type="button" data-step-btn="4" role="tab">④ 接上负载</button>
+          </div>
+          <div class="step-panel">
+            <p data-step-desc="1"><b>左边线圈通上交流电。</b>电流的大小和方向每秒来回变化 50 次。注意：这时候右边什么都还没发生 —— 恒定不变的电流是不会"传"过去的。</p>
+            <p data-step-desc="2" hidden><b>铁芯被反复磁化，里头的磁场跟着一起变。</b>磁场绕着铁芯转圈，一半往上、一半往下，但它始终待在铁芯里，不会漏到空气中乱跑。铁芯的作用只是"给磁通指一条省力的路"。</p>
+            <p data-step-desc="3" hidden><b>变化的磁场穿过右边线圈，把里面的自由电子推动起来。</b>线圈里没有接通任何东西，可两端之间已经出现了电压 —— 这叫感应电动势。它不需要导线连接，只需要磁通"在变"。</p>
+            <p data-step-desc="4" hidden><b>右边一接上负载，电流就出来了。</b>于是功率从左边到了右边。但请记住：<b>任何一个电子都没有跨过中间那道缝</b>。过去的只是能量，形态从电变成了磁，又变回了电。</p>
+          </div>
+        </div>
+      </div>
+      <figcaption>
+        顺序很重要：<b>先有"变"，才有"感应"</b>。
+        这也直接解释了下一节的问题 —— 为什么变压器传不了直流。
+      </figcaption>
+    </figure>
+
+    <div class="quote">
+      导线是"管子"，电荷在里面流；磁场是"手"，隔着墙也能推。
+      <small>变压器把能量从管子交给手，再由手交给另一根管子。</small>
+    </div>
+
+    <div class="note">
+      <h4>类比在这里就失效了</h4>
+      <p>
+        常有人说"像两个齿轮咬在一起"。这个说法能帮你理解"没有直接接触也能传力"，
+        但它会误导一件事：齿轮传的是力矩，不需要"变化"；而变压器<strong>必须靠变化</strong>。
+        转速恒定的齿轮照样传力，电流恒定的变压器却什么也传不过去。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 ============ -->
+<section id="s4">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">04</span>
+      <h2>一个奇怪的事实：它经常什么都不改变</h2>
+    </div>
+    <div class="body">
+      <p>
+        大多数隔离变压器是 <strong>1:1</strong> 的 —— 进去 220 V，出来还是 220 V。
+        从"变压"这个角度看，它好像什么都没干，还白白搭进去一点损耗。
+        那为什么还要装它？
+      </p>
+    </div>
+
+    <div class="cards c2">
+      <div class="card">
+        <h4>没变的</h4>
+        <p>
+          电压（220 V → 220 V）、频率（50 Hz）、波形、功率（扣掉一点点损耗后）。
+          它不升压、不降压、不省电，也不提高功率因数。
+        </p>
+      </div>
+      <div class="card">
+        <h4>变了的</h4>
+        <p>
+          二次侧和电网之间<b>不再有任何电气连接</b>。输出的两根线不接大地，浮在空中，
+          对地电压接近于零；地环路被切断；共模噪声失去通路。
+        </p>
+      </div>
+    </div>
+
+    <div class="body">
+      <p>
+        所以 1:1 不是"没用的变压器"，而是<em>把变压器的变压功能关掉、只留下隔离功能</em>。
+        当然也有很多隔离变压器顺带改变电压：380 V 变 220 V、220 V 变 110 V，
+        或者给安全电压供电的 220 V 变 36 V —— 这些是"隔离 + 变压"两件事一起做。
+      </p>
+      <p>
+        匝数比决定了电压比：<strong>V₂ / V₁ = N₂ / N₁</strong>。
+        1:1 就是 N₂ = N₁，仅此而已。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 05 ============ -->
+<section id="s5">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">05</span>
+      <h2>它不是一堵万能墙</h2>
+    </div>
+    <div class="body">
+      <p>
+        隔离变压器最容易被误解的地方，是把它想成"绝缘的墙"。实际上它更像一扇<strong>关着的门</strong>：
+        对人的手（直流、50 Hz）是关死的，但对高频，门缝会漏。
+      </p>
+      <p>
+        原因很具体：两个线圈为了传磁，必须<em>贴得很近</em>。两片挨得很近的金属导体，
+        中间隔着绝缘 —— 这在物理上就是一个<strong>电容</strong>。电容隔直流、通交流，
+        而且频率越高，通得越痛快。
+      </p>
+    </div>
+
+    <figure>
+      <div class="fig">
+        <svg viewBox="0 0 760 320" role="img" aria-labelledby="lkT lkD">
+          <title id="lkT">泄漏电流与频率的关系</title>
+          <desc id="lkD">横轴为频率，纵轴为流过寄生电容的泄漏电流。频率越高泄漏电流越大，在几十千赫兹以上就越过人体感知与危险阈值。</desc>
+
+          <!-- 坐标轴 -->
+          <path d="M90 250 H720" fill="none" stroke="#b7c7cd" stroke-width="2"/>
+          <path d="M90 40 V250" fill="none" stroke="#b7c7cd" stroke-width="2"/>
+
+          <!-- 横向网格 -->
+          <g stroke="#e8edf0" stroke-width="1">
+            <path d="M90 250 H720"/>
+            <path d="M90 215 H720"/>
+            <path d="M90 180 H720"/>
+            <path d="M90 145 H720"/>
+            <path d="M90 110 H720"/>
+            <path d="M90 75 H720"/>
+            <path d="M90 40 H720"/>
+          </g>
+          <g stroke="#dce3e7" stroke-width="1">
+            <path d="M216 40 V250"/>
+            <path d="M342 40 V250"/>
+            <path d="M468 40 V250"/>
+            <path d="M594 40 V250"/>
+          </g>
+
+          <!-- Y 轴刻度 -->
+          <g font-size="17" fill="var(--muted)" text-anchor="end">
+            <text x="80" y="255">1 µA</text>
+            <text x="80" y="220">10 µA</text>
+            <text x="80" y="185">100 µA</text>
+            <text x="80" y="150">1 mA</text>
+            <text x="80" y="115">10 mA</text>
+            <text x="80" y="80">100 mA</text>
+            <text x="80" y="45">1 A</text>
+          </g>
+          <!-- X 轴刻度 -->
+          <g font-size="17" fill="var(--muted)" text-anchor="middle">
+            <text x="90" y="272">10 Hz</text>
+            <text x="216" y="272">100 Hz</text>
+            <text x="342" y="272">1 kHz</text>
+            <text x="468" y="272">10 kHz</text>
+            <text x="594" y="272">100 kHz</text>
+            <text x="720" y="272">1 MHz</text>
+          </g>
+
+          <!-- 阈值 -->
+          <path d="M90 155.5 H720" fill="none" stroke="#d9a441" stroke-width="1.8" stroke-dasharray="7 6"/>
+          <text x="712" y="147" font-size="16" fill="#a97e2a" text-anchor="end">0.5 mA · 开始有感觉</text>
+          <path d="M90 110 H720" fill="none" stroke="var(--live)" stroke-width="1.8" stroke-dasharray="7 6"/>
+          <text x="712" y="102" font-size="16" fill="var(--live)" text-anchor="end">10 mA · 难以摆脱</text>
+
+          <!-- 曲线 -->
+          <line x1="90" y1="209.4" x2="699.8" y2="40" stroke="var(--flux)" stroke-width="3.4" stroke-linecap="round"/>
+          <circle id="leakDot" cx="178" cy="184.9" r="8" fill="#fff" stroke="var(--flux)" stroke-width="3.4"/>
+          <path id="leakGuide" d="M178 185 V250" stroke="var(--flux)" stroke-width="1.6" stroke-dasharray="4 5" opacity=".5"/>
+
+          <text x="404" y="310" font-size="16" fill="var(--muted)" text-anchor="middle">频率（对数刻度）· 假设绕组间寄生电容约 1 nF、电压 230 V</text>
+        </svg>
+
+        <div class="slider-box">
+          <input type="range" id="freqSlider" min="0" max="1000" value="140" step="1" aria-label="频率">
+        </div>
+        <div class="readout">
+          <span class="big" id="leakValue">72 µA</span>
+          <span class="at" id="freqLabel">在 50 Hz 时</span>
+          <span class="chip" id="leakVerdict">基本感觉不到</span>
+        </div>
+      </div>
+      <figcaption>
+        把滑块往右拖。50 Hz 时漏过去的电流只有几十微安，远低于人体的感知阈值 —— 隔离是真的有效。
+        但频率一上去，同一条"门缝"就变成了通途。
+        <b>所以隔离能力是有频率上限的</b>，这也是高频电源不能只靠一只变压器就宣称"隔离"的原因。
+      </figcaption>
+    </figure>
+
+    <div class="body">
+      <p>除了频率，还有几件事必须先知道：</p>
+    </div>
+
+    <div class="cards c2">
+      <div class="card">
+        <h4>它不限制电流</h4>
+        <p>
+          隔离变压器断开的是"路"，不是"能量"。一台 1 kVA 的隔离变压器，短路时照样能吐出几十安培，
+          电到人也一样会死。过流保护、熔断器，一样都不能少。
+        </p>
+      </div>
+      <div class="card">
+        <h4>绝缘是会坏的</h4>
+        <p>
+          它能隔多高电压，取决于绕组之间的绝缘厚度、材料、爬电距离和工艺。
+          长期过热、受潮、积灰、过电压冲击都会让这层绝缘退化，直到某一天击穿 —— 那一刻，隔离就不存在了。
+        </p>
+      </div>
+      <div class="card">
+        <h4>"浮空"本身也是隐患</h4>
+        <p>
+          二次侧不接地，意味着<b>第一次接地故障不会跳闸，也没人会发现</b>。等第二次故障发生，两条线就都带上了电位，
+          危险反而更大。所以医疗场所的隔离系统必须配绝缘监测仪，实时盯着绝缘电阻。
+        </p>
+      </div>
+      <div class="card">
+        <h4>接法比器件更重要</h4>
+        <p>
+          如果二次侧的任何一根线又被接回了大地（比如设备的机壳接地、或者你顺手接了根地线），
+          隔离就被你自己拆掉了。变压器只能保证它内部不连，管不了外面怎么接。
+        </p>
+      </div>
+    </div>
+
+    <div class="note">
+      <h4>那高频噪声怎么办？</h4>
+      <p>
+        不是假装它不存在。常见做法是在一次、二次绕组之间加一层<b>静电屏蔽层</b>（也叫法拉第屏蔽），
+        把容性电流就地引到机壳地，不让它进到二次侧；或者用安规 Y 电容给共模电流一条<em>受控的、限流的安全旁路</em>。
+      </p>
+      <p>这两件事恰恰说明：隔离从来不是"绝对断开"，而是"把不该有的路，换成一条被设计过、被限制过的路"。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 06 ============ -->
+<section id="s6">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">06</span>
+      <h2>五个常见的误解</h2>
+    </div>
+
+    <dl class="myths">
+      <div class="myth">
+        <dt>接了隔离变压器就可以随便摸</dt>
+        <dd>它只断开了"对地"这条路。同时碰到输出的两根线，220 V 照样完整地加在你身上 —— 上面那颗按钮演的就是这件事。</dd>
+      </div>
+      <div class="myth">
+        <dt>隔离变压器能省电 / 提高功率因数</dt>
+        <dd>完全不能。它自己还要吃掉一点损耗（发热），效率通常在 90%～98%。省电是另一套东西的事。</dd>
+      </div>
+      <div class="myth">
+        <dt>1:1 就是没变压，装了等于没装</dt>
+        <dd>电压确实没变，但电气连接确实断了。它卖掉的是"变压"功能，留下的是"隔离"功能。</dd>
+      </div>
+      <div class="myth">
+        <dt>隔离 = 屏蔽</dt>
+        <dd>两件不同的事。隔离是切断导体通路，屏蔽是挡住电场/磁场的辐射。好一点的隔离变压器会两者都做，但它们不是一回事。</dd>
+      </div>
+      <div class="myth">
+        <dt>有了隔离变压器就不用漏电保护器</dt>
+        <dd>功能完全不同：漏电保护器负责"发现故障并切断"，隔离变压器负责"让故障不容易发生"。前者不能替代后者，反过来也一样。</dd>
+      </div>
+    </dl>
+
+    <div class="note safe">
+      <h4>想自己验证？一支万用表就够</h4>
+      <p>
+        交流电压档，一根表笔碰二次侧的任一根输出线，另一根表笔碰真正的大地（比如接地良好的金属水管或接地端子）。
+        读数应该接近于零，或者只有几伏的"虚电压"。
+      </p>
+      <p>同样去量墙上的插座：火线对大地，读数就是 220 V 左右。这一个对比，就把"隔离"讲完了。</p>
+      <p><b>注意：</b>只用仪表验证，不要用身体验证。测量时手指不要碰到表笔的金属部分。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 收尾 ============ -->
+<section class="outro" id="end">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">小结</span>
+      <h2>记住这三句就够了</h2>
+    </div>
+    <ol>
+      <li><b>电气隔离 = 两边没有导线。</b>隔离的是导电路径，不是能量；能量换个载体照样能过去。</li>
+      <li><b>变压器靠"磁"当这个载体。</b>电 → 磁 → 电，中间那一段没有任何电荷跨过去，所以它天然就是隔离的。</li>
+      <li><b>它断开的是"路"，不是"危险"。</b>不限制电流、有频率上限、绝缘会老化、接错线就白装 —— 该有的保护一样都不能少。</li>
+    </ol>
+
+    <div class="quote" style="margin-top:34px">
+      一句话版本：隔离变压器不是在电线中间修了一堵墙，<br>而是把电线换成了磁场。
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>延伸阅读与依据</p>
+    <ul>
+      <li><a href="https://en.wikipedia.org/wiki/Isolation_transformer" target="_blank" rel="noopener">Isolation transformer — Wikipedia</a>：结构、用途与安全隔离变压器的分类。</li>
+      <li><a href="https://en.wikipedia.org/wiki/Galvanic_isolation" target="_blank" rel="noopener">Galvanic isolation — Wikipedia</a>：隔离的定义，以及磁、光、电容三种实现方式。</li>
+      <li>IEC 61558 系列：电力变压器、电源装置与类似设备的安全标准，其中包含隔离变压器与安全隔离变压器的专门要求（如 61558-2-4、61558-2-5）。</li>
+      <li>IEC 60601-1：医用电气设备通用安全要求，涉及医疗场所 IT 系统、绝缘等级与患者漏电流限值。</li>
+    </ul>
+    <p style="margin-top:14px">
+      页面中的泄漏电流曲线按 I = 2πfCV 估算（C = 1 nF，V = 230 V），用来表达趋势；
+      真实数值随变压器结构、屏蔽方式与绕组工艺差别很大，不能直接当作设计依据。
+      人体电流阈值也只是量级参考，个体差异显著。
+    </p>
+  </div>
+</footer>
+
+</main>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ---------- 进度条 ---------- */
+  var bar = document.getElementById('bar');
+  function onScroll() {
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    var p = h > 0 ? (window.scrollY / h) * 100 : 0;
+    bar.style.width = Math.min(100, Math.max(0, p)) + '%';
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  onScroll();
+
+  /* ---------- 04 步骤器 ---------- */
+  (function () {
+    var root = document.getElementById('mech');
+    if (!root) return;
+    var btns = Array.prototype.slice.call(root.parentNode.querySelectorAll('[data-step-btn]'));
+    var descs = Array.prototype.slice.call(root.parentNode.querySelectorAll('[data-step-desc]'));
+    var groups = Array.prototype.slice.call(root.querySelectorAll('[data-hl]'));
+
+    function setStep(n) {
+      groups.forEach(function (g) {
+        g.classList.toggle('dim', g.getAttribute('data-hl') !== String(n));
+      });
+      btns.forEach(function (b) {
+        var on = b.getAttribute('data-step-btn') === String(n);
+        b.classList.toggle('on', on);
+        b.setAttribute('aria-selected', on ? 'true' : 'false');
+      });
+      descs.forEach(function (d) {
+        d.hidden = d.getAttribute('data-step-desc') !== String(n);
+      });
+    }
+    btns.forEach(function (b) {
+      b.addEventListener('click', function () {
+        setStep(b.getAttribute('data-step-btn'));
+      });
+    });
+    setStep('1');
+  })();
+
+  /* ---------- 02 再摸一根线 ---------- */
+  (function () {
+    var svg = document.getElementById('shockB');
+    var btn = document.getElementById('secondTouchBtn');
+    var tip = document.getElementById('secondTouchTip');
+    if (!svg || !btn) return;
+    var on = false;
+    var textOn = '火线 → 身体 → 零线，回路在人体内部闭合了：220 V 直接加在两只手之间。';
+    var textOff = '只碰一根线时，二次侧悬空，没有回到电源的路径。';
+    btn.addEventListener('click', function () {
+      on = !on;
+      svg.classList.toggle('show-second', on);
+      btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+      btn.textContent = on ? '把手收回来' : '再让另一只手碰到零线';
+      tip.textContent = on ? textOn : textOff;
+    });
+  })();
+
+  /* ---------- 05 泄漏电流 ---------- */
+  (function () {
+    var slider = document.getElementById('freqSlider');
+    var dot = document.getElementById('leakDot');
+    var guide = document.getElementById('leakGuide');
+    var valEl = document.getElementById('leakValue');
+    var fEl = document.getElementById('freqLabel');
+    var vEl = document.getElementById('leakVerdict');
+    if (!slider) return;
+
+    var C = 1e-9, V = 230;
+    var X0 = 90, X1 = 720, Y0 = 250, Y1 = 40;
+
+    function xOf(f) { return X0 + (Math.log10(f) - 1) / 5 * (X1 - X0); }
+    function yOf(i) { return Y0 - (Math.log10(i) + 6) / 6 * (Y0 - Y1); }
+
+    function fmtHz(f) {
+      if (f >= 1e6) return (f / 1e6).toFixed(f >= 9.5e5 ? 0 : 1) + ' MHz';
+      if (f >= 1e3) return (f / 1e3).toFixed(f >= 9.5e3 ? 0 : 1) + ' kHz';
+      return Math.round(f) + ' Hz';
+    }
+    function fmtA(i) {
+      if (i >= 1) return i.toFixed(2) + ' A';
+      if (i >= 1e-3) return (i * 1e3).toFixed(1) + ' mA';
+      if (i >= 1e-4) return (i * 1e3).toFixed(2) + ' mA';
+      return (i * 1e6).toFixed(0) + ' µA';
+    }
+
+    function update() {
+      var n = Number(slider.value) / 1000;
+      var f = Math.pow(10, 1 + n * 5);
+      var i = 2 * Math.PI * f * C * V;
+
+      var x = xOf(f);
+      var y = Math.max(Y1, Math.min(Y0, yOf(i)));
+
+      dot.setAttribute('cx', x.toFixed(1));
+      dot.setAttribute('cy', y.toFixed(1));
+      guide.setAttribute('d', 'M' + x.toFixed(1) + ' ' + y.toFixed(1) + ' V250');
+
+      valEl.textContent = fmtA(i);
+      fEl.textContent = '在 ' + fmtHz(f) + ' 时';
+
+      var cls = 'chip', txt;
+      if (i < 5e-4) { txt = '基本感觉不到'; }
+      else if (i < 5e-3) { cls = 'chip warn'; txt = '有麻感'; }
+      else if (i < 1e-2) { cls = 'chip warn'; txt = '难以摆脱'; }
+      else { cls = 'chip bad'; txt = '危险'; }
+      vEl.className = cls;
+      vEl.textContent = txt;
+    }
+
+    slider.addEventListener('input', update);
+    update();
+  })();
+})();
+</script>
+</body>
+</html>

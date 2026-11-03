@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>高频电源变压器的结构与工作原理 · 拆解 Pulse P666 系列</title>
+<meta name="description" content="用剖面图和动画解释开关电源里高频变压器的结构、磁耦合原理、反激与正激的区别，以及数据手册里每个参数到底在说什么。">
+<style>
+  :root{
+    --bg:#f0f3f6;
+    --paper:#ffffff;
+    --ink:#1a2c3d;
+    --ink2:#243646;
+    --muted:#677784;
+    --line:#dce3e7;
+    --copper:#c27343;
+    --copper-l:#e5c2aa;
+    --blue:#39796f;
+    --blue-l:#b9d2cb;
+    --olive:#39796f;
+    --core:#c8d0d6;
+    --core-d:#7a8b97;
+    --gold:#b98846;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font:400 17px/1.78 'Segoe UI','Microsoft YaHei','PingFang SC',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  svg{font-family:inherit;display:block;width:100%;height:auto}
+  main{overflow-x:hidden}
+
+  /* ---------- hero ---------- */
+  .hero{
+    max-width:1060px;margin:0 auto;padding:88px 28px 40px;
+    background:radial-gradient(1200px 380px at 12% -10%,#f0f3f6 0%,rgba(240,243,246,0) 70%);
+  }
+  .eyebrow{
+    font:600 12px/1 'Segoe UI','Microsoft YaHei','PingFang SC',sans-serif;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--copper);margin:0 0 22px;
+  }
+  h1{
+    font-size:clamp(30px,5.1vw,54px);line-height:1.16;letter-spacing:-.022em;
+    margin:0 0 24px;font-weight:700;
+  }
+  h1 .thin{color:var(--copper)}
+  .lede{font-size:clamp(16.5px,1.9vw,20px);line-height:1.75;color:var(--ink2);max-width:52ch;margin:0}
+  .lede b{color:var(--ink);font-weight:600}
+  .chips{list-style:none;display:flex;flex-wrap:wrap;gap:8px;padding:0;margin:34px 0 0}
+  .chips li{
+    background:var(--paper);border:1px solid var(--line);border-radius:999px;
+    padding:5px 14px;font-size:13px;color:var(--ink2);letter-spacing:.01em;
+  }
+
+  /* ---------- sections ---------- */
+  section{max-width:1060px;margin:0 auto;padding:64px 28px 8px;border-top:1px solid var(--line)}
+  section:first-of-type{border-top:none}
+  .sec-num{
+    font:600 12px/1 'Segoe UI','Microsoft YaHei','PingFang SC',sans-serif;
+    letter-spacing:.16em;color:var(--copper);margin:0 0 12px;text-transform:uppercase;
+  }
+  h2{font-size:clamp(21px,3vw,31px);line-height:1.3;letter-spacing:-.012em;margin:0 0 18px;font-weight:700}
+  h3{font-size:16px;margin:0 0 6px;font-weight:650;letter-spacing:-.005em}
+  p{max-width:64ch;color:var(--ink2);margin:0 0 16px}
+  p strong,p b{color:var(--ink);font-weight:600}
+  .kicker{font-size:15px;color:var(--muted);margin-top:-6px}
+
+  /* ---------- figures ---------- */
+  figure{
+    margin:30px 0 0;background:var(--paper);border:1px solid var(--line);
+    border-radius:18px;padding:16px 16px 10px;
+  }
+  figcaption{font-size:13px;line-height:1.6;color:var(--muted);margin:10px 2px 4px}
+  figcaption b{color:var(--ink2);font-weight:600}
+
+  /* ---------- flow ---------- */
+  .flow{list-style:none;display:grid;grid-template-columns:repeat(5,1fr);gap:10px;padding:0;margin:0}
+  .flow li{
+    background:var(--paper);border:1px solid var(--line);border-radius:14px;
+    padding:14px 14px 12px;display:flex;flex-direction:column;gap:8px;position:relative;
+  }
+  .flow li .n{
+    position:absolute;top:10px;right:12px;font:600 11px/1 ui-monospace,monospace;
+    color:var(--muted);letter-spacing:.06em;
+  }
+  .flow svg{width:26px;height:26px;flex:none;color:var(--copper)}
+  .flow b{font-size:14px;font-weight:650;line-height:1.35;display:block}
+  .flow small{font-size:12.5px;color:var(--muted);line-height:1.45;display:block}
+  @media(max-width:780px){.flow{grid-template-columns:1fr 1fr}}
+
+  /* ---------- legend ---------- */
+  .legend{list-style:none;padding:0;margin:14px 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(238px,1fr));gap:8px}
+  .leg{
+    display:block;width:100%;text-align:left;background:#fff;border:1px solid var(--line);
+    border-radius:12px;padding:11px 13px;cursor:pointer;color:inherit;font:inherit;
+    transition:border-color .2s,box-shadow .2s,background .2s;
+  }
+  .leg:hover{border-color:#b7c7cd}
+  .leg[aria-pressed="true"]{border-color:var(--copper);box-shadow:0 0 0 3px rgba(194,115,67,.10);background:#f6ebe2}
+  .leg .hd{display:flex;align-items:center;gap:8px;margin-bottom:3px}
+  .leg .idx{
+    flex:none;width:19px;height:19px;border-radius:50%;border:1px solid var(--ink);
+    display:grid;place-items:center;font-size:11px;font-weight:600;line-height:1;
+  }
+  .leg[aria-pressed="true"] .idx{background:var(--copper);border-color:var(--copper);color:#fff}
+  .leg .nm{font-size:14px;font-weight:650}
+  .leg p{font-size:13px;line-height:1.6;color:var(--muted);margin:0;max-width:none}
+  .tag{
+    display:inline-block;font-size:10.5px;letter-spacing:.05em;color:var(--muted);
+    border:1px solid var(--line);border-radius:4px;padding:0 5px;margin-left:auto;flex:none;
+    font-family:inherit;
+  }
+
+  /* svg highlight */
+  [data-part]{transition:opacity .25s ease,filter .25s ease}
+  [data-part].dim{opacity:.22}
+  [data-part].hot{filter:drop-shadow(0 0 6px rgba(194,115,67,.55)) saturate(1.1)}
+  .callout{stroke:#95a6b0;stroke-width:1;stroke-dasharray:3 3;fill:none}
+  .dot{fill:var(--copper)}
+  .badge circle{fill:var(--paper);stroke:var(--ink);stroke-width:1.2}
+  .badge text{font-size:11.5px;font-weight:600;fill:var(--ink);text-anchor:middle;dominant-baseline:central}
+  .lbl{font-size:13px;fill:var(--ink2)}
+
+  /* ---------- player ---------- */
+  .player{margin-top:6px}
+  .controls{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:2px 0 12px}
+  .btn{
+    font:inherit;font-size:13.5px;padding:7px 14px;border-radius:999px;cursor:pointer;
+    border:1px solid var(--line);background:#fff;color:var(--ink2);
+    transition:border-color .2s,color .2s,background .2s;
+  }
+  .btn:hover{border-color:var(--copper);color:var(--copper)}
+  .pill{
+    font:inherit;font-size:13px;padding:7px 14px;border-radius:999px;cursor:pointer;
+    border:1px solid var(--line);background:#fff;color:var(--muted);
+    display:inline-flex;align-items:center;gap:7px;transition:all .2s;
+  }
+  .pill i{width:7px;height:7px;border-radius:50%;background:#c8d0d6;flex:none}
+  .pill[aria-pressed="true"]{border-color:var(--ink);color:var(--ink);background:#ffffff}
+  .pill[aria-pressed="true"] i{background:var(--copper)}
+  .status{
+    font-size:14.5px;line-height:1.7;color:var(--ink2);margin:0;padding:12px 15px;
+    border-left:2px solid var(--copper);background:#f6ebe2;border-radius:0 10px 10px 0;
+    max-width:none;min-height:76px;
+  }
+  .status b{color:var(--ink)}
+  #flyback .ph{opacity:0;transition:opacity .35s ease}
+  #flyback.on .ph-on{opacity:1}
+  #flyback.off .ph-off{opacity:1}
+  #flyback .pri-coil{stroke:#7a8b97;stroke-width:2.6;fill:none;transition:stroke .3s}
+  #flyback.on .pri-coil{stroke:var(--copper)}
+  #flyback .sec-coil{stroke:#7a8b97;stroke-width:2.6;fill:none;transition:stroke .3s}
+  #flyback.off .sec-coil{stroke:var(--blue)}
+  #flyback .flux{stroke:#95a6b0;opacity:.45;transition:stroke .3s,opacity .3s}
+  #flyback.on .flux{stroke:var(--copper);opacity:1}
+  #flyback.off .flux{stroke:var(--blue);opacity:.45}
+  .flowline{stroke-dasharray:9 9;animation:dashmove .75s linear infinite}
+  @keyframes dashmove{to{stroke-dashoffset:-18}}
+
+  /* ---------- table ---------- */
+  .table-wrap{overflow-x:auto;margin-top:24px;border:1px solid var(--line);border-radius:14px;background:var(--paper)}
+  table{border-collapse:collapse;width:100%;min-width:660px;font-size:14.5px}
+  th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+  thead th{
+    font-size:11.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);
+    font-weight:600;background:#e8edf0;white-space:nowrap;
+  }
+  tbody tr:last-child td{border-bottom:none}
+  td.v{font-family:inherit;font-variant-numeric:tabular-nums;font-size:13px;color:var(--ink);white-space:nowrap}
+  td.note{color:var(--muted);font-size:13.5px;min-width:220px}
+
+  /* ---------- cards ---------- */
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(232px,1fr));gap:12px;margin-top:26px}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+  .card h3{font-size:14.5px}
+  .card p{font-size:13.8px;line-height:1.68;margin:0;max-width:none}
+
+  .formula{
+    background:#e8edf0;border:1px solid var(--line);border-radius:12px;padding:14px 18px;
+    font-family:inherit;font-variant-numeric:tabular-nums;font-size:14px;
+    line-height:2;color:var(--ink);overflow-x:auto;margin:18px 0 0;
+  }
+  .formula span{color:var(--muted)}
+
+  .myths{list-style:none;padding:0;margin:26px 0 0;display:grid;gap:10px}
+  .myths li{display:flex;gap:13px;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+  .myths .x{
+    flex:none;width:22px;height:22px;border-radius:50%;background:#f6ebe2;color:#a95838;
+    display:grid;place-items:center;font-size:12px;font-weight:700;margin-top:2px;
+  }
+  .myths .t{font-size:14px;color:var(--ink2);line-height:1.7;max-width:70ch}
+  .myths .t b{color:var(--ink)}
+
+  .recap{list-style:none;padding:0;margin:26px 0 0;counter-reset:r}
+  .recap li{
+    counter-increment:r;position:relative;padding:0 0 0 44px;margin-bottom:20px;
+    font-size:16px;line-height:1.72;color:var(--ink2);max-width:60ch;
+  }
+  .recap li::before{
+    content:counter(r);position:absolute;left:0;top:2px;width:26px;height:26px;border-radius:50%;
+    background:var(--copper);color:#fff;display:grid;place-items:center;font-size:12.5px;font-weight:600;
+  }
+  .recap b{color:var(--ink);font-weight:650}
+
+  footer{max-width:1060px;margin:56px auto 0;padding:28px 28px 80px;border-top:1px solid var(--line)}
+  footer p{font-size:13px;line-height:1.8;color:var(--muted);max-width:78ch}
+  footer a{color:var(--copper);text-decoration:none;border-bottom:1px solid rgba(194,115,67,.3)}
+  footer a:hover{border-bottom-color:var(--copper)}
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+    #flyback .ph{transition:none}
+  }
+  /* Reuse this exact player in the chapter's fixed-size canvas. */
+  html[data-embed="flyback"],html[data-embed="flyback"] body{width:100%;height:100%;overflow:hidden;background:var(--paper)}
+  html[data-embed="flyback"] main{height:100%}
+  html[data-embed="flyback"] main > :not(#working-principle),
+  html[data-embed="flyback"] #working-principle > :not(.player){display:none}
+  html[data-embed="flyback"] #working-principle{max-width:none;height:100%;padding:0;border:0}
+  html[data-embed="flyback"] .player{display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:4px;height:100%;margin:0;padding:8px;border-radius:10px}
+  html[data-embed="flyback"] .controls{gap:6px;margin:0}
+  html[data-embed="flyback"] .controls button{padding:4px 10px;font-size:14px;line-height:1.4}
+  html[data-embed="flyback"] #flyback{width:100%;height:100%;min-height:0}
+  html[data-embed="flyback"] #flyback text{font-size:22px}
+  html[data-embed="flyback"] .status{min-height:0;padding:6px 10px;font-size:14px;line-height:1.5}
+  html[data-embed="flyback"] .player figcaption{display:none}
+  button:focus-visible,a:focus-visible{outline:3px solid #b96632;outline-offset:3px}
+</style>
+<script>
+  if (new URLSearchParams(window.location.search).get('embed') === 'flyback') {
+    document.documentElement.dataset.embed = 'flyback';
+  }
+</script>
+</head>
+<body>
+<svg aria-hidden="true" focusable="false" width="0" height="0" style="position:absolute">
+  <defs>
+    <pattern id="turns" width="10" height="7" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="6.4" x2="10" y2="6.4" stroke="rgba(255,255,255,.42)" stroke-width="1.5"/>
+    </pattern>
+    <pattern id="lam" width="9" height="9" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="8.4" x2="9" y2="8.4" stroke="rgba(0,0,0,.09)" stroke-width="1"/>
+    </pattern>
+    <linearGradient id="coreGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#dce3e7"/>
+      <stop offset=".55" stop-color="#c8d0d6"/>
+      <stop offset="1" stop-color="#afbec7"/>
+    </linearGradient>
+    <marker id="arw" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto">
+      <path d="M0,1 L9,5 L0,9 Z" fill="#b98846"/>
+    </marker>
+  </defs>
+</svg>
+<main>
+
+<header class="hero">
+  <p class="eyebrow">数据手册拆解 · Pulse Electronics P666.E (07/19)</p>
+  <h1>一个 29×22 毫米的方块，<br>怎么把 48 V 变成 5 V？</h1>
+  <p class="lede">你给的这份 PDF，是 Pulse 的<b>高频绕线变压器</b>手册。它不是插在墙上那种铁疙瘩，而是开关电源里负责“变压 + 隔离”的那颗心脏。下面从结构讲到原理，再把手册上每个数字翻译成人话。</p>
+  <ul class="chips">
+    <li>12 脚贴片</li>
+    <li>最高 95 W</li>
+    <li>开关频率 150–550 kHz</li>
+    <li>隔离 1500 Vrms</li>
+    <li>−40 ~ +125 °C</li>
+  </ul>
+</header>
+
+<section>
+  <p class="sec-num">01 — 先对齐概念</p>
+  <h2>它和你脑子里那种“电源变压器”不是一回事</h2>
+  <p>手册第一页写得很直白：<b>High Frequency Wire Wound Transformers</b>，功率最高 95 W，高度不超过 11.4 mm，拓扑是 Forward（正激）和 Flyback（反激）。这些词都在说同一件事——它住在<b>开关电源</b>里，磁芯里跑的是每秒几十万次翻转的方波（手册各型号标注 150–550 kHz，多数是 250 kHz），不是 50 Hz 的市电正弦波。</p>
+  <p>这一点决定了它为什么能这么小。变压器的磁芯截面，大致和“每伏电压需要多少匝”成正比，而后者和频率成反比：<b>频率越高，传递同样功率所需的磁芯就越小</b>。从 50 Hz 到 250 kHz，差 5000 倍，磁芯就能从一块砖缩到一枚邮票。</p>
+
+  <figure>
+    <svg viewBox="0 0 820 300" role="img" aria-label="左侧为 50 赫兹工频变压器的示意轮廓，体积大；右侧为 250 千赫兹高频贴片变压器，尺寸 29.2 乘 21.8 乘 11.4 毫米，体积小得多。两者频率相差约 5000 倍。">
+      <!-- 左：工频 -->
+      <g>
+        <path d="M82,42 H292 V246 H82 Z M116,76 H258 V212 H116 Z" fill="#dce3e7" fill-rule="evenodd" stroke="#7a8b97" stroke-width="1.4"/>
+        <path d="M82,42 H292 V246 H82 Z M116,76 H258 V212 H116 Z" fill="url(#lam)" fill-rule="evenodd"/>
+        <rect x="132" y="92" width="44" height="104" rx="3" fill="#c27343" opacity=".85"/>
+        <rect x="192" y="92" width="44" height="104" rx="3" fill="#39796f" opacity=".8"/>
+        <text x="187" y="270" text-anchor="middle" class="lbl" font-size="13">50 Hz · 工频变压器</text>
+        <text x="187" y="290" text-anchor="middle" font-size="11.5" fill="#677784">硅钢片叠成的铁芯，体积是右图的数十倍</text>
+      </g>
+      <!-- 中：对比 -->
+      <g>
+        <text x="404" y="128" text-anchor="middle" font-family="ui-monospace,monospace" font-size="12" fill="#c27343">频率 5000×</text>
+        <line x1="356" y1="150" x2="452" y2="150" stroke="#b7c7cd" stroke-width="1" stroke-dasharray="4 4"/>
+        <text x="404" y="174" text-anchor="middle" font-size="11" fill="#677784">体积 ↓ 数十倍</text>
+      </g>
+      <!-- 右：高频 -->
+      <g>
+        <rect x="528" y="96" width="148" height="96" rx="7" fill="#e8edf0" stroke="#7a8b97" stroke-width="1.4"/>
+        <rect x="542" y="110" width="120" height="68" rx="4" fill="#e8edf0" stroke="#c8d0d6" stroke-width="1"/>
+        <g fill="#b7c7cd">
+          <rect x="518" y="110" width="10" height="8" rx="1"/><rect x="518" y="130" width="10" height="8" rx="1"/>
+          <rect x="518" y="150" width="10" height="8" rx="1"/><rect x="518" y="170" width="10" height="8" rx="1"/>
+          <rect x="676" y="110" width="10" height="8" rx="1"/><rect x="676" y="130" width="10" height="8" rx="1"/>
+          <rect x="676" y="150" width="10" height="8" rx="1"/><rect x="676" y="170" width="10" height="8" rx="1"/>
+        </g>
+        <text x="602" y="152" text-anchor="middle" font-size="14" font-weight="600" fill="#7a8b97">P666</text>
+        <line x1="602" y1="192" x2="602" y2="208" stroke="#b7c7cd" stroke-width="1"/>
+        <line x1="528" y1="208" x2="676" y2="208" stroke="#b7c7cd" stroke-width="1"/>
+        <line x1="528" y1="204" x2="528" y2="212" stroke="#b7c7cd" stroke-width="1"/>
+        <line x1="676" y1="204" x2="676" y2="212" stroke="#b7c7cd" stroke-width="1"/>
+        <text x="602" y="226" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10.5" fill="#677784">29.2 mm</text>
+        <text x="602" y="270" text-anchor="middle" class="lbl" font-size="13">250 kHz · 典型值</text>
+        <text x="602" y="290" text-anchor="middle" font-size="11.5" fill="#677784">29.2 × 21.8 × 11.4 mm</text>
+      </g>
+    </svg>
+    <figcaption><b>定性对比，两个外形都没有按真实比例绘制。</b>左侧工频变压器是便于理解的示意轮廓，不来自本手册；右侧尺寸取自手册 Mechanical 页（.860 × 1.150 × .450 英寸）。</figcaption>
+  </figure>
+</section>
+
+<section>
+  <p class="sec-num" id="power-chain">02 — 它在电路里干什么</p>
+  <h2>一条固定的流水线：剁碎 → 过桥 → 拼回</h2>
+  <p>变压器本身不会“发电”，它只做两件事：<b>按匝数比换电压</b>，以及<b>把输入和输出在电气上彻底断开</b>。但这两件事都有个前提——磁通必须一直在变。</p>
+  <p>直流不变，磁通就不变，次级什么都感应不出来。所以前面必须有个开关管，把直流剁成方波；后面必须有个整流和电容，把方波拼回直流。整条链路是这样的：</p>
+
+  <ol class="flow">
+    <li>
+      <span class="n">01</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="7" width="18" height="10" rx="2"/><path d="M12 7v10M7 10v4"/></svg>
+      <b>48 V 直流</b><small>从系统母线进来</small>
+    </li>
+    <li>
+      <span class="n">02</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 17V8h4v9h4V8h4v9h4V8h4"/></svg>
+      <b>开关管切碎</b><small>高频方波</small>
+    </li>
+    <li>
+      <span class="n">03</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3v18" stroke-dasharray="3 2.5"/><path d="M2.5 12h15"/><path d="M17.5 8.5L21 12l-3.5 3.5"/></svg>
+      <b>磁芯过桥</b><small>换电压 + 隔离</small>
+    </li>
+    <li>
+      <span class="n">04</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 12h5M8 7l7 10M15 12h3"/><path d="M18 8v8"/><path d="M21 8v8"/></svg>
+      <b>整流 + 电容</b><small>方波变回平滑直流</small>
+    </li>
+    <li>
+      <span class="n">05</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 12h14M13 7l5 5-5 5"/></svg>
+      <b>5 V / 9 A</b><small>送到负载</small>
+    </li>
+  </ol>
+</section>
+
+<section>
+  <p class="sec-num">03 — 结构</p>
+  <h2>拆开来看：五层东西套在一根磁柱上</h2>
+  <p>手册没有画剖面图，只给了外廓尺寸和 12 个引脚。下面这张剖面是按这类 12 脚贴片高频变压器的通用做法画的，<b>结构属于合理推断</b>（凡手册没写的，我都标了出来）；引脚编号、绕组分组、电气数字则全部来自手册。</p>
+  <p class="kicker">点下面的条目，可以高亮图上对应的那一层。</p>
+
+  <figure>
+    <svg viewBox="0 0 820 530" role="img" aria-label="高频变压器剖面结构示意图：两半 E 形磁芯扣合，中间磁柱上套着骨架，骨架外依次是初级绕组、绝缘胶带、辅助绕组、绝缘胶带、次级绕组；中间磁柱上有一道气隙。">
+      <!-- 磁芯 -->
+      <g data-part="core">
+        <path d="M180,60 H620 V480 H180 Z M224,104 H576 V436 H224 Z" fill="url(#coreGrad)" fill-rule="evenodd" stroke="#7a8b97" stroke-width="1.6"/>
+        <rect x="380" y="104" width="40" height="166" fill="url(#coreGrad)" stroke="#7a8b97" stroke-width="1.6"/>
+        <rect x="380" y="286" width="40" height="150" fill="url(#coreGrad)" stroke="#7a8b97" stroke-width="1.6"/>
+      </g>
+
+      <!-- 对合面 -->
+      <line x1="182" y1="278" x2="222" y2="278" stroke="#7a8b97" stroke-width="1.6" stroke-dasharray="4 3"/>
+      <line x1="578" y1="278" x2="618" y2="278" stroke="#7a8b97" stroke-width="1.6" stroke-dasharray="4 3"/>
+
+      <!-- 气隙 -->
+      <g data-part="gap">
+        <rect x="380" y="270" width="40" height="16" fill="#f6ebe2" stroke="#b98846" stroke-width="1.4" stroke-dasharray="3 2"/>
+      </g>
+
+      <!-- 骨架 -->
+      <g data-part="bobbin">
+        <rect x="244" y="104" width="312" height="16" fill="#e8edf0" stroke="#95a6b0" stroke-width="1.2"/>
+        <rect x="244" y="420" width="312" height="16" fill="#e8edf0" stroke="#95a6b0" stroke-width="1.2"/>
+        <rect x="368" y="120" width="12" height="300" fill="#e8edf0" stroke="#95a6b0" stroke-width="1.2"/>
+        <rect x="420" y="120" width="12" height="300" fill="#e8edf0" stroke="#95a6b0" stroke-width="1.2"/>
+      </g>
+
+      <!-- 绕组 -->
+      <g data-part="secondary">
+        <rect x="248" y="124" width="40" height="292" fill="#39796f"/>
+        <rect x="248" y="124" width="40" height="292" fill="url(#turns)"/>
+        <rect x="512" y="124" width="40" height="292" fill="#39796f"/>
+        <rect x="512" y="124" width="40" height="292" fill="url(#turns)"/>
+      </g>
+      <g data-part="aux">
+        <rect x="302" y="124" width="12" height="292" fill="#39796f"/>
+        <rect x="486" y="124" width="12" height="292" fill="#39796f"/>
+      </g>
+      <g data-part="tape">
+        <rect x="288" y="124" width="14" height="292" fill="#f6ebe2" stroke="#b98846" stroke-width=".8" stroke-dasharray="3 2"/>
+        <rect x="314" y="124" width="14" height="292" fill="#f6ebe2" stroke="#b98846" stroke-width=".8" stroke-dasharray="3 2"/>
+        <rect x="472" y="124" width="14" height="292" fill="#f6ebe2" stroke="#b98846" stroke-width=".8" stroke-dasharray="3 2"/>
+        <rect x="498" y="124" width="14" height="292" fill="#f6ebe2" stroke="#b98846" stroke-width=".8" stroke-dasharray="3 2"/>
+      </g>
+      <g data-part="primary">
+        <rect x="328" y="124" width="40" height="292" fill="#c27343"/>
+        <rect x="328" y="124" width="40" height="292" fill="url(#turns)"/>
+        <rect x="432" y="124" width="40" height="292" fill="#c27343"/>
+        <rect x="432" y="124" width="40" height="292" fill="url(#turns)"/>
+      </g>
+
+      <!-- 引出线 -->
+      <g stroke="#95a6b0" stroke-width="1" opacity=".9">
+        <line x1="152" y1="64" x2="192" y2="64"/>
+        <line x1="152" y1="112" x2="240" y2="112"/>
+        <line x1="152" y1="180" x2="348" y2="180"/>
+        <line x1="152" y1="236" x2="321" y2="236"/>
+        <line x1="152" y1="300" x2="308" y2="300"/>
+        <line x1="152" y1="370" x2="268" y2="370"/>
+      </g>
+      <line x1="664" y1="278" x2="426" y2="278" stroke="#b98846" stroke-width="1.2" marker-end="url(#arw)"/>
+      <g class="dot">
+        <circle cx="192" cy="64" r="2.6"/><circle cx="240" cy="112" r="2.6"/>
+        <circle cx="348" cy="180" r="2.6"/><circle cx="321" cy="236" r="2.6"/>
+        <circle cx="308" cy="300" r="2.6"/><circle cx="268" cy="370" r="2.6"/>
+        <circle cx="424" cy="278" r="2.6"/>
+      </g>
+
+      <!-- 编号 -->
+      <g class="badge">
+        <circle cx="140" cy="64" r="12"/><text x="140" y="64">1</text>
+        <circle cx="140" cy="112" r="12"/><text x="140" y="112">2</text>
+        <circle cx="140" cy="180" r="12"/><text x="140" y="180">3</text>
+        <circle cx="140" cy="236" r="12"/><text x="140" y="236">4</text>
+        <circle cx="140" cy="300" r="12"/><text x="140" y="300">5</text>
+        <circle cx="140" cy="370" r="12"/><text x="140" y="370">6</text>
+        <circle cx="676" cy="278" r="12"/><text x="676" y="278">7</text>
+      </g>
+      <g class="lbl" text-anchor="end">
+        <text x="124" y="69">磁芯</text>
+        <text x="124" y="117">骨架</text>
+        <text x="124" y="185">初级绕组</text>
+        <text x="124" y="241">绝缘胶带</text>
+        <text x="124" y="305">辅助绕组</text>
+        <text x="124" y="375">次级绕组</text>
+      </g>
+      <text x="694" y="283" class="lbl">气隙</text>
+    </svg>
+
+    <ul class="legend">
+      <li><button class="leg" type="button" data-for="core" aria-pressed="false">
+        <span class="hd"><span class="idx">1</span><span class="nm">磁芯</span><span class="tag">材质未标注</span></span>
+        <p>两半 E 形铁氧体扣在一起，给磁通修一条低阻力通道。它是烧结陶瓷、整块实心，没有硅钢片那种叠片结构。手册没写牌号；几百 kHz 下通常是锰锌铁氧体。</p>
+      </button></li>
+      <li><button class="leg" type="button" data-for="bobbin" aria-pressed="false">
+        <span class="hd"><span class="idx">2</span><span class="nm">骨架</span><span class="tag">推断</span></span>
+        <p>塑料线圈架。它把绕组架在磁柱上、隔开磁芯、固定 12 个引脚的位置，同时是绝缘距离的主要贡献者。</p>
+      </button></li>
+      <li><button class="leg" type="button" data-for="primary" aria-pressed="false">
+        <span class="hd"><span class="idx">3</span><span class="nm">初级绕组</span><span class="tag">1,2-3,4</span></span>
+        <p>接开关管那一侧。手册写成 <b>(1,2-3,4)</b>，意思是四个引脚被中间抽头分成两段，可以串联或并联使用。</p>
+      </button></li>
+      <li><button class="leg" type="button" data-for="tape" aria-pressed="false">
+        <span class="hd"><span class="idx">4</span><span class="nm">绝缘胶带</span><span class="tag">推断</span></span>
+        <p>层间绝缘。手册标的 Hi-Pot 1500 Vrms，靠的就是这几层胶带加上骨架的爬电距离。</p>
+      </button></li>
+      <li><button class="leg" type="button" data-for="aux" aria-pressed="false">
+        <span class="hd"><span class="idx">5</span><span class="nm">辅助绕组</span><span class="tag">5-6</span></span>
+        <p>给控制芯片自己供电的小绕组，手册标注 12 V / 20 mA。电流小，所以 DCR 可以放宽到 240 mΩ。</p>
+      </button></li>
+      <li><button class="leg" type="button" data-for="secondary" aria-pressed="false">
+        <span class="hd"><span class="idx">6</span><span class="nm">次级绕组</span><span class="tag">7,8,9-10,11,12</span></span>
+        <p>输出侧。分成两组、每组三个引脚并联，是为了把大电流路径上的电阻压下去——所以它的 DCR 只有 27 mΩ。</p>
+      </button></li>
+      <li><button class="leg" type="button" data-for="gap" aria-pressed="false">
+        <span class="hd"><span class="idx">7</span><span class="nm">气隙</span><span class="tag">推断</span></span>
+        <p>中间磁柱上磨出来的一道缝。它决定了初级电感量和“能存多少能量”，是反激变压器的关键零件。</p>
+      </button></li>
+    </ul>
+    <figcaption><b>剖面为原理示意图，不按真实比例绘制。</b>手册只给出外廓 29.2 × 21.8 × 11.4 mm、12 脚贴片封装；磁芯形状、层叠顺序、气隙位置均属这类产品的通用做法，手册未明确。</figcaption>
+  </figure>
+</section>
+
+<section id="working-principle">
+  <p class="sec-num">04 — 工作原理</p>
+  <h2>一开一关，能量就搬过去了</h2>
+  <p>先把最关键的一句说完：<b>变压器只认“变化”。</b>电流不变，磁通就不变；磁通不变，次级就感应不出电压。所以整个过程必须被切成一段一段——开关管导通，磁芯被“充能”；开关管关断，能量被送到次级。</p>
+  <p>下面这颗是反激（Flyback）的工作过程，手册里 PA0751NL、PA1066NL 等都属于这一类。点按钮看两种状态，也可以自己切换。</p>
+
+  <figure class="player">
+    <div class="controls">
+      <button class="btn" type="button" id="playBtn">▶ 自动播放</button>
+      <button class="pill" type="button" data-phase="on" aria-pressed="true"><i></i>① 开关导通</button>
+      <button class="pill" type="button" data-phase="off" aria-pressed="false"><i></i>② 开关关断</button>
+    </div>
+
+    <svg id="flyback" class="on" viewBox="0 55 820 415" role="img" aria-label="反激变压器工作过程示意图：导通时电流流过初级绕组，磁芯储能，次级二极管反偏；关断时初级电流被切断，磁通衰减，次级二极管导通把能量送到输出。原、副边回线分开，无导线跨接。">
+      <!-- 底色轨道 -->
+      <g stroke="#c8d0d6" stroke-width="1.6" fill="none">
+        <path d="M70,120 H370 V130"/>
+        <path d="M370,338 V352"/>
+        <path d="M370,400 V430"/>
+        <!-- 原、副边各自回流，底线不跨越隔离间隙 -->
+        <path d="M70,430 H370"/>
+        <path d="M470,430 H760"/>
+        <path d="M470,130 V120 H545"/>
+        <path d="M470,338 V430"/>
+        <path d="M572,120 H700 V200"/>
+        <path d="M700,280 V430"/>
+        <path d="M600,120 V430"/>
+      </g>
+
+      <!-- 磁芯 -->
+      <rect x="400" y="106" width="40" height="248" rx="4" fill="url(#coreGrad)" stroke="#7a8b97" stroke-width="1.4"/>
+      <g class="flux" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M410,150 l10,10 l10,-10"/>
+        <path d="M410,206 l10,10 l10,-10"/>
+        <path d="M410,262 l10,10 l10,-10"/>
+      </g>
+
+      <!-- 线圈 -->
+      <path class="pri-coil" d="M370,130 A26,26 0 0 0 370,182 A26,26 0 0 0 370,234 A26,26 0 0 0 370,286 A26,26 0 0 0 370,338"/>
+      <path class="sec-coil" d="M470,130 A26,26 0 0 1 470,182 A26,26 0 0 1 470,234 A26,26 0 0 1 470,286 A26,26 0 0 1 470,338"/>
+
+      <!-- 同名端 -->
+      <circle cx="356" cy="126" r="3.4" fill="#1a2c3d"/>
+      <circle cx="484" cy="126" r="3.4" fill="#1a2c3d"/>
+
+      <!-- 开关 -->
+      <rect x="340" y="352" width="62" height="48" rx="6" fill="#fff" stroke="#7a8b97" stroke-width="1.4"/>
+      <text x="371" y="382" text-anchor="middle" font-size="12" fill="#243646">开关</text>
+      <path d="M340,376 H236" stroke="#c8d0d6" stroke-width="1.4"/>
+      <text x="232" y="380" text-anchor="end" font-size="11.5" fill="#677784">控制芯片驱动</text>
+
+      <!-- 二极管 -->
+      <path d="M545,107 L545,133 L570,120 Z" fill="#fff" stroke="#7a8b97" stroke-width="1.4"/>
+      <line x1="570" y1="107" x2="570" y2="133" stroke="#7a8b97" stroke-width="1.4"/>
+      <path d="M570,120 H600" stroke="#c8d0d6" stroke-width="1.6"/>
+
+      <!-- 电容 -->
+      <g stroke="#7a8b97" stroke-width="1.6">
+        <line x1="582" y1="300" x2="618" y2="300"/>
+        <line x1="582" y1="312" x2="618" y2="312"/>
+      </g>
+
+      <!-- 负载 -->
+      <rect x="686" y="200" width="28" height="80" rx="3" fill="#fff" stroke="#7a8b97" stroke-width="1.4"/>
+      <text x="724" y="246" font-size="11.5" fill="#677784">负载</text>
+
+      <!-- 标注 -->
+      <text x="330" y="96" text-anchor="middle" font-size="12" fill="#243646">初级绕组</text>
+      <text x="420" y="96" text-anchor="middle" font-size="12" fill="#243646">磁芯</text>
+      <text x="512" y="96" text-anchor="middle" font-size="12" fill="#243646">次级绕组</text>
+      <text x="70" y="110" font-size="12" fill="#677784">48 V +</text>
+      <text x="70" y="450" font-size="12" fill="#677784">输入 −</text>
+      <text x="470" y="450" font-size="12" fill="var(--muted)">输出 −</text>
+
+      <!-- 状态：导通 -->
+      <g class="ph ph-on">
+        <g stroke="#c27343" stroke-width="4.5" fill="none" stroke-linecap="round">
+          <path class="flowline" d="M70,120 H370 V130"/>
+          <path class="flowline" d="M370,400 V430 H70"/>
+        </g>
+        <path d="M370,338 V352" stroke="#c27343" stroke-width="4.5"/>
+        <text x="286" y="200" font-size="11.5" fill="#c27343" text-anchor="end">电流 ↑ 一路爬升</text>
+        <text x="578" y="76" font-size="11.5" fill="#95a6b0">二极管反偏 · 不导通</text>
+        <g stroke="#39796f" stroke-width="2" fill="none" stroke-dasharray="4 4" opacity=".75">
+          <path d="M600,120 H686 V200"/>
+          <path d="M700,280 V430 H600"/>
+        </g>
+        <text x="612" y="152" font-size="11" fill="#39796f">电容在供电</text>
+      </g>
+
+      <!-- 状态：关断 -->
+      <g class="ph ph-off">
+        <g stroke="#39796f" stroke-width="4.5" fill="none" stroke-linecap="round">
+          <path class="flowline" d="M470,130 V120 H545"/>
+          <path class="flowline" d="M572,120 H700 V200"/>
+          <path class="flowline" d="M700,280 V430 H470 V338"/>
+        </g>
+        <text x="286" y="200" font-size="11.5" fill="#95a6b0" text-anchor="end">初级电流 → 0</text>
+        <rect x="340" y="352" width="62" height="48" rx="6" fill="none" stroke="#c27343" stroke-width="1.4" stroke-dasharray="5 4"/>
+        <text x="336" y="345" text-anchor="end" font-size="11" fill="#c27343">开关断开</text>
+        <text x="578" y="76" font-size="11.5" fill="#39796f">二极管导通</text>
+      </g>
+    </svg>
+
+    <p class="status" id="statusText"><b>① 开关导通（几微秒）：</b>初级电流从 0 一路涨到峰值，能量被存进磁芯气隙的磁场里。此时次级上端是负电位，二极管反偏不导通，输出全靠电容顶着。</p>
+    <figcaption>虚线在流动 = 有电流；磁芯里的 V 形记号表示磁通方向——两种状态下方向相同，用颜色和浓淡区分它在增强还是减弱。原、副边回线彼此分离，无导线跨接。为看清路径，二极管与电容画成了简化符号。</figcaption>
+  </figure>
+
+  <p>这套“先存后送”的玩法，很像<b>用桶往楼上运水</b>：开关导通时，你在往桶里装水（磁芯储能）；开关关断时，你把桶递上去（能量送到次级）。这个类比在两件事上就不成立了——桶不会漏，而变压器的<b>漏感</b>会漏；桶的容量不会因为装太满而崩塌，而磁芯会<b>饱和</b>。</p>
+  <p>输出电压由两样东西共同决定，不只是匝数比：</p>
+  <div class="formula">
+    V<sub>out</sub> ≈ V<sub>in</sub> × (N<sub>s</sub> / N<sub>p</sub>) × D / (1 − D)<br>
+    <span>D = 占空比（开关导通时间占整个周期的比例）。手册原理图上标的 2.75 / 4.0 / 1.0，就是 N<sub>p</sub> : N<sub>s</sub>。</span>
+  </div>
+
+  <h3 style="margin-top:34px">手册里的两种拓扑，差在“能量什么时候过”</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>对比项</th><th>反激 Flyback</th><th>正激 Forward</th></tr></thead>
+      <tbody>
+        <tr><td>能量什么时候传给次级</td><td>开关<b>关断</b>时（先存后送）</td><td>开关<b>导通</b>时（边充边送）</td></tr>
+        <tr><td>磁芯的角色</td><td>储能的“桶”，靠气隙存磁场能量</td><td>只做耦合；还需要复位绕组把磁通清零，否则会饱和</td></tr>
+        <tr><td>输出端</td><td>二极管 + 电容</td><td>二极管 + <b>储能电感</b> + 电容</td></tr>
+        <tr><td>适合</td><td>中小功率、多路输出、成本敏感</td><td>中大功率、输出纹波要求低</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="kicker" style="margin-top:14px">PA0273NL、PA0769NL 标的是 FORWARD TRANSFORMER；PA0751NL、PA1066NL、PA1366NL 等标的是 FLYBACK TRANSFORMER——同一份手册，同一套外壳，里面绕法不同。</p>
+</section>
+
+<section>
+  <p class="sec-num">05 — 读手册</p>
+  <h2>这一排数字，其实都在回答同一个问题</h2>
+  <p>手册每页的表格长得很像，字段也就那么几个。把两颗典型的拿出来对照，其余的就都能读了：</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>手册字段</th><th>PA0273NL（正激）</th><th>PA0751NL（反激）</th><th>它在说什么</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Pri. Inductance</td><td class="v">307 µH ±25%</td><td class="v">110 µH ±10%</td><td class="note">初级绕组的电感量。决定励磁电流多大、反激时能存多少能量。</td></tr>
+        <tr><td>Lk. Inductance</td><td class="v">≤ 0.35 µH</td><td class="v">≤ 2 µH</td><td class="note">漏感——没耦合到次级的那一小部分磁通。关断时它会打电压尖峰。</td></tr>
+        <tr><td>DCR（初级）</td><td class="v">≤ 65 mΩ</td><td class="v">≤ 85 mΩ</td><td class="note">铜线电阻。电流一过就变成热，这是“铜损”。</td></tr>
+        <tr><td>DCR（次级）</td><td class="v">≤ 27 mΩ</td><td class="v">≤ 12 mΩ</td><td class="note">次级走大电流，所以要多脚并联把这个数压到最低。</td></tr>
+        <tr><td>DCR（辅助）</td><td class="v">≤ 240 mΩ</td><td class="v">≤ 300 mΩ</td><td class="note">辅助绕组只带 20 mA 量级，电阻大一点无所谓。</td></tr>
+        <tr><td>Hi-Pot</td><td class="v">1500 Vrms</td><td class="v">1500 Vrms</td><td class="note">初次级之间能扛住的耐压测试值——隔离能力的硬指标。</td></tr>
+        <tr><td>K1 Factor</td><td class="v">20.2</td><td class="v">1364.8</td><td class="note">把电流 / 伏秒换算成磁密的系数。两者量纲不同，所以差得很远。</td></tr>
+        <tr><td>工作温度</td><td class="v">−40 ~ +125 °C</td><td class="v">−40 ~ +125 °C</td><td class="note">指元件自身温度（环境 + 温升），不是环境温度。</td></tr>
+        <tr><td>功率 / 高度 / 占位</td><td class="v">95 W / 11.4 / 29.2×21.8</td><td class="v">同上</td><td class="note">整个系列的共同上限，单位 mm。</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="margin-top:34px">K1 系数：手册里最容易被跳过、也最要命的一行</h3>
+  <p>它只服务一个目的——让你在选型时确认<b>磁芯不会被喂饱</b>。手册给出的两条判据是：</p>
+  <div class="formula">
+    B<sub>pk</sub> = K1 × I<sub>pk</sub> &nbsp;&nbsp;<span>← 反激，电流驱动</span><br>
+    ΔB = K1 × Volt-µsec &nbsp;&nbsp;<span>← 正激，伏秒驱动</span><br>
+    <span>要求：B<sub>pk</sub> &lt; 2700 Gauss</span>
+  </div>
+  <p style="margin-top:18px">举个例子。PA0751NL 的 K1 是 <b>1364.8 G/A</b>：峰值电流跑到 1.5 A，B<sub>pk</sub> ≈ 2047 G，离 2700 G 还有余量；跑到 2 A，就是约 2730 G，<b>已经顶到墙了</b>。所以这颗变压器的电流天花板，大致就在 2 A 附近——这就是为什么它只能做十几瓦，而不是 95 W。</p>
+</section>
+
+<section>
+  <p class="sec-num">06 — 代价与边界</p>
+  <h2>省下来的体积，是从别处换来的</h2>
+  <p>没有免费的午餐。频率提高 5000 倍，磁芯小了，但账单换了个地方寄来：</p>
+
+  <div class="cards">
+    <div class="card">
+      <h3>铁损随频率涨</h3>
+      <p>手册给的估算式里，频率的指数是 1.63。频率翻一倍，铁损大约涨 3 倍。所以高频磁芯要用薄片、要用低损耗铁氧体。</p>
+    </div>
+    <div class="card">
+      <h3>漏感打尖峰</h3>
+      <p>0.35 µH 听着很小，但开关在几十纳秒内切断电流，v = L·di/dt 会瞬间冲得很高，通常得配 RC 或 RCD 吸收电路。</p>
+    </div>
+    <div class="card">
+      <h3>手册给的 DCR 都是 MAX</h3>
+      <p>不是典型值。做最坏情况设计、算发热时要用它；估算效率时用它会偏悲观。</p>
+    </div>
+    <div class="card">
+      <h3>饱和是一道硬墙</h3>
+      <p>B<sub>pk</sub> 一旦越过约 2700 G，磁芯失去导磁能力，初级电感塌掉，电流失控——反激变压器最常见的翻车方式。</p>
+    </div>
+    <div class="card">
+      <h3>Hi-Pot 是测试值</h3>
+      <p>1500 Vrms 是出厂耐压检验的电压，不是“可以长期工作在 1500 V”。工作电压要留足余量。</p>
+    </div>
+    <div class="card">
+      <h3>温升要自己算</h3>
+      <p>手册只说“元件温度（环境 + 温升）必须落在 −40 ~ +125 °C 内”。温升多少，取决于你的电流波形和散热。</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:38px">三个容易长歪的心智模型</h3>
+  <ul class="myths">
+    <li><span class="x">✕</span><span class="t"><b>“变压器能放大功率。”</b> 不能。它只换电压和电流的比例，输出功率永远小于输入——差的那部分是铜损和铁损，都变成了热。</span></li>
+    <li><span class="x">✕</span><span class="t"><b>“接上直流也能变压。”</b> 不能。磁通不变就没有感应电动势，次级一片安静。必须先被开关剁成变化的波形。</span></li>
+    <li><span class="x">✕</span><span class="t"><b>“输出电压 = 匝数比 × 输入电压。”</b> 反激还要乘一个 D/(1−D)。同一个变压器，改占空比就能改输出电压，这也是它能做稳压的原因。</span></li>
+  </ul>
+</section>
+
+<section>
+  <p class="sec-num">07 — 记住这些就够</p>
+  <h2>一句话版本</h2>
+  <ol class="recap">
+    <li><b>它是开关电源变压器，不是工频变压器。</b>几十万赫兹的方波，让磁芯可以缩到 29 × 22 × 11 mm。</li>
+    <li><b>结构就是“磁芯 + 骨架 + 三层绕组 + 绝缘”。</b>初级、辅助、次级依次套在中间磁柱上，中间那道气隙负责储能。</li>
+    <li><b>原理只有一句：电流变，磁通变，次级才有电压。</b>开关一开一关，能量就被搬过了隔离带。</li>
+    <li><b>读手册的顺序：</b>先看拓扑（正激还是反激）→ 再看匝比和输出 → 用 K1 验算会不会饱和 → 最后算 DCR 带来的热。</li>
+  </ol>
+</section>
+
+<footer>
+  <p>
+    <b>数据来源：</b>Pulse Electronics（a YAGEO company）数据手册 <i>High Frequency Wire Wound Transformers</i>，P666.E（07/19），经 Mouser 分发：
+    <a href="https://www.mouser.com/datasheet/3/508/1/P666.pdf">mouser.com/datasheet/3/508/1/P666.pdf</a>。<br>
+    <b>边界说明：</b>文中电气参数、引脚分组、尺寸、K1 系数与判据，均摘自该手册；磁芯材质、层叠顺序、骨架结构、气隙位置为代表此类产品的合理推断，手册未明确标注，图中已单独标出。左页的体积对比图是示意，不来自手册数据。
+  </p>
+</footer>
+
+</main>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ---------- 结构图：点条目高亮 ---------- */
+  var legs = Array.prototype.slice.call(document.querySelectorAll('.leg'));
+  var parts = Array.prototype.slice.call(document.querySelectorAll('[data-part]'));
+
+  function clearAll() {
+    parts.forEach(function (p) { p.classList.remove('hot', 'dim'); });
+    legs.forEach(function (l) {
+      l.classList.remove('on');
+      l.setAttribute('aria-pressed', 'false');
+    });
+  }
+
+  legs.forEach(function (leg) {
+    leg.addEventListener('click', function () {
+      var key = leg.getAttribute('data-for');
+      var wasOn = leg.getAttribute('aria-pressed') === 'true';
+      clearAll();
+      if (wasOn) { return; }
+      leg.setAttribute('aria-pressed', 'true');
+      parts.forEach(function (p) {
+        if (p.getAttribute('data-part') === key) {
+          p.classList.add('hot');
+        } else {
+          p.classList.add('dim');
+        }
+      });
+    });
+  });
+
+  /* ---------- 反激动画 ---------- */
+  var svg = document.getElementById('flyback');
+  var playBtn = document.getElementById('playBtn');
+  var status = document.getElementById('statusText');
+  var pills = Array.prototype.slice.call(document.querySelectorAll('.pill'));
+
+  var TEXT = {
+    on: '<b>① 开关导通（几微秒）：</b>初级电流从 0 一路涨到峰值，能量被存进磁芯气隙的磁场里。此时次级上端是负电位，二极管反偏不导通，输出全靠电容顶着。',
+    off: '<b>② 开关关断：</b>初级电流被强行切断，磁通开始塌陷。次级电压反号，二极管导通，磁场里存的能量被挤到输出电容和负载上。磁通方向没变，只是由强变弱。'
+  };
+
+  if (document.documentElement.dataset.embed === 'flyback') {
+    TEXT.on = '<b>① 导通储能：</b>初级电流增大，磁场储能；次级二极管反偏，电容向负载供电。';
+    TEXT.off = '<b>② 关断释能：</b>初级电流切断，次级二极管导通，磁场能量送往输出电容与负载。';
+  }
+
+  var timer = null;
+  var phase = 'on';
+  var remaining = 0;
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function setPhase(p) {
+    phase = p;
+    svg.classList.toggle('on', p === 'on');
+    svg.classList.toggle('off', p === 'off');
+    status.innerHTML = TEXT[p];
+    pills.forEach(function (b) {
+      var on = b.getAttribute('data-phase') === p;
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+  }
+
+  function stop() {
+    if (timer) { window.clearInterval(timer); timer = null; }
+    playBtn.textContent = '▶ 自动播放';
+  }
+
+  function start(times) {
+    if (timer) { return; }
+    remaining = typeof times === 'number' ? times : Infinity;
+    playBtn.textContent = '❙❙ 暂停';
+    timer = window.setInterval(function () {
+      setPhase(phase === 'on' ? 'off' : 'on');
+      remaining -= 1;
+      if (remaining <= 0) { stop(); }
+    }, 2200);
+  }
+
+  playBtn.addEventListener('click', function () {
+    if (timer) { stop(); } else { start(Infinity); }
+  });
+
+  pills.forEach(function (b) {
+    b.addEventListener('click', function () {
+      stop();
+      setPhase(b.getAttribute('data-phase'));
+    });
+  });
+
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) { stop(); }
+  });
+
+  if (document.documentElement.dataset.embed === 'flyback') {
+    ['keydown', 'touchstart', 'touchend', 'touchcancel'].forEach(function (type) {
+      document.addEventListener(type, function (event) {
+        if (event.defaultPrevented || window.parent === window) { return; }
+        if (event.target.closest('button') && (event.key === ' ' || type !== 'keydown')) { return; }
+        var target = window.parent.document.body;
+        var forwarded = type === 'keydown'
+          ? new KeyboardEvent(type, { key: event.key, altKey: event.altKey,
+              ctrlKey: event.ctrlKey, metaKey: event.metaKey, bubbles: true,
+              cancelable: true })
+          : new TouchEvent(type, { touches: event.touches,
+              changedTouches: event.changedTouches, bubbles: true });
+        if (!target.dispatchEvent(forwarded)) { event.preventDefault(); }
+      }, { passive: false });
+    });
+  }
+
+  setPhase('on');
+
+  if (!reduced && 'IntersectionObserver' in window) {
+    var seen = false;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting && !seen) {
+          seen = true;
+          start(4);
+          io.disconnect();
+        }
+      });
+    }, { threshold: 0.45 });
+    io.observe(svg);
+  }
+})();
+</script>
+</body>
+</html>

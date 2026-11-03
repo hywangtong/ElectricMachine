@@ -149,32 +149,32 @@ function renderAxes() {
   if (state.mode === 'four-quadrant') {
     // 四象限全貌：背景四个象限均轻微着色并标明象限名称与运行性质
     gridHtml += `
-      <rect x="${originX}" y="25" width="370" height="${originY - 25}" fill="#f2f9f4" opacity="0.38" />
-      <rect x="40" y="25" width="${originX - 40}" height="${originY - 25}" fill="#f2f7fc" opacity="0.38" />
-      <rect x="40" y="${originY}" width="${originX - 40}" height="200" fill="#fdf4f8" opacity="0.38" />
-      <rect x="${originX}" y="${originY}" width="370" height="200" fill="#fcf3f5" opacity="0.38" />
-      <text x="590" y="55" fill="#1b5e20" font-size="13" font-weight="700" opacity="0.8">第Ⅰ象限 · 电动区 (T>0, n>0)</text>
-      <text x="60" y="55" fill="#880e4f" font-size="13" font-weight="700" opacity="0.8">第Ⅱ象限 · 制动区 (T<0, n>0)</text>
-      <text x="60" y="415" fill="#4a154b" font-size="13" font-weight="700" opacity="0.8">第Ⅲ象限 · 电动区 (T<0, n<0)</text>
-      <text x="590" y="415" fill="#1b5e20" font-size="13" font-weight="700" opacity="0.8">第Ⅳ象限 · 制动区 (T>0, n<0)</text>
+      <rect x="${originX}" y="25" width="370" height="${originY - 25}" fill="#edf4ef" opacity="0.38" />
+      <rect x="40" y="25" width="${originX - 40}" height="${originY - 25}" fill="#edf3f6" opacity="0.38" />
+      <rect x="40" y="${originY}" width="${originX - 40}" height="200" fill="#f6eff2" opacity="0.38" />
+      <rect x="${originX}" y="${originY}" width="370" height="200" fill="#faf1e3" opacity="0.38" />
+      <text x="590" y="55" fill="#39796f" font-size="13" font-weight="700" opacity="0.8">第Ⅰ象限 · 电动区 (T>0, n>0)</text>
+      <text x="60" y="55" fill="#874758" font-size="13" font-weight="700" opacity="0.8">第Ⅱ象限 · 制动区 (T<0, n>0)</text>
+      <text x="60" y="415" fill="#745765" font-size="13" font-weight="700" opacity="0.8">第Ⅲ象限 · 电动区 (T<0, n<0)</text>
+      <text x="590" y="415" fill="#39796f" font-size="13" font-weight="700" opacity="0.8">第Ⅳ象限 · 制动区 (T>0, n<0)</text>
     `;
   } else if (!isBraking) {
     // 电动状态：高亮第Ⅰ象限（正向电动）与第Ⅲ象限（反向电动）
     gridHtml += `
-      <rect x="${originX}" y="25" width="370" height="${originY - 25}" fill="#f2f9f4" opacity="0.38" />
-      <rect x="40" y="${originY}" width="${originX - 40}" height="200" fill="#fdf4f8" opacity="0.38" />
-      <text x="160" y="70" fill="#8ca59e" font-size="14" font-weight="600" opacity="0.7">第Ⅱ象限 · 制动状态区</text>
-      <text x="600" y="380" fill="#8ca59e" font-size="14" font-weight="600" opacity="0.7">第Ⅳ象限 · 制动状态区</text>
+      <rect x="${originX}" y="25" width="370" height="${originY - 25}" fill="#edf4ef" opacity="0.38" />
+      <rect x="40" y="${originY}" width="${originX - 40}" height="200" fill="#f6eff2" opacity="0.38" />
+      <text x="160" y="70" fill="#778b83" font-size="14" font-weight="600" opacity="0.7">第Ⅱ象限 · 制动状态区</text>
+      <text x="600" y="380" fill="#778b83" font-size="14" font-weight="600" opacity="0.7">第Ⅳ象限 · 制动状态区</text>
     `;
   } else {
     // 制动状态：高亮第Ⅱ象限（减速停机制动）与第Ⅳ象限（位能下放制动）
     gridHtml += `
-      <rect x="40" y="25" width="${originX - 40}" height="${originY - 25}" fill="#f2f7fc" opacity="0.45" />
-      <rect x="${originX}" y="${originY}" width="370" height="200" fill="#fcf3f5" opacity="0.45" />
+      <rect x="40" y="25" width="${originX - 40}" height="${originY - 25}" fill="#edf3f6" opacity="0.45" />
+      <rect x="${originX}" y="${originY}" width="370" height="200" fill="#faf1e3" opacity="0.45" />
       <!-- 参照附图左上方醒目标题 -->
-      <text x="56" y="48" fill="#15325b" font-size="28" font-weight="900" font-family="'SimHei', 'Microsoft YaHei', sans-serif">二、制动状态</text>
-      <text x="600" y="70" fill="#8ca59e" font-size="14" font-weight="600" opacity="0.6">第Ⅰ象限 · 正向电动区</text>
-      <text x="160" y="380" fill="#8ca59e" font-size="14" font-weight="600" opacity="0.6">第Ⅲ象限 · 反向电动区</text>
+      <text x="56" y="48" fill="#173b3b" font-size="28" font-weight="900" font-family="'Segoe UI', 'Microsoft YaHei', sans-serif">二、制动状态</text>
+      <text x="600" y="70" fill="#778b83" font-size="14" font-weight="600" opacity="0.6">第Ⅰ象限 · 正向电动区</text>
+      <text x="160" y="380" fill="#778b83" font-size="14" font-weight="600" opacity="0.6">第Ⅲ象限 · 反向电动区</text>
     `;
   }
   el.gridGroup.innerHTML = gridHtml;
@@ -267,14 +267,14 @@ function renderLoadCharacteristicCurve() {
 
     let loadHtml = `
       <!-- 位能型恒转矩负载特性曲线路径 (垂直线 T = +TL) -->
-      <path class="curve-path load-curve-path" d="${pathD}" stroke="#0f766e" stroke-width="3.2" stroke-dasharray="6 3" stroke-linecap="round" fill="none" opacity="0.92" />
+      <path class="curve-path load-curve-path" d="${pathD}" stroke="#39796f" stroke-width="3.2" stroke-dasharray="6 3" stroke-linecap="round" fill="none" opacity="0.92" />
     `;
 
     if (showPos) {
       loadHtml += `
         <g transform="translate(${xPos.toFixed(1)}, ${yTop.toFixed(1)})">
-          <rect x="6" y="2" width="170" height="20" rx="3" fill="#ffffff" fill-opacity="0.9" stroke="#0f766e" stroke-width="1" />
-          <text class="curve-label load-curve-label" x="12" y="16" fill="#0f766e" font-size="12" font-weight="700">
+          <rect x="6" y="2" width="170" height="20" rx="3" fill="#ffffff" fill-opacity="0.9" stroke="#39796f" stroke-width="1" />
+          <text class="curve-label load-curve-label" x="12" y="16" fill="#39796f" font-size="12" font-weight="700">
             +T_L 位能型负载 (${absTl.toFixed(1)} N·m)
           </text>
         </g>
@@ -282,8 +282,8 @@ function renderLoadCharacteristicCurve() {
     } else if (showNeg) {
       loadHtml += `
         <g transform="translate(${xPos.toFixed(1)}, ${yBot.toFixed(1)})">
-          <rect x="6" y="-22" width="170" height="20" rx="3" fill="#ffffff" fill-opacity="0.9" stroke="#0f766e" stroke-width="1" />
-          <text class="curve-label load-curve-label" x="12" y="-8" fill="#0f766e" font-size="12" font-weight="700">
+          <rect x="6" y="-22" width="170" height="20" rx="3" fill="#ffffff" fill-opacity="0.9" stroke="#39796f" stroke-width="1" />
+          <text class="curve-label load-curve-label" x="12" y="-8" fill="#39796f" font-size="12" font-weight="700">
             +T_L 位能型负载 (${absTl.toFixed(1)} N·m)
           </text>
         </g>
@@ -317,15 +317,15 @@ function renderLoadCharacteristicCurve() {
 
   let loadHtml = `
     <!-- 反抗性恒转矩负载特性曲线路径 -->
-    <path class="curve-path load-curve-path" d="${pathD}" stroke="#0f766e" stroke-width="3.2" stroke-dasharray="6 3" stroke-linecap="round" fill="none" opacity="0.92" />
+    <path class="curve-path load-curve-path" d="${pathD}" stroke="#39796f" stroke-width="3.2" stroke-dasharray="6 3" stroke-linecap="round" fill="none" opacity="0.92" />
   `;
 
   // 曲线文字说明标签 (带半透明背景与描边防重叠)
   if (showPos) {
     loadHtml += `
       <g transform="translate(${xPos.toFixed(1)}, ${yTop.toFixed(1)})">
-        <rect x="6" y="2" width="170" height="20" rx="3" fill="#ffffff" fill-opacity="0.9" stroke="#0f766e" stroke-width="1" />
-        <text class="curve-label load-curve-label" x="12" y="16" fill="#0f766e" font-size="12" font-weight="700">
+        <rect x="6" y="2" width="170" height="20" rx="3" fill="#ffffff" fill-opacity="0.9" stroke="#39796f" stroke-width="1" />
+        <text class="curve-label load-curve-label" x="12" y="16" fill="#39796f" font-size="12" font-weight="700">
           +T_L 反抗性负载 (${absTl.toFixed(1)} N·m)
         </text>
       </g>
@@ -334,8 +334,8 @@ function renderLoadCharacteristicCurve() {
   if (showNeg) {
     loadHtml += `
       <g transform="translate(${xNeg.toFixed(1)}, ${yBot.toFixed(1)})">
-        <rect x="-176" y="-22" width="170" height="20" rx="3" fill="#ffffff" fill-opacity="0.9" stroke="#0f766e" stroke-width="1" />
-        <text class="curve-label load-curve-label" x="-170" y="-8" fill="#0f766e" font-size="12" font-weight="700">
+        <rect x="-176" y="-22" width="170" height="20" rx="3" fill="#ffffff" fill-opacity="0.9" stroke="#39796f" stroke-width="1" />
+        <text class="curve-label load-curve-label" x="-170" y="-8" fill="#39796f" font-size="12" font-weight="700">
           -T_L 反抗性负载 (-${absTl.toFixed(1)} N·m)
         </text>
       </g>
@@ -714,7 +714,7 @@ function renderFourQuadrantPoints() {
         <circle class="core" r="6" fill="${tabConfigs.natural.color}" />
       </g>
       <g transform="translate(${x3 - 128}, ${y3 + 20})">
-        <rect class="point-tooltip-bg" x="-4" y="-15" width="124" height="22" fill="#4a154b" />
+        <rect class="point-tooltip-bg" x="-4" y="-15" width="124" height="22" fill="#745765" />
         <text class="point-tooltip" x="3" y="0">A₃ (${ptRev.torque.toFixed(1)}, ${ptRev.speed.toFixed(0)}) 电动</text>
       </g>
     `;
@@ -728,7 +728,7 @@ function renderFourQuadrantPoints() {
     });
     const x2 = xCoord(ptQ2.torque);
     const y2 = yCoord(ptQ2.speed);
-    const q2Color = '#c2185b';
+    const q2Color = '#b2657d';
     pointsHtml += `
       <line class="grid-line" x1="${x2}" y1="${y2}" x2="${x2}" y2="${svgConfig.originY}" stroke="${q2Color}" stroke-dasharray="3 3" />
       <line class="grid-line" x1="${x2}" y1="${y2}" x2="${svgConfig.originX}" y2="${y2}" stroke="${q2Color}" stroke-dasharray="3 3" />
@@ -737,7 +737,7 @@ function renderFourQuadrantPoints() {
         <circle class="core" r="6" fill="${q2Color}" />
       </g>
       <g transform="translate(${x2 - 128}, ${y2 - 12})">
-        <rect class="point-tooltip-bg" x="-4" y="-15" width="124" height="22" fill="#880e4f" />
+        <rect class="point-tooltip-bg" x="-4" y="-15" width="124" height="22" fill="#874758" />
         <text class="point-tooltip" x="3" y="0">B₂ (${ptQ2.torque.toFixed(1)}, ${ptQ2.speed.toFixed(0)}) 制动</text>
       </g>
     `;
@@ -748,7 +748,7 @@ function renderFourQuadrantPoints() {
     });
     const x4 = xCoord(ptQ4.torque);
     const y4 = yCoord(ptQ4.speed);
-    const q4Color = '#1b5e20';
+    const q4Color = '#39796f';
     pointsHtml += `
       <line class="grid-line" x1="${x4}" y1="${y4}" x2="${x4}" y2="${svgConfig.originY}" stroke="${q4Color}" stroke-dasharray="3 3" />
       <line class="grid-line" x1="${x4}" y1="${y4}" x2="${svgConfig.originX}" y2="${y4}" stroke="${q4Color}" stroke-dasharray="3 3" />
@@ -757,7 +757,7 @@ function renderFourQuadrantPoints() {
         <circle class="core" r="6" fill="${q4Color}" />
       </g>
       <g transform="translate(${x4 + 12}, ${y4 + 20})">
-        <rect class="point-tooltip-bg" x="-4" y="-15" width="124" height="22" fill="#1b5e20" />
+        <rect class="point-tooltip-bg" x="-4" y="-15" width="124" height="22" fill="#39796f" />
         <text class="point-tooltip" x="3" y="0">B₄ (${ptQ4.torque.toFixed(1)}, ${ptQ4.speed.toFixed(0)}) 制动</text>
       </g>
     `;
@@ -769,7 +769,7 @@ function renderFourQuadrantPoints() {
       const x1 = xCoord(ptFwd.torque);
       const ySpeed = yCoord(ptFwd.speed);
       pointsHtml += `
-        <line class="guide-line" x1="${x2}" y1="${ySpeed}" x2="${x1}" y2="${ySpeed}" stroke="#c2185b" stroke-width="2.0" stroke-dasharray="4 3" opacity="0.8" />
+        <line class="guide-line" x1="${x2}" y1="${ySpeed}" x2="${x1}" y2="${ySpeed}" stroke="#b2657d" stroke-width="2.0" stroke-dasharray="4 3" opacity="0.8" />
       `;
     }
   }
@@ -829,7 +829,7 @@ function renderMotoringPoints() {
         <circle class="core" r="6" fill="${tab.color}" />
       </g>
       <g transform="translate(${x - 124}, ${y + 20})">
-        <rect class="point-tooltip-bg" x="-4" y="-15" width="116" height="22" fill="#4a154b" />
+        <rect class="point-tooltip-bg" x="-4" y="-15" width="116" height="22" fill="#745765" />
         <text class="point-tooltip" x="3" y="0">A- (${ptRev.torque.toFixed(1)}, ${ptRev.speed.toFixed(0)})</text>
       </g>
     `;
@@ -860,8 +860,8 @@ function renderBrakingPoints() {
     loadTorque: state.baseLoadTorque,
   });
 
-  const q2Color = '#c2185b';
-  const q4Color = '#1b5e20';
+  const q2Color = '#b2657d';
+  const q4Color = '#39796f';
 
   if (showQ2) {
     const xA = xCoord(ptQ2.pointA.torque);
@@ -897,7 +897,7 @@ function renderBrakingPoints() {
         <circle class="core" r="6" fill="${q2Color}" />
       </g>
       <g transform="translate(${xB - 138}, ${yB - 12})">
-        <rect class="point-tooltip-bg" x="-4" y="-15" width="136" height="22" fill="#880e4f" />
+        <rect class="point-tooltip-bg" x="-4" y="-15" width="136" height="22" fill="#874758" />
         <text class="point-tooltip" x="3" y="0">B_II (${ptQ2.torque.toFixed(1)}, ${ptQ2.speed.toFixed(0)}) 停机制动</text>
       </g>
     `;
@@ -914,7 +914,7 @@ function renderBrakingPoints() {
         <circle class="core" r="6" fill="${q4Color}" />
       </g>
       <g transform="translate(${x4 + 12}, ${y4 + 20})">
-        <rect class="point-tooltip-bg" x="-4" y="-15" width="134" height="22" fill="#1b5e20" />
+        <rect class="point-tooltip-bg" x="-4" y="-15" width="134" height="22" fill="#39796f" />
         <text class="point-tooltip" x="3" y="0">B_IV (+${ptQ4.torque.toFixed(1)}, ${ptQ4.speed.toFixed(0)}) 位能下放</text>
       </g>
     `;
@@ -1014,22 +1014,22 @@ function renderMotorDiagrams() {
     return `
       <defs>
         <marker id="${prefix}-arrow-spd" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
-          <path d="M0 0 L6 3 L0 6 Z" fill="#1565c0" />
+          <path d="M0 0 L6 3 L0 6 Z" fill="#52788d" />
         </marker>
         <marker id="${prefix}-arrow-trq" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
-          <path d="M0 0 L6 3 L0 6 Z" fill="#c2185b" />
+          <path d="M0 0 L6 3 L0 6 Z" fill="#b2657d" />
         </marker>
       </defs>
       <!-- 定子磁极 N (左) 与 S (右) -->
-      <path d="M 6 22 C 22 26 22 68 6 72 Z" fill="#e3f2fd" stroke="#1976d2" stroke-width="2" />
-      <text x="14" y="52" font-size="14" font-weight="900" fill="#0d47a1" text-anchor="middle">N</text>
+      <path d="M 6 22 C 22 26 22 68 6 72 Z" fill="#edf3f6" stroke="#52788d" stroke-width="2" />
+      <text x="14" y="52" font-size="14" font-weight="900" fill="#365a70" text-anchor="middle">N</text>
 
-      <path d="M 134 22 C 118 26 118 68 134 72 Z" fill="#fce4ec" stroke="#c2185b" stroke-width="2" />
-      <text x="126" y="52" font-size="14" font-weight="900" fill="#880e4f" text-anchor="middle">S</text>
+      <path d="M 134 22 C 118 26 118 68 134 72 Z" fill="#f7ecee" stroke="#b2657d" stroke-width="2" />
+      <text x="126" y="52" font-size="14" font-weight="900" fill="#874758" text-anchor="middle">S</text>
 
       <!-- 磁力线符号与方向线 -->
-      <line x1="28" y1="47" x2="112" y2="47" stroke="#90caf9" stroke-width="1.5" stroke-dasharray="3 3" />
-      <text x="70" y="38" font-size="11" fill="#1976d2" text-anchor="middle" font-style="italic">Φ →</text>
+      <line x1="28" y1="47" x2="112" y2="47" stroke="#adc7d0" stroke-width="1.5" stroke-dasharray="3 3" />
+      <text x="70" y="38" font-size="11" fill="#52788d" text-anchor="middle" font-style="italic">Φ →</text>
 
       <!-- 转子电枢圆盘 (中心位于 70, 47) -->
       <circle cx="70" cy="47" r="28" fill="#fff" stroke="#37474f" stroke-width="2.5" />
@@ -1042,10 +1042,10 @@ function renderMotorDiagrams() {
         <circle cx="92" cy="47" r="4.5" fill="#cfd8dc" stroke="#263238" stroke-width="1.5" />
         <circle cx="70" cy="25" r="4.5" fill="#cfd8dc" stroke="#263238" stroke-width="1.5" />
         <circle cx="70" cy="69" r="4.5" fill="#cfd8dc" stroke="#263238" stroke-width="1.5" />
-        <text x="70" y="28" font-size="10" font-weight="900" text-anchor="middle" fill="#d32f2f">
+        <text x="70" y="28" font-size="10" font-weight="900" text-anchor="middle" fill="#ac4c54">
           ${isFwd ? '⊙' : '⊗'}
         </text>
-        <text x="70" y="72" font-size="10" font-weight="900" text-anchor="middle" fill="#d32f2f">
+        <text x="70" y="72" font-size="10" font-weight="900" text-anchor="middle" fill="#ac4c54">
           ${isFwd ? '⊗' : '⊙'}
         </text>
       </g>
@@ -1054,7 +1054,7 @@ function renderMotorDiagrams() {
       <rect x="66" y="14" width="8" height="6" fill="#424242" rx="1" />
       <rect x="66" y="74" width="8" height="6" fill="#424242" rx="1" />
       <!-- 电源极性 -->
-      <text x="70" y="10" font-size="12" font-weight="bold" text-anchor="middle" fill="${isFwd ? '#d32f2f' : '#1976d2'}">
+      <text x="70" y="10" font-size="12" font-weight="bold" text-anchor="middle" fill="${isFwd ? '#ac4c54' : '#52788d'}">
         ${isFwd ? '+Uₐ' : '−Uₐ'}
       </text>
       <text x="70" y="90" font-size="12" font-weight="bold" text-anchor="middle" fill="${isFwd ? '−' : '+'}">
@@ -1062,14 +1062,14 @@ function renderMotorDiagrams() {
       </text>
 
       <!-- 旋转速度 n 指示箭头 (顶部蓝色，与转子同心对齐) -->
-      <path d="${speedArrowPath}" fill="none" stroke="#1565c0" stroke-width="2.5" marker-end="url(#${prefix}-arrow-spd)" />
-      <text x="${isFwd ? '96' : '44'}" y="17" font-size="11" font-weight="bold" fill="#1565c0" text-anchor="${isFwd ? 'start' : 'end'}">
+      <path d="${speedArrowPath}" fill="none" stroke="#52788d" stroke-width="2.5" marker-end="url(#${prefix}-arrow-spd)" />
+      <text x="${isFwd ? '96' : '44'}" y="17" font-size="11" font-weight="bold" fill="#52788d" text-anchor="${isFwd ? 'start' : 'end'}">
         ${isFwd ? 'n ↷' : '↶ n'}
       </text>
 
       <!-- 电磁转矩 T 指示箭头 (底部洋红色，与转子同心对齐，电动状态与转向同向驱动) -->
-      <path d="${torqueArrowPath}" fill="none" stroke="#c2185b" stroke-width="2.5" marker-end="url(#${prefix}-arrow-trq)" />
-      <text x="${isFwd ? '44' : '96'}" y="81" font-size="10.5" font-weight="bold" fill="#c2185b" text-anchor="${isFwd ? 'end' : 'start'}">
+      <path d="${torqueArrowPath}" fill="none" stroke="#b2657d" stroke-width="2.5" marker-end="url(#${prefix}-arrow-trq)" />
+      <text x="${isFwd ? '44' : '96'}" y="81" font-size="10.5" font-weight="bold" fill="#b2657d" text-anchor="${isFwd ? 'end' : 'start'}">
         ${isFwd ? 'T ↷ (驱动)' : '↶ T (驱动)'}
       </text>
     `;
@@ -1091,12 +1091,12 @@ function renderMotorDiagrams() {
       ? 'M 48 73 A 34 34 0 0 0 92 73'
       : 'M 92 73 A 34 34 0 0 1 48 73';
 
-    const torqueColor = isQuad2 ? '#c2185b' : '#1b5e20';
+    const torqueColor = isQuad2 ? '#b2657d' : '#39796f';
 
     return `
       <defs>
         <marker id="${prefix}-arrow-spd" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
-          <path d="M0 0 L6 3 L0 6 Z" fill="#1565c0" />
+          <path d="M0 0 L6 3 L0 6 Z" fill="#52788d" />
         </marker>
         <marker id="${prefix}-arrow-trq" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
           <path d="M0 0 L6 3 L0 6 Z" fill="${torqueColor}" />
@@ -1104,15 +1104,15 @@ function renderMotorDiagrams() {
       </defs>
 
       <!-- 定子磁极 N (左) 与 S (右) -->
-      <path d="M 6 22 C 22 26 22 68 6 72 Z" fill="#e3f2fd" stroke="#1976d2" stroke-width="2" />
-      <text x="14" y="52" font-size="14" font-weight="900" fill="#0d47a1" text-anchor="middle">N</text>
+      <path d="M 6 22 C 22 26 22 68 6 72 Z" fill="#edf3f6" stroke="#52788d" stroke-width="2" />
+      <text x="14" y="52" font-size="14" font-weight="900" fill="#365a70" text-anchor="middle">N</text>
 
-      <path d="M 134 22 C 118 26 118 68 134 72 Z" fill="#fce4ec" stroke="#c2185b" stroke-width="2" />
-      <text x="126" y="52" font-size="14" font-weight="900" fill="#880e4f" text-anchor="middle">S</text>
+      <path d="M 134 22 C 118 26 118 68 134 72 Z" fill="#f7ecee" stroke="#b2657d" stroke-width="2" />
+      <text x="126" y="52" font-size="14" font-weight="900" fill="#874758" text-anchor="middle">S</text>
 
       <!-- 磁力线符号与方向线 -->
-      <line x1="28" y1="47" x2="112" y2="47" stroke="#90caf9" stroke-width="1.5" stroke-dasharray="3 3" />
-      <text x="70" y="38" font-size="11" fill="#1976d2" text-anchor="middle" font-style="italic">Φ →</text>
+      <line x1="28" y1="47" x2="112" y2="47" stroke="#adc7d0" stroke-width="1.5" stroke-dasharray="3 3" />
+      <text x="70" y="38" font-size="11" fill="#52788d" text-anchor="middle" font-style="italic">Φ →</text>
 
       <!-- 转子电枢圆盘 (中心位于 70, 47) -->
       <circle cx="70" cy="47" r="28" fill="#fff" stroke="#37474f" stroke-width="2.5" />
@@ -1139,8 +1139,8 @@ function renderMotorDiagrams() {
       <rect x="66" y="74" width="8" height="6" fill="#424242" rx="1" />
 
       <!-- 旋转速度 n 指示箭头 (顶部蓝色，与转子同心对齐) -->
-      <path d="${speedArrowPath}" fill="none" stroke="#1565c0" stroke-width="2.5" marker-end="url(#${prefix}-arrow-spd)" />
-      <text x="${isQuad2 ? '96' : '44'}" y="17" font-size="11" font-weight="bold" fill="#1565c0" text-anchor="${isQuad2 ? 'start' : 'end'}">
+      <path d="${speedArrowPath}" fill="none" stroke="#52788d" stroke-width="2.5" marker-end="url(#${prefix}-arrow-spd)" />
+      <text x="${isQuad2 ? '96' : '44'}" y="17" font-size="11" font-weight="bold" fill="#52788d" text-anchor="${isQuad2 ? 'start' : 'end'}">
         ${isQuad2 ? 'n ↷' : '↶ n'}
       </text>
 
@@ -1246,11 +1246,11 @@ function updateTabUI() {
     el.btnShowAll.setAttribute('aria-pressed', 'true');
     el.motorVisualCardTitle.textContent = '四象限运行状态可视化';
     el.fwdDiagTitle.innerHTML =
-      '<span style="color: #1565c0">●</span> Ⅰ/Ⅲ 象限 · 电动状态';
+      '<span style="color: #52788d">●</span> Ⅰ/Ⅲ 象限 · 电动状态';
     el.fwdDiagStat.innerHTML =
       '转矩与转向同向: <b>T·n &gt; 0</b> · 吸收电能输出机械能';
     el.revDiagTitle.innerHTML =
-      '<span style="color: #c2185b">●</span> Ⅱ/Ⅳ 象限 · 制动状态';
+      '<span style="color: #b2657d">●</span> Ⅱ/Ⅳ 象限 · 制动状态';
     el.revDiagStat.innerHTML =
       '转矩与转向反向: <b>T·n &lt; 0</b> · 电磁转矩为制动阻力';
     el.footerTips.textContent =
@@ -1292,11 +1292,11 @@ function updateTabUI() {
     el.btnShowAll.setAttribute('aria-pressed', String(state.showAllMotoring));
     el.motorVisualCardTitle.textContent = '电动机运行状态可视化';
     el.fwdDiagTitle.innerHTML =
-      '<span style="color: #1565c0">●</span> 第Ⅰ象限 · 正向电动';
+      '<span style="color: #52788d">●</span> 第Ⅰ象限 · 正向电动';
     el.fwdDiagStat.innerHTML =
       '转向: <b>顺时针 CW</b> · 电压: <b>+U<sub>a</sub></b>';
     el.revDiagTitle.innerHTML =
-      '<span style="color: #ad1457">●</span> 第Ⅲ象限 · 反向电动';
+      '<span style="color: #ac4c54">●</span> 第Ⅲ象限 · 反向电动';
     el.revDiagStat.innerHTML =
       '转向: <b>逆时针 CCW</b> · 电压: <b>-U<sub>a</sub></b>';
     el.footerTips.textContent =
@@ -1344,11 +1344,11 @@ function updateTabUI() {
     el.btnShowAll.style.display = 'none';
     el.motorVisualCardTitle.textContent = '制动运行状态可视化';
     el.fwdDiagTitle.innerHTML =
-      '<span style="color: #c2185b">●</span> 第Ⅱ象限 · 停机制动过程';
+      '<span style="color: #b2657d">●</span> 第Ⅱ象限 · 停机制动过程';
     el.fwdDiagStat.innerHTML =
       '转向: <b>顺时针 n&gt;0</b> · 转矩: <b>逆时针 T&lt;0 (制动阻力)</b>';
     el.revDiagTitle.innerHTML =
-      '<span style="color: #1b5e20">●</span> 第Ⅳ象限 · 位能下放运行';
+      '<span style="color: #39796f">●</span> 第Ⅳ象限 · 位能下放运行';
     el.revDiagStat.innerHTML =
       '转向: <b>逆时针 n&lt;0</b> · 转矩: <b>顺时针 T&gt;0 (平衡阻力)</b>';
     el.footerTips.textContent =

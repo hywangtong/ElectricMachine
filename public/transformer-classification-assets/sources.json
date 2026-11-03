@@ -1,0 +1,102 @@
+[
+  {
+    "file": "shell.webp",
+    "title": "File:Transformer.filament.agr.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Transformer.filament.agr.jpg",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/1/1d/Transformer.filament.agr.jpg",
+    "Artist": "Original uploader was ArnoldReinhold at en.wikipedia",
+    "LicenseShortName": "CC BY-SA 3.0",
+    "LicenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "ImageDescription": "Transformer, 115 VAC to 6.3 VAC with laminated core. Typically used to power vacuum tube filaments. Mounting holes are 6 cm apart.I took this picture.--agr 14:45, 9 Nov 2004 (UTC)",
+    "processing": "Proportional resize and WebP conversion; no content modification"
+  },
+  {
+    "file": "resin.webp",
+    "title": "File:Cast resine transformer.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Cast_resine_transformer.jpg",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0a/Cast_resine_transformer.jpg",
+    "Artist": "STM guanajuato",
+    "LicenseShortName": "CC0",
+    "LicenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "ImageDescription": "Cast Resin Transformer",
+    "processing": "Proportional resize and WebP conversion; no content modification",
+    "downloadedUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Cast_resine_transformer.jpg/1280px-Cast_resine_transformer.jpg"
+  },
+  {
+    "file": "core.webp",
+    "title": "File:Philips N4422 - power supply transformer-2098.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Philips_N4422_-_power_supply_transformer-2098.jpg",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f4/Philips_N4422_-_power_supply_transformer-2098.jpg",
+    "Artist": "Raimond Spekking",
+    "LicenseShortName": "CC BY-SA 4.0",
+    "LicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "ImageDescription": "Philips N4422 - power supply transformer",
+    "processing": "Proportional resize and WebP conversion; no content modification"
+  },
+  {
+    "file": "isolation.webp",
+    "title": "File:Trenntransformator.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Trenntransformator.jpg",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/36/Trenntransformator.jpg",
+    "Artist": "wdwd",
+    "LicenseShortName": "CC BY-SA 3.0",
+    "LicenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "ImageDescription": "Trenntransformator, Einphasentrafo für 230V mit 100VA",
+    "processing": "Proportional resize and WebP conversion; no content modification"
+  },
+  {
+    "file": "oil.webp",
+    "source": "https://www.hitachi-ies.com/products/power/transformer/oil-immersed/",
+    "imageUrl": "https://www.hitachi-ies.com/common/images/add/image_0228.jpg",
+    "Artist": "Hitachi Industrial Equipment Systems",
+    "LicenseShortName": "Manufacturer copyright; no open license stated",
+    "processing": "Proportional resize and WebP conversion; no content modification"
+  },
+  {
+    "file": "application-power.webp",
+    "source": "https://www.hitachienergy.cn/cn/zh/news-and-events/events-and-webinars/2026/05/customer-transformer-training-webinar-series-2026",
+    "imageUrl": "https://dynamicassets.hitachienergy.com/adobe/assets/urn%3Aaaid%3Aaem%3A97cdc3ae-5617-42b4-9d18-6eae2c738d1a/as/GPG.jpg",
+    "Artist": "Hitachi Energy",
+    "LicenseShortName": "Manufacturer copyright; no open license stated",
+    "ImageDescription": "Outdoor power transformer at a substation; manufacturer website photograph",
+    "originalDimensions": [2048, 1097],
+    "localDimensions": [1920, 1028],
+    "processing": "Proportional resize and WebP conversion; no content modification"
+  },
+  {
+    "file": "application-current.webp",
+    "source": "https://www.gecdurham.com/instrument_transformers",
+    "imageUrl": "https://lirp.cdn-website.com/47d16104/dms3rep/multi/opt/TCW%2B198KBRP_cut-1920w.jpg",
+    "Artist": "GEC Durham Industries",
+    "LicenseShortName": "Manufacturer copyright; no open license stated",
+    "ImageDescription": "Type TCW window-type current transformer, instrument-rated product photograph",
+    "originalDimensions": [1500, 1626],
+    "localDimensions": [1500, 1626],
+    "processing": "WebP conversion; no content modification"
+  },
+  {
+    "file": "application-furnace.webp",
+    "title": "File:Arc Furnace transformer bus.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Arc_Furnace_transformer_bus.jpg",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d6/Arc_Furnace_transformer_bus.jpg",
+    "Artist": "Wtshymanski",
+    "LicenseShortName": "CC BY-SA 3.0",
+    "LicenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+    "ImageDescription": "Arc furnace transformer core, windings and heavy low-voltage copper bus, removed from insulating oil for service",
+    "originalDimensions": [1600, 1200],
+    "localDimensions": [1600, 1200],
+    "processing": "WebP conversion; no content modification"
+  },
+  {
+    "file": "power-pa2047nl.webp",
+    "source": "https://www.alldatasheetcn.com/datasheet-pdf/view/536104/PULSE/PA2047NL.html",
+    "downloadedUrl": "https://prod-parts-data.s3.amazonaws.com/PA1736NLT/datasheet/1_PA1736NLT-Pulse-datasheet-8617364.pdf",
+    "Artist": "Pulse",
+    "LicenseShortName": "Manufacturer copyright; no open license stated",
+    "ImageDescription": "EFD20 SMT high-frequency wire-wound transformer family photograph, P666.A (03/08) page 1; datasheet includes PA2047NL",
+    "originalDimensions": [228, 217],
+    "localDimensions": [228, 217],
+    "processing": "Extracted original embedded photograph from PDF and converted to WebP; no content modification",
+    "sourceNote": "Requested Alldatasheet page returned an access challenge; used original manufacturer datasheet mirror, not a verified pixel-identical copy of the inaccessible version."
+  }
+]

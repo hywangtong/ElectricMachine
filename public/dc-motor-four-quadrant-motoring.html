@@ -15,9 +15,7 @@
         <div class="eyebrow">
           直流拖动 / 8.5 · 他励电动机在四象限中的运行状态
         </div>
-        <h1 id="page-title">
-          8.5 他励电动机在四象限中的运行状态
-        </h1>
+        <h1 id="page-title">8.5 他励电动机在四象限中的运行状态</h1>
         <p id="page-desc">
           比较固有特性与三种人为特性的两象限运行：第Ⅰ象限（正向电动）与第Ⅲ象限（反向电动）。
         </p>
@@ -158,7 +156,11 @@
         </div>
 
         <!-- 四象限全貌子标签页 -->
-        <div class="subtabs-group" id="four-quadrant-subtabs" style="display: none">
+        <div
+          class="subtabs-group"
+          id="four-quadrant-subtabs"
+          style="display: none"
+        >
           <button
             role="tab"
             id="tab-fq-all"
@@ -427,7 +429,7 @@
                 aria-label="运行示意1"
               >
                 <h4 id="fwd-diag-title">
-                  <span style="color: #1565c0">●</span> 第Ⅰ象限 · 正向电动
+                  <span style="color: #52788d">●</span> 第Ⅰ象限 · 正向电动
                 </h4>
                 <div class="motor-svg-wrap">
                   <svg id="motor-fwd-svg" viewBox="0 0 140 94"></svg>
@@ -444,7 +446,7 @@
                 aria-label="运行示意2"
               >
                 <h4 id="rev-diag-title">
-                  <span style="color: #ad1457">●</span> 第Ⅲ象限 · 反向电动
+                  <span style="color: #ac4c54">●</span> 第Ⅲ象限 · 反向电动
                 </h4>
                 <div class="motor-svg-wrap">
                   <svg id="motor-rev-svg" viewBox="0 0 140 94"></svg>
@@ -452,58 +454,6 @@
                 <div class="motor-stat-line" id="rev-diag-stat">
                   转向: <b>逆时针 CCW</b> · 电压: <b>-U<sub>a</sub></b>
                 </div>
-              </div>
-            </div>
-          </article>
-
-          <!-- 交互调节卡片 -->
-          <article class="param-control-card" aria-label="当前特性参数调节">
-            <div class="slider-group">
-              <div class="slider-header">
-                <label id="param-slider-label" for="param-slider"
-                  >负载转矩 T<sub>L</sub></label
-                >
-                <output id="param-slider-output" for="param-slider"
-                  >40.0 N·m</output
-                >
-              </div>
-              <div class="slider-control">
-                <input
-                  id="param-slider"
-                  type="range"
-                  min="10"
-                  max="60"
-                  step="1"
-                  value="40"
-                />
-              </div>
-            </div>
-
-            <!-- 实时运行数据仪表盘 -->
-            <div class="readings-grid">
-              <div class="reading-item">
-                <span>转速 n (r/min)</span>
-                <strong id="readout-speed">±995.3</strong>
-              </div>
-              <div class="reading-item">
-                <span>电磁转矩 T (N·m)</span>
-                <strong id="readout-torque">±40.0</strong>
-              </div>
-              <div class="reading-item">
-                <span>电枢电流 I<sub>a</sub> (A)</span>
-                <strong id="readout-current">±20.9</strong>
-              </div>
-              <div class="reading-item">
-                <span>感应反电动势 E (V)</span>
-                <strong id="readout-emf">±199.1</strong>
-              </div>
-              <div class="reading-item">
-                <span>机械功率 P<sub>mech</sub></span>
-                <strong id="readout-pmech">4.17 kW</strong>
-              </div>
-              <div class="reading-item">
-                <span>电网输入功率 P<sub>a</sub></span>
-                <strong id="readout-pa">4.61 kW</strong>
               </div>
             </div>
           </article>
@@ -526,6 +476,58 @@
             </div>
           </article>
         </aside>
+
+        <!-- 交互调节卡片 -->
+        <article class="param-control-card" aria-label="当前特性参数调节">
+          <div class="slider-group">
+            <div class="slider-header">
+              <label id="param-slider-label" for="param-slider"
+                >负载转矩 T<sub>L</sub></label
+              >
+              <output id="param-slider-output" for="param-slider"
+                >40.0 N·m</output
+              >
+            </div>
+            <div class="slider-control">
+              <input
+                id="param-slider"
+                type="range"
+                min="10"
+                max="60"
+                step="1"
+                value="40"
+              />
+            </div>
+          </div>
+
+          <!-- 实时运行数据仪表盘 -->
+          <div class="readings-grid">
+            <div class="reading-item">
+              <span>转速 n (r/min)</span>
+              <strong id="readout-speed">±995.3</strong>
+            </div>
+            <div class="reading-item">
+              <span>电磁转矩 T (N·m)</span>
+              <strong id="readout-torque">±40.0</strong>
+            </div>
+            <div class="reading-item">
+              <span>电枢电流 I<sub>a</sub> (A)</span>
+              <strong id="readout-current">±20.9</strong>
+            </div>
+            <div class="reading-item">
+              <span>感应反电动势 E (V)</span>
+              <strong id="readout-emf">±199.1</strong>
+            </div>
+            <div class="reading-item">
+              <span>机械功率 P<sub>mech</sub></span>
+              <strong id="readout-pmech">4.17 kW</strong>
+            </div>
+            <div class="reading-item">
+              <span>电网输入功率 P<sub>a</sub></span>
+              <strong id="readout-pa">4.61 kW</strong>
+            </div>
+          </div>
+        </article>
       </section>
 
       <footer>
