@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>电流变换比：功率平衡与磁动势平衡</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/transformer-current-ratio.css" />
+    <script src="/dc-machine-basics.js" defer></script>
+  </head>
+  <body>
+    <main class="lesson current-ratio-page">
+      <header class="page-head">
+        <div class="eyebrow">变压器 / 从电压变换到电流变换</div>
+        <h1>电流变换比</h1>
+        <p>
+          同一个结论，两条推导路径：电压升高，电流减小；电压降低，电流增大。
+        </p>
+      </header>
+
+      <div class="derivations">
+        <section class="path power-path" aria-labelledby="power-title">
+          <h2 id="power-title"><span>01</span> 从功率平衡看</h2>
+          <p class="premise">
+            理想变压器：忽略损耗与励磁电流，两侧功率因数相同。
+          </p>
+          <div class="power-balance">
+            <p class="math">P<sub>1</sub> = P<sub>2</sub></p>
+            <p class="math power-equation">
+              U<sub>1</sub>I<sub>1</sub>cos φ<sub>1</sub> =
+              U<sub>2</sub>I<sub>2</sub>cos φ<sub>2</sub>
+            </p>
+            <p class="explanation">
+              理想模型有功、无功均守恒，故两侧视在功率相等：
+            </p>
+            <p class="math apparent-power">
+              U<sub>1</sub>I<sub>1</sub> = U<sub>2</sub>I<sub>2</sub>
+            </p>
+          </div>
+          <p
+            class="math inverse-ratio"
+            aria-label="I1 比 I2 等于 U2 比 U1，等于 k 的倒数"
+          >
+            <span class="fraction"
+              ><span>I<sub>1</sub></span
+              ><span>I<sub>2</sub></span></span
+            >
+            =
+            <span class="fraction"
+              ><span>U<sub>2</sub></span
+              ><span>U<sub>1</sub></span></span
+            >
+            =
+            <span class="fraction"><span>1</span><span>k</span></span>
+          </p>
+          <p class="takeaway">
+            传递相同功率，<strong>电压比与电流比互为倒数</strong>。
+          </p>
+        </section>
+
+        <section class="path magnetic-path" aria-labelledby="magnetic-title">
+          <h2 id="magnetic-title"><span>02</span> 从电磁关系看</h2>
+          <p class="flux-note">
+            电源电压、频率不变时：
+            <span class="math"
+              >Φ<sub>m</sub> ≈ U<sub>1N</sub>/(4.44N<sub>1</sub>f) ≈ 常数</span
+            >
+          </p>
+          <div class="magnetic-balance">
+            <figure class="mmf-figure">
+              <svg
+                viewBox="0 0 282 190"
+                role="img"
+                aria-labelledby="mmf-title mmf-description"
+              >
+                <title id="mmf-title">原、副边磁动势共同建立主磁通</title>
+                <desc id="mmf-description">
+                  闭合铁芯左侧是原边绕组 N1，右侧是副边绕组 N2。铜色 F1
+                  顺时针磁化，绿色 F2 逆时针去磁；蓝色闭合箭头表示合成磁动势 F0
+                  维持的共同主磁通。箭头仅示意某一瞬时的磁化方向，不表示相量大小。
+                </desc>
+                <defs>
+                  <pattern
+                    id="mmf-laminations"
+                    width="5"
+                    height="5"
+                    patternUnits="userSpaceOnUse"
+                  >
+                    <path d="M0 1H5" stroke="#bac8c3" stroke-width="0.8" />
+                  </pattern>
+                  <marker
+                    id="mmf-primary-arrow"
+                    viewBox="0 0 10 10"
+                    refX="8"
+                    refY="5"
+                    markerWidth="5"
+                    markerHeight="5"
+                    orient="auto-start-reverse"
+                  >
+                    <path d="M0 0 10 5 0 10Z" fill="#95633f" />
+                  </marker>
+                  <marker
+                    id="mmf-secondary-arrow"
+                    viewBox="0 0 10 10"
+                    refX="8"
+                    refY="5"
+                    markerWidth="5"
+                    markerHeight="5"
+                    orient="auto-start-reverse"
+                  >
+                    <path d="M0 0 10 5 0 10Z" fill="#397d70" />
+                  </marker>
+                  <marker
+                    id="mmf-flux-arrow"
+                    viewBox="0 0 10 10"
+                    refX="8"
+                    refY="5"
+                    markerWidth="5"
+                    markerHeight="5"
+                    orient="auto-start-reverse"
+                  >
+                    <path d="M0 0 10 5 0 10Z" fill="#466f99" />
+                  </marker>
+                </defs>
+                <path
+                  d="M46 43H236V166H46Z M76 73V136H206V73Z"
+                  fill="#dbe2df"
+                  fill-rule="evenodd"
+                  stroke="#aebebb"
+                  stroke-width="1.5"
+                />
+                <path
+                  d="M46 43H236V166H46Z M76 73V136H206V73Z"
+                  fill="url(#mmf-laminations)"
+                  fill-rule="evenodd"
+                />
+                <path
+                  d="M42 79h38q8 5 0 10H42q-8 5 0 10h38q8 5 0 10H42q-8 5 0 10h38q8 5 0 10H42"
+                  class="mmf-winding mmf-primary"
+                />
+                <path
+                  d="M202 79h38q8 5 0 10h-38q-8 5 0 10h38q8 5 0 10h-38q-8 5 0 10h38q8 5 0 10h-38"
+                  class="mmf-winding mmf-secondary"
+                />
+                <path
+                  d="M26 80V25H123"
+                  class="mmf-direction mmf-primary"
+                  marker-end="url(#mmf-primary-arrow)"
+                />
+                <path
+                  d="M256 80V25H159"
+                  class="mmf-direction mmf-secondary"
+                  marker-end="url(#mmf-secondary-arrow)"
+                />
+                <text
+                  x="69"
+                  y="17"
+                  text-anchor="middle"
+                  class="mmf-label mmf-primary"
+                >
+                  F₁ 原边磁化
+                </text>
+                <text
+                  x="213"
+                  y="17"
+                  text-anchor="middle"
+                  class="mmf-label mmf-secondary"
+                >
+                  F₂ 副边去磁
+                </text>
+                <path
+                  d="M140 58H221V151H61V58H119"
+                  class="mmf-flux"
+                  marker-end="url(#mmf-flux-arrow)"
+                />
+                <text
+                  x="141"
+                  y="103"
+                  text-anchor="middle"
+                  class="mmf-flux-label"
+                >
+                  合成 F₀ 维持
+                </text>
+                <text
+                  x="141"
+                  y="126"
+                  text-anchor="middle"
+                  class="mmf-flux-symbol"
+                >
+                  Φₘ
+                </text>
+                <text
+                  x="61"
+                  y="184"
+                  text-anchor="middle"
+                  class="mmf-label mmf-primary"
+                >
+                  原边 N₁
+                </text>
+                <text
+                  x="221"
+                  y="184"
+                  text-anchor="middle"
+                  class="mmf-label mmf-secondary"
+                >
+                  副边 N₂
+                </text>
+              </svg>
+              <figcaption>磁化方向示意 · 箭头长度不表示相量大小</figcaption>
+            </figure>
+            <div class="mmf-explanation">
+              <p class="explanation">
+                磁路基尔霍夫定律：<br /><strong
+                  >两侧磁动势之和维持主磁通</strong
+                >
+              </p>
+              <p class="math mmf-equation">
+                <span class="phasor">F</span><sub>1</sub> +
+                <span class="phasor">F</span><sub>2</sub> =
+                <span class="phasor">F</span><sub>0</sub>
+              </p>
+              <p class="math winding-equation">
+                N<sub>1</sub><span class="phasor">I</span><sub>1</sub> + N<sub
+                  >2</sub
+                ><span class="phasor">I</span><sub>2</sub> = N<sub>1</sub
+                ><span class="phasor">I</span><sub>0</sub>
+              </p>
+              <p class="compensation-note">
+                原边新增磁动势补偿副边去磁作用；合成的 F<sub>0</sub>
+                与空载时近似相同。
+              </p>
+            </div>
+          </div>
+          <div class="no-load-note">
+            <strong>I<sub>0</sub> 为空载电流</strong>
+            <span
+              >满载或接近满载时，I<sub>0</sub> ≪ I<sub>1</sub>，可忽略。</span
+            >
+            <small
+              >满载：I<sub>2</sub> = I<sub>2N</sub>，I<sub>1</sub> ≈ I<sub
+                >1N</sub
+              ></small
+            >
+          </div>
+          <p class="math loaded-equation">
+            N<sub>1</sub><span class="phasor">I</span><sub>1</sub> + N<sub
+              >2</sub
+            ><span class="phasor">I</span><sub>2</sub> ≈ 0
+            <span class="therefore">⇒</span>
+            <span class="phasor">I</span><sub>1</sub> ≈ −<span class="fraction"
+              ><span>N<sub>2</sub></span
+              ><span>N<sub>1</sub></span></span
+            ><span class="phasor">I</span><sub>2</sub>
+          </p>
+        </section>
+      </div>
+
+      <section class="result" aria-labelledby="result-title">
+        <div>
+          <h2 id="result-title">电流变换 · 大小关系</h2>
+          <p>满载近似；理想变压器取等号</p>
+        </div>
+        <p
+          class="math result-equation"
+          aria-label="电流比 I1 比 I2 近似等于 N2 比 N1，等于 k 的倒数"
+        >
+          <span class="fraction"
+            ><span>I<sub>1</sub></span
+            ><span>I<sub>2</sub></span></span
+          >
+          ≈
+          <span class="fraction"
+            ><span>N<sub>2</sub></span
+            ><span>N<sub>1</sub></span></span
+          >
+          =
+          <span class="fraction"><span>1</span><span>k</span></span>
+        </p>
+        <p class="voltage-recall">
+          回顾电压比<br /><span class="math"
+            >k = N<sub>1</sub>/N<sub>2</sub> ≈ U<sub>1</sub>/U<sub>2</sub></span
+          >
+        </p>
+      </section>
+
+      <footer class="notation">
+        <strong>相位关系</strong>
+        <p>
+          本页取两侧正电流产生同向磁动势为参考：<span class="math phasor"
+            >I</span
+          ><sub>1</sub> 与 <span class="math phasor">I</span
+          ><sub>2</sub> 近似反相。点号表示相量；无点号的 U、I 为有效值。
+        </p>
+      </footer>
+    </main>
+  </body>
+</html>

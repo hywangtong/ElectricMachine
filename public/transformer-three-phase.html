@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>三相变压器：组式与心式</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/transformer-three-phase.css" />
+    <script type="module" src="/transformer-three-phase.js"></script>
+  </head>
+  <body>
+    <main class="lesson three-phase-page">
+      <header class="page-head">
+        <div class="eyebrow">变压器 / 三相结构 · 同步磁通与波形</div>
+        <h1>三相变压器：组式与心式</h1>
+        <p>同一组三相对称电压，两种磁路组织方式。观察每相磁通在哪里闭合。</p>
+      </header>
+
+      <section class="controls" aria-label="动画控制">
+        <button id="play" type="button">暂停</button>
+        <button id="step" type="button">步进 30°</button>
+        <button id="reset" type="button">复位</button>
+        <label class="angle-control" for="angle">
+          电角度 θ
+          <input
+            id="angle"
+            type="range"
+            min="0"
+            max="360"
+            step="1"
+            value="30"
+          />
+        </label>
+        <output id="angle-value" for="angle">030°</output>
+        <span class="phase-hint">追踪相别</span>
+        <div class="phase-select" role="group" aria-label="高亮相别">
+          <button type="button" data-select="all" aria-pressed="true">
+            全部
+          </button>
+          <button type="button" data-select="0" aria-pressed="false">
+            A / U
+          </button>
+          <button type="button" data-select="1" aria-pressed="false">
+            B / V
+          </button>
+          <button type="button" data-select="2" aria-pressed="false">
+            C / W
+          </button>
+        </div>
+      </section>
+
+      <div class="comparison-layout">
+        <section class="structure-card" aria-labelledby="bank-title">
+          <header>
+            <span class="figure-number">01 / 三台单相</span>
+            <h2 id="bank-title">三相组式变压器</h2>
+          </header>
+          <svg
+            id="bank"
+            viewBox="0 0 420 270"
+            role="img"
+            aria-label="三台独立铁芯的单相变压器组成三相组，每相磁通在各自铁芯中闭合"
+          ></svg>
+          <div class="flux-values" aria-label="各相瞬时磁通，按峰值归一化">
+            <span class="phase-a"
+              >Φ<sub>A</sub> <b data-flux="0">+0.50</b></span
+            >
+            <span class="phase-b"
+              >Φ<sub>B</sub> <b data-flux="1">−1.00</b></span
+            >
+            <span class="phase-c"
+              >Φ<sub>C</sub> <b data-flux="2">+0.50</b></span
+            >
+          </div>
+          <div class="structure-caption">
+            <strong>有电的联系 · 无磁的联系</strong>
+            <p>
+              绕组按三相方式联结；三个铁芯独立，<br />每相磁通经自己的回磁柱闭合。
+            </p>
+          </div>
+        </section>
+
+        <section class="structure-card" aria-labelledby="core-title">
+          <header>
+            <span class="figure-number">02 / 共用铁芯</span>
+            <h2 id="core-title">三相心式变压器</h2>
+          </header>
+          <svg
+            id="core"
+            viewBox="0 0 420 270"
+            role="img"
+            aria-label="三柱心式变压器，各相磁通通过共用上下磁轭和其他两柱闭合，三柱磁通瞬时和为零"
+          ></svg>
+          <div class="flux-sum math">
+            Φ<sub>A</sub> + Φ<sub>B</sub> + Φ<sub>C</sub> =
+            <b id="flux-sum">0.00</b>
+          </div>
+          <div class="structure-caption">
+            <strong>有电的联系 · 也有磁的联系</strong>
+            <p>
+              三相绕组分置三柱，共用上下磁轭；<br />一相磁通可经其余两柱返回。
+            </p>
+          </div>
+        </section>
+
+        <section class="wave-card" aria-labelledby="wave-title">
+          <header>
+            <h2 id="wave-title">三相对称波形</h2>
+            <span>各量 / 各自峰值</span>
+          </header>
+          <div class="wave-legend" aria-label="相色图例">
+            <span class="phase-a">━ A 相</span>
+            <span class="phase-b">┅ B 相</span>
+            <span class="phase-c">┉ C 相</span>
+            <span class="phase-spacing">同类量相差 120°</span>
+          </div>
+          <svg
+            id="waves"
+            viewBox="0 0 500 334"
+            role="img"
+            aria-label="三组同步波形：相电压、空载励磁电流、主磁通。每组的三相互差120度，电流和磁通同相并滞后电压90度"
+          ></svg>
+          <div class="wave-note">
+            <span id="time-value">t = 1.67 ms</span
+            ><span>50 Hz · 一周 20 ms · 动画慢放</span>
+          </div>
+        </section>
+      </div>
+
+      <footer class="explanation">
+        <div class="phase-relation">
+          <strong>同一相：电压超前磁通 90°</strong>
+          <p class="math">
+            u<sub>A</sub> = U<sub>m</sub> cos θ，Φ<sub>A</sub> = Φ<sub>m</sub>
+            sin θ，i<sub>μA</sub> = I<sub>μm</sub> sin θ
+          </p>
+          <p>B、C 相分别将 θ 换为 θ − 120°、θ + 120°；u = N dΦ/dt。</p>
+        </div>
+        <div class="model-note">
+          <strong>线性空载励磁示意</strong>
+          <p>
+            忽略铁耗与绕组压降，i₀ = iμ；副边开路，i₂ =
+            0。实际心式的励磁电流可不完全对称。
+          </p>
+          <p>
+            上 / 下绕组为原 / 副边（展开示意，省略外部联结）；箭头朝上为 Φ
+            正方向，流动标记表示磁通方向与强弱。
+          </p>
+        </div>
+      </footer>
+    </main>
+  </body>
+</html>

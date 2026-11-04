@@ -1,0 +1,354 @@
+.current-ratio-page {
+  grid-template-rows: 87px 450px 104px minmax(0, 1fr);
+}
+
+.current-ratio-page .page-head h1 {
+  margin: 5px 0;
+  font-size: 38px;
+}
+
+.current-ratio-page .page-head p {
+  font-size: 21px;
+}
+
+.math {
+  font-family: 'Cambria Math', Georgia, serif;
+}
+
+sub {
+  font-size: 0.6em;
+}
+
+.derivations {
+  display: grid;
+  grid-template-columns: 0.92fr 1.08fr;
+  gap: 18px;
+}
+
+.path {
+  padding: 18px 23px;
+  border: 1px solid #c8d9d4;
+  border-top: 4px solid currentColor;
+  border-radius: 12px;
+  background: #ffffffba;
+}
+
+.power-path {
+  color: #95633f;
+}
+
+.magnetic-path {
+  color: #397d70;
+}
+
+.path h2 {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 25px;
+}
+
+.path h2 > span {
+  font-size: 18px;
+  font-weight: 500;
+  opacity: 0.75;
+}
+
+.premise,
+.explanation,
+.flux-note {
+  color: #55736d;
+  font-size: 19px;
+  line-height: 1.5;
+}
+
+.premise {
+  margin-top: 8px;
+}
+
+.power-balance {
+  display: grid;
+  gap: 6px;
+  margin-top: 8px;
+  text-align: center;
+  font-size: 32px;
+}
+
+.power-equation {
+  color: #55736d;
+  font-size: 29px;
+}
+
+.apparent-power {
+  font-size: 38px;
+}
+
+.inverse-ratio,
+.result-equation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 19px;
+  line-height: 1;
+}
+
+.inverse-ratio {
+  margin-top: 9px;
+  font-size: 40px;
+}
+
+.fraction {
+  display: inline-flex;
+  flex-direction: column;
+  text-align: center;
+  vertical-align: middle;
+  font-style: italic;
+  line-height: 1;
+}
+
+.fraction > span {
+  padding: 3px 10px;
+}
+
+.fraction > span + span {
+  border-top: 2px solid currentColor;
+}
+
+.takeaway {
+  margin-top: 9px;
+  color: #55736d;
+  font-size: 20px;
+  text-align: center;
+}
+
+.takeaway strong {
+  color: #95633f;
+}
+
+.flux-note {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 5px 0;
+  font-size: 18px;
+}
+
+.flux-note .math {
+  font-size: 23px;
+}
+
+.magnetic-balance {
+  display: grid;
+  grid-template-columns: 282px minmax(0, 1fr);
+  align-items: center;
+  gap: 14px;
+  margin-top: 5px;
+}
+
+.mmf-figure {
+  margin: 0;
+  padding: 5px 0;
+  border: 1px solid #d8e3dd;
+  border-radius: 9px;
+  background: #f5f8f3;
+}
+
+.mmf-figure svg {
+  display: block;
+  width: 100%;
+  height: 166px;
+}
+
+.mmf-figure figcaption {
+  color: #637a72;
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.mmf-primary {
+  color: #95633f;
+}
+
+.mmf-secondary {
+  color: #397d70;
+}
+
+.mmf-winding,
+.mmf-direction {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mmf-winding {
+  stroke-width: 4;
+}
+
+.mmf-direction {
+  stroke-width: 2.5;
+}
+
+.mmf-label {
+  fill: currentColor;
+  font-size: 15px;
+}
+
+.mmf-flux {
+  fill: none;
+  stroke: #466f99;
+  stroke-width: 2;
+  stroke-dasharray: 5 4;
+}
+
+.mmf-flux-label,
+.mmf-flux-symbol {
+  fill: #466f99;
+  font-size: 16px;
+}
+
+.mmf-flux-symbol {
+  font-family: 'Cambria Math', Georgia, serif;
+  font-size: 23px;
+}
+
+.mmf-explanation .explanation {
+  font-size: 17px;
+  line-height: 1.3;
+}
+
+.mmf-explanation strong {
+  color: #173b3b;
+  font-weight: 600;
+}
+
+.compensation-note {
+  margin-top: 6px;
+  color: #55736d;
+  font-size: 17px;
+  line-height: 1.3;
+}
+
+.magnetic-path sub {
+  line-height: 0;
+}
+
+.phasor {
+  position: relative;
+  display: inline-block;
+  font-style: italic;
+}
+
+.phasor::after {
+  position: absolute;
+  top: -0.38em;
+  left: 52%;
+  content: '·';
+  font-style: normal;
+}
+
+.mmf-equation,
+.winding-equation {
+  margin-top: 6px;
+  text-align: center;
+  font-size: 28px;
+  line-height: 1.2;
+}
+
+.winding-equation {
+  color: #173b3b;
+  font-size: 28px;
+  white-space: nowrap;
+}
+
+.no-load-note {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 15px;
+  align-items: center;
+  margin-top: 6px;
+  padding: 4px 14px;
+  border: 1px solid #d8c59c;
+  border-radius: 8px;
+  background: #fcf3dd;
+  color: #73552f;
+  font-size: 18px;
+  line-height: 1.15;
+}
+
+.no-load-note small {
+  grid-column: 1 / -1;
+  font-size: 17px;
+}
+
+.loaded-equation {
+  margin-top: 6px;
+  font-size: 26px;
+  line-height: 1.2;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.therefore {
+  padding: 0 9px;
+  color: #95633f;
+}
+
+.result {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 27px;
+  border: 1px solid #c4d6cc;
+  border-radius: 12px;
+  background: #eef4e9;
+}
+
+.result h2 {
+  margin-bottom: 8px;
+  font-size: 25px;
+}
+
+.result p:not(.result-equation) {
+  color: #55736d;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.result-equation {
+  color: #397d70;
+  font-size: 43px;
+}
+
+.result-equation sub {
+  line-height: 0;
+}
+
+.result-equation .fraction > span {
+  padding: 1px 10px;
+}
+
+.voltage-recall {
+  text-align: right;
+}
+
+.voltage-recall .math {
+  color: #95633f;
+  font-size: 24px;
+}
+
+.notation {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 7px;
+  color: #55736d;
+  font-size: 18px;
+}
+
+.notation strong {
+  flex-shrink: 0;
+  color: #173b3b;
+  font-size: 20px;
+}

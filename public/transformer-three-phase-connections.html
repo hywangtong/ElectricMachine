@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>三相变压器：绕组的联结方式</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/transformer-three-phase-connections.css" />
+    <script
+      type="module"
+      src="/transformer-three-phase-connections.js"
+    ></script>
+  </head>
+  <body>
+    <main class="lesson connections-page">
+      <header class="page-head">
+        <div class="eyebrow">变压器 / 三相绕组 · 从端子到联结符号</div>
+        <h1>三相变压器：绕组的联结方式</h1>
+        <p>
+          分别选择原边、副边的联结方式，观察同一台心式变压器上的绕组端子怎样连接。
+        </p>
+      </header>
+
+      <div class="connection-layout">
+        <div class="winding-controls">
+          <section
+            class="winding-card"
+            data-side="primary"
+            aria-labelledby="primary-title"
+          >
+            <header class="card-head">
+              <div>
+                <span class="figure-number">01 / HIGH VOLTAGE</span>
+                <h2 id="primary-title">原边 · 高压绕组</h2>
+              </div>
+              <output class="side-symbol" id="primary-symbol">Y</output>
+            </header>
+            <div
+              class="connection-select"
+              role="group"
+              aria-label="原边联结方式"
+            >
+              <button type="button" data-connection="star" aria-pressed="true">
+                星形 Y
+              </button>
+              <button
+                type="button"
+                data-connection="neutral"
+                aria-pressed="false"
+              >
+                星形 Y<sub>N</sub>
+              </button>
+              <button
+                type="button"
+                data-connection="delta"
+                aria-pressed="false"
+              >
+                三角形 D
+              </button>
+            </div>
+            <div class="connection-caption">
+              <strong id="primary-rule"></strong>
+              <p id="primary-terminals"></p>
+            </div>
+          </section>
+
+          <section
+            class="winding-card"
+            data-side="secondary"
+            aria-labelledby="secondary-title"
+          >
+            <header class="card-head">
+              <div>
+                <span class="figure-number">02 / LOW VOLTAGE</span>
+                <h2 id="secondary-title">副边 · 低压绕组</h2>
+              </div>
+              <output class="side-symbol" id="secondary-symbol"
+                >y<sub>n</sub></output
+              >
+            </header>
+            <div
+              class="connection-select"
+              role="group"
+              aria-label="副边联结方式"
+            >
+              <button type="button" data-connection="star" aria-pressed="false">
+                星形 y
+              </button>
+              <button
+                type="button"
+                data-connection="neutral"
+                aria-pressed="true"
+              >
+                星形 y<sub>n</sub>
+              </button>
+              <button
+                type="button"
+                data-connection="delta"
+                aria-pressed="false"
+              >
+                三角形 d
+              </button>
+            </div>
+            <div class="connection-caption">
+              <strong id="secondary-rule"></strong>
+              <p id="secondary-terminals"></p>
+            </div>
+          </section>
+        </div>
+        <section class="core-card" aria-labelledby="core-title">
+          <header>
+            <h2 id="core-title">三相心式变压器</h2>
+            <span>上：原边绕组 · 下：副边绕组</span>
+          </header>
+          <svg
+            id="core"
+            viewBox="30 0 530 365"
+            role="img"
+            aria-label="共用铁芯上六个绕组的实际端子联结示意"
+          ></svg>
+          <p>
+            绕组固定在铁芯柱上，改变端子间的连接；跨线拱桥处不相连，实心点表示共接。
+          </p>
+        </section>
+        <aside class="notation-card" aria-labelledby="notation-title">
+          <span class="figure-number">READ THE SYMBOLS</span>
+          <h2 id="notation-title">联结符号怎么读？</h2>
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">联结方式</th>
+                <th scope="col">高压</th>
+                <th scope="col">低压</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">星形 · 引出中性线</th>
+                <td>Y<sub>N</sub></td>
+                <td>y<sub>n</sub></td>
+              </tr>
+              <tr>
+                <th scope="row">星形 · 无中性线</th>
+                <td>Y</td>
+                <td>y</td>
+              </tr>
+              <tr>
+                <th scope="row">三角形</th>
+                <td>D</td>
+                <td>d</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="reading-note">
+            <strong>大写在前，小写在后</strong>
+            <p>按高压、低压绕组的顺序书写；N / n 表示中性点引出。</p>
+          </div>
+          <div class="reading-note">
+            <strong>有星点，不一定有中性线</strong>
+            <p>Y / y 的内部星点仍然存在；只有引出端子时才加 N / n。</p>
+          </div>
+          <p class="scope-note">
+            本图按降压变压器示意：原边高压，副边低压；两侧仅磁耦合。
+          </p>
+        </aside>
+      </div>
+
+      <section class="combination-bar" aria-label="当前联结组合">
+        <div class="combination-result" aria-live="polite" aria-atomic="true">
+          <span>当前组合</span><output id="combination">Y,y<sub>n</sub></output>
+          <p id="combination-description">原边星形，副边星形并引出中性线</p>
+        </div>
+        <div class="presets">
+          <span>一键对照</span>
+          <div role="group" aria-label="课堂联结组合">
+            <button type="button" data-preset="star,star">Y,y</button>
+            <button type="button" data-preset="star,delta">Y,d</button>
+            <button type="button" data-preset="neutral,delta">
+              Y<sub>N</sub>,d
+            </button>
+            <button type="button" data-preset="star,neutral">
+              Y,y<sub>n</sub>
+            </button>
+            <button type="button" data-preset="neutral,neutral">
+              Y<sub>N</sub>,y<sub>n</sub>
+            </button>
+          </div>
+        </div>
+        <button type="button" id="motion">暂停动画</button>
+      </section>
+      <footer class="page-note">
+        <span
+          ><i class="phase-a"></i>A / a 相 <i class="phase-b"></i>B / b 相
+          <i class="phase-c"></i>C / c
+          相；磁通动画沿用上一页的对称三相示意，不用于比较不同接法的电流与相位。</span
+        ><span>这里只表示联结方式；完整联结组别还需时钟序号表示相位差。</span>
+      </footer>
+    </main>
+  </body>
+</html>

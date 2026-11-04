@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>电压变换比</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/transformer-voltage-ratio.css" />
+    <script src="/dc-machine-basics.js" defer></script>
+  </head>
+  <body>
+    <main class="lesson voltage-ratio-page">
+      <header class="page-head">
+        <div class="eyebrow">变压器 / 从电压方程到变比</div>
+        <h1>电压变换比</h1>
+        <p>忽略原、副边漏阻抗时，端电压之比近似等于绕组匝数之比。</p>
+      </header>
+
+      <section class="condition" aria-label="近似条件">
+        <strong>近似条件</strong>
+        <span>忽略原、副边漏阻抗</span>
+        <span class="math"
+          >Z<sub>1</sub> = R<sub>1</sub> + jX<sub>1</sub>，Z<sub>2</sub> = R<sub
+            >2</sub
+          >
+          + jX<sub>2</sub></span
+        >
+      </section>
+
+      <div class="sides">
+        <section class="side primary" aria-labelledby="primary-title">
+          <div class="side-heading">
+            <h2 id="primary-title">一次侧（原边）</h2>
+            <span>忽略 Z<sub>1</sub></span>
+          </div>
+          <p class="balance math">
+            <span class="phasor">U</span><sub>1</sub> = −<span class="phasor"
+              >E</span
+            ><sub>1</sub> + Z<sub>1</sub><span class="phasor">I</span
+            ><sub>1</sub>
+          </p>
+          <p
+            class="approximation math"
+            aria-label="原边电压相量近似等于负的原边电动势相量"
+          >
+            <span class="phasor">U</span><sub>1</sub> ≈ −<span class="phasor"
+              >E</span
+            ><sub>1</sub>
+          </p>
+        </section>
+        <section class="side secondary" aria-labelledby="secondary-title">
+          <div class="side-heading">
+            <h2 id="secondary-title">二次侧（副边）</h2>
+            <span>忽略 Z<sub>2</sub></span>
+          </div>
+          <p class="balance math">
+            <span class="phasor">U</span><sub>2</sub> =
+            <span class="phasor">E</span><sub>2</sub> − Z<sub>2</sub
+            ><span class="phasor">I</span><sub>2</sub>
+          </p>
+          <p
+            class="approximation math"
+            aria-label="副边电压相量近似等于副边电动势相量"
+          >
+            <span class="phasor">U</span><sub>2</sub> ≈
+            <span class="phasor">E</span><sub>2</sub>
+          </p>
+        </section>
+      </div>
+
+      <section class="ratio-panel" aria-labelledby="ratio-title">
+        <h2 id="ratio-title">
+          一、二次绕组的电动势之比称为<span>电压比</span>（变比）
+        </h2>
+        <p
+          class="ratio math"
+          aria-label="电压变换比 k 等于 E1 比 E2，等于 N1 比 N2，近似等于 U1 比 U2"
+        >
+          <i>k</i> =
+          <span class="fraction"
+            ><span>E<sub>1</sub></span
+            ><span>E<sub>2</sub></span></span
+          >
+          =
+          <span class="fraction"
+            ><span>N<sub>1</sub></span
+            ><span>N<sub>2</sub></span></span
+          >
+          <span class="terminal-ratio"
+            >≈
+            <span class="fraction"
+              ><span>U<sub>1</sub></span
+              ><span>U<sub>2</sub></span></span
+            ></span
+          >
+        </p>
+        <p class="ratio-reason">
+          同一主磁通、同一频率：<span class="math"
+            >E<sub>1</sub> = 4.44fN<sub>1</sub>Φ<sub>m</sub>，E<sub>2</sub> =
+            4.44fN<sub>2</sub>Φ<sub>m</sub></span
+          >
+        </p>
+      </section>
+
+      <footer class="notation">
+        <strong>相量看相位，变比用有效值</strong>
+        <p>
+          点号表示相量；无点号的 U、E 表示有效值，N
+          为绕组匝数。原边负号来自参考方向，取有效值后 U<sub>1</sub> ≈
+          E<sub>1</sub>、U<sub>2</sub> ≈ E<sub>2</sub>。以上按正弦稳态分析。
+        </p>
+      </footer>
+    </main>
+  </body>
+</html>

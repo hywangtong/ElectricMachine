@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>阻抗变换：负载折算到原边</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/transformer-impedance-transformation.css" />
+    <script src="/dc-machine-basics.js" defer></script>
+  </head>
+  <body>
+    <main class="lesson impedance-page">
+      <header class="page-head">
+        <div class="eyebrow">变压器 / 从电压、电流变换到阻抗变换</div>
+        <h1>阻抗变换</h1>
+        <p>副边接入负载 Z<sub>L</sub>，从原边看进去，等效阻抗是多少？</p>
+      </header>
+
+      <section class="condition" aria-label="理想模型条件">
+        <strong>忽略 Z<sub>1</sub>、Z<sub>2</sub>、I<sub>0</sub></strong>
+        <span>忽略两侧漏阻抗与空载电流，采用理想变压器模型。</span>
+        <span class="math">k = N<sub>1</sub>/N<sub>2</sub></span>
+      </section>
+
+      <div class="impedance-layout">
+        <section class="derivation" aria-labelledby="derivation-title">
+          <h2 id="derivation-title"><span>01</span> 电压乘 k，电流除以 k</h2>
+          <p
+            class="math ratio-equation"
+            aria-label="U1 比 U2 等于 I2 比 I1，等于 N1 比 N2，等于 k"
+          >
+            <span class="fraction"
+              ><span>U<sub>1</sub></span
+              ><span>U<sub>2</sub></span></span
+            >
+            =
+            <span class="fraction"
+              ><span>I<sub>2</sub></span
+              ><span>I<sub>1</sub></span></span
+            >
+            =
+            <span class="fraction"
+              ><span>N<sub>1</sub></span
+              ><span>N<sub>2</sub></span></span
+            >
+            = k
+          </p>
+          <p class="step-label">原边输入阻抗的模值</p>
+          <p
+            class="math derivation-equation"
+            aria-label="Ze 的模等于 U1 比 I1，等于 k U2 比 I2 除以 k，等于 k 平方乘以 U2 比 I2"
+          >
+            <span>|Z<sub>e</sub>| =</span>
+            <span class="fraction"
+              ><span>U<sub>1</sub></span
+              ><span>I<sub>1</sub></span></span
+            >
+            =
+            <span class="fraction"
+              ><span>kU<sub>2</sub></span
+              ><span>I<sub>2</sub>/k</span></span
+            >
+          </p>
+          <p class="math squared-equation">
+            <span>= k<sup>2</sup></span
+            ><span class="fraction"
+              ><span>U<sub>2</sub></span
+              ><span>I<sub>2</sub></span></span
+            >
+            <span class="load-definition"
+              >其中 |Z<sub>L</sub>| = U<sub>2</sub>/I<sub>2</sub></span
+            >
+          </p>
+          <div class="result">
+            <span>负载折算到原边</span>
+            <p class="math">|Z<sub>e</sub>| = k<sup>2</sup>|Z<sub>L</sub>|</p>
+          </div>
+        </section>
+
+        <section class="equivalent" aria-labelledby="equivalent-title">
+          <h2 id="equivalent-title"><span>02</span> 原边端口的等效电路</h2>
+          <figure>
+            <svg
+              viewBox="0 0 650 395"
+              role="img"
+              aria-labelledby="circuit-title circuit-description"
+            >
+              <title id="circuit-title">变压器的阻抗变换</title>
+              <desc id="circuit-description">
+                上图原边 N1 接电压 U1，电流 I1 流入；副边 N2 的电流 I2 流向负载
+                ZL，负载两端电压
+                U2。下图从原边端口看，变压器与负载共同等效为阻抗 Ze 等于 k
+                平方乘以 ZL；输入电压 U1、电流 I1
+                保持相同。两侧电压均以上正下负为参考。
+              </desc>
+              <defs>
+                <marker
+                  id="current-arrow"
+                  viewBox="0 0 10 10"
+                  refX="8"
+                  refY="5"
+                  markerWidth="5"
+                  markerHeight="5"
+                  orient="auto"
+                >
+                  <path d="M0 0 10 5 0 10Z" fill="#95633f" />
+                </marker>
+                <marker
+                  id="equivalent-arrow"
+                  viewBox="0 0 10 10"
+                  refX="8"
+                  refY="5"
+                  markerWidth="5"
+                  markerHeight="5"
+                  orient="auto"
+                >
+                  <path d="M0 0 10 5 0 10Z" fill="#466f99" />
+                </marker>
+              </defs>
+              <rect
+                x="56"
+                y="12"
+                width="460"
+                height="211"
+                rx="20"
+                class="equivalent-boundary"
+              />
+              <text x="286" y="35" text-anchor="middle" class="circuit-caption">
+                理想变压器 + 副边负载
+              </text>
+              <g class="wire">
+                <path d="M38 60H228V90 M228 170V196H38" />
+                <path
+                  d="M228 90c16 0 16 20 0 20c16 0 16 20 0 20c16 0 16 20 0 20c16 0 16 20 0 20"
+                />
+                <path
+                  d="M282 90c-16 0-16 20 0 20c-16 0-16 20 0 20c-16 0-16 20 0 20c-16 0-16 20 0 20"
+                />
+                <path d="M282 90V60H474V110 M474 153V196H282V170" />
+                <path d="M250 89V172 M258 89V172" class="core" />
+              </g>
+              <rect x="465" y="110" width="18" height="43" class="load" />
+              <g class="terminal">
+                <circle cx="38" cy="60" r="4" />
+                <circle cx="38" cy="196" r="4" />
+              </g>
+              <g class="current">
+                <path d="M104 60H160" marker-end="url(#current-arrow)" />
+                <path d="M340 60H398" marker-end="url(#current-arrow)" />
+              </g>
+              <g class="circuit-math">
+                <text x="126" y="50" class="primary">I₁</text>
+                <text x="360" y="50" class="primary">I₂</text>
+                <text x="185" y="139">N₁</text>
+                <text x="301" y="139">N₂</text>
+                <text x="4" y="140" class="primary">U₁</text>
+                <text x="491" y="142" class="secondary">U₂</text>
+                <text x="400" y="141" class="secondary">
+                  Z
+                  <tspan baseline-shift="sub" font-size="17">L</tspan>
+                </text>
+              </g>
+              <g class="polarity">
+                <text x="24" y="90">+</text>
+                <text x="25" y="181">−</text>
+                <text x="488" y="91">+</text>
+                <text x="488" y="181">−</text>
+              </g>
+              <path
+                d="M548 151C606 182 606 302 532 322"
+                class="conversion"
+                marker-end="url(#equivalent-arrow)"
+              />
+              <text
+                x="579"
+                y="235"
+                text-anchor="middle"
+                class="conversion-label"
+              >
+                等效
+              </text>
+              <rect
+                x="270"
+                y="252"
+                width="247"
+                height="136"
+                rx="17"
+                class="equivalent-boundary"
+              />
+              <text
+                x="394"
+                y="275"
+                text-anchor="middle"
+                class="circuit-caption"
+              >
+                折算到原边
+              </text>
+              <path d="M110 290H350V309 M350 351V375H110" class="wire" />
+              <rect x="341" y="309" width="18" height="42" class="load" />
+              <g class="terminal">
+                <circle cx="110" cy="290" r="4" />
+                <circle cx="110" cy="375" r="4" />
+              </g>
+              <path
+                d="M164 290H220"
+                class="current"
+                marker-end="url(#current-arrow)"
+              />
+              <g class="circuit-math">
+                <text x="183" y="280" class="primary">I₁</text>
+                <text x="67" y="340" class="primary">U₁</text>
+                <text x="374" y="338" class="secondary">
+                  k²Z
+                  <tspan baseline-shift="sub" font-size="17">L</tspan>
+                </text>
+              </g>
+              <g class="polarity">
+                <text x="97" y="317">+</text>
+                <text x="97" y="363">−</text>
+              </g>
+            </svg>
+            <figcaption>
+              端口等效：同一 U<sub>1</sub> 下，吸取相同的 I<sub>1</sub>。
+            </figcaption>
+          </figure>
+        </section>
+      </div>
+
+      <footer class="takeaway">
+        <strong>阻抗按变比的平方变换</strong>
+        <p>
+          k &gt; 1：原边所见阻抗增大；k &lt; 1：原边所见阻抗减小。<br /><span
+            >U、I 为有效值；理想模型还满足复阻抗 Z<sub>e</sub> =
+            k²Z<sub>L</sub>，阻抗角不变。</span
+          >
+        </p>
+      </footer>
+    </main>
+  </body>
+</html>

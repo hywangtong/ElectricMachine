@@ -1,0 +1,265 @@
+.connections-page {
+  grid-template-rows: 82px 1fr 90px 30px;
+}
+
+.connections-page .page-head h1 {
+  margin: 5px 0 7px;
+  font-size: 36px;
+}
+.connections-page .page-head p {
+  font-size: 20px;
+}
+.connection-layout {
+  display: grid;
+  grid-template-columns: 285px minmax(0, 1fr) 300px;
+  gap: 16px;
+  min-height: 0;
+}
+.winding-card,
+.core-card,
+.notation-card {
+  min-width: 0;
+  border: 1px solid #c8d9d4;
+  border-radius: 12px;
+  background: #ffffffcf;
+}
+.winding-card {
+  display: grid;
+  grid-template-rows: 46px 44px 1fr;
+  padding: 12px;
+  min-height: 0;
+}
+.card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.figure-number {
+  color: #7c8e80;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+}
+.card-head h2 {
+  margin-top: 4px;
+  font-size: 17px;
+  font-weight: 650;
+}
+.side-symbol {
+  padding-right: 7px;
+  color: #39796f;
+  font:
+    40px Georgia,
+    serif;
+}
+.connection-select {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+button {
+  font: inherit;
+  cursor: pointer;
+  color: #365951;
+  border: 1px solid #c8d9d4;
+  border-radius: 7px;
+  background: #fffdf7;
+}
+button:hover {
+  background: #eaf2e9;
+}
+button:focus-visible {
+  outline: 3px solid #ad7b32;
+  outline-offset: 3px;
+}
+.connection-select button {
+  flex: 1;
+  padding: 9px 4px;
+  font-size: 17px;
+  white-space: nowrap;
+}
+button[aria-pressed='true'] {
+  background: #39796f;
+  border-color: #39796f;
+  color: white;
+}
+.core-card svg {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+svg text {
+  font-family: 'Cambria Math', 'Microsoft YaHei', serif;
+}
+.connection-caption {
+  padding-top: 10px;
+  border-top: 1px solid #dce5dc;
+}
+.connection-caption strong {
+  font-size: 17px;
+  font-weight: 650;
+}
+.connection-caption p {
+  margin-top: 6px;
+  font-size: 14px;
+  color: #617b70;
+}
+.winding-controls {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 12px;
+  min-height: 0;
+}
+.core-card {
+  display: grid;
+  grid-template-rows: 30px minmax(0, 1fr) 35px;
+  padding: 13px 12px 8px;
+  min-height: 0;
+}
+.core-card header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.core-card h2 {
+  font-size: 22px;
+}
+.core-card header span,
+.core-card > p {
+  color: #617b70;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.core-card > p {
+  border-top: 1px solid #dce5dc;
+  padding-top: 7px;
+}
+.notation-card {
+  padding: 16px;
+}
+.notation-card h2 {
+  font-size: 23px;
+  margin: 6px 0 10px;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 16px;
+}
+th,
+td {
+  padding: 6px 4px;
+  text-align: left;
+  border-bottom: 1px solid #dce5dc;
+}
+thead th {
+  color: #6e8275;
+  font-size: 14px;
+  font-weight: 500;
+}
+tbody th {
+  font-size: 15px;
+  font-weight: 500;
+}
+td {
+  text-align: center;
+  font:
+    22px Georgia,
+    serif;
+}
+.reading-note {
+  margin-top: 12px;
+}
+.reading-note strong {
+  font-size: 16px;
+}
+.reading-note p,
+.scope-note {
+  margin-top: 6px;
+  color: #617b70;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.scope-note {
+  border-top: 1px solid #dce5dc;
+  padding-top: 10px;
+  margin-top: 12px;
+  font-size: 13px;
+}
+sub {
+  font-size: 0.6em;
+  line-height: 0;
+}
+.combination-bar {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 13px 20px;
+  border: 1px solid #cbdcc8;
+  border-radius: 10px;
+  background: #edf3e8;
+}
+.combination-result {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 3px 17px;
+  min-width: 400px;
+}
+.combination-result > span,
+.presets > span {
+  font-size: 15px;
+  color: #617b70;
+}
+.combination-result output {
+  font:
+    34px Georgia,
+    serif;
+  color: #244e45;
+}
+.combination-result p {
+  grid-column: 1 / -1;
+  font-size: 16px;
+}
+.presets {
+  margin-left: auto;
+}
+.presets > div {
+  display: flex;
+  gap: 7px;
+  margin-top: 8px;
+}
+.presets button {
+  padding: 7px 14px;
+  font:
+    21px Georgia,
+    serif;
+}
+#motion {
+  margin-left: 12px;
+  padding: 10px 14px;
+  font-size: 16px;
+}
+.page-note {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  color: #738576;
+  font-size: 12px;
+}
+.page-note i {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin: 0 3px 0 8px;
+}
+.phase-a {
+  background: #b65c37;
+}
+.phase-b {
+  background: #297e70;
+}
+.phase-c {
+  background: #536cac;
+}

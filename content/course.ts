@@ -1397,6 +1397,55 @@ export const slides: Slide[] = [
           chapterId: chapter.id,
           embedUrl: '/transformer-working-principle.html',
         },
+        {
+          id: 'transformers-voltage-leakage',
+          kind: 'embed',
+          title: '变压器电压方程：从漏磁通到漏抗',
+          chapterId: chapter.id,
+          embedUrl: '/transformer-voltage-leakage.html',
+        },
+        {
+          id: 'transformers-voltage-ratio',
+          kind: 'embed',
+          title: '电压变换比',
+          chapterId: chapter.id,
+          embedUrl: '/transformer-voltage-ratio.html',
+        },
+        {
+          id: 'transformers-current-ratio',
+          kind: 'embed',
+          title: '电流变换比：功率平衡与磁动势平衡',
+          chapterId: chapter.id,
+          embedUrl: '/transformer-current-ratio.html',
+        },
+        {
+          id: 'transformers-impedance-transformation',
+          kind: 'embed',
+          title: '阻抗变换：负载折算到原边',
+          chapterId: chapter.id,
+          embedUrl: '/transformer-impedance-transformation.html',
+        },
+        {
+          id: 'transformers-impedance-matching-example',
+          kind: 'embed',
+          title: '例 2.2.1：扬声器的阻抗匹配',
+          chapterId: chapter.id,
+          embedUrl: '/transformer-impedance-matching-example.html',
+        },
+        {
+          id: 'transformers-three-phase',
+          kind: 'embed',
+          title: '三相变压器：组式与心式',
+          chapterId: chapter.id,
+          embedUrl: '/transformer-three-phase.html',
+        },
+        {
+          id: 'transformers-three-phase-connections',
+          kind: 'embed',
+          title: '三相变压器：绕组的联结方式',
+          chapterId: chapter.id,
+          embedUrl: '/transformer-three-phase-connections.html',
+        },
       );
     }
 

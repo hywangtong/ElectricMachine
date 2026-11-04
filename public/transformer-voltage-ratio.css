@@ -1,0 +1,174 @@
+.voltage-ratio-page {
+  grid-template-rows: 87px 60px 196px 220px minmax(0, 1fr);
+}
+
+.voltage-ratio-page .page-head h1 {
+  font-size: 38px;
+  margin: 5px 0;
+}
+
+.voltage-ratio-page .page-head p {
+  font-size: 21px;
+}
+
+.math {
+  font-family: 'Cambria Math', Georgia, serif;
+}
+
+.math sub {
+  font-size: 0.6em;
+}
+
+.condition {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding: 0 22px;
+  border: 1px solid #d8c59c;
+  border-radius: 10px;
+  background: #fcf3dd;
+  font-size: 22px;
+}
+
+.condition strong {
+  color: #8e6329;
+  font-size: 18px;
+}
+
+.condition .math {
+  margin-left: auto;
+  color: #6e715d;
+  font-size: 24px;
+}
+
+.sides {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.side {
+  padding: 19px 24px;
+  border: 1px solid #c8d9d4;
+  border-top: 4px solid currentColor;
+  border-radius: 12px;
+  background: #ffffffba;
+}
+
+.primary {
+  color: #95633f;
+}
+
+.secondary {
+  color: #397d70;
+}
+
+.side-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.side h2 {
+  font-size: 23px;
+}
+
+.side-heading > span {
+  font-size: 19px;
+}
+
+.balance {
+  margin-top: 12px;
+  color: #6c7c75;
+  font-size: 27px;
+}
+
+.approximation {
+  margin-top: 9px;
+  font-size: 47px;
+}
+
+.phasor {
+  position: relative;
+  display: inline-block;
+  font-style: italic;
+}
+
+.phasor::after {
+  position: absolute;
+  top: -0.38em;
+  left: 52%;
+  content: '·';
+  font-style: normal;
+}
+
+.ratio-panel {
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 12px;
+  border: 1px solid #c4d6cc;
+  border-radius: 12px;
+  background: #eef4e9;
+}
+
+.ratio-panel h2 {
+  font-size: 25px;
+  font-weight: 500;
+}
+
+.ratio-panel h2 > span {
+  color: #95633f;
+  font-weight: 700;
+}
+
+.ratio {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 56px;
+  line-height: 1;
+}
+
+.fraction {
+  display: inline-flex;
+  flex-direction: column;
+  text-align: center;
+  vertical-align: middle;
+  font-style: italic;
+}
+
+.fraction > span {
+  padding: 3px 11px;
+}
+
+.fraction > span + span {
+  border-top: 2px solid currentColor;
+}
+
+.terminal-ratio {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  color: #95633f;
+}
+
+.ratio-reason {
+  color: #55736d;
+  font-size: 21px;
+}
+
+.notation {
+  display: grid;
+  align-content: center;
+  gap: 6px;
+  padding: 0 7px;
+  color: #55736d;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.notation strong {
+  color: #173b3b;
+  font-size: 20px;
+}

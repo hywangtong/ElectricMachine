@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>例 2.2.1：扬声器的阻抗匹配</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/transformer-impedance-matching-example.css" />
+    <script src="/dc-machine-basics.js" defer></script>
+  </head>
+  <body>
+    <main class="lesson matching-example-page">
+      <header class="page-head">
+        <div class="eyebrow">变压器 / 阻抗变换的应用 · 课堂例题</div>
+        <h1>例 2.2.1 · 扬声器的阻抗匹配</h1>
+        <p>用变压器把 8 Ω 的负载，折算为收音机所需的 800 Ω。</p>
+      </header>
+
+      <div class="example-layout">
+        <section class="question-card" aria-labelledby="question-title">
+          <h2 id="question-title"><span>01</span> 题目</h2>
+          <p class="question-copy">
+            某半导体收音机的输出需接一只电阻为 <strong>800 Ω</strong>
+            的扬声器（喇叭），而目前市场上供应的扬声器电阻只有
+            <strong>8 Ω</strong
+            >。问利用电压比为多少的变压器才能实现这一阻抗匹配？
+          </p>
+          <dl class="given-values">
+            <div>
+              <dt>原边所需等效电阻</dt>
+              <dd>R<sub>e</sub> = <strong>800</strong> Ω</dd>
+            </div>
+            <div>
+              <dt>副边扬声器电阻</dt>
+              <dd>R<sub>L</sub> = <strong>8</strong> Ω</dd>
+            </div>
+          </dl>
+          <p class="model-note">
+            按题意将扬声器视为电阻负载，采用理想变压器模型。
+          </p>
+        </section>
+
+        <section class="solution-card" aria-labelledby="solution-title">
+          <h2 id="solution-title"><span>02</span> 解：由阻抗比求电压比</h2>
+          <p class="step-label">负载折算到原边</p>
+          <p class="math impedance-equation">
+            R<sub>e</sub> = k<sup>2</sup>R<sub>L</sub>
+          </p>
+          <p class="step-label">代入数据，求变比</p>
+          <math
+            display="block"
+            aria-label="k 等于根号下 Re 除以 RL，等于根号下 800 除以 8，等于 10"
+          >
+            <mi>k</mi><mo>=</mo>
+            <msqrt>
+              <mfrac>
+                <msub><mi>R</mi><mi>e</mi></msub>
+                <msub><mi>R</mi><mi>L</mi></msub>
+              </mfrac>
+            </msqrt>
+            <mo>=</mo>
+            <msqrt
+              ><mfrac><mn>800</mn><mn>8</mn></mfrac></msqrt
+            >
+            <mo>=</mo><mn>10</mn>
+          </math>
+          <div class="answer">
+            <span>所需电压比（原边∶副边）</span>
+            <strong class="math">U<sub>1</sub>∶U<sub>2</sub> = 10∶1</strong>
+          </div>
+          <p class="check math">
+            校核：R<sub>e</sub> = 10<sup>2</sup> × 8 = 800 Ω
+          </p>
+        </section>
+      </div>
+
+      <footer class="takeaway">
+        <strong>电压比 10∶1 → 阻抗比 100∶1</strong>
+        <p>
+          收音机接原边（多匝侧），8 Ω 扬声器接副边（少匝侧）。<br />
+          <span class="math"
+            >k = U<sub>1</sub>/U<sub>2</sub> = N<sub>1</sub>/N<sub>2</sub> =
+            10</span
+          >
+        </p>
+      </footer>
+    </main>
+  </body>
+</html>
