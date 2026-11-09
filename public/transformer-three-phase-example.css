@@ -1,0 +1,56 @@
+.three-phase-example .given-grid {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.three-phase-example .given-grid > div:last-child {
+  grid-column: 1 / -1;
+}
+
+.three-phase-example.is-revealed .question-card {
+  gap: 10px;
+}
+
+.three-phase-example.is-revealed .question-card h2 {
+  font-size: 23px;
+  line-height: 1.4;
+}
+
+.three-phase-example.is-revealed .given-grid > div {
+  padding: 9px 14px;
+}
+
+.three-phase-example .solution-steps {
+  grid-template-rows: repeat(3, 1fr) 0.8fr 1fr;
+  gap: 8px;
+}
+
+.three-phase-example .solution-steps li {
+  padding: 5px 14px;
+  grid-template-columns: 34px 1fr;
+  gap: 12px;
+}
+
+.three-phase-example .step-index {
+  width: 32px;
+  height: 32px;
+}
+
+.three-phase-example .solution-steps h2 {
+  margin-bottom: 3px;
+  font-size: 15px;
+  line-height: 1.2;
+}
+
+.three-phase-example .solution-steps p {
+  font-family: 'Cambria Math', Georgia, serif;
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.three-phase-example .solution-steps b {
+  color: #b25d3f;
+}
+
+.three-phase-example .solution-panel sub {
+  line-height: 0;
+}

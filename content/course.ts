@@ -1446,6 +1446,13 @@ export const slides: Slide[] = [
           chapterId: chapter.id,
           embedUrl: '/transformer-three-phase-connections.html',
         },
+        {
+          id: 'transformers-three-phase-example-question',
+          kind: 'embed',
+          title: '例 2.2.2：三相变压器的线量、相量与功率',
+          chapterId: chapter.id,
+          embedUrl: '/transformer-three-phase-example-question.html',
+        },
       );
     }
 

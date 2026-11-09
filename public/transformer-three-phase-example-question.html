@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>例 2.2.2：三相变压器的线量、相量与功率</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/dc-motor-nameplate-example.css" />
+    <link rel="stylesheet" href="/transformer-three-phase-example.css" />
+    <script src="/dc-machine-basics.js" defer></script>
+    <script type="module" src="/dc-motor-nameplate-example.js"></script>
+    <script type="module" src="/dc-generator-emf-controls.js"></script>
+  </head>
+  <body>
+    <main class="lesson exercise-page three-phase-example">
+      <header class="page-head exercise-head">
+        <div class="eyebrow">变压器 / 三相绕组联结的应用 · 课堂例题</div>
+        <h1>例 2.2.2 · 三相变压器的线量、相量与功率</h1>
+        <p>先根据题意独立列式，再点击按钮核对计算过程。</p>
+      </header>
+      <section class="exercise-layout">
+        <article class="question-card" aria-labelledby="question-title">
+          <header class="card-label">
+            <span>题目 · 例 2.2.2</span><small>THREE-PHASE TRANSFORMER</small>
+          </header>
+          <h2 id="question-title">
+            某三相变压器，Y,d 联结，向某对称三相负载供电。
+          </h2>
+          <dl class="given-grid" aria-label="已知条件">
+            <div>
+              <dt>一次侧线电压 · Y 联结</dt>
+              <dd>U<sub>1L</sub> = <b>66</b> kV</dd>
+            </div>
+            <div>
+              <dt>一次侧线电流</dt>
+              <dd>I<sub>1L</sub> = <b>15.76</b> A</dd>
+            </div>
+            <div>
+              <dt>二次侧线电压 · d 联结</dt>
+              <dd>U<sub>2L</sub> = <b>10</b> kV</dd>
+            </div>
+            <div>
+              <dt>二次侧线电流</dt>
+              <dd>I<sub>2L</sub> = <b>104</b> A</dd>
+            </div>
+            <div>
+              <dt>负载功率因数</dt>
+              <dd>λ<sub>2</sub> = cos φ<sub>2</sub> = <b>0.8</b></dd>
+            </div>
+          </dl>
+          <div class="question-tasks">
+            <strong>求</strong>
+            <ol>
+              <li>一次、二次绕组的相电压与相电流；</li>
+              <li>输出的视在功率、有功功率与无功功率。</li>
+            </ol>
+          </div>
+          <button
+            class="reveal-button"
+            type="button"
+            aria-expanded="false"
+            aria-controls="three-phase-solution"
+          >
+            <span class="button-label">显示计算过程与答案</span
+            ><span class="button-icon" aria-hidden="true">→</span>
+          </button>
+        </article>
+        <section
+          class="solution-panel"
+          id="three-phase-solution"
+          aria-label="例 2.2.2 计算过程与答案"
+          hidden
+        >
+          <header class="solution-head">
+            <span>计算过程与答案</span><small>先换算每相量，再求三相功率</small>
+          </header>
+          <ol class="solution-steps">
+            <li>
+              <span class="step-index">01</span>
+              <div>
+                <h2>一次侧 Y 联结：线电压除以 √3</h2>
+                <p>
+                  U<sub>1P</sub> = U<sub>1L</sub> / √3 ≈ 66 / 1.732 =
+                  <b>38.11 kV</b>
+                </p>
+                <p>I<sub>1P</sub> = I<sub>1L</sub> = <b>15.76 A</b></p>
+              </div>
+            </li>
+            <li>
+              <span class="step-index">02</span>
+              <div>
+                <h2>二次侧 d 联结：线电流除以 √3</h2>
+                <p>U<sub>2P</sub> = U<sub>2L</sub> = <b>10 kV</b></p>
+                <p>
+                  I<sub>2P</sub> = I<sub>2L</sub> / √3 ≈ 104 / 1.732 =
+                  <b>60.05 A</b>
+                </p>
+              </div>
+            </li>
+            <li>
+              <span class="step-index">03</span>
+              <div>
+                <h2>输出视在功率：采用二次侧线量</h2>
+                <p>
+                  S<sub>2</sub> = √3 U<sub>2L</sub>I<sub>2L</sub> ≈ 1.732 × 10 ×
+                  104
+                </p>
+                <p>= 1801.28 kV·A ≈ <b>1800 kV·A</b></p>
+              </div>
+            </li>
+            <li>
+              <span class="step-index">04</span>
+              <div>
+                <h2>输出有功功率</h2>
+                <p>
+                  P<sub>2</sub> = S<sub>2</sub> cos φ<sub>2</sub> ≈ 1801.28 ×
+                  0.8 ≈ <b>1441 kW</b>
+                </p>
+              </div>
+            </li>
+            <li>
+              <span class="step-index">05</span>
+              <div>
+                <h2>输出无功功率大小</h2>
+                <p>|sin φ<sub>2</sub>| = √(1 − 0.8²) = 0.6</p>
+                <p>
+                  |Q<sub>2</sub>| = S<sub>2</sub> |sin φ<sub>2</sub>| ≈ 1801.28
+                  × 0.6 ≈ <b>1080.8 kvar</b>
+                </p>
+              </div>
+            </li>
+          </ol>
+          <p class="solution-note">
+            取 √3 ≈ 1.732，保留中间精度。L 表示线量，P
+            表示每相绕组的量。题目未说明超前或滞后，无功给出大小；感性 Q₂ &gt;
+            0，容性 Q₂ &lt; 0。
+          </p>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>
