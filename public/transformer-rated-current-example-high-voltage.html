@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>例 2.4.1：高压绕组的额定线电流与相电流</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/dc-motor-nameplate-example.css" />
+    <link rel="stylesheet" href="/transformer-rated-current-example.css" />
+    <script src="/dc-machine-basics.js" defer></script>
+    <script type="module" src="/dc-motor-nameplate-example.js"></script>
+    <script type="module" src="/dc-generator-emf-controls.js"></script>
+  </head>
+  <body>
+    <main class="lesson exercise-page rated-current-example">
+      <header class="page-head exercise-head">
+        <div class="eyebrow">变压器 / 额定值的应用 · 课堂例题 · 1 / 2</div>
+        <h1>例 2.4.1 · 高压绕组的额定线电流与相电流</h1>
+        <p>先由额定容量和额定线电压求线电流，再按绕组联结换算相电流。</p>
+      </header>
+      <section class="exercise-layout">
+        <article class="question-card" aria-labelledby="question-title">
+          <header class="card-label">
+            <span>题目 · 例 2.4.1</span><small>THREE-PHASE TRANSFORMER</small>
+          </header>
+          <h2 id="question-title">某三相变压器在额定状态下运行。</h2>
+          <dl class="given-grid" aria-label="已知条件">
+            <div>
+              <dt>绕组联结</dt>
+              <dd><b>YN,d</b></dd>
+            </div>
+            <div>
+              <dt>额定容量</dt>
+              <dd>
+                <i>S<sub>N</sub></i> = <b>500</b> kV·A
+              </dd>
+            </div>
+            <div>
+              <dt>高压侧额定线电压</dt>
+              <dd>
+                <i>U<sub>1N</sub></i> = <b>35</b> kV
+              </dd>
+            </div>
+            <div>
+              <dt>低压侧额定线电压</dt>
+              <dd>
+                <i>U<sub>2N</sub></i> = <b>11</b> kV
+              </dd>
+            </div>
+          </dl>
+          <div class="question-tasks">
+            <strong>求</strong>
+            <ol>
+              <li>高压绕组的额定线电流与相电流（本页）；</li>
+              <li>低压绕组的额定线电流与相电流（下一页）。</li>
+            </ol>
+          </div>
+          <button
+            class="reveal-button"
+            type="button"
+            aria-expanded="false"
+            aria-controls="rated-current-solution"
+          >
+            <span class="button-label">显示计算过程与答案</span
+            ><span class="button-icon" aria-hidden="true">→</span>
+          </button>
+        </article>
+        <section
+          class="solution-panel"
+          id="rated-current-solution"
+          aria-label="高压侧计算过程与答案"
+          hidden
+        >
+          <header class="solution-head">
+            <span>计算过程与答案</span><small>高压侧 · 星形联结</small>
+          </header>
+          <ol class="solution-steps">
+            <li>
+              <span class="step-index">01</span>
+              <div>
+                <h2>按三相额定容量求高压侧线电流</h2>
+                <p>
+                  <i>I<sub>1NL</sub></i> = <i>I<sub>1N</sub></i> =
+                  <i>S<sub>N</sub></i> / (√3 <i>U<sub>1N</sub></i
+                  >)
+                </p>
+                <p class="substitution">
+                  = (500 × 10³) / (√3 × 35 × 10³) A ≈ <b>8.25 A</b>
+                </p>
+              </div>
+            </li>
+            <li>
+              <span class="step-index">02</span>
+              <div>
+                <h2>高压绕组为星形联结，相电流等于线电流</h2>
+                <p>
+                  <i>I<sub>1NP</sub></i> = <i>I<sub>1NL</sub></i>
+                </p>
+                <p class="substitution">≈ <b>8.25 A</b></p>
+              </div>
+            </li>
+          </ol>
+          <p class="solution-note">
+            YN 表示星形联结且中性点引出。下标 L 表示线电流，P 表示绕组相电流。
+          </p>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>变压器的额定频率：50 Hz 与 60 Hz</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/transformer-rated-values.css" />
+    <script src="/dc-machine-basics.js" defer></script>
+    <script src="/dc-generator-emf-controls.js" defer></script>
+    <script src="/transformer-rated-values.js" defer></script>
+  </head>
+  <body>
+    <main class="lesson rated-page frequency-page" data-frequency="50">
+      <header class="page-head">
+        <div class="eyebrow">变压器 / 额定值 / 02</div>
+        <h1>额定频率 · 50 Hz 与 60 Hz</h1>
+        <p>
+          额定频率
+          <span class="math">f<sub>N</sub></span>
+          是变压器设计运行的电源频率。原边与副边的频率相同。
+        </p>
+      </header>
+
+      <div class="rated-grid">
+        <figure
+          class="anatomy-card frequency-card"
+          aria-labelledby="frequency-title"
+        >
+          <div class="figure-head">
+            <span class="figure-number">FIG 02</span>
+            <div class="switch" role="group" aria-label="供电频率">
+              <button type="button" data-hz="50" aria-pressed="true">
+                50 Hz
+              </button>
+              <button type="button" data-hz="60" aria-pressed="false">
+                60 Hz
+              </button>
+            </div>
+            <h2 id="frequency-title">铁芯主磁通</h2>
+          </div>
+          <svg
+            class="transformer-art flux-art"
+            viewBox="0 0 760 360"
+            role="img"
+            aria-label="变压器铁芯上以光带和箭头显示主磁通的相对大小和方向"
+          >
+            <use href="/transformer-rated-diagram.svg#single-art" />
+            <g class="flux-field">
+              <use href="/transformer-rated-diagram.svg#flux-loop" />
+              <use
+                id="forward-flux"
+                href="/transformer-rated-diagram.svg#flux-forward"
+              />
+              <use
+                id="reverse-flux"
+                href="/transformer-rated-diagram.svg#flux-reverse"
+              />
+            </g>
+          </svg>
+          <svg
+            class="flux-chart"
+            viewBox="0 0 690 106"
+            role="img"
+            aria-label="同样 100 毫秒内，50 赫兹磁通波形有五个周期，60 赫兹有六个周期"
+          >
+            <path
+              class="chart-axis"
+              d="M45 13v70h609 M45 48h609 M45 83v5 M654 83v5"
+            />
+            <text x="24" y="18">Φ</text>
+            <text x="45" y="103">0</text>
+            <text x="625" y="103">100 ms</text>
+            <path class="trace trace-50" />
+            <path class="trace trace-60" />
+            <line class="chart-cursor" y1="13" y2="83" />
+            <circle class="chart-point" r="4.5" />
+          </svg>
+          <figcaption class="frequency-readout">
+            <div>
+              <div class="figure-legend">
+                <span class="voltage-text">● 60 Hz</span
+                ><span class="current-text">● 50 Hz</span>
+              </div>
+              <span class="motion-hint">慢放 · 磁通峰值以 60 Hz 为基准</span>
+            </div>
+            <strong id="flux-readout" aria-live="polite"
+              >20.0 ms / 周期 · 峰值 1.20 倍</strong
+            >
+            <button type="button" class="pause-button">暂停</button>
+          </figcaption>
+        </figure>
+
+        <div class="rated-notes frequency-notes">
+          <section class="rated-note">
+            <h2>各国工频示例</h2>
+            <div class="region-grid">
+              <div>
+                <strong class="current-text">50 Hz</strong
+                ><span>中国、德国、日本东部</span>
+              </div>
+              <div>
+                <strong class="voltage-text">60 Hz</strong
+                ><span>美国、日本西部</span>
+              </div>
+            </div>
+          </section>
+          <section class="rated-note">
+            <h2>同一台变压器，频率越低，磁通越大</h2>
+            <p class="formula math">
+              Φ<sub>m</sub> ≈ U<sub>1</sub> / (4.44 f N<sub>1</sub>)
+            </p>
+            <p>
+              正弦供电时，若电压和匝数不变，<b
+                >50 Hz 的磁通峰值是 60 Hz 的 1.20 倍</b
+              >。
+            </p>
+          </section>
+          <section class="rated-note">
+            <h2>换频率时，电压也要一起看</h2>
+            <p>
+              <b>60 → 50 Hz</b
+              >，同电压下更易过励磁，可能饱和、发热。若设备允许改用 50
+              Hz，维持原 <span class="math">U/f</span> 需把电压降至原来的
+              <b>5/6</b>。
+            </p>
+            <p>
+              <b>50 → 60 Hz</b>，同电压下磁通降为
+              <b>5/6</b>，允许的容量与温升仍以铭牌和厂家资料为准。
+            </p>
+          </section>
+        </div>
+      </div>
+
+      <p class="rated-strip">
+        同电压下，若要维持相同峰值磁通密度，50 Hz 设计需要更大的「匝数 ×
+        铁芯截面积」。
+      </p>
+    </main>
+  </body>
+</html>

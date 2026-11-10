@@ -1,0 +1,3 @@
+.rated-current-example .solution-steps {
+  grid-template-rows: repeat(2, 1fr);
+}

@@ -1453,6 +1453,55 @@ export const slides: Slide[] = [
           chapterId: chapter.id,
           embedUrl: '/transformer-three-phase-example-question.html',
         },
+        {
+          id: 'transformers-core-lamination',
+          kind: 'embed',
+          title: '变压器铁芯：奇偶层交错叠片',
+          chapterId: chapter.id,
+          embedUrl: '/transformer-core-lamination.html',
+        },
+        {
+          id: 'transformers-rated-voltage-current',
+          kind: 'embed',
+          title: '变压器的额定值：电压、电流与容量',
+          chapterId: chapter.id,
+          embedUrl: '/transformer-rated-voltage-current.html',
+        },
+        {
+          id: 'transformers-rated-capacity-frequency',
+          kind: 'embed',
+          title: '变压器的额定频率：50 Hz 与 60 Hz',
+          chapterId: chapter.id,
+          embedUrl: '/transformer-rated-capacity-frequency.html',
+        },
+        {
+          id: 'transformers-rated-current-example-high-voltage',
+          kind: 'embed',
+          title: '例 2.4.1：高压绕组的额定线电流与相电流',
+          chapterId: chapter.id,
+          embedUrl: '/transformer-rated-current-example-high-voltage.html',
+        },
+        {
+          id: 'transformers-rated-current-example-low-voltage',
+          kind: 'embed',
+          title: '例 2.4.1（续）：低压绕组的额定线电流与相电流',
+          chapterId: chapter.id,
+          embedUrl: '/transformer-rated-current-example-low-voltage.html',
+        },
+        {
+          id: 'transformers-equivalent-circuit-referral',
+          kind: 'embed',
+          title: '变压器等效电路：二次侧折算',
+          chapterId: chapter.id,
+          embedUrl: '/transformer-equivalent-circuit-referral.html',
+        },
+        {
+          id: 'transformers-t-equivalent-circuit',
+          kind: 'embed',
+          title: '变压器：从二次侧折算到 T 形等效电路',
+          chapterId: chapter.id,
+          embedUrl: '/transformer-t-equivalent-circuit.html',
+        },
       );
     }
 

@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>变压器的额定值：电压、电流与容量</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/transformer-rated-values.css" />
+    <script src="/dc-machine-basics.js" defer></script>
+    <script src="/dc-generator-emf-controls.js" defer></script>
+    <script src="/transformer-rated-values.js" defer></script>
+  </head>
+  <body>
+    <main class="lesson rated-page" data-phase="one">
+      <header class="page-head">
+        <div class="eyebrow">变压器 / 额定值 / 01</div>
+        <h1>额定电压、额定电流与额定容量</h1>
+        <p>先分清端子上的电压和电流，再用同一侧的额定值求容量。</p>
+      </header>
+
+      <div class="rated-grid">
+        <figure class="anatomy-card" aria-labelledby="phase-title">
+          <div class="figure-head">
+            <span class="figure-number">FIG 01</span>
+            <div class="switch" role="group" aria-label="变压器相数">
+              <button type="button" data-phase-mode="one" aria-pressed="true">
+                单相
+              </button>
+              <button
+                type="button"
+                data-phase-mode="three"
+                aria-pressed="false"
+              >
+                三相
+              </button>
+            </div>
+            <h2 id="phase-title">绕组与接线端子</h2>
+          </div>
+          <svg
+            class="transformer-art phase-art"
+            viewBox="0 0 760 360"
+            role="img"
+            aria-label="单相变压器，两侧各两个接线端子"
+          >
+            <use
+              data-phase-only="one"
+              href="/transformer-rated-diagram.svg#single"
+            />
+            <use
+              data-phase-only="three"
+              href="/transformer-rated-diagram.svg#three"
+            />
+          </svg>
+          <div class="figure-legend">
+            <span><i class="sample primary"></i> 原边绕组 · 大写端子</span>
+            <span><i class="sample secondary"></i> 副边绕组 · 小写端子</span>
+          </div>
+          <figcaption class="figure-readout" aria-live="polite">
+            <div data-phase-only="one">
+              <strong class="voltage-text">电压</strong>跨接两个端子测量，
+              <strong class="current-text">电流</strong>沿一根引线测量。
+            </div>
+            <div data-phase-only="three">
+              <strong class="voltage-text">线电压</strong>跨两根线（如 A–B），
+              <strong class="current-text">线电流</strong>沿一根线（图中 C
+              线）。
+            </div>
+            <small
+              >蓝色跨线和橙色箭头标的是测量位置。测电压与测满载电流对应不同工况。</small
+            >
+          </figcaption>
+        </figure>
+
+        <div class="rated-notes">
+          <section class="rated-note">
+            <h2>
+              <span>01</span> 额定电压
+              <b class="math">U<sub>1N</sub> / U<sub>2N</sub></b>
+            </h2>
+            <p>在额定频率下，原边加额定电压，副边开路时量得副边额定电压。</p>
+            <p class="note-detail" data-phase-only="one">
+              铭牌示例 <b>10 000 / 230 V</b>，原边加 10 000 V，副边空载为 230
+              V。
+            </p>
+            <p class="note-detail voltage-text" data-phase-only="three">
+              <b>铭牌读线电压</b>，即任意两根线之间的额定电压。
+            </p>
+          </section>
+
+          <section class="rated-note">
+            <h2>
+              <span>02</span> 额定电流
+              <b class="math">I<sub>1N</sub> / I<sub>2N</sub></b>
+            </h2>
+            <p>各侧在规定的运行和冷却条件下可长期承载的满载电流。</p>
+            <p class="note-detail current-text" data-phase-only="three">
+              <b>铭牌读线电流</b>，即流经一根线端引线的额定电流。
+            </p>
+          </section>
+
+          <section class="rated-note">
+            <h2>
+              <span>03</span> 额定容量 <b class="math">S<sub>N</sub></b>
+            </h2>
+            <p>额定视在功率，单位为 VA 或 kVA。双绕组的两侧容量相同。</p>
+            <p class="formula math" data-phase-only="one">
+              S<sub>N</sub> = U<sub>1N</sub>I<sub>1N</sub> = U<sub>2N</sub>I<sub
+                >2N</sub
+              >
+            </p>
+            <p class="formula math" data-phase-only="three">
+              S<sub>N</sub> = √3 U<sub>1N</sub>I<sub>1N</sub> = √3
+              U<sub>2N</sub>I<sub>2N</sub>
+            </p>
+          </section>
+        </div>
+      </div>
+
+      <p class="rated-strip" data-phase-only="one">
+        单相容量用同一侧的额定端电压 × 额定电流。
+      </p>
+      <p class="rated-strip" data-phase-only="three">
+        三相总容量用 √3 × 同一侧的<strong>额定线电压 × 额定线电流</strong>。
+      </p>
+    </main>
+  </body>
+</html>

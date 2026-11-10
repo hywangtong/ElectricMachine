@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>变压器：从二次侧折算到 T 形等效电路</title>
+    <link rel="stylesheet" href="/transformer-working-principle.css" />
+    <link
+      rel="stylesheet"
+      href="/transformer-equivalent-circuit-referral.css"
+    />
+    <script src="/dc-machine-basics.js" defer></script>
+    <script src="/dc-generator-emf-controls.js" defer></script>
+    <script src="/transformer-t-equivalent-circuit.js" defer></script>
+  </head>
+  <body>
+    <main class="lesson circuit-lesson" data-voltage-frame="0">
+      <header>
+        <div class="eyebrow">TRANSFORMERS / 运行分析与等效电路</div>
+        <h1>变压器：从二次侧折算到 T 形等效电路</h1>
+        <p class="lead">
+          把二次侧统一到一次侧基准，再把绕组阻抗与励磁支路接成一个电路。
+        </p>
+      </header>
+      <nav class="stages" aria-label="T 形等效电路的形成">
+        <button type="button" aria-pressed="true"><b>01</b>实际匝数不同</button>
+        <button type="button" aria-pressed="false">
+          <b>02</b>折算成同匝数
+        </button>
+        <button type="button" aria-pressed="false">
+          <b>03</b>理想耦合等效直连
+        </button>
+        <button type="button" aria-pressed="false">
+          <b>04</b>接入励磁支路
+        </button>
+      </nav>
+      <div class="body">
+        <figure class="diagram panel">
+          <div class="diagram-top">
+            <span>电路演变 · 一次侧基准</span>
+            <button type="button" id="replay">重播图示</button>
+          </div>
+          <svg
+            class="art"
+            viewBox="0 0 720 310"
+            role="img"
+            aria-labelledby="voltage-circuit-title voltage-circuit-heading"
+          >
+            <title id="voltage-circuit-title">电压与电动势折算的电路</title>
+            <defs>
+              <path
+                id="reactor"
+                d="M0 0a10 10 0 0 1 20 0 10 10 0 0 1 20 0 10 10 0 0 1 20 0"
+              />
+              <rect id="resistor" x="0" y="-9" width="50" height="18" rx="2" />
+              <path
+                id="winding-four-turns"
+                d="M0 0a7.5 7.5 0 0 1 15 0 7.5 7.5 0 0 1 15 0 7.5 7.5 0 0 1 15 0 7.5 7.5 0 0 1 15 0"
+              />
+              <path
+                id="winding-two-turns"
+                d="M0 0a15 15 0 0 1 30 0 15 15 0 0 1 30 0"
+              />
+            </defs>
+            <text
+              class="art-heading"
+              id="voltage-circuit-heading"
+              x="360"
+              y="45"
+            >
+              折算前 · 两侧匝数不同
+            </text>
+            <g class="circuit input">
+              <path d="M43 98H100 M150 98H194 M254 98H318 M318 230H43" />
+              <use href="#resistor" x="100" y="98" />
+              <use href="#reactor" x="194" y="98" />
+              <path d="m77 93 7 5-7 5" />
+              <circle cx="43" cy="98" r="4" />
+              <circle cx="43" cy="230" r="4" />
+              <text x="125" y="78">R₁</text>
+              <text x="224" y="78">jX₁</text>
+              <text x="57" y="172">U₁</text>
+              <text x="79" y="78">I₁</text>
+              <g class="transformer-only">
+                <path d="M318 98V134 M318 194V230" />
+                <use
+                  href="#winding-four-turns"
+                  transform="translate(318 134) rotate(90)"
+                />
+                <circle cx="310" cy="127" r="3" />
+                <text x="281" y="172">E₁</text>
+                <text x="267" y="263">N₁ = 200 匝</text>
+              </g>
+            </g>
+            <path
+              class="coupling transformer-only"
+              d="M346 123V205 M357 123V205"
+            />
+            <g class="circuit output">
+              <path
+                d="M384 98H431 M491 98H535 M585 98H656V139 M656 189V230H384"
+              />
+              <use href="#reactor" x="431" y="98" />
+              <use href="#resistor" x="535" y="98" />
+              <use href="#resistor" transform="translate(656 139) rotate(90)" />
+              <path d="m618 93 7 5-7 5" />
+              <text x="461" y="78" data-referred-label="jX₂′">jX₂</text>
+              <text x="560" y="78" data-referred-label="R₂′">R₂</text>
+              <text x="619" y="172" data-referred-label="U₂′">U₂</text>
+              <text x="621" y="78" data-referred-label="I₂′">I₂</text>
+              <text x="684" y="172">
+                Z
+                <tspan baseline-shift="sub" font-size="14">L</tspan>
+                <tspan class="after-referral">′</tspan>
+              </text>
+              <g class="transformer-only">
+                <path d="M384 98V134 M384 194V230" />
+                <use
+                  class="before-referral"
+                  href="#winding-two-turns"
+                  transform="translate(384 194) rotate(-90)"
+                />
+                <use
+                  class="after-referral"
+                  href="#winding-four-turns"
+                  transform="translate(384 194) rotate(-90)"
+                />
+                <circle cx="392" cy="127" r="3" />
+                <text x="421" y="172" data-referred-label="E₂′">E₂</text>
+                <text x="450" y="263" data-referred-label="N₂′ = N₁ = 200 匝">
+                  N₂ = 100 匝
+                </text>
+              </g>
+            </g>
+            <g class="direct-only">
+              <path class="direct-wire" d="M318 98H384" pathLength="1" />
+              <path class="direct-wire" d="M318 230H384" pathLength="1" />
+              <text class="art-value" x="351" y="155">
+                1∶1 理想变压器 → 导线
+              </text>
+              <text class="art-note" x="351" y="186">
+                上、下对应端子分别直连
+              </text>
+            </g>
+          </svg>
+          <svg
+            class="art"
+            viewBox="0 0 720 310"
+            role="img"
+            aria-labelledby="referred-title"
+            hidden
+          >
+            <title id="referred-title">
+              折算到一次侧的 T 形等效电路，励磁支路接在两侧串联阻抗之间
+            </title>
+            <text class="art-heading" x="360" y="45">
+              折算后 · 一次侧基准的 T 形等效电路
+            </text>
+            <g class="circuit input">
+              <path d="M43 98H100 M150 98H194 M254 98H353 M43 230H353" />
+              <use href="#resistor" x="100" y="98" />
+              <use href="#reactor" x="194" y="98" />
+              <path d="m77 93 7 5-7 5" />
+              <circle cx="43" cy="98" r="4" />
+              <circle cx="43" cy="230" r="4" />
+              <text x="125" y="78">R₁</text>
+              <text x="224" y="78">jX₁</text>
+              <text x="57" y="172">U₁</text>
+              <text x="79" y="78">I₁</text>
+            </g>
+            <g class="circuit excitation">
+              <path d="M353 98V119 M353 160V165 M353 225V230" />
+              <path d="m348 108 5 6 5-6" />
+              <use
+                href="#resistor"
+                transform="translate(353 119) rotate(90) scale(0.82 1)"
+              />
+              <use href="#reactor" transform="translate(353 165) rotate(90)" />
+              <circle cx="353" cy="98" r="4" />
+              <circle cx="353" cy="230" r="4" />
+              <text x="320" y="114">I₀′</text>
+              <text x="320" y="148">R₀</text>
+              <text x="316" y="201">jX₀</text>
+              <text x="386" y="128">−</text>
+              <text x="386" y="222">+</text>
+              <text x="449" y="180">E₁ = E₂′</text>
+              <text class="art-note" x="354" y="263">励磁支路</text>
+            </g>
+            <g class="circuit output">
+              <path
+                d="M353 98H431 M491 98H535 M585 98H656V139 M656 189V230H353"
+              />
+              <use href="#reactor" x="431" y="98" />
+              <use href="#resistor" x="535" y="98" />
+              <use href="#resistor" transform="translate(656 139) rotate(90)" />
+              <path d="m618 93 7 5-7 5" />
+              <text x="461" y="78">jX₂′</text>
+              <text x="560" y="78">R₂′</text>
+              <text x="616" y="172">U₂′</text>
+              <text x="621" y="78">I₂′</text>
+              <text x="685" y="172">
+                Z
+                <tspan baseline-shift="sub" font-size="14">L</tspan>
+                ′
+              </text>
+              <text class="art-note" x="535" y="263">折算后的二次支路</text>
+            </g>
+          </svg>
+          <figcaption class="diagram-caption" id="diagram-caption">
+            <span>一次侧 200 匝，实际二次侧 100 匝，匝数比 k = 2。</span>
+            <span>铜色为一次侧，青绿色为二次侧。</span>
+          </figcaption>
+        </figure>
+        <section class="explanation panel" aria-label="T 形电路推导">
+          <div aria-live="polite">
+            <div class="step">
+              <div class="eyebrow">实际变压器 · 200 匝对 100 匝</div>
+              <h2>两侧经主磁通耦合</h2>
+              <p>
+                把绕组电阻和漏抗画成各侧的串联元件。中间的绕组表示两侧的磁耦合。
+              </p>
+              <div class="formula">k = N₁/N₂ = 200/100 = 2</div>
+              <p class="note">
+                二次侧电压、电流和阻抗仍以 100 匝的实际绕组为基准。
+              </p>
+            </div>
+            <div class="step" hidden>
+              <div class="eyebrow">二次侧折算 · 两侧各 200 匝</div>
+              <h2>把变比化为 1∶1</h2>
+              <p>
+                用 N₁ 匝等效二次绕组替代实际二次绕组，同时折算整个二次支路。
+              </p>
+              <div class="formula">
+                U₂′ = kU₂，I₂′ = I₂/k<br />R₂′ = k²R₂，X₂′ =
+                k²X₂，Z<sub>L</sub>′ = k²Z<sub>L</sub>
+              </div>
+              <p class="note">
+                两绕组交链同一主磁通，按图中同名端取同向参考，E₂′ = E₁。
+              </p>
+            </div>
+            <div class="step" hidden>
+              <div class="eyebrow">理想化简 · 励磁支路开路</div>
+              <h2>1∶1 理想变压器可用导线替代</h2>
+              <p>
+                忽略励磁电流（X₀ → ∞）与铁耗时，1∶1
+                理想耦合的两端电压相等，传递电流等大。
+              </p>
+              <div class="formula">上、下对应端子分别直连</div>
+              <p class="note">
+                左右绕组的串联阻抗和负载仍保留。接下来把实际的励磁电流与铁耗补回模型。
+              </p>
+            </div>
+            <div class="step" hidden>
+              <div class="eyebrow">实际模型 · 补回励磁与铁耗</div>
+              <h2>中间接入励磁支路，形成 T 形</h2>
+              <p>
+                在 E₁ = E₂′ 所对应的公共节点跨接励磁支路。励磁电流 I₀′
+                流过串联的 R₀ 和 jX₀。
+              </p>
+              <div class="formula">
+                R₀ 表示铁耗，jX₀ 表示建立主磁通的励磁电抗
+              </div>
+              <p class="note">
+                左臂是一次绕组阻抗，右臂是折算后的二次绕组阻抗，下臂是励磁支路。
+              </p>
+            </div>
+          </div>
+          <div class="stage-bottom">
+            <span id="step-count">第 1 步 / 共 4 步</span>
+            <button id="next-step" type="button">下一步 →</button>
+          </div>
+        </section>
+      </div>
+      <footer>
+        <strong>先把两侧统一到同一匝数基准，再由理想直连补回励磁支路。</strong>
+        <span>撇号 ′ 标记折算量。图中的导线表示等效电路里的连接。</span>
+      </footer>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,317 @@
+.rated-page {
+  grid-template-rows: 102px minmax(0, 1fr) 52px;
+  gap: 14px;
+}
+
+.rated-page .page-head h1 {
+  margin: 6px 0;
+  font-size: 42px;
+}
+
+.rated-page .page-head p {
+  font-size: 22px;
+}
+
+.rated-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.16fr) minmax(0, 1fr);
+  gap: 16px;
+}
+
+.anatomy-card {
+  display: grid;
+  grid-template-rows: 42px minmax(0, 1fr) 30px auto;
+  gap: 7px;
+  min-height: 0;
+  margin: 0;
+  padding: 13px 17px;
+  border: 1px solid #c1d2cc;
+  border-radius: 13px;
+  background: radial-gradient(ellipse at 50% 47%, #fff, #eef4ee 85%);
+}
+
+.figure-head,
+.frequency-readout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.figure-head h2 {
+  font-size: 20px;
+}
+
+.figure-number {
+  color: #55736d;
+  font:
+    700 15px 'Segoe UI',
+    sans-serif;
+  letter-spacing: 0.13em;
+}
+
+.switch {
+  display: flex;
+  gap: 3px;
+  padding: 3px;
+  border: 1px solid #bccfc7;
+  border-radius: 8px;
+  background: #e1ebe4;
+}
+
+.switch button,
+.pause-button {
+  min-width: 78px;
+  padding: 5px 13px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  background: transparent;
+  color: #335a53;
+  font:
+    650 18px 'Segoe UI',
+    'Microsoft YaHei',
+    sans-serif;
+  cursor: pointer;
+}
+
+.switch button[aria-pressed='true'] {
+  border-color: #9fbeb0;
+  background: #fff;
+  color: #173b3b;
+}
+
+.pause-button {
+  min-width: 62px;
+  border-color: #aac1b6;
+  background: #fff;
+  font-size: 16px;
+}
+
+.rated-page button:focus-visible {
+  outline: 2px solid #21689a;
+  outline-offset: 2px;
+}
+
+.transformer-art,
+.flux-chart {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.figure-legend {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  color: #385a53;
+  font-size: 17px;
+}
+
+.sample {
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  margin-right: 3px;
+  border-radius: 2px;
+}
+
+.sample.primary {
+  background: #bf8757;
+}
+
+.sample.secondary {
+  background: #6a9990;
+}
+
+.figure-readout,
+.frequency-readout {
+  min-width: 0;
+  border-top: 1px solid #bfd1c8;
+  padding-top: 9px;
+  font-size: 19px;
+}
+
+.figure-readout small,
+.motion-hint {
+  display: block;
+  margin-top: 3px;
+  color: #4d6963;
+  font-size: 15px;
+}
+
+.voltage-text {
+  color: #21689a;
+}
+
+.current-text {
+  color: #9c491f;
+}
+
+.rated-notes {
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  gap: 9px;
+  min-height: 0;
+}
+
+.rated-note {
+  padding: 12px 15px;
+  border: 1px solid #c8d9d4;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.rated-note h2 {
+  margin-bottom: 4px;
+  font-size: 22px;
+}
+
+.rated-note h2 span {
+  margin-right: 4px;
+  color: #487467;
+  font-size: 15px;
+  letter-spacing: 0.05em;
+}
+
+.rated-note h2 .math {
+  margin-left: 8px;
+  color: #287768;
+}
+
+.rated-note p {
+  font-size: 20px;
+  line-height: 1.4;
+}
+
+.rated-note p + p {
+  margin-top: 5px;
+}
+
+.rated-note .note-detail {
+  font-size: 18px;
+}
+
+.rated-page .math {
+  font-family: 'Cambria Math', Georgia, serif;
+}
+
+.rated-page sub {
+  font-size: 0.64em;
+  line-height: 0;
+}
+
+.rated-note .formula {
+  width: fit-content;
+  margin-top: 6px;
+  border-radius: 5px;
+  padding: 2px 9px;
+  background: #edf6f1;
+  font-size: 28px;
+}
+
+.rated-page[data-phase] .rated-notes {
+  grid-template-rows: 1fr 1fr 1.2fr;
+}
+
+.rated-page[data-phase] .rated-note {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.rated-page[data-phase] .formula {
+  font-size: 32px;
+}
+
+.rated-strip {
+  padding: 10px 16px;
+  border-left: 4px solid #39796f;
+  border-radius: 7px;
+  background: #e8f2eb;
+  font-size: 22px;
+}
+
+.rated-page[data-phase='one'] [data-phase-only='three'],
+.rated-page[data-phase='three'] [data-phase-only='one'] {
+  display: none;
+}
+
+.frequency-card {
+  grid-template-rows: 42px minmax(0, 1fr) 98px 55px;
+}
+
+.flux-chart text {
+  fill: #46645d;
+  font:
+    14px 'Segoe UI',
+    sans-serif;
+}
+
+.chart-axis,
+.chart-cursor {
+  fill: none;
+  stroke: #9eb4ad;
+  stroke-width: 1;
+}
+
+.trace {
+  fill: none;
+  stroke-width: 1.6;
+  opacity: 0.37;
+}
+
+.trace-50 {
+  stroke: #a24c22;
+}
+
+.trace-60 {
+  stroke: #21689a;
+}
+
+.frequency-page[data-frequency='50'] {
+  --flux-color: #a24c22;
+}
+
+.frequency-page[data-frequency='60'] {
+  --flux-color: #21689a;
+}
+
+.frequency-page[data-frequency='50'] .trace-50,
+.frequency-page[data-frequency='60'] .trace-60 {
+  stroke-width: 2.5;
+  opacity: 1;
+}
+
+.flux-field {
+  color: var(--flux-color);
+}
+
+.chart-point {
+  fill: var(--flux-color);
+}
+
+.frequency-readout strong {
+  font-size: 19px;
+}
+
+.region-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.region-grid > div {
+  display: grid;
+  gap: 2px;
+  padding: 6px 9px;
+  border-radius: 5px;
+  background: #f1f6f2;
+}
+
+.region-grid strong {
+  font-size: 23px;
+}
+
+.region-grid span {
+  font-size: 18px;
+}

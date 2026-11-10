@@ -1,0 +1,218 @@
+.lamination {
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: 16px;
+  padding: 24px 30px;
+}
+
+.lamination .page-head h1 {
+  margin: 4px 0 6px;
+  font-size: 38px;
+}
+
+.lamination .page-head p {
+  font-size: 21px;
+}
+
+.lamination-layout {
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  grid-template-rows: minmax(0, 1fr);
+  gap: 16px;
+}
+
+.lamination-card {
+  min-height: 0;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto auto;
+  padding: 16px 22px 14px;
+  border: 1px solid #c8d9d4;
+  border-radius: 16px;
+  background: #fff;
+}
+
+.lamination-card-head,
+.lamination-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.lamination-card-head span {
+  color: #54756e;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.lamination-card-head h2 {
+  font-size: 21px;
+}
+
+#lamination-stack {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+
+.stack-layer,
+.stack-stage {
+  transition: transform 550ms cubic-bezier(0.22, 0.65, 0.3, 1);
+}
+
+.stack-stage {
+  transform: translateY(-63px);
+}
+
+.is-exploded .stack-stage {
+  transform: translateY(0);
+}
+
+.is-exploded [data-layer='9'] {
+  transform: translateY(-73px);
+}
+
+.is-exploded [data-layer='10'] {
+  transform: translateY(-146px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stack-layer,
+  .stack-stage {
+    transition: none;
+  }
+}
+
+.steel-top,
+.steel-side {
+  stroke: #587075;
+  stroke-width: 0.8;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.steel-top {
+  fill: url(#steel-top);
+}
+
+.steel-east {
+  fill: #81989c;
+}
+
+.steel-south {
+  fill: #627c83;
+}
+
+.steel-seam {
+  fill: none;
+  stroke: #b45c1f;
+  stroke-width: 2.5;
+  vector-effect: non-scaling-stroke;
+}
+
+.lamination-controls button {
+  padding: 9px 18px;
+  border: 1px solid #195a50;
+  border-radius: 8px;
+  color: #fff;
+  background: #195a50;
+  font: inherit;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.lamination-controls button:hover {
+  background: #247568;
+}
+
+.lamination-controls button:focus-visible {
+  outline: 3px solid #b45c1f;
+  outline-offset: 3px;
+}
+
+.lamination-controls output {
+  color: #2f6258;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.lamination-note {
+  margin-top: 8px;
+  color: #55736d;
+  font-size: 15px;
+}
+
+.lamination-plans {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+  gap: 20px;
+}
+
+.lamination-plans figure {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  margin: 0;
+}
+
+.lamination-plans svg {
+  display: block;
+  width: 216px;
+}
+
+.lamination-plans text {
+  fill: #173b3b;
+  font-size: 0.5px;
+  font-weight: 700;
+  text-anchor: middle;
+  dominant-baseline: central;
+}
+
+.lamination-plans figcaption {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.seam-key {
+  margin-bottom: 12px;
+  color: #6d482c;
+  font-size: 16px;
+  text-align: center;
+}
+
+.seam-key span {
+  display: inline-block;
+  width: 24px;
+  border-top: 3px solid #b45c1f;
+  vertical-align: middle;
+}
+
+.corner-example {
+  padding: 11px 14px;
+  border-left: 3px solid #b45c1f;
+  border-radius: 0 8px 8px 0;
+  background: #fcf5e9;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.corner-example h3 {
+  margin: 0 0 2px;
+  font-size: 19px;
+}
+
+.lamination-takeaways {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.lamination-takeaways p {
+  padding: 12px 16px;
+  border-radius: 10px;
+  background: #eaf3ed;
+  font-size: 19px;
+}

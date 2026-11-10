@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>变压器等效电路：二次侧折算</title>
+    <link rel="stylesheet" href="/transformer-working-principle.css" />
+    <link
+      rel="stylesheet"
+      href="/transformer-equivalent-circuit-referral.css"
+    />
+    <script src="/dc-machine-basics.js" defer></script>
+    <script src="/dc-generator-emf-controls.js" defer></script>
+    <script src="/transformer-equivalent-circuit-referral.js" defer></script>
+  </head>
+  <body>
+    <main class="lesson" data-step="1">
+      <header>
+        <div class="eyebrow">TRANSFORMERS / 运行分析与等效电路</div>
+        <h1>变压器等效电路：二次侧折算</h1>
+        <p class="lead">
+          把实际二次绕组的 N₂ 匝换成 N₁ 匝，怎样保持它的磁动势和功率不变？
+        </p>
+      </header>
+      <nav class="stages" aria-label="二次侧折算步骤">
+        <button type="button" aria-pressed="true"><b>01</b>实际二次侧</button>
+        <button type="button" aria-pressed="false"><b>02</b>换成 N₁ 匝</button>
+        <button type="button" aria-pressed="false"><b>03</b>电流折算</button>
+        <button type="button" aria-pressed="false"><b>04</b>功率不变</button>
+      </nav>
+      <div class="body">
+        <figure class="diagram panel">
+          <div class="diagram-top">
+            <span id="diagram-label">用同一铁芯，对比折算前后的二次绕组</span>
+            <button type="button" id="replay">重播图示</button>
+          </div>
+          <svg
+            class="art"
+            viewBox="0 0 720 310"
+            role="img"
+            aria-labelledby="winding-title"
+          >
+            <title id="winding-title">实际二次绕组与折算后的二次绕组</title>
+            <defs>
+              <pattern
+                id="core-lines"
+                width="6"
+                height="6"
+                patternUnits="userSpaceOnUse"
+              >
+                <path d="M0 0H6" stroke="#c2cbc6" stroke-width="2" />
+              </pattern>
+              <g id="core">
+                <path
+                  d="M56 65H246V224H56Z M82 91H220V198H82Z"
+                  fill="#e1e6df"
+                  fill-rule="evenodd"
+                  stroke="#70827c"
+                  stroke-width="2"
+                />
+                <path
+                  d="M56 65H246V224H56Z M82 91H220V198H82Z"
+                  fill="url(#core-lines)"
+                  fill-rule="evenodd"
+                />
+              </g>
+              <path
+                id="mmf-loop"
+                d="M137 78H233V211H69V78H137"
+                pathLength="100"
+              />
+              <path id="loop-arrow" d="m129 71 8 7-8 7" />
+              <path id="turn" d="M45 0c0-9 48-9 48 0" />
+              <marker
+                id="compare-arrow"
+                markerWidth="8"
+                markerHeight="8"
+                refX="7"
+                refY="4"
+                orient="auto"
+                viewBox="0 0 8 8"
+              >
+                <path
+                  d="m1 1 6 3-6 3"
+                  fill="none"
+                  stroke="#866043"
+                  stroke-width="1.5"
+                />
+              </marker>
+            </defs>
+            <g class="actual">
+              <text class="art-heading" x="151" y="34">实际二次绕组</text>
+              <use href="#core" />
+              <use class="mmf-trace" href="#mmf-loop" />
+              <use class="mmf-arrow" href="#loop-arrow" />
+              <g class="turns">
+                <use href="#turn" x="164" y="117" />
+                <use href="#turn" x="164" y="136" />
+                <use href="#turn" x="164" y="155" />
+                <use href="#turn" x="164" y="174" />
+              </g>
+              <text class="art-value" x="151" y="139">400 安匝</text>
+              <text class="art-note" x="151" y="165">N₂I₂</text>
+              <text class="art-value" x="151" y="269">100 匝 × 4 A</text>
+            </g>
+            <g class="equal-mmf">
+              <path
+                d="M277 144H403"
+                stroke="#866043"
+                stroke-width="2"
+                marker-end="url(#compare-arrow)"
+              />
+              <text class="art-note" x="340" y="128">磁动势不变</text>
+            </g>
+            <g class="referred" transform="translate(415 0)">
+              <text class="art-heading" x="151" y="34">折算到一次侧</text>
+              <use href="#core" />
+              <use class="mmf-trace" href="#mmf-loop" />
+              <use class="mmf-arrow" href="#loop-arrow" />
+              <g class="turns">
+                <use href="#turn" x="164" y="107" />
+                <use href="#turn" x="164" y="118" />
+                <use href="#turn" x="164" y="129" />
+                <use href="#turn" x="164" y="140" />
+                <use href="#turn" x="164" y="151" />
+                <use href="#turn" x="164" y="162" />
+                <use href="#turn" x="164" y="173" />
+                <use href="#turn" x="164" y="184" />
+              </g>
+              <text class="art-value" x="151" y="139">400 安匝</text>
+              <text class="art-note" x="151" y="165">N₁I₂′</text>
+              <text class="art-value" x="151" y="269">200 匝 × 2 A</text>
+            </g>
+          </svg>
+          <svg
+            class="art phasor-art"
+            viewBox="0 0 720 320"
+            role="img"
+            aria-labelledby="phasor-title"
+            hidden
+          >
+            <title id="phasor-title">
+              折算前后，电压矢量长度翻倍，电流矢量长度减半，电流仍滞后电压约
+              36.9 度
+            </title>
+            <defs>
+              <marker
+                id="voltage-tip"
+                viewBox="0 0 10 10"
+                markerWidth="11"
+                markerHeight="11"
+                refX="9"
+                refY="5"
+                orient="auto"
+                markerUnits="userSpaceOnUse"
+              >
+                <path d="M0 0L10 5 0 10Z" fill="#466f99" />
+              </marker>
+              <marker
+                id="current-tip"
+                viewBox="0 0 10 10"
+                markerWidth="11"
+                markerHeight="11"
+                refX="9"
+                refY="5"
+                orient="auto"
+                markerUnits="userSpaceOnUse"
+              >
+                <path d="M0 0L10 5 0 10Z" fill="#397d70" />
+              </marker>
+              <g id="phasor-axes">
+                <circle r="119" />
+                <path d="M-126 0H126 M0 -126V126" />
+              </g>
+            </defs>
+            <text class="art-heading" x="176" y="25">实际二次侧</text>
+            <text class="art-heading" x="544" y="25">折算到一次侧</text>
+            <g transform="translate(176 160)">
+              <use class="phasor-axes" href="#phasor-axes" />
+              <g class="phasor-rotor">
+                <path class="phasor-angle" d="M25 0A25 25 0 0 1 20 15" />
+                <path
+                  class="voltage-vector"
+                  d="M0 0H57.6"
+                  marker-end="url(#voltage-tip)"
+                />
+                <path
+                  class="current-vector"
+                  d="M0 0L76.8 57.6"
+                  marker-end="url(#current-tip)"
+                />
+              </g>
+            </g>
+            <g transform="translate(544 160)">
+              <use class="phasor-axes" href="#phasor-axes" />
+              <g class="phasor-rotor">
+                <path class="phasor-angle" d="M25 0A25 25 0 0 1 20 15" />
+                <path
+                  class="voltage-vector"
+                  d="M0 0H115.2"
+                  marker-end="url(#voltage-tip)"
+                />
+                <path
+                  class="current-vector"
+                  d="M0 0L38.4 28.8"
+                  marker-end="url(#current-tip)"
+                />
+              </g>
+            </g>
+            <text class="art-note" x="360" y="138">折算后</text>
+            <text class="phasor-value voltage-vector" x="360" y="166">
+              电压 ×2
+            </text>
+            <text class="phasor-value current-vector" x="360" y="192">
+              电流 ÷2
+            </text>
+            <text class="phasor-value voltage-vector" x="115" y="305">
+              U₂ = 24 V
+            </text>
+            <text class="phasor-value current-vector" x="237" y="305">
+              I₂ = 4 A
+            </text>
+            <text class="phasor-value voltage-vector" x="483" y="305">
+              U₂′ = 48 V
+            </text>
+            <text class="phasor-value current-vector" x="605" y="305">
+              I₂′ = 2 A
+            </text>
+          </svg>
+          <figcaption class="diagram-caption" id="diagram-caption">
+            <span>青绿色对应二次绕组；蓝色环线标示磁动势的参考方向。</span>
+            <span>绕组匝数与磁路均为示意。</span>
+          </figcaption>
+        </figure>
+        <section class="explanation panel" aria-label="折算推导">
+          <div id="step-content" aria-live="polite">
+            <div class="step">
+              <div class="eyebrow">磁动势不变 · 先算原值</div>
+              <h2>二次侧产生多少磁动势？</h2>
+              <p>二次侧的电流 I₂ 流过 N₂ 匝绕组，各匝的安匝数相加。</p>
+              <div class="formula">F₂ = N₂I₂ = 100 × 4 = <b>400 安匝</b></div>
+              <p class="note">
+                示例统一使用有效值。第 10 页动画中的瞬时关系同样成立，即 F₂(t) =
+                N₂i₂(t)。
+              </p>
+            </div>
+            <div class="step" hidden>
+              <div class="eyebrow">磁动势不变 · 换算电流</div>
+              <h2>换成一次侧匝数，要多少电流？</h2>
+              <p>让等效二次绕组采用 N₁ = 200 匝，仍产生同方向的 400 安匝。</p>
+              <div class="formula">
+                N₁I₂′ = N₂I₂ = 400 安匝<br />I₂′ = 400 安匝 ÷ 200 匝 =
+                <b>2 A</b>
+              </div>
+              <p class="note">
+                I₂′ 是以一次侧匝数表示的二次电流。实际一次电流 I₁
+                还包含励磁电流。
+              </p>
+            </div>
+            <div class="step" hidden>
+              <div class="eyebrow">磁动势不变 · 推出通式</div>
+              <h2>电流按变比反向折算</h2>
+              <p>定义匝数比 k = N₁/N₂。由两种表示的安匝数相等，得到</p>
+              <div class="formula">
+                N₁I₂′ = N₂I₂<br /><b>I₂′ = (N₂/N₁)I₂ = I₂/k</b>
+              </div>
+              <p class="note">
+                本例 k = 2，匝数变为 2 倍，折算电流变为 1/2，磁动势仍为 400
+                安匝。
+              </p>
+            </div>
+            <div class="step power-step" hidden>
+              <div class="eyebrow">功率不变 · 电压乘 k，阻抗乘 k²</div>
+              <h2>矢量长度改变，功率保持不变</h2>
+              <div class="formula">
+                S = UI，P = UI cos φ，Q = UI sin φ
+                <small
+                  >24 V × 4 A = 48 V × 2 A = 96 VA。相角相同，P = 76.8 W，Q =
+                  57.6 var。</small
+                >
+              </div>
+              <div class="formula">
+                <small>端口视在功率与内部感应电动势的功率乘积分别不变</small>
+                U₂′I₂′ = U₂I₂　⇒　<b>U₂′ = kU₂</b><br />
+                E₂′I₂′ = E₂I₂　⇒　<b>E₂′ = kE₂</b>
+              </div>
+              <div class="formula">
+                <small>绕组电阻保有功（铜耗），漏抗保无功</small>
+                (I₂′)²R₂′ = I₂²R₂　⇒　<b>R₂′ = k²R₂</b><br />
+                (I₂′)²X₂′ = I₂²X₂　⇒　<b>X₂′ = k²X₂</b>
+              </div>
+              <p class="note">
+                因此 Z₂′ = k²Z₂，Z<sub>L</sub>′ = k²Z<sub>L</sub>。
+              </p>
+            </div>
+          </div>
+          <div class="stage-bottom">
+            <span id="step-count">第 1 步 / 共 4 步</span>
+            <button id="next-step" type="button">下一步 →</button>
+          </div>
+        </section>
+      </div>
+      <footer>
+        <strong>折算改变电压和电流的表示基准，保留磁动势和功率。</strong>
+        <span
+          >撇号 ′
+          表示二次侧折算到一次侧的量。电压、电动势和电流按同一变比进行线性变换，相角保持不变。</span
+        >
+      </footer>
+    </main>
+  </body>
+</html>

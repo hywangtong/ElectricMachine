@@ -1,0 +1,240 @@
+.diagram {
+  grid-template-rows: 32px minmax(0, 1fr) 54px;
+}
+
+.phasor-axes {
+  fill: none;
+  stroke: #d5e2df;
+  stroke-width: 1.3;
+}
+
+.phasor-angle {
+  fill: none;
+  stroke: #ac8540;
+  stroke-width: 2.5;
+}
+
+.voltage-vector {
+  color: #466f99;
+}
+
+.current-vector {
+  color: #397d70;
+}
+
+.phasor-rotor :is(.voltage-vector, .current-vector) {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 3.5;
+}
+
+.phasor-value {
+  fill: currentColor;
+  font-size: 20px;
+  font-weight: 650;
+}
+
+.phasor-rotor {
+  transform: rotate(-18deg);
+}
+
+.power-step h2 {
+  margin-bottom: 10px;
+}
+
+.power-step .formula {
+  padding: 6px 14px;
+  font-size: 22px;
+  line-height: 1.35;
+}
+
+.power-step .formula + .formula {
+  margin-top: 8px;
+}
+
+.power-step .note {
+  margin: 6px 0 0;
+}
+
+.lesson:not([data-voltage-frame='2']) .direct-only,
+[data-voltage-frame='2'] .transformer-only,
+[data-voltage-frame='0'] .after-referral,
+.lesson:not([data-voltage-frame='0']) .before-referral {
+  display: none;
+}
+
+.direct-wire {
+  fill: none;
+  stroke: #466f99;
+  stroke-width: 3.5;
+  stroke-linecap: round;
+}
+
+.art {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+
+.art text {
+  text-anchor: middle;
+}
+
+.art-heading {
+  font-size: 23px;
+  font-weight: 600;
+  fill: #173b3b;
+}
+
+.art-value {
+  font-size: 24px;
+  font-weight: 700;
+  fill: #39796f;
+}
+
+.art-note,
+.circuit .art-note {
+  font:
+    17px 'Segoe UI',
+    'Microsoft YaHei',
+    sans-serif;
+  fill: #55736d;
+}
+
+.turns {
+  fill: none;
+  stroke: #397d70;
+  stroke-width: 3.5;
+  stroke-linecap: round;
+}
+
+.mmf-trace,
+.mmf-arrow {
+  fill: none;
+  stroke: #466f99;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mmf-trace {
+  stroke-dasharray: 100;
+}
+
+[data-step='1'] .referred {
+  opacity: 0.22;
+}
+
+[data-step='1'] .equal-mmf,
+[data-step='1'] .referred :is(.mmf-trace, .mmf-arrow, .art-value, .art-note) {
+  visibility: hidden;
+}
+
+.circuit {
+  color: #397d70;
+}
+
+.circuit.input {
+  color: #866043;
+}
+
+.circuit.excitation {
+  color: #466f99;
+}
+
+.circuit :is(path, use, circle),
+.coupling {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.circuit circle {
+  fill: currentColor;
+}
+
+.circuit text {
+  fill: currentColor;
+  font:
+    italic 23px 'Cambria Math',
+    Georgia,
+    serif;
+}
+
+.formula + .formula {
+  margin-top: 12px;
+}
+
+.formula small {
+  line-height: 1.45;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  [data-step='1'] .actual .mmf-trace,
+  [data-step='2'] .referred .mmf-trace {
+    animation: trace-mmf 850ms 150ms ease-out both;
+  }
+
+  [data-step='1'] .actual .mmf-arrow,
+  [data-step='2'] .referred .mmf-arrow {
+    animation: reveal-mmf 180ms 850ms ease-out both;
+  }
+
+  [data-step='1'] .actual .turns,
+  [data-step='2'] .referred .turns {
+    animation: highlight-turns 600ms ease-out both;
+  }
+
+  [data-step='2'] .equal-mmf,
+  [data-voltage-frame='1'] .after-referral,
+  [data-voltage-frame='3'] .circuit.excitation {
+    animation: reveal-mmf 450ms ease-out both;
+  }
+
+  [data-voltage-frame='2'] .direct-wire {
+    stroke-dasharray: 1;
+    animation: draw-connection 650ms ease-out both;
+  }
+
+  .phasor-rotor {
+    animation: rotate-phasors 8s linear infinite;
+  }
+
+  [data-phasors-paused] .phasor-rotor {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes rotate-phasors {
+  to {
+    transform: rotate(-378deg);
+  }
+}
+
+@keyframes draw-connection {
+  from {
+    stroke-dashoffset: 1;
+  }
+}
+
+@keyframes trace-mmf {
+  from {
+    stroke-dashoffset: 100;
+  }
+}
+
+@keyframes reveal-mmf {
+  from {
+    opacity: 0.2;
+  }
+}
+
+@keyframes highlight-turns {
+  45% {
+    stroke: #4fb795;
+    stroke-width: 5.5;
+  }
+}

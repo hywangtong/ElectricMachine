@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>变压器铁芯：奇偶层交错叠片</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/transformer-core-lamination.css" />
+    <script src="/dc-machine-basics.js" defer></script>
+    <script src="/transformer-core-lamination.js" defer></script>
+  </head>
+  <body>
+    <main class="lesson lamination">
+      <header class="page-head">
+        <div class="eyebrow">变压器 / 2.3 基本结构</div>
+        <h1>变压器铁芯：奇偶层交错叠片</h1>
+        <p>
+          每层用四片硅钢片围成一个闭合框。相邻两层轮换拼法，让四角接缝错开。
+        </p>
+      </header>
+
+      <div class="lamination-layout">
+        <section class="lamination-card" aria-labelledby="stack-title">
+          <div class="lamination-card-head">
+            <span>图 01</span>
+            <h2 id="stack-title">叠片立体示意</h2>
+          </div>
+          <svg
+            id="lamination-stack"
+            viewBox="0 0 700 450"
+            role="img"
+            aria-labelledby="stack-description"
+          >
+            <title id="stack-description">
+              十层交错叠合的铁芯，顶部两层可展开
+            </title>
+            <defs>
+              <linearGradient id="steel-top" x2="0.85" y2="1">
+                <stop stop-color="#eef3f4" />
+                <stop offset="1" stop-color="#a8babd" />
+              </linearGradient>
+              <radialGradient id="stack-shadow">
+                <stop stop-color="#244644" stop-opacity="0.22" />
+                <stop offset="1" stop-color="#244644" stop-opacity="0" />
+              </radialGradient>
+            </defs>
+            <g class="stack-stage">
+              <ellipse
+                cx="350"
+                cy="410"
+                rx="238"
+                ry="32"
+                fill="url(#stack-shadow)"
+              />
+              <g id="stack-layers"></g>
+            </g>
+          </svg>
+          <div class="lamination-controls">
+            <button type="button" id="stack-toggle" aria-pressed="false">
+              展开顶部两层
+            </button>
+            <output id="stack-readout" aria-live="polite"
+              >已叠合 · 10 层</output
+            >
+          </div>
+          <p class="lamination-note">片厚与展开距离已放大，层数仅作示意。</p>
+        </section>
+
+        <section class="lamination-card" aria-labelledby="plan-title">
+          <div class="lamination-card-head">
+            <span>图 02</span>
+            <h2 id="plan-title">同一方向俯视相邻两层</h2>
+          </div>
+          <div class="lamination-plans">
+            <figure>
+              <svg
+                id="odd-plan"
+                viewBox="-0.1 -0.1 4.2 4.2"
+                role="img"
+                aria-label="奇数层：左上角由左侧 1 号片占据"
+              ></svg>
+              <figcaption>奇数层</figcaption>
+            </figure>
+            <figure>
+              <svg
+                id="even-plan"
+                viewBox="-0.1 -0.1 4.2 4.2"
+                role="img"
+                aria-label="偶数层：左上角由上侧 2 号片占据"
+              ></svg>
+              <figcaption>偶数层</figcaption>
+            </figure>
+          </div>
+          <p class="seam-key">
+            <span aria-hidden="true"></span> 橙线表示同一层内的拼接缝
+          </p>
+          <div class="corner-example">
+            <h3>看左上角</h3>
+            <p>
+              奇数层的接缝在左上角右侧；偶数层的 2
+              号片跨过这条缝。反过来，奇数层的 1 号片也跨过偶数层的接缝。
+            </p>
+          </div>
+        </section>
+      </div>
+
+      <footer class="lamination-takeaways">
+        <p>
+          <strong>为什么用薄片？</strong> 片间绝缘限制涡流，降低铁芯涡流损耗。
+        </p>
+        <p>
+          <strong>为什么要错缝？</strong>
+          接缝不贯穿叠厚，可减小接缝对磁路磁阻的影响。
+        </p>
+      </footer>
+    </main>
+  </body>
+</html>
