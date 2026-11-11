@@ -1,0 +1,78 @@
+.simplified-lesson {
+  grid-template-rows: 98px minmax(0, 1fr) 65px;
+}
+
+.simplified-lesson .diagram {
+  grid-template-rows: 32px minmax(0, 1fr) 42px;
+}
+
+.simplified-lesson .diagram-caption {
+  display: grid;
+  grid-template-rows: 1fr;
+}
+
+.simplified-lesson .circuit rect {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.7;
+}
+
+.series-explanation {
+  padding: 24px 28px;
+}
+
+.series-explanation > p {
+  font-size: 21px;
+  line-height: 1.55;
+}
+
+.series-parameters {
+  margin: 22px 0 0;
+}
+
+.series-parameters > div {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  align-items: center;
+  padding: 14px 18px;
+  border-bottom: 1px solid #e1e7df;
+}
+
+.series-parameters dt {
+  color: #55736d;
+  font-size: 20px;
+}
+
+.series-parameters dd {
+  margin: 0;
+  font-size: 27px;
+  font-family: 'Cambria Math', 'Microsoft YaHei', serif;
+}
+
+.series-parameters > div:last-child {
+  border: 0;
+  border-radius: 8px;
+  background: #edf4ee;
+}
+
+.load-example:not(.is-revealed) .given-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.load-example .solution-steps {
+  grid-template-rows: auto auto auto;
+}
+
+.load-example .solution-steps li {
+  padding-block: 8px;
+}
+
+.load-example .solution-steps p {
+  font-family: 'Cambria Math', Georgia, serif;
+  font-size: 21px;
+  line-height: 1.2;
+}
+
+.load-example .solution-steps sub {
+  line-height: 0;
+}

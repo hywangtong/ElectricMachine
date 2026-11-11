@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>变压器的基本方程式</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/transformer-basic-equations.css" />
+    <script src="/dc-machine-basics.js" defer></script>
+  </head>
+  <body>
+    <main class="lesson equations-lesson">
+      <header class="page-head">
+        <div class="eyebrow">变压器 / 运行分析与等效电路</div>
+        <h1 id="equations-title">变压器的基本方程式</h1>
+      </header>
+      <table
+        aria-labelledby="equations-title"
+        aria-describedby="equations-note"
+      >
+        <thead>
+          <tr>
+            <th scope="col">项目</th>
+            <th scope="col">折算前</th>
+            <th scope="col">折算后</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">一次电压方程</th>
+            <td>
+              <i>U̇<sub>1</sub></i> = −<i>Ė<sub>1</sub></i> +
+              <i>Z<sub>1</sub>İ<sub>1</sub></i>
+            </td>
+            <td>
+              <i>U̇<sub>1</sub></i> = −<i>Ė<sub>1</sub></i> +
+              <i>Z<sub>1</sub>İ<sub>1</sub></i>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">二次电压方程</th>
+            <td>
+              <i>U̇<sub>2</sub></i> = <i>Ė<sub>2</sub></i> −
+              <i>Z<sub>2</sub>İ<sub>2</sub></i>
+            </td>
+            <td>
+              <i>U̇<sub>2</sub>′</i> = <i>Ė<sub>2</sub>′</i> −
+              <i>Z<sub>2</sub>′İ<sub>2</sub>′</i>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">电流关系</th>
+            <td>
+              <i>N<sub>1</sub>İ<sub>1</sub></i> +
+              <i>N<sub>2</sub>İ<sub>2</sub></i> =
+              <i>N<sub>1</sub>İ<sub>0</sub></i>
+            </td>
+            <td>
+              <i>İ<sub>1</sub></i> + <i>İ<sub>2</sub>′</i> =
+              <i>İ<sub>0</sub></i>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">感应电动势</th>
+            <td>
+              <i>Ė<sub>1</sub></i> = −<i>Z<sub>0</sub>İ<sub>0</sub></i>
+            </td>
+            <td>
+              <i>Ė<sub>1</sub></i> = −<i>Z<sub>0</sub>İ<sub>0</sub></i>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">感应电动势的关系</th>
+            <td>
+              <i>Ė<sub>1</sub></i> = <i>kĖ<sub>2</sub></i>
+            </td>
+            <td>
+              <i>Ė<sub>1</sub></i> = <i>Ė<sub>2</sub>′</i>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">输出电压</th>
+            <td>
+              <i>U̇<sub>2</sub></i> = <i>Z<sub>L</sub>İ<sub>2</sub></i>
+            </td>
+            <td><i>U̇<sub>2</sub>′</i> = <i>Z<sub>L</sub>′İ<sub>2</sub>′</i></td>
+          </tr>
+        </tbody>
+      </table>
+      <p id="equations-note">
+        <i>k</i> =
+        <i>N<sub>1</sub>/N<sub>2</sub></i>
+        为匝数比，撇号（′）表示二次侧量折算到一次侧。
+      </p>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>变压器：负载相量图</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/transformer-inductive-load-phasors.css" />
+    <script src="/dc-machine-basics.js" defer></script>
+    <script src="/dc-generator-emf-controls.js" defer></script>
+    <script src="/transformer-inductive-load-phasors.js" defer></script>
+  </head>
+  <body>
+    <main class="lesson phasor-lesson">
+      <header class="page-head">
+        <div class="eyebrow">变压器 / 运行分析与等效电路</div>
+        <h1>变压器：负载相量图</h1>
+        <p>以 U̇₂ 为相位基准，按一次侧基准画出折算后的相量。</p>
+      </header>
+      <div class="phasor-layout">
+        <section class="panel phasor-panel" aria-labelledby="phasor-heading">
+          <header class="panel-heading">
+            <h2 id="phasor-heading">相量图</h2>
+            <span>电压和电流各用一套比例尺</span>
+          </header>
+          <svg
+            class="phasor-plot"
+            viewBox="0 0 1000 480"
+            role="img"
+            aria-labelledby="phasor-heading"
+            aria-describedby="step-explanation"
+          >
+            <path class="axes" d="M20 240H980 M530 18V463" />
+            <g id="vectors"></g>
+            <circle cx="530" cy="240" r="3.5" fill="#173b3b" />
+          </svg>
+          <div class="load-control">
+            <label for="load-angle">负载相角 φ₂</label>
+            <output id="load-status" for="load-angle">感性 · 滞后 36°</output>
+            <input
+              id="load-angle"
+              type="range"
+              min="-90"
+              max="90"
+              step="1"
+              value="-36"
+            />
+            <div class="load-scale" aria-hidden="true">
+              <span>−90° 滞后</span>
+              <span>0° 同相</span>
+              <span>+90° 超前</span>
+            </div>
+          </div>
+        </section>
+        <section class="panel circuit-panel" aria-labelledby="circuit-heading">
+          <header class="panel-heading">
+            <h2 id="circuit-heading">T 形等效电路</h2>
+            <span>折算到一次侧</span>
+          </header>
+          <svg
+            class="phasor-circuit"
+            viewBox="0 0 500 226"
+            role="img"
+            aria-labelledby="circuit-heading"
+          >
+            <defs>
+              <rect id="resistor" width="48" height="16" x="0" y="-8" rx="2" />
+              <path
+                id="reactor"
+                d="M0 0a8.67 8.67 0 0 1 17.33 0 8.67 8.67 0 0 1 17.34 0 8.67 8.67 0 0 1 17.33 0"
+              />
+            </defs>
+            <g class="wires">
+              <path
+                d="M38 78H80 M128 78H159 M211 78H297 M349 78H377 M425 78H459V106 M459 152V179H38 M253 78V98 M253 128V135 M253 168V179"
+              />
+              <circle cx="38" cy="78" r="3.2" />
+              <circle cx="38" cy="179" r="3.2" />
+              <circle cx="253" cy="78" r="3.2" />
+              <circle cx="253" cy="179" r="3.2" />
+              <circle cx="459" cy="78" r="3.2" />
+              <circle cx="459" cy="179" r="3.2" />
+            </g>
+            <g class="reference circuit-part" data-step="0">
+              <use
+                href="#resistor"
+                transform="translate(459 106) rotate(90) scale(.958 1)"
+              />
+              <text x="429" y="135">
+                Z
+                <tspan baseline-shift="sub" font-size="12">L</tspan>
+                ′
+              </text>
+              <text x="480" y="102">−</text>
+              <text x="480" y="137">U̇₂′</text>
+              <text x="480" y="169">+</text>
+            </g>
+            <g class="secondary" data-step="1">
+              <path d="M452 47H418 M425 42l-7 5 7 5" />
+              <text x="435" y="36">İ₂′</text>
+            </g>
+            <g class="secondary circuit-part" data-step="2">
+              <use href="#reactor" x="297" y="78" />
+              <use href="#resistor" x="377" y="78" />
+              <text x="323" y="57">jX₂′</text>
+              <text x="401" y="57">R₂′</text>
+            </g>
+            <g class="emf" data-step="3">
+              <path d="M253 78H281V90 M253 179H281V167" />
+              <text x="299" y="103">−</text>
+              <text x="306" y="137">Ė₂′</text>
+              <text x="299" y="165">+</text>
+            </g>
+            <g class="excitation circuit-part" data-step="4">
+              <use
+                href="#resistor"
+                transform="translate(253 98) rotate(90) scale(.625 1)"
+              />
+              <use
+                href="#reactor"
+                transform="translate(253 135) rotate(90) scale(.635 1)"
+              />
+              <text x="226" y="116">R₀</text>
+              <text x="226" y="157">jX₀</text>
+              <path d="M190 104V149 M185 142l5 7 5-7" />
+              <text x="171" y="132">İ₀</text>
+            </g>
+            <g class="primary" data-step="5">
+              <path d="M44 47H78 M71 42l7 5-7 5" />
+              <text x="59" y="36">İ₁</text>
+            </g>
+            <g class="emf" data-step="6">
+              <text x="253" y="210">Ė₁ = Ė₂′</text>
+            </g>
+            <g class="primary circuit-part" data-step="7">
+              <use href="#resistor" x="80" y="78" />
+              <use href="#reactor" x="159" y="78" />
+              <text x="104" y="57">R₁</text>
+              <text x="185" y="57">jX₁</text>
+            </g>
+            <g class="input" data-step="8">
+              <text x="38" y="102">+</text>
+              <text x="38" y="137">U̇₁</text>
+              <text x="38" y="169">−</text>
+            </g>
+          </svg>
+          <div id="step-explanation" aria-live="polite" aria-atomic="true">
+            <h3 id="step-title"></h3>
+            <p id="step-formula"></p>
+            <p id="step-detail"></p>
+          </div>
+        </section>
+      </div>
+      <footer class="phasor-controls" aria-label="相量演示步骤">
+        <span id="step-count"></span>
+        <button id="previous-step" type="button" disabled>← 上一步</button>
+        <button id="next-step" type="button">下一步 →</button>
+      </footer>
+    </main>
+  </body>
+</html>

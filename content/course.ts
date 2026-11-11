@@ -1502,6 +1502,34 @@ export const slides: Slide[] = [
           chapterId: chapter.id,
           embedUrl: '/transformer-t-equivalent-circuit.html',
         },
+        {
+          id: 'transformers-simplified-equivalent-circuit',
+          kind: 'embed',
+          title: '变压器：简化等效电路',
+          chapterId: chapter.id,
+          embedUrl: '/transformer-simplified-equivalent-circuit.html',
+        },
+        {
+          id: 'transformers-equivalent-circuit-example',
+          kind: 'embed',
+          title: '例 2.5.1：用两种等效电路求负载电流与电压',
+          chapterId: chapter.id,
+          embedUrl: '/transformer-equivalent-circuit-example.html',
+        },
+        {
+          id: 'transformers-basic-equations',
+          kind: 'embed',
+          title: '变压器的基本方程式',
+          chapterId: chapter.id,
+          embedUrl: '/transformer-basic-equations.html',
+        },
+        {
+          id: 'transformers-inductive-load-phasors',
+          kind: 'embed',
+          title: '变压器：负载相量图',
+          chapterId: chapter.id,
+          embedUrl: '/transformer-inductive-load-phasors.html',
+        },
       );
     }
 

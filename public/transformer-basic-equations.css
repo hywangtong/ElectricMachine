@@ -1,0 +1,73 @@
+.equations-lesson {
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: 18px;
+}
+
+.equations-lesson h1 {
+  font-size: 44px;
+}
+
+.equations-lesson table {
+  width: 100%;
+  table-layout: fixed;
+  border: 1px solid #c8d9d4;
+  border-spacing: 0;
+  border-radius: 15px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.equations-lesson th,
+.equations-lesson td {
+  padding: 8px 26px;
+  text-align: left;
+}
+
+.equations-lesson thead th {
+  height: 62px;
+  font-size: 28px;
+  background: #edf4ee;
+}
+
+.equations-lesson thead th:first-child {
+  width: 24%;
+}
+
+.equations-lesson thead th:nth-child(2) {
+  color: #794d25;
+  background: #f7ecdf;
+}
+
+.equations-lesson thead th:nth-child(3) {
+  color: #22675e;
+  background: #e5f1ed;
+}
+
+.equations-lesson tbody th {
+  font-size: 28px;
+}
+
+.equations-lesson tbody td {
+  font:
+    42px / 1.2 'Cambria Math',
+    Georgia,
+    serif;
+  white-space: nowrap;
+}
+
+.equations-lesson sub {
+  line-height: 0;
+}
+
+.equations-lesson tbody tr > * {
+  border-top: 1px solid #dce7e1;
+}
+
+.equations-lesson tr > * + * {
+  border-left: 1px solid #dce7e1;
+}
+
+.equations-lesson > p {
+  color: #55736d;
+  font-size: 22px;
+}

@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>变压器：简化等效电路</title>
+    <link rel="stylesheet" href="/transformer-working-principle.css" />
+    <link
+      rel="stylesheet"
+      href="/transformer-equivalent-circuit-referral.css"
+    />
+    <link rel="stylesheet" href="/transformer-load-analysis.css" />
+    <script src="/dc-machine-basics.js" defer></script>
+  </head>
+  <body>
+    <main class="lesson simplified-lesson">
+      <header>
+        <div class="eyebrow">TRANSFORMERS / 运行分析与等效电路</div>
+        <h1>变压器：简化等效电路</h1>
+        <p class="lead">
+          满载或接近满载时，励磁电流远小于负载折算电流，可将 T
+          形电路简化为串联回路。
+        </p>
+      </header>
+      <div class="body">
+        <figure class="diagram panel">
+          <div class="diagram-top">简化等效电路 · 折算到一次侧</div>
+          <svg
+            class="art"
+            viewBox="0 0 640 330"
+            role="img"
+            aria-labelledby="series-circuit-title"
+          >
+            <title id="series-circuit-title">
+              一次侧电源、短路电阻、短路电抗和折算负载串联。一次电流与二次折算电流的参考方向相反。
+            </title>
+            <g class="circuit input">
+              <path d="M72 100H240 M304 100H358 M454 100H490 M72 256H490" />
+              <rect x="240" y="89" width="64" height="22" rx="2" />
+              <path
+                d="M358 100a12 12 0 0 1 24 0 12 12 0 0 1 24 0 12 12 0 0 1 24 0 12 12 0 0 1 24 0"
+              />
+              <path d="M100 100h60m-9-6 9 6-9 6" />
+              <circle cx="72" cy="100" r="4" />
+              <circle cx="72" cy="256" r="4" />
+              <text x="130" y="72">İ₁</text>
+              <text x="272" y="72">
+                R
+                <tspan baseline-shift="sub" font-size="15">s</tspan>
+              </text>
+              <text x="406" y="72">
+                jX
+                <tspan baseline-shift="sub" font-size="15">s</tspan>
+              </text>
+              <text x="72" y="135">+</text>
+              <text x="72" y="184">U̇₁</text>
+              <text x="72" y="233">−</text>
+            </g>
+            <g class="circuit output">
+              <path d="M490 100H550V149 M550 207V256H490" />
+              <rect x="539" y="149" width="22" height="58" rx="2" />
+              <path d="M534 100h-40m9-6-9 6 9 6" />
+              <text x="514" y="72">İ₂′</text>
+              <text x="508" y="135">−</text>
+              <text x="508" y="184">U̇₂′</text>
+              <text x="508" y="233">+</text>
+              <text x="591" y="184">
+                Z
+                <tspan baseline-shift="sub" font-size="15">L</tspan>
+                ′
+              </text>
+            </g>
+          </svg>
+          <figcaption class="diagram-caption">
+            铜色表示一次侧及合并后的串联阻抗，青绿色表示折算后的负载侧。
+          </figcaption>
+        </figure>
+        <section class="panel series-explanation">
+          <h2>开路励磁支路，合并两侧串联阻抗</h2>
+          <p>
+            当 |İ₀| ≪ |İ₂′| 时，可忽略励磁支路。按图示参考方向，简化电路中 İ₁ =
+            −İ₂′，两者的有效值相等。
+          </p>
+          <dl class="series-parameters">
+            <div>
+              <dt>短路电阻</dt>
+              <dd>R<sub>s</sub> = R₁ + R₂′</dd>
+            </div>
+            <div>
+              <dt>短路电抗</dt>
+              <dd>X<sub>s</sub> = X₁ + X₂′</dd>
+            </div>
+            <div>
+              <dt>短路阻抗</dt>
+              <dd>Z<sub>s</sub> = R<sub>s</sub> + jX<sub>s</sub></dd>
+            </div>
+          </dl>
+        </section>
+      </div>
+      <footer>
+        <strong
+          >在一次侧基准上，用 Z<sub>s</sub> 与 Z<sub>L</sub>′
+          串联求电流。</strong
+        >
+        <span>求实际二次侧有效值时，用 I₂ = kI₂′、U₂ = U₂′/k 换回二次侧。</span>
+      </footer>
+    </main>
+  </body>
+</html>

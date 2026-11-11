@@ -777,7 +777,7 @@ export default function CoursePlayer() {
                       </div>
                     ) : slide.kind === 'embed' ? (
                       <div
-                        className={`embed-body${slide.embedUrl.startsWith('/magnetic-') || slide.embedUrl === '/dc-machine-uses-types.html' || slide.embedUrl === '/dc-machine-constants-relation.html' || slide.embedUrl.startsWith('/dc-motor-') || slide.embedUrl.startsWith('/dc-generator-') || slide.embedUrl.startsWith('/transformer-classification.html') || slide.embedUrl === '/transformer-working-principle.html' || slide.embedUrl === '/transformer-voltage-leakage.html' || slide.embedUrl === '/transformer-voltage-ratio.html' || slide.embedUrl === '/transformer-current-ratio.html' || slide.embedUrl === '/transformer-impedance-transformation.html' || slide.embedUrl === '/transformer-impedance-matching-example.html' || slide.embedUrl === '/transformer-three-phase.html' || slide.embedUrl === '/transformer-three-phase-connections.html' || slide.embedUrl === '/transformer-core-lamination.html' || slide.embedUrl.startsWith('/transformer-rated-') || slide.embedUrl === '/transformer-equivalent-circuit-referral.html' || slide.embedUrl === '/transformer-t-equivalent-circuit.html' ? ' embed-maxwell' : ''}${slide.embedUrl === '/ship-power-eli5.html' ? ' embed-ship-power' : ''}`}
+                        className={`embed-body${slide.embedUrl.startsWith('/magnetic-') || slide.embedUrl === '/dc-machine-uses-types.html' || slide.embedUrl === '/dc-machine-constants-relation.html' || slide.embedUrl.startsWith('/dc-motor-') || slide.embedUrl.startsWith('/dc-generator-') || slide.embedUrl.startsWith('/transformer-classification.html') || slide.embedUrl === '/transformer-working-principle.html' || slide.embedUrl === '/transformer-voltage-leakage.html' || slide.embedUrl === '/transformer-voltage-ratio.html' || slide.embedUrl === '/transformer-current-ratio.html' || slide.embedUrl === '/transformer-impedance-transformation.html' || slide.embedUrl === '/transformer-impedance-matching-example.html' || slide.embedUrl === '/transformer-three-phase.html' || slide.embedUrl === '/transformer-three-phase-connections.html' || slide.embedUrl === '/transformer-core-lamination.html' || slide.embedUrl.startsWith('/transformer-rated-') || slide.embedUrl === '/transformer-equivalent-circuit-referral.html' || slide.embedUrl === '/transformer-t-equivalent-circuit.html' || slide.embedUrl === '/transformer-simplified-equivalent-circuit.html' || slide.embedUrl === '/transformer-equivalent-circuit-example.html' || slide.embedUrl === '/transformer-basic-equations.html' || slide.embedUrl === '/transformer-inductive-load-phasors.html' ? ' embed-maxwell' : ''}${slide.embedUrl === '/ship-power-eli5.html' ? ' embed-ship-power' : ''}`}
                       >
                         {findShuntTab(slide.id) ? (
                           <ShuntGeneratorFrame
@@ -809,7 +809,15 @@ export default function CoursePlayer() {
                               slide.id.startsWith('transformers-rated-') ||
                               slide.id ===
                                 'transformers-equivalent-circuit-referral' ||
-                              slide.id === 'transformers-t-equivalent-circuit' ||
+                              slide.id ===
+                                'transformers-t-equivalent-circuit' ||
+                              slide.id ===
+                                'transformers-simplified-equivalent-circuit' ||
+                              slide.id ===
+                                'transformers-equivalent-circuit-example' ||
+                              slide.id === 'transformers-basic-equations' ||
+                              slide.id ===
+                                'transformers-inductive-load-phasors' ||
                               slide.id === 'dc-motor-field-loss'
                                 ? slide.id
                                 : undefined

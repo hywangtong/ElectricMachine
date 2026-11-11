@@ -1,0 +1,288 @@
+.phasor-lesson {
+  grid-template-rows: 76px minmax(0, 1fr) 54px;
+}
+
+.phasor-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr);
+  gap: 16px;
+}
+
+.phasor-panel,
+.circuit-panel {
+  min-height: 0;
+  padding: 18px 20px;
+  display: grid;
+  gap: 12px;
+}
+
+.phasor-panel {
+  grid-template-rows: auto minmax(0, 1fr) auto;
+}
+
+.circuit-panel {
+  grid-template-rows: auto auto 1fr;
+}
+
+.panel-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.panel-heading h2 {
+  font-size: 23px;
+}
+
+.panel-heading span {
+  color: #55736d;
+  font-size: 15px;
+}
+
+.phasor-plot,
+.phasor-circuit {
+  display: block;
+  width: 100%;
+}
+
+.phasor-plot {
+  height: 100%;
+}
+
+.load-control {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 3px 12px;
+  padding: 10px 14px;
+  border: 1px solid #d8e5e1;
+  border-radius: 9px;
+  background: #f6faf8;
+}
+
+.load-control label,
+#load-status {
+  font-size: 17px;
+  font-weight: 650;
+}
+
+#load-status {
+  color: #9b4b1d;
+  font-variant-numeric: tabular-nums;
+}
+
+#load-angle,
+.load-scale {
+  grid-column: 1 / -1;
+}
+
+#load-angle {
+  width: 100%;
+  height: 22px;
+  margin: 0;
+  accent-color: #245e52;
+  cursor: pointer;
+}
+
+.load-scale {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  color: #55736d;
+  font-size: 14px;
+}
+
+.load-scale span:nth-child(2) {
+  text-align: center;
+}
+
+.load-scale span:last-child {
+  text-align: right;
+}
+
+.axes {
+  fill: none;
+  stroke: #c2d3d0;
+  stroke-width: 1.5;
+  stroke-dasharray: 5 6;
+}
+
+.reference {
+  color: #24528a;
+}
+
+.secondary {
+  color: #9b4b1d;
+}
+
+.emf {
+  color: #544197;
+}
+
+.excitation {
+  color: #08766e;
+}
+
+.primary {
+  color: #237044;
+}
+
+.input {
+  color: #ac2e40;
+}
+
+.phasor-plot text,
+.phasor-circuit text {
+  fill: currentColor;
+  font:
+    italic 24px 'Cambria Math',
+    Georgia,
+    serif;
+  text-anchor: middle;
+}
+
+.phasor-plot text {
+  font-size: 27px;
+  paint-order: stroke;
+  stroke: #fff;
+  stroke-width: 5px;
+  stroke-linejoin: round;
+}
+
+.phasor-plot :is(line, .angle path, .corner),
+.phasor-circuit :is(path, use, circle) {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.phasor-plot .vector line {
+  stroke-width: 3.4;
+}
+
+.phasor-plot .is-current line {
+  stroke-width: 4;
+}
+
+.phasor-plot .coincident .reference line {
+  stroke-width: 8;
+}
+
+.phasor-plot .construction line {
+  stroke-width: 1.7;
+  stroke-dasharray: 5 6;
+}
+
+.phasor-plot polygon,
+.phasor-circuit circle {
+  fill: currentColor;
+}
+
+.phasor-plot .corner {
+  stroke-width: 1.6;
+}
+
+.phasor-circuit {
+  color: #a2b3b0;
+}
+
+.phasor-circuit text {
+  font-size: 21px;
+}
+
+.phasor-circuit [data-step] {
+  opacity: 0.78;
+}
+
+.phasor-circuit .is-current {
+  opacity: 1;
+}
+
+.phasor-circuit .is-current :is(path, use) {
+  stroke-width: 3.5;
+}
+
+.phasor-plot [data-step]:not(.is-shown),
+.phasor-circuit [data-step]:not(.is-shown, .circuit-part),
+.phasor-circuit .circuit-part:not(.is-shown) :is(text, path) {
+  visibility: hidden;
+}
+
+.phasor-circuit .circuit-part:not(.is-shown) {
+  color: inherit;
+}
+
+#step-explanation {
+  border-top: 1px solid #d8e5e1;
+  padding-top: 15px;
+}
+
+#step-title {
+  margin: 0 0 8px;
+  font-size: 25px;
+}
+
+#step-formula {
+  padding: 9px 12px;
+  border-radius: 8px;
+  color: #22485e;
+  background: #edf4f9;
+  font:
+    23px 'Cambria Math',
+    'Microsoft YaHei',
+    serif;
+  line-height: 1.35;
+  white-space: pre-line;
+}
+
+#step-detail {
+  margin-top: 10px;
+  color: #496661;
+  font-size: 18px;
+  line-height: 1.55;
+}
+
+.phasor-controls {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+#step-count {
+  margin-right: auto;
+  color: #55736d;
+  font-size: 18px;
+  font-variant-numeric: tabular-nums;
+}
+
+.phasor-controls button {
+  min-width: 126px;
+  padding: 9px 18px;
+  border: 1px solid #abc6bc;
+  border-radius: 8px;
+  color: #214f45;
+  background: #fff;
+  font:
+    600 18px 'Segoe UI',
+    'Microsoft YaHei',
+    sans-serif;
+  cursor: pointer;
+}
+
+.phasor-controls #next-step {
+  color: #fff;
+  border-color: #245e52;
+  background: #245e52;
+}
+
+.phasor-controls button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.phasor-controls button:focus-visible {
+  outline: 3px solid #24528a;
+  outline-offset: 3px;
+}

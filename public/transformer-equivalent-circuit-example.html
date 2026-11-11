@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>例 2.5.1：用两种等效电路求负载电流与电压</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/dc-motor-nameplate-example.css" />
+    <link rel="stylesheet" href="/transformer-load-analysis.css" />
+    <script src="/dc-machine-basics.js" defer></script>
+    <script type="module" src="/dc-motor-nameplate-example.js"></script>
+    <script type="module" src="/dc-generator-emf-controls.js"></script>
+  </head>
+  <body>
+    <main class="lesson exercise-page load-example">
+      <header class="page-head exercise-head">
+        <div class="eyebrow">变压器 / 运行分析与等效电路 · 课堂例题</div>
+        <h1>例 2.5.1 · 用两种等效电路求负载电流与电压</h1>
+      </header>
+      <section class="exercise-layout">
+        <article class="question-card" aria-labelledby="question-title">
+          <header class="card-label">
+            <span>题目 · 例 2.5.1</span><small>SINGLE-PHASE TRANSFORMER</small>
+          </header>
+          <h2 id="question-title">单相变压器在额定一次电压下带载运行。</h2>
+          <dl class="given-grid" aria-label="已知条件">
+            <div>
+              <dt>两侧额定电压</dt>
+              <dd>
+                <i>U<sub>1N</sub>/U<sub>2N</sub></i> = 380/190 V
+              </dd>
+            </div>
+            <div>
+              <dt>一次侧施加电压</dt>
+              <dd><i>U̇₁</i> = 380∠0° V</dd>
+            </div>
+            <div>
+              <dt>一次绕组阻抗</dt>
+              <dd><i>Z₁</i> = (0.4 + j0.8) Ω</dd>
+            </div>
+            <div>
+              <dt>二次绕组阻抗</dt>
+              <dd><i>Z₂</i> = (0.15 + j0.3) Ω</dd>
+            </div>
+            <div>
+              <dt>励磁阻抗</dt>
+              <dd><i>Z₀</i> = (600 + j1200) Ω</dd>
+            </div>
+            <div>
+              <dt>负载阻抗</dt>
+              <dd>
+                <i>Z<sub>L</sub></i> = (7.5 + j4.75) Ω
+              </dd>
+            </div>
+          </dl>
+          <div class="question-tasks">
+            <strong>求</strong>
+            <ol>
+              <li>用 T 形等效电路求负载电流和电压的有效值；</li>
+              <li>用简化等效电路求上述两个有效值。</li>
+            </ol>
+          </div>
+          <button
+            class="reveal-button"
+            type="button"
+            aria-expanded="false"
+            aria-controls="load-example-solution"
+          >
+            <span class="button-label">显示计算过程与答案</span
+            ><span class="button-icon" aria-hidden="true">→</span>
+          </button>
+        </article>
+        <section
+          class="solution-panel"
+          id="load-example-solution"
+          aria-label="计算过程与答案"
+          hidden
+        >
+          <header class="solution-head">
+            <span>计算过程与答案</span><small>T 形与简化等效电路</small>
+          </header>
+          <ol class="solution-steps">
+            <li>
+              <span class="step-index">01</span>
+              <div>
+                <h2>把二次绕组阻抗和负载阻抗折算到一次侧</h2>
+                <p>k = 380/190 = 2，Z₂′ = k²Z₂ = (0.6 + j1.2) Ω</p>
+                <p>Z<sub>L</sub>′ = k²Z<sub>L</sub> = (30 + j19) Ω</p>
+              </div>
+            </li>
+            <li>
+              <span class="step-index">02</span>
+              <div>
+                <h2>用 T 形等效电路计算</h2>
+                <p>Z = Z₁ + [Z₀ ∥ (Z₂′ + Z<sub>L</sub>′)] ≈ 36.60∠34.88° Ω</p>
+                <p>İ₁ = U̇₁ / Z ≈ 10.38∠(−34.88°) A</p>
+                <p>Ė₂′ = Ė₁ = Z₁İ₁ − U̇₁ ≈ 371.87∠179.32° V</p>
+                <p>İ₂′ = Ė₂′ / (Z₂′ + Z<sub>L</sub>′) ≈ 10.14∠145.89° A</p>
+                <p class="substitution">
+                  I₂ = k|İ₂′| ≈ <b>20.28 A</b>， U₂ = |Z<sub>L</sub>| I₂ ≈
+                  <b>180.08 V</b>
+                </p>
+              </div>
+            </li>
+            <li>
+              <span class="step-index">03</span>
+              <div>
+                <h2>忽略励磁支路，用简化等效电路计算</h2>
+                <p>Z<sub>s</sub> = Z₁ + Z₂′ = (1.0 + j2.0) Ω</p>
+                <p>Z<sub>s</sub> + Z<sub>L</sub>′ = (31 + j21) Ω</p>
+                <p>
+                  İ₁ = −İ₂′ = U̇₁ / (Z<sub>s</sub> + Z<sub>L</sub>′) ≈
+                  10.15∠(−34.11°) A
+                </p>
+                <p class="substitution">
+                  I₂ = k|İ₂′| ≈ <b>20.30 A</b>， U₂ = |Z<sub>L</sub>| I₂ ≈
+                  <b>180.19 V</b>
+                </p>
+              </div>
+            </li>
+          </ol>
+          <p class="solution-note">
+            ∥ 表示阻抗并联。用未舍入的中间值计算，两种模型的负载电压相差约 0.12
+            V。
+          </p>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>
