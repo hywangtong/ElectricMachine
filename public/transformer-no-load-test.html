@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>变压器的空载试验</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/transformer-no-load-test.css" />
+    <script src="/dc-machine-basics.js" defer></script>
+    <script src="/dc-generator-emf-controls.js" defer></script>
+    <script src="/transformer-no-load-test.js" defer></script>
+  </head>
+  <body>
+    <main class="lesson no-load" data-step="0">
+      <header class="page-head">
+        <div class="eyebrow">2.6 变压器的参数测定</div>
+        <h1>变压器的空载试验</h1>
+        <p>
+          <strong>空载试验在低压侧进行</strong>
+          <span>低压侧接额定频率、额定电压的交流电源，高压侧开路。</span>
+        </p>
+      </header>
+
+      <nav class="steps" aria-label="空载试验演示步骤">
+        <button type="button" data-step-button="0" aria-current="step">
+          1　接线加压
+        </button>
+        <button type="button" data-step-button="1">2　读取仪表</button>
+        <button type="button" data-step-button="2">3　计算参数</button>
+        <button type="button" data-step-button="3">4　折算至二次侧</button>
+        <button type="button" id="play">播放演示</button>
+      </nav>
+
+      <div class="test-layout">
+        <section class="panel test-panel" aria-labelledby="circuit-heading">
+          <div class="panel-heading">
+            <h2 id="circuit-heading">单相变压器试验接线</h2>
+            <span id="circuit-caption">高压侧仅接电压表</span>
+          </div>
+          <svg
+            class="test-diagram"
+            viewBox="0 0 860 352"
+            role="img"
+            aria-labelledby="circuit-heading"
+            aria-describedby="diagram-desc"
+          >
+            <desc id="diagram-desc">
+              交流电源接低压侧，电压表并联，电流表及功率表电流线圈串联，功率表电压线圈跨接输入端。高压侧开路，仅接高内阻电压表。
+            </desc>
+            <rect
+              class="low-side wiring"
+              x="12"
+              y="8"
+              width="462"
+              height="334"
+              rx="14"
+            />
+            <rect
+              class="high-side wiring"
+              x="493"
+              y="8"
+              width="355"
+              height="334"
+              rx="14"
+            />
+            <g class="equivalent">
+              <rect
+                class="low-side"
+                x="12"
+                y="8"
+                width="659"
+                height="334"
+                rx="14"
+              />
+              <rect
+                class="high-side"
+                x="704"
+                y="8"
+                width="144"
+                height="334"
+                rx="14"
+              />
+              <rect
+                class="t-area"
+                x="392"
+                y="44"
+                width="245"
+                height="255"
+                rx="12"
+              />
+            </g>
+            <text class="side-title" x="34" y="38">低压侧 · 加压</text>
+            <text class="side-title" x="718" y="38">高压侧 · 开路</text>
+
+            <path
+              class="wire primary-wire"
+              d="M82 157V101H389 M389 265H82V205"
+            />
+            <path class="wire" d="M709 101H820 M709 265H820" />
+
+            <g class="wiring">
+              <path
+                class="wire primary-wire"
+                d="M389 101H438V129
+                c27 0 27 26 0 26 c27 0 27 26 0 26 c27 0 27 26 0 26 c27 0 27 26 0 26 V265H389"
+              />
+              <path
+                class="wire"
+                d="M709 101H525V129
+                c-27 0-27 26 0 26 c-27 0-27 26 0 26 c-27 0-27 26 0 26 c-27 0-27 26 0 26 V265H709"
+              />
+              <path class="core" d="M477 129V233 M486 129V233" />
+              <path class="core excitation" d="M477 129V233 M486 129V233" />
+              <text class="diagram-note" x="482" y="291" text-anchor="middle">
+                铁芯
+              </text>
+            </g>
+
+            <g class="equivalent">
+              <g class="wire t-arm">
+                <path
+                  d="M389 101H407 M433 101H443 c0-14 15-14 15 0 c0-14 15-14 15 0 c0-14 15-14 15 0 H509"
+                />
+                <rect x="407" y="93" width="26" height="16" />
+                <text class="element-label" x="420" y="78">R₁</text>
+                <text class="element-label" x="465" y="78">jX₁</text>
+              </g>
+              <g class="wire t-arm">
+                <path
+                  d="M509 101H539 M565 101H575 c0-14 15-14 15 0 c0-14 15-14 15 0 c0-14 15-14 15 0 H658V129"
+                />
+                <rect x="539" y="93" width="26" height="16" />
+                <text class="element-label" x="552" y="78">R₂′</text>
+                <text class="element-label" x="597" y="78">jX₂′</text>
+              </g>
+              <path
+                class="wire"
+                d="M389 265H658V233
+                M658 129c16 0 16 26 0 26 c16 0 16 26 0 26 c16 0 16 26 0 26 c16 0 16 26 0 26
+                M709 101V129c-16 0-16 26 0 26 c-16 0-16 26 0 26 c-16 0-16 26 0 26 c-16 0-16 26 0 26 V265"
+              />
+              <text class="diagram-note" x="684" y="294" text-anchor="middle">
+                理想变压器
+              </text>
+              <text class="diagram-note" x="684" y="317" text-anchor="middle">
+                1 : k
+              </text>
+              <text class="diagram-note" x="514" y="322" text-anchor="middle">
+                T 形电路 · 低压侧基准
+              </text>
+              <g class="wire magnetizing-branch">
+                <path
+                  d="M509 101V145 M509 179V196
+                  c16 0 16 14 0 14 c16 0 16 14 0 14 c16 0 16 14 0 14 V265"
+                />
+                <rect x="501" y="145" width="16" height="34" />
+                <circle cx="509" cy="101" r="4.5" />
+                <circle cx="509" cy="265" r="4.5" />
+                <text class="element-label branch-label" x="532" y="168">
+                  R₀
+                </text>
+                <text class="element-label branch-label" x="532" y="224">
+                  jX₀
+                </text>
+              </g>
+              <g class="calculation-labels">
+                <text class="diagram-note" x="449" y="136" text-anchor="middle">
+                  压降很小
+                </text>
+                <text class="diagram-note" x="576" y="136" text-anchor="middle">
+                  压降 ≈ 0
+                </text>
+                <text class="element-label" x="471" y="217">I₀</text>
+              </g>
+            </g>
+
+            <g class="source">
+              <circle cx="82" cy="181" r="24" />
+              <path d="M67 181q7-15 15 0t15 0" />
+              <text x="82" y="304" text-anchor="middle">交流电源</text>
+            </g>
+
+            <g class="meter meter-voltage scan-first">
+              <path d="M173 101V265" />
+              <circle class="junction" cx="173" cy="101" r="4.5" />
+              <circle class="junction" cx="173" cy="265" r="4.5" />
+              <circle class="meter-face" cx="173" cy="181" r="24" />
+              <text x="173" y="182">V</text>
+            </g>
+            <g class="meter meter-power scan-third">
+              <path
+                class="potential-wire"
+                d="M231 101V55H275V77 M275 125V265"
+              />
+              <circle class="junction" cx="231" cy="101" r="4.5" />
+              <circle class="junction" cx="275" cy="265" r="4.5" />
+              <circle class="meter-face" cx="275" cy="101" r="24" />
+              <text x="275" y="102">W</text>
+              <text class="diagram-note" x="291" y="60" text-anchor="start">
+                电压线圈
+              </text>
+            </g>
+            <g class="meter meter-current scan-second">
+              <circle class="meter-face" cx="365" cy="101" r="24" />
+              <text x="365" y="102">A</text>
+            </g>
+            <g class="meter meter-voltage scan-fourth">
+              <path d="M760 101V265" />
+              <circle class="junction" cx="760" cy="101" r="4.5" />
+              <circle class="junction" cx="760" cy="265" r="4.5" />
+              <circle class="meter-face" cx="760" cy="181" r="24" />
+              <text x="760" y="182">V</text>
+            </g>
+            <g class="open-terminals">
+              <circle cx="823" cy="101" r="6" />
+              <circle cx="823" cy="265" r="6" />
+              <text class="diagram-note" x="815" y="169" text-anchor="middle">
+                无负载
+              </text>
+              <text class="current-label" x="815" y="196" text-anchor="middle">
+                I₂ ≈ 0
+              </text>
+            </g>
+          </svg>
+          <table class="referral-chart">
+            <thead>
+              <tr>
+                <th scope="col">励磁参数</th>
+                <th scope="col">低压侧</th>
+                <th scope="col">折算</th>
+                <th scope="col">二次侧（高压侧）</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">|Z₀|</th>
+                <td data-value="impedance"></td>
+                <td class="scale-factor">× k²</td>
+                <td data-value="referredImpedance"></td>
+              </tr>
+              <tr>
+                <th scope="row">R₀</th>
+                <td data-value="resistance"></td>
+                <td class="scale-factor">× k²</td>
+                <td data-value="referredResistance"></td>
+              </tr>
+              <tr>
+                <th scope="row">X₀</th>
+                <td data-value="reactance"></td>
+                <td class="scale-factor">× k²</td>
+                <td data-value="referredReactance"></td>
+              </tr>
+            </tbody>
+          </table>
+          <dl class="readings" aria-label="四个仪表的示例读数">
+            <div class="reading meter-voltage scan-first">
+              <dt><b>U₁</b> 低压侧电压</dt>
+              <dd data-value="primaryVoltage"></dd>
+            </div>
+            <div class="reading meter-current scan-second">
+              <dt><b>I₀</b> 空载电流</dt>
+              <dd data-value="current"></dd>
+            </div>
+            <div class="reading meter-power scan-third">
+              <dt><b>P₀</b> 输入功率</dt>
+              <dd data-value="power"></dd>
+            </div>
+            <div class="reading meter-voltage scan-fourth">
+              <dt><b>U₂</b> 高压侧电压</dt>
+              <dd data-value="secondaryVoltage"></dd>
+            </div>
+          </dl>
+        </section>
+
+        <section class="panel results-panel" aria-labelledby="results-heading">
+          <div class="panel-heading">
+            <h2 id="results-heading">由读数求参数</h2>
+            <span>励磁阻抗用串联形式表示</span>
+          </div>
+          <div class="formulas">
+            <div class="formula">
+              <h3>铁损耗</h3>
+              <math
+                ><msub><mi>P</mi><mtext>Fe</mtext></msub
+                ><mo>≈</mo><msub><mi>P</mi><mn>0</mn></msub></math
+              >
+              <div class="result">≈ <span data-value="power"></span></div>
+            </div>
+            <div class="formula">
+              <h3>励磁阻抗模</h3>
+              <math
+                ><mo stretchy="false">|</mo><msub><mi>Z</mi><mn>0</mn></msub
+                ><mo stretchy="false">|</mo><mo>=</mo
+                ><mfrac
+                  ><msub><mi>U</mi><mn>1</mn></msub
+                  ><msub><mi>I</mi><mn>0</mn></msub></mfrac
+                ></math
+              >
+              <div class="result" data-value="impedance"></div>
+            </div>
+            <div class="formula">
+              <h3>励磁电阻</h3>
+              <math
+                ><msub><mi>R</mi><mn>0</mn></msub
+                ><mo>=</mo
+                ><mfrac
+                  ><msub><mi>P</mi><mn>0</mn></msub
+                  ><msubsup><mi>I</mi><mn>0</mn><mn>2</mn></msubsup></mfrac
+                ></math
+              >
+              <div class="result" data-value="resistance"></div>
+            </div>
+            <div class="formula">
+              <h3>励磁电抗</h3>
+              <math
+                ><msub><mi>X</mi><mn>0</mn></msub
+                ><mo>=</mo
+                ><msqrt
+                  ><msup
+                    ><mrow
+                      ><mo stretchy="false">|</mo
+                      ><msub><mi>Z</mi><mn>0</mn></msub
+                      ><mo stretchy="false">|</mo></mrow
+                    ><mn>2</mn></msup
+                  ><mo>−</mo
+                  ><msubsup><mi>R</mi><mn>0</mn><mn>2</mn></msubsup></msqrt
+                ></math
+              >
+              <div class="result" data-value="reactance"></div>
+            </div>
+            <div class="formula ratio">
+              <h3>电压比 <small>高压侧 / 低压侧</small></h3>
+              <math
+                ><mi>k</mi><mo>=</mo
+                ><mfrac
+                  ><msub><mi>U</mi><mn>2</mn></msub
+                  ><msub><mi>U</mi><mn>1</mn></msub></mfrac
+                ></math
+              >
+              <div class="result" data-value="ratio"></div>
+            </div>
+            <div class="formula referral">
+              <h3>折算至高压侧</h3>
+              <div class="referral-rule">
+                低压侧 |Z₀|、R₀、X₀ 各乘 <strong>k²</strong>
+              </div>
+              <div class="referred-result">
+                本例乘 <strong data-value="factor"></strong>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <p class="step-note" id="step-note" aria-live="polite">
+        在低压侧接电源和测量仪表。高压侧虽开路，端子间仍有感应电压。
+      </p>
+    </main>
+  </body>
+</html>

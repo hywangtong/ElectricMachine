@@ -1530,6 +1530,13 @@ export const slides: Slide[] = [
           chapterId: chapter.id,
           embedUrl: '/transformer-inductive-load-phasors.html',
         },
+        {
+          id: 'transformers-no-load-test',
+          kind: 'embed',
+          title: '变压器的空载试验',
+          chapterId: chapter.id,
+          embedUrl: '/transformer-no-load-test.html',
+        },
       );
     }
 
