@@ -1,0 +1,138 @@
+.short-circuit {
+  --voltage: #315b9f;
+  --current: #177558;
+  --power: #a24c18;
+  grid-template-rows: max-content 54px minmax(0, 1fr) 48px;
+}
+
+.short-circuit .page-head h1 {
+  margin-bottom: 4px;
+  font-size: 40px;
+}
+
+.short-circuit .page-head p {
+  font-size: 20px;
+}
+
+.short-circuit .page-head strong {
+  display: inline-block;
+  margin-right: 10px;
+  padding: 3px 10px;
+  border-radius: 6px;
+  background: #21665a;
+  color: white;
+}
+
+.short-circuit .test-diagram {
+  display: block;
+}
+
+.short-circuit .short-circuit-excitation {
+  stroke: #687f78;
+}
+
+.short-circuit .short-circuit-excitation rect {
+  fill: white;
+}
+
+.short-circuit .short-circuit-excitation circle {
+  fill: #687f78;
+  stroke: none;
+}
+
+.short-circuit[data-step='2'] .t-arm {
+  opacity: 1;
+  stroke: #177558;
+}
+
+.short-circuit[data-step='2'] .t-arm rect {
+  fill: #d8f2e4;
+}
+
+.short-circuit[data-step='2'] .t-arm text {
+  fill: #177558;
+}
+
+.short-circuit .shorting-link {
+  fill: white;
+  stroke: #a24c18;
+  stroke-width: 4;
+  stroke-linejoin: round;
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.short-circuit .shorting-link path {
+  fill: none;
+}
+
+.short-circuit .shorting-link text {
+  fill: #a24c18;
+}
+
+.short-circuit .readings {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.short-circuit [data-stage][hidden] {
+  display: none;
+}
+
+.short-circuit .detail-list {
+  display: grid;
+  align-content: center;
+  gap: 12px;
+}
+
+.short-circuit .detail {
+  padding: 12px 14px;
+  border: 1px solid #d5e1dd;
+  border-radius: 10px;
+  background: #fafcfb;
+}
+
+.short-circuit .detail h3 {
+  margin: 0 0 5px;
+  color: #21665a;
+  font-size: 20px;
+}
+
+.short-circuit .detail p,
+.short-circuit .explanation {
+  font-size: 19px;
+  line-height: 1.48;
+}
+
+.short-circuit .formulas {
+  grid-template-rows: repeat(2, 112px);
+}
+
+.short-circuit .detail math {
+  font-size: 24px;
+}
+
+.short-circuit .detail math + p {
+  margin-top: 6px;
+}
+
+.short-circuit .formula-pair {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 16px;
+  font-size: 17px;
+}
+
+.short-circuit .explanation {
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: #e9f3ee;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .short-circuit *,
+  .short-circuit *::before,
+  .short-circuit *::after {
+    animation: none !important;
+  }
+}

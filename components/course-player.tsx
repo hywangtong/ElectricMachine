@@ -269,6 +269,56 @@ export default function CoursePlayer() {
     }
   }, [presenting]);
   useEffect(() => {
+    if (!presenting) return;
+
+    const cursor = encodeURIComponent(`
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+        <circle cx="12" cy="12" r="11" fill="#ff2424" opacity=".28" />
+        <circle cx="12" cy="12" r="7.5" fill="#ff2424" stroke="white" />
+      </svg>
+    `);
+    const style = document.createElement('style');
+    // Use a native cursor so the red dot does not intercept input.
+    style.textContent = `
+      * {
+        cursor: url("data:image/svg+xml,${cursor}") 12 12, auto !important;
+      }
+    `;
+    document.head.appendChild(style);
+
+    const frameStyles = new Map<Document, HTMLStyleElement>();
+    const syncFrames = () => {
+      const frameDocuments = new Set(
+        Array.from(
+          document.querySelectorAll('iframe'),
+          (frame) => frame.contentDocument,
+        ),
+      );
+      for (const [frameDocument, frameStyle] of frameStyles) {
+        if (frameDocuments.has(frameDocument)) continue;
+        frameStyle.remove();
+        frameStyles.delete(frameDocument);
+      }
+      for (const frameDocument of frameDocuments) {
+        if (!frameDocument?.head || frameStyles.has(frameDocument)) continue;
+        const frameStyle = style.cloneNode(true) as HTMLStyleElement;
+        frameDocument.head.appendChild(frameStyle);
+        frameStyles.set(frameDocument, frameStyle);
+      }
+    };
+    const handleFrameLoad = (event: Event) => {
+      if (event.target instanceof HTMLIFrameElement) syncFrames();
+    };
+
+    document.addEventListener('load', handleFrameLoad, true);
+    syncFrames();
+    return () => {
+      document.removeEventListener('load', handleFrameLoad, true);
+      style.remove();
+      for (const frameStyle of frameStyles.values()) frameStyle.remove();
+    };
+  }, [presenting]);
+  useEffect(() => {
     const sync = () => {
       const hash = window.location.hash.slice(1);
       const introTab = findIntroTab(hash);

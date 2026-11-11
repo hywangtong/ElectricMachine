@@ -1537,6 +1537,13 @@ export const slides: Slide[] = [
           chapterId: chapter.id,
           embedUrl: '/transformer-no-load-test.html',
         },
+        {
+          id: 'transformers-short-circuit-test',
+          kind: 'embed',
+          title: '变压器的短路试验',
+          chapterId: chapter.id,
+          embedUrl: '/transformer-short-circuit-test.html',
+        },
       );
     }
 
