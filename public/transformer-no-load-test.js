@@ -7,10 +7,10 @@ const circuitCaption = document.querySelector('#circuit-caption');
 const diagramDesc = document.querySelector('#diagram-desc');
 const wiringDesc = diagramDesc.textContent.trim();
 const equivalentDesc =
-  '保留试验接线的四只仪表。T 形电路左臂为 R₁ 和 jX₁，右臂为 R₂′ 和 jX₂′，中间支路为串联的 R₀ 和 jX₀。右端经变比 1:k 的理想变压器还原实际高压端，电压表仍读 U₂。';
+  'T 形等效电路统一折算到一次侧（低压侧）。左臂为 R₁ 和 jX₁，右臂为 R₂′ 和 jX₂′，中间支路为串联的 R₀ 和 jX₀，折算后的输出端开路。';
 const notes = [
   '在低压侧接电源和测量仪表。高压侧虽开路，端子间仍有感应电压。',
-  '保持仪表接法：低压侧读取 U₁、I₀、P₀，高压侧电压表仍读取实际端电压 U₂。',
+  '低压侧读取 U₁、I₀、P₀。读数卡中的 U₂ 取自实际接线图的高压侧电压表。',
   '二次侧近似无电流，I₀ 流过励磁支路。忽略一次绕组的空载压降与铜耗后，由读数求励磁参数。',
   '折算至高压侧，电压乘 k，电流除以 k，因此由电压与电流之比得到的阻抗乘 k²。',
 ];
@@ -57,7 +57,11 @@ function showStep(index) {
     : isReferral
       ? '励磁参数折算'
       : '空载试验的 T 形等效电路';
-  circuitCaption.textContent = isWiring ? '高压侧仅接电压表' : '额定工况示例';
+  circuitCaption.textContent = isWiring
+    ? '高压侧仅接电压表'
+    : isReferral
+      ? '额定工况示例'
+      : '折算至一次侧（低压侧）';
   diagramDesc.textContent = isWiring ? wiringDesc : equivalentDesc;
   for (const [position, button] of steps.entries()) {
     if (position === index) button.setAttribute('aria-current', 'step');

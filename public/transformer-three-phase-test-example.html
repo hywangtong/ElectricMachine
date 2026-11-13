@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>例 2.6.1：三相变压器的空载与短路试验计算</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/dc-motor-nameplate-example.css" />
+    <link rel="stylesheet" href="/transformer-three-phase-test-example.css" />
+    <script src="/dc-machine-basics.js" defer></script>
+    <script type="module" src="/dc-motor-nameplate-example.js"></script>
+    <script type="module" src="/dc-generator-emf-controls.js"></script>
+  </head>
+  <body>
+    <main class="lesson exercise-page transformer-test-example">
+      <header class="page-head exercise-head">
+        <div class="eyebrow">变压器 / 空载与短路试验 · 课堂例题</div>
+        <h1>例 2.6.1 · 三相变压器的空载与短路试验计算</h1>
+      </header>
+      <section class="exercise-layout">
+        <article class="question-card" aria-labelledby="question-title">
+          <header class="card-label">
+            <span>题目 · 例 2.6.1</span><small>THREE-PHASE TRANSFORMER</small>
+          </header>
+          <h2 id="question-title">
+            一台 Y,d 联结的三相变压器，铜绕组，室温 20 °C。
+          </h2>
+          <div class="test-data">
+            <dl class="given-grid" aria-label="额定数据">
+              <div>
+                <dt>额定容量</dt>
+                <dd>S<sub>N</sub> = 750 kV·A</dd>
+              </div>
+              <div>
+                <dt>额定线电压（高压 / 低压）</dt>
+                <dd>U<sub>1N</sub>/U<sub>2N</sub> = 10 000/231 V</dd>
+              </div>
+              <div>
+                <dt>额定线电流（高压 / 低压）</dt>
+                <dd>I<sub>1N</sub>/I<sub>2N</sub> = 43.3/1 874 A</dd>
+              </div>
+            </dl>
+            <table aria-label="试验数据">
+              <thead>
+                <tr>
+                  <th scope="col">试验</th>
+                  <th scope="col">线电压 / V</th>
+                  <th scope="col">线电流 / A</th>
+                  <th scope="col">三相功率 / W</th>
+                  <th scope="col">加压侧</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">空载</th>
+                  <td>231/10 000</td>
+                  <td>103.8</td>
+                  <td>3 800</td>
+                  <td>低压侧</td>
+                </tr>
+                <tr>
+                  <th scope="row">短路</th>
+                  <td>440</td>
+                  <td>43.3</td>
+                  <td>10 900</td>
+                  <td>高压侧</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="question-tasks">
+            <strong>求</strong>
+            <ol>
+              <li>折算到高压侧的每相空载参数 |Z₀|、R₀、X₀。</li>
+              <li>
+                高压侧每相短路参数
+                |Z<sub>s</sub>|、R<sub>s</sub>、X<sub>s</sub>（折算至 75 °C）。
+              </li>
+            </ol>
+          </div>
+          <button
+            class="reveal-button"
+            type="button"
+            aria-expanded="false"
+            aria-controls="test-example-solution"
+          >
+            <span class="button-label">显示计算过程与答案</span
+            ><span class="button-icon" aria-hidden="true">→</span>
+          </button>
+        </article>
+        <section
+          class="solution-panel"
+          id="test-example-solution"
+          aria-label="计算过程与答案"
+          hidden
+        >
+          <header class="solution-head">
+            <span>计算过程与答案</span><small>每相等效参数</small>
+          </header>
+          <ol class="solution-steps">
+            <li>
+              <span class="step-index">01</span>
+              <div>
+                <h2>空载试验：在低压侧（d 接）求每相参数</h2>
+                <p>
+                  U<sub>φ</sub> = 231 V，I<sub>φ</sub> = 103.8 / √3 A，P<sub
+                    >φ</sub
+                  >
+                  = 3 800 / 3 W
+                </p>
+                <p>
+                  |Z₀| = U<sub>φ</sub> / I<sub>φ</sub> ≈ 3.85 Ω，R₀ = P<sub
+                    >φ</sub
+                  >
+                  / I<sub>φ</sub>² ≈ 0.35 Ω
+                </p>
+                <p>X₀ = √(|Z₀|² − R₀²) ≈ 3.84 Ω</p>
+              </div>
+            </li>
+            <li>
+              <span class="step-index">02</span>
+              <div>
+                <h2>用相电压比的平方将空载参数折算到高压侧</h2>
+                <p>k = (10 000 / √3) / 231 ≈ 24.99</p>
+                <p class="substitution">
+                  k²(|Z₀|, R₀, X₀) ≈ <b>(2 408, 220, 2 398) Ω</b>
+                </p>
+              </div>
+            </li>
+            <li>
+              <span class="step-index">03</span>
+              <div>
+                <h2>短路试验：在高压侧（Y 接）求每相参数</h2>
+                <p>
+                  U<sub>φ</sub> = 440 / √3 V，I<sub>φ</sub> = 43.3 A，P<sub
+                    >φ</sub
+                  >
+                  = 10 900 / 3 W
+                </p>
+                <p>
+                  |Z<sub>s</sub>| = U<sub>φ</sub> / I<sub>φ</sub> ≈ 5.87
+                  Ω，R<sub>s</sub> = P<sub>φ</sub> / I<sub>φ</sub>² ≈ 1.94 Ω
+                </p>
+                <p>
+                  X<sub>s</sub> = √(|Z<sub>s</sub>|² − R<sub>s</sub>²) ≈ 5.54 Ω
+                </p>
+              </div>
+            </li>
+            <li>
+              <span class="step-index">04</span>
+              <div>
+                <h2>折算到 75 °C：修正铜绕组电阻，漏抗取原值</h2>
+                <p>
+                  R<sub>s,75</sub> = [(234.5 + 75) / (234.5 + 20)] R<sub
+                    >s,20</sub
+                  >
+                  ≈ <b>2.36 Ω</b>
+                </p>
+                <p>
+                  X<sub>s,75</sub> ≈ <b>5.54 Ω</b>，|Z<sub>s,75</sub>| =
+                  √(R<sub>s,75</sub>² + X<sub>s,75</sub>²) ≈ <b>6.02 Ω</b>
+                </p>
+              </div>
+            </li>
+          </ol>
+          <p class="solution-note">
+            表中空载线电压按低压侧 / 高压侧列出。计算过程保留未舍入的中间值。
+          </p>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>

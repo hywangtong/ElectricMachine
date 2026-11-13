@@ -68,15 +68,7 @@
                 class="low-side"
                 x="12"
                 y="8"
-                width="659"
-                height="334"
-                rx="14"
-              />
-              <rect
-                class="high-side"
-                x="704"
-                y="8"
-                width="144"
+                width="836"
                 height="334"
                 rx="14"
               />
@@ -90,7 +82,10 @@
               />
             </g>
             <text class="side-title" x="34" y="38">低压侧 · 加压</text>
-            <text class="side-title" x="718" y="38">高压侧 · 开路</text>
+            <text class="side-title wiring" x="718" y="38">高压侧 · 开路</text>
+            <text class="side-title equivalent" x="704" y="38">
+              折算端 · 开路
+            </text>
 
             <path
               class="wire primary-wire"
@@ -127,24 +122,13 @@
               </g>
               <g class="wire t-arm">
                 <path
-                  d="M509 101H539 M565 101H575 c0-14 15-14 15 0 c0-14 15-14 15 0 c0-14 15-14 15 0 H658V129"
+                  d="M509 101H539 M565 101H575 c0-14 15-14 15 0 c0-14 15-14 15 0 c0-14 15-14 15 0 H709"
                 />
                 <rect x="539" y="93" width="26" height="16" />
                 <text class="element-label" x="552" y="78">R₂′</text>
                 <text class="element-label" x="597" y="78">jX₂′</text>
               </g>
-              <path
-                class="wire"
-                d="M389 265H658V233
-                M658 129c16 0 16 26 0 26 c16 0 16 26 0 26 c16 0 16 26 0 26 c16 0 16 26 0 26
-                M709 101V129c-16 0-16 26 0 26 c-16 0-16 26 0 26 c-16 0-16 26 0 26 c-16 0-16 26 0 26 V265"
-              />
-              <text class="diagram-note" x="684" y="294" text-anchor="middle">
-                理想变压器
-              </text>
-              <text class="diagram-note" x="684" y="317" text-anchor="middle">
-                1 : k
-              </text>
+              <path class="wire" d="M389 265H709" />
               <text class="diagram-note" x="514" y="322" text-anchor="middle">
                 T 形电路 · 低压侧基准
               </text>
@@ -204,7 +188,7 @@
               <circle class="meter-face" cx="365" cy="101" r="24" />
               <text x="365" y="102">A</text>
             </g>
-            <g class="meter meter-voltage scan-fourth">
+            <g class="wiring meter meter-voltage scan-fourth">
               <path d="M760 101V265" />
               <circle class="junction" cx="760" cy="101" r="4.5" />
               <circle class="junction" cx="760" cy="265" r="4.5" />
@@ -217,8 +201,21 @@
               <text class="diagram-note" x="815" y="169" text-anchor="middle">
                 无负载
               </text>
-              <text class="current-label" x="815" y="196" text-anchor="middle">
+              <text
+                class="current-label wiring"
+                x="815"
+                y="196"
+                text-anchor="middle"
+              >
                 I₂ ≈ 0
+              </text>
+              <text
+                class="current-label equivalent"
+                x="815"
+                y="196"
+                text-anchor="middle"
+              >
+                I₂′ ≈ 0
               </text>
             </g>
           </svg>

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>三相变压器的参数测定</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/transformer-no-load-test.css" />
+    <link rel="stylesheet" href="/transformer-three-phase-tests.css" />
+    <script src="/dc-machine-basics.js" defer></script>
+    <script src="/dc-generator-emf-controls.js" defer></script>
+    <script src="/transformer-three-phase-tests.js" defer></script>
+  </head>
+  <body>
+    <main class="lesson three-phase-test" data-step="0">
+      <header class="page-head">
+        <div class="eyebrow">2.6 变压器的参数测定</div>
+        <h1 id="lesson-title"></h1>
+        <p id="lesson-intro"></p>
+      </header>
+      <nav class="steps" aria-label="试验演示步骤">
+        <button type="button" data-step-button aria-current="step">
+          1　接线
+        </button>
+        <button type="button" data-step-button id="energize"></button>
+        <button type="button" data-step-button>3　读取仪表</button>
+        <button type="button" data-step-button>4　计算参数</button>
+        <button type="button" id="play">播放演示</button>
+      </nav>
+      <div class="three-phase-layout">
+        <section class="panel circuit-panel" aria-labelledby="circuit-heading">
+          <div class="panel-heading">
+            <h2 id="circuit-heading">三相试验接线</h2>
+            <span>Y／Y 联结 · 三相三线</span>
+          </div>
+          <svg
+            id="circuit"
+            viewBox="0 0 960 368"
+            role="img"
+            aria-labelledby="circuit-heading"
+            aria-describedby="circuit-desc"
+          ></svg>
+          <dl id="measurements" aria-label="试验示例读数"></dl>
+        </section>
+        <section class="panel stage-panel" aria-labelledby="stage-heading">
+          <h2 id="stage-heading"></h2>
+          <div id="stage-content"></div>
+        </section>
+      </div>
+      <p class="step-note" id="step-note" aria-live="polite"></p>
+    </main>
+  </body>
+</html>

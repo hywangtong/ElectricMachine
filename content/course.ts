@@ -1544,6 +1544,27 @@ export const slides: Slide[] = [
           chapterId: chapter.id,
           embedUrl: '/transformer-short-circuit-test.html',
         },
+        {
+          id: 'transformers-three-phase-no-load-test',
+          kind: 'embed',
+          title: '三相变压器的空载试验',
+          chapterId: chapter.id,
+          embedUrl: '/transformer-three-phase-tests.html?test=no-load',
+        },
+        {
+          id: 'transformers-three-phase-short-circuit-test',
+          kind: 'embed',
+          title: '三相变压器的短路试验',
+          chapterId: chapter.id,
+          embedUrl: '/transformer-three-phase-tests.html?test=short-circuit',
+        },
+        {
+          id: 'transformers-three-phase-test-example',
+          kind: 'embed',
+          title: '例 2.6.1：三相变压器的空载与短路试验计算',
+          chapterId: chapter.id,
+          embedUrl: '/transformer-three-phase-test-example.html',
+        },
       );
     }
 

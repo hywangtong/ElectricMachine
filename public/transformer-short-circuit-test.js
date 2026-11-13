@@ -10,7 +10,7 @@ const wiringHeading = circuitHeading.textContent;
 const wiringCaption = circuitCaption.textContent;
 const wiringDesc = diagramDesc.textContent.trim();
 const equivalentDesc =
-  '电源、仪表和低压侧短接线保持原接法。T 形等效电路左臂为 R₁ 和 jX₁，右臂为折算到高压侧的 R₂′ 和 jX₂′，中间为串联的 R₀ 和 jX₀。右臂经变比 k∶1 的理想变压器接至低压侧短接线。';
+  'T 形等效电路统一折算到一次侧（高压侧）。左臂为 R₁ 和 jX₁，右臂为 R₂′ 和 jX₂′，中间支路为串联的 R₀ 和 jX₀，折算后的输出端直接短接。';
 const notes = [
   stepNote.textContent.trim(),
   '试验电压低，励磁电流很小。折算至高压侧，短路电阻 Rₛ ≈ R₁ + R₂′，短路电抗 Xₛ ≈ X₁ + X₂′。',
@@ -29,7 +29,9 @@ function showStep(index) {
   circuitHeading.textContent = showEquivalent
     ? '短路试验的 T 形等效电路'
     : wiringHeading;
-  circuitCaption.textContent = showEquivalent ? '折算至高压侧' : wiringCaption;
+  circuitCaption.textContent = showEquivalent
+    ? '折算至一次侧（高压侧）'
+    : wiringCaption;
   diagramDesc.textContent = showEquivalent ? equivalentDesc : wiringDesc;
 
   for (const [position, button] of steps.entries()) {

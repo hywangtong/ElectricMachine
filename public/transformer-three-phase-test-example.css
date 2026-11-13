@@ -1,0 +1,73 @@
+.transformer-test-example .test-data {
+  display: grid;
+  gap: 12px;
+}
+
+.transformer-test-example .given-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.transformer-test-example.is-revealed .question-card {
+  gap: 10px;
+}
+
+.transformer-test-example.is-revealed .given-grid {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.transformer-test-example.is-revealed .given-grid div {
+  padding-block: 8px;
+}
+
+.transformer-test-example.is-revealed .given-grid div:first-child {
+  grid-column: 1 / -1;
+}
+
+.transformer-test-example table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #38594f;
+  font-size: 16px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.transformer-test-example th,
+.transformer-test-example td {
+  padding: 9px 4px;
+  border-bottom: 1px solid #d6e5de;
+  white-space: nowrap;
+}
+
+.transformer-test-example thead {
+  background: #f1f8f4;
+}
+
+.transformer-test-example.is-revealed :is(th, td) {
+  padding-block: 5px;
+}
+
+.transformer-test-example.is-revealed .question-tasks {
+  padding-block: 10px;
+}
+
+.transformer-test-example .solution-steps {
+  grid-template-rows: repeat(4, 1fr);
+}
+
+.transformer-test-example .solution-steps li {
+  padding-block: 8px;
+}
+
+.transformer-test-example .solution-steps p {
+  font-size: 21px;
+  line-height: 1.25;
+}
+
+.transformer-test-example .solution-steps b {
+  color: #b25d3f;
+}
+
+.transformer-test-example sub {
+  line-height: 0;
+}
