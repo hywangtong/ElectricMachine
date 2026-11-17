@@ -17,7 +17,7 @@
         <h1>变压器的空载试验</h1>
         <p>
           <strong>空载试验在低压侧进行</strong>
-          <span>低压侧接额定频率、额定电压的交流电源，高压侧开路。</span>
+          <span>电源保持额定频率，低压侧逐步调至额定电压，高压侧开路。</span>
         </p>
       </header>
 
@@ -42,10 +42,13 @@
             viewBox="0 0 860 352"
             role="img"
             aria-labelledby="circuit-heading"
-            aria-describedby="diagram-desc"
+            aria-describedby="diagram-desc meter-polarity-desc primary-reading current-reading power-reading secondary-reading"
           >
             <desc id="diagram-desc">
               交流电源接低压侧，电压表并联，电流表及功率表电流线圈串联，功率表电压线圈跨接输入端。高压侧开路，仅接高内阻电压表。
+            </desc>
+            <desc id="meter-polarity-desc">
+              正负号表示参考方向：电压表与功率表电压线圈上正下负，电流表与功率表电流线圈左正右负。
             </desc>
             <rect
               class="low-side wiring"
@@ -160,7 +163,7 @@
 
             <g class="source">
               <circle cx="82" cy="181" r="24" />
-              <path d="M67 181q7-15 15 0t15 0" />
+              <path class="source-wave" d="M67 181q7-15 15 0t15 0" />
               <text x="82" y="304" text-anchor="middle">交流电源</text>
             </g>
 
@@ -170,6 +173,15 @@
               <circle class="junction" cx="173" cy="265" r="4.5" />
               <circle class="meter-face" cx="173" cy="181" r="24" />
               <text x="173" y="182">V</text>
+              <text class="meter-polarity" x="160" y="144">+</text>
+              <text class="meter-polarity" x="160" y="218">−</text>
+              <text
+                class="meter-reading"
+                id="primary-reading"
+                x="205"
+                y="182"
+                data-value="primaryVoltage"
+              >0 V</text>
             </g>
             <g class="meter meter-power scan-third">
               <path
@@ -180,6 +192,17 @@
               <circle class="junction" cx="275" cy="265" r="4.5" />
               <circle class="meter-face" cx="275" cy="101" r="24" />
               <text x="275" y="102">W</text>
+              <text class="meter-polarity" x="242" y="87">+</text>
+              <text class="meter-polarity" x="308" y="87">−</text>
+              <text class="meter-polarity" x="263" y="69">+</text>
+              <text class="meter-polarity" x="263" y="137">−</text>
+              <text
+                class="meter-reading"
+                id="power-reading"
+                x="287"
+                y="188"
+                data-value="power"
+              >0 W</text>
               <text class="diagram-note" x="291" y="60" text-anchor="start">
                 电压线圈
               </text>
@@ -187,13 +210,48 @@
             <g class="meter meter-current scan-second">
               <circle class="meter-face" cx="365" cy="101" r="24" />
               <text x="365" y="102">A</text>
+              <text class="meter-polarity" x="332" y="87">+</text>
+              <text class="meter-polarity" x="398" y="87">−</text>
+              <text
+                class="meter-reading centered-reading"
+                id="current-reading"
+                x="365"
+                y="143"
+                data-value="current"
+              >0.00 A</text>
             </g>
-            <g class="wiring meter meter-voltage scan-fourth">
-              <path d="M760 101V265" />
-              <circle class="junction" cx="760" cy="101" r="4.5" />
-              <circle class="junction" cx="760" cy="265" r="4.5" />
-              <circle class="meter-face" cx="760" cy="181" r="24" />
-              <text x="760" y="182">V</text>
+            <g class="meter meter-voltage scan-fourth">
+              <g class="wiring">
+                <path d="M730 101V265" />
+                <circle class="junction" cx="730" cy="101" r="4.5" />
+                <circle class="junction" cx="730" cy="265" r="4.5" />
+                <text class="meter-polarity" x="743" y="144">+</text>
+                <text class="meter-polarity" x="743" y="218">−</text>
+              </g>
+              <g class="equivalent">
+                <rect
+                  class="t-area"
+                  x="640"
+                  y="132"
+                  width="137"
+                  height="98"
+                  rx="8"
+                />
+                <text class="diagram-note" x="710" y="155" text-anchor="middle">
+                  高压侧实测
+                </text>
+                <text class="meter-polarity" x="764" y="168">+</text>
+                <text class="meter-polarity" x="764" y="195">−</text>
+              </g>
+              <circle class="meter-face" cx="730" cy="181" r="24" />
+              <text x="730" y="182">V</text>
+              <text
+                class="meter-reading secondary-reading"
+                id="secondary-reading"
+                x="698"
+                y="182"
+                data-value="secondaryVoltage"
+              >0 V</text>
             </g>
             <g class="open-terminals">
               <circle cx="823" cy="101" r="6" />
@@ -249,24 +307,25 @@
               </tr>
             </tbody>
           </table>
-          <dl class="readings" aria-label="四个仪表的示例读数">
-            <div class="reading meter-voltage scan-first">
-              <dt><b>U₁</b> 低压侧电压</dt>
-              <dd data-value="primaryVoltage"></dd>
+          <div class="voltage-control">
+            <label for="test-voltage">低压侧加压</label>
+            <div class="voltage-slider">
+              <input
+                id="test-voltage"
+                type="range"
+                min="0"
+                max="264"
+                step="1"
+                value="0"
+                aria-describedby="rated-voltage"
+              />
+              <div class="voltage-scale">
+                <span>0 V</span>
+                <span id="rated-voltage">额定 220 V</span>
+                <span>264 V</span>
+              </div>
             </div>
-            <div class="reading meter-current scan-second">
-              <dt><b>I₀</b> 空载电流</dt>
-              <dd data-value="current"></dd>
-            </div>
-            <div class="reading meter-power scan-third">
-              <dt><b>P₀</b> 输入功率</dt>
-              <dd data-value="power"></dd>
-            </div>
-            <div class="reading meter-voltage scan-fourth">
-              <dt><b>U₂</b> 高压侧电压</dt>
-              <dd data-value="secondaryVoltage"></dd>
-            </div>
-          </dl>
+          </div>
         </section>
 
         <section class="panel results-panel" aria-labelledby="results-heading">
@@ -349,9 +408,14 @@
         </section>
       </div>
 
-      <p class="step-note" id="step-note" aria-live="polite">
-        在低压侧接电源和测量仪表。高压侧虽开路，端子间仍有感应电压。
-      </p>
+      <div class="step-note">
+        <p id="step-note" aria-live="polite">
+          拖动滑块调节模拟电压。加压后，高压侧开路端子间会出现感应电压。
+        </p>
+        <span class="voltage-status" id="voltage-status" role="status">
+          未到额定电压
+        </span>
+      </div>
     </main>
   </body>
 </html>

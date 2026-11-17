@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>变压器：电压调整率</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/transformer-voltage-regulation.css" />
+    <script src="/transformer-voltage-regulation.js" type="module"></script>
+    <script src="/dc-machine-basics.js" defer></script>
+  </head>
+  <body>
+    <main class="lesson regulation-lesson">
+      <header class="page-head regulation-header">
+        <div>
+          <div class="eyebrow">变压器 / 运行特性</div>
+          <h1>变压器：电压调整率</h1>
+          <p>一次侧保持额定电压和频率，比较空载与带载时的二次端电压。</p>
+        </div>
+        <div class="regulation-tabs" role="tablist" aria-label="电压调整率">
+          <button
+            type="button"
+            role="tab"
+            id="tab-phasors"
+            aria-selected="false"
+            aria-controls="panel-phasors"
+            tabindex="-1"
+          >
+            相量推导
+          </button>
+          <button
+            type="button"
+            role="tab"
+            id="tab-formulas"
+            aria-selected="true"
+            aria-controls="panel-formulas"
+          >
+            公式与电路
+          </button>
+        </div>
+      </header>
+      <div
+        class="regulation-pane"
+        role="tabpanel"
+        id="panel-phasors"
+        aria-labelledby="tab-phasors"
+        tabindex="0"
+        hidden
+      >
+        <div class="regulation-layout phasor-layout">
+          <section
+            class="panel regulation-plot"
+            aria-labelledby="phasor-heading"
+          >
+            <div class="regulation-panel-head">
+              <h2 id="phasor-heading">串联压降的相量合成</h2>
+              <span>感性负载 · 压降适当放大</span>
+            </div>
+            <svg
+              viewBox="0 143 850 366"
+              role="img"
+              aria-labelledby="phasor-title"
+            >
+              <title id="phasor-title">
+                一次侧折算相量图：感性负载的电阻、电抗压降及其水平投影
+              </title>
+              <defs>
+                <marker
+                  id="phasor-arrow"
+                  viewBox="0 0 10 10"
+                  refX="9"
+                  refY="5"
+                  markerWidth="14"
+                  markerHeight="14"
+                  markerUnits="userSpaceOnUse"
+                  orient="auto"
+                >
+                  <path d="M0 0L10 5L0 10Z" fill="context-stroke" />
+                </marker>
+              </defs>
+              <path class="construction" d="M62 300H807" />
+              <circle cx="62" cy="300" r="4" fill="#173b3b" />
+              <text x="36" y="324">O</text>
+              <g data-layer="1">
+                <path
+                  class="vector terminal"
+                  d="M62 300H459"
+                  marker-end="url(#phasor-arrow)"
+                  pathLength="1"
+                />
+                <text class="terminal-label" x="316" y="337">−U̇₂′</text>
+                <path
+                  class="vector current"
+                  d="M62 300L186 393"
+                  marker-end="url(#phasor-arrow)"
+                  pathLength="1"
+                />
+                <path class="load-angle-arc" d="M132 300A70 70 0 0 1 118 342" />
+                <text class="current-label" x="139" y="335">φ₂</text>
+                <text class="current-label" x="184" y="421">İ₁</text>
+              </g>
+              <g data-layer="2">
+                <path
+                  class="vector resistance"
+                  d="M459 300L591 399"
+                  marker-end="url(#phasor-arrow)"
+                  pathLength="1"
+                />
+                <path
+                  class="load-angle-arc"
+                  d="M515 300A56 56 0 0 1 503.8 333.6"
+                />
+                <text class="current-label" x="520" y="331">φ₂</text>
+                <text class="resistance-label" x="482" y="384">İ₁Rₛ</text>
+              </g>
+              <g data-layer="3">
+                <path
+                  class="vector reactance"
+                  d="M591 399L747 191"
+                  marker-end="url(#phasor-arrow)"
+                  pathLength="1"
+                />
+                <path
+                  class="construction"
+                  d="M573.4 385.8L586.6 368.2L604.2 381.4"
+                />
+                <text class="reactance-label" x="665" y="371">jİ₁Xₛ</text>
+              </g>
+              <g data-layer="4">
+                <path
+                  class="vector source"
+                  d="M62 300L747 191"
+                  marker-end="url(#phasor-arrow)"
+                  pathLength="1"
+                />
+                <text class="source-label" x="329" y="232">U̇₁</text>
+                <path
+                  class="source-angle"
+                  d="M232 300A170 170 0 0 0 229.9 273.3"
+                />
+                <text class="source-label" x="255" y="291">δ</text>
+                <path
+                  class="equal-radius"
+                  d="M747 191A693.62 693.62 0 0 1 755.62 300"
+                />
+                <path
+                  class="construction"
+                  d="M770 176L754 216 M459 309V461 M591 300V461 M747 200V461"
+                />
+                <text class="source-label" x="768" y="170">U₁N</text>
+                <circle cx="755.62" cy="300" r="4" fill="#24598e" />
+                <path
+                  class="load-angle-arc"
+                  d="M747 248A57 57 0 0 1 712.8 236.6"
+                />
+                <text class="current-label" x="712" y="274">φ₂</text>
+                <g class="projections" text-anchor="middle">
+                  <path class="resistance" d="M459 445V459 M459 452H591" />
+                  <path
+                    class="reactance"
+                    d="M591 445V459 M591 452H747 M747 445V459"
+                  />
+                  <text class="resistance-label" x="525" y="486">
+                    I₁Rₛ cos φ₂
+                  </text>
+                  <text class="reactance-label" x="669" y="486">
+                    I₁Xₛ sin φ₂
+                  </text>
+                </g>
+              </g>
+            </svg>
+            <div class="projection-condition">
+              <strong
+                >近似条件：串联内阻抗压降远小于两侧工作电压（折算到同一侧）。</strong
+              >
+              <p>
+                因此 U̇₁ 与 −U̇₂′ 的相角差 δ 很小，cos δ ≈ 1，可用 U₁N cos δ 近似
+                U₁N。
+              </p>
+            </div>
+          </section>
+          <section
+            class="panel regulation-steps"
+            aria-labelledby="steps-heading"
+          >
+            <h2 id="steps-heading">四步读懂相量图</h2>
+            <div class="step-list" role="group" aria-label="相量推导步骤">
+              <button type="button" data-step="1" aria-pressed="false">
+                <span>01</span> 画出带载端电压和电流
+              </button>
+              <button type="button" data-step="2" aria-pressed="false">
+                <span>02</span> 接上串联电阻压降
+              </button>
+              <button type="button" data-step="3" aria-pressed="false">
+                <span>03</span> 接上串联漏抗压降
+              </button>
+              <button type="button" data-step="4" aria-pressed="true">
+                <span>04</span> 沿端电压方向取投影
+              </button>
+            </div>
+            <p
+              class="step-description"
+              id="regulation-step-note"
+              aria-live="polite"
+            >
+              U₁N cos δ − U₂′ = I₁Rₛ cos φ₂ + I₁Xₛ sin
+              φ₂。小角度下，这两个水平投影之和近似等于 U₁N − U₂′。
+            </p>
+            <button type="button" class="play-steps" id="play-regulation">
+              播放推导
+            </button>
+            <p class="referral-note">
+              变比 k = N₁/N₂，U₂′ = kU₂。按课程的参考极性取 −U̇₂′
+              为端电压；忽略励磁电流时，İ₁ ≈ −İ₂′。
+            </p>
+          </section>
+        </div>
+        <footer class="regulation-footer regulation-result">
+          <strong>最终公式</strong>
+          <math display="block" aria-label="电压调整率近似公式">
+            <msub><mi>V</mi><mi mathvariant="normal">R</mi></msub>
+            <mo>≈</mo>
+            <mo stretchy="false">(</mo>
+            <msub><mi>R</mi><mi mathvariant="normal">S</mi></msub>
+            <mspace width="0.15em" /><mi>cos</mi
+            ><msub><mi>φ</mi><mn>2</mn></msub>
+            <mo>+</mo>
+            <msub><mi>X</mi><mi mathvariant="normal">S</mi></msub>
+            <mspace width="0.15em" /><mi>sin</mi
+            ><msub><mi>φ</mi><mn>2</mn></msub>
+            <mo stretchy="false">)</mo>
+            <mfrac>
+              <msub
+                ><mi>I</mi
+                ><mrow><mn>1</mn><mi mathvariant="normal">N</mi></mrow></msub
+              >
+              <msub
+                ><mi>U</mi
+                ><mrow><mn>1</mn><mi mathvariant="normal">N</mi></mrow></msub
+              >
+            </mfrac>
+            <mo>×</mo><mn>100</mn><mo>%</mo>
+          </math>
+          <span>取额定电流 I₁ = I₁N，将近似幅值差除以 U₁N。</span>
+        </footer>
+      </div>
+      <div
+        class="regulation-pane"
+        role="tabpanel"
+        id="panel-formulas"
+        aria-labelledby="tab-formulas"
+        tabindex="0"
+      >
+        <div class="regulation-layout formula-layout">
+          <div class="regulation-formulas">
+            <section class="panel formula-card">
+              <h2><span>01</span> 定义公式 · 二次侧</h2>
+              <math display="block">
+                <msub><mi>V</mi><mi mathvariant="normal">R</mi></msub
+                ><mo>=</mo>
+                <mfrac>
+                  <mrow
+                    ><msub
+                      ><mi>U</mi
+                      ><mrow
+                        ><mn>2</mn><mi mathvariant="normal">N</mi></mrow
+                      ></msub
+                    ><mo>−</mo><msub><mi>U</mi><mn>2</mn></msub></mrow
+                  >
+                  <msub
+                    ><mi>U</mi
+                    ><mrow
+                      ><mn>2</mn><mi mathvariant="normal">N</mi></mrow
+                    ></msub
+                  >
+                </mfrac>
+                <mo>×</mo><mn>100</mn><mo>%</mo>
+              </math>
+              <p>
+                U<sub>2N</sub>：额定供电时的二次空载端电压；U<sub>2</sub>：给定负载下的二次端电压。两者均取有效值。
+              </p>
+            </section>
+            <section class="panel formula-card">
+              <h2><span>02</span> 折算至一次侧</h2>
+              <math display="block">
+                <msub><mi>V</mi><mi mathvariant="normal">R</mi></msub
+                ><mo>=</mo>
+                <mfrac>
+                  <mrow
+                    ><msub
+                      ><mi>U</mi
+                      ><mrow
+                        ><mn>1</mn><mi mathvariant="normal">N</mi></mrow
+                      ></msub
+                    ><mo>−</mo
+                    ><msup
+                      ><msub><mi>U</mi><mn>2</mn></msub
+                      ><mo>′</mo></msup
+                    ></mrow
+                  >
+                  <msub
+                    ><mi>U</mi
+                    ><mrow
+                      ><mn>1</mn><mi mathvariant="normal">N</mi></mrow
+                    ></msub
+                  >
+                </mfrac>
+                <mo>×</mo><mn>100</mn><mo>%</mo>
+              </math>
+              <p>
+                简化等效电路中，kU<sub>2N</sub> = U<sub>1N</sub>，且 U₂′ =
+                kU₂；分子与分母同乘变比 k，百分比不变。
+              </p>
+            </section>
+          </div>
+          <section
+            class="panel regulation-circuit"
+            aria-labelledby="circuit-heading"
+          >
+            <div class="regulation-panel-head">
+              <h2 id="circuit-heading">简化等效电路</h2>
+              <span>折算至一次侧</span>
+            </div>
+            <svg
+              viewBox="0 0 660 334"
+              role="img"
+              aria-labelledby="circuit-title"
+            >
+              <title id="circuit-title">
+                一次电流向右流经串联电阻、漏抗和折算负载。一次端电压上正下负，二次折算端电压下正上负。
+              </title>
+              <g class="circuit-lines">
+                <path
+                  d="M85 90H250 M320 90H372 M476 90H548V171 M548 229V300H85"
+                />
+                <rect x="250" y="78" width="70" height="24" />
+                <path
+                  d="M372 90a13 13 0 0 1 26 0a13 13 0 0 1 26 0a13 13 0 0 1 26 0a13 13 0 0 1 26 0"
+                />
+                <rect x="536" y="171" width="24" height="58" />
+                <circle cx="85" cy="90" r="5" />
+                <circle cx="85" cy="300" r="5" />
+                <circle cx="511" cy="90" r="5" />
+                <circle cx="511" cy="300" r="5" />
+              </g>
+              <path class="current-arrow" d="M112 90h86m-11-7 11 7-11 7" />
+              <text class="current-label" x="107" y="65">İ₁ = −İ₂′</text>
+              <text x="285" y="136" text-anchor="middle">Rₛ</text>
+              <text x="424" y="136" text-anchor="middle">jXₛ</text>
+              <text x="574" y="208">
+                Z
+                <tspan baseline-shift="sub" font-size="16">L</tspan>
+                ′
+              </text>
+              <g class="source-label" text-anchor="middle">
+                <text x="85" y="137">+</text>
+                <text x="85" y="205">U̇₁</text>
+                <text x="85" y="267">−</text>
+              </g>
+              <g class="terminal-label" text-anchor="middle">
+                <text x="491" y="145">−</text>
+                <text x="491" y="205">U̇₂′</text>
+                <text x="491" y="267">+</text>
+              </g>
+            </svg>
+            <div class="circuit-equation">
+              <strong>U̇₁ = −U̇₂′ + İ₁(Rₛ + jXₛ)</strong>
+              <p>
+                省略励磁支路，只保留短路电阻 Rₛ、短路电抗 Xₛ 和折算负载
+                Z<sub>L</sub>′。
+              </p>
+            </div>
+          </section>
+        </div>
+        <footer class="regulation-footer">
+          <strong>V<sub>R</sub> &gt; 0：带载后电压下降</strong>
+          <span
+            >V<sub>R</sub> &lt; 0
+            表示带载后电压升高，例如某些容性负载工况。</span
+          >
+        </footer>
+      </div>
+    </main>
+  </body>
+</html>

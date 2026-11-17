@@ -1,0 +1,355 @@
+.regulation-lesson {
+  grid-template-rows: 83px minmax(0, 1fr);
+  gap: 16px;
+}
+
+.regulation-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.regulation-tabs {
+  display: flex;
+  gap: 8px;
+  padding: 5px;
+  border: 1px solid #c8d9d4;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.regulation-tabs button {
+  padding: 8px 18px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: #226657;
+  cursor: pointer;
+  font: inherit;
+  font-size: 20px;
+  font-weight: 650;
+}
+
+.regulation-tabs button[aria-selected='true'] {
+  background: #226657;
+  color: #fff;
+}
+
+.regulation-tabs button:focus-visible {
+  outline: 3px solid #24598e;
+  outline-offset: 2px;
+}
+
+.regulation-pane:not([hidden]) {
+  display: grid;
+  min-height: 0;
+  grid-template-rows: minmax(0, 1fr) 55px;
+  gap: 16px;
+}
+
+#panel-phasors:not([hidden]) {
+  grid-template-rows: minmax(0, 1fr) 96px;
+}
+
+.regulation-lesson .page-head h1 {
+  font-size: 36px;
+}
+
+.regulation-lesson .page-head p {
+  margin-top: 5px;
+  font-size: 20px;
+}
+
+.regulation-layout {
+  display: grid;
+  min-height: 0;
+  gap: 18px;
+}
+
+.phasor-layout {
+  grid-template-columns: minmax(0, 1.92fr) minmax(0, 1fr);
+}
+
+.formula-layout {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.06fr);
+}
+
+.regulation-panel-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.regulation-panel-head span {
+  color: #55736d;
+  font-size: 17px;
+}
+
+.regulation-plot,
+.regulation-steps,
+.regulation-circuit,
+.formula-card {
+  min-height: 0;
+  padding: 22px 26px;
+}
+
+.regulation-plot,
+.regulation-circuit {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+}
+
+.regulation-plot {
+  grid-template-rows: auto minmax(0, 1fr) auto;
+}
+
+.regulation-circuit {
+  grid-template-rows: auto minmax(0, 1fr) auto;
+}
+
+.regulation-layout svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: #173b3b;
+  font-size: 26px;
+  font-weight: 650;
+}
+
+.regulation-layout svg [hidden] {
+  display: none;
+}
+
+.regulation-layout :is(.construction, .equal-radius, .vector, .source-angle) {
+  fill: none;
+}
+
+.regulation-layout .construction {
+  stroke: #9aaea8;
+  stroke-width: 1.6;
+  stroke-dasharray: 5 4;
+}
+
+.regulation-layout .vector {
+  stroke-width: 4.5;
+}
+
+.regulation-layout .terminal {
+  stroke: #16776b;
+}
+
+.regulation-layout .current,
+.regulation-layout .current-arrow {
+  stroke: #674399;
+}
+
+.regulation-layout .resistance {
+  stroke: #9a5419;
+}
+
+.regulation-layout .reactance {
+  stroke: #b13e5e;
+}
+
+.regulation-layout .source,
+.regulation-layout .equal-radius {
+  stroke: #24598e;
+}
+
+.regulation-layout .equal-radius {
+  stroke-width: 2.5;
+  stroke-dasharray: 5 4;
+}
+
+.regulation-layout .source-angle {
+  stroke: #24598e;
+  stroke-width: 2;
+}
+
+.regulation-layout .projections {
+  fill: none;
+  stroke-width: 2.5;
+  font-size: 21px;
+}
+
+.regulation-layout .terminal-label {
+  fill: #16776b;
+}
+
+.regulation-layout .current-label {
+  fill: #674399;
+}
+
+.regulation-layout .load-angle-arc {
+  fill: none;
+  stroke: #674399;
+  stroke-width: 2;
+}
+
+.regulation-layout .resistance-label {
+  fill: #9a5419;
+}
+
+.regulation-layout .reactance-label {
+  fill: #b13e5e;
+}
+
+.regulation-layout .source-label {
+  fill: #24598e;
+}
+
+.regulation-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-block: 18px;
+}
+
+.projection-condition,
+.referral-note {
+  border-top: 1px solid #c8d9d4;
+  padding-top: 9px;
+  color: #34594c;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.step-list {
+  display: grid;
+  gap: 6px;
+}
+
+.regulation-steps button {
+  border: 1px solid #c8d9d4;
+  border-radius: 8px;
+  background: #f8fbf7;
+  color: #173b3b;
+  cursor: pointer;
+  font: inherit;
+  font-size: 19px;
+  font-weight: 650;
+}
+
+.step-list button {
+  padding: 8px 13px;
+  text-align: left;
+}
+
+.step-list button[aria-pressed='true'] {
+  border-color: #2c786b;
+  background: #e4f2eb;
+}
+
+.regulation-steps button:focus-visible {
+  outline: 3px solid #24598e;
+  outline-offset: 2px;
+}
+
+.step-list span,
+.formula-card h2 span {
+  margin-right: 9px;
+  color: #39796f;
+  font-size: 16px;
+  font-variant-numeric: tabular-nums;
+}
+
+.step-description {
+  flex: 1;
+  color: #34594c;
+  font-size: 20px;
+  line-height: 1.55;
+}
+
+.regulation-steps .play-steps {
+  align-self: start;
+  padding: 9px 20px;
+  border-color: #226657;
+  background: #226657;
+  color: #fff;
+}
+
+.regulation-formulas {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 14px;
+}
+
+.formula-card {
+  display: grid;
+  align-content: center;
+  gap: 12px;
+}
+
+.formula-card math {
+  font-size: 39px;
+}
+
+.formula-card p,
+.circuit-equation p {
+  color: #34594c;
+  font-size: 19px;
+  line-height: 1.55;
+}
+
+.regulation-circuit .circuit-lines {
+  fill: none;
+  stroke: #173b3b;
+  stroke-width: 3.5;
+}
+
+.regulation-circuit .circuit-lines circle {
+  fill: #fff;
+}
+
+.regulation-circuit .current-arrow {
+  fill: none;
+  stroke-width: 3.5;
+}
+
+.circuit-equation {
+  border-top: 1px solid #c8d9d4;
+  padding-top: 12px;
+}
+
+.circuit-equation strong {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 26px;
+}
+
+.regulation-footer {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 0 20px;
+  border-radius: 10px;
+  background: #eaf4eb;
+  color: #34594c;
+  font-size: 19px;
+}
+
+.regulation-footer strong {
+  color: #173b3b;
+  font-size: 22px;
+  white-space: nowrap;
+}
+
+.regulation-result {
+  gap: 24px;
+  border: 1px solid #e2c493;
+  border-left: 6px solid #a75e25;
+  background: #fff0d5;
+  color: #654223;
+}
+
+.regulation-result strong {
+  color: #783c16;
+}
+
+.regulation-result math {
+  flex: none;
+  color: #783c16;
+  font-size: 39px;
+}

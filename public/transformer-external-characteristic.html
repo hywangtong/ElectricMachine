@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>变压器：运行外特性</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/transformer-external-characteristic.css" />
+    <script src="/dc-machine-basics.js" defer></script>
+    <script src="/dc-generator-emf-controls.js" defer></script>
+    <script
+      src="/transformer-external-characteristic.js"
+      type="module"
+    ></script>
+  </head>
+  <body>
+    <main class="lesson characteristic-lesson">
+      <header class="page-head">
+        <div class="eyebrow">变压器 / 运行特性</div>
+        <h1>变压器：运行外特性</h1>
+        <p>
+          一次侧电压
+          <math
+            ><msub><mi>U</mi><mn>1</mn></msub></math
+          >
+          和频率
+          <math><mi>f</mi></math> 均保持额定值。每条曲线保持负载相角
+          <math
+            ><msub><mi>φ</mi><mn>2</mn></msub></math
+          >
+          不变，观察
+          <math
+            ><msub><mi>U</mi><mn>2</mn></msub></math
+          >
+          随
+          <math
+            ><msub><mi>I</mi><mn>2</mn></msub></math
+          >
+          的变化。
+        </p>
+      </header>
+      <div class="characteristic-layout">
+        <section class="panel curve-panel" aria-labelledby="curve-heading">
+          <div class="panel-heading">
+            <h2 id="curve-heading">
+              二次端电压
+              <math
+                ><msub><mi>U</mi><mn>2</mn></msub
+                ><mo>=</mo><mi>f</mi><mo>(</mo><msub><mi>I</mi><mn>2</mn></msub
+                ><mo>)</mo></math
+              >
+            </h2>
+            <span>实线为当前曲线</span>
+          </div>
+          <div class="presets" role="group" aria-label="典型负载">
+            <button type="button" data-angle="-36.9" aria-pressed="true">
+              感性 ·
+              <math
+                ><mi>cos</mi><msub><mi>φ</mi><mn>2</mn></msub
+                ><mo>=</mo><mn>0.8</mn></math
+              >
+            </button>
+            <button type="button" data-angle="0" aria-pressed="false">
+              阻性 ·
+              <math
+                ><mi>cos</mi><msub><mi>φ</mi><mn>2</mn></msub
+                ><mo>=</mo><mn>1</mn></math
+              >
+            </button>
+            <button type="button" data-angle="36.9" aria-pressed="false">
+              容性 ·
+              <math
+                ><mi>cos</mi><msub><mi>φ</mi><mn>2</mn></msub
+                ><mo>=</mo><mn>0.8</mn></math
+              >
+            </button>
+          </div>
+          <svg
+            class="curve-plot"
+            viewBox="0 0 850 470"
+            role="img"
+            aria-labelledby="curve-title"
+          >
+            <title id="curve-title">
+              端电压对负载电流的曲线及额定电流参考线
+            </title>
+            <path
+              class="grid"
+              d="M100 78H814 M100 154H814 M100 306H814 M100 382H814"
+            />
+            <path class="reference" d="M100 230H814 M660 42V382" />
+            <path
+              class="axes"
+              d="M100 42V382H814 M94 52l6-10 6 10 M804 376l10 6-10 6"
+            />
+            <g class="ticks" text-anchor="end">
+              <text x="86" y="84">1.10</text>
+              <text x="86" y="160">1.05</text>
+              <text x="86" y="236">1.00</text>
+              <text x="86" y="312">0.95</text>
+              <text x="86" y="388">0.90</text>
+            </g>
+            <g class="ticks" text-anchor="middle">
+              <text x="100" y="408">0</text>
+              <text x="240" y="408">0.25</text>
+              <text x="380" y="408">0.50</text>
+              <text x="520" y="408">0.75</text>
+              <text x="660" y="408">1.00</text>
+              <text x="800" y="408">1.25</text>
+            </g>
+            <foreignObject
+              class="axis-label"
+              x="48"
+              y="5"
+              width="128"
+              height="34"
+            >
+              <math
+                ><msub><mi>U</mi><mn>2</mn></msub
+                ><mo>/</mo
+                ><msub
+                  ><mi>U</mi
+                  ><mrow><mn>2</mn><mi mathvariant="normal">N</mi></mrow></msub
+                ></math
+              >
+            </foreignObject>
+            <foreignObject
+              class="axis-label current-axis-label"
+              x="715"
+              y="422"
+              width="90"
+              height="34"
+            >
+              <math
+                ><msub><mi>I</mi><mn>2</mn></msub
+                ><mo>/</mo
+                ><msub
+                  ><mi>I</mi
+                  ><mrow><mn>2</mn><mi mathvariant="normal">N</mi></mrow></msub
+                ></math
+              >
+            </foreignObject>
+            <text class="guide-label" x="660" y="433" text-anchor="middle">
+              额定电流
+            </text>
+            <text class="guide-label" x="114" y="218">空载电压</text>
+            <g class="curves">
+              <path id="lagging-curve" class="lagging" />
+              <path id="resistive-curve" class="resistive" />
+              <path id="leading-curve" class="leading" />
+              <path id="active-curve" />
+            </g>
+            <path id="operating-guides" />
+            <circle id="operating-point" r="8" />
+          </svg>
+        </section>
+        <section class="panel analysis-panel" aria-labelledby="phasor-heading">
+          <div class="panel-heading">
+            <h2 id="phasor-heading">电压相量示意</h2>
+            <span>折算到二次侧</span>
+          </div>
+          <p class="phasor-note">
+            <strong>简化等效电路</strong> · 忽略铁耗与励磁电抗，省略励磁支路。
+          </p>
+          <svg
+            class="drop-plot"
+            viewBox="0 0 466 228"
+            role="img"
+            aria-labelledby="phasor-title"
+            aria-describedby="phasor-description"
+          >
+            <title id="phasor-title">
+              固定电源电压与端电压、串联电阻压降、漏抗压降的相量关系
+            </title>
+            <desc id="phasor-description">
+              使用较大的示例串联阻抗。电源电压的箭头端点沿等幅圆弧移动。二次电流和二次端电压从同一原点画出，两者的夹角为
+              φ₂。
+            </desc>
+            <defs>
+              <marker
+                id="arrow"
+                viewBox="0 0 8 8"
+                refX="7"
+                refY="4"
+                markerWidth="8"
+                markerHeight="8"
+                markerUnits="userSpaceOnUse"
+                orient="auto"
+              >
+                <polygon points="0,0 8,4 0,8" fill="context-stroke" />
+              </marker>
+            </defs>
+            <path class="phase-axis" d="M28 122H345" />
+            <path id="source-arc" class="source-arc" />
+            <line id="source-phasor" class="vector source" />
+            <line id="terminal-phasor" class="vector terminal" />
+            <line id="resistance-phasor" class="vector resistance" />
+            <line id="reactance-phasor" class="vector reactance" />
+            <circle cx="28" cy="122" r="3" />
+            <line id="source-leader" class="leader source" x1="142" y1="37" />
+            <line class="leader terminal" x1="142" y1="146" x2="142" y2="122" />
+            <line
+              id="resistance-leader"
+              class="leader resistance"
+              x1="331"
+              y1="155"
+            />
+            <line
+              id="reactance-leader"
+              class="leader reactance"
+              x1="331"
+              y1="60"
+            />
+            <g id="current-directions">
+              <path id="load-angle-arc" class="current" />
+              <line id="current-phasor" class="vector current" />
+              <text id="phasor-angle-label" class="current">φ₂</text>
+              <text id="current-phasor-label" class="current">İ₂</text>
+            </g>
+            <foreignObject
+              class="source label"
+              x="30"
+              y="10"
+              width="204"
+              height="29"
+            >
+              电源
+              <math
+                ><msub
+                  ><mover accent="true"><mi>U</mi><mo>˙</mo></mover
+                  ><mn>1</mn></msub
+                ><mo>/</mo><mi>k</mi></math
+              >（幅值固定）
+            </foreignObject>
+            <foreignObject
+              class="terminal label"
+              x="128"
+              y="148"
+              width="119"
+              height="29"
+            >
+              端电压
+              <math
+                ><msub
+                  ><mover accent="true"><mi>U</mi><mo>˙</mo></mover
+                  ><mn>2</mn></msub
+                ></math
+              >
+            </foreignObject>
+            <foreignObject
+              class="resistance label"
+              x="337"
+              y="144"
+              width="127"
+              height="29"
+            >
+              电阻压降
+              <math
+                ><msub><mi>R</mi><mi>eq</mi></msub
+                ><msub
+                  ><mover accent="true"><mi>I</mi><mo>˙</mo></mover
+                  ><mn>2</mn></msub
+                ></math
+              >
+            </foreignObject>
+            <foreignObject
+              class="reactance label"
+              x="337"
+              y="49"
+              width="127"
+              height="29"
+            >
+              漏抗压降
+              <math
+                ><mi>j</mi><msub><mi>X</mi><mi>eq</mi></msub
+                ><msub
+                  ><mover accent="true"><mi>I</mi><mo>˙</mo></mover
+                  ><mn>2</mn></msub
+                ></math
+              >
+            </foreignObject>
+            <text class="detail-note" x="464" y="222" text-anchor="end">
+              串联阻抗采用放大示例，电流箭头仅示方向
+            </text>
+          </svg>
+          <div class="readout">
+            <span>曲线上的工作点</span>
+            <strong
+              ><math
+                ><msub><mi>U</mi><mn>2</mn></msub
+                ><mo>/</mo
+                ><msub
+                  ><mi>U</mi
+                  ><mrow><mn>2</mn><mi mathvariant="normal">N</mi></mrow></msub
+                ><mo>=</mo></math
+              >
+              <output id="terminal-value"></output
+            ></strong>
+            <p id="voltage-note"></p>
+          </div>
+          <div class="controls">
+            <div class="control">
+              <label for="load-angle"
+                >负载相角
+                <math
+                  ><msub><mi>φ</mi><mn>2</mn></msub></math
+                ></label
+              >
+              <span
+                ><output id="angle-value" for="load-angle"></output> ·
+                <math
+                  ><mi>cos</mi><msub><mi>φ</mi><mn>2</mn></msub
+                  ><mo>=</mo><mn id="power-factor-value"></mn></math
+              ></span>
+              <input
+                id="load-angle"
+                type="range"
+                min="-90"
+                max="90"
+                step="0.1"
+                value="-36.9"
+              />
+              <div class="scale" aria-hidden="true">
+                <span>−90° 滞后</span><span>0° 同相</span><span>+90° 超前</span>
+              </div>
+            </div>
+            <div class="control">
+              <label for="load-current"
+                >负载电流
+                <math
+                  ><msub><mi>I</mi><mn>2</mn></msub
+                  ><mo>/</mo
+                  ><msub
+                    ><mi>I</mi
+                    ><mrow
+                      ><mn>2</mn><mi mathvariant="normal">N</mi></mrow
+                    ></msub
+                  ></math
+                ></label
+              >
+              <output id="current-value" for="load-current"></output>
+              <input
+                id="load-current"
+                type="range"
+                min="0"
+                max="1.25"
+                step="0.01"
+                value="1"
+              />
+              <div class="scale" aria-hidden="true">
+                <span>空载</span><span>1.25</span>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <footer>
+        采用简化等效电路与示例阻抗。<math
+          ><msub
+            ><mi>U</mi
+            ><mrow><mn>2</mn><mi mathvariant="normal">N</mi></mrow></msub
+          ></math
+        >
+        为额定供电条件下的二次空载端电压，<math
+          ><msub
+            ><mi>I</mi
+            ><mrow><mn>2</mn><mi mathvariant="normal">N</mi></mrow></msub
+          ></math
+        >
+        为额定二次电流。
+      </footer>
+    </main>
+  </body>
+</html>

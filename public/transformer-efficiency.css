@@ -1,0 +1,108 @@
+.efficiency-lesson {
+  grid-template-rows: 84px auto minmax(0, 1fr) auto;
+}
+
+.efficiency-balance,
+.efficiency-step {
+  padding: 16px 22px;
+}
+
+.efficiency-balance {
+  display: flex;
+  align-items: center;
+  gap: 54px;
+}
+
+.efficiency-lesson h2 {
+  color: #173b3b;
+  font-size: 24px;
+}
+
+.efficiency-lesson h2 span {
+  margin-right: 6px;
+  color: #39796f;
+  font-size: 16px;
+}
+
+.efficiency-layout {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.efficiency-step {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.efficiency-note {
+  color: #46635d;
+  font-size: 19px;
+  line-height: 1.5;
+}
+
+.efficiency-lesson :is(sub, sup) {
+  line-height: 0;
+}
+
+.efficiency-equation {
+  font-family: 'Cambria Math', Cambria, serif;
+  font-size: 29px;
+  line-height: 1.3;
+}
+
+.efficiency-balance .efficiency-equation {
+  display: flex;
+  gap: 36px;
+  margin: 4px 0;
+}
+
+.efficiency-output {
+  display: grid;
+  gap: 3px;
+}
+
+.efficiency-output span:not(:first-child) {
+  padding-left: 50px;
+}
+
+.efficiency-losses {
+  display: grid;
+  gap: 8px;
+}
+
+.efficiency-result-label {
+  margin-top: auto;
+  color: #146852;
+  font-size: 19px;
+  font-weight: 750;
+}
+
+.efficiency-result {
+  display: grid;
+  min-height: 112px;
+  place-items: center;
+  border: 3px solid #146852;
+  background: #eff8f3;
+  color: #124a3d;
+  font-size: 41px;
+}
+
+.efficiency-result math {
+  math-style: normal;
+}
+
+.efficiency-footer {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 17px;
+}
+
+.efficiency-footer strong {
+  margin-right: 12px;
+  color: #146852;
+  font-size: 21px;
+}

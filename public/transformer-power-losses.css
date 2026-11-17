@@ -1,0 +1,244 @@
+.power-lesson {
+  grid-template-rows: 84px minmax(0, 1fr) 32px;
+}
+
+.power-layout,
+.power-diagrams {
+  display: grid;
+  min-height: 0;
+  gap: 12px;
+}
+
+.power-layout {
+  grid-template-columns: 535px minmax(0, 1fr);
+}
+
+.power-diagrams {
+  grid-template-rows: minmax(0, 1.8fr) minmax(0, 1fr);
+}
+
+.power-list {
+  display: grid;
+  grid-template-rows: repeat(3, minmax(0, 1fr)) 132px 109px 90px;
+  min-height: 0;
+  gap: 6px;
+  margin: 0;
+}
+
+.power-item {
+  display: grid;
+  align-content: center;
+  padding: 4px 14px;
+  border: 1px solid #c8d9d4;
+  border-left: 5px solid var(--power-ink);
+  border-radius: 10px;
+  background: #fff;
+}
+
+.power-item:is(:hover, :focus-visible) {
+  border-color: var(--power-ink);
+}
+
+.power-item:focus-visible {
+  outline: 2px solid var(--power-ink);
+  outline-offset: 1px;
+}
+
+.input-power {
+  --power-ink: #215694;
+}
+.output-power {
+  --power-ink: #146852;
+}
+.total-loss {
+  --power-ink: #504c6b;
+}
+.copper-loss {
+  --power-ink: #96451c;
+}
+.iron-loss {
+  --power-ink: #723e88;
+}
+.short-loss {
+  --power-ink: #8a3147;
+}
+
+.power-item dt {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  color: var(--power-ink);
+  font-size: 21px;
+  font-weight: 750;
+  line-height: 1.2;
+}
+
+.power-item dt span,
+.power-panel h2 span {
+  color: #46635d;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.power-item dd {
+  margin: 2px 0 0;
+  font-family: 'Cambria Math', Cambria, serif;
+  font-size: 25px;
+  line-height: 1.2;
+}
+
+.power-item sub,
+.power-item sup,
+.power-footer sub {
+  line-height: 0;
+}
+
+.power-item .power-note {
+  font-family: inherit;
+  font-size: 16px;
+}
+
+.power-estimate strong,
+.power-item .power-note strong,
+.power-loss-kind {
+  color: var(--power-ink);
+}
+
+.power-loss-kind {
+  margin-left: 4px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--power-ink) 12%, white);
+}
+
+.power-formula-note {
+  margin-left: 8px;
+  color: #46635d;
+  font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+  font-size: 16px;
+}
+
+.power-item .power-load-factor {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 2px 8px;
+  border-radius: 5px;
+  background: #fcf0e8;
+  color: var(--power-ink);
+  font-size: 23px;
+}
+
+.power-load-factor span {
+  font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+  font-size: 16px;
+}
+
+.power-load-factor span:first-child {
+  font-weight: 700;
+}
+
+.power-panel {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  padding: 11px 16px 5px;
+  min-width: 0;
+}
+
+.power-panel h2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 24px;
+}
+
+.power-panel svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.power-wires,
+.power-callout path {
+  fill: none;
+  stroke: #315350;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.power-wires use[class],
+.power-callout path {
+  stroke: var(--power-ink);
+}
+
+.power-terminal {
+  fill: #fff;
+}
+.power-node {
+  fill: #315350;
+}
+
+.power-symbols,
+.power-callout {
+  text-anchor: middle;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.power-symbols {
+  fill: #173b3b;
+}
+.power-callout {
+  fill: var(--power-ink);
+}
+.power-callout.total-loss path {
+  stroke-dasharray: 5 5;
+}
+
+.power-layout:has(.power-item:is(:hover, :focus-visible))
+  .power-diagrams
+  :is(.power-wires > *, .power-symbols > *, .power-callout) {
+  filter: grayscale(1);
+  opacity: 0.27;
+}
+
+.power-layout:is(
+    :has(.power-item.input-power:hover),
+    :not(:has(.power-item:hover)):has(.power-item.input-power:focus-visible)
+  )
+  [data-power~='input'],
+.power-layout:is(
+    :has(.power-item.output-power:hover),
+    :not(:has(.power-item:hover)):has(.power-item.output-power:focus-visible)
+  )
+  [data-power~='output'],
+.power-layout:is(
+    :has(.power-item.total-loss:hover),
+    :not(:has(.power-item:hover)):has(.power-item.total-loss:focus-visible)
+  )
+  [data-power~='total'],
+.power-layout:is(
+    :has(.power-item.copper-loss:hover),
+    :not(:has(.power-item:hover)):has(.power-item.copper-loss:focus-visible)
+  )
+  [data-power~='copper'],
+.power-layout:is(
+    :has(.power-item.iron-loss:hover),
+    :not(:has(.power-item:hover)):has(.power-item.iron-loss:focus-visible)
+  )
+  [data-power~='iron'],
+.power-layout:is(
+    :has(.power-item.short-loss:hover),
+    :not(:has(.power-item:hover)):has(.power-item.short-loss:focus-visible)
+  )
+  [data-power~='short'] {
+  filter: none;
+  opacity: 1;
+}
+
+.power-footer {
+  align-self: center;
+  color: #46635d;
+  font-size: 16px;
+}

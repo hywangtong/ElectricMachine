@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>变压器：效率特性</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/transformer-efficiency-characteristic.css" />
+    <script src="/dc-machine-basics.js" defer></script>
+    <script src="/transformer-efficiency-characteristic.js" defer></script>
+  </head>
+  <body>
+    <main class="lesson efficiency-characteristic">
+      <header class="page-head">
+        <div class="eyebrow">变压器 / 工作特性</div>
+        <h1>变压器：效率特性</h1>
+        <p>
+          一次侧以额定电压和频率供电。每条曲线的负载功率因数 λ<sub>2</sub> = cos
+          φ<sub>2</sub> 保持不变。
+        </p>
+      </header>
+
+      <section class="panel efficiency-proof" aria-labelledby="proof-title">
+        <h2 id="proof-title">最大效率条件</h2>
+        <p>
+          令 A = S<sub>N</sub>λ<sub>2</sub> &gt; 0，β = I<sub>2</sub> /
+          I<sub>2N</sub>。取铁耗 ≈ P<sub>0</sub>、铜耗 ≈ β²P<sub>s</sub>。
+        </p>
+        <div class="efficiency-math">
+          <math>
+            <mi>η</mi><mo>=</mo>
+            <mfrac>
+              <mrow><mi>β</mi><mi>A</mi></mrow>
+              <mrow>
+                <mi>β</mi><mi>A</mi><mo>+</mo><msub><mi>P</mi><mn>0</mn></msub>
+                <mo>+</mo><msup><mi>β</mi><mn>2</mn></msup
+                ><msub><mi>P</mi><mi>s</mi></msub>
+              </mrow>
+            </mfrac>
+            <mo>×</mo><mn>100</mn><mo>%</mo>
+          </math>
+        </div>
+        <p>记分母为 D，用商法则对 β 求导：</p>
+        <div class="efficiency-math">
+          <math>
+            <mfrac>
+              <mrow><mi mathvariant="normal">d</mi><mi>η</mi></mrow>
+              <mrow><mi mathvariant="normal">d</mi><mi>β</mi></mrow>
+            </mfrac>
+            <mo>=</mo>
+            <mfrac>
+              <mrow>
+                <mi>A</mi><mo>(</mo><msub><mi>P</mi><mn>0</mn></msub
+                ><mo>−</mo> <msup><mi>β</mi><mn>2</mn></msup
+                ><msub><mi>P</mi><mi>s</mi></msub>
+                <mo>)</mo>
+              </mrow>
+              <msup><mi>D</mi><mn>2</mn></msup>
+            </mfrac>
+            <mo>×</mo><mn>100</mn><mo>%</mo>
+          </math>
+        </div>
+        <p>导数随 P<sub>0</sub> − β²P<sub>s</sub> 由正变负，效率先升后降。</p>
+        <div class="efficiency-condition">
+          <math>
+            <msub><mi>P</mi><mn>0</mn></msub
+            ><mo>=</mo> <msup><mi>β</mi><mn>2</mn></msup
+            ><msub><mi>P</mi><mi>s</mi></msub> <mo>⇒</mo
+            ><msub><mi>β</mi><mtext>opt</mtext></msub
+            ><mo>=</mo>
+            <msqrt>
+              <msub><mi>P</mi><mn>0</mn></msub
+              ><mo>/</mo>
+              <msub><mi>P</mi><mi>s</mi></msub>
+            </msqrt>
+          </math>
+          <p>铜耗等于铁耗时，效率最高。</p>
+        </div>
+      </section>
+
+      <section class="panel efficiency-chart" aria-labelledby="chart-title">
+        <div class="efficiency-chart-head">
+          <h2 id="chart-title">效率曲线</h2>
+          <p>示例：P<sub>0</sub> = 1 kW，P<sub>s</sub> = 4 kW</p>
+        </div>
+        <svg viewBox="0 0 730 386" role="img" aria-labelledby="curve-title">
+          <title id="curve-title">效率随负载系数先升后降</title>
+          <path
+            class="efficiency-grid"
+            d="M64 34H690 M64 108.5H690 M64 183H690 M64 257.5H690"
+          />
+          <path
+            class="efficiency-axes"
+            d="M58 34H64 M58 108.5H64 M58 183H64 M58 257.5H64 M64 34V332H690 M189.2 332v6 M314.4 332v6 M439.6 332v6 M564.8 332v6 M690 332v6"
+          />
+          <g class="efficiency-ticks" text-anchor="end">
+            <text x="51" y="40">100</text>
+            <text x="51" y="115">75</text>
+            <text x="51" y="189">50</text>
+            <text x="51" y="264">25</text>
+            <text x="51" y="338">0</text>
+          </g>
+          <g class="efficiency-ticks" text-anchor="middle">
+            <text x="64" y="357">0</text>
+            <text x="189.2" y="357">0.25</text>
+            <text x="314.4" y="357" class="efficiency-peak-tick">0.50</text>
+            <text x="439.6" y="357">0.75</text>
+            <text x="564.8" y="357">1.00</text>
+            <text x="690" y="357">1.25</text>
+          </g>
+          <text class="efficiency-axis-label" x="46" y="23">η (%)</text>
+          <text class="efficiency-axis-label" x="690" y="382" text-anchor="end">
+            负载系数 β
+          </text>
+          <path id="peak-vertical" class="efficiency-guide" />
+          <path id="peak-horizontal" class="efficiency-guide" />
+          <path id="efficiency-curve" />
+          <circle id="efficiency-peak" r="8" />
+        </svg>
+        <div class="efficiency-control">
+          <label for="rated-active-power">
+            调节 S<sub>N</sub>λ<sub>2</sub>：
+            <output id="power-value" for="rated-active-power">20 kW</output>
+          </label>
+          <p>
+            峰值效率 η<sub>max</sub> = <strong id="peak-value">83.33%</strong>
+          </p>
+          <input
+            id="rated-active-power"
+            type="range"
+            min="10"
+            max="50"
+            step="1"
+            value="20"
+          />
+          <p class="efficiency-fixed">
+            峰值位置 β<sub>opt</sub> = <strong id="peak-beta">0.50</strong>
+          </p>
+        </div>
+      </section>
+      <footer>
+        拖动滑块：峰值沿竖线移动。损耗参数固定时，S<sub>N</sub>λ<sub>2</sub>
+        改变峰值效率，最佳负载系数只由 P<sub>0</sub> / P<sub>s</sub> 决定。
+      </footer>
+    </main>
+  </body>
+</html>

@@ -1,47 +1,58 @@
-const shortCircuit =
-  new URLSearchParams(location.search).get('test') === 'short-circuit';
 const lesson = document.querySelector('.three-phase-test');
-const buttons = [...document.querySelectorAll('[data-step-button]')];
+const tabs = document.querySelectorAll('[data-test-button]');
 const play = document.querySelector('#play');
+const slider = document.querySelector('#test-voltage');
+const status = document.querySelector('#trial-status');
 const circuit = document.querySelector('#circuit');
-const measurements = document.querySelector('#measurements');
-const stageHeading = document.querySelector('#stage-heading');
-const stageContent = document.querySelector('#stage-content');
-const note = document.querySelector('#step-note');
+const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+const root3 = Math.sqrt(3);
+const tests = {
+  'no-load': {
+    target: 400,
+    maximum: 480,
+    current: 0.5,
+    power: 45,
+    input: '低压侧',
+    output: '高压侧',
+    currentSymbol: 'I₀L',
+    criterion: '额定电压',
+    intro:
+      '<strong>空载试验在低压侧进行</strong> 高压侧开路，在额定频率下将低压侧调至额定线电压。',
+    outputConnection: '高压侧开路，仅在 a、b 两线间接高内阻电压表。',
+    note: '拖动滑块调节低压侧线电压。高压侧开路端仍有感应电压。',
+    voltage: 0,
+  },
+  'short-circuit': {
+    target: 48,
+    maximum: 58,
+    current: 10,
+    power: 360,
+    input: '高压侧',
+    output: '低压侧',
+    currentSymbol: 'I₁L',
+    criterion: '额定电流',
+    intro:
+      '<strong>短路试验在高压侧进行</strong> 低压侧三端短接，在额定频率下从零升压至额定线电流。',
+    outputConnection: '低压侧 a、b、c 三端短接，高压侧接三相可调电源。',
+    note: '低压侧三端短接后，从 0 V 升压，观察两侧绕组与三相仪表的联动。',
+    voltage: 0,
+  },
+};
+let selectedTest;
+let rampFrame = null;
+let meterReadings;
+let diagramDescription;
+let wiringDescription;
+const isTest = (test) => Object.hasOwn(tests, test);
 
-const title = shortCircuit ? '短路试验' : '空载试验';
-const inputSide = shortCircuit ? '高压侧' : '低压侧';
-const outputSide = shortCircuit ? '低压侧' : '高压侧';
-const voltage = shortCircuit ? 48 : 400;
-const ratedVoltage = shortCircuit ? 800 : 400;
-const current = shortCircuit ? 10 : 0.5;
-const power = shortCircuit ? 360 : 45;
-const outputVoltage = 800;
-const phaseVoltage = voltage / Math.sqrt(3);
-const impedance = phaseVoltage / current;
-const resistance = power / (3 * current ** 2);
-const reactance = Math.sqrt(impedance ** 2 - resistance ** 2);
-// For ABC phase order and lagging current, Wₐ = U_L I_L cos(30° + φ).
-const apparentPower = Math.sqrt(3) * voltage * current;
-const difference = Math.sqrt(apparentPower ** 2 - power ** 2) / Math.sqrt(3);
-const wattsA = ((power - difference) / 2).toFixed(1).replace('-', '−');
-const wattsC = ((power + difference) / 2).toFixed(1);
-const voltageSymbol = shortCircuit ? 'Uₛ' : 'U₁L';
-const currentSymbol = shortCircuit ? 'I₁N' : 'I₀L';
-const energizeLabel = shortCircuit ? '升至额定电流' : '施加额定电压';
-
-document.title = `三相变压器的${title}`;
-document.querySelector('#lesson-title').textContent = document.title;
-document.querySelector('#lesson-intro').textContent = shortCircuit
-  ? '低压侧三端短接，高压侧接额定频率的三相可调电源。'
-  : '低压侧接额定频率、额定线电压的三相电源，高压侧开路。';
-document.querySelector('#energize').textContent = `2　${energizeLabel}`;
-
-function meter(type, x, y, label, scan, wiring = '', extra = '') {
-  return `<g class="meter meter-${type} scan-${scan} ${extra}">
+function meter(type, x, y, label, scan, reading, wiring = '') {
+  const [key, readingX, readingY, alignment = 'start'] = reading;
+  return `<g class="meter meter-${type} scan-${scan}">
     ${wiring}
-    <circle class="meter-dial" cx="${x}" cy="${y}" r="24" />
+    <circle class="meter-face" cx="${x}" cy="${y}" r="24" />
     <text x="${x}" y="${y + 1}">${label}</text>
+    <text class="meter-reading" x="${readingX}" y="${readingY}"
+      style="text-anchor:${alignment}" data-value="${key}"></text>
   </g>`;
 }
 
@@ -49,27 +60,31 @@ function junction(x, y) {
   return `<circle class="junction" cx="${x}" cy="${y}" r="4.5" />`;
 }
 
-function voltageMeter(x, symbol, scan, extra) {
+function voltageMeter(x, symbol, scan, output = false) {
+  const readingX = x + (output ? -34 : 34);
+  const alignment = output ? 'end' : 'start';
   return meter(
     'voltage',
     x,
     150,
     'V',
     scan,
+    [output ? 'outputVoltage' : 'voltage', readingX, 164, alignment],
     `<path d="M${x} 105V195" />
     ${junction(x, 105)}${junction(x, 195)}
-    <text class="diagram-note symbol" x="${x + 36}" y="157">${symbol}</text>`,
-    extra,
+    <text class="diagram-note symbol" x="${readingX}" y="140"
+      text-anchor="${alignment}">${symbol}</text>`,
   );
 }
 
-function powerMeter(y, lead, label) {
+function powerMeter(y, lead, label, key) {
   return meter(
     'power',
     300,
     y,
     label,
     'third',
+    [key, 333, y + (lead < y ? 36 : -36)],
     `<path class="potential-wire" d="M235 ${y}V${lead}H300V${y}
       M300 ${y}V195" />
     ${junction(235, y)}`,
@@ -78,210 +93,204 @@ function powerMeter(y, lead, label) {
 
 const winding =
   'c0-14 20-14 20 0 c0-14 20-14 20 0 c0-14 20-14 20 0 c0-14 20-14 20 0';
-const phases = [105, 195, 285];
-const phaseWires = phases.map((y, index) => {
-  const input = `M80 ${y}H520 ${winding} H650`;
-  const output = `M710 ${y}H745 ${winding} H920`;
-  const outputLabel = ['a', 'b', 'c'][index];
-  const inputLabel = ['A', 'B', 'C'][index];
-  return `<path class="wire" d="${input} ${output}" />
-    <path class="current-trace" style="--phase-delay:${index * 500}ms"
+function drawWiring(
+  { input: inputSide, output: outputSide, currentSymbol },
+  shortCircuit,
+) {
+  const phases = [105, 195, 285];
+  const phaseWires = phases.map((y, index) => {
+    const input = `M80 ${y}H520 ${winding} H650`;
+    const output = `M710 ${y}H745 ${winding} H920`;
+    const outputLabel = ['a', 'b', 'c'][index];
+    const inputLabel = ['A', 'B', 'C'][index];
+    return `<path class="wire" d="${input} ${output}" />
+    <path class="current-trace" style="--phase-delay:${(index - 3) * 450}ms"
       d="${input}${shortCircuit ? ` ${output}` : ''}" />
     <text class="phase-label" x="53" y="${y + 7}">${inputLabel}</text>
     <text class="phase-label" x="943" y="${y + 7}">${outputLabel}</text>
     <circle class="wire terminal" cx="80" cy="${y}" r="5" />`;
-});
+  });
 
-circuit.innerHTML = `
-  <desc id="circuit-desc">
-    ${inputSide}接三相三线电源，电压表跨接 A、B 两线，三条线各串联一只电流表。
-    两只功率表的电流线圈分别串入 A、C 线，电压线圈分别跨接 A、B 和 C、B。
-    两侧绕组均为星形联结。${shortCircuit ? '低压侧 a、b、c 三个线端短接。' : '高压侧开路，仅在 a、b 两端跨接高内阻电压表。'}
-  </desc>
-  <rect class="low-side" x="10" y="12" width="655" height="346" rx="13" />
-  <rect class="high-side" x="695" y="12" width="263" height="346" rx="13" />
+  return `
+  <rect class="${shortCircuit ? 'high-side' : 'low-side'}" x="10" y="12" width="655" height="346" rx="13" />
+  <rect class="${shortCircuit ? 'low-side' : 'high-side'}" x="695" y="12" width="263" height="346" rx="13" />
   <text class="side-title" x="527" y="47">${inputSide}绕组</text>
   <text class="side-title" x="825" y="47">${outputSide}绕组</text>
   <path class="wire" d="M650 105V285 M710 105V285" />
   ${phaseWires.join('')}
   <circle class="neutral" cx="650" cy="195" r="5" />
   <circle class="neutral" cx="710" cy="195" r="5" />
-  ${shortCircuit ? '<path class="wire short-link" d="M920 105V285" />' : ''}
+  <path class="core" d="M675 88V302 M685 88V302" />
+  ${shortCircuit ? '<path class="wire short-link" d="M920 105V285" />' : '<path class="core excitation" d="M675 88V302 M685 88V302" />'}
   ${phases.map((y) => `<circle class="wire ${shortCircuit ? 'short-terminal' : 'terminal'}" cx="920" cy="${y}" r="5" />`).join('')}
-  ${voltageMeter(147, voltageSymbol, 'first', '')}
-  ${powerMeter(105, 65, 'Wₐ')}
-  ${powerMeter(285, 325, 'W𝚌')}
+  ${voltageMeter(147, 'U₁L', 'first')}
+  ${powerMeter(105, 65, 'Wₐ', 'wattsA')}
+  ${powerMeter(285, 325, 'Wᴄ', 'wattsC')}
   <circle class="meter-power junction" cx="300" cy="195" r="5" />
-  ${phases.map((y) => meter('current', 410, y, 'A', 'second')).join('')}
-  ${shortCircuit ? '' : voltageMeter(870, 'U₂L', 'fourth', 'output-voltage')}
+  ${phases.map((y) => meter('current', 430, y, 'A', 'second', ['current', 462, y + 34])).join('')}
+  ${shortCircuit ? '' : voltageMeter(870, 'U₂L', 'fourth', true)}
   <path class="current-arrow" d="M95 105H124 m-7-6 7 6-7 6" />
   <text class="symbol" x="97" y="90">${currentSymbol}</text>
-  <text class="side-title" x="148" y="341">三相电源</text>
+  <text class="side-title" x="102" y="341">三相电源</text>
+  <g class="source-waves" transform="translate(180 334)">
+    <path class="source-wave phase-a" d="M0 0q8-21 16 0t16 0" />
+    <path class="source-wave phase-b" d="M0 8q6 1 11-8t16 0t5 8" />
+    <path class="source-wave phase-c" d="M0 -8q6-1 11 8t16 0t5-8" />
+  </g>
   <text class="side-title" x="825" y="341">${shortCircuit ? '三端短接' : '开路 · I₂ ≈ 0'}</text>
 `;
-
-const readings = [
-  ['voltage', 'first', '输入线电压', `${voltageSymbol} = ${voltage} V`],
-  [
-    'current',
-    'second',
-    '三线电流（各相）',
-    `${currentSymbol} = ${current.toFixed(2)} A`,
-  ],
-  ['power', 'third', '功率表 Wₐ ／ W𝚌', `${wattsA} W / ${wattsC} W`],
-];
-if (!shortCircuit) {
-  readings.push([
-    'voltage',
-    'fourth',
-    '输出线电压',
-    `U₂L = ${outputVoltage} V`,
-  ]);
 }
 
-function showReadings(visible) {
-  measurements.innerHTML = readings
-    .map(
-      ([type, scan, label, value]) => `<div class="meter-${type} scan-${scan}">
-        <dt>${label}</dt><dd>${visible ? value : '—'}</dd>
-      </div>`,
-    )
-    .join('');
-}
+const numberFormat = new Intl.NumberFormat('zh-CN', {
+  maximumFractionDigits: 2,
+  useGrouping: false,
+});
 
-const stages = [
-  {
-    heading: '接线',
-    cards: [
-      ['电压表 V', '跨接 A、B 两线，测线电压'],
-      ['电流表 A', '三条线各串联一只，测线电流'],
-      [
-        '功率表 Wₐ、W𝚌',
-        '电流线圈串入 A、C 线，虚线为电压线圈接线，两表共用 B 线',
-      ],
-    ],
-    note: shortCircuit
-      ? '确认低压侧三个线端已短接，再从高压侧施加试验电压。'
-      : '高压侧仅跨接高内阻电压表。两侧星点各自独立，均未引出。',
-  },
-  {
-    heading: energizeLabel,
-    cards: [
-      [
-        '输入线电压',
-        `<output id="voltage-value"></output>
-        <progress id="voltage-progress" max="${ratedVoltage}" value="0" aria-label="输入线电压占额定值的比例"></progress>`,
-      ],
-      ['输入线电流', '<output id="current-value"></output>'],
-      shortCircuit
-        ? ['本例升压终点', 'I₁L = I₁N，记下此时的 Uₛ']
-        : ['高压侧感应电压', 'U₂L = 800 V，负载电流近似为零'],
-    ],
-    note: shortCircuit
-      ? '随高压侧线电压上升，两侧绕组均流过电流。输入线电流达到额定值时停止升压。'
-      : '三相绕组依次高亮，示意三相励磁电流的相位差。高压侧开路时仍有感应电压。',
-  },
-  {
-    heading: '读取仪表',
-    cards: [
-      [
-        '线电压换算为相电压',
-        `Uφ = ${voltageSymbol} / √3 = ${phaseVoltage.toFixed(1)} V`,
-      ],
-      ['线电流等于相电流', `Iφ = ${current.toFixed(2)} A`],
-      ['两表读数取代数和', `P = ${wattsA} + (${wattsC}) = ${power} W`],
-    ],
-    note: '在本例的平衡工况下，三只电流表读数相同。两瓦特表法求三相总功率时保留负读数的符号。',
-  },
-  {
-    heading: shortCircuit ? '每相短路参数' : '每相励磁参数（串联形式）',
-    cards: [
-      ['阻抗模 |Z| = Uφ / Iφ', `${impedance.toFixed(2)} Ω`],
-      ['电阻 R = P / (3Iφ²)', `${resistance.toFixed(2)} Ω`],
-      ['电抗 X = √(|Z|² − R²)', `${reactance.toFixed(2)} Ω`],
-      shortCircuit
-        ? [
-            '阻抗电压 Uₛ / U₁N',
-            `${((voltage / ratedVoltage) * 100).toFixed(1)}%`,
-          ]
-        : ['铁耗 PFe ≈ P₀', `${power} W（三相合计）`],
-    ],
-    note: shortCircuit
-      ? '参数以高压侧为基准。忽略低试验电压下的铁耗，额定电流时测得的三相短路功率近似为额定铜耗。'
-      : '参数以低压侧为基准。忽略空载时低压绕组的压降与铜耗，由相电压、相电流和每相功率求励磁参数。',
-  },
-];
-
-let step = 0;
-let timer = null;
-let rampFrame = null;
-const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
-
-function animateVoltage() {
-  const volts = document.querySelector('#voltage-value');
-  const amps = document.querySelector('#current-value');
-  const progress = document.querySelector('#voltage-progress');
-  const duration = shortCircuit && !reducedMotion.matches ? 2400 : 0;
-  const start = performance.now();
-
-  function update(time) {
-    const fraction = duration ? Math.min((time - start) / duration, 1) : 1;
-    const applied = voltage * fraction;
-    volts.value = `${applied.toFixed(shortCircuit ? 1 : 0)} V`;
-    amps.value = `${(current * fraction).toFixed(2)} A`;
-    progress.value = applied;
-    rampFrame = fraction < 1 ? requestAnimationFrame(update) : null;
+function showVoltage(voltage) {
+  const test = tests[selectedTest];
+  const shortCircuit = selectedTest === 'short-circuit';
+  test.voltage = voltage;
+  slider.value = voltage;
+  const fraction = voltage / test.target;
+  const ratedActive = test.power / (root3 * test.target);
+  const ratedReactive = Math.sqrt(test.current ** 2 - ratedActive ** 2);
+  const active = ratedActive * fraction;
+  const reactive =
+    ratedReactive * fraction * (shortCircuit ? 1 : 0.7 + 0.3 * fraction ** 6);
+  const current = Math.hypot(active, reactive);
+  const power = root3 * voltage * active;
+  // In ABC phase order with lagging current, Wₐ is the smaller reading.
+  const difference = voltage * reactive;
+  const formatWatts = (reading) =>
+    `${numberFormat.format(reading).replace('-', '−')} W`;
+  const values = {
+    voltage: `${voltage} V`,
+    current: `${current.toFixed(current > 0 && current < 0.1 ? 3 : 2)} A`,
+    outputVoltage: `${2 * voltage} V`,
+    wattsA: formatWatts((power - difference) / 2),
+    wattsC: formatWatts((power + difference) / 2),
+  };
+  for (const reading of meterReadings) {
+    reading.textContent = values[reading.dataset.value];
   }
+  diagramDescription.textContent = `${wiringDescription}
+    输入线电压 ${values.voltage}，三线各 ${values.current}，功率表 Wₐ 为 ${values.wattsA}，Wᴄ 为 ${values.wattsC}。${shortCircuit ? '' : `输出线电压 ${values.outputVoltage}。`}`;
 
-  update(start);
+  const state =
+    voltage < test.target ? 'below' : voltage > test.target ? 'above' : 'rated';
+  const label =
+    state === 'rated'
+      ? '可读数'
+      : `${state === 'below' ? '未到' : '超出'}${test.criterion}`;
+  if (status.textContent !== label) status.textContent = label;
+  lesson.dataset.voltageState = state;
+  lesson.dataset.energized = voltage > 0;
+  lesson.dataset.step = state === 'rated' ? '1' : '0';
+  lesson.style.setProperty('--voltage-fraction', fraction);
+  lesson.style.setProperty(
+    '--current-fraction',
+    Math.min(current / test.current, 1.25),
+  );
+  slider.setAttribute(
+    'aria-valuetext',
+    `${values.voltage}，${values.current}，${label}`,
+  );
 }
 
-function showStep(index) {
+function stopRamp() {
   if (rampFrame !== null) cancelAnimationFrame(rampFrame);
   rampFrame = null;
-  step = index;
-  lesson.dataset.step = index;
-  const { heading, cards, note: instruction } = stages[index];
-  stageHeading.textContent = heading;
-  stageContent.innerHTML = `<dl class="stage-cards">${cards
-    .map(
-      ([label, value]) =>
-        `<div class="stage-card"><dt>${label}</dt><dd>${value}</dd></div>`,
-    )
-    .join('')}</dl>`;
-  note.textContent = instruction;
-  showReadings(index >= 2);
-  if (index === 1) animateVoltage();
-  for (const [position, button] of buttons.entries()) {
-    if (position === index) button.setAttribute('aria-current', 'step');
-    else button.removeAttribute('aria-current');
+  play.textContent =
+    tests[selectedTest].voltage === tests[selectedTest].target
+      ? '重播升压'
+      : '播放升压';
+}
+
+function showTest(test) {
+  if (!isTest(test) || selectedTest === test) return;
+  selectedTest = test;
+  stopRamp();
+  const mode = tests[test];
+  lesson.dataset.test = test;
+  document.querySelector('#lesson-intro').innerHTML = mode.intro;
+  document.querySelector('#voltage-label').textContent = `${mode.input}加压`;
+  document.querySelector('#rated-voltage').textContent =
+    `${mode.target} V · ${mode.criterion}`;
+  document.querySelector('#maximum-voltage').textContent = `${mode.maximum} V`;
+  document.querySelector('#step-note').textContent = mode.note;
+  slider.max = mode.maximum;
+  lesson.style.setProperty(
+    '--target-position',
+    `${(mode.target / mode.maximum) * 100}%`,
+  );
+  for (const tab of tabs) {
+    tab.setAttribute('aria-pressed', String(tab.dataset.testButton === test));
   }
+  document.querySelector('#output-connection').textContent =
+    mode.outputConnection;
+  wiringDescription = `${mode.input}接三相三线电源，三线各串联一只电流表。两只功率表的电流线圈分别串入 A、C 线，电压线圈分别跨接 A、B 和 C、B。图中两侧绕组以星形联结为例。${mode.outputConnection}`;
+  circuit.innerHTML = `<desc id="circuit-desc"></desc><g class="three-phase-wiring">${drawWiring(mode, test === 'short-circuit')}</g>`;
+  meterReadings = circuit.querySelectorAll('.meter-reading');
+  diagramDescription = circuit.querySelector('#circuit-desc');
+  showVoltage(mode.voltage);
 }
 
-function stopPlayback() {
-  clearInterval(timer);
-  timer = null;
-  play.textContent = step === stages.length - 1 ? '重新播放' : '播放演示';
-}
-
-for (const [index, button] of buttons.entries()) {
-  button.addEventListener('click', () => {
-    if (index !== step) showStep(index);
-    stopPlayback();
+for (const tab of tabs) {
+  tab.addEventListener('click', () => {
+    const test = tab.dataset.testButton;
+    if (test === selectedTest) return;
+    showTest(test);
+    if (window.parent !== window) {
+      window.parent.postMessage(
+        { type: 'transformer-phase-test-select', test },
+        location.origin,
+      );
+    } else {
+      const url = new URL(location.href);
+      url.searchParams.set('test', test);
+      history.replaceState(null, '', url);
+    }
   });
 }
 
-play.addEventListener('click', () => {
-  if (timer !== null) {
-    stopPlayback();
-    return;
-  }
-  if (step === stages.length - 1) showStep(0);
-  play.textContent = '暂停演示';
-  timer = setInterval(() => {
-    showStep(step + 1);
-    if (step === stages.length - 1) stopPlayback();
-  }, 5500);
+window.addEventListener('message', (event) => {
+  if (
+    event.origin === location.origin &&
+    event.source === window.parent &&
+    event.data?.type === 'transformer-phase-test'
+  )
+    showTest(event.data.test);
 });
 
-showStep(0);
+slider.addEventListener('input', () => {
+  showVoltage(slider.valueAsNumber);
+  stopRamp();
+});
+
+play.addEventListener('click', () => {
+  if (rampFrame !== null) {
+    stopRamp();
+    return;
+  }
+  const { target, voltage } = tests[selectedTest];
+  const initial = voltage >= target ? 0 : voltage;
+  showVoltage(initial);
+  if (reducedMotion.matches) {
+    showVoltage(target);
+    stopRamp();
+    return;
+  }
+  play.textContent = '暂停升压';
+  const start = performance.now();
+  const ramp = (time) => {
+    const fraction = Math.max(0, Math.min((time - start) / 3800, 1));
+    const nextVoltage = Math.round(initial + (target - initial) * fraction);
+    if (nextVoltage !== tests[selectedTest].voltage) showVoltage(nextVoltage);
+    if (fraction < 1) rampFrame = requestAnimationFrame(ramp);
+    else stopRamp();
+  };
+  rampFrame = requestAnimationFrame(ramp);
+});
+
+const initialTest = new URLSearchParams(location.search).get('test');
+showTest(isTest(initialTest) ? initialTest : 'no-load');

@@ -1,0 +1,321 @@
+.characteristic-lesson {
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  --lagging: #a43945;
+  --resistive: #4159a5;
+  --leading: #25734f;
+  --curve: #215a50;
+}
+
+.characteristic-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.75fr) minmax(0, 1fr);
+  gap: 16px;
+}
+
+.characteristic-layout .panel {
+  min-height: 0;
+  padding: 16px 20px;
+}
+
+.characteristic-layout .panel-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.panel-heading h2 {
+  font-size: 23px;
+}
+
+.panel-heading span,
+.phasor-note,
+.characteristic-lesson footer {
+  color: #52736b;
+  font-size: 15px;
+}
+
+.curve-panel {
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr);
+  gap: 12px;
+}
+
+.presets {
+  display: flex;
+  gap: 10px;
+}
+
+.presets button {
+  border: 1px solid #c8d9d4;
+  border-radius: 7px;
+  padding: 6px 12px;
+  color: var(--sample);
+  background: #fff;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.presets button::before {
+  display: inline-block;
+  width: 19px;
+  margin: 0 7px 4px 0;
+  border-top: 2px dashed currentColor;
+  content: '';
+}
+
+.presets button[aria-pressed='true'] {
+  border-color: currentColor;
+  background: #edf4f1;
+}
+
+.presets button:nth-child(1) {
+  --sample: var(--lagging);
+}
+
+.presets button:nth-child(2) {
+  --sample: var(--resistive);
+}
+
+.presets button:nth-child(3) {
+  --sample: var(--leading);
+}
+
+.curve-plot,
+.drop-plot {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+
+.curve-plot path,
+.drop-plot path {
+  fill: none;
+}
+
+.curve-plot .grid {
+  stroke: #e0ebe8;
+}
+
+.curve-plot .reference,
+.drop-plot .phase-axis {
+  stroke: #8ea9a2;
+  stroke-dasharray: 6 6;
+}
+
+.curve-plot .axes {
+  stroke: #42665e;
+  stroke-width: 2;
+}
+
+.curve-plot text {
+  fill: #40655d;
+  font-size: 17px;
+}
+
+.curve-plot .axis-label {
+  color: #173b3b;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.current-axis-label {
+  text-align: right;
+}
+
+.curves path {
+  stroke-width: 2.5;
+  stroke-dasharray: 9 6;
+}
+
+.curves .lagging {
+  stroke: var(--lagging);
+}
+
+.curves .resistive {
+  stroke: var(--resistive);
+}
+
+.curves .leading {
+  stroke: var(--leading);
+}
+
+#active-curve {
+  stroke: var(--curve);
+  stroke-width: 5;
+  stroke-dasharray: none;
+  stroke-linecap: round;
+}
+
+#operating-guides {
+  stroke: var(--curve);
+  stroke-dasharray: 3 5;
+}
+
+#operating-point {
+  fill: var(--curve);
+  stroke: #fff;
+  stroke-width: 2.5;
+}
+
+.analysis-panel {
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr) auto auto;
+  gap: 10px;
+  --source: #644b96;
+  --terminal: #1a5f93;
+  --resistance: #9b4816;
+  --reactance: #26725e;
+}
+
+.phasor-note {
+  padding: 8px 10px;
+  border-left: 3px solid #3d796c;
+  background: #edf4f1;
+  color: #29554b;
+}
+
+.drop-plot .source {
+  --phasor-color: var(--source);
+}
+
+.drop-plot .terminal {
+  --phasor-color: var(--terminal);
+}
+
+.drop-plot .resistance {
+  --phasor-color: var(--resistance);
+}
+
+.drop-plot .reactance {
+  --phasor-color: var(--reactance);
+}
+
+.drop-plot .current {
+  --phasor-color: #674399;
+}
+
+#load-angle-arc {
+  fill: none;
+  stroke: var(--phasor-color);
+  stroke-width: 1.6;
+}
+
+#phasor-angle-label,
+#current-phasor-label {
+  fill: var(--phasor-color);
+  stroke: #fff;
+  stroke-width: 3px;
+  paint-order: stroke;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+#current-phasor.coincident {
+  stroke-dasharray: 5 4;
+}
+
+.drop-plot .source-arc {
+  stroke: #9c85ba;
+  stroke-width: 1.5;
+  stroke-dasharray: 5 5;
+}
+
+.drop-plot .vector,
+.drop-plot .leader {
+  stroke: var(--phasor-color);
+}
+
+.drop-plot .vector {
+  stroke-width: 2.5;
+  marker-end: url(#arrow);
+}
+
+.drop-plot .vector.source {
+  stroke-width: 4;
+}
+
+.drop-plot .vector.short-drop {
+  marker-end: none;
+}
+
+.drop-plot .leader {
+  stroke-width: 1.25;
+  opacity: 0.7;
+}
+
+.drop-plot .label {
+  color: var(--phasor-color);
+  font-size: 16px;
+}
+
+.drop-plot .detail-note {
+  fill: #52736b;
+  font-size: 14px;
+}
+
+.readout,
+.control {
+  padding: 9px 12px;
+  border-radius: 8px;
+  background: #f1f6f4;
+}
+
+.readout {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  gap: 4px 10px;
+}
+
+.readout strong {
+  font-size: 21px;
+}
+
+.readout p {
+  grid-column: 1 / -1;
+  font-size: 15px;
+}
+
+.controls {
+  display: grid;
+  gap: 8px;
+}
+
+.control {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 4px 8px;
+  font-size: 15px;
+}
+
+.control label {
+  font-weight: 700;
+}
+
+.control output,
+.readout output {
+  font-variant-numeric: tabular-nums;
+}
+
+.control input,
+.control .scale {
+  grid-column: 1 / -1;
+}
+
+.control input {
+  width: 100%;
+  margin: 0;
+  accent-color: var(--curve);
+  touch-action: none;
+}
+
+.control .scale {
+  display: flex;
+  justify-content: space-between;
+  color: #52736b;
+  font-size: 13px;
+}

@@ -71,7 +71,7 @@
 }
 
 .test-panel {
-  grid-template-rows: auto minmax(0, 1fr) 76px;
+  grid-template-rows: auto minmax(0, 1fr) 60px;
 }
 
 .results-panel {
@@ -103,7 +103,6 @@
 .equivalent,
 .calculation-labels,
 .referral-chart,
-[data-step='3'] .test-diagram,
 :is([data-step='1'], [data-step='2']) .wiring {
   display: none;
 }
@@ -196,6 +195,24 @@
   dominant-baseline: middle;
 }
 
+.meter text.meter-reading {
+  font-size: 22px;
+  font-variant-numeric: tabular-nums;
+  text-anchor: start;
+}
+
+.meter text.centered-reading {
+  text-anchor: middle;
+}
+
+.meter text.secondary-reading {
+  text-anchor: end;
+}
+
+.meter text.meter-polarity {
+  font-size: 19px;
+}
+
 .potential-wire {
   stroke-dasharray: 6 5;
 }
@@ -270,41 +287,81 @@
   }
 }
 
-.readings {
+.no-load[data-step='0'] .primary-wire {
+  animation: none;
+}
+
+.no-load[data-step='0'][data-energized='true'] .primary-wire {
+  stroke: #177558;
+  stroke-width: calc(3.5px + 1.5px * var(--current-fraction));
+}
+
+.no-load[data-step='0'] .excitation {
+  animation: none;
+  opacity: calc(0.65 * var(--voltage-fraction, 0));
+  stroke-width: calc(3.5px + 2px * var(--voltage-fraction, 0));
+}
+
+.no-load[data-step='0'][data-energized='true'] .excitation {
+  animation: no-load-flux 1.35s ease-in-out infinite alternate;
+}
+
+@keyframes no-load-flux {
+  to {
+    opacity: calc(0.25 * var(--voltage-fraction));
+  }
+}
+
+.source-wave {
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: scaleY(var(--voltage-fraction, 0));
+}
+
+.voltage-control {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 9px;
-  margin: 0;
-}
-
-.reading {
-  padding: 7px 10px;
-  border: 1px solid #d5e1dd;
-  border-top: 3px solid var(--meter-color);
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 14px;
+  padding: 4px 12px;
+  border: 1px solid #c8d9d4;
   border-radius: 8px;
-  background: #fbfcfc;
+  background: #f1f7f4;
+  font-size: 17px;
+  font-weight: 650;
 }
 
-.reading dt {
-  font-size: 16px;
-  white-space: nowrap;
+.voltage-slider input {
+  display: block;
+  width: 100%;
+  height: 27px;
+  margin: 0;
+  accent-color: #21665a;
+  cursor: pointer;
+  touch-action: none;
 }
 
-.reading b {
-  color: var(--meter-color);
-  font-size: 21px;
-  margin-right: 3px;
+.voltage-slider input:focus-visible {
+  outline: 3px solid var(--voltage);
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 
-.reading dd {
-  margin: 1px 0 0;
-  color: var(--meter-color);
-  font-size: 23px;
-  font-weight: 750;
-  font-variant-numeric: tabular-nums;
+.voltage-scale {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  color: #526f69;
+  font-size: 14px;
 }
 
-[data-step='0'] .reading dd,
+#rated-voltage {
+  position: absolute;
+  left: 83.333%;
+  transform: translateX(-50%);
+  color: #21665a;
+}
+
 :is([data-step='0'], [data-step='1']) .result,
 .no-load:not([data-step='3']) .referred-result {
   visibility: hidden;
@@ -324,14 +381,6 @@
 
 [data-step='1'] .meter-face {
   animation: meter-scan 1.1s ease var(--delay, 0ms) both;
-}
-
-[data-step='1'] .reading {
-  animation: reading-scan 1.1s ease var(--delay, 0ms) both;
-}
-
-[data-step='1'] .reading dd {
-  animation: reveal 300ms ease var(--delay, 0ms) both;
 }
 
 @keyframes meter-scan {
@@ -417,11 +466,18 @@
   line-height: 1.35;
 }
 
+.no-load[data-step='3'] .test-panel {
+  grid-template-rows: auto minmax(0, 1fr) auto;
+}
+
+.no-load[data-step='3'] .voltage-control {
+  display: none;
+}
+
 [data-step='3'] .referral-chart {
   display: table;
   width: 100%;
-  height: 100%;
-  border-spacing: 0 8px;
+  border-spacing: 0 4px;
   text-align: center;
   font-variant-numeric: tabular-nums;
 }
@@ -437,7 +493,7 @@
 
 .referral-chart tbody th,
 .referral-chart tbody td {
-  padding: 10px;
+  padding: 3px 10px;
   background: #f1f7f4;
 }
 
@@ -487,6 +543,31 @@
   background: #e9f3ee;
   padding: 0 16px;
   font-size: 20px;
+}
+
+.no-load .step-note {
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.voltage-status {
+  padding: 4px 12px;
+  border-radius: 6px;
+  background: #f7edce;
+  color: #684908;
+  font-size: 18px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+[data-voltage-state='rated'] .voltage-status {
+  background: #d9f1e4;
+  color: #145a43;
+}
+
+[data-voltage-state='above'] .voltage-status {
+  background: #fbe2dd;
+  color: #8c3427;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>三相变压器的参数测定</title>
+    <title>三相变压器的试验接线</title>
     <link rel="stylesheet" href="/dc-machine-basics.css" />
     <link rel="stylesheet" href="/transformer-no-load-test.css" />
     <link rel="stylesheet" href="/transformer-three-phase-tests.css" />
@@ -15,39 +15,85 @@
     <main class="lesson three-phase-test" data-step="0">
       <header class="page-head">
         <div class="eyebrow">2.6 变压器的参数测定</div>
-        <h1 id="lesson-title"></h1>
+        <h1>三相变压器的试验接线</h1>
         <p id="lesson-intro"></p>
       </header>
-      <nav class="steps" aria-label="试验演示步骤">
-        <button type="button" data-step-button aria-current="step">
-          1　接线
+      <nav class="steps" aria-label="选择试验接线">
+        <button type="button" data-test-button="no-load" aria-pressed="true">
+          空载试验
         </button>
-        <button type="button" data-step-button id="energize"></button>
-        <button type="button" data-step-button>3　读取仪表</button>
-        <button type="button" data-step-button>4　计算参数</button>
-        <button type="button" id="play">播放演示</button>
+        <button
+          type="button"
+          data-test-button="short-circuit"
+          aria-pressed="false"
+        >
+          短路试验
+        </button>
+        <button type="button" id="play">播放升压</button>
       </nav>
-      <div class="three-phase-layout">
-        <section class="panel circuit-panel" aria-labelledby="circuit-heading">
+      <div class="test-layout">
+        <section class="panel test-panel" aria-labelledby="circuit-heading">
           <div class="panel-heading">
             <h2 id="circuit-heading">三相试验接线</h2>
-            <span>Y／Y 联结 · 三相三线</span>
+            <span>三相三线</span>
           </div>
           <svg
             id="circuit"
+            class="test-diagram"
             viewBox="0 0 960 368"
             role="img"
             aria-labelledby="circuit-heading"
             aria-describedby="circuit-desc"
           ></svg>
-          <dl id="measurements" aria-label="试验示例读数"></dl>
+          <div class="phase-voltage-control voltage-control">
+            <label for="test-voltage" id="voltage-label"></label>
+            <div class="voltage-slider">
+              <input
+                id="test-voltage"
+                type="range"
+                min="0"
+                step="1"
+                value="0"
+              />
+              <div class="voltage-scale" aria-hidden="true">
+                <span>0 V</span>
+                <span id="rated-voltage"></span>
+                <span id="maximum-voltage"></span>
+              </div>
+            </div>
+          </div>
         </section>
-        <section class="panel stage-panel" aria-labelledby="stage-heading">
-          <h2 id="stage-heading"></h2>
-          <div id="stage-content"></div>
+        <section class="panel results-panel" aria-labelledby="stage-heading">
+          <div class="panel-heading">
+            <h2 id="stage-heading">接线说明</h2>
+            <span>额定频率</span>
+          </div>
+          <div class="wiring-details">
+            <div class="detail">
+              <h3>电源与被试绕组</h3>
+              <p id="output-connection"></p>
+            </div>
+            <div class="detail">
+              <h3>电压表与电流表</h3>
+              <p>输入电压表跨接 A、B 两线。A、B、C 三条线各串联一只电流表。</p>
+            </div>
+            <div class="detail">
+              <h3>两只功率表</h3>
+              <p>
+                电流线圈分别串入 A、C 线；虚线为电压线圈接线，两表共用 B 线。
+              </p>
+            </div>
+          </div>
         </section>
       </div>
-      <p class="step-note" id="step-note" aria-live="polite"></p>
+      <div class="step-note">
+        <p id="step-note" aria-live="polite"></p>
+        <output
+          class="voltage-status"
+          id="trial-status"
+          for="test-voltage"
+        ></output>
+      </div>
     </main>
   </body>
 </html>

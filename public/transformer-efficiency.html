@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>变压器：效率公式的推导</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/transformer-efficiency.css" />
+    <script src="/dc-machine-basics.js" defer></script>
+  </head>
+  <body>
+    <main class="lesson efficiency-lesson">
+      <header class="page-head">
+        <div class="eyebrow">变压器 / 工作特性</div>
+        <h1>变压器：效率公式的推导</h1>
+        <p>
+          单相变压器稳态运行：从有功功率平衡出发，用空载与短路试验数据估算效率。
+        </p>
+      </header>
+
+      <section class="panel efficiency-balance" aria-labelledby="balance-title">
+        <div>
+          <h2 id="balance-title"><span>01</span> 写出功率平衡</h2>
+          <p class="efficiency-note">功率取有功值，损耗只计铁耗与铜耗。</p>
+        </div>
+        <p class="efficiency-equation">
+          <span
+            >P<sub>1</sub> = P<sub>2</sub> + P<sub>Fe</sub> + P<sub
+              >Cu</sub
+            ></span
+          >
+          <span>η = (P<sub>2</sub> / P<sub>1</sub>) × 100%</span>
+        </p>
+      </section>
+
+      <div class="efficiency-layout">
+        <section class="panel efficiency-step" aria-labelledby="output-title">
+          <h2 id="output-title"><span>02</span> 用负载系数表示输出</h2>
+          <p class="efficiency-note">
+            一次侧按额定电压和频率供电。电压调整率 V<sub>R</sub> 很小时，取
+            U<sub>2</sub> ≈ U<sub>2N</sub>。
+          </p>
+          <p class="efficiency-equation efficiency-output">
+            <span
+              >P<sub>2</sub> = U<sub>2</sub>I<sub>2</sub> cos φ<sub
+                >2</sub
+              ></span
+            >
+            <span
+              >≈ U<sub>2N</sub>I<sub>2N</sub> (I<sub>2</sub> / I<sub>2N</sub>)
+              cos φ<sub>2</sub></span
+            >
+            <span>= βS<sub>N</sub>λ<sub>2</sub></span>
+          </p>
+          <p class="efficiency-note">
+            β = I<sub>2</sub> / I<sub>2N</sub> 为负载系数， S<sub>N</sub> =
+            U<sub>2N</sub>I<sub>2N</sub> 为额定容量， λ<sub>2</sub> = cos φ<sub
+              >2</sub
+            >
+            为负载功率因数。
+          </p>
+          <p class="efficiency-result-label">结果一 · 保留铁耗与铜耗</p>
+          <div class="efficiency-result">
+            <math
+              aria-label="效率约等于 β S N λ 2 除以 β S N λ 2 加铁耗加铜耗，再乘以百分之百"
+            >
+              <mi>η</mi><mo>≈</mo>
+              <mfrac>
+                <mrow
+                  ><mi>β</mi
+                  ><msub><mi>S</mi><mi mathvariant="normal">N</mi></msub
+                  ><msub><mi>λ</mi><mn>2</mn></msub></mrow
+                >
+                <mrow>
+                  <mi>β</mi
+                  ><msub><mi>S</mi><mi mathvariant="normal">N</mi></msub
+                  ><msub><mi>λ</mi><mn>2</mn></msub> <mo>+</mo
+                  ><msub><mi>P</mi><mi>Fe</mi></msub> <mo>+</mo
+                  ><msub><mi>P</mi><mi>Cu</mi></msub>
+                </mrow>
+              </mfrac>
+              <mo>×</mo><mn>100</mn><mo>%</mo>
+            </math>
+          </div>
+        </section>
+
+        <section class="panel efficiency-step" aria-labelledby="loss-title">
+          <h2 id="loss-title"><span>03</span> 用试验功率代入损耗</h2>
+          <div class="efficiency-losses">
+            <div>
+              <p class="efficiency-equation">P<sub>Fe</sub> ≈ P<sub>0</sub></p>
+              <p class="efficiency-note">
+                电压、频率不变时，铁耗近似恒定；空载铜耗很小，取额定电压下的空载试验功率
+                P<sub>0</sub>。
+              </p>
+            </div>
+            <div>
+              <p class="efficiency-equation">
+                P<sub>Cu</sub> ≈ (I<sub>1</sub> /
+                I<sub>1N</sub>)<sup>2</sup>P<sub>s</sub> ≈ β<sup>2</sup>P<sub
+                  >s</sub
+                >
+              </p>
+              <p class="efficiency-note">
+                同一绕组温度下，铜耗随电流平方变化。短路试验电压低、铁耗很小，取额定电流下测得的
+                P<sub>s</sub> 作为额定铜耗。空载电流相对负载电流很小时， I<sub
+                  >1</sub
+                >
+                / I<sub>1N</sub> ≈ β。
+              </p>
+            </div>
+          </div>
+          <p class="efficiency-result-label">
+            结果二 · 用空载与短路试验数据计算
+          </p>
+          <div class="efficiency-result">
+            <math
+              aria-label="效率约等于 β S N λ 2 除以 β S N λ 2 加 P 0 加 β 平方 P s，再乘以百分之百"
+            >
+              <mi>η</mi><mo>≈</mo>
+              <mfrac>
+                <mrow
+                  ><mi>β</mi
+                  ><msub><mi>S</mi><mi mathvariant="normal">N</mi></msub
+                  ><msub><mi>λ</mi><mn>2</mn></msub></mrow
+                >
+                <mrow>
+                  <mi>β</mi
+                  ><msub><mi>S</mi><mi mathvariant="normal">N</mi></msub
+                  ><msub><mi>λ</mi><mn>2</mn></msub> <mo>+</mo
+                  ><msub><mi>P</mi><mn>0</mn></msub> <mo>+</mo
+                  ><msup><mi>β</mi><mn>2</mn></msup
+                  ><msub><mi>P</mi><mi>s</mi></msub>
+                </mrow>
+              </mfrac>
+              <mo>×</mo><mn>100</mn><mo>%</mo>
+            </math>
+          </div>
+        </section>
+      </div>
+
+      <footer class="efficiency-note efficiency-footer">
+        <p>
+          <strong>最大效率点：P<sub>Fe</sub> = P<sub>Cu</sub></strong>
+          <span>
+            功率因数固定时，效率最高对应 P<sub>0</sub>/β + βP<sub>s</sub>
+            最小，即两项相等：P<sub>0</sub> = β²P<sub>s</sub>。
+          </span>
+        </p>
+        <p>若电压调整率不可忽略，输出应按实际端电压 U<sub>2</sub> 计算。</p>
+      </footer>
+    </main>
+  </body>
+</html>

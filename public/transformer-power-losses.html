@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>变压器：功率与损耗</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/transformer-power-losses.css" />
+    <script src="/dc-machine-basics.js" defer></script>
+  </head>
+  <body>
+    <main class="lesson power-lesson">
+      <header class="page-head">
+        <div class="eyebrow">变压器 / 章末总结</div>
+        <h1>变压器：功率与损耗</h1>
+        <p>
+          单相变压器 ·
+          电路折算到一次侧。将鼠标移到左侧任一项，查看对应元件和标注。
+        </p>
+      </header>
+
+      <div class="power-layout">
+        <dl class="power-list" aria-label="各部分功率与损耗">
+          <div class="power-item input-power" tabindex="0">
+            <dt>输入有功功率 <span>一次侧输入端</span></dt>
+            <dd>
+              P<sub>1</sub> = U<sub>1</sub>I<sub>1</sub> cos φ<sub>1</sub>
+            </dd>
+          </div>
+          <div class="power-item output-power" tabindex="0">
+            <dt>输出有功功率 <span>二次侧负载端</span></dt>
+            <dd>
+              P<sub>2</sub> = U<sub>2</sub>I<sub>2</sub> cos φ<sub>2</sub> =
+              U<sub>2</sub>′I<sub>2</sub>′ cos φ<sub>2</sub>
+            </dd>
+          </div>
+          <div class="power-item total-loss" tabindex="0">
+            <dt>总损耗 <span>输入与输出的差</span></dt>
+            <dd>
+              ΔP = P<sub>1</sub> − P<sub>2</sub> = P<sub>Cu</sub> + P<sub
+                >Fe</sub
+              >
+            </dd>
+          </div>
+          <div class="power-item copper-loss" tabindex="0">
+            <dt>
+              铜耗
+              <span
+                >随负载电流变化
+                <strong class="power-loss-kind">可变损耗</strong></span
+              >
+            </dt>
+            <dd>
+              P<sub>Cu</sub> = R<sub>1</sub>I<sub>1</sub><sup>2</sup> +
+              R<sub>2</sub>′(I<sub>2</sub>′)<sup>2</sup>
+            </dd>
+            <dd class="power-estimate">
+              P<sub>Cu</sub> ≈ R<sub>s</sub>I<sub>1</sub><sup>2</sup> ≈
+              <strong>β<sup>2</sup>P<sub>s</sub></strong>
+              <span class="power-formula-note">简易电路 · 随电流平方变化</span>
+            </dd>
+            <dd class="power-load-factor">
+              <span>负载系数</span>
+              <strong>β = I<sub>1</sub> / I<sub>1N</sub></strong>
+              <span>一次电流与额定值之比</span>
+            </dd>
+          </div>
+          <div class="power-item iron-loss" tabindex="0">
+            <dt>
+              铁耗
+              <span
+                >励磁支路
+                <strong class="power-loss-kind">不变损耗</strong></span
+              >
+            </dt>
+            <dd>
+              P<sub>Fe</sub> = R<sub>0</sub>I<sub>0</sub><sup>2</sup> ≈ P<sub
+                >0</sub
+              >
+              <span class="power-formula-note"
+                >P<sub>0</sub> 为空载试验功率</span
+              >
+            </dd>
+            <dd class="power-note">
+              取决于主磁通大小与频率。频率一定时，主磁通随工作电压变化。
+            </dd>
+            <dd class="power-note">
+              <strong>电压和频率一定时，基本不随负载电流变化。</strong>
+            </dd>
+          </div>
+          <div class="power-item short-loss" tabindex="0">
+            <dt>额定短路损耗 <span>简易电路 · 短路试验</span></dt>
+            <dd>P<sub>s</sub> ≈ R<sub>s</sub>I<sub>1N</sub><sup>2</sup></dd>
+            <dd class="power-note">
+              I<sub>1</sub> = I<sub>1N</sub> 时的短路损耗。R<sub>s</sub> = R<sub
+                >1</sub
+              >
+              + R<sub>2</sub>′。
+            </dd>
+          </div>
+        </dl>
+
+        <div class="power-diagrams">
+          <section class="panel power-panel" aria-labelledby="power-t-heading">
+            <h2 id="power-t-heading">
+              T 形等效电路 <span>带载运行 · 保留励磁支路</span>
+            </h2>
+            <svg
+              viewBox="0 0 800 310"
+              role="img"
+              aria-labelledby="power-t-heading power-t-desc"
+            >
+              <desc id="power-t-desc">
+                输入端标 P₁，负载标 P₂。R₁ 和 R₂′
+                分别对应一次和二次铜耗，励磁支路 R₀
+                对应铁耗。三处有功损耗之和为总损耗。
+              </desc>
+              <defs>
+                <path id="power-resistor" d="M0 -10H56V10H0Z" />
+                <path
+                  id="power-reactor"
+                  d="M0 0a7 10 0 0 1 14 0a7 10 0 0 1 14 0a7 10 0 0 1 14 0a7 10 0 0 1 14 0"
+                />
+                <path id="power-arrow" d="M-22 0H0m-6-5 6 5-6 5" />
+              </defs>
+              <g class="power-wires">
+                <path
+                  d="M210 86H262m56 0h144m56 0h62M736 229H64M390 86v43m0 56v7m0 28v9"
+                />
+                <path d="M64 86H154" data-power="input" />
+                <path d="M636 86h100v43m0 56v44" data-power="output" />
+                <use
+                  href="#power-resistor"
+                  x="154"
+                  y="86"
+                  class="copper-loss"
+                  data-power="copper total short"
+                />
+                <use href="#power-reactor" x="262" y="86" />
+                <use href="#power-reactor" x="462" y="86" />
+                <use
+                  href="#power-resistor"
+                  x="580"
+                  y="86"
+                  class="copper-loss"
+                  data-power="copper total short"
+                />
+                <use
+                  href="#power-resistor"
+                  transform="translate(390 129) rotate(90)"
+                  class="iron-loss"
+                  data-power="iron total"
+                />
+                <use
+                  href="#power-reactor"
+                  transform="translate(390 192) rotate(90) scale(.5 1)"
+                />
+                <use
+                  href="#power-resistor"
+                  transform="translate(736 129) rotate(90)"
+                  class="output-power"
+                  data-power="output"
+                />
+                <use href="#power-arrow" x="124" y="86" data-power="input" />
+                <use href="#power-arrow" x="691" y="86" data-power="output" />
+                <use
+                  href="#power-arrow"
+                  transform="translate(390 118) rotate(90)"
+                  data-power="iron total"
+                />
+                <circle
+                  cx="64"
+                  cy="86"
+                  r="4"
+                  class="power-terminal"
+                  data-power="input"
+                />
+                <circle
+                  cx="64"
+                  cy="229"
+                  r="4"
+                  class="power-terminal"
+                  data-power="input"
+                />
+                <circle cx="390" cy="86" r="4" class="power-node" />
+                <circle cx="390" cy="229" r="4" class="power-node" />
+              </g>
+              <g class="power-symbols">
+                <text x="113" y="70" data-power="input">I₁</text>
+                <text x="182" y="70" data-power="copper total short">R₁</text>
+                <text x="290" y="70">jX₁</text>
+                <text x="490" y="70">jX₂′</text>
+                <text x="608" y="70" data-power="copper total short">R₂′</text>
+                <text x="680" y="70" data-power="output">I₂′*</text>
+                <text x="64" y="137" data-power="input">U₁</text>
+                <text x="367" y="120" data-power="iron total">I₀</text>
+                <text x="357" y="165" data-power="iron total">R₀</text>
+                <text x="356" y="211">jX₀</text>
+                <text x="736" y="117" data-power="output">U₂′</text>
+                <text x="768" y="163" data-power="output">
+                  Z
+                  <tspan baseline-shift="sub" font-size="13">L</tspan>
+                  ′
+                </text>
+              </g>
+              <g class="power-callout input-power" data-power="input">
+                <path d="M64 149v12" />
+                <text x="64" y="185">P₁ 输入</text>
+              </g>
+              <g class="power-callout output-power" data-power="output">
+                <path d="M726 172h-20v34h-7" />
+                <text x="659" y="213">P₂ 输出</text>
+              </g>
+              <g
+                class="power-callout copper-loss"
+                data-power="copper total short"
+              >
+                <path d="M182 96v14m426-14v14" />
+                <text x="182" y="135">一次铜耗</text>
+                <text x="608" y="135">二次铜耗</text>
+                <text x="182" y="161">R₁I₁²</text>
+                <text x="608" y="161">R₂′(I₂′)²</text>
+              </g>
+              <g class="power-callout iron-loss" data-power="iron total">
+                <path d="M400 156h21" />
+                <text x="476" y="164">
+                  P
+                  <tspan baseline-shift="sub" font-size="14">Fe</tspan>
+                  铁耗
+                </text>
+              </g>
+              <g class="power-callout total-loss" data-power="total">
+                <path d="M122 244v13h556v-13m-278 13v9" />
+                <text x="400" y="294">ΔP 总损耗 = 两侧铜耗 + 铁耗</text>
+              </g>
+            </svg>
+          </section>
+
+          <section
+            class="panel power-panel"
+            aria-labelledby="power-short-heading"
+          >
+            <h2 id="power-short-heading">
+              简易等效电路 <span>短路试验 · 省略励磁支路</span>
+            </h2>
+            <svg
+              viewBox="0 0 800 142"
+              role="img"
+              aria-labelledby="power-short-heading power-short-desc"
+            >
+              <desc id="power-short-desc">
+                副边短接，一次电流调到额定值。额定短路损耗 Pₛ 近似为合并电阻 Rₛ
+                消耗的有功功率。
+              </desc>
+              <g class="power-wires">
+                <path d="M64 58H301m56 0h122m56 0h155v60H64" />
+                <use
+                  href="#power-resistor"
+                  x="301"
+                  y="58"
+                  class="short-loss"
+                  data-power="short"
+                />
+                <use href="#power-reactor" x="479" y="58" />
+                <use href="#power-arrow" x="220" y="58" data-power="short" />
+                <circle cx="64" cy="58" r="4" class="power-terminal" />
+                <circle cx="64" cy="118" r="4" class="power-terminal" />
+              </g>
+              <g class="power-symbols">
+                <text x="64" y="95">Uₛ</text>
+                <text x="204" y="43" data-power="short">
+                  I₁ = I
+                  <tspan baseline-shift="sub" font-size="13">1N</tspan>
+                </text>
+                <text x="329" y="43" data-power="short">Rₛ</text>
+                <text x="507" y="43">jXₛ</text>
+                <text x="742" y="95">副边短接</text>
+              </g>
+              <g class="power-callout short-loss" data-power="short">
+                <path d="M329 68v9" />
+                <text x="329" y="103">Pₛ 额定短路损耗</text>
+              </g>
+            </svg>
+          </section>
+        </div>
+      </div>
+
+      <footer class="power-footer">
+        R<sub>0</sub>（教材记作
+        R<sub>m</sub>）为等效铁耗电阻；理想电抗不消耗有功功率。*
+        图中二次电流箭头指向负载，公式用电流有效值。
+      </footer>
+    </main>
+  </body>
+</html>

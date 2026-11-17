@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>例 2.7.1：变压器的电压调整率与满载效率</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/dc-motor-nameplate-example.css" />
+    <link
+      rel="stylesheet"
+      href="/transformer-regulation-efficiency-example.css"
+    />
+    <script src="/dc-machine-basics.js" defer></script>
+    <script type="module" src="/dc-motor-nameplate-example.js"></script>
+    <script type="module" src="/dc-generator-emf-controls.js"></script>
+  </head>
+  <body>
+    <main class="lesson exercise-page transformer-performance-example">
+      <header class="page-head exercise-head">
+        <div class="eyebrow">变压器 / 运行特性 · 课堂例题</div>
+        <h1>例 2.7.1 · 变压器的电压调整率与满载效率</h1>
+        <p>先独立列式，再点击按钮核对计算过程。</p>
+      </header>
+      <section class="exercise-layout">
+        <article class="question-card" aria-labelledby="question-title">
+          <header class="card-label">
+            <span>题目 · 例 2.7.1</span><small>THREE-PHASE TRANSFORMER</small>
+          </header>
+          <h2 id="question-title">
+            例 2.6.1 中的 Y,d 联结三相变压器，向功率因数 λ<sub>2</sub> =
+            0.8（滞后）的三相感性负载供电。
+          </h2>
+          <dl class="given-grid" aria-label="沿用例 2.6.1 的数据">
+            <div>
+              <dt>额定容量</dt>
+              <dd>S<sub>N</sub> = 750 kV·A</dd>
+            </div>
+            <div>
+              <dt>高压侧额定线电压</dt>
+              <dd>U<sub>1N</sub> = 10 000 V</dd>
+            </div>
+            <div>
+              <dt>高压侧额定线电流</dt>
+              <dd>I<sub>1N</sub> = 43.3 A</dd>
+            </div>
+            <div>
+              <dt>高压侧每相短路阻抗（75 °C）</dt>
+              <dd>R<sub>s</sub> = 2.36 Ω，X<sub>s</sub> = 5.54 Ω</dd>
+            </div>
+            <div>
+              <dt>三相空载试验功率</dt>
+              <dd>P<sub>0</sub> = 3.8 kW</dd>
+            </div>
+            <div>
+              <dt>三相短路试验功率</dt>
+              <dd>P<sub>s</sub> = 10.9 kW</dd>
+            </div>
+          </dl>
+          <div class="question-tasks">
+            <strong>求</strong>
+            <ol>
+              <li>额定电流下的电压调整率 V<sub>R</sub>。</li>
+              <li>满载效率 η。</li>
+            </ol>
+          </div>
+          <button
+            class="reveal-button"
+            type="button"
+            aria-expanded="false"
+            aria-controls="performance-solution"
+          >
+            <span class="button-label">显示计算过程与答案</span>
+            <span class="button-icon" aria-hidden="true">→</span>
+          </button>
+        </article>
+        <section
+          class="solution-panel"
+          id="performance-solution"
+          aria-label="例 2.7.1 计算过程与答案"
+          hidden
+        >
+          <header class="solution-head">
+            <span>计算过程与答案</span><small>额定运行 · 感性负载</small>
+          </header>
+          <ol class="solution-steps">
+            <li>
+              <span class="step-index">01</span>
+              <div>
+                <h2>求高压侧额定相电压与相电流</h2>
+                <p>
+                  U<sub>1Nφ</sub> = 10 000 / √3 ≈ 5 774 V，I<sub>1Nφ</sub> =
+                  43.3 A（Y 接）
+                </p>
+                <p>cos φ<sub>2</sub> = 0.8，sin φ<sub>2</sub> = 0.6（滞后）</p>
+              </div>
+            </li>
+            <li>
+              <span class="step-index">02</span>
+              <div>
+                <h2>按额定相电流计算电压调整率</h2>
+                <p>
+                  V<sub>R</sub> ≈ (R<sub>s</sub> cos φ<sub>2</sub> + X<sub
+                    >s</sub
+                  >
+                  sin φ<sub>2</sub>) × (I<sub>1Nφ</sub> / U<sub>1Nφ</sub>) ×
+                  100%
+                </p>
+                <p class="substitution">
+                  ≈ (2.36 × 0.8 + 5.54 × 0.6) × (43.3 / 5 774) × 100% ≈
+                  <b>3.9%</b>
+                </p>
+              </div>
+            </li>
+            <li>
+              <span class="step-index">03</span>
+              <div>
+                <h2>取负载系数 β = 1，计算满载效率</h2>
+                <p>
+                  P<sub>2</sub> ≈ βS<sub>N</sub>λ<sub>2</sub> = 1 × 750 × 0.8 =
+                  600 kW
+                </p>
+                <p>
+                  η ≈ [P<sub>2</sub> / (P<sub>2</sub> + P<sub>0</sub> +
+                  β²P<sub>s</sub>)] × 100%
+                </p>
+                <p class="substitution">
+                  ≈ [600 / (600 + 3.8 + 1² × 10.9)] × 100% ≈ <b>97.6%</b>
+                </p>
+              </div>
+            </li>
+          </ol>
+          <p class="solution-note">
+            效率沿用题设近似：按额定端电压估算输出功率，用空载和短路试验功率分别估算铁耗和满载铜耗。
+          </p>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>

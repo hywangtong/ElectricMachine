@@ -43,10 +43,13 @@
             viewBox="0 0 760 345"
             role="img"
             aria-labelledby="circuit-heading"
-            aria-describedby="diagram-desc"
+            aria-describedby="diagram-desc meter-polarity-desc voltage-reading current-reading power-reading"
           >
             <desc id="diagram-desc">
               高压侧由可调交流电源供电。电压表并联，电流表与功率表的电流线圈串联，功率表的电压线圈跨接输入端。低压侧两个端子由短接线相连。
+            </desc>
+            <desc id="meter-polarity-desc">
+              正负号表示参考方向：电压表与功率表电压线圈上正下负，电流表与功率表电流线圈左正右负。
             </desc>
             <g class="wiring">
               <rect
@@ -71,7 +74,7 @@
                 d="M350 108H400V138 c25 0 25 24 0 24 c25 0 25 24 0 24 c25 0 25 24 0 24 c25 0 25 24 0 24 V263H350"
               />
               <path
-                class="wire"
+                class="wire secondary-wire"
                 d="M686 108H497V138 c-25 0-25 24 0 24 c-25 0-25 24 0 24 c-25 0-25 24 0 24 c-25 0-25 24 0 24 V263H686"
               />
               <path class="core" d="M444 138V234 M453 138V234" />
@@ -86,34 +89,17 @@
                 rx="14"
               />
               <text class="side-title" x="600" y="42">折算端 · 短接</text>
-              <g class="wire t-arm">
+              <g class="wire short-circuit-impedance">
                 <path
-                  d="M350 108H364 M389 108H398 c0-14 15-14 15 0 c0-14 15-14 15 0 H463 M488 108H497 c0-14 15-14 15 0 c0-14 15-14 15 0 H686"
+                  d="M350 108H418 M454 108H501 c0-14 18-14 18 0 c0-14 18-14 18 0 c0-14 18-14 18 0 H686"
                 />
-                <rect x="364" y="100" width="25" height="16" />
-                <rect x="463" y="100" width="25" height="16" />
-                <text class="element-label" x="376" y="87">R₁</text>
-                <text class="element-label" x="413" y="87">jX₁</text>
-                <text class="element-label" x="475" y="87">R₂′</text>
-                <text class="element-label" x="512" y="87">jX₂′</text>
-              </g>
-              <g class="wire short-circuit-excitation">
-                <path
-                  d="M445 108V157 M445 189V206 c15 0 15 14 0 14 c15 0 15 14 0 14 V263"
-                />
-                <rect x="437" y="157" width="16" height="32" />
-                <circle cx="445" cy="108" r="4" />
-                <circle cx="445" cy="263" r="4" />
-                <text class="element-label branch-label" x="466" y="180">
-                  R₀
-                </text>
-                <text class="element-label branch-label" x="466" y="229">
-                  jX₀
-                </text>
+                <rect x="418" y="100" width="36" height="16" />
+                <text class="element-label" x="436" y="87">Rₛ</text>
+                <text class="element-label" x="528" y="87">jXₛ</text>
               </g>
               <path class="wire" d="M350 263H686" />
-              <text class="diagram-note" x="445" y="301" text-anchor="middle">
-                励磁电流很小
+              <text class="diagram-note" x="520" y="301" text-anchor="middle">
+                励磁电流很小，省略励磁支路
               </text>
             </g>
             <text class="side-title" x="32" y="42">高压侧 · 加压</text>
@@ -123,9 +109,8 @@
             />
             <g class="source">
               <circle cx="72" cy="183" r="24" />
-              <path
-                d="M57 183q7-15 15 0t15 0 M47 218l47-69 M83 152l11-3-1 12"
-              />
+              <path d="M47 218l47-69 M83 152l11-3-1 12" />
+              <path class="test-source-wave" d="M57 183q7-15 15 0t15 0" />
               <text x="72" y="302" text-anchor="middle">可调交流电源</text>
             </g>
             <g class="meter meter-voltage scan-first">
@@ -134,6 +119,17 @@
               <circle class="junction" cx="152" cy="263" r="4.5" />
               <circle class="meter-face" cx="152" cy="183" r="24" />
               <text x="152" y="184">V</text>
+              <text class="meter-polarity" x="139" y="146">+</text>
+              <text class="meter-polarity" x="139" y="220">−</text>
+              <text
+                class="meter-reading"
+                id="voltage-reading"
+                x="182"
+                y="184"
+                data-value="voltage"
+              >
+                0 V
+              </text>
             </g>
             <g class="meter meter-power scan-third">
               <path
@@ -144,11 +140,35 @@
               <circle class="junction" cx="236" cy="263" r="4.5" />
               <circle class="meter-face" cx="236" cy="108" r="24" />
               <text x="236" y="109">W</text>
+              <text class="meter-polarity" x="203" y="94">+</text>
+              <text class="meter-polarity" x="269" y="94">−</text>
+              <text class="meter-polarity" x="224" y="76">+</text>
+              <text class="meter-polarity" x="224" y="144">−</text>
+              <text
+                class="meter-reading"
+                id="power-reading"
+                x="248"
+                y="188"
+                data-value="power"
+              >
+                0 W
+              </text>
               <text class="diagram-note" x="249" y="68">电压线圈</text>
             </g>
             <g class="meter meter-current scan-second">
               <circle class="meter-face" cx="325" cy="108" r="24" />
               <text x="325" y="109">A</text>
+              <text class="meter-polarity" x="292" y="94">+</text>
+              <text class="meter-polarity" x="358" y="94">−</text>
+              <text
+                class="meter-reading centered-reading"
+                id="current-reading"
+                x="325"
+                y="150"
+                data-value="current"
+              >
+                0 A
+              </text>
             </g>
             <g class="shorting-link">
               <path d="M686 108H710V263H686" />
@@ -157,20 +177,24 @@
               <text x="692" y="302" text-anchor="middle">短接线</text>
             </g>
           </svg>
-          <dl class="readings" aria-label="达到额定电流时的仪表读数">
-            <div class="reading meter-voltage scan-first">
-              <dt>电压表 · 高压侧电压</dt>
-              <dd>U<sub>S</sub></dd>
+          <div class="test-control">
+            <label for="test-voltage">高压侧加压</label>
+            <div class="test-slider">
+              <input
+                id="test-voltage"
+                type="range"
+                min="0"
+                max="48"
+                step="1"
+                value="0"
+                aria-describedby="test-rating"
+              />
+              <div class="test-scale" aria-hidden="true">
+                <span>0 V</span>
+                <span>48 V</span>
+              </div>
             </div>
-            <div class="reading meter-current scan-second">
-              <dt>电流表 · 高压侧电流</dt>
-              <dd>I<sub>1</sub> = I<sub>1N</sub></dd>
-            </div>
-            <div class="reading meter-power scan-third">
-              <dt>功率表 · 输入有功功率</dt>
-              <dd>P<sub>S</sub></dd>
-            </div>
-          </dl>
+          </div>
         </section>
 
         <section
@@ -189,15 +213,18 @@
             <div class="detail">
               <h3>高压侧逐渐升压</h3>
               <p>
-                在额定频率下，从零缓慢升高 U<sub>1</sub>，直至 I<sub>1</sub> =
-                I<sub>1N</sub>。
+                拖动滑块，从零缓慢升高 U<sub>1</sub>，观察两侧绕组和仪表的变化。
+                <span id="test-rating"
+                  >示例额定电压：高压侧 500 V、低压侧 250 V；高压侧额定电流 5
+                  A。</span
+                >
               </p>
             </div>
             <div class="detail">
               <h3>达到额定电流时读表</h3>
               <p>
-                此时高压侧电压即阻抗电压 U<sub>S</sub>，附图用额定电压的约
-                5%～10% 示意其量级。
+                当 I<sub>1</sub> = I<sub>1N</sub> 时，记录电压、电流和功率。
+                此时的外施电压才是阻抗电压 U<sub>S</sub>。
               </p>
             </div>
           </div>
@@ -215,11 +242,12 @@
           <div class="detail-list">
             <div class="formulas">
               <div class="formula">
-                <h3>额定电流下的绕组铜耗</h3>
+                <h3>当前绕组铜耗</h3>
                 <math
                   ><msub><mi>P</mi><mtext>Cu</mtext></msub
-                  ><mo>≈</mo><msub><mi>P</mi><mtext>S</mtext></msub></math
+                  ><mo>≈</mo><msub><mi>P</mi><mtext>1</mtext></msub></math
                 >
+                <p class="test-value" data-value="power">0 W</p>
               </div>
               <div class="formula">
                 <h3>短路阻抗模</h3>
@@ -230,10 +258,11 @@
                     ><mo stretchy="false">|</mo></mrow
                   ><mo>=</mo
                   ><mfrac
-                    ><msub><mi>U</mi><mtext>S</mtext></msub
+                    ><msub><mi>U</mi><mtext>1</mtext></msub
                     ><msub><mi>I</mi><mtext>1</mtext></msub></mfrac
                   ></math
                 >
+                <p class="test-value" data-value="impedance">—</p>
               </div>
               <div class="formula">
                 <h3>短路电阻</h3>
@@ -241,13 +270,14 @@
                   ><msub><mi>R</mi><mtext>S</mtext></msub
                   ><mo>=</mo
                   ><mfrac
-                    ><msub><mi>P</mi><mtext>S</mtext></msub
+                    ><msub><mi>P</mi><mtext>1</mtext></msub
                     ><msup
                       ><msub><mi>I</mi><mtext>1</mtext></msub
                       ><mn>2</mn></msup
                     ></mfrac
                   ></math
                 >
+                <p class="test-value" data-value="resistance">—</p>
               </div>
               <div class="formula">
                 <h3>短路电抗</h3>
@@ -270,10 +300,12 @@
                     ></msqrt
                   ></math
                 >
+                <p class="test-value" data-value="reactance">—</p>
               </div>
             </div>
             <p class="explanation">
-              试验电压低，主磁通和铁耗很小。忽略铁耗后，输入有功功率近似为两侧绕组的铜耗。
+              试验电压低，忽略铁耗时输入有功功率近似为两侧绕组的铜耗。
+              固定温度下，电压和功率随电流变化，算得的阻抗保持不变。零电流时无法由读数计算阻抗。
             </p>
           </div>
         </section>
@@ -334,7 +366,15 @@
                   ><mo>*</mo></msup
                 ></math
               >
-              <p>铭牌可用百分数表示，例如 0.08 对应 8%。</p>
+              <p>
+                当前 U<sub>1</sub>/U<sub>1N</sub> =
+                <strong class="test-value" data-value="voltagePercent"
+                  >0%</strong
+                >；
+                <span id="impedance-voltage-note"
+                  >达到额定电流时才可直接读出阻抗电压。</span
+                >
+              </p>
             </div>
             <div class="detail">
               <h3>附图所列参考范围</h3>
@@ -356,7 +396,7 @@
           </div>
           <div class="detail-list">
             <div class="detail">
-              <h3>将实测温度 θ（°C）下的电阻折算至 75 °C</h3>
+              <h3>从实测温度 25 °C 折算到 75 °C</h3>
               <div class="formula-pair">
                 <div>
                   铜线
@@ -381,6 +421,12 @@
                   >
                 </div>
               </div>
+              <p>
+                以铜绕组为例：R<sub>S75</sub> =
+                <strong class="test-value" data-value="warmResistance">—</strong
+                >， 当前电流下的校正铜耗为
+                <strong class="test-value" data-value="warmPower">0 W</strong>。
+              </p>
             </div>
             <div class="detail">
               <h3>电抗视为不随温度变化，重新计算阻抗模</h3>
@@ -409,22 +455,50 @@
                   ></math
                 >
               </div>
+              <p>
+                X<sub>S75</sub> =
+                <strong class="test-value" data-value="reactance">—</strong>，
+                |Z<sub>S75</sub>| =
+                <strong class="test-value" data-value="warmImpedance">—</strong
+                >。
+              </p>
             </div>
             <div class="detail">
               <h3>从高压侧折算至低压侧</h3>
               <p>
                 |Z<sub>S</sub>|、R<sub>S</sub>、X<sub>S</sub> 各乘
                 <strong>1/k²</strong>。<br />
-                k = U<sub>1N</sub>/U<sub>2N</sub> 为高、低压侧额定电压之比。
+                k = U<sub>1N</sub>/U<sub>2N</sub> = 2。当前读数折算为
+                <strong class="test-value" data-value="referredVoltage"
+                  >0 V</strong
+                >、
+                <strong class="test-value" data-value="referredCurrent"
+                  >0 A</strong
+                >； 25 °C 时 |Z<sub>S</sub>|、R<sub>S</sub>、X<sub>S</sub>
+                依次为
+                <strong class="test-value" data-value="referredImpedance"
+                  >—</strong
+                >、
+                <strong class="test-value" data-value="referredResistance"
+                  >—</strong
+                >、
+                <strong class="test-value" data-value="referredReactance"
+                  >—</strong
+                >。
               </p>
             </div>
           </div>
         </section>
       </div>
 
-      <p class="step-note" id="step-note" aria-live="polite">
-        电压表并联，电流表和功率表的电流线圈串联，功率表的电压线圈跨接高压侧输入端。
-      </p>
+      <div class="step-note">
+        <span id="step-note" aria-live="polite">
+          电压表并联，电流表和功率表的电流线圈串联，功率表的电压线圈跨接高压侧输入端。
+        </span>
+        <span class="current-status" id="current-status" role="status">
+          未到额定电流
+        </span>
+      </div>
     </main>
   </body>
 </html>

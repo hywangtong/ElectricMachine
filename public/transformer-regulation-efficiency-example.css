@@ -1,0 +1,15 @@
+.transformer-performance-example .given-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.transformer-performance-example .given-grid dd {
+  font-size: 20px;
+}
+
+.transformer-performance-example.is-revealed .given-grid dd {
+  font-size: 17px;
+}
+
+.transformer-performance-example sub {
+  line-height: 0;
+}
