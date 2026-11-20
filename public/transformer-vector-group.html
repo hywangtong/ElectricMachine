@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>三相变压器：联结组别</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/transformer-three-phase-connections.css" />
+    <link rel="stylesheet" href="/transformer-vector-group.css" />
+    <script type="module" src="/transformer-vector-group.js"></script>
+  </head>
+  <body>
+    <main class="lesson connections-page vector-group-page">
+      <header class="page-head">
+        <div class="eyebrow">变压器 / 三相绕组</div>
+        <h1>三相变压器：联结组别</h1>
+        <p>改变两侧接线或循环换位，观察线电压相位差如何决定钟点数。</p>
+      </header>
+
+      <div class="connection-layout">
+        <div class="winding-controls">
+          <section
+            class="winding-card"
+            data-side="primary"
+            aria-labelledby="primary-title"
+          >
+            <header class="card-head">
+              <h2 id="primary-title">原边 · 高压绕组</h2>
+              <output class="side-symbol">Y</output>
+            </header>
+            <div
+              class="connection-select"
+              role="group"
+              aria-label="高压侧联结方式"
+            >
+              <button type="button" data-connection="star" aria-pressed="true">
+                星形 Y
+              </button>
+              <button
+                type="button"
+                data-connection="delta"
+                aria-pressed="false"
+              >
+                三角形 D
+              </button>
+            </div>
+            <div
+              class="connection-select"
+              role="group"
+              aria-label="高压侧接线顺序"
+            >
+              <button type="button" data-reversed="false" aria-pressed="true">
+                尾端共接
+              </button>
+              <button type="button" data-reversed="true" aria-pressed="false">
+                首端共接
+              </button>
+            </div>
+            <p class="terminal-summary"></p>
+            <button
+              class="rotate-windings"
+              type="button"
+              data-rotate
+              aria-label="循环换位高压绕组"
+            >
+              从左到右 ABC · 循环换位
+            </button>
+          </section>
+
+          <section
+            class="winding-card"
+            data-side="secondary"
+            aria-labelledby="secondary-title"
+          >
+            <header class="card-head">
+              <h2 id="secondary-title">副边 · 低压绕组</h2>
+              <output class="side-symbol">y</output>
+            </header>
+            <div
+              class="connection-select"
+              role="group"
+              aria-label="低压侧联结方式"
+            >
+              <button type="button" data-connection="star" aria-pressed="true">
+                星形 y
+              </button>
+              <button
+                type="button"
+                data-connection="delta"
+                aria-pressed="false"
+              >
+                三角形 d
+              </button>
+            </div>
+            <div
+              class="connection-select"
+              role="group"
+              aria-label="低压侧接线顺序"
+            >
+              <button type="button" data-reversed="false" aria-pressed="true">
+                尾端共接
+              </button>
+              <button type="button" data-reversed="true" aria-pressed="false">
+                首端共接
+              </button>
+            </div>
+            <p class="terminal-summary"></p>
+            <button
+              class="rotate-windings"
+              type="button"
+              data-rotate
+              aria-label="循环换位低压绕组"
+            >
+              从左到右 abc · 循环换位
+            </button>
+          </section>
+        </div>
+
+        <section class="core-card" aria-labelledby="core-title">
+          <header>
+            <h2 id="core-title">三相变压器</h2>
+            <span>上 · 高压绕组　下 · 低压绕组</span>
+          </header>
+          <svg id="core" viewBox="54 0 498 365" role="group"></svg>
+          <div class="core-caption">
+            <p>
+              点击上排高压侧或下排低压侧，统一切换该侧同名端
+              ●。线路实心点表示共接，跨线拱桥表示交叉。
+            </p>
+            <button type="button" id="motion">暂停动画</button>
+          </div>
+        </section>
+
+        <aside class="notation-card phasor-card" aria-labelledby="phasor-title">
+          <h2 id="phasor-title">线电压与相电压</h2>
+          <div class="phasor-legend" aria-label="图例">
+            <span class="phasor-line-key">线电压 · 实线</span>
+            <span class="phasor-phase-key">相电压 · 线圈同色</span>
+          </div>
+          <div class="phasor-grid">
+            <figure>
+              <figcaption>高压侧</figcaption>
+              <svg id="high-phasors" viewBox="0 0 250 164" role="img"></svg>
+            </figure>
+            <figure>
+              <figcaption>低压侧</figcaption>
+              <svg id="low-phasors" viewBox="0 0 250 164" role="img"></svg>
+            </figure>
+          </div>
+          <p id="voltage-ratios"></p>
+          <p>两图共用方向基准，可按同柱绕组的同名端对照。</p>
+          <div class="combination-result" aria-live="polite" aria-atomic="true">
+            <span>当前联结组别</span><output id="combination">Yy0</output>
+            <p id="combination-description"></p>
+          </div>
+        </aside>
+      </div>
+      <template id="clock-view">
+        <section class="notation-card clock-card" aria-labelledby="clock-title">
+          <h2 id="clock-title">联结组别时钟</h2>
+          <svg id="group-clock" viewBox="12 12 336 336" role="img"></svg>
+          <p>从 12 点顺时针读数，每格 30°。12 点对应组别 0。</p>
+        </section>
+      </template>
+      <footer class="page-note">
+        <span
+          ><i class="phase-a"></i>A / a 相 <i class="phase-b"></i>B / b 相
+          <i class="phase-c"></i>C / c 相</span
+        >
+        <span id="calculation-note"
+          >按理想、对称三相变压器计算；磁通动画用于示意。</span
+        >
+      </footer>
+    </main>
+  </body>
+</html>

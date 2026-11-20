@@ -1,0 +1,295 @@
+.vector-group-page {
+  grid-template-rows: 90px minmax(0, 1fr) 25px;
+}
+
+.vector-group-page .connection-layout {
+  grid-template-columns: 282px minmax(0, 1fr) 568px;
+  grid-template-rows: minmax(0, 1fr);
+}
+
+.vector-group-page .combination-result {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 12px;
+  min-width: 0;
+  padding: 4px 10px;
+  border: 1px solid #cbdcc8;
+  border-radius: 7px;
+  background: #edf3e8;
+}
+
+.vector-group-page .combination-result p {
+  color: #365951;
+  font-size: 16px;
+}
+
+.vector-group-page .winding-card {
+  grid-template-rows: 42px 43px 43px minmax(0, 1fr) 39px;
+  gap: 8px;
+}
+
+.vector-group-page .card-head h2 {
+  margin: 0;
+  font-size: 19px;
+}
+
+.vector-group-page .side-symbol {
+  font-size: 38px;
+}
+
+.vector-group-page .connection-select button {
+  padding: 9px 3px;
+  font-size: 17px;
+}
+
+.terminal-summary {
+  margin-top: 3px;
+  font-size: 16px;
+  line-height: 1.35;
+}
+
+.rotate-windings {
+  font-size: 15px;
+}
+
+.vector-group-page .core-card {
+  grid-template-rows: 30px minmax(0, 1fr) auto;
+}
+
+.core-caption {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-top: 8px;
+  border-top: 1px solid #dce5dc;
+  color: #617b70;
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.core-caption #motion {
+  flex: none;
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+.vector-group-page [data-polarity-side] {
+  cursor: pointer;
+}
+
+.vector-group-page [data-side-wiring] {
+  pointer-events: none;
+}
+
+.vector-group-page [data-polarity-side]:is(:hover, :focus-visible) {
+  fill: #39796f12;
+  stroke: #39796f;
+  stroke-width: 1.5;
+  stroke-dasharray: 4 3;
+}
+
+.phasor-card {
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr) auto auto auto;
+  gap: 6px;
+}
+
+.phasor-card h2 {
+  margin: 0;
+}
+
+.phasor-card p {
+  color: #55736d;
+  font-size: 16px;
+}
+
+.phasor-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: minmax(0, 1fr);
+  gap: 6px;
+}
+
+.phasor-grid figure {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  min-width: 0;
+  margin: 0;
+  border: 1px solid #dce5dc;
+  border-radius: 7px;
+  background: #fcfdf9;
+}
+
+.phasor-grid figcaption {
+  padding-top: 10px;
+  text-align: center;
+  font-size: 17px;
+}
+
+.phasor-grid svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.phasor-legend {
+  display: flex;
+  gap: 20px;
+  font-size: 16px;
+}
+
+.phasor-legend span::before {
+  display: inline-block;
+  width: 20px;
+  margin-right: 6px;
+  vertical-align: 0.25em;
+  content: '';
+}
+
+.phasor-line-key::before {
+  border-top: 2px solid #536cac;
+}
+
+.phasor-phase-key::before {
+  border-top: 2px dashed #536cac;
+}
+
+.phasor-grid [data-voltage] line {
+  stroke-width: 2.7;
+}
+
+.phasor-grid [data-voltage='phase'] line {
+  stroke-width: 2;
+  stroke-dasharray: 5 3;
+}
+
+.phasor-grid [data-voltage] path,
+.phasor-grid [data-voltage] text {
+  fill: currentColor;
+}
+
+.phasor-grid text {
+  font-size: 17px;
+  text-anchor: middle;
+  dominant-baseline: central;
+  stroke: #fcfdf9;
+  stroke-width: 2px;
+  paint-order: stroke;
+}
+
+.phasor-grid .phasor-node {
+  fill: #173b3b;
+  font-weight: 700;
+}
+
+.vector-group-page.clock-view {
+  --high-reference: #087569;
+  --low-reference: #6746a8;
+  --reference-color: var(--high-reference);
+}
+
+.clock-view #low-phasors {
+  --reference-color: var(--low-reference);
+}
+
+.vector-group-page.clock-view .connection-layout {
+  grid-template-columns: 282px minmax(0, 1fr) 420px;
+}
+
+.clock-view .phasor-card {
+  grid-area: 1 / 2;
+  grid-template-rows: auto auto minmax(0, 1fr) auto auto;
+}
+
+.clock-view .clock-card {
+  grid-area: 1 / 3;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto auto;
+  gap: 6px;
+  align-items: center;
+  text-align: center;
+}
+
+.clock-card h2 {
+  margin: 0;
+}
+
+.clock-card p {
+  color: #55736d;
+  font-size: 16px;
+}
+
+.clock-card .combination-result {
+  justify-content: center;
+}
+
+.clock-card svg {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+
+.clock-face {
+  fill: #fcfdf9;
+  stroke: #c8d9d4;
+  stroke-width: 2;
+}
+
+.clock-tick {
+  stroke: #77948c;
+  stroke-width: 2;
+}
+
+.clock-number,
+.clock-label {
+  text-anchor: middle;
+  dominant-baseline: central;
+  font-size: 22px;
+}
+
+.clock-number,
+.clock-pin {
+  fill: #173b3b;
+}
+
+.clock-high {
+  fill: var(--high-reference);
+}
+
+.clock-low {
+  fill: var(--low-reference);
+}
+
+.clock-label {
+  font-weight: 700;
+  stroke: #fcfdf9;
+  stroke-width: 3px;
+  paint-order: stroke;
+}
+
+.winding-actions {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 6px;
+}
+
+.winding-actions button {
+  padding: 3px 8px;
+  white-space: nowrap;
+  font-size: 14px;
+}
+
+.phasor-grid .reference-phasor {
+  color: var(--reference-color);
+  filter: drop-shadow(0 0 3px var(--reference-color));
+}
+
+.phasor-grid .reference-phasor line {
+  stroke: currentColor;
+  stroke-width: 4;
+}
+
+.phasor-grid .reference-phasor text {
+  font-weight: 700;
+}

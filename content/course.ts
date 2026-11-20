@@ -1607,6 +1607,20 @@ export const slides: Slide[] = [
           chapterId: chapter.id,
           embedUrl: '/transformer-regulation-efficiency-example.html',
         },
+        {
+          id: 'transformers-vector-group',
+          kind: 'embed',
+          title: '三相变压器：联结组别',
+          chapterId: chapter.id,
+          embedUrl: '/transformer-vector-group.html',
+        },
+        {
+          id: 'transformers-vector-group-clock',
+          kind: 'embed',
+          title: '三相变压器：联结组别的时钟表示法',
+          chapterId: chapter.id,
+          embedUrl: '/transformer-vector-group.html?view=clock',
+        },
       );
     }
 
