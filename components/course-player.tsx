@@ -126,6 +126,8 @@ function MaxwellDetailFrame({ url, title }: { url: string; title: string }) {
 
 type PhaseTest = 'no-load' | 'short-circuit';
 const phaseTestSlideId = 'transformers-three-phase-tests';
+const yd1SlideId = 'transformers-yd1-exercise';
+const yd1AlternateId = 'transformers-yd1-alternate-exercise';
 const phaseNoLoadId = 'transformers-three-phase-no-load-test';
 const phaseShortCircuitId = 'transformers-three-phase-short-circuit-test';
 
@@ -226,11 +228,13 @@ const findCourseIndex = (id: string) => {
                 ? 'dc-drives-braking-example-question'
                 : id;
   const containerId =
-    stableId === regulationPhasorId
-      ? regulationAnchorId
-      : stableId === phaseNoLoadId || stableId === phaseShortCircuitId
-        ? phaseTestSlideId
-        : stableId;
+    stableId === yd1AlternateId
+      ? yd1SlideId
+      : stableId === regulationPhasorId
+        ? regulationAnchorId
+        : stableId === phaseNoLoadId || stableId === phaseShortCircuitId
+          ? phaseTestSlideId
+          : stableId;
   const directIndex = courseSlides.findIndex((item) => item.id === containerId);
   if (directIndex >= 0) return directIndex;
   if (findShuntTab(id))
@@ -245,6 +249,7 @@ export default function CoursePlayer() {
   const [introPage, setIntroPage] = useState<EvPage>('principle');
   const [shuntPage, setShuntPage] = useState<ShuntPage>('principle');
   const [phaseTest, setPhaseTest] = useState<PhaseTest>('no-load');
+  const [yd1Alternate, setYd1Alternate] = useState(false);
   const [presenting, setPresenting] = useState(false);
   const [catalog, setCatalog] = useState(false);
   const [notice, setNotice] = useState('');
@@ -386,6 +391,7 @@ export default function CoursePlayer() {
       const shuntTab = findShuntTab(hash);
       if (shuntTab) setShuntPage(shuntTab);
       setPhaseTest(hash === phaseShortCircuitId ? 'short-circuit' : 'no-load');
+      setYd1Alternate(hash === yd1AlternateId);
       const next = findCourseIndex(hash);
       setIndex(next < 0 ? 0 : next);
     };
@@ -888,7 +894,7 @@ export default function CoursePlayer() {
                       </div>
                     ) : slide.kind === 'embed' ? (
                       <div
-                        className={`embed-body${slide.embedUrl.startsWith('/magnetic-') || slide.embedUrl === '/dc-machine-uses-types.html' || slide.embedUrl === '/dc-machine-constants-relation.html' || slide.embedUrl.startsWith('/dc-motor-') || slide.embedUrl.startsWith('/dc-generator-') || slide.embedUrl.startsWith('/transformer-classification.html') || slide.embedUrl === '/transformer-working-principle.html' || slide.embedUrl === '/transformer-voltage-leakage.html' || slide.embedUrl === '/transformer-voltage-ratio.html' || slide.embedUrl === '/transformer-current-ratio.html' || slide.embedUrl === '/transformer-impedance-transformation.html' || slide.embedUrl === '/transformer-impedance-matching-example.html' || slide.embedUrl === '/transformer-three-phase.html' || slide.embedUrl === '/transformer-three-phase-connections.html' || slide.embedUrl.startsWith('/transformer-vector-group.html') || slide.embedUrl === '/transformer-yy0-exercise.html' || slide.embedUrl === '/transformer-core-lamination.html' || slide.embedUrl.startsWith('/transformer-rated-') || slide.embedUrl === '/transformer-equivalent-circuit-referral.html' || slide.embedUrl === '/transformer-t-equivalent-circuit.html' || slide.embedUrl === '/transformer-simplified-equivalent-circuit.html' || slide.embedUrl === '/transformer-equivalent-circuit-example.html' || slide.embedUrl === '/transformer-three-phase-test-example.html' || slide.embedUrl === '/transformer-basic-equations.html' || slide.embedUrl === '/transformer-inductive-load-phasors.html' || slide.embedUrl === '/transformer-external-characteristic.html' || slide.embedUrl.startsWith('/transformer-voltage-regulation') || slide.embedUrl === '/transformer-power-losses.html' || slide.embedUrl === '/transformer-efficiency.html' || slide.embedUrl === '/transformer-efficiency-characteristic.html' || slide.embedUrl === '/transformer-regulation-efficiency-example.html' ? ' embed-maxwell' : ''}${slide.embedUrl === '/ship-power-eli5.html' ? ' embed-ship-power' : ''}`}
+                        className={`embed-body${slide.embedUrl.startsWith('/magnetic-') || slide.embedUrl === '/dc-machine-uses-types.html' || slide.embedUrl === '/dc-machine-constants-relation.html' || slide.embedUrl.startsWith('/dc-motor-') || slide.embedUrl.startsWith('/dc-generator-') || slide.embedUrl.startsWith('/transformer-classification.html') || slide.embedUrl === '/transformer-working-principle.html' || slide.embedUrl === '/transformer-voltage-leakage.html' || slide.embedUrl === '/transformer-voltage-ratio.html' || slide.embedUrl === '/transformer-current-ratio.html' || slide.embedUrl === '/transformer-impedance-transformation.html' || slide.embedUrl === '/transformer-impedance-matching-example.html' || slide.embedUrl === '/transformer-three-phase.html' || slide.embedUrl === '/transformer-three-phase-connections.html' || slide.embedUrl.startsWith('/transformer-vector-group.html') || slide.embedUrl.startsWith('/transformer-yy0-exercise.html') || slide.embedUrl === '/transformer-core-lamination.html' || slide.embedUrl.startsWith('/transformer-rated-') || slide.embedUrl === '/transformer-equivalent-circuit-referral.html' || slide.embedUrl === '/transformer-t-equivalent-circuit.html' || slide.embedUrl === '/transformer-simplified-equivalent-circuit.html' || slide.embedUrl === '/transformer-equivalent-circuit-example.html' || slide.embedUrl === '/transformer-three-phase-test-example.html' || slide.embedUrl === '/transformer-basic-equations.html' || slide.embedUrl === '/transformer-inductive-load-phasors.html' || slide.embedUrl === '/transformer-external-characteristic.html' || slide.embedUrl.startsWith('/transformer-voltage-regulation') || slide.embedUrl === '/transformer-power-losses.html' || slide.embedUrl === '/transformer-efficiency.html' || slide.embedUrl === '/transformer-efficiency-characteristic.html' || slide.embedUrl === '/transformer-regulation-efficiency-example.html' ? ' embed-maxwell' : ''}${slide.embedUrl === '/ship-power-eli5.html' ? ' embed-ship-power' : ''}`}
                       >
                         {findShuntTab(slide.id) ? (
                           <ShuntGeneratorFrame
@@ -925,6 +931,9 @@ export default function CoursePlayer() {
                               slide.id.startsWith(
                                 'transformers-vector-group',
                               ) ||
+                              slide.embedUrl.startsWith(
+                                '/transformer-yy0-exercise.html',
+                              ) ||
                               slide.id === 'transformers-core-lamination' ||
                               slide.id.startsWith('transformers-rated-') ||
                               slide.id ===
@@ -948,7 +957,11 @@ export default function CoursePlayer() {
                                 ? slide.id
                                 : undefined
                             }
-                            src={slide.embedUrl}
+                            src={
+                              slide.id === yd1SlideId && yd1Alternate
+                                ? `${slide.embedUrl}&mode=reverse-alternate`
+                                : slide.embedUrl
+                            }
                             title={slide.title}
                             className="embed-frame"
                           />

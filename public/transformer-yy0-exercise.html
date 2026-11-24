@@ -20,15 +20,25 @@
           <button type="button" data-mode="reverse" aria-pressed="false">
             第 2 问 · 逆向
           </button>
+          <button
+            type="button"
+            data-mode="reverse-alternate"
+            aria-pressed="false"
+            hidden
+          >
+            另一种接法 · 逆向
+          </button>
         </div>
       </header>
-      <p id="question">
-        已知右图的三相变压器接线，画出高、低压侧相量图，并用时钟法判断联结组别。
-      </p>
+      <div class="exercise-question">
+        <p id="question">
+          已知右图的三相变压器接线，画出高、低压侧相量图，并用时钟法判断联结组别。
+        </p>
+      </div>
       <div class="exercise-diagrams">
         <section class="exercise-card phasor-panel">
           <header class="phasor-heading">
-            <h2 id="phasor-title">相量图</h2>
+            <h2>相量图</h2>
             <p id="phasor-status" hidden>低压线相量在下一步绘出</p>
           </header>
           <div id="phasor-prompt" class="diagram-prompt">
@@ -50,29 +60,6 @@
           <h2 id="wiring-title">已知 · 绕组接线图</h2>
           <svg id="wiring" viewBox="0 0 414 276" role="img"></svg>
           <p class="diagram-note">黑点 ● 为同名端；同列为同一铁芯柱</p>
-          <div id="reverse-controls" hidden>
-            <label
-              >低压绕组从左到右
-              <select id="order">
-                <option value="" selected disabled>选择排列</option>
-                <option value="0">abc</option>
-                <option value="1">bca</option>
-                <option value="2">cab</option>
-              </select>
-            </label>
-            <label
-              >低压侧同名端
-              <select id="polarity">
-                <option value="" selected disabled>选择方向</option>
-                <option value="head">出线端 a、b、c</option>
-                <option value="tail">星点侧 x、y、z</option>
-              </select>
-            </label>
-            <div class="check-actions">
-              <button type="button" id="check" disabled>校验接法</button>
-              <button type="button" id="answer">显示逆向推导</button>
-            </div>
-          </div>
         </section>
       </div>
       <div class="exercise-footer">
@@ -81,9 +68,9 @@
         </div>
         <div
           class="step-controls"
-          id="forward-controls"
+          id="step-controls"
           role="group"
-          aria-label="正向推导步骤"
+          aria-label="推导步骤"
           hidden
         >
           <button type="button" id="previous-step">上一步</button>

@@ -21,8 +21,7 @@
   gap: 8px;
 }
 
-.yy-exercise button,
-.yy-exercise select {
+.yy-exercise button {
   border: 1px solid #acc5b9;
   border-radius: 7px;
   padding: 7px 12px;
@@ -38,8 +37,7 @@
 
 .yy-exercise button[aria-pressed='true'],
 .yy-exercise #reveal,
-.yy-exercise #next-step,
-.yy-exercise #check:not(:disabled) {
+.yy-exercise #next-step {
   border-color: #086c60;
   background: #086c60;
   color: white;
@@ -50,7 +48,6 @@
 }
 
 .yy-exercise #question {
-  align-self: center;
   font-size: 21px;
   font-weight: 650;
 }
@@ -122,31 +119,6 @@
   border-radius: 9px;
   background: #f8fbf7;
   font-size: 19px;
-}
-
-.wiring-panel:has(#reverse-controls:not([hidden])) {
-  grid-template-rows: auto minmax(0, 1fr) auto auto;
-}
-
-#reverse-controls:not([hidden]) {
-  display: grid;
-  gap: 6px;
-  padding-top: 8px;
-  border-top: 1px solid #d5ded3;
-}
-
-#reverse-controls label {
-  display: grid;
-  grid-template-columns: 1fr 190px;
-  align-items: center;
-  gap: 8px;
-  font-size: 17px;
-}
-
-.check-actions {
-  display: flex;
-  gap: 8px;
-  justify-content: end;
 }
 
 .exercise-footer {

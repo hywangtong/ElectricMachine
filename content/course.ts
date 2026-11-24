@@ -1628,6 +1628,34 @@ export const slides: Slide[] = [
           chapterId: chapter.id,
           embedUrl: '/transformer-yy0-exercise.html',
         },
+        {
+          id: 'transformers-yy6-exercise',
+          kind: 'embed',
+          title: '例题：Yy6 联结组别的正向与逆向分析',
+          chapterId: chapter.id,
+          embedUrl: '/transformer-yy0-exercise.html?group=Yy6',
+        },
+        {
+          id: 'transformers-yy4-exercise',
+          kind: 'embed',
+          title: '例题：Yy4 联结组别的正向与逆向分析',
+          chapterId: chapter.id,
+          embedUrl: '/transformer-yy0-exercise.html?group=Yy4',
+        },
+        {
+          id: 'transformers-yd11-exercise',
+          kind: 'embed',
+          title: '例题：Yd11 联结组别的正向与逆向分析',
+          chapterId: chapter.id,
+          embedUrl: '/transformer-yy0-exercise.html?group=Yd11',
+        },
+        {
+          id: 'transformers-yd1-exercise',
+          kind: 'embed',
+          title: '例题：Yd1 联结组别的正向与逆向分析',
+          chapterId: chapter.id,
+          embedUrl: '/transformer-yy0-exercise.html?group=Yd1',
+        },
       );
     }
 
