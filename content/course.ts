@@ -1621,6 +1621,13 @@ export const slides: Slide[] = [
           chapterId: chapter.id,
           embedUrl: '/transformer-vector-group.html?view=clock',
         },
+        {
+          id: 'transformers-yy0-exercise',
+          kind: 'embed',
+          title: '例题：Yy0 联结组别的正向与逆向分析',
+          chapterId: chapter.id,
+          embedUrl: '/transformer-yy0-exercise.html',
+        },
       );
     }
 

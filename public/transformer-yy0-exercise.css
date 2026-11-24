@@ -1,0 +1,207 @@
+.yy-exercise {
+  grid-template-rows: 64px 48px minmax(0, 1fr) 108px;
+  --high: #087569;
+  --low: #6746a8;
+}
+
+.yy-exercise [hidden] {
+  display: none;
+}
+
+.yy-exercise .page-head {
+  position: relative;
+  border-bottom: 1px solid #d5ded3;
+}
+
+.exercise-modes {
+  position: absolute;
+  top: 14px;
+  right: 0;
+  display: flex;
+  gap: 8px;
+}
+
+.yy-exercise button,
+.yy-exercise select {
+  border: 1px solid #acc5b9;
+  border-radius: 7px;
+  padding: 7px 12px;
+  background: #fff;
+  color: #173b3b;
+  font: inherit;
+  font-weight: 650;
+}
+
+.yy-exercise button:not(:disabled) {
+  cursor: pointer;
+}
+
+.yy-exercise button[aria-pressed='true'],
+.yy-exercise #reveal,
+.yy-exercise #next-step,
+.yy-exercise #check:not(:disabled) {
+  border-color: #086c60;
+  background: #086c60;
+  color: white;
+}
+
+.yy-exercise button:disabled {
+  opacity: 0.5;
+}
+
+.yy-exercise #question {
+  align-self: center;
+  font-size: 21px;
+  font-weight: 650;
+}
+
+.exercise-diagrams {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 296px 482px;
+  gap: 14px;
+}
+
+.exercise-card {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: 8px;
+  min-height: 0;
+  padding: 14px 16px;
+  border: 1px solid #c8d9d4;
+  border-radius: 14px;
+  background: #fff;
+}
+
+.exercise-card h2 {
+  font-size: 20px;
+}
+
+.phasor-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+#phasor-status {
+  color: var(--low);
+  font-size: 16px;
+}
+
+.exercise-card svg {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+
+.clock-panel {
+  grid-template-rows: auto minmax(0, 1fr) auto auto;
+  text-align: center;
+}
+
+#group-result {
+  padding: 6px 8px;
+  border-radius: 7px;
+  background: #edf3e8;
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.diagram-note {
+  color: #47665d;
+  font-size: 16px;
+  text-align: center;
+}
+
+.diagram-prompt {
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 16px;
+  border: 1px dashed #acc5b9;
+  border-radius: 9px;
+  background: #f8fbf7;
+  font-size: 19px;
+}
+
+.wiring-panel:has(#reverse-controls:not([hidden])) {
+  grid-template-rows: auto minmax(0, 1fr) auto auto;
+}
+
+#reverse-controls:not([hidden]) {
+  display: grid;
+  gap: 6px;
+  padding-top: 8px;
+  border-top: 1px solid #d5ded3;
+}
+
+#reverse-controls label {
+  display: grid;
+  grid-template-columns: 1fr 190px;
+  align-items: center;
+  gap: 8px;
+  font-size: 17px;
+}
+
+.check-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: end;
+}
+
+.exercise-footer {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+}
+
+.step-controls:not([hidden]) {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.exercise-steps {
+  display: grid;
+  grid-auto-columns: minmax(0, 1fr);
+  grid-auto-flow: column;
+  gap: 12px;
+}
+
+.exercise-steps > p,
+.exercise-steps article {
+  padding: 10px 13px;
+  border: 1px solid #d5ded3;
+  border-radius: 9px;
+  background: #f3f6ee;
+  font-size: 17px;
+  line-height: 1.35;
+}
+
+.exercise-steps h2 {
+  margin-bottom: 4px;
+  color: #086c60;
+  font-size: 18px;
+}
+
+.yy-exercise svg text {
+  fill: currentColor;
+  text-anchor: middle;
+  dominant-baseline: central;
+  font-weight: 650;
+}
+
+.phasor-high {
+  color: var(--high);
+}
+
+.phasor-low {
+  color: var(--low);
+}
+
+.yy-exercise .phase-symbol {
+  paint-order: stroke;
+  stroke: #fff;
+  stroke-width: 4px;
+  stroke-linejoin: round;
+}

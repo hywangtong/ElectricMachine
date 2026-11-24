@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>例题：Yy0 联结组别的正向与逆向分析</title>
+    <link rel="stylesheet" href="/dc-machine-basics.css" />
+    <link rel="stylesheet" href="/transformer-yy0-exercise.css" />
+    <script type="module" src="/transformer-yy0-exercise.js"></script>
+  </head>
+  <body>
+    <main class="lesson yy-exercise">
+      <header class="page-head">
+        <div class="eyebrow">变压器 / 章末例题</div>
+        <h1>三相变压器联结组别的正推与反推</h1>
+        <div class="exercise-modes" role="group" aria-label="选择题目">
+          <button type="button" data-mode="forward" aria-pressed="true">
+            第 1 问 · 正向
+          </button>
+          <button type="button" data-mode="reverse" aria-pressed="false">
+            第 2 问 · 逆向
+          </button>
+        </div>
+      </header>
+      <p id="question">
+        已知右图的三相变压器接线，画出高、低压侧相量图，并用时钟法判断联结组别。
+      </p>
+      <div class="exercise-diagrams">
+        <section class="exercise-card phasor-panel">
+          <header class="phasor-heading">
+            <h2 id="phasor-title">相量图</h2>
+            <p id="phasor-status" hidden>低压线相量在下一步绘出</p>
+          </header>
+          <div id="phasor-prompt" class="diagram-prompt">
+            <p>以高压 E<sub>AB</sub> 为基线，逐步画出两侧相量。</p>
+            <button type="button" id="reveal">显示正向推导</button>
+          </div>
+          <svg id="phasors" viewBox="0 0 432 370" role="img" hidden></svg>
+          <p class="diagram-note">
+            青色高压 · 紫色低压　｜　虚线相电动势 · 实线线电动势
+          </p>
+        </section>
+        <section class="exercise-card clock-panel">
+          <h2>时钟读数</h2>
+          <svg id="clock" viewBox="0 0 220 245" role="img"></svg>
+          <output id="group-result" aria-live="polite" tabindex="-1"></output>
+          <p class="diagram-note">高压 E<sub>AB</sub> 对准 12 点</p>
+        </section>
+        <section class="exercise-card wiring-panel">
+          <h2 id="wiring-title">已知 · 绕组接线图</h2>
+          <svg id="wiring" viewBox="0 0 414 276" role="img"></svg>
+          <p class="diagram-note">黑点 ● 为同名端；同列为同一铁芯柱</p>
+          <div id="reverse-controls" hidden>
+            <label
+              >低压绕组从左到右
+              <select id="order">
+                <option value="" selected disabled>选择排列</option>
+                <option value="0">abc</option>
+                <option value="1">bca</option>
+                <option value="2">cab</option>
+              </select>
+            </label>
+            <label
+              >低压侧同名端
+              <select id="polarity">
+                <option value="" selected disabled>选择方向</option>
+                <option value="head">出线端 a、b、c</option>
+                <option value="tail">星点侧 x、y、z</option>
+              </select>
+            </label>
+            <div class="check-actions">
+              <button type="button" id="check" disabled>校验接法</button>
+              <button type="button" id="answer">显示逆向推导</button>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div class="exercise-footer">
+        <div class="exercise-steps" id="steps" aria-live="polite">
+          <p>作图约定：实线表示线电动势，虚线表示相电动势。</p>
+        </div>
+        <div
+          class="step-controls"
+          id="forward-controls"
+          role="group"
+          aria-label="正向推导步骤"
+          hidden
+        >
+          <button type="button" id="previous-step">上一步</button>
+          <button type="button" id="next-step">下一步</button>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
